@@ -1,6 +1,15 @@
 # Strategy Design Pattern
 
+Erster Bild Kandidat:
+
 <img src="strategy_design_pattern.png" width="700">
+
+Zweiter Bild Kandidat:
+
+<img src="StrategyPatternShalloway.png" width="600">
+
+
+
 
 ## Kategorie: *Behavioral Pattern*
 
@@ -23,4 +32,3 @@ Beispiele:
 Die Beispiele zu diesem Pattern orientieren sich an:
 
 [https://refactoring.guru/design-patterns/strategy](https://refactoring.guru/design-patterns/strategy/java/example)
-
