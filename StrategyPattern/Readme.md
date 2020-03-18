@@ -1,6 +1,6 @@
 # Strategy Design Pattern
 
-<img src="strategy_design_pattern.png" width="400">
+<img src="strategy_design_pattern.png" width="700">
 
 ## Kategorie: *Behavioral Pattern*
 
@@ -11,7 +11,7 @@
 ## Beschreibung:
 
 Das "Strategie Entwurfsmuster" zählt zur Kategorie der "Verhaltensmuster" / "Behavioral Pattern".
-Es injiziiert ein oder mehrere Verhalten in ein Objekt, die sich in ihrer Umgebung ("*Object Context*") austauschen lassen.
+Es injiziiert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung ("*Object* / *Context*") austauschen lassen.
 
 ## Anwendungsbeispiel:
 
