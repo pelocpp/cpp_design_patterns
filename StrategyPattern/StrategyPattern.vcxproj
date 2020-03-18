@@ -138,6 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConceptualExample.cpp" />
+    <ClCompile Include="CreditCard.cpp" />
+    <ClCompile Include="Order.cpp" />
+    <ClCompile Include="PayByCreditCard.cpp" />
+    <ClCompile Include="PayByPayPal.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +150,13 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="strategy_design_pattern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CreditCard.h" />
+    <ClInclude Include="Order.h" />
+    <ClInclude Include="PayByCreditCard.h" />
+    <ClInclude Include="PayByPayPal.h" />
+    <ClInclude Include="PaymentStrategy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
