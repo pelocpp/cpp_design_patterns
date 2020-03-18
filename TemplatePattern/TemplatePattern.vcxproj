@@ -138,6 +138,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConceptualExample.cpp" />
+    <ClCompile Include="Facebook.cpp" />
+    <ClCompile Include="Network.cpp" />
+    <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Twitter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Facebook.h" />
+    <ClInclude Include="Network.h" />
+    <ClInclude Include="Twitter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

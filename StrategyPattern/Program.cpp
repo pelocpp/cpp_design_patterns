@@ -101,7 +101,6 @@ void test_ecommerce_app() {
             }
         }
     }
-
 }
 
 int main() {
