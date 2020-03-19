@@ -149,6 +149,12 @@
     <ClInclude Include="Network.h" />
     <ClInclude Include="Twitter.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="TemplateMethodPattern.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
