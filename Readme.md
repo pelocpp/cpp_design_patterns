@@ -7,7 +7,5 @@ Es folgt eine Auflistung der Beispiele (bzw. Unterverzeichnisse):
 Beispiel *Strategy Pattern* (Unterverzeichnis *StrategyPattern*):
 ---
 
-Beispiel *Template Pattern* (Unterverzeichnis *TemplatePattern*):
----
-
+Beispiel *Template Method Pattern* (Unterverzeichnis *TemplatePattern*):
 ---

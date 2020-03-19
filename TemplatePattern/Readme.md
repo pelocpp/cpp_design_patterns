@@ -1,8 +1,9 @@
-# Template Pattern
+# Template Method Pattern
 
 Bild:
 
-TBD
+<img src="TemplateMethodPattern.png" width="600">
+
 
 ## Kategorie: *Behavioral Pattern*
 
@@ -12,15 +13,15 @@ TBD
 
 ## Beschreibung:
 
-Das "Strategie Entwurfsmuster" zählt zur Kategorie der "Verhaltensmuster" / "Behavioral Pattern".
-Es injiziiert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung ("*Object* / *Context*") austauschen lassen.
+Das *Template Method Pattern* beschreibt das "Skelett" (*Schablone*, *Template*) eines Algorithmus in einer Oberklasse,
+typischerweise in einer Methode. Diese Methode setzt sich typischerweise aus mehreren (Teil-)Methoden zusammen,
+die die einzelnen Schritte umsetzen.
+
 
 ## Anwendungsbeispiel:
 
-Das Template Pattern beschreibt das "Skelett" (*Schablone*, *Template*) eines Algorithmus in einer Oberklasse,
-typischerweise mit mehreren (Teil-)Methoden, die die einzelnen Schritte umsetzen.
-
-In Spezialisierungen der Oberklasse können ein oder mehrere Teilmethoden überschrieben werden.
+In Spezialisierungen der Oberklasse können bzw. sollten ein oder mehrere Teilmethoden überschrieben werden,
+um die **Template Methode* in der Oberklasse zu vervollständigen. 
 
 Die Skelett-Methode ist davon ausgenommen - die prinzipielle Struktur des Algorithmus ist beizubehalten,
 also nicht zu verändern.
