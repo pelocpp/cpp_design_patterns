@@ -43,11 +43,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Readme.md" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="TemplateMethodPattern.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Readme.md">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

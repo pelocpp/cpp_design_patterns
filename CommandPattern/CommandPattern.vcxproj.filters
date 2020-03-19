@@ -15,46 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Program.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PayByPayPal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Order.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ConceptualExample.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PayByCreditCard.cpp">
+    <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CreditCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="strategy_design_pattern.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="PayByPayPal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PaymentStrategy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Order.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PayByCreditCard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CreditCard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md">
