@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Strategy Pattern
+// ConceptualExample.cpp // Command Pattern
 // ===========================================================================
 
 // https://refactoring.guru/design-patterns/command/cpp/example#example-0
