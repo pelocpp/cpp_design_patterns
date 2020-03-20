@@ -10,7 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{60AD0A9A-5241-4A56-9619-C260AE166D44}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.md = Readme.md
-		Readme_02.md = Readme_02.md
+		Literature\Readme.md = Literature\Readme.md
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommandPattern", "CommandPattern\CommandPattern.vcxproj", "{21FFCF01-BFED-4FB5-ADDC-3665F70C3D77}"

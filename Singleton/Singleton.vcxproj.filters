@@ -27,7 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>
