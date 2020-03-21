@@ -27,6 +27,14 @@ Es injiziiert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer
 Das Strategie Pattern wird häufig eingesetzt, um das Verhalten einer Klasse zu ändern,
 ohne dies über eine Spezialisierung vorzunehmen.
 
+## Hinweis:
+
+Man kann in der Implementierung zwischen dynamischer und statischer Ausprägung unterscheiden.
+Die statische Implementierung basiert in C++ auf der Verwendung von Schablonen (`template`),
+die dynamische Implementierung auf dynamisch allokierten Strategy-Objekten (`new`),
+die zur Laufzeit austauschbar sind.
+
+
 Beispiele:
 
 Die Beispiele zu diesem Pattern orientieren sich an:

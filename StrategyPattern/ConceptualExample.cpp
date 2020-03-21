@@ -20,7 +20,8 @@ class Strategy
 {
 public:
     virtual ~Strategy() {}
-    virtual std::string DoAlgorithm(const std::vector<std::string>& data) const = 0;
+    virtual std::string doAlgorithm(const std::vector<std::string>& data) const = 0;
+    virtual std::string getName() const = 0;
 };
 
 /**
@@ -35,40 +36,44 @@ class Context
      * should work with all strategies via the Strategy interface.
      */
 private:
-    Strategy* strategy_;
+    Strategy* m_strategy;
 
     /**
-     * Usually, the Context accepts a strategy through the constructor, but also
-     * provides a setter to change it at runtime.
+     * Usually, the Context accepts a strategy through the constructor,
+     * but also provides a setter to change it at runtime.
      */
 public:
-    Context(Strategy* strategy = nullptr) : strategy_(strategy)
+    Context(Strategy* strategy = nullptr) : m_strategy(strategy)
     {
     }
 
     ~Context()
     {
-        delete this->strategy_;
+        delete m_strategy;
     }
 
     /**
      * Usually, the Context allows replacing a Strategy object at runtime.
      */
-    void set_strategy(Strategy* strategy)
+    void setStrategy(Strategy* strategy)
     {
-        delete this->strategy_;
-        this->strategy_ = strategy;
+        delete m_strategy;
+        m_strategy = strategy;
     }
 
     /**
      * The Context delegates some work to the Strategy object instead of
      * implementing +multiple versions of the algorithm on its own.
      */
-    void DoSomeBusinessLogic() const
+    void doSomeBusinessLogic() const
     {
         // ...
-        std::cout << "Context: Sorting data using the strategy (not sure how it'll do it)\n";
-        std::string result = this->strategy_->DoAlgorithm(std::vector<std::string>{"a", "e", "c", "b", "d"});
+        std::vector<std::string> someStrings {"A", "E", "C", "B", "D"};
+        std::cout 
+            << "Context: Sorting data using strategy " 
+            << "'" << m_strategy->getName() << "'" << std::endl;
+        
+        std::string result = m_strategy->doAlgorithm(someStrings);
         std::cout << result << "\n";
         // ...
     }
@@ -81,7 +86,11 @@ public:
 class ConcreteStrategyA : public Strategy
 {
 public:
-    std::string DoAlgorithm(const std::vector<std::string>& data) const override
+    std::string getName() const override {
+        return "Normal Sorting";
+    }
+
+    std::string doAlgorithm(const std::vector<std::string>& data) const override
     {
         std::string result;
         std::for_each(std::begin(data), std::end(data), [&result](const std::string& letter) {
@@ -95,7 +104,12 @@ public:
 
 class ConcreteStrategyB : public Strategy
 {
-    std::string DoAlgorithm(const std::vector<std::string>& data) const override
+public:
+    std::string getName() const override {
+        return "Reverse Sorting";
+    }
+
+    std::string doAlgorithm(const std::vector<std::string>& data) const override
     {
         std::string result;
         std::for_each(std::begin(data), std::end(data), [&result](const std::string& letter) {
@@ -119,14 +133,16 @@ class ConcreteStrategyB : public Strategy
 
 void ClientCode()
 {
-    Context* context = new Context(new ConcreteStrategyA);
-    std::cout << "Client: Strategy is set to normal sorting.\n";
-    context->DoSomeBusinessLogic();
+    Strategy* strategy = new ConcreteStrategyA();
+    Context* context = new Context(strategy);
+    std::cout << "Client: Strategy is set to normal sorting:" << std::endl;
+    context->doSomeBusinessLogic();
     std::cout << std::endl;
 
-    std::cout << "Client: Strategy is set to reverse sorting.\n";
-    context->set_strategy(new ConcreteStrategyB);
-    context->DoSomeBusinessLogic();
+    std::cout << "Client: Strategy is set to reverse sorting:" << std::endl;
+    strategy = new ConcreteStrategyB();
+    context->setStrategy(strategy);
+    context->doSomeBusinessLogic();
 
     delete context;
 }

@@ -144,6 +144,11 @@
     <ClCompile Include="PayByCreditCard.cpp" />
     <ClCompile Include="PayByPayPal.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="RenderHtmlListStrategy.cpp" />
+    <ClCompile Include="RenderMarkdownListStrategy.cpp" />
+    <ClCompile Include="RenderOutputFormats.h" />
+    <ClCompile Include="RenderProgram.cpp" />
+    <ClCompile Include="RenderTextProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />
@@ -157,6 +162,10 @@
     <ClInclude Include="PayByCreditCard.h" />
     <ClInclude Include="PayByPayPal.h" />
     <ClInclude Include="PaymentStrategy.h" />
+    <ClInclude Include="RenderHtmlListStrategy.h" />
+    <ClInclude Include="RenderListStrategy.h" />
+    <ClInclude Include="RenderMarkdownListStrategy.h" />
+    <ClInclude Include="RenderTextProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -15,6 +15,7 @@
 // function prototypes
 void test_conceptual_example();
 void test_ecommerce_app();
+void test_render_app();
 
 void test_ecommerce_app() {
 
@@ -105,7 +106,8 @@ void test_ecommerce_app() {
 
 int main() {
     // test_conceptual_example();
-    test_ecommerce_app();
+    // test_ecommerce_app();
+    test_render_app();
     return 0;
 }
 

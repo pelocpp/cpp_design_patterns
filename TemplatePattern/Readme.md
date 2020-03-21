@@ -17,6 +17,10 @@ Das *Template Method Pattern* beschreibt das "Skelett" (*Schablone*, *Template*)
 typischerweise in einer Methode. Diese Methode setzt sich typischerweise aus mehreren (Teil-)Methoden zusammen,
 die die einzelnen Schritte umsetzen.
 
+## Hinweis:
+
+Template Method Pattern und Strategy Pattern besitzen viele Gemeinsamkeiten. Ein Unterschied zwischen den beiden Mustern ist,
+dass das Template Method Pattern auf Vererbung beruht, dass Strategy Pattern hingehen auf Komposition.
 
 ## Anwendungsbeispiel:
 
