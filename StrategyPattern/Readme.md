@@ -40,3 +40,7 @@ Beispiele:
 Die Beispiele zu diesem Pattern orientieren sich an:
 
 [https://refactoring.guru/design-patterns/strategy](https://refactoring.guru/design-patterns/strategy/java/example)
+
+und
+
+Dmitri Nesteruk

@@ -106,8 +106,8 @@ void test_ecommerce_app() {
 }
 
 int main() {
-    // test_conceptual_example();
-    // test_ecommerce_app();
+    test_conceptual_example();
+    test_ecommerce_app();
     test_render_app_dynamically();
     test_render_app_statically();
     return 0;
