@@ -1,3 +1,7 @@
+// ===========================================================================
+// RenderHtmlListStrategy.cpp
+// ===========================================================================
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -16,3 +20,7 @@ void HtmlListStrategy::end(std::ostringstream& oss) {
 void HtmlListStrategy::addListItem(std::ostringstream& oss, const std::string& item) {
     oss << "<li>" << item << "</li>\n";
 }
+
+// ===========================================================================
+// End-of-File
+// ===========================================================================

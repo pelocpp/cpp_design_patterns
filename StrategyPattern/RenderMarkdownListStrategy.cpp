@@ -1,3 +1,7 @@
+// ===========================================================================
+// RenderMarkdownListStrategy.cpp
+// ===========================================================================
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -8,3 +12,7 @@
 void MarkdownListStrategy::addListItem(std::ostringstream& oss, const std::string& item) {
     oss << "  * " << item << std::endl;
 }
+
+// ===========================================================================
+// End-of-File
+// ===========================================================================

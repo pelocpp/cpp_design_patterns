@@ -1,3 +1,7 @@
+// ===========================================================================
+// RenderHtmlListStrategy.h
+// ===========================================================================
+
 class HtmlListStrategy : public ListStrategy
 {
 public:
@@ -5,3 +9,7 @@ public:
     void end(std::ostringstream&) override;
     void addListItem(std::ostringstream&, const std::string&) override;
 };
+
+// ===========================================================================
+// End-of-File
+// ===========================================================================
