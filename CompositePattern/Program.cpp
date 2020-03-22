@@ -1,0 +1,23 @@
+// ===========================================================================
+// Program.cpp
+// ===========================================================================
+
+#include <iostream>
+#include <string>
+
+//HIER WEITER:
+//https://github.com/achimoraites/DesignPatterns/blob/master/CompositePattern/FileSystem/src/ui/FileSystem.java
+
+// function prototypes
+void test_conceptual_example();
+void test_filesystem();
+
+int main() {
+    // test_conceptual_example();
+    test_filesystem();
+    return 0;
+}
+
+// ===========================================================================
+// End-of-File
+// ===========================================================================
