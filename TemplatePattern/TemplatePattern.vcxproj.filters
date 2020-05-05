@@ -48,7 +48,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\TemplateMethodPattern.png">
+    <Image Include="Resources\dp_template_method_pattern.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

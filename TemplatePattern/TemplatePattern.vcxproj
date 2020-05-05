@@ -153,7 +153,7 @@
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\TemplateMethodPattern.png" />
+    <Image Include="Resources\dp_template_method_pattern.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

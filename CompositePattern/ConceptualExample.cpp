@@ -124,6 +124,7 @@ public:
         return "Branch(" + result + ")";
     }
 };
+
 /**
  * The client code works with all of the components via the base interface.
  */
@@ -157,10 +158,10 @@ void  test_conceptual_example() {
     std::cout << "Client: I've got a simple component:\n";
     ClientCode(simple);
     std::cout << "\n\n";
+
     /**
      * ...as well as the complex composites.
      */
-
     Component* tree = new Composite;
 
     Component* branch1 = new Composite;

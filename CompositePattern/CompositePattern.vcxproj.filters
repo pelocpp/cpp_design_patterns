@@ -55,6 +55,9 @@
     <Image Include="Resources\CompositePattern_02.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\dp_composite_pattern.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">

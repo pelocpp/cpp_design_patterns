@@ -13,8 +13,8 @@ void test_conceptual_example();
 void test_filesystem();
 
 int main() {
-    // test_conceptual_example();
-    test_filesystem();
+    test_conceptual_example();
+    // test_filesystem();
     return 0;
 }
 
