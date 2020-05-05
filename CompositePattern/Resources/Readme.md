@@ -42,6 +42,6 @@ https://nick79.gitlab.io/mnblog/post/composite_design_pattern/
 
 ---
 
-[Zurück](../../SolutionResources/Readme.md)
+[Zurück](../../Readme.md)
 
 ---

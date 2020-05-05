@@ -2,6 +2,6 @@
 
 ---
 
-[Zurück](../../SolutionResources/Readme.md)
+[Zurück](../../Readme.md)
 
 ---
