@@ -35,6 +35,6 @@ Die Beispiele zu diesem Pattern orientieren sich an:
 
 ---
 
-[Zurück](../../Readme.md)
+[Zurück](../../SolutionResources/Readme.md)
 
 ---
