@@ -1,5 +1,5 @@
 // ===========================================================================
-// Example.cpp
+// Filesystem Test
 // ===========================================================================
 
 #include <iostream>
@@ -10,7 +10,7 @@
 #include "File.h"
 #include "Directory.h"
 
-void test_filesystem () {
+void test_filesystem_01() {
 
     Directory dir1 ("Directory 1:");
     Directory dir2 ("Directory 2:");

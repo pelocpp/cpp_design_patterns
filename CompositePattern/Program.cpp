@@ -10,11 +10,13 @@
 
 // function prototypes
 void test_conceptual_example();
-void test_filesystem();
+void test_filesystem_01();
+void test_filesystem_02();
 
 int main() {
     test_conceptual_example();
-    // test_filesystem();
+    // test_filesystem_01();
+    test_filesystem_02();
     return 0;
 }
 
