@@ -1,11 +1,32 @@
 # C++ Design Patterns
 
-In dieser Projektmappe befinden sich zahlreichen Beispiele zur Thematik *Software Design Patterns* (*Software Entwurfsmuster*).
+Design Patterns (Entwurfsmuster) sind bewährte Lösungswege für wiederkehrende Entwurfsprobleme
+in der Softwareentwicklung. Sie beschreiben die zentralen Entwurfsentscheidungen (Klassen, Objekte, deren Beziehungen zueinander).
+Durch den Einsatz von Software Entwurfsmustern wird ein Entwurf flexibel, wiederverwendbar, erweiterbar, einfacher zu verwenden und 
+stabiler im Falle von Änderungen.
 
-Entwurfsmuster lassen sich in die drei Kategorien Erzeugungs-, Struktur- und Verhaltensmuster
-(Creational, Structural and Behavioral Design Patterns) untergliedern. Eine Aufstellung 
-der einzelnen Entwurfsmuster dieser Kategorien finden Sie nachstehend vor:
+In den Entwurfsmustern manifestiert sich die jahrelange Entwicklungserfahrung vieler Softewareentwickler. 
+Dieses Wissen lässt sich durch die Verwendung von Entwurfsmustern reaktivierbar und nutzbar machen,
+ohne vorher den teuren Prozess der Entwurfsentwicklung erneut durchlaufen zu müssen.
 
-## Überblick
+Zeitgleich schulen Design Pattern die Fähigkeit zur effektiven objektorientierten Modellierung.
 
-[Überblick](Readme_Main.md)
+## [Geschichtlicher Überblick](Readme_01_History.md)
+
+## [Was ist ein Entwurfsmuster?](Readme_02_Description.md)
+
+## [Kritik](Readme_03_Criticism.md)
+
+## [Katalog](Readme_04_Catalog.md)
+
+## [Literatur](Readme_05_Literature.md)
+
+---
+
+Es folgt eine Auflistung der Beispiele (bzw. Unterverzeichnisse):
+
+##### Beispiel *Strategy Pattern* (Unterverzeichnis *StrategyPattern*):
+
+##### Beispiel *Template Method Pattern* (Unterverzeichnis *TemplatePattern*):
+
+---

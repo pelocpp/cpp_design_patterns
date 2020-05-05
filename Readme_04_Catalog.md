@@ -1,10 +1,11 @@
-# C++ Design Patterns
+# Katalog der Entwurfsmuster
 
-In dieser Projektmappe befinden sich zahlreichen Beispiele zur Thematik *Software Design Patterns* (*Software Entwurfsmuster*).
 
 Entwurfsmuster lassen sich in die drei Kategorien Erzeugungs-, Struktur- und Verhaltensmuster
 (Creational, Structural and Behavioral Design Patterns) untergliedern. Eine Aufstellung 
 der einzelnen Entwurfsmuster dieser Kategorien finden Sie nachstehend vor:
+
+<img src="Resources/Software-Design-Pattern.png" width="600">
 
 ## Erzeugungssmuster
 
@@ -56,16 +57,9 @@ Behavioral design patterns are concerned with algorithms and the assignment of r
 
 Tabelle 3. Verhaltensmuster (Behavioral Design Patterns).
 
-Es folgt eine Auflistung der Beispiele (bzw. Unterverzeichnisse):
 
-Beispiel *Strategy Pattern* (Unterverzeichnis *StrategyPattern*):
 ---
 
-Beispiel *Template Method Pattern* (Unterverzeichnis *TemplatePattern*):
+[Zurück](Readme.md)
+
 ---
-
-
-## Literaturhinweise
-
-[Literatur](Readme_Literature.md) 
-
