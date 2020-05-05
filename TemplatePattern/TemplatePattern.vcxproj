@@ -150,10 +150,10 @@
     <ClInclude Include="Twitter.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Readme.md" />
+    <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="TemplateMethodPattern.png" />
+    <Image Include="Resources\TemplateMethodPattern.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

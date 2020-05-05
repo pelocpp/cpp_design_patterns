@@ -35,22 +35,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Readme.md">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="CompositePattern.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="CompositePattern_02.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="CompositePattern_02.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="FileComponent.h">
       <Filter>FileSystem</Filter>
     </ClInclude>
@@ -60,5 +44,21 @@
     <ClInclude Include="Directory.h">
       <Filter>FileSystem</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\CompositePattern.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\CompositePattern_02.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\CompositePattern_02.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Readme.md">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

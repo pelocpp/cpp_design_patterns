@@ -151,12 +151,6 @@
     <ClCompile Include="RenderTextProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Readme.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="strategy_design_pattern.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="CreditCard.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="PayByCreditCard.h" />
@@ -166,6 +160,13 @@
     <ClInclude Include="RenderListStrategy.h" />
     <ClInclude Include="RenderMarkdownListStrategy.h" />
     <ClInclude Include="RenderTextProcessor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\StrategyPatternShalloway.png" />
+    <Image Include="Resources\strategy_design_pattern.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

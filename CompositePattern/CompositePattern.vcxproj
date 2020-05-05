@@ -147,17 +147,17 @@
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Readme.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="CompositePattern.png" />
-    <Image Include="CompositePattern_02.jpg" />
-    <Image Include="CompositePattern_02.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Directory.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="FileComponent.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\CompositePattern.png" />
+    <Image Include="Resources\CompositePattern_02.jpg" />
+    <Image Include="Resources\CompositePattern_02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

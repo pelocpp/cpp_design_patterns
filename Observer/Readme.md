@@ -1,2 +1,0 @@
-# Observer Pattern
-
