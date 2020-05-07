@@ -57,6 +57,98 @@ Behavioral design patterns are concerned with algorithms and the assignment of r
 
 Tabelle 3. Verhaltensmuster (Behavioral Design Patterns).
 
+Neben diesen klassischen Entwurfsmustern finden sich in verschiendenen Publikationen weiterere
+Gruppierungen von Entwurfsmustern - so zum Beispiel bei [Robert Nystrom](https://gameprogrammingpatterns.com/),
+aktuell bei der Fa. Google in der Entwicklung der Programmiersprache Dart beschäftigt:
+
+| Muster | Kurzbeschreibung |
+|:-------------- |----|
+| Double Buffer | TBD |
+| Game Loop | TBD |
+| Update Method | TBD |
+
+Tabelle 4. Sequencing Patterns
+
+
+
+
+
+
+
+
+
+
+
+| Muster | Kurzbeschreibung |
+|:-------------- |----|
+| Bytecode | TBD |
+| Subclass Sandbox | TBD |
+| Type Object | TBD |
+
+Tabelle 5. Behavioral Patterns
+
+
+
+| Muster | Kurzbeschreibung |
+|:-------------- |----|
+| Component | TBD |
+| Event Queue | TBD |
+| Service Locator | TBD |
+
+Tabelle 6. Decoupling Patterns
+
+
+
+| Muster | Kurzbeschreibung |
+|:-------------- |----|
+| Data Locality | TBD |
+| Dirty Flag | TBD |
+| Object Pool | TBD |
+
+Tabelle 7. Optimization Patterns
+
+
+
+Neben Entwurfsmustern gibt es auch so genannte Anti-Entwurfsmuster: Hierunter verstehen wir offensichtlich
+(bekannte) Vorgehensweisen in der Software-Entwicklung, denen bereits zu Beginn des Entwicklungsprozesses
+schlechte Aussichten auf eine qualitativ gelungenge Architektur bescheinigen kann:
+
+
+
+| Anti-Pattern | Kurzbeschreibung |
+|:-------------- |----|
+| The Blob | TBD |
+| Continuous Obsolescence | TBD |
+| Lava Flow | TBD |
+| Ambiguous Viewpoint | TBD |
+| Functional Decomposition | TBD |
+| Poltergeists | TBD |
+| Boat Anchor | TBD |
+| Golden Hammer | TBD |
+| Dead End | TBD |
+| Spaghetti Code | TBD |
+| Input Kludge | TBD |
+| Walking through a Minefield | TBD |
+| Cut-and-Paste Programming | TBD |
+| Mushroom Management | TBD |
+
+Tabelle 4. Anti-Pattern
+
+Weitere Anti-Pattern:
+
+| Anti-Pattern | Kurzbeschreibung |
+|:-------------- |----|
+| God Object | TBD |
+| Input Kludge | TBD |
+| Interface Bloat | TBD |
+| Race Condition | TBD |
+| Circular Dependency | TBD |
+| Copy and Paste Programming | TBD |
+
+Tabelle 5. Weitere Anti-Pattern
+
+
+
 
 ---
 
