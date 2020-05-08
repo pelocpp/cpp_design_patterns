@@ -19,7 +19,7 @@ Car::Car() : m_engine{ new EngineImpl() }, m_engine2(new EngineImpl()) {}
 
 // Car::~Car() { delete m_engine; }
 
-// Car::~Car() = default;
+Car::~Car() = default;
 
 void Car::coolDown()
 {

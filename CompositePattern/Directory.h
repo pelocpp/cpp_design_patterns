@@ -4,6 +4,7 @@
 
 class Directory : public FileComponent {
 public:
+    // c'tor(s)
     Directory() = default;
     Directory(const std::string& name);
 
@@ -11,8 +12,7 @@ public:
     std::string getName();
 
     // public interface
-    void addFileComponent(FileComponent* fc);
-
+    void addFileComponent(FileComponent*);
     void display(const std::string&) const override;
 
 private:

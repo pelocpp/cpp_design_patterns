@@ -1,22 +1,24 @@
 // ===========================================================================
-// File.h
+// DirectoryEx.h
 // ===========================================================================
 
-class File : public FileComponent {
+class DirectoryEx : public FileComponent {
 public:
-    File() = default;
-    File(const std::string& name, const std::string& data);
-    ~File() = default;
+    // c'tor(s), d'tor
+    DirectoryEx() = default;
+    DirectoryEx(const std::string& name);
+    ~DirectoryEx() = default;;
 
     // getter
     std::string getName();
-    std::string getData();
 
+    // public interface
+    void addFileComponent(std::unique_ptr<FileComponent>&);
     void display(const std::string&) const override;
 
 private:
     std::string m_name;
-    std::string m_data;
+    std::vector<std::unique_ptr<FileComponent>> m_contents;
 };
 
 // ===========================================================================

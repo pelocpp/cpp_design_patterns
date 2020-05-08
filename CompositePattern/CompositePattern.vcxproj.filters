@@ -33,7 +33,10 @@
     <ClCompile Include="FileSystemExample01.cpp">
       <Filter>FileSystem</Filter>
     </ClCompile>
-    <ClCompile Include="FileSystemExample02.cpp">
+    <ClCompile Include="FileSystemExample10.cpp">
+      <Filter>FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectoryEx.cpp">
       <Filter>FileSystem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -45,6 +48,9 @@
       <Filter>FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="Directory.h">
+      <Filter>FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectoryEx.h">
       <Filter>FileSystem</Filter>
     </ClInclude>
   </ItemGroup>

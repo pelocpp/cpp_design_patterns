@@ -2,7 +2,7 @@ class Car
 {
 public:
     Car();
- //   ~Car();
+    ~Car();
 
 public:
     void coolDown();

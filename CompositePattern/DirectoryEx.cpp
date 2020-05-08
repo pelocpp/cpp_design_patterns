@@ -1,5 +1,5 @@
 // ===========================================================================
-// Directory.cpp
+// DirectoryEx.cpp
 // ===========================================================================
 
 #include <iostream>
@@ -7,25 +7,25 @@
 #include <vector>
 
 #include "FileComponent.h"
-#include "Directory.h"
+#include "DirectoryEx.h"
 
 // c'tor(s)
-Directory::Directory(const std::string& name) : m_name(name) {}
+DirectoryEx::DirectoryEx(const std::string& name) : m_name(name) {}
 
 // getter
-std::string Directory::getName() { return m_name; }
+std::string DirectoryEx::getName() { return m_name; }
 
 // public interface
-void Directory::addFileComponent(FileComponent* fc) {
+void DirectoryEx::addFileComponent(std::unique_ptr<FileComponent>& fc) {
     m_contents.push_back(std::move(fc));
 }
 
-void Directory::display(const std::string& indent) const {
+void DirectoryEx::display(const std::string& indent) const {
 
     std::string s = indent + indent;
-    std::cout << s << m_name << std::endl;
+    std::cout << "Dir:  " << s << m_name << std::endl;
 
-    for (FileComponent* fileComponent : m_contents) {
+    for (const auto& fileComponent : m_contents) {
         fileComponent->display(s);
     }
 }

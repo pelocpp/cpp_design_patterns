@@ -75,6 +75,15 @@ Die Beispiele zu diesem Pattern orientieren sich an:
 [https://refactoring.guru/design-patterns/strategy](https://refactoring.guru/design-patterns/strategy/java/example)
 
 
+## Literaturhinweise
+
+http://www.martinbroadhurst.com/list-the-files-in-a-directory-in-c.html
+
+https://github.com/achimoraites/DesignPatterns/blob/master/CompositePattern/FileSystem/src/ui/FileSystem.java
+
+https://www.codingame.com/playgrounds/5659/c17-filesystem
+
+
 # TODO
 
 Beispiel mit arithmetischen Ausdrücken:
