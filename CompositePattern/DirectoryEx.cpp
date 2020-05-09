@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "FileComponent.h"
 #include "DirectoryEx.h"
@@ -16,7 +17,7 @@ DirectoryEx::DirectoryEx(const std::string& name) : m_name(name) {}
 std::string DirectoryEx::getName() { return m_name; }
 
 // public interface
-void DirectoryEx::addFileComponent(std::unique_ptr<FileComponent>& fc) {
+void DirectoryEx::addFileComponent(std::shared_ptr<FileComponent> fc) {
     m_contents.push_back(std::move(fc));
 }
 
