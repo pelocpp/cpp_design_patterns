@@ -23,8 +23,11 @@ void DirectoryEx::addFileComponent(std::shared_ptr<FileComponent> fc) {
 
 void DirectoryEx::display(const std::string& indent) const {
 
-    std::string s = indent + indent;
-    std::cout << "Dir:  " << s << m_name << std::endl;
+    // std::string s = indent + indent;
+    std::string s = indent + "    ";
+
+   // std::cout << "Dir:  " << s << m_name << std::endl;
+    std::cout << s << m_name << std::endl;
 
     for (const auto& fileComponent : m_contents) {
         fileComponent->display(s);

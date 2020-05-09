@@ -33,10 +33,10 @@
     <ClCompile Include="FileSystemExample01.cpp">
       <Filter>FileSystem</Filter>
     </ClCompile>
-    <ClCompile Include="FileSystemExample10.cpp">
+    <ClCompile Include="DirectoryEx.cpp">
       <Filter>FileSystem</Filter>
     </ClCompile>
-    <ClCompile Include="DirectoryEx.cpp">
+    <ClCompile Include="FileSystemExample02.cpp">
       <Filter>FileSystem</Filter>
     </ClCompile>
   </ItemGroup>

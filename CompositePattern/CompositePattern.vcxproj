@@ -145,7 +145,7 @@
     <ClCompile Include="DirectoryEx.cpp" />
     <ClCompile Include="FileSystemExample01.cpp" />
     <ClCompile Include="File.cpp" />
-    <ClCompile Include="FileSystemExample10.cpp" />
+    <ClCompile Include="FileSystemExample02.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>

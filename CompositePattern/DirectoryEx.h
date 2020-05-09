@@ -2,8 +2,7 @@
 // DirectoryEx.h
 // ===========================================================================
 
-// TODO  Das ist noch zu klären ...
-class DirectoryEx : public FileComponent  /* , public std::enable_shared_from_this<FileComponent>  */  {
+class DirectoryEx : public FileComponent {
 public:
     // c'tor(s), d'tor
     DirectoryEx() = default;

@@ -17,19 +17,16 @@
 #include <string>
 #include <memory>
 
-//HIER WEITER:
-//https://github.com/achimoraites/DesignPatterns/blob/master/CompositePattern/FileSystem/src/ui/FileSystem.java
-
 // function prototypes
 void test_conceptual_example();
 void test_filesystem_01();
-void test_filesystem_10();
+void test_filesystem_02();
 
 int main() {
 
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    test_filesystem_10();
+    test_filesystem_02();
 
     return 0;
 }
