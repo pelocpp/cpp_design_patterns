@@ -2,8 +2,6 @@
 // ConceptualExample.cpp // Composite Pattern
 // ===========================================================================
 
-// https://refactoring.guru/design-patterns/composite/cpp/example#example-0
-
 #include <algorithm>
 #include <iostream>
 #include <list>

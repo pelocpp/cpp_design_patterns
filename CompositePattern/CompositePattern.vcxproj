@@ -143,9 +143,9 @@
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Directory.cpp" />
     <ClCompile Include="DirectoryEx.cpp" />
-    <ClCompile Include="FileSystemExample01.cpp" />
+    <ClCompile Include="FileSystemBeginners.cpp" />
     <ClCompile Include="File.cpp" />
-    <ClCompile Include="FileSystemExample02.cpp" />
+    <ClCompile Include="FileSystemAdvanced.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
