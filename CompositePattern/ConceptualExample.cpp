@@ -2,7 +2,6 @@
 // ConceptualExample.cpp // Composite Pattern
 // ===========================================================================
 
-#include <algorithm>
 #include <iostream>
 #include <list>
 #include <string>
@@ -22,16 +21,12 @@ protected:
      * accessing a parent of the component in a tree structure. It can also
      * provide some default implementation for these methods.
      */
+
 public:
     virtual ~Component() {}
 
-    void SetParent(Component* parent) {
-        m_parent = parent;
-    }
-
-    Component* GetParent() const {
-        return m_parent;
-    }
+    void setParent(Component* parent) { m_parent = parent; }
+    Component* setParent() const { return m_parent; }
 
     /**
      * In some cases, it would be beneficial to define the child-management
@@ -40,22 +35,23 @@ public:
      * object tree assembly. The downside is that these methods will be empty for
      * the leaf-level components.
      */
-    virtual void Add(Component* component) {}
-    virtual void Remove(Component* component) {}
+    virtual void add(Component* component) {}
+    virtual void remove(Component* component) {}
+    
     /**
      * You can provide a method that lets the client code figure out whether a
      * component can bear children.
      */
-    virtual bool IsComposite() const {
-        return false;
-    }
+    virtual bool isComposite() const { return false; }
+
     /**
      * The base Component may implement some default behavior or leave it to
      * concrete classes (by declaring the method containing the behavior as
      * "abstract").
      */
-    virtual std::string Operation() const = 0;
+    virtual std::string operation() const = 0;
 };
+
 
 /**
  * The Leaf class represents the end objects of a composition. A leaf can't have
@@ -66,7 +62,7 @@ public:
  */
 class Leaf : public Component {
 public:
-    std::string Operation() const override {
+    std::string operation() const override {
         return "Leaf";
     }
 };
@@ -88,35 +84,37 @@ public:
      * A composite object can add or remove other components (both simple or
      * complex) to or from its child list.
      */
-    void Add(Component* component) override {
+    void Add(Component* component) {
         m_children.push_back(component);
-        component->SetParent(this);
+        component->setParent(this);
     }
+
     /**
      * Have in mind that this method removes the pointer to the list but doesn't
      * frees the memory, you should do it manually or better use smart pointers.
      */
-    void Remove(Component* component) override {
+    void Remove(Component* component)  {
         m_children.remove(component);
-        component->SetParent(nullptr);
+        component->setParent(nullptr);
     }
-    bool IsComposite() const override {
+    bool isComposite() const override {
         return true;
     }
+
     /**
      * The Composite executes its primary logic in a particular way. It traverses
      * recursively through all its children, collecting and summing their results.
      * Since the composite's children pass these calls to their children and so
      * forth, the whole object tree is traversed as a result.
      */
-    std::string Operation() const override {
+    std::string operation() const override {
         std::string result;
         for (const Component* c : m_children) {
             if (c == m_children.back()) {
-                result += c->Operation();
+                result += c->operation();
             }
             else {
-                result += c->Operation() + "+";
+                result += c->operation() + "+";
             }
         }
         return "Branch(" + result + ")";
@@ -127,23 +125,19 @@ public:
  * The client code works with all of the components via the base interface.
  */
 void ClientCode(Component* component) {
-    // ...
-    std::cout << "RESULT: " << component->Operation();
-    // ...
+    std::cout << "RESULT: " << component->operation();
 }
 
 /**
- * Thanks to the fact that the child-management operations are declared in the
+ * Due to the fact that the child-management operations are declared in the
  * base Component class, the client code can work with any component, simple or
  * complex, without depending on their concrete classes.
  */
 void ClientCode2(Component* component1, Component* component2) {
-    // ...
-    if (component1->IsComposite()) {
-        component1->Add(component2);
+    if (component1->isComposite()) {
+        component1->add(component2);
     }
-    std::cout << "RESULT: " << component1->Operation();
-    // ...
+    std::cout << "RESULT: " << component1->operation();
 }
 
 /**
@@ -166,13 +160,13 @@ void  test_conceptual_example() {
     Component* leaf_1 = new Leaf;
     Component* leaf_2 = new Leaf;
     Component* leaf_3 = new Leaf;
-    branch1->Add(leaf_1);
-    branch1->Add(leaf_2);
+    branch1->add(leaf_1);
+    branch1->add(leaf_2);
 
     Component* branch2 = new Composite;
-    branch2->Add(leaf_3);
-    tree->Add(branch1);
-    tree->Add(branch2);
+    branch2->add(leaf_3);
+    tree->add(branch1);
+    tree->add(branch2);
     std::cout << "Client: Now I've got a composite tree:\n";
     ClientCode(tree);
     std::cout << "\n\n";
