@@ -205,11 +205,11 @@ C:\Development\GitRepositoryCPlusPlus\Cpp_DesignPatterns\CompositePattern
 
 Anregungen zum Beispiel und zum C++17 Filesystem findet man zum Beispiel unter
 
-[www.martinbroadhurst.com](http://www.martinbroadhurst.com/list-the-files-in-a-directory-in-c.html)
+[www.martinbroadhurst.com](http://www.martinbroadhurst.com/list-the-files-in-a-directory-in-c.html)<br>(abgerufen am 11.05.2020).
 
-[www.codingame.com](https://www.codingame.com/playgrounds/5659/c17-filesystem)
+[www.codingame.com](https://www.codingame.com/playgrounds/5659/c17-filesystem)<br>(abgerufen am 11.05.2020).
 
-[github.com/achimoraites/DesignPatterns](https://github.com/achimoraites/DesignPatterns/blob/master/CompositePattern/FileSystem/src/ui/FileSystem.java)
+[github.com/achimoraites/DesignPatterns](https://github.com/achimoraites/DesignPatterns/blob/master/CompositePattern/FileSystem/src/ui/FileSystem.java)<br>(abgerufen am 11.05.2020).
 
 
 ## Weitere Beispiele
@@ -217,7 +217,7 @@ Anregungen zum Beispiel und zum C++17 Filesystem findet man zum Beispiel unter
 Ein weiterer Anwendungsfall für das *Composite Entwurfsmuster* sind arithmetische Ausdrücke.
 Anregungen finden sich zum Beispiel unter
 
-[https://stackoverflow.com/questions](https://stackoverflow.com/questions/57942934/composite-design-pattern-how-to-create-calculator)
+[https://stackoverflow.com/questions](https://stackoverflow.com/questions/57942934/composite-design-pattern-how-to-create-calculator)<br>(abgerufen am 11.05.2020).
 
 ---
 
