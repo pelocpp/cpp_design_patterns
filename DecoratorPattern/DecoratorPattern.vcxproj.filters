@@ -13,9 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ConceptualExample">
-      <UniqueIdentifier>{d28d2b3c-2c94-4a72-9573-ed716193b5c2}</UniqueIdentifier>
+    <Filter Include="Source Files\ConceptualExample">
+      <UniqueIdentifier>{816bf9f2-9520-474d-aa6f-12a054464677}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\__DecoratorPattern\ConceptualExample.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="Program.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -23,31 +31,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyClass.h">
-      <Filter>ConceptualExample</Filter>
-    </ClInclude>
-    <ClInclude Include="MyClassImpl.h">
-      <Filter>ConceptualExample</Filter>
-    </ClInclude>
-    <ClInclude Include="Car.h">
-      <Filter>ConceptualExample</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>ConceptualExample</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="MyClass.cpp">
-      <Filter>ConceptualExample</Filter>
-    </ClCompile>
-    <ClCompile Include="MyClassImpl.cpp">
-      <Filter>ConceptualExample</Filter>
-    </ClCompile>
-    <ClCompile Include="Car.cpp">
-      <Filter>ConceptualExample</Filter>
-    </ClCompile>
-    <ClCompile Include="Program.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <Image Include="Resources\dp_decorator_01.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 # Katalog der Entwurfsmuster
 
+## TODO: Interceptor Pattern ergänzen
 
 Entwurfsmuster lassen sich in die drei Kategorien Erzeugungs-, Struktur- und Verhaltensmuster
 (Creational, Structural and Behavioral Design Patterns) untergliedern. Eine Aufstellung 
