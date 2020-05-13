@@ -13,22 +13,28 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\ConceptualExample">
+      <UniqueIdentifier>{0e8a5aae-faf6-497b-959e-2254bafe4332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SocialNetworking">
+      <UniqueIdentifier>{102470db-8e7d-4985-9891-87523ab09bbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConceptualExample.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
     <ClCompile Include="Facebook.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SocialNetworking</Filter>
     </ClCompile>
     <ClCompile Include="Network.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SocialNetworking</Filter>
     </ClCompile>
     <ClCompile Include="Twitter.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\SocialNetworking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

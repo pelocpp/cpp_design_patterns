@@ -13,40 +13,49 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\ConceptualExample">
+      <UniqueIdentifier>{5556b153-ba28-499f-bd10-eb58f159afee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ECommerceApp">
+      <UniqueIdentifier>{425126ef-a763-4635-a176-f5dccdf5fb9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RenderApp">
+      <UniqueIdentifier>{ed3aa8c8-1977-4b43-96f1-881e36064528}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PayByPayPal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Order.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ConceptualExample.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PayByCreditCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CreditCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderTextProcessor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderHtmlListStrategy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderMarkdownListStrategy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RenderOutputFormats.h">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="CreditCard.cpp">
+      <Filter>Source Files\ECommerceApp</Filter>
+    </ClCompile>
+    <ClCompile Include="Order.cpp">
+      <Filter>Source Files\ECommerceApp</Filter>
+    </ClCompile>
+    <ClCompile Include="PayByCreditCard.cpp">
+      <Filter>Source Files\ECommerceApp</Filter>
+    </ClCompile>
+    <ClCompile Include="PayByPayPal.cpp">
+      <Filter>Source Files\ECommerceApp</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderHtmlListStrategy.cpp">
+      <Filter>Source Files\RenderApp</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTextProcessor.cpp">
+      <Filter>Source Files\RenderApp</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderProgram.cpp">
+      <Filter>Source Files\RenderApp</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderMarkdownListStrategy.cpp">
+      <Filter>Source Files\RenderApp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

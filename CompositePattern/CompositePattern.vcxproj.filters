@@ -16,11 +16,11 @@
     <Filter Include="FileSystem">
       <UniqueIdentifier>{6b5dfcab-926a-4481-b7ce-27dff44e9baf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ConceptualExample">
+      <UniqueIdentifier>{aae7269e-c02a-4232-bbdd-2aa3d6740bc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConceptualExample.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -38,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="FileSystemAdvanced.cpp">
       <Filter>FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
