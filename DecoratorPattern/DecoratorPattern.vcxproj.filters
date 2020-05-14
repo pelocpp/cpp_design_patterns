@@ -16,13 +16,19 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{816bf9f2-9520-474d-aa6f-12a054464677}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Shapes">
+      <UniqueIdentifier>{c2ae6189-1798-4047-bd0c-39d00fab23a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Program.cpp">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClCompile>
     <ClCompile Include="ConceptualExample.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Program.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

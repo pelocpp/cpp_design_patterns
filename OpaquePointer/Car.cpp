@@ -25,3 +25,8 @@ void Car::coolDown()
 {
     m_engine->coolDown();
 }
+
+void test_01() {
+    Car vw;
+    vw.coolDown();
+}

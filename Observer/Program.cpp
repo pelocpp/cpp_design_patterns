@@ -2,9 +2,6 @@
 // Program.cpp
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-
 // function prototypes
 void test_conceptual_example();
 

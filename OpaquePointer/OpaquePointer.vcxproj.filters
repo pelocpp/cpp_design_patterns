@@ -13,8 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ConceptualExample">
-      <UniqueIdentifier>{d28d2b3c-2c94-4a72-9573-ed716193b5c2}</UniqueIdentifier>
+    <Filter Include="Source Files\ConceptualExample">
+      <UniqueIdentifier>{70de5f88-81ad-47f9-8100-ddf7bf0755c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -23,31 +23,31 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyClass.h">
-      <Filter>ConceptualExample</Filter>
-    </ClInclude>
-    <ClInclude Include="MyClassImpl.h">
-      <Filter>ConceptualExample</Filter>
-    </ClInclude>
     <ClInclude Include="Car.h">
-      <Filter>ConceptualExample</Filter>
+      <Filter>Source Files\ConceptualExample</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>ConceptualExample</Filter>
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClInclude>
+    <ClInclude Include="MyClass.h">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClInclude>
+    <ClInclude Include="MyClassImpl.h">
+      <Filter>Source Files\ConceptualExample</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyClass.cpp">
-      <Filter>ConceptualExample</Filter>
-    </ClCompile>
-    <ClCompile Include="MyClassImpl.cpp">
-      <Filter>ConceptualExample</Filter>
-    </ClCompile>
-    <ClCompile Include="Car.cpp">
-      <Filter>ConceptualExample</Filter>
-    </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Car.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="MyClass.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="MyClassImpl.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
