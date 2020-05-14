@@ -142,7 +142,8 @@
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Program.cpp" />
-    <ClCompile Include="Shapes.cpp" />
+    <ClCompile Include="DynamicShapes.cpp" />
+    <ClCompile Include="StaticShapes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md" />
