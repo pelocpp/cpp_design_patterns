@@ -138,7 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\__DecoratorPattern\ConceptualExample.cpp" />
+    <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_decorator_01.png" />
+    <Image Include="Resources\dp_decorator_02.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,10 +18,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\__DecoratorPattern\ConceptualExample.cpp">
+    <ClCompile Include="Program.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
-    <ClCompile Include="Program.cpp">
+    <ClCompile Include="ConceptualExample.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,6 +32,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_decorator_01.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\dp_decorator_02.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

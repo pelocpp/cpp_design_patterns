@@ -42,13 +42,38 @@ Abbildung 1: Vererbung versus Aggregation.
 
 Das Objekt, das Sie verwenden möchten, führt die grundlegenden Funktionen aus, die Sie benötigen.
 Möglicherweise müssen Sie dem Objekt jedoch noch einige zusätzliche Funktionalitäten hinzufügen,
-die vor nach der Basisfunktionalität des betrachteten Objekts auszuführen ist.
-
-
+die vor oder nach der Basisfunktionalität des betrachteten Objekts auszuführen sind.
 
 #### Lösung:
 
+*Wrapper* oder Hülle ist der alternative Kurzname für das Decorator-Pattern,
+der die Hauptidee des Musters klar zum Ausdruck bringt. Ein "Wrapper" ist ein Objekt,
+das mit einem "Ziel"-Objekt verknüpft werden kann. Das Wrapper-Objekt enthält die gleichen Methoden
+wie das Ziel und delegiert alle eingehenden Requests an es.
+Der Wrapper kann das Verhalten jedoch ändern,
+indem er entweder vor oder nach dem Weiterleiten der Anforderung an das Ziel
+zusätzliches Verhalten hinzufügt.
 
+#### Struktur (UML):
+
+<img src="dp_decorator_02.png" width="650">
+
+Abbildung 2: Standard-Darstellung des Decorator Patterns.
+
+
+###### Hinweis:
+
+Während ein Dekorateur seine Funktionalität vor oder nach Weiterleiten der Anforderung an das Objekt,
+was es dekoriert, hinzufügen kann
+Funktionalität vor oder nach dem, was es dekoriert, sollte die Kette der Instanziierung
+immer mit dem ConcreteComponent enden.
+
+#### Implementierung:
+
+Erstellen Sie eine abstrakte Klasse, die sowohl die ursprüngliche Klasse darstellt
+als auch die neuen Methoden besitzt, die der Klasse hinzugefügt werden sollen.
+Platzieren Sie in den Dekoratoren die neuen Methoden-Anrufe
+vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge zu erhalten.
 
 #### Pro / Kontra:
 
@@ -66,30 +91,9 @@ die vor nach der Basisfunktionalität des betrachteten Objekts auszuführen ist.
   * Es ist schwierig, einen Dekorateur so zu implementieren, dass sein Verhalten nicht von der Reihenfolge im Dekorationsstapel abhängt.
   * Der anfängliche Konfigurationscode von Ebenen (Hüllen) sieht möglicherweise nicht sehr gut aus.
 
+#### Beispiel:
 
-#### Struktur (UML):
-
-<img src="dp_decorator_02.png" width="600">
-
-Abbildung 2: Vererbung versus Aggregation.
-
-
-Bild abgleichen mit
-
-http://www.vincehuston.org/dp/decorator.html
-und Buch von Shalloway ....
-
-
-
-#### Ein Beispiel:
-
-###### Grundlagen:
-
-
-## Anwendungen des Design Pattern in der STL:
-
-  * TBD
-
+Siehe Verzeichnis *ConceptualExample*.
 
 
 ## Anwendungsbeispiel:
@@ -99,24 +103,15 @@ und Buch von Shalloway ....
 
 ## Literaturhinweise
 
-https://www.bfilipek.com/2018/01/pimpl.html
+*Hinweise*:
 
-https://www.geeksforgeeks.org/pimpl-idiom-in-c-with-examples/
+Die Anregungen zu den Beispielen findet man unter
 
+[refactoring.guru](https://refactoring.guru/design-patterns/decorator)<br>(abgerufen am 14.05.2020).
 
+und 
 
-https://www.gamasutra.com/view/news/167098/Indepth_PIMPL_vs_pure_virtual_interfaces.php
-
-https://stackoverflow.com/questions/825018/pimpl-idiom-vs-pure-virtual-class-interface
-
-
-
-https://marcmutz.wordpress.com/translated-articles/pimp-my-pimpl-reloaded/
-
-
-https://www.fluentcpp.com/2017/09/22/make-pimpl-using-unique_ptr/
-
-
+[Dmitri Nesteruk "Design Patterns in Modern C++](https://github.com/Apress/design-patterns-in-modern-cpp)<br>(abgerufen am 14.05.2020).
 
 ---
 
@@ -126,9 +121,5 @@ https://www.fluentcpp.com/2017/09/22/make-pimpl-using-unique_ptr/
 
 ## Weiterarbeit:
 
-a) Ein voll funktionsfähiges Beispiel (mit COpy und MOveable) implementieren.
-
-b) Bridge
-
-c) Wenn Zeit: Einen Vergleich Pimpl vs Interface Inheritance herstellen.
+a) Beispiel Dmitri Nesteruk !!!
 
