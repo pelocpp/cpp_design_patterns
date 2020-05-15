@@ -4,22 +4,26 @@
 
 Das *Null Object Pattern* ist ein Entwurfsmuster, das sich der Thematik von Null-Referenzen annimmt.
 Null-Referenzen gibt es in anderen Programmiersprachen sehr wohl, in C++ sind sie per Definition nicht existent.
-Wir sprechen daher besser von so genannten Null-Objekten, also Objekten, die keinerei Funktionalität haben.
+Wir sprechen daher besser von so genannten Null-Objekten, also Objekten, die keinerlei Funktionalität haben.
 
-Das  *Null Object* Entwurfsmuster befreit uns von der Pflicht, zur Laufzeit Abfragen bzgl. gewisser Zustände vornehmen zu müssen.
-Überall im Quellcode, wo Überprüfungen auf Nullwerte erfoderlich wären (was in C++ bei Referenzen ohnehin nicht möglich ist),
-kommen Nullobjektklassen zum Einsatz.
+Der Sinn des Musters besteht darin, einer Referenz ein Objekt zuzuweisen, das keine Aktion ausführt,
+anstatt die Referenz zu invalidieren. Dadurch wird erreicht, dass die Referenz auf die Variable zu jedem Zeitpunkt auf ein gültiges Objekt verweist,
+was Behandlungen von Sonderfällen (das Nichtvorhandensein) erübrigt.
 
-#### Kategorie: *Structural Pattern*  ????
+#### Kategorie: *Behavioural Pattern*
 
 #### Ziel / Absicht:
 
 Objekte ohne Funktionalität stellen natürlich einen Sonderfall dar.
 Sie können Sinn ergeben, wenn reale Daten - zum Beispiel in einem Testszenario - nicht verfügbar sind,
 man aber das Standardverhalten der Software trotzdem bereitstellen möchte.
-Das Null-Objekt spiegelt folglich eine "*Do-Nothing*"-Beziehung wider.
+Das Null-Objekt spiegelt folglich eine "*Do-Nothing*"-Beziehung wieder.
 
 #### Problem:
+
+Das  *Null Object* Entwurfsmuster befreit uns von der Pflicht, zur Laufzeit Abfragen bzgl. gewisser Zustände vornehmen zu müssen.
+Überall im Quellcode, wo Überprüfungen auf Nullwerte erfoderlich wären (was in C++ bei Referenzen ohnehin nicht möglich ist),
+kommen Nullobjektklassen zum Einsatz.
 
 #### Lösung:
 
@@ -28,15 +32,16 @@ die die verschiedenen auszuführenden Operationen definiert.
 
 Davon leiten wir reale Klassen ab, die die eigentliche Funktionalität implementieren und schließlich eine Null-Objekt Klasse,
 die *keine* Implementierung der Basisklasse bereitstellt. Um es anderes zu formulieren: Streng genommen stellt auch die
-Null-Objekt Klasse eine Implementierung der Basisklasse dar, aber eben nur mit leeren Methodenrümpfen
+Null-Objekt Klasse eine Implementierung der Basisklasse dar, aber eben mit leeren Methodenrümpfen.
 
-Nun kann man die Null-Objekt Klasse überall dort einsetzen, wo aus welchen Gründen auch immer, eine Klasse mit einer realen
+Nun kann man die Null-Objekt Klasse überall dort einsetzen, wo aus welchen Gründen auch immer,
+eine Klasse mit einer realen
 Realisierung (temporär) nicht anwendbar ist.
 
 
 #### Struktur (UML):
 
-<img src="db_null_object.png" width="400">
+<img src="db_null_object.png" width="500">
 
 Abbildung 1: Schematische Darstellung des *Null Object* Entwurfsmusters.
 

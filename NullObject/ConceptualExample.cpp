@@ -3,185 +3,55 @@
 // ===========================================================================
 
 #include <iostream>
-#include <list>
 #include <string>
 
 /**
- * The base Component class declares common operations for both
- * simple and complex objects of a composition.
+ * The base Component class declares common operations
+ * for both real and null objects.
  */
-class Component {
-    /**
-     * @var Component
-     */
-protected:
-    Component* m_parent;
-    /**
-     * Optionally, the base Component can declare an interface for setting and
-     * accessing a parent of the component in a tree structure. It can also
-     * provide some default implementation for these methods.
-     */
-
+class AbstractObject
+{
 public:
-    virtual ~Component() {}
-
-    void setParent(Component* parent) { m_parent = parent; }
-    Component* setParent() const { return m_parent; }
-
-    /**
-     * In some cases, it would be beneficial to define the child-management
-     * operations right in the base Component class. This way, you won't need to
-     * expose any concrete component classes to the client code, even during the
-     * object tree assembly. The downside is that these methods will be empty for
-     * the leaf-level components.
-     */
-    virtual void add(Component* component) {}
-    virtual void remove(Component* component) {}
-    
-    /**
-     * You can provide a method that lets the client code figure out whether a
-     * component can bear children.
-     */
-    virtual bool isComposite() const { return false; }
-
-    /**
-     * The base Component may implement some default behavior or leave it to
-     * concrete classes (by declaring the method containing the behavior as
-     * "abstract").
-     */
-    virtual std::string operation() const = 0;
+    virtual std::string  operation() const = 0;
 };
 
-
 /**
- * The Leaf class represents the end objects of a composition. A leaf can't have
- * any children.
- *
- * Usually, it's the Leaf objects that do the actual work, whereas Composite
- * objects only delegate to their sub-components.
+ * Implementation of a real object.
  */
-class Leaf : public Component {
+class RealObject : public AbstractObject
+{
 public:
-    std::string operation() const override {
-        return "Leaf";
+    virtual std::string  operation() const override
+    {
+     //   std::cout << "do something" << std::endl;
+        return std::string("computed something!");
     }
 };
 
 /**
- * The Composite class represents the complex components that may have children.
- * Usually, the Composite objects delegate the actual work to their children and
- * then "sum-up" the result.
+ * Implementation of a null object.
  */
-class Composite : public Component {
-    /**
-     * @var Composite
-     */
-protected:
-    std::list<Component*> m_children;
-
+class NullObject : public AbstractObject
+{
 public:
-    /**
-     * A composite object can add or remove other components (both simple or
-     * complex) to or from its child list.
-     */
-    void Add(Component* component) {
-        m_children.push_back(component);
-        component->setParent(this);
-    }
-
-    /**
-     * Have in mind that this method removes the pointer to the list but doesn't
-     * frees the memory, you should do it manually or better use smart pointers.
-     */
-    void Remove(Component* component)  {
-        m_children.remove(component);
-        component->setParent(nullptr);
-    }
-    bool isComposite() const override {
-        return true;
-    }
-
-    /**
-     * The Composite executes its primary logic in a particular way. It traverses
-     * recursively through all its children, collecting and summing their results.
-     * Since the composite's children pass these calls to their children and so
-     * forth, the whole object tree is traversed as a result.
-     */
-    std::string operation() const override {
-        std::string result;
-        for (const Component* c : m_children) {
-            if (c == m_children.back()) {
-                result += c->operation();
-            }
-            else {
-                result += c->operation() + "+";
-            }
-        }
-        return "Branch(" + result + ")";
-    }
+    virtual std::string operation() const override { return std::string(""); }
 };
 
 /**
- * The client code works with all of the components via the base interface.
+ * The client code works with all of the objects via the base interface.
+ * The function which requires an AbstractObject instance, and will not accept null
  */
-void ClientCode(Component* component) {
-    std::cout << "RESULT: " << component->operation();
+void clientCode(const AbstractObject& obj) {
+    // obj may never be null here
+    std::string result = obj.operation();
+    std::cout << "RESULT: " << result << std::endl;
 }
-
-/**
- * Due to the fact that the child-management operations are declared in the
- * base Component class, the client code can work with any component, simple or
- * complex, without depending on their concrete classes.
- */
-void ClientCode2(Component* component1, Component* component2) {
-    if (component1->isComposite()) {
-        component1->add(component2);
-    }
-    std::cout << "RESULT: " << component1->operation();
-}
-
-/**
- * This way the client code can support the simple leaf components...
- */
 
 void  test_conceptual_example() {
-
-    Component* simple = new Leaf;
-    std::cout << "Client: I've got a simple component:\n";
-    ClientCode(simple);
-    std::cout << "\n\n";
-
-    /**
-     * ...as well as the complex composites.
-     */
-    Component* tree = new Composite;
-
-    Component* branch1 = new Composite;
-    Component* leaf_1 = new Leaf;
-    Component* leaf_2 = new Leaf;
-    Component* leaf_3 = new Leaf;
-    branch1->add(leaf_1);
-    branch1->add(leaf_2);
-
-    Component* branch2 = new Composite;
-    branch2->add(leaf_3);
-    tree->add(branch1);
-    tree->add(branch2);
-    std::cout << "Client: Now I've got a composite tree:\n";
-    ClientCode(tree);
-    std::cout << "\n\n";
-
-    std::cout << "Client: I don't need to check the components classes even when managing the tree:\n";
-    ClientCode2(tree, simple);
-    std::cout << "\n";
-
-    delete simple;
-    delete tree;
-    delete branch1;
-    delete branch2;
-    delete leaf_1;
-    delete leaf_2;
-    delete leaf_3;
+    RealObject realObject;
+    clientCode(realObject);
+    NullObject nullObject;
+    clientCode(nullObject);
 }
 
 // ===========================================================================
