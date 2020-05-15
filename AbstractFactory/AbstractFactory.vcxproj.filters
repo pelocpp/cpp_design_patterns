@@ -13,10 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\ConceptualExample">
+      <UniqueIdentifier>{022de622-adf2-4a00-a0fd-900455a37523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\VehiclesFactory">
+      <UniqueIdentifier>{64476307-df44-4216-866d-412c11d86c86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ConceptualExample.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicles.cpp">
+      <Filter>Source Files\VehiclesFactory</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

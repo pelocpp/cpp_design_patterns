@@ -140,6 +140,9 @@
   <ItemGroup>
     <None Include="Resources\Readme.md" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ConceptualExample.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
