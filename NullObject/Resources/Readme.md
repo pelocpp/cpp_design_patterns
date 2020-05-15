@@ -34,13 +34,11 @@ Nun kann man die Null-Objekt Klasse überall dort einsetzen, wo aus welchen Gründ
 Realisierung (temporär) nicht anwendbar ist.
 
 
-
-
 #### Struktur (UML):
 
-<img src="dp_composite_pattern.png" width="600">
+<img src="db_null_object.png" width="400">
 
-Abbildung 1: Schematische Darstellung des *Composite Entwurfsmusters*.
+Abbildung 1: Schematische Darstellung des *Null Object* Entwurfsmusters.
 
 #### Conceptual Example:
 
@@ -53,7 +51,6 @@ vor.
 #### Beginners Example:
 
 #### 'Real-World' Example:
-
 
 
 ## Literaturhinweise
