@@ -32,3 +32,6 @@ Es folgt eine Auflistung der Beispiele (bzw. Unterverzeichnisse):
 ##### Beispiel *Template Method Pattern* (Unterverzeichnis *TemplatePattern*):
 
 ---
+
+## TODO: Interceptor Pattern ergänzen
+

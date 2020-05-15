@@ -1,7 +1,5 @@
 # Katalog der Entwurfsmuster
 
-## TODO: Interceptor Pattern ergänzen
-
 Entwurfsmuster lassen sich in die drei Kategorien Erzeugungs-, Struktur- und Verhaltensmuster
 (Creational, Structural and Behavioral Design Patterns) untergliedern. Eine Aufstellung 
 der einzelnen Entwurfsmuster dieser Kategorien finden Sie nachstehend vor:
@@ -10,18 +8,20 @@ der einzelnen Entwurfsmuster dieser Kategorien finden Sie nachstehend vor:
 
 ## Erzeugungssmuster
 
-Creational patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code.
+In der Softwareentwicklung sind Erstellungsmuster (so genannten *Creational Patter*) Entwurfsmuster,
+die sich mit Objekterstellungsmechanismen befassen und in Situationen verwendet werden,
+in denen die klassischen Formen der Objekterzeugung zu Entwurfsproblemen führen
+oder die Komplexität des Codes erhöhen kann.
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| [Factory Method](TemplatePattern/Resources/Readme.md) | Bietet eine Schnittstelle zum Erstellen von Objekten in einer Oberklasse, ermöglicht es jedoch den Unterklassen, den Typ der zu erstellenden Objekte zu ändern.. |
-| Abstract Factory | Lets you produce families of related objects without specifying their concrete classes. |
-| Builder | Lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code. |
-| Prototype | Lets you copy existing objects without making your code dependent on their classes. |
-| [Singleton](Singleton/Resources/Readme.md) | Lets you ensure that a class has only one instance, while providing a global access point to this instance. |
+| [Factory Method](FactoryMethod/Resources/Readme.md) | Bietet eine Schnittstelle zum Erstellen von Objekten in einer Oberklasse, ermöglicht es jedoch den Unterklassen, den Typ der zu erstellenden Objekte zu ändern.. |
+| [Abstract Factory](AbstractFactory/Resources/Readme.md) | Erstellung von Familien verwandter Objekte, ohne deren konkrete Klassen anzugeben. |
+| [Builder](Builder/Resources/Readme.md) | Ermöglicht das schrittweise Erstellen komplexer Objekte. |
+| [Prototype](Prototype/Resources/Readme.md) | Erstellen von Kopien vorhandener Objekte, ohne Ihren Code von ihren Klassen abhängig zu machen. |
+| [Singleton](Singleton/Resources/Readme.md) | Hiermit können Sie sicherstellen, dass eine Klasse nur eine Instanz hat, während Sie einen globalen Zugriffspunkt für diese Instanz bereitstellen. |
 
 Tabelle 1. Erzeugungsmuster (Creational Design Patterns).
-
 
 ## Strukturmuster
 
@@ -47,6 +47,7 @@ Behavioral design patterns are concerned with algorithms and the assignment of r
 |:-------------- |----|
 | Chain of Responsibility | Lets you pass requests along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain. |
 | [Command Pattern](CommandPattern/Resources/Readme.md) | Turns a request into a stand-alone object that contains all information about the request. This transformation lets you parameterize methods with different requests, delay or queue a request's execution, and support undoable operations. |
+| Interpreter | TBD |
 | Iterator | Lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.). |
 | Mediator | Lets you reduce chaotic dependencies between objects. The pattern restricts direct communications between the objects and forces them to collaborate only via a mediator object. |
 | Memento | Lets you save and restore the previous state of an object without revealing the details of its implementation. |
@@ -69,12 +70,6 @@ aktuell bei der Fa. Google in der Entwicklung der Programmiersprache Dart beschä
 | Update Method | TBD |
 
 Tabelle 4. Sequencing Patterns
-
-
-
-
-
-
 
 
 
@@ -107,6 +102,15 @@ Tabelle 6. Decoupling Patterns
 | Object Pool | TBD |
 
 Tabelle 7. Optimization Patterns
+
+
+| Muster | Kurzbeschreibung |
+|:-------------- |----|
+| MVC | Model-View-Controller |
+| MVVM | Model View View-Model |
+
+Tabelle 7. Entwurfsmuster für Oberflächen
+
 
 
 
@@ -156,3 +160,5 @@ Tabelle 5. Weitere Anti-Pattern
 [Zurück](Readme.md)
 
 ---
+
+
