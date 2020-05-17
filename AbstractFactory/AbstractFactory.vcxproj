@@ -142,7 +142,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
+    <ClCompile Include="Program.cpp" />
     <ClCompile Include="Vehicles.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_abstract_factory.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

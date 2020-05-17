@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <memory>
 
 /**
  * Each distinct product of a product family should have a base interface.
@@ -97,8 +98,8 @@ public:
  */
 class AbstractFactory {
 public:
-    virtual AbstractProductA* CreateProductA() const = 0;
-    virtual AbstractProductB* CreateProductB() const = 0;
+    virtual std::shared_ptr<AbstractProductA> CreateProductA() const = 0;
+    virtual std::shared_ptr<AbstractProductB> CreateProductB() const = 0;
 };
 
 /**
@@ -109,11 +110,12 @@ public:
  */
 class ConcreteFactory1 : public AbstractFactory {
 public:
-    AbstractProductA* CreateProductA() const override {
-        return new ConcreteProductA1();
+    std::shared_ptr<AbstractProductA> CreateProductA() const override {
+        return std::make_shared<ConcreteProductA1>();
     }
-    AbstractProductB* CreateProductB() const override {
-        return new ConcreteProductB1();
+
+    std::shared_ptr<AbstractProductB> CreateProductB() const override {
+        return std::make_shared<ConcreteProductB1>();
     }
 };
 
@@ -122,40 +124,38 @@ public:
  */
 class ConcreteFactory2 : public AbstractFactory {
 public:
-    AbstractProductA* CreateProductA() const override {
-        return new ConcreteProductA2();
+    std::shared_ptr<AbstractProductA> CreateProductA() const override {
+        return std::make_shared<ConcreteProductA2>();
     }
-    AbstractProductB* CreateProductB() const override {
-        return new ConcreteProductB2();
+    std::shared_ptr<AbstractProductB> CreateProductB() const override {
+        return std::make_shared<ConcreteProductB2>();
     }
 };
 
 /**
- * The client code works with factories and products only through abstract
- * types: AbstractFactory and AbstractProduct. This lets you pass any factory or
+ * The client code works with factories and products only through abstract types:
+ * AbstractFactory and AbstractProduct. This lets you pass any factory or
  * product subclass to the client code without breaking it.
  */
 
-void ClientCode(const AbstractFactory& factory) {
-    const AbstractProductA* product_a = factory.CreateProductA();
-    const AbstractProductB* product_b = factory.CreateProductB();
+void clientCode(const std::shared_ptr<AbstractFactory>& factory) {
+    const std::shared_ptr<AbstractProductA> product_a = factory->CreateProductA();
+    const std::shared_ptr<AbstractProductB> product_b = factory->CreateProductB();
     std::cout << product_b->UsefulFunctionB() << "\n";
     std::cout << product_b->AnotherUsefulFunctionB(*product_a) << "\n";
-    delete product_a;
-    delete product_b;
 }
 
-int main() {
+// function prototypes
+void test_conceptual_example()
+{
     std::cout << "Client: Testing client code with the first factory type:\n";
-    ConcreteFactory1* f1 = new ConcreteFactory1();
-    ClientCode(*f1);
-    delete f1;
+    std::shared_ptr<ConcreteFactory1> f1 = std::make_shared<ConcreteFactory1>();
+    clientCode(f1);
     std::cout << std::endl;
+
     std::cout << "Client: Testing the same client code with the second factory type:\n";
-    ConcreteFactory2* f2 = new ConcreteFactory2();
-    ClientCode(*f2);
-    delete f2;
-    return 0;
+    std::shared_ptr<ConcreteFactory2> f2 = std::make_shared<ConcreteFactory2>();
+    clientCode(f2);
 }
 
 // ===========================================================================

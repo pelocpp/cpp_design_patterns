@@ -55,7 +55,7 @@ vor.
 
 #### Beginners Example:
 
-#### 'Real-World' Example:
+#### 'Real-World' Beispiel:
 
 
 ## Literaturhinweise

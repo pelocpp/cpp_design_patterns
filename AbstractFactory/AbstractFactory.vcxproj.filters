@@ -32,5 +32,13 @@
     <ClCompile Include="Vehicles.cpp">
       <Filter>Source Files\VehiclesFactory</Filter>
     </ClCompile>
+    <ClCompile Include="Program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_abstract_factory.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
