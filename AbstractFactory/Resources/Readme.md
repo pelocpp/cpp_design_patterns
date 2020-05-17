@@ -13,7 +13,7 @@ Eine von mehreren Factory-Klassen generiert die jeweiligen Objektmengen.
 
 #### Struktur (UML):
 
-<img src="dp_abstract_factory.png" width="600">
+<img src="dp_abstract_factory.png" width="800">
 
 Abbildung 1: Schematische Darstellung des *Abstract Factory* Entwurfsmusters.
 
