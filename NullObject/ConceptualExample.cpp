@@ -47,7 +47,7 @@ void clientCode(const AbstractObject& obj) {
     std::cout << "RESULT: " << result << std::endl;
 }
 
-void  test_conceptual_example() {
+void test_conceptual_example() {
     RealObject realObject;
     clientCode(realObject);
     NullObject nullObject;

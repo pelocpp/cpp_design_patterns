@@ -144,7 +144,7 @@ void ClientCode2(Component* component1, Component* component2) {
  * This way the client code can support the simple leaf components...
  */
 
-void  test_conceptual_example() {
+void test_conceptual_example() {
 
     Component* simple = new Leaf;
     std::cout << "Client: I've got a simple component:\n";
