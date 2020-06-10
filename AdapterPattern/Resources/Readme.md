@@ -47,7 +47,7 @@ deren Aufgabe die Verknüpfung von Funktionen / das Weiterreichen unabhängiger od
 
 #### Struktur (UML):
 
-<img src="dp_adapter_01.png" width="500">
+<img src="dp_adapter_01.png" width="700">
 
 Abbildung 1: Schematische Darstellung des *Adapter Pattern*.
 

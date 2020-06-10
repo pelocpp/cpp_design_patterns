@@ -44,10 +44,6 @@ Das *Template Method Pattern* ermöglicht die Realisierung von variierenden Teils
 Abbildung: Schematische Darstellung des *Template Method Patterns*.
 
 
-#### Anwendungen des Design Pattern in der STL:
-
-  * TBD
-
 #### Hinweis:
 
 Template Method Pattern und Strategy Pattern besitzen viele Gemeinsamkeiten. Ein Unterschied zwischen den beiden Mustern ist,
