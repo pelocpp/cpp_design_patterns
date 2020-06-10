@@ -143,8 +143,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
-    <ClCompile Include="MediaPlayer.cpp" />
+    <ClCompile Include="MediaPlayer01.cpp" />
+    <ClCompile Include="MediaPlayer02.cpp" />
     <ClCompile Include="Program.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_adapter_01.png" />
+    <Image Include="Resources\dp_adapter_02.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

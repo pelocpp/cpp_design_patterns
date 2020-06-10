@@ -19,14 +19,16 @@
 
 // function prototypes
 void test_conceptual_example();
-void test_media_player();
+void test_media_player_01();
+void test_media_player_02();
 
 int main() {
 
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
     // test_conceptual_example();
-    test_media_player();
+    test_media_player_01();
+    test_media_player_02();
 
     return 0;
 }

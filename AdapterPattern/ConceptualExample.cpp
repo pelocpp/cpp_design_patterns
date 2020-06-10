@@ -63,16 +63,16 @@ void ClientCode(std::shared_ptr<Target> target) {
 
 void test_conceptual_example() {
 
-    std::cout << "Client: I can work just fine with the Target objects:\n";
+    std::cout << "Client: I can work just fine with the Target objects" << std::endl;
     std::shared_ptr<Target> target = std::shared_ptr<Target>(new Target{});
     ClientCode(target);
 
     std::shared_ptr<Adaptee> adaptee = std::shared_ptr<Adaptee>(new Adaptee{ });
-    std::cout << "Client: The Adaptee class has a weird interface. See, I don't understand it:" << std::endl;
+    std::cout << "Client: The Adaptee class has an incompatible interface:" << std::endl;
     std::string specificRequest = adaptee->getSpecificRequest();
     std::cout << "Adaptee: " << specificRequest << std::endl << std::endl;
 
-    std::cout << "Client: But I can work with it via the Adapter:" << std::endl;
+    std::cout << "Client: But I can work with the Adaptee via the Adapter:" << std::endl;
     std::shared_ptr<Adapter> adapter = std::shared_ptr<Adapter>(new Adapter{ adaptee });
     ClientCode(adapter);
 }

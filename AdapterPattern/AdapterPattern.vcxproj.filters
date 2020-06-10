@@ -32,8 +32,19 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MediaPlayer.cpp">
+    <ClCompile Include="MediaPlayer02.cpp">
       <Filter>Source Files\MediaPlayer</Filter>
     </ClCompile>
+    <ClCompile Include="MediaPlayer01.cpp">
+      <Filter>Source Files\MediaPlayer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_adapter_01.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\dp_adapter_02.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -45,12 +45,14 @@ in das Programm einführen, ohne imkompatibel zum vorhandenen Client-Code zu sein
 Das Pattern steht im Prinzip für eine einzige Klasse (Adapterklasse),
 deren Aufgabe die Verknüpfung von Funktionen / das Weiterreichen unabhängiger oder inkompatibler Schnittstellen ist.
 
-
 #### Struktur (UML):
 
-<img src="dp_adapter.png" width="500">
+<img src="dp_adapter_01.png" width="500">
 
 Abbildung 1: Schematische Darstellung des *Adapter Pattern*.
+
+Der Klassenname `Adaptee` steht stellvertretend für Service-Klassen, die es gilt,
+über Adapter-Klassen verfügbar zu machen.
 
 #### Conceptual Example:
 
@@ -63,6 +65,30 @@ vor.
 #### Beginners Example:
 
 Das oben zitierte Beispiel eines MediaPlayers finden Sie im Quellcode exemplarisch umgesetzt vor.
+
+*Hinweis*: Prinzipiell gibt es für das Adapter Pattern zwei Vorgehensweisen in der realen Umsetzung in einer Programmiersprache:
+
+  * **Objekt Adapter Ansatz**:
+    Diese Implementierung verwendet das Prinzip der Komposition von Objekten:
+    Der Adapter implementiert die Schnittstelle eines Objekts, die für den Client relevant sind.
+    Die anderen Objekte werden "umhüllt", deren Funktionalität ist über die eine bekannte Schnittstelle nach außen zu transportieren.
+    Der Zugriff auf die - schnittstellentechnisch gesehen - inkompatiblen Funktion dieser Objekt ist die eigentliche Dienstleistung des Adapter-Objekts.
+    Dieser Ansatz kann in allen gängigen Programmiersprachen implementiert werden ("*has-a*" Relationship / "*hat-ein*" Beziehung).
+
+  * **Klassen Adapter Ansatz**:
+    Diese Implementierung verwendet die Vererbung: Der Adapter erbt Schnittstellen von allen Objekten gleichzeitig (vorhandenes Objekt, neue Service-Objekte mit inkompatiblen Service-Funktionen).
+    Beachten Sie, dass dieser Ansatz nur in Programmiersprachen implementiert werden kann, die Mehrfachvererbung unterstützen, z.B. C ++.
+    Wie beim *Objekt Adapter Ansatz* besteht auch hier die eigentliche Aufgabe der Adapter Klasse,
+    die geerbten Funktionalitäten über die vorhandene Schnittstelle verfügbar zu machen.
+
+
+Abbildung 1 gibt das Entwurfsmuster mit dem *Objekt Adapter Ansatz* wieder. In Abbildung 2 finden Sie
+das Muster auf Basis des *Klassen Adapter Ansatzes* vor:
+
+<img src="dp_adapter_02.png" width="700">
+
+Abbildung 1: Schematische Darstellung des *Adapter Pattern* (*Klassen Adapter Ansatzes*).
+
 
 ## Literaturhinweise
 
