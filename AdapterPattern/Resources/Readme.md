@@ -87,7 +87,7 @@ das Muster auf Basis des *Klassen Adapter Ansatzes* vor:
 
 <img src="dp_adapter_02.png" width="700">
 
-Abbildung 1: Schematische Darstellung des *Adapter Pattern* (*Klassen Adapter Ansatzes*).
+Abbildung 2: Schematische Darstellung des *Adapter Pattern* (*Klassen Adapter Ansatzes*).
 
 
 ## Literaturhinweise
