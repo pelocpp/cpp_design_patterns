@@ -1,7 +1,5 @@
 # Adapter Pattern
 
-DER TEXT IST NOCH NICHT FERTIG !!!!
-
 ## Wesentliche Merkmale
 
 #### Kategorie: *Structural Pattern*
@@ -17,24 +15,30 @@ Wir demonstrieren den Einsatz des Adapter Patterns anhand des folgenden Beispiel
 in dem ein Audio-Player-Gerät nur MP3-Dateien abspielen kann und einen erweiterten Audio-Player verwenden möchte,
 der VLC- und MP4-Dateien abspielen kann.
 
-Wir haben eine MediaPlayer-Schnittstelle und einen konkreten AudioPlayer,
-der die MediaPlayer-Schnittstelle implementiert.
-AudioPlayer kann standardmäßig Audiodateien im MP3-Format abspielen.
+Wir haben eine Schnittstelle `MediaPlayer` und eine konkrete Klasse `AudioPlayer`,
+die die `MediaPlayer`-Schnittstelle implementiert.
+`AudioPlayer` Objekte spielen standardmäßig Audiodateien im MP3-Format ab.
 
-Wir haben eine weitere Schnittstelle AdvancedMediaPlayer und konkrete Klassen,
-die die AdvancedMediaPlayer-Schnittstelle implementieren.
+Wir haben eine weitere Schnittstelle `AdvancedMediaPlayer` und konkrete Klassen,
+die die `AdvancedMediaPlayer`-Schnittstelle implementieren.
 Diese Klassen können Dateien im VLC- und MP4-Format abspielen.
 
-Wir möchten, dass AudioPlayer auch andere Formate wiedergibt.
-Um dies zu erreichen, haben wir eine Adapterklasse MediaAdapter erstellt,
-die die MediaPlayer-Schnittstelle implementiert und AdvancedMediaPlayer-Objekte verwendet,
-um das erforderliche Format abzuspielen.
+Wir wollen nun erreichen, dass die `AudioPlayer` Klasse auch andere Formate wiedergibt.
+Um dies zu erreichen, erstellen wir eine Adapterklasse `MediaAdapter`.
+Diese Klasse `MediaAdapter` implementiert zum Einen die `MediaPlayer`-Schnittstelle 
+und benutzt eine Instanz der Klasse `AdvancedMediaPlayer`,
+um das gewünschte Format abzuspielen.
 
-AudioPlayer verwendet die Adapterklasse MediaAdapter, die den gewünschten Audiotyp übergibt,
-ohne die tatsächliche Klasse zu kennen, die das gewünschte Format wiedergeben kann.
-AdapterPatternDemo, unsere Demo-Klasse, verwendet die AudioPlayer-Klasse,
-um verschiedene Formate abzuspielen.
+Die Klasse `AudioPlayer` verwendet die Adapterklasse `MediaAdapter`,
+ohne dabei die tatsächliche Klasse zu kennen, die das gewünschte Format wiedergeben kann.
+Bei Benutzung der Klasse `AudioPlayer` reicht diese den gewünschten Audiotyp nur an die Adapterklasse weiter.
 
+*Hinweis*: Der Clientcode wird bei Einhaltung des Patterns nicht an die konkrete Adapterklasse gekoppelt,
+sondern er darf nur über die vorhandene Clientschnittstelle mit dem Adapter zusammenarbeiten
+(im vorliegenden Beispiel: Schnittstelle `MediaPlayer`).
+
+Auf diese Weise lassen sich neue Adapterklassen in das Programm einführen,
+ohne imkompatibel zum vorhandenen Client-Code zu sein!
 
 #### Lösung:
 
@@ -44,15 +48,15 @@ unabhängiger oder inkompatibler Schnittstellen ist.
 
 #### Struktur (UML):
 
-<img src="to_be_done.png" width="600">
+<img src="dp_adapter.png" width="500">
 
-Abbildung 1: Schematische Darstellung des *Composite Entwurfsmusters*.
+Abbildung 1: Schematische Darstellung des *Adapter Pattern*.
 
 #### Conceptual Example:
 
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/composite/cpp/example#example-0)
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/adapter/cpp/example#example-0)
 
 vor.
 

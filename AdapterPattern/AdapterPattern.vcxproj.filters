@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{e334de7a-f5c6-4762-96ee-ea11fc4d9a8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\MediaPlayer">
+      <UniqueIdentifier>{a9b88d91-45d2-454c-a31a-724a52279cb5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -28,6 +31,9 @@
     </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaPlayer.cpp">
+      <Filter>Source Files\MediaPlayer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
