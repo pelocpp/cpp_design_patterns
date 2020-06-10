@@ -19,12 +19,14 @@
 
 // function prototypes
 void test_conceptual_example();
+void test_media_player();
 
 int main() {
 
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    test_conceptual_example();
+    // test_conceptual_example();
+    test_media_player();
 
     return 0;
 }
