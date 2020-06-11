@@ -54,9 +54,9 @@ public:
 };
 
 /**
- * The client code supports all classes that follow the Target interface.
+ * The client code supports all classes that follow the Target interface
  */
-void ClientCode(std::shared_ptr<Target> target) {
+static void clientCode(std::shared_ptr<Target> target) {
     std::string request = target->getRequest();
     std::cout << request << std::endl << std::endl;
 }
@@ -65,7 +65,7 @@ void test_conceptual_example() {
 
     std::cout << "Client: I can work just fine with the Target objects" << std::endl;
     std::shared_ptr<Target> target = std::shared_ptr<Target>(new Target{});
-    ClientCode(target);
+    clientCode(target);
 
     std::shared_ptr<Adaptee> adaptee = std::shared_ptr<Adaptee>(new Adaptee{ });
     std::cout << "Client: The Adaptee class has an incompatible interface:" << std::endl;
@@ -74,7 +74,7 @@ void test_conceptual_example() {
 
     std::cout << "Client: But I can work with the Adaptee via the Adapter:" << std::endl;
     std::shared_ptr<Adapter> adapter = std::shared_ptr<Adapter>(new Adapter{ adaptee });
-    ClientCode(adapter);
+    clientCode(adapter);
 }
 
 // ===========================================================================
