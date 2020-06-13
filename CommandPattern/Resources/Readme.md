@@ -1,37 +1,68 @@
-# Command Design Pattern
+# Command Pattern
 
-Erster Bild Kandidat:
+## Wesentliche Merkmale
 
-<img src="strategy_design_pattern.png" width="700">
+#### Kategorie: *Behavioral Pattern*
 
-Zweiter Bild Kandidat:
+#### Ziel / Absicht:
 
-<img src="StrategyPatternShalloway.png" width="600">
+Das *Command Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
+das eine Anforderung (einen *Request*, einen Befehl) in ein eigenständiges Objekt umwandelt,
+das alle Informationen über die Anforderung enthält.
+Der Befehl kann dann nach Bedarf aufgerufen werden, häufig als Teil einer Reihe von Befehlen,
+die in der Warteschlange (*Queue*) abgelegt sind.
+Die Befehle in einer Warteschlange können auf diese Weise sequentiell abgearbeitet werden,
+denkbar sind auch Rollback/Undo-Funktionalitäten.
+
+#### Problem:
+
+Das *Command Pattern* ist ein Entwurfsmuster, bei dem alle zur Ausführung einer Methode erforderlichen Informationen
+in einem Objekt gekapselt sind, das sofort verwendet oder zum späteren Gebrauch aufbewahrt werden kann.
+Dieses Objekt führt nichts aus, es enthält nur Informationen.
+
+Es gibt drei Schlüsselbegriffe, die zu definieren sind: *Client*, *Invoker* und *Receiver*.
+Der *Client* erstellt das Befehlsobjekt ("*Command Object*").
+Das *Invoker*-Objekt entscheidet, wann die Methode, deren Informationen (Parameter) im *Command Object* abgelegt sind, aufgerufen werden soll.
+Das *Receiver*-Objekt ist eine Instanz einer Klasse, die den Ablaufcode der Methode enthält.
 
 
+#### Lösung:
+
+#### Struktur (UML):
+
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Command Patterns*.
+Es besteht im Wesentlichen aus fünf Teilen:
+
+  * **Client**: Genereller Konsument der Klassen des Entwurfsmusters. Es erstellt die *Command Object* und verknüpft sie mit *Receiver*-Objekten.
+  * **Receiver**: Objekt, das weiß, wie das Kommando (Methode) auszuführen ist.
+  * **CommandBase**: Abstrakte Klasse (oder Schnittstelle) für *Command*-Objekte. Es enthält Informationen über das *Receiver*-Objekt,
+    das für die Ausführung einer Operation unter Verwendung der im *Command*-Objekt gekapselten Informationen verantwortlich ist.
+  * **ConcreteCommand**: Konkrete Implementierung der abstrakten `CommandBase`-Klasse oder -Schnittstelle.
+  * **Invoker**: Objekt, das entscheidet, wann das Kommando ausgeführt werden soll.
 
 
-## Kategorie: *Behavioral Pattern*
+<img src="command_pattern.png" width="400">
 
-## Anwendungen des Design Pattern in der STL:
+Abbildung 1: Schematische Darstellung des *Command Patterns*.
 
-  * `std::sort`: Im optionalen dritten Parameter kann ein *callable* übergeben werden, dass die Strategie des Sortierens implementiert.
 
-## Beschreibung:
+#### Conceptual Example:
 
-Das "Strategie Entwurfsmuster" zählt zur Kategorie der "Verhaltensmuster" / "Behavioral Pattern".
-Es injiziiert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung ("*Object* / *Context*") austauschen lassen.
+Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
-## Anwendungsbeispiel:
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/command/cpp/example#example-0)
 
-Das Strategie Pattern wird häufig eingesetzt, um das Verhalten einer Klasse zu ändern,
-ohne dies über eine Spezialisierung vorzunehmen.
+vor.
 
-Beispiele:
 
-Die Beispiele zu diesem Pattern orientieren sich an:
+#### Beginners Example:
 
-[https://refactoring.guru/design-patterns/strategy](https://refactoring.guru/design-patterns/strategy/java/example)
+#### 'Real-World' Beispiel:
+
+
+## Literaturhinweise
+
+*Hinweise*:
 
 ---
 

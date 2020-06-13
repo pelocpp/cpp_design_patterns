@@ -21,7 +21,10 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample.cpp">
+    <ClCompile Include="ConceptualExample_02.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample_01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>

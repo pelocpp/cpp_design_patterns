@@ -138,7 +138,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ConceptualExample.cpp" />
+    <ClCompile Include="ConceptualExample_01.cpp" />
+    <ClCompile Include="ConceptualExample_02.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
