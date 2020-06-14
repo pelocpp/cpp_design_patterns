@@ -8,88 +8,75 @@
 #include <string>
 #include <memory>
 
-class Receiver
-{
-public:
-    void action(std::string message)
+namespace ConceptualExample01 {
+
+    /**
+     * Receiver classes contain business logic. They know how to
+     * perform all kinds of operations, associated with carrying out a command.
+     * In fact, any class may serve as a Receiver.
+     */
+    class Receiver
     {
-        std::cout << "Action called with message " << message << std::endl;
-    }
-};
+    public:
+        void action(std::string message)
+        {
+            std::cout << "Action called with message " << message << std::endl;
+        }
+    };
 
-/**
- * The CommandBase interface declares a method for executing a command.
- */
-class CommandBase {
-protected:
-    std::shared_ptr<Receiver> m_receiver;
+    /**
+     * The CommandBase interface declares a method for executing a command.
+     */
+    class CommandBase {
+    protected:
+        std::shared_ptr<Receiver> m_receiver;
 
-public:
-    CommandBase(std::shared_ptr<Receiver> receiver) : m_receiver(receiver) {}
-    virtual ~CommandBase() {}
-    virtual void execute() const = 0;
-};
+    public:
+        CommandBase(std::shared_ptr<Receiver> receiver) : m_receiver(receiver) {}
+        virtual ~CommandBase() {}
+        virtual void execute() const = 0;
+    };
 
-//
-//public abstract class CommandBase
-//{
-//    protected readonly Receiver _receiver;
-//
-//    public CommandBase(Receiver receiver)
-//    {
-//        _receiver = receiver;
-//    }
-//
-//    public abstract void Execute();
-//}
+    class ConcreteCommand : public CommandBase
+    {
+    private:
+        std::string m_data;
+    public:
+        ConcreteCommand(std::shared_ptr<Receiver> receiver) : CommandBase(receiver) {}
 
-class ConcreteCommand : public CommandBase
-{
-private:
-    std::string m_data;
-public:
-    ConcreteCommand (std::shared_ptr<Receiver> receiver) : CommandBase(receiver) {}
+        void setData(std::string data) { 
+            m_data = data;
+        }
 
-    void setData(std::string data) { m_data = data; }
+        void execute() const override {
+            m_receiver->action(m_data);
+        }
+    };
 
+    class Invoker
+    {
+    private:
+        std::shared_ptr<CommandBase> m_command;
 
-    //public string Parameter { get; set; }
+    public:
+        void setCommand(std::shared_ptr<CommandBase> command) {
+            m_command = command;
+        }
 
-    //public ConcreteCommand(Receiver receiver) : base(receiver) { }
+        void executeCommand() {
+            m_command->execute();
+        }
+    };
+}
 
-    //public override void Execute()
-    //{
-    //    _receiver.Action(Parameter);
-    //}
-
-    void execute() const override {
-        m_receiver->action(m_data);
-    }
-};
-
-
-class Invoker
-{
-private:
-    std::shared_ptr<CommandBase> m_command;
-
-public:
-    void setCommand(std::shared_ptr<CommandBase> command) {
-        m_command = command;
-    }
-
-    void executeCommand() {
-        m_command->execute();
-    }
-};
-
-/**
- * The client code can parameterize an invoker with any commands.
- */
 void test_conceptual_example_01() {
+
+    using namespace ConceptualExample01;
+
     std::shared_ptr<Invoker> invoker = std::make_shared<Invoker>();
     std::shared_ptr<Receiver> receiver = std::make_shared<Receiver>();
     std::shared_ptr<ConcreteCommand> command = std::make_shared<ConcreteCommand>(receiver);
+
     command->setData("Hello, world!");
     invoker->setCommand(command);
     invoker->executeCommand();
