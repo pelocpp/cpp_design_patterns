@@ -44,6 +44,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdapterPattern", "AdapterPa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChainOfResponsibility", "ChainOfResponsibility\ChainOfResponsibility.vcxproj", "{EF040D12-2B09-4510-8053-022C8DDD9B60}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IteratorPattern", "IteratorPattern\IteratorPattern.vcxproj", "{F082A534-FE0D-49A6-A82F-F3F9C5151A0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -172,6 +174,14 @@ Global
 		{EF040D12-2B09-4510-8053-022C8DDD9B60}.Release|x64.Build.0 = Release|x64
 		{EF040D12-2B09-4510-8053-022C8DDD9B60}.Release|x86.ActiveCfg = Release|Win32
 		{EF040D12-2B09-4510-8053-022C8DDD9B60}.Release|x86.Build.0 = Release|Win32
+		{F082A534-FE0D-49A6-A82F-F3F9C5151A0B}.Debug|x64.ActiveCfg = Debug|x64
+		{F082A534-FE0D-49A6-A82F-F3F9C5151A0B}.Debug|x64.Build.0 = Debug|x64
+		{F082A534-FE0D-49A6-A82F-F3F9C5151A0B}.Debug|x86.ActiveCfg = Debug|Win32
+		{F082A534-FE0D-49A6-A82F-F3F9C5151A0B}.Debug|x86.Build.0 = Debug|Win32
+		{F082A534-FE0D-49A6-A82F-F3F9C5151A0B}.Release|x64.ActiveCfg = Release|x64
+		{F082A534-FE0D-49A6-A82F-F3F9C5151A0B}.Release|x64.Build.0 = Release|x64
+		{F082A534-FE0D-49A6-A82F-F3F9C5151A0B}.Release|x86.ActiveCfg = Release|Win32
+		{F082A534-FE0D-49A6-A82F-F3F9C5151A0B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
