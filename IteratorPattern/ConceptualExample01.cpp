@@ -1,12 +1,12 @@
 // ===========================================================================
-// ConceptualExample.cpp // Iterator Pattern
+// ConceptualExample01.cpp // Iterator Pattern // Standard Variant
 // ===========================================================================
 
 #include <iostream>
 #include <string>
 #include <vector>
 
-namespace IteratorPattern {
+namespace IteratorPatternStandard {
 
     template <typename T>
     class IteratorBase
@@ -49,6 +49,11 @@ namespace IteratorPattern {
         int size() const
         {
             return static_cast<int> (m_list.size());
+        }
+
+        T& get(int index)
+        {
+            return m_list[index];
         }
 
         const T& get(int index) const
@@ -142,9 +147,9 @@ namespace IteratorPattern {
     // =======================================================================
 }
 
-void test_conceptual_example() {
+void test_conceptual_example01() {
 
-    using namespace IteratorPattern;
+    using namespace IteratorPatternStandard;
 
     ConcreteAggregate<std::string> container;
     container.add("123");

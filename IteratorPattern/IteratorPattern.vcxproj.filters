@@ -26,7 +26,10 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample.cpp">
+    <ClCompile Include="ConceptualExample01.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,6 +38,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\dp_collections_iterator_tree_structures.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\dp_iterator_pattern.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
