@@ -13,10 +13,6 @@
 #endif
 #endif  // _DEBUG
 
-#include <iostream>
-#include <string>
-#include <memory>
-
 // function prototypes
 void test_conceptual_example();
 void test_media_player_01();
@@ -26,7 +22,7 @@ int main() {
 
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    // test_conceptual_example();
+    test_conceptual_example();
     test_media_player_01();
     test_media_player_02();
 

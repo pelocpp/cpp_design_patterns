@@ -2,10 +2,6 @@
 // Program.cpp // Command Pattern
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-#include <map>
-
 // function prototypes
 void test_conceptual_example_01();
 void test_conceptual_example_02();

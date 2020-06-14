@@ -2,9 +2,6 @@
 // Program.cpp // Abstract Factory
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-
 // function prototypes
 void test_conceptual_example();
 void test_vehicles();

@@ -10,10 +10,10 @@ void test_dynamic_decoration_03();
 void test_static_decoration_01();
 
 int main() {
-    //test_conceptual_example();
-    //test_dynamic_decoration_01();
-    //test_dynamic_decoration_02();
-    //test_dynamic_decoration_03();
+    test_conceptual_example();
+    test_dynamic_decoration_01();
+    test_dynamic_decoration_02();
+    test_dynamic_decoration_03();
     test_static_decoration_01();
     return 0;
 }

@@ -64,10 +64,10 @@ Es besteht im Wesentlichen aus fünf Teilen:
   * **Client**: Fordert das *Iterator*-Objekt von einem aggregierten Objekt an und "konsumiert" es, wenn die Elemente durchlaufen werden sollen.
   * **AggregateBase**: Abstrakte Basisklasse (oder Schnittstelle) für alle konkreten Aggregate. Diese Klasse enthält eine Methode, die auf Anfage ein Iterator-Objekt zurückgibt.
   * **ConcreteAggregate**: Repräsentiert die konkrete Implementierung der `AggregateBase`-Schnittstelle. Hat Zugriff auf die Elemente, die mit dem Iterator durchlaufen werden.
-  * **IteratorBase**: Abstrakte Klasse (oder Schnittstelle) eines konkreten Iterators. Enthält Methoden (präziser: die Signaturen von Methoden), mit denen die Elemente durchlaufen können..
+  * **IteratorBase**: Abstrakte Klasse (oder Schnittstelle) eines konkreten Iterators. Enthält Methoden (präziser: die Signaturen von Methoden), mit denen die Elemente durchlaufen können.
   * **ConcreteIterator**: Konkrete Realisierung von `IteratorBase`..
 
-<img src="dp_iterator_structure.png" width="600">
+<img src="dp_iterator_pattern.png" width="700">
 
 Abbildung 1: Schematische Darstellung des *Iterator Patterns*.
 
@@ -76,11 +76,11 @@ Abbildung 1: Schematische Darstellung des *Iterator Patterns*.
 
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/chain-of-responsibility/cpp/example#example-0)
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/iterator/cpp/example#example-0)
 
 und 
 
-[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Chain)
+[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Iterator)
 
 vor.
 

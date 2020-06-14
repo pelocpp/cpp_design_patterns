@@ -2,10 +2,6 @@
 // Program.cpp // Iterator Pattern
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-#include <map>
-
 // function prototypes
 void test_conceptual_example();
 
