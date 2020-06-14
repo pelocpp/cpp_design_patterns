@@ -1,4 +1,4 @@
-# Chain of Responsibility
+# Chain of Responsibility Patterns
 
 ## Wesentliche Merkmale
 
@@ -14,39 +14,57 @@ wird sie zunächst dem ersten Handler in der Liste übergeben.
 Nun entscheidet jeder Handler für sich, die Anforderung entweder zu verarbeiten oder
 diese an den nächsten Handler in der Liste weiterzuleiten.
 
-
 #### Problem:
+
+Im Prinzip betrachten wir das Problem, dass ein bestimmtes Ereignis von einem anderen Objekt zu verarbeiten ist.
+Das *Chain of Responsibility Pattern* ist eine formale Beschreibung dieses Problems.
+Wir haben in diesem Muster eine *Quelle* (*Ereignis*, *Event*) und mehrere Objekte, die auf dieses Ereignis reagieren wollen.
+Das Ereignis wird bei Eintreten an das erste Verarbeitungsobjekt übergeben.
+Dieses kann den Befehl verarbeiten (oder auch nicht) und/oder an seinen Nachfolger senden.
+Dies wird solange fortgesetzt, bis der Befehl verarbeitet wurde oder das Ende der Kette erreicht ist.
+Das Objekt, das den Befehl sendet (das Ereignis ausgelöst hat), weiß nicht, welches Objekt in der Kette aller Verarbeitungsobjekte
+den Befehl verarbeitet hat.
+
+Bzfgl. der Verarbeitung sind mehrere Szenarien denkbar: Hat ein Verarbeitungsobjekt die Anfrage übernommen,
+kann es das Weiterreichen der Anfrage an die noch vorhandenen Objekte in der Kette unterlassen ("*Single-Cast*" Szenario).
+Umgekehrt ist es denkbar, dass eine Anfrage prinzipiell die gesamte Kette aller Verarbeitungsobjekte durchläuft.
+Kein, ein oder mehrere Objekte können hierbei ihren Beitrag zur Abarbeitung des Ereignisses beitragen.
 
 
 #### Lösung:
 
+Das Pattern ermöglicht es, eine Anfrage an eine Kette von Verarbeitungsobjekten zu senden,
+ohne wissen zu müssen, welches Objekt / welche Objekte die Anfrage bearbeiten.
+Die Anfrage wird entlang der Kette weitergeleitet, bis ein oder mehrere Empfänger die Anfrage bearbeitet.
+Es kann auch sein, dass das Ereignis von keinem Empfänger bearbeitet wird.
+Der Absender eines Ereignisses ist nicht mit einem bestimmten Empfänger direkt verbunden.
+
+
 #### Struktur (UML):
 
-Das folgende UML-Diagramm beschreibt eine Implementierung des *Command Patterns*.
-Es besteht im Wesentlichen aus fünf Teilen:
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Chain of Responsibility Patterns*.
+Es besteht im Wesentlichen aus drei Teilen:
 
-  * **Client**: Genereller Konsument der Klassen des Entwurfsmusters. Er erstellt das *Command Object* und verknüpft es mit *Receiver*-Objekten.
-  * **Receiver**: Objekt, das weiß, wie das Kommando (Methode) auszuführen ist.
-  * **CommandBase**: Abstrakte Klasse (oder Schnittstelle) für *Command*-Objekte. Enthält Informationen über das *Receiver*-Objekt,
-    das für die Ausführung der Operation unter Verwendung der im *Command*-Objekt abgelegten Informationen verantwortlich ist.
-  * **ConcreteCommand**: Konkrete Implementierung der abstrakten `CommandBase`-Klasse oder -Schnittstelle.
-  * **Invoker**: Objekt, das entscheidet, wann das Kommando ausgeführt werden soll.
+  * **Client**: Diese Klasse übergibt das Ereignis (die Anforderung) an das erste Objekt in der Kette der Verarbeitungsobjekte.
+  * **HandlerBase**: Repräsentiert eine Schnittstelle oder Basisklasse für die konkreten Handler einer Verarbeitungskette.
+    Typischerweise enthält es eine Instanzvariable, die auf das nächste Handlerobjet in der Verarbeitungskette verweist.
+  * **ConcreteHandlers**: Konkrete Implementierung der `HandlerBase`-Klasse.
 
 
-<img src="dp_command_pattern.png" width="700">
+<img src="dp_chain_of_responsibility.png" width="600">
 
-Abbildung 1: Schematische Darstellung des *Command Patterns*.
+Abbildung 1: Schematische Darstellung des *Chain of Responsibility Patterns*.
 
 
 #### Conceptual Example:
 
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/command/cpp/example#example-0)
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/chain-of-responsibility/cpp/example#example-0)
 
 und 
 
-[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command)
+[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Chain)
 
 vor.
 
@@ -56,7 +74,7 @@ vor.
 
 To be done:
 
-"Robot Movements"
+"FiftyPenceHandler"
 
 https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command
 
