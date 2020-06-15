@@ -3,12 +3,12 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example01();
-void test_conceptual_example02();
+void test_conceptual_example_01();
+void test_conceptual_example_02();
 
 int main() {
-    // test_conceptual_example01();
-    test_conceptual_example02();
+    test_conceptual_example_01();
+    test_conceptual_example_02();
     return 0;
 }
 

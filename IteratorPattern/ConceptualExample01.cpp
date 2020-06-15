@@ -147,7 +147,7 @@ namespace IteratorPatternStandard {
     // =======================================================================
 }
 
-void test_conceptual_example01() {
+void test_conceptual_example_01() {
 
     using namespace IteratorPatternStandard;
 
