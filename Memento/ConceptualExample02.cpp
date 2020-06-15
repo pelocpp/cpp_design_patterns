@@ -52,7 +52,7 @@ namespace ConceptualExample02 {
         }
 
         /**
-         * The rest of the methods are used by the Caretaker to display metadata.
+         * The rest of the methods are used by the CareTaker to display metadata.
          */
         std::string getName() const override {
             return m_date + " / (" + m_state.substr(0, 9) + " ...)";
@@ -129,23 +129,23 @@ namespace ConceptualExample02 {
     };
 
     /**
-     * The Caretaker doesn't depend on the Concrete Memento class. Therefore, it
+     * The CareTaker doesn't depend on the Concrete Memento class. Therefore, it
      * doesn't have access to the originator's state, stored inside the memento.
      * It works with all mementos via the base Memento interface.
      */
-    class Caretaker {
+    class CareTaker {
 
     private:
         std::vector<std::shared_ptr<Memento>> m_mementos;
         std::shared_ptr<Originator> m_originator;
 
     public:
-        Caretaker(std::shared_ptr<Originator> originator) : m_originator(originator) {
+        CareTaker(std::shared_ptr<Originator> originator) : m_originator(originator) {
             m_originator = originator;
         }
 
         void backup() {
-            std::cout << "\nCaretaker: Saving Originator's state..." << std::endl;
+            std::cout << "\nCareTaker: Saving Originator's state..." << std::endl;
             m_mementos.push_back(m_originator->save());
         }
 
@@ -156,7 +156,7 @@ namespace ConceptualExample02 {
 
             std::shared_ptr<Memento> memento = m_mementos.back();
             m_mementos.pop_back();
-            std::cout << "Caretaker: Restoring state to: " << memento->getName() << std::endl;
+            std::cout << "CareTaker: Restoring state to: " << memento->getName() << std::endl;
             
             try {
                 m_originator->restore(memento);
@@ -167,7 +167,7 @@ namespace ConceptualExample02 {
         }
 
         void showHistory() const {
-            std::cout << "Caretaker: Here's the list of mementos:\n";
+            std::cout << "CareTaker: Here's the list of mementos:\n";
             for (std::shared_ptr<Memento> memento : m_mementos) {
                 std::cout << memento->getName() << std::endl;
             }
@@ -177,7 +177,7 @@ namespace ConceptualExample02 {
     void clientCode() {
         // std::shared_ptr<Originator> originator = std::make_shared<Originator>("Super-duper-super-puper-super.");
         std::shared_ptr<Originator> originator = std::make_shared<Originator>("I'm the original state of this Originator"); 
-        std::shared_ptr<Caretaker> caretaker = std::make_shared<Caretaker>(originator);
+        std::shared_ptr<CareTaker> caretaker = std::make_shared<CareTaker>(originator);
 
         caretaker->backup();
         originator->doSomething();

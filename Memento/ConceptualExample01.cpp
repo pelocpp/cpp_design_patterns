@@ -53,7 +53,7 @@ namespace ConceptualExample01 {
         }
     };
 
-    class Caretaker
+    class CareTaker
     {
     private:
         std::shared_ptr<Memento> m_memento;
@@ -77,7 +77,7 @@ void test_conceptual_example_01() {
     std::shared_ptr<Originator> originator = std::make_shared<Originator>(std::string("State A"));
     std::cout << originator->getState() << std::endl;
 
-    std::shared_ptr<Caretaker> caretaker = std::make_shared<Caretaker>();
+    std::shared_ptr<CareTaker> caretaker = std::make_shared<CareTaker>();
     std::shared_ptr<Memento> memento = originator->createMemento();
     caretaker->setMemento(memento);
 
