@@ -65,7 +65,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
   * **AggregateBase**: Abstrakte Basisklasse (oder Schnittstelle) für alle konkreten Aggregate. Diese Klasse enthält eine Methode, die auf Anfage ein Iterator-Objekt zurückgibt.
   * **ConcreteAggregate**: Repräsentiert die konkrete Implementierung der `AggregateBase`-Schnittstelle. Hat Zugriff auf die Elemente, die mit dem Iterator durchlaufen werden sollen.
   * **IteratorBase**: Abstrakte Klasse (oder Schnittstelle) eines konkreten Iterators. Enthält Methoden (präziser: die Signaturen von Methoden), mit denen die Elemente durchlaufen werden können.
-  * **ConcreteIterator**: Konkrete Realisierung von `IteratorBase`..
+  * **ConcreteIterator**: Konkrete Realisierung von `IteratorBase`.
 
 <img src="dp_iterator_pattern.png" width="700">
 
