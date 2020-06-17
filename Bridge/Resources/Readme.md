@@ -72,13 +72,7 @@ vor.
 
 #### 'Real-World' Beispiel:
 
-To be done:
-
-Beispiel aus
-
-https://refactoring.guru/design-patterns/iterator/cpp/example#example-0
-
-Ist bei Conceptual 2 einzufügen !!!
+To be done.
 
 
 ## Literaturhinweise
