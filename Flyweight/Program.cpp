@@ -5,8 +5,10 @@
 // function prototypes
 void test_conceptual_example();
 
+void example_01();
+
 int main() {
-    test_conceptual_example();
+    example_01();
     return 0;
 }
 

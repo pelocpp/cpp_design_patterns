@@ -19,6 +19,24 @@ Wenn wir den klassischen Ansatz verwenden (Instanzen erstellen, Instanzvariablen
 können sich die Speicher- bzw. Speicherbereichsanforderungen inakzeptabel erhöhen.
 Das *Flyweight Pattern* stellt eine Alternative in diesem Kontext dar.
 
+#### Beispiel:
+
+Zum Verständnis des  *Flyweight* Entwurfsmusters spielen zwei Begriffe eine Rolle: *Intrinsischer* und *extrinsischer* Zustand.
+Dazu ein Beispiel: Betrachten wir als Beispiel einen Texteditor. Pro Eingabe eines Zeichens wird ein Objekt einer Klasse `Character` erstellt.
+Zu den Attributen der `Character`-Klasse zählen zum Beispiel `name` (welches Zeichen), `font` (welche Schriftart) und
+`size` (welche Zeichengröße). Diese Informationen müssen wir nicht jedes Mal kopieren, wenn der Benutzer ein  Zeichen eingibt,
+da sich der Buchstabe 'B' nicht von einem anderen 'B' unterscheidet. 
+Wenn der Client erneut ein 'B' eingibt, geben wir einfach das Objekt zurück, das wir bereits zuvor erstellt haben.
+All dies bezeichnen wir als *intrinsische* Zustände (Name, Schriftart, Größe), da sie von den verschiedenen Objekten gemeinsam genutzt werden können!
+
+Jetzt fügen wir der Klasse `Character` weitere Attribute hinzu, zum Beispiel `row` (Zeile) und `col` (Spalte).
+Sie geben die Position eines Zeichens im Dokument an. Diese Attribute können niemals diesselben sind, auch nicht für dieselben Zeichen,
+da keine zwei Zeichen dieselbe Position in einem Dokument haben könnenb.
+Diese Zustände werden als *extrinsische* Zustände bezeichnet und können von den betrachteten Objekten nicht gemeinsam genutzt werden.
+
+An Stelle der beiden Fachwörter *intrinsischer* und *extrinsischer* Zustand könnte man auch von *repeatingState* und *uniqueState
+sprechen.
+
 #### Lösung:
 
 Ein so genanntes *Flyweight* ist ein Objekt, das den Speicherbedarf minimiert,
@@ -38,26 +56,26 @@ wird eine Referenz dieses Objekt zurückgegeben. Andernfalls wird ein neues *Flyw
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Flyweight Patterns*.
-Es besteht im Wesentlichen aus vier Teilen:
+Es besteht im Wesentlichen aus fünf Teilen:
 
-  * **FlyweightBase**: Definiert eine Schnittstelle, über die *Flyweight* Objekte einen externen
-    Zustand empfangen und darauf operieren können.
-  * **ConcreteFlyweight**: Implementiert die *Flyweight* Objekt Schnittstelle und fügt Speicher für den intrinsischen Status (gemeinsam genutzten Status) hinzu, falls vorhanden.
-    Ein ConcreteFlyweight-Objekt muss "gemeinsam nutzbar" (*sharable*) sein.
-    Jeder Zustand, den dieses Objekt speichert, muss intrinsisch sein,
-    d.h. er muss unabhängig vom Kontext des `ConcreteFlyweight`-Objekts sein.
-  * **UnsharedFlyweight**: Nicht alle *Flyweight* Unterklassen können gemeinsam genutzt werden
-    Die *Flyweight* Objekt Schnittstelle ermöglicht das Teilen, erzwingt es jedoch nicht
-    Es ist üblich, dass `UnsharedFlyweight`-Objekte `ConcreteFlyweight`-Objekte als
-    Kind-Objekte ab einer bestimmten Ebene in der Flyweight-Objektstruktur haben.
-  * **FlyweightFactory**: Die *FlyweightFactory* erstellt und verwaltet *Flyweight* Objekte.
+  * **Flyweight**: Beschreibt eine Klasse *Flyweight*, die den Teil des Status des zu betrachtenden Objekts enthält, der von mehreren Objekten gemeinsam genutzt werden kann.
+    Dieses Objekt kann mehrfach verwendet werden. Der im *Flyweight* Objekt gespeicherte Zustand wird als "intrinsisch" oder "repeating" bezeichnet.
+    Der Zustand, der an die Methoden des *Flyweight* Objekt übergeben wird, wird als "extrinsisch" bezeichnet.
+    Ein Flyweight-Objekt muss "gemeinsam nutzbar" (*sharable*) sein.
+    Jeder Zustand, den dieses Objekt speichert, muss intrinsisch sein.
+  * **FlyweightBase**: Abstraktion der Klasse *Flyweight* zu einem Schnittstellentyp.
+  * **UnsharedFlyweight**: Nicht alle *Flyweight* Objekte können gemeinsam genutzt werden.
+    Die `UnsharedFlyweight`-Klasse enthält den extrinsischen Status, der für alle `UnsharedFlyweight`-Objekte eindeutig (*unique*) ist.
+    Wenn ein `UnsharedFlyweight`-Objekt mit einem `Flyweight`-Objekt gepaart wird,
+    repräsentiert es den vollständigen Status des zu betrachtenden Objekts.
+  * **FlyweightFactory**: Die *FlyweightFactory* (Fabrik) erstellt und verwaltet *Flyweight* Objekte.
     Darüber hinaus verwaltet die Fabrik einen Pool unterschiedlicher *Flyweight* Objekte.
     Die Fabrik gibt bei einer entsprechenden Anforderung ein Objekt aus dem Pool zurück,
     falls es bereits erstellt wurde,
     oder fügt dem Pool ein Neues hinzu und gibt dieses zurück, falls dies der Anforderung entspricht.
 
 
-<img src="dp_flyweight.png" width="500">
+<img src="dp_flyweight_pattern.png" width="650">
 
 Abbildung 1: Schematische Darstellung des *Flyweight Patterns*.
 
