@@ -19,47 +19,33 @@ oder sehr ressourcensensitiv ist (Beispiel: XML-Parser)
 
 #### Problem:
 
-
-<img src="dp_collections_iterator_tree_structures.png" width="600">
-
-Abbildung 2: Eine Collection kann auf verschiedene Arten durchlaufen werden.
-
 #### Lösung:
-
-Die Kernidee des *Iterator Patterns* besteht darin,
-die Art und Weise des Durchlaufs einer Collection in ein separates Objekt zu extrahieren, das als *Iterator* bezeichnet wird.
-
-Alle Iteratoren müssen dieselbe Schnittstelle implementieren.
-Dadurch ist ein Clientcode mit jedem Typ von Collection oder jedem Traversierungsalgorithmus kompatibel,
-sofern ein *Iterator*-Objekt vorhanden ist.
-
-Möchte man eine Collection auf eine bestimmte Art und Weise durchlaufen
-(z.B. "*Depth-First Traversal*" oder "*Breadth-First Traversal*"),
-implementiert man einfach eine neue Iteratorklasse.
-So muss man weder Änderungen an der Collection oder am Client vornehmen.
-
 
 #### Struktur (UML):
 
-Das folgende UML-Diagramm beschreibt eine Implementierung des *Iterator Patterns*.
-Es besteht im Wesentlichen aus fünf Teilen:
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Proxy Patterns*.
+Es besteht im Wesentlichen aus drei Teilen:
 
-  * **Client**: Fordert das *Iterator*-Objekt von einem aggregierten Objekt an und "konsumiert" es, wenn die Elemente durchlaufen werden sollen.
-  * **AggregateBase**: Abstrakte Basisklasse (oder Schnittstelle) für alle konkreten Aggregate. Diese Klasse enthält eine Methode, die auf Anfage ein Iterator-Objekt zurückgibt.
-  * **ConcreteAggregate**: Repräsentiert die konkrete Implementierung der `AggregateBase`-Schnittstelle. Hat Zugriff auf die Elemente, die mit dem Iterator durchlaufen werden sollen.
-  * **IteratorBase**: Abstrakte Klasse (oder Schnittstelle) eines konkreten Iterators. Enthält Methoden (präziser: die Signaturen von Methoden), mit denen die Elemente durchlaufen werden können.
-  * **ConcreteIterator**: Konkrete Realisierung von `IteratorBase`.
+  * **SubjectBase**: Schnittstelle (oder abstrakte Klasse), die von der `RealSubject`-Klasse implementiert wird und deren Dienste in Form
+    von abstrakten (virtuellen) Methoden beschreibt. Die Schnittstelle muss auch von der Proxy-Klasse implementiert werden,
+    so dass das Proxy-Objekt überall dort verwendet werden kann,
+    wo das `RealSubject`-Objekt sonst in Erscheinung treten würde.
+  * **RealSubject**: Repräsentiert eine aus welchen Gründen auch schwer zugängliche oder ressourcensensitive Klasse,
+    die man einfacher oder effektiver verwenden möchte.
+  * **Proxy**: Dreh- und Angelpunkt dieses Entwurfsmusters: Es kapselt eine Referenz (Zeiger) auf das `RealSubject`-Objekt.
+    Die Client-Anwendung ruft Methoden an der `Proxy`-Klasse aus,
+    die an entsprechende Methoden des `RealSubject`-Objekts transferiert werden.
 
-<img src="dp_iterator_pattern.png" width="700">
+<img src="dp_proxy_pattern.png" width="400">
 
-Abbildung 1: Schematische Darstellung des *Iterator Patterns*.
+Abbildung 1: Schematische Darstellung des *Proxy Patterns*.
 
 
 #### Conceptual Example:
 
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/iterator/cpp/example#example-0)
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/proxy/cpp/example#example-0)
 
 und 
 
@@ -71,14 +57,7 @@ vor.
 
 #### 'Real-World' Beispiel:
 
-To be done:
-
-Beispiel aus
-
-https://refactoring.guru/design-patterns/iterator/cpp/example#example-0
-
-Ist bei Conceptual 2 einzufügen !!!
-
+To be done
 
 ## Literaturhinweise
 
