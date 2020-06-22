@@ -15,13 +15,15 @@ Zeitgleich schulen Design Pattern die Fähigkeit zur effektiven objektorientierte
 
 ## [Was ist ein Entwurfsmuster?](Readme_02_Description.md)
 
-## [Was ist ein Entwurfsmuster?](Readme_03_Design_Principles.md)
+## [Entwurfsprinzipien](Readme_03_Design_Principles.md)
 
 ## [Kritik](Readme_04_Criticism.md)
 
-## [Katalog](Readme_05_Catalog.md)
+## [Katalog der Entwurfsmuster](Readme_05_Catalog.md)
 
-## [Literatur](Readme_06_Literature.md)
+## [Katalog der Anti-Pattern](Readme_06_Catalog_AntiPattern.md)
+
+## [Literatur](Readme_07_Literature.md)
 
 ---
 

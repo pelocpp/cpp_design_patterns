@@ -111,54 +111,8 @@ Tabelle 7. Optimization Patterns
 
 Tabelle 7. Entwurfsmuster für Oberflächen
 
-
-
-
-Neben Entwurfsmustern gibt es auch so genannte Anti-Entwurfsmuster: Hierunter verstehen wir offensichtlich
-(bekannte) Vorgehensweisen in der Software-Entwicklung, denen bereits zu Beginn des Entwicklungsprozesses
-schlechte Aussichten auf eine qualitativ gelungenge Architektur bescheinigen kann:
-
-
-
-| Anti-Pattern | Kurzbeschreibung |
-|:-------------- |----|
-| The Blob | TBD |
-| Continuous Obsolescence | TBD |
-| Lava Flow | TBD |
-| Ambiguous Viewpoint | TBD |
-| Functional Decomposition | TBD |
-| Poltergeists | TBD |
-| Boat Anchor | TBD |
-| Golden Hammer | TBD |
-| Dead End | TBD |
-| Spaghetti Code | TBD |
-| Input Kludge | TBD |
-| Walking through a Minefield | TBD |
-| Cut-and-Paste Programming | TBD |
-| Mushroom Management | TBD |
-
-Tabelle 4. Anti-Pattern
-
-Weitere Anti-Pattern:
-
-| Anti-Pattern | Kurzbeschreibung |
-|:-------------- |----|
-| God Object | TBD |
-| Input Kludge | TBD |
-| Interface Bloat | TBD |
-| Race Condition | TBD |
-| Circular Dependency | TBD |
-| Copy and Paste Programming | TBD |
-
-Tabelle 5. Weitere Anti-Pattern
-
-
-
-
 ---
 
 [Zurück](Readme.md)
 
 ---
-
-
