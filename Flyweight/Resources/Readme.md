@@ -56,7 +56,7 @@ wird eine Referenz dieses Objekt zurückgegeben. Andernfalls wird ein neues *Flyw
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Flyweight Patterns*.
-Es besteht im Wesentlichen aus fünf Teilen:
+Es besteht im Wesentlichen aus vier Teilen:
 
   * **Flyweight**: Beschreibt eine Klasse *Flyweight*, die den Teil des Status des zu betrachtenden Objekts enthält, der von mehreren Objekten gemeinsam genutzt werden kann.
     Dieses Objekt kann mehrfach verwendet werden. Der im *Flyweight* Objekt gespeicherte Zustand wird als "intrinsisch" oder "repeating" bezeichnet.

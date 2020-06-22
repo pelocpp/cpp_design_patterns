@@ -2,13 +2,14 @@
 
 ## Wesentliche Merkmale
 
-##### Kategorie: *Behavioral Pattern*
+##### Kategorie: *Structural Pattern*
 
 #### Ziel / Absicht:
 
-Das Decorator Pattern ist ein konzeptionelles Muster,
-mit dem Objekte dynamisch um neue Verhaltensweisen erweitert werden können,
-indem sie in spezielle *Wrapper*-Objekte (Hüllen-Objekte) eingebettet werden.
+Das *Decorator Pattern* ist ein strukturelles Entwurfsmuster, das die Funktionalität eines Objekts erweitert,
+indem es dieses mit einer oder mehreren Dekorationsklassen "umhüllt", oder gewissermaßen dekoriert.
+*Decorator* Klassen können vorhandene Elemente ändern und zur Laufzeit neue Methoden und Eigenschaften hinzufügen.
+
 
 ##### Hinweis:
 
@@ -56,17 +57,33 @@ zusätzliches Verhalten hinzufügt.
 
 #### Struktur (UML):
 
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Decorator Patterns*.
+Es besteht im Wesentlichen aus vier Teilen:
+
+  * **Component**: Abstrakte Basisklasse für alle konkreten Komponenten und Decorator-Klassen.
+    Diese Klasse definiert diejenigen Klassenelemente, die standardmäßig von diesen Klassentypen implementiert werden müssen.
+  * **ConcreteComponent**: Diese Klasse erbt von der Klasse `Component`. Es kann diese Klasse mehrfach geben. Es damit jeweils einen Objekttyp definiert,
+    der von einer Decorator-Klasse umhüllt wird.
+  * **DecoratorBase**: Stellt die abstrakte Basisklasse für alle Decorator-Klassen dar. Es wird ein Konstruktor hinzugefügt,
+    der ein `Component-Objekt` als Parameter akzeptiert. Das übergebene Objekt ist die Komponente, die umhüllt wird.
+    Da das umhüllte Objekt von `Component` erben muss, kann es sich um ein `ConcreteComponent`-Objekt
+    oder ein anderes Decorator-Objekt handeln. Auf diese Weise können mehrere Decorator-Objekte auf ein einzelnes Objekt angewendet werden.
+  * **ConcreteDecorator**: Diese Klasse repräsentiert ein konkretes Decorator-Objekt für eine Komponente.
+    Es kann einige zusätzliche Methoden enthalten, die die Funktionalität der Komponente erweitern.
+    Die `operation`-Methoden können auf zwei Arten verwendet werden:
+    Sie können unverändert bleiben und in diesem Fall wird die Basisklassenmethode der Komponente aufgerufen
+    oder die `operation`-Methode kann geändert werden oder vollständig durch eine neue Implementierung ersetzt werden.
+
 <img src="dp_decorator_02.png" width="650">
 
-Abbildung 2: Standard-Darstellung des Decorator Patterns.
+Abbildung 2: Schematische Darstellung des *Decorator* Patterns.
 
 
 ###### Hinweis:
 
 Während ein Dekorateur seine Funktionalität vor oder nach Weiterleiten der Anforderung an das Objekt,
-was es dekoriert, hinzufügen kann
-Funktionalität vor oder nach dem, was es dekoriert, sollte die Kette der Instanziierung
-immer mit dem ConcreteComponent enden.
+was es dekoriert, hinzufügen kann, sollte die Kette der Instanziierung
+immer mit dem `ConcreteComponent`-Objekt enden.
 
 #### Implementierung:
 
