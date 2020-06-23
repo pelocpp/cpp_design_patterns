@@ -70,8 +70,6 @@ private:
     std::string m_color;
 
 public:
-  // ColoredShape() {}
-
     ColoredShape(const std::shared_ptr<Shape>& shape, const std::string& color) 
         : Decorator(shape), m_color{ color } {}
 
