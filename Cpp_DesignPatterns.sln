@@ -55,8 +55,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Flyweight", "Flyweight\Flyw
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Proxy", "Proxy\Proxy.vcxproj", "{A54A4DC1-CE87-4844-B432-F0A9E348A442}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Exercises", "Excercises\Excercises.vcxproj", "{2E12C3A4-49AD-4EAE-8908-01AB96530AFB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -225,14 +223,6 @@ Global
 		{A54A4DC1-CE87-4844-B432-F0A9E348A442}.Release|x64.Build.0 = Release|x64
 		{A54A4DC1-CE87-4844-B432-F0A9E348A442}.Release|x86.ActiveCfg = Release|Win32
 		{A54A4DC1-CE87-4844-B432-F0A9E348A442}.Release|x86.Build.0 = Release|Win32
-		{2E12C3A4-49AD-4EAE-8908-01AB96530AFB}.Debug|x64.ActiveCfg = Debug|x64
-		{2E12C3A4-49AD-4EAE-8908-01AB96530AFB}.Debug|x64.Build.0 = Debug|x64
-		{2E12C3A4-49AD-4EAE-8908-01AB96530AFB}.Debug|x86.ActiveCfg = Debug|Win32
-		{2E12C3A4-49AD-4EAE-8908-01AB96530AFB}.Debug|x86.Build.0 = Debug|Win32
-		{2E12C3A4-49AD-4EAE-8908-01AB96530AFB}.Release|x64.ActiveCfg = Release|x64
-		{2E12C3A4-49AD-4EAE-8908-01AB96530AFB}.Release|x64.Build.0 = Release|x64
-		{2E12C3A4-49AD-4EAE-8908-01AB96530AFB}.Release|x86.ActiveCfg = Release|Win32
-		{2E12C3A4-49AD-4EAE-8908-01AB96530AFB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
