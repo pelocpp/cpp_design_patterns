@@ -11,22 +11,21 @@
  * simple and complex objects of a composition.
  */
 class Component {
-    /**
-     * @var Component
-     */
+
 protected:
     Component* m_parent;
+
+public:
+    Component() : m_parent(nullptr) {}
+    virtual ~Component() {}
+
     /**
      * Optionally, the base Component can declare an interface for setting and
      * accessing a parent of the component in a tree structure. It can also
      * provide some default implementation for these methods.
      */
-
-public:
-    virtual ~Component() {}
-
     void setParent(Component* parent) { m_parent = parent; }
-    Component* setParent() const { return m_parent; }
+    Component* getParent() const { return m_parent; }
 
     /**
      * In some cases, it would be beneficial to define the child-management
@@ -39,8 +38,8 @@ public:
     virtual void remove(Component* component) {}
     
     /**
-     * You can provide a method that lets the client code figure out whether a
-     * component can bear children.
+     * You can provide a method that lets the client code figure out whether
+     * a component can bear children.
      */
     virtual bool isComposite() const { return false; }
 
@@ -54,8 +53,8 @@ public:
 
 
 /**
- * The Leaf class represents the end objects of a composition. A leaf can't have
- * any children.
+ * The Leaf class represents the end objects of a composition.
+ * A leaf can't have any children.
  *
  * Usually, it's the Leaf objects that do the actual work, whereas Composite
  * objects only delegate to their sub-components.
@@ -67,15 +66,14 @@ public:
     }
 };
 
+
 /**
  * The Composite class represents the complex components that may have children.
  * Usually, the Composite objects delegate the actual work to their children and
  * then "sum-up" the result.
  */
 class Composite : public Component {
-    /**
-     * @var Composite
-     */
+
 protected:
     std::list<Component*> m_children;
 
@@ -84,7 +82,7 @@ public:
      * A composite object can add or remove other components (both simple or
      * complex) to or from its child list.
      */
-    void Add(Component* component) {
+    void add(Component* component) {
         m_children.push_back(component);
         component->setParent(this);
     }
@@ -93,10 +91,11 @@ public:
      * Have in mind that this method removes the pointer to the list but doesn't
      * frees the memory, you should do it manually or better use smart pointers.
      */
-    void Remove(Component* component)  {
+    void remove(Component* component)  {
         m_children.remove(component);
         component->setParent(nullptr);
     }
+
     bool isComposite() const override {
         return true;
     }
@@ -109,23 +108,24 @@ public:
      */
     std::string operation() const override {
         std::string result;
-        for (const Component* c : m_children) {
-            if (c == m_children.back()) {
-                result += c->operation();
+        for (const Component* comp : m_children) {
+            if (comp == m_children.back()) {
+                result = result + comp->operation();
             }
             else {
-                result += c->operation() + "+";
+                result = result + comp->operation() + "+";
             }
         }
         return "Branch(" + result + ")";
     }
 };
 
+
 /**
  * The client code works with all of the components via the base interface.
  */
-void ClientCode(Component* component) {
-    std::cout << "RESULT: " << component->operation();
+void clientCode(Component* component) {
+    std::cout << "Result: " << component->operation();
 }
 
 /**
@@ -133,11 +133,11 @@ void ClientCode(Component* component) {
  * base Component class, the client code can work with any component, simple or
  * complex, without depending on their concrete classes.
  */
-void ClientCode2(Component* component1, Component* component2) {
+void clientCode2(Component* component1, Component* component2) {
     if (component1->isComposite()) {
         component1->add(component2);
     }
-    std::cout << "RESULT: " << component1->operation();
+    std::cout << "Result: " << component1->operation();
 }
 
 /**
@@ -148,7 +148,7 @@ void test_conceptual_example() {
 
     Component* simple = new Leaf;
     std::cout << "Client: I've got a simple component:\n";
-    ClientCode(simple);
+    clientCode(simple);
     std::cout << "\n\n";
 
     /**
@@ -168,11 +168,11 @@ void test_conceptual_example() {
     tree->add(branch1);
     tree->add(branch2);
     std::cout << "Client: Now I've got a composite tree:\n";
-    ClientCode(tree);
+    clientCode(tree);
     std::cout << "\n\n";
 
     std::cout << "Client: I don't need to check the components classes even when managing the tree:\n";
-    ClientCode2(tree, simple);
+    clientCode2(tree, simple);
     std::cout << "\n";
 
     delete simple;

@@ -51,6 +51,20 @@ Wenn Sie eine Methode aufrufen, übergeben die Objekte selbst die Anforderung an 
 
 #### Struktur (UML):
 
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Composite Patterns*.
+Es besteht im Wesentlichen aus drei Teilen:
+
+  * **Component**: Stellt eine Abstraktion (abstrakte Klasse, Interface) für alle Komponenten dar (elementare und zusammengesetzte).
+    Manchmal wird neben den eigentlichen Methoden der Komponente auch zusätzlich Methoden für den Zugriff
+    auf das übergeordnete Element einer Komponente in der rekursiven Struktur definiert.
+  * **Composite**: Kernstück des Entwurfsmusters. Es handelt sich gewissermaßen um eine *zusammengesetzte Komponente*.
+    Das heißt, dass ein `Composite`-Objekt eine Liste für die Kind-Elemente verwaltet.
+    Das Objekt stellt Methoden zum Hinzufügen und Entfernen von Kind-Elementen bereit.
+    Zusätzlich werden die Methoden der `Component`-Klasse implementiert. Typischerweise werden deren
+    Realisierung an die entsprechende Methode der Kind-Elemente delegiert.
+  * **Leaf**: 
+    Stellt ein "Blatt"-Objekt in der Komposition (Baumstruktur) dar. Es werden alle Methoden der `Component`-Klasse implementiert.
+
 <img src="dp_composite_pattern.png" width="600">
 
 Abbildung 1: Schematische Darstellung des *Composite Entwurfsmusters*.
