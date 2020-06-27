@@ -13,7 +13,7 @@
 class AbstractProductA {
 public:
     virtual ~AbstractProductA() {};
-    virtual std::string UsefulFunctionA() const = 0;
+    virtual std::string usefulFunctionA() const = 0;
 };
 
 /**
@@ -21,13 +21,13 @@ public:
  */
 class ConcreteProductA1 : public AbstractProductA {
 public:
-    std::string UsefulFunctionA() const override {
+    std::string usefulFunctionA() const override {
         return "The result of the product A1.";
     }
 };
 
 class ConcreteProductA2 : public AbstractProductA {
-    std::string UsefulFunctionA() const override {
+    std::string usefulFunctionA() const override {
         return "The result of the product A2.";
     }
 };
@@ -43,14 +43,14 @@ class AbstractProductB {
      */
 public:
     virtual ~AbstractProductB() {};
-    virtual std::string UsefulFunctionB() const = 0;
+    virtual std::string usefulFunctionB() const = 0;
     /**
      * ...but it also can collaborate with the ProductA.
      *
      * The Abstract Factory makes sure that all products it creates are of the
      * same variant and thus, compatible.
      */
-    virtual std::string AnotherUsefulFunctionB(const AbstractProductA& collaborator) const = 0;
+    virtual std::string anotherUsefulFunctionB(const AbstractProductA& collaborator) const = 0;
 };
 
 /**
@@ -58,7 +58,7 @@ public:
  */
 class ConcreteProductB1 : public AbstractProductB {
 public:
-    std::string UsefulFunctionB() const override {
+    std::string usefulFunctionB() const override {
         return "The result of the product B1.";
     }
     /**
@@ -66,15 +66,15 @@ public:
      * Product A1. Nevertheless, it accepts any instance of AbstractProductA as an
      * argument.
      */
-    std::string AnotherUsefulFunctionB(const AbstractProductA& collaborator) const override {
-        const std::string result = collaborator.UsefulFunctionA();
+    std::string anotherUsefulFunctionB(const AbstractProductA& collaborator) const override {
+        const std::string result = collaborator.usefulFunctionA();
         return "The result of the B1 collaborating with ( " + result + " )";
     }
 };
 
 class ConcreteProductB2 : public AbstractProductB {
 public:
-    std::string UsefulFunctionB() const override {
+    std::string usefulFunctionB() const override {
         return "The result of the product B2.";
     }
     /**
@@ -82,8 +82,8 @@ public:
      * Product A2. Nevertheless, it accepts any instance of AbstractProductA as an
      * argument.
      */
-    std::string AnotherUsefulFunctionB(const AbstractProductA& collaborator) const override {
-        const std::string result = collaborator.UsefulFunctionA();
+    std::string anotherUsefulFunctionB(const AbstractProductA& collaborator) const override {
+        const std::string result = collaborator.usefulFunctionA();
         return "The result of the B2 collaborating with ( " + result + " )";
     }
 };
@@ -98,8 +98,8 @@ public:
  */
 class AbstractFactory {
 public:
-    virtual std::shared_ptr<AbstractProductA> CreateProductA() const = 0;
-    virtual std::shared_ptr<AbstractProductB> CreateProductB() const = 0;
+    virtual std::shared_ptr<AbstractProductA> createProductA() const = 0;
+    virtual std::shared_ptr<AbstractProductB> createProductB() const = 0;
 };
 
 /**
@@ -110,11 +110,11 @@ public:
  */
 class ConcreteFactory1 : public AbstractFactory {
 public:
-    std::shared_ptr<AbstractProductA> CreateProductA() const override {
+    std::shared_ptr<AbstractProductA> createProductA() const override {
         return std::make_shared<ConcreteProductA1>();
     }
 
-    std::shared_ptr<AbstractProductB> CreateProductB() const override {
+    std::shared_ptr<AbstractProductB> createProductB() const override {
         return std::make_shared<ConcreteProductB1>();
     }
 };
@@ -124,10 +124,10 @@ public:
  */
 class ConcreteFactory2 : public AbstractFactory {
 public:
-    std::shared_ptr<AbstractProductA> CreateProductA() const override {
+    std::shared_ptr<AbstractProductA> createProductA() const override {
         return std::make_shared<ConcreteProductA2>();
     }
-    std::shared_ptr<AbstractProductB> CreateProductB() const override {
+    std::shared_ptr<AbstractProductB> createProductB() const override {
         return std::make_shared<ConcreteProductB2>();
     }
 };
@@ -139,10 +139,10 @@ public:
  */
 
 void clientCode(const std::shared_ptr<AbstractFactory>& factory) {
-    const std::shared_ptr<AbstractProductA> product_a = factory->CreateProductA();
-    const std::shared_ptr<AbstractProductB> product_b = factory->CreateProductB();
-    std::cout << product_b->UsefulFunctionB() << "\n";
-    std::cout << product_b->AnotherUsefulFunctionB(*product_a) << "\n";
+    const std::shared_ptr<AbstractProductA> product_a = factory->createProductA();
+    const std::shared_ptr<AbstractProductB> product_b = factory->createProductB();
+    std::cout << product_b->usefulFunctionB() << "\n";
+    std::cout << product_b->anotherUsefulFunctionB(*product_a) << "\n";
 }
 
 // function prototypes
