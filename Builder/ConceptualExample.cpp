@@ -4,32 +4,41 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <vector>
 #include <memory>
 
 /**
- * It makes sense to use the Builder pattern only when your products are quite
- * complex and require extensive configuration.
+ * It makes sense to use the Builder pattern only when your products
+ * are quite complex and require extensive configuration.
  *
  * Unlike in other creational patterns, different concrete builders can produce
  * unrelated products. In other words, results of various builders may not
  * always follow the same interface.
  */
 
-class Product1 {
+class Product {
+private:
+    std::vector<std::string> m_parts;
+
 public:
-    std::vector<std::string> parts_;
-    void ListParts()const {
-        std::cout << "Product parts: ";
-        for (size_t i = 0; i < parts_.size(); i++) {
-            if (parts_[i] == parts_.back()) {
-                std::cout << parts_[i];
+    void addPart(std::string part) {
+        m_parts.push_back(part);
+    }
+
+    std::string operator()() {
+        std::ostringstream oss;
+        oss << "Product parts: ";
+        for (size_t i = 0; i < m_parts.size(); i++) {
+            if (m_parts[i] == m_parts.back()) {
+                oss << m_parts[i];
             }
             else {
-                std::cout << parts_[i] << ", ";
+                oss << m_parts[i] << ", ";
             }
         }
-        std::cout << "\n\n";
+        oss << std::endl;
+        return oss.str();
     }
 };
 
@@ -41,51 +50,48 @@ public:
 class Builder {
 public:
     virtual ~Builder() {}
-    virtual void ProducePartA() const = 0;
-    virtual void ProducePartB() const = 0;
-    virtual void ProducePartC() const = 0;
+    virtual void createProducePartA() const = 0;
+    virtual void createProducePartB() const = 0;
+    virtual void createProducePartC() const = 0;
 };
+
+
 /**
  * The Concrete Builder classes follow the Builder interface and provide
  * specific implementations of the building steps. Your program may have several
  * variations of Builders, implemented differently.
  */
-class ConcreteBuilder1 : public Builder {
+class ConcreteBuilder : public Builder {
 private:
+    std::unique_ptr<Product> m_p;
 
-    Product1* product;
 
+public:
     /**
      * A fresh builder instance should contain a blank product object, which is
      * used in further assembly.
      */
-public:
-
-    ConcreteBuilder1() {
-        this->Reset();
+    ConcreteBuilder() {
+        this->reset();
     }
 
-    ~ConcreteBuilder1() {
-        delete product;
+    void reset() {
+        m_p = std::make_unique<Product>();
     }
 
-    void Reset() {
-        this->product = new Product1();
-    }
     /**
      * All production steps work with the same product instance.
      */
-
-    void ProducePartA()const override {
-        this->product->parts_.push_back("PartA1");
+    void createProducePartA() const override {
+        m_p->addPart(std::string("Part A1"));
     }
 
-    void ProducePartB()const override {
-        this->product->parts_.push_back("PartB1");
+    void createProducePartB() const override {
+        m_p->addPart(std::string("Part B1"));
     }
 
-    void ProducePartC()const override {
-        this->product->parts_.push_back("PartC1");
+    void createProducePartC() const override {
+        m_p->addPart(std::string("Part C1"));
     }
 
     /**
@@ -93,9 +99,7 @@ public:
      * retrieving results. That's because various types of builders may create
      * entirely different products that don't follow the same interface.
      * Therefore, such methods cannot be declared in the base Builder interface
-     * (at least in a statically typed programming language). Note that PHP is a
-     * dynamically typed language and this method CAN be in the base interface.
-     * However, we won't declare it there for the sake of clarity.
+     * (at least in a statically typed programming language).
      *
      * Usually, after returning the end result to the client, a builder instance
      * is expected to be ready to start producing another product. That's why
@@ -107,15 +111,15 @@ public:
 
      /**
       * Please be careful here with the memory ownership. Once you call
-      * GetProduct the user of this function is responsable to release this
+      * getProduct the user of this function is responsable to release this
       * memory. Here could be a better option to use smart pointers to avoid
       * memory leaks
       */
 
-    Product1* GetProduct() {
-        Product1* result = this->product;
-        this->Reset();
-        return result;
+    std::unique_ptr<Product> getProduct() {
+        std::unique_ptr<Product> result = std::move(m_p);
+        reset();
+        return std::move(result);
     }
 };
 
@@ -126,21 +130,17 @@ public:
  * optional, since the client can control builders directly.
  */
 class Director {
-    /**
-     * @var Builder
-     */
 private:
-    Builder* builder;
+    std::shared_ptr<Builder> m_builder;
+
+public:
     /**
      * The Director works with any builder instance that the client code passes
      * to it. This way, the client code may alter the final type of the newly
      * assembled product.
      */
-
-public:
-
-    void set_builder(Builder* builder) {
-        this->builder = builder;
+    void set_builder(std::shared_ptr<Builder> builder) {
+        m_builder = builder;
     }
 
     /**
@@ -148,60 +148,50 @@ public:
      * building steps.
      */
 
-    void BuildMinimalViableProduct() {
-        this->builder->ProducePartA();
+    void buildMinimalViableProduct() {
+        m_builder->createProducePartA();
     }
 
-    void BuildFullFeaturedProduct() {
-        this->builder->ProducePartA();
-        this->builder->ProducePartB();
-        this->builder->ProducePartC();
+    void buildFullFeaturedProduct() {
+        m_builder->createProducePartA();
+        m_builder->createProducePartB();
+        m_builder->createProducePartC();
     }
 };
+
+
 /**
  * The client code creates a builder object, passes it to the director and then
  * initiates the construction process. The end result is retrieved from the
  * builder object.
  */
- /**
-  * I used raw pointers for simplicity however you may prefer to use smart
-  * pointers here
-  */
-void clientCode(Director& director)
+void clientCode(std::shared_ptr<Director> director)
 {
-    ConcreteBuilder1* builder = new ConcreteBuilder1();
-    director.set_builder(builder);
-    std::cout << "Standard basic product:\n";
-    director.BuildMinimalViableProduct();
+    std::shared_ptr<ConcreteBuilder> builder = std::make_shared<ConcreteBuilder>();
+    director->set_builder(builder);
+    std::cout << "Standard basic product:" << std::endl;
+    director->buildMinimalViableProduct();
+    std::unique_ptr<Product> p = builder->getProduct();
+    std::cout << (*p)() << std::endl;
 
-    Product1* p = builder->GetProduct();
-    p->ListParts();
-    delete p;
-
-    std::cout << "Standard full featured product:\n";
-    director.BuildFullFeaturedProduct();
-
-    p = builder->GetProduct();
-    p->ListParts();
-    delete p;
+    std::cout << "Standard full featured product:" << std::endl;
+    director->buildFullFeaturedProduct();
+    p = builder->getProduct();
+    std::cout << (*p)() << std::endl;
 
     // Remember, the Builder pattern can be used without a Director class.
-    std::cout << "Custom product:\n";
-    builder->ProducePartA();
-    builder->ProducePartC();
-    p = builder->GetProduct();
-    p->ListParts();
-    delete p;
-
-    delete builder;
+    std::cout << "Custom product:" << std::endl;
+    builder->createProducePartA();
+    builder->createProducePartC();
+    p = builder->getProduct();
+    std::cout << (*p)() << std::endl;
 }
 
 // function prototypes
 void test_conceptual_example()
 {
-    Director* director = new Director();
-    clientCode(*director);
-    delete director;
+    std::shared_ptr<Director> director = std::make_shared<Director>();
+    clientCode(director);
 }
 
 // ===========================================================================
