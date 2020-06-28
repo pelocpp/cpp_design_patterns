@@ -10,9 +10,9 @@ Das *Command Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral P
 das eine Anforderung (einen *Request*, einen *Befehl*) in ein eigenständiges Objekt umwandelt,
 das alle Informationen über das Kommando enthält.
 Der Befehl kann dann nach Bedarf aufgerufen werden, häufig als Teil einer Reihe von Befehlen,
-die in der Warteschlange (*Queue*) abgelegt sind.
-Die Befehle in einer Warteschlange können auf diese Weise sequentiell abgearbeitet werden,
-denkbar sind auch Rollback- bzw. Undo-Funktionalitäten.
+die in einer Warteschlange (*Queue*) abgelegt sind.
+Die Befehle in der Warteschlange können auf diese Weise sequentiell abgearbeitet werden,
+denkbar sind auch *Rollback*- bzw. *Undo*-Funktionalitäten.
 
 #### Problem:
 
@@ -22,7 +22,7 @@ Dieses Objekt führt nichts aus, es enthält nur Informationen.
 
 Es gibt drei Schlüsselbegriffe, die im Umfeld dieses Patterns zu definieren sind: *Client*, *Invoker* und *Receiver*.
 Der *Client* erstellt das Befehlsobjekt ("*Command Object*").
-Das *Invoker*-Objekt entscheidet, wann die Methode, deren Informationen (Parameter) im *Command Object* abgelegt sind, aufgerufen werden soll.
+Das *Invoker*-Objekt entscheidet, wann die Methode, deren Informationen (*Parameter*) im *Command Object* abgelegt sind, aufgerufen werden soll.
 Das *Receiver*-Objekt ist eine Instanz einer Klasse, die den eigentlichen Code der auszuführenden Methode enthält.
 
 #### Lösung:
@@ -36,7 +36,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
   * **Receiver**: Objekt, das weiß, wie das Kommando (Methode) auszuführen ist.
   * **CommandBase**: Abstrakte Klasse (oder Schnittstelle) für *Command*-Objekte. Enthält Informationen über das *Receiver*-Objekt,
     das für die Ausführung der Operation unter Verwendung der im *Command*-Objekt abgelegten Informationen verantwortlich ist.
-  * **ConcreteCommand**: Konkrete Implementierung der abstrakten `CommandBase`-Klasse oder -Schnittstelle.
+  * **ConcreteCommand**: Konkrete Implementierung der abstrakten `CommandBase`-Klasse bzw. -Schnittstelle.
   * **Invoker**: Objekt, das entscheidet, wann das Kommando ausgeführt werden soll.
 
 

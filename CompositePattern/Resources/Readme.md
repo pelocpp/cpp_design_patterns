@@ -82,7 +82,7 @@ vor.
 Ein typisches Beispiel für das *Composite Entwurfsmuster* ist ein Dateisystem mit Ordnern und Dateien:
 Ordner können Dateien oder andere Ordner enthalten oder leer sein. Andererseits enthalten Dateien keine Ordner oder andere Dateien!
 
-Um eine Analogie zur Abbildung 1 herzustellen, stellen wir dir drei relevanten Header-Dateien kurz vor`.
+Um eine Analogie zur Abbildung 1 herzustellen, stellen wir die drei relevanten Header-Dateien kurz vor.
 Die Schnittstelle für die Beschreibung der übergreifenden Komponente könnte so aussehen:
 
 ```cpp

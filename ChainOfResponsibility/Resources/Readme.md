@@ -25,7 +25,7 @@ Dies wird solange fortgesetzt, bis der Befehl verarbeitet wurde oder das Ende de
 Das Objekt, das den Befehl sendet (das Ereignis ausgelöst hat), weiß nicht, welches Objekt in der Kette aller Verarbeitungsobjekte
 den Befehl verarbeitet hat.
 
-Bzfgl. der Verarbeitung sind mehrere Szenarien denkbar: Hat ein Verarbeitungsobjekt die Anfrage übernommen,
+Bzgl. der Verarbeitung sind mehrere Szenarien denkbar: Hat ein Verarbeitungsobjekt die Anfrage übernommen,
 kann es das Weiterreichen der Anfrage an die noch vorhandenen Objekte in der Kette unterlassen ("*Single-Cast*" Szenario).
 Umgekehrt ist es denkbar, dass eine Anfrage prinzipiell die gesamte Kette aller Verarbeitungsobjekte durchläuft.
 Kein, ein oder mehrere Objekte können hierbei ihren Beitrag zur Abarbeitung des Ereignisses beitragen.
@@ -35,7 +35,7 @@ Kein, ein oder mehrere Objekte können hierbei ihren Beitrag zur Abarbeitung des 
 
 Das Pattern ermöglicht es, eine Anfrage an eine Kette von Verarbeitungsobjekten zu senden,
 ohne wissen zu müssen, welches Objekt / welche Objekte die Anfrage bearbeiten.
-Die Anfrage wird entlang der Kette weitergeleitet, bis ein oder mehrere Empfänger die Anfrage bearbeitet.
+Die Anfrage wird entlang der Kette weitergeleitet, bis ein oder mehrere Empfänger die Anfrage bearbeiten.
 Es kann auch sein, dass das Ereignis von keinem Empfänger bearbeitet wird.
 Der Absender eines Ereignisses ist nicht mit einem bestimmten Empfänger direkt verbunden.
 
@@ -47,7 +47,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
   * **Client**: Diese Klasse übergibt das Ereignis (die Anforderung) an das erste Objekt in der Kette der Verarbeitungsobjekte.
   * **HandlerBase**: Repräsentiert eine Schnittstelle oder Basisklasse für die konkreten Handler einer Verarbeitungskette.
-    Typischerweise enthält es eine Instanzvariable, die auf das nächste Handlerobjet in der Verarbeitungskette verweist.
+    Typischerweise enthält es eine Instanzvariable, die auf das nächste Handlerobjekt in der Verarbeitungskette verweist.
   * **ConcreteHandlers**: Konkrete Implementierung der `HandlerBase`-Klasse.
 
 
