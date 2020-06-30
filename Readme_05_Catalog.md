@@ -1,4 +1,4 @@
-    # Katalog der Entwurfsmuster
+# Katalog der Entwurfsmuster
 
 Entwurfsmuster lassen sich in die drei Kategorien Erzeugungs-, Struktur- und Verhaltensmuster
 (Creational, Structural and Behavioral Design Patterns) untergliedern. Eine Aufstellung 
