@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Prototype Pattern
+// ConceptualExample01.cpp // Prototype Pattern
 // ===========================================================================
 
 #include <iostream>
@@ -9,13 +9,14 @@
 class Prototype
 {
 private:
-    std::string m_id;
+    int m_id;
 
 protected:
-    Prototype(std::string id) : m_id(id) {}
+    Prototype(int id) : m_id(id) {}
 
 public:
-    std::string getId() { return m_id; }
+    int getId() { return m_id; }
+    void setId(int id) { m_id = id; }
 
 public:
     virtual std::shared_ptr<Prototype> Clone() = 0;
@@ -24,7 +25,7 @@ public:
 class ConcretePrototype : public Prototype
 {
 public:
-    ConcretePrototype(std::string id) : Prototype(id) {}
+    ConcretePrototype(int id) : Prototype(id) {}
 
     std::shared_ptr<Prototype> Clone() override
     {
@@ -33,15 +34,18 @@ public:
     }
 };
 
-void test_conceptual_example()
+void test_conceptual_example_01()
 {
     std::shared_ptr<ConcretePrototype> prototype = 
-        std::make_shared<ConcretePrototype>("1");
+        std::make_shared<ConcretePrototype>(1);
 
     std::shared_ptr<ConcretePrototype> clone = 
         std::static_pointer_cast<ConcretePrototype> (prototype->Clone());
 
-    std::cout << "Cloned: " << clone->getId();
+    clone->setId(2);
+
+    std::cout << "Prototype: " << prototype->getId() << std::endl;
+    std::cout << "Clone:     " << clone->getId() << std::endl;
 }
 
 // ===========================================================================

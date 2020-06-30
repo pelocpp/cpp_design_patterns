@@ -141,7 +141,8 @@
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConceptualExample.cpp" />
+    <ClCompile Include="ConceptualExample01.cpp" />
+    <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

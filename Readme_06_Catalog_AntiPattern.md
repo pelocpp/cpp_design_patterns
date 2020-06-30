@@ -1,5 +1,13 @@
 # Katalog der Anti-Pattern
 
+TODO: 
+
+Ebenfalls einführen
+
+https://arne-mertz.de/2018/12/simple-data-structures/
+
+als Anti-Pattern
+
 Neben Entwurfsmustern gibt es auch so genannte Anti-Entwurfsmuster: Hierunter verstehen wir offensichtlich
 (bekannte) Vorgehensweisen in der Software-Entwicklung, denen bereits zu Beginn des Entwicklungsprozesses
 schlechte Aussichten auf eine qualitativ gelungenge Architektur bescheinigen kann:
