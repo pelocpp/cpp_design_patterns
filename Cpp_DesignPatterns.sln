@@ -9,6 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TemplatePattern", "Template
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{60AD0A9A-5241-4A56-9619-C260AE166D44}"
 	ProjectSection(SolutionItems) = preProject
+		Resources\dp_overview.png = Resources\dp_overview.png
 		Readme.md = Readme.md
 		Readme_01_History.md = Readme_01_History.md
 		Readme_02_Description.md = Readme_02_Description.md
