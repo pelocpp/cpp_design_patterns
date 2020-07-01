@@ -45,6 +45,14 @@ Abbildung 1: Schematische Darstellung des *State Patterns*.
 
 #### Conceptual Example:
 
+*Hinweis*:
+
+Das *Conceptual Example* liegt in drei Versionen vor:
+
+  * Ein einfaches Beispiel - mit *raw*-Zeigern 
+  * Dasselbe Beispiel - mit `std::shared_ptr`-Zeigern
+  * Ein zweites einfaches Beispiel
+
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/state/cpp/example#example-0)

@@ -24,10 +24,10 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample03.cpp">
+    <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample04.cpp">
+    <ClCompile Include="ConceptualExample03.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -40,7 +40,7 @@
     <ClInclude Include="ConceptualExample01.h">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClInclude>
-    <ClInclude Include="ConceptualExample03.h">
+    <ClInclude Include="ConceptualExample02.h">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClInclude>
   </ItemGroup>
