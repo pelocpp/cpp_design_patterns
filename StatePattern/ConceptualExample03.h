@@ -1,26 +1,26 @@
 // ===========================================================================
-// ConceptualExample01.h // State Pattern
+// ConceptualExample03.h // State Pattern
 // ===========================================================================
 
-namespace ConceptualExample01 {
+namespace ConceptualExample03 {
 
     class Context;
 
     class StateBase
     {
     public:
-        virtual void handle(Context* context) = 0;
+        virtual void Handle(Context& context) = 0;
     };
 
     class Context
     {
     private:
-        StateBase* m_state;
+        std::shared_ptr<StateBase> m_state;
 
     public:
-        Context(StateBase* state);
-        void request();
-        void setState(StateBase* base);
+        Context(std::shared_ptr<StateBase> state);
+        void Request();
+        void setState(std::shared_ptr<StateBase> base);
     };
 
     class ConcreteStateA;
@@ -29,13 +29,13 @@ namespace ConceptualExample01 {
     class ConcreteStateA : public StateBase {
     public:
         ConcreteStateA() = default;
-        virtual void handle(Context* context);
+        virtual void Handle(Context& context);
     };
 
     class ConcreteStateB : public StateBase {
     public:
         ConcreteStateB() = default;
-        virtual void handle(Context* context);
+        virtual void Handle(Context& context);
     };
 }
 

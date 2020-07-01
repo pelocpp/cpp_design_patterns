@@ -21,11 +21,14 @@
     <ClCompile Include="ConceptualExample01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample02.cpp">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample03.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample04.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,5 +40,13 @@
     <ClInclude Include="ConceptualExample01.h">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClInclude>
+    <ClInclude Include="ConceptualExample03.h">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_state_pattern.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -140,7 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample01.cpp" />
-    <ClCompile Include="ConceptualExample02.cpp" />
+    <ClCompile Include="ConceptualExample04.cpp" />
+    <ClCompile Include="ConceptualExample03.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConceptualExample01.h" />
+    <ClInclude Include="ConceptualExample03.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_state_pattern.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
