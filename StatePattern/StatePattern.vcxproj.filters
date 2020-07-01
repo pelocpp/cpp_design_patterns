@@ -33,4 +33,9 @@
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ConceptualExample01.h">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

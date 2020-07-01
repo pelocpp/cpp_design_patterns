@@ -39,9 +39,6 @@ namespace ConceptualExample02 {
      * state of the Context.
      */
     class Context {
-        /**
-         * @var State A reference to the current state of the Context.
-         */
     private:
         State* m_state;
 
@@ -49,6 +46,7 @@ namespace ConceptualExample02 {
         Context(State* state) : m_state(nullptr) {
             this->TransitionTo(state);
         }
+
         ~Context() {
             delete m_state;
         }
@@ -62,6 +60,7 @@ namespace ConceptualExample02 {
             this->m_state = state;
             this->m_state->set_context(this);
         }
+
         /**
          * The Context delegates part of its behavior to the current State object.
          */
