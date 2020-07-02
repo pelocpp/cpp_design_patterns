@@ -49,7 +49,7 @@ roten eine blaue Farbe werden, was so sicherlich nicht erwünscht ist.
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Singleton Patterns*.
-Es besteht nur aus einer einzogen Klasse:
+Es besteht nur aus einer einzigen Klasse:
 
   * **Singleton**: Dieser Klasse besitzt eine statische Methode `getSingleton`,
     die pro Aufruf eine einzelne Instanz zurückgibt (Referenz, Zeiger),
@@ -78,6 +78,13 @@ vor.
 ## Literaturhinweise
 
 *Hinweise*:
+
+TO BE DONE:
+
+Ein guter Aufsatz, wie shared_ptr, weak_ptr und Singletons zusammenarbeiten !!!
+
+http://btorpey.github.io/blog/2014/02/12/shared-singletons/
+
 
 ---
 
