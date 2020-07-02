@@ -1,5 +1,13 @@
 # Literatur zu Design Patterns (Entwurfsmuster)
 
+  * Matthias Geirhos: "Entwurfsmuster: Das umfassende Handbuch".</br>
+    Rheinwerk Verlag GmbH (1. Juni 2015), XXXX Seiten. Sprache: Deutsch. ISBN-10: 3836227622, ISBN-13: 978-3836227629.
+
+    Hier werden die wichtigsten Entwurfsmuster für die verschiedensten Anwendungsfälle aufgelistet
+    und anschaulich anhand praxisnaher Beispiele erläutert. Kaufempfehlung für alle, die sich mit Entwurfsmustern auseinandersetzen wollen.
+
+---
+
   * Fedor G. Pikus: "Hands-On Design Patterns with C++".</br>
     Packt Publishing (30. Januar 2019), 512 Seiten. Sprache: Englisch. ISBN-10: 1788832566, ISBN-13: 978-1788832564.
 
@@ -14,6 +22,23 @@
 
     Einfach zu lesendes Buch zum Thema "Design Patterns". An vielen Stellen wird versucht,
     die neuen Sprachelemente von C++ in den Beispielen zur Anwendung zu bringen.
+
+---
+
+  * Erich Gamma, John Vlissides, Ralph Johnson, Richard Helm: "Design Patterns: Elements of Reusable Object-Oriented Software".</br>
+    Addison-Wesley Professional (10. November 1994), 416 Seiten. Sprache: Englisch. ISBN-13: 978-0201633610, ISBN-10: 0201633612.
+
+    Der Bestseller von Gamma und Co. in englischer Originalfassung. Der Klassiker für alle Programmierer.
+    Das Standardwerk für die objektorientierte Softwareentwicklung.
+    Es werden 23 Patterns vorstellt, die die Grundlage der meisten Bücher zu diesem Thema darstellen.
+    Das Buch ist auch in deutscher Fassung erschienen, siehe den folgenden Abschnitt.
+
+---
+
+  * Erich Gamma, John Vlissides, Ralph Johnson, Richard Helm: "Design Patterns: Entwurfsmuster als Elemente wiederverwendbarer objektorientierter Software".</br>
+    MITP Verlag (1. Februar 2015), 480 Seiten. Sprache: Deutsch. ISBN-13: 978-3826697005, ISBN-10: 3826697006.
+
+    Deutsche Version des Bestsellers von Gamma und Co., siehe Abschitt zuvor.
 
 ---
 
@@ -37,7 +62,14 @@
 
 ---
 
-  * EBook: "https://refactoring.guru/design-patterns/book"
+  * EBook<br/><br/>[Refactoring.Guru](https://refactoring.guru/design-patterns/book)
+
+---
+
+  * Dreiteilige Artikelserie auf *CodeProject.com*:<br/><br/>
+    [Design Patterns 1 of 3 - Creational Design Patterns](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns)<br/>
+    [Design Patterns 2 of 3 - Structural Design Patterns](https://www.codeproject.com/Articles/438922/Design-Patterns-2-of-3-Structural-Design-Patterns)<br/>
+    [Design Patterns 3 of 3 - Behavioral Design Patterns](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns)<br/>
 
 ---
 
