@@ -3,12 +3,12 @@
 // ===========================================================================
 
 // function prototypes
-void test_simple_singleton();
-void test_thread_safe_singleton();
+void test_singleton_01();
+void test_singleton_02();
 
 int main() {
-    test_simple_singleton();
-    test_thread_safe_singleton();
+    test_singleton_01();
+    test_singleton_02();
     return 0;
 }
 
