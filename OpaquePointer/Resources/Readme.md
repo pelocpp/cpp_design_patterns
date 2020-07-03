@@ -1,4 +1,4 @@
-# Opaque Pointer /  Bridge Pattern
+# Opaque Pointer /  Pimpl Pattern
 
 ## Wesentliche Merkmale
 
@@ -6,30 +6,28 @@
 
 #### Ziel / Absicht:
 
-Was versteht man unter einem *Opaque Pointer*? Opaque, zu deutsch *undurchsichtig*, soll implizieren,
+Was versteht man unter einem *Opaque Pointer*? Opaque, zu Deutsch *undurchsichtig*, soll implizieren,
 das wir es mit etwas zu tun haben, durch das wir nicht durchschauen können.
-
-Ein *Opaque Pointer* (zu deutsch gewissermaßen ein "undurchsichtiger Zeiger") ist ein Zeiger,
+Ein *Opaque Pointer* (zu Deutsch gewissermaßen ein "undurchsichtiger Zeiger") ist ein Zeiger,
 der auf eine Datenstruktur (Objekt) verweist, deren Inhalt zum Zeitpunkt seiner Definition nicht verfügbar ist.
 
 ##### Hinweis:
 
 Das *Opaque Pointer* Pattern ist auch unter den Begriffen *d-pointer*, *compiler firewall*
-oder auch *Cheshire Cat* pattern oder *Pimpl* ("*Pointer to implementation*") bekannt.
-
-In Zusammenhang mit diesem Pattern steht auch das *Bridge Pattern*, das wir in diesem Zusammenhang ebenfalls ansprechen.
+oder auch *Cheshire Cat Pattern* oder *Pimpl* ("*Pointer to implementation*") bekannt.
 
 #### Problem:
 
 *Opaque Pointer* sind eine Möglichkeit, die Implementierungsdetails einer Schnittstelle vor Benutzern zu verbergen.
 
-Auf diesen Weise kann die Implementierung geändert werden,
+Auf diese Weise kann die Implementierung geändert werden,
 ohne dass die C++-Module, die sie verwenden, neu kompiliert werden müssen.
 
 Dies kommt auch dem Programmierer zugute, da eine einfache Schnittstelle erstellt werden kann
-und die meisten Details in einer anderen Datei versteckt werden können.
+und die meisten Details in einer anderen Datei versteckt sind.
 
-Dies ist wichtig, um beispielsweise die Binärcode-Kompatibilität mit verschiedenen Versionen einer *Shared*-Bibliothek zu gewährleisten.
+Dies ist wichtig, um beispielsweise die Binärcode-Kompatibilität mit verschiedenen Versionen
+einer *Shared*-Bibliothek zu gewährleisten.
 
 #### Lösung:
 
@@ -37,7 +35,7 @@ In seiner Grundform sieht das Muster wie folgt aus:
 
   * In einer Klasse verschieben wir alle privaten Member in einen neu deklarierten Typ - z.B. eine Klasse `PrivateImpl`.
   * Zu diesem neu deklarierten Typ gibt es in der Header-Datei der Hauptklasse nur eine Forward-Deklaration.
-  * Die `PrivateImpl`-Klasse wird in gewohnter Manier in einer *cpp*- und *h*-Datei deklarier und implementiert.
+  * Die `PrivateImpl`-Klasse wird in gewohnter Manier in einer *cpp*- und *h*-Datei deklariert und implementiert.
   * Der Client-Code der Hauptklasse muss nun nicht neu kompiliert werden, wenn sich Änderungen an der Implementierung der privaten Hilfsklasse `PrivateImpl` ergeben (da sich die Schnittstelle nicht geändert hat).
   * Im Umkehrschluss bedeutet dies natürlich, dass Änderungen an der Schnittstelle tabu sind.
 
@@ -46,25 +44,24 @@ In seiner Grundform sieht das Muster wie folgt aus:
 
 ###### Pros:
 
-  * Bietet so genannte "*Compilation Firewall*":
+  * Stellt eine so genannte "*Compilation Firewall*" dar:
     Wenn sich die private Implementierung ändert, muss der Clientcode nicht neu kompiliert werden.
     Alles in allem führt dies zu besseren Übersetzungszeiten.
-
   * Bietet so genannte "*Binary Compatibility*": für Bibliotheksentwickler von Interesse.
     Solange die Binärschnittstelle gleich bleibt, kann man die Anwendung mit einer anderen Version der Bibliothek verknüpfen.
 
 ###### Kontras:
 
   * Performance - Eine Indirektionsebene wird hinzugefügt.
-  * Komplexer Code und es erfordert etwas Disziplin, um solche Klassen zu pflegen.
-  * Debugging - Da die Klasse ist aufgeteilt ist, erkennt man Details bei der Fehlersuche nicht sofort.
+  * Komplexer Code - Es erfordert etwas Disziplin, um solche Klassen zu pflegen.
+  * Debugging - Da die Klasse aufgeteilt ist, erkennt man Details bei der Fehlersuche nicht sofort.
 
 
 #### Ein Beispiel:
 
 ###### Grundlagen:
 
-wie betrachten ein Auto (Klasse `Car`), das logischerweise einen Motor besitzt (Klasse `Engine`).
+Wir betrachten ein Auto (Klasse `Car`), das logischerweise einen Motor besitzt (Klasse `Engine`).
 Die Klasse `Car` könnte folgendes Header-File besitzen:
 
 ```cpp
@@ -91,13 +88,13 @@ void Car::coolDown()
 }
 ```
 
-Betrachten Sie das Problem, das - in Abghängigkeit von der Anzahl der Benutzer der Klasse `Car` -
+Betrachten Sie das Problem, das - in Abhängigkeit von der Anzahl der Benutzer der Klasse `Car` -
 weniger oder mehr in Erscheinung treten kann: Da die Datei `car.h` die Datei `engine.h` inkludiert,
 besitzen alle Benutzer der Datei `Car.h` eine indirekte Abhängigkeit zur Datei `engine.h`.
 Sprich alle Benutzer von `car.h` inkludieren `engine.h`.
-Das bedeutet, das bei Änderungen an der Klasse `Engine` alle Benutzer von `car.h` neu übersetzt werden müssen,
+Dies bedeutet, dass bei Änderungen an der Klasse `Engine` alle Benutzer von `car.h` neu übersetzt werden müssen,
 eben auch für den Fall, dass an der Klasse `Car` nichts geändert wurde. Und zum Zweiten vor dem Hintergrund,
-dass diese Clients sich möglicherweise der Abhängigkeite zur Klasse `Engine` gar nicht bewusst sind.
+dass diese Clients sich möglicherweise der Abhängigkeit zur Klasse `Engine` gar nicht bewusst sind.
 
 Das *Piml*-Idiom (*Pointer to Implementation*) löst diese Abhängigkeit durch das Hinzufügen
 einer Indirektionsstufe in Gestalt einer zusätzlichen Klasse - nennen wir sie `CarImpl` - auf.
@@ -154,20 +151,19 @@ void Car::coolDown()
 
 Die Klasse `Car` delegiert ihre Aufrufe an die Klasse `Engine` nun an die Klasse `CarImpl`,
 natürlich in der Erwartung, dass diese den Aufruf an eine Instanz von `Engine` weiterreicht.
-
 Allerdings ist für die Klasse `Car` eine neue Verantwortlichkeit entstanden:
 Die Verwaltung der Lebenszeit des `CarImpl`-Zeigers.
 
-*Beachte*: Haben Sie eine Erklärung darfür, warum Benutzer der Klasse `Car`, also des Header-Files `car.h`, übersetzungsfähig sind,
+*Beachte*: Haben Sie eine Erklärung dafür, warum Benutzer der Klasse `Car`, also des Header-Files `car.h`, übersetzungsfähig sind,
 obwohl von der referenzierten Klasse `CarImpl` nur eine Vorwärts-Deklaration vorliegt, also die tatsächliche Klassendefinition fehlt?
 
 Die Klasse `Car` besitzt von der Klasse `CarImpl` nur einen Zeiger (sagen wir: dieser belegt 4 Bytes, sprich seine Größe ist dem Compiler bekannt) und kein Objekt.
-Bei diesem Sachverhalt kann der Compiler Code generieren, es muss das tatsächliche Aussehen der Klasse `CarImpl` nicht kennen!
+Bei diesem Sachverhalt kann der Compiler Code generieren, er muss das tatsächliche Aussehen der Klasse `CarImpl` nicht kennen!
 
 ###### Verbesserungen:
 
-Der Einsatz eines *raw-Pointers* in der Klasse `Car` entspricht dem Aussehen eines *Modern C++* Designs.
-Aus diesem Grund tauschen wir diesen Zeiger mit einem Smart-Pointer, beispielsweise einem `std::unique_ptr`-Objekt aus.
+Der Einsatz eines *raw-Pointers* in der Klasse `Car` entspricht nicht dem Aussehen eines *Modern C++* Designs.
+Aus diesem Grund tauschen wir diesen Zeiger mit einem Smart-Pointer, beispielsweise einem `std::unique_ptr`-Objekt, aus.
 Die Header-Datei der Klasse `Car` sieht nun so aus:
 
 ```cpp
@@ -204,7 +200,7 @@ private:
 Car::Car() : impl_(new CarImpl) {}
 ```
 
-Es sieht soweit alles gut aus - überraschenderweise erhalten wir in diesem Zustand des Programms
+Es sieht so weit alles gut aus - überraschenderweise erhalten wir in diesem Zustand des Programms
 einen Übersetzungsfehler:
 
 <b>
@@ -223,13 +219,13 @@ Der Übersetzungsfehler liegt als darin begründet, dass der korrespondierende Typ
 
 Es sind zwei Änderungen am aktuellen Programm vorzunehmen:
 
-Hinzufügen einer Destruktor-Deklaration in der Klasse Car: 
- `~Car();`
+  * Hinzufügen einer Destruktor-Deklaration in der Klasse `Car`:<br/>
+    `~Car();`
 
-Hinzufügen einer Destruktor-Definition in der Klasse CarImpl: 
-`Car::~Car() = default;`
+  * Hinzufügen einer Destruktor-Definition in der Klasse `CarImpl`:<br/>
+    `Car::~Car() = default;`
 
-Damit haben einen ersten minimalistischen Durchauf durch das Pimlp-Idiom beschritten!
+Damit haben einen ersten minimalistischen Durchlauf durch das Pimlp-Idiom beschritten!
 
 
 #### Struktur (UML):
@@ -237,11 +233,6 @@ Damit haben einen ersten minimalistischen Durchauf durch das Pimlp-Idiom beschri
 <img src="XXX.png" width="600">
 
 Abbildung: XXX
-
-
-## Anwendungen des Design Pattern in der STL:
-
-  * TBD
 
 
 
@@ -280,8 +271,6 @@ https://www.fluentcpp.com/2017/09/22/make-pimpl-using-unique_ptr/
 ## Weiterarbeit:
 
 a) Ein voll funktionsfähiges Beispiel (mit COpy und MOveable) implementieren.
-
-b) Bridge
-
+2) 
 c) Wenn Zeit: Einen Vergleich Pimpl vs Interface Inheritance herstellen.
 

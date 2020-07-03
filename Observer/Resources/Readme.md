@@ -7,35 +7,35 @@
 #### Ziel / Absicht:
 
 Das *Observer Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
-mit dem Sie einen Mechanismus für Benachrichtigungen definieren können,
+mit dem Sie einen Mechanismus für Benachrichtigungen definieren,
 um Objekte über Ereignisse zu informieren, die in einem beobachteten Objekt auftreten.
 
 #### Problem:
 
 Betrachten wir als Szenario ein Beispiel mit zwei Arten von Objekten:
-mehreren Kunden und ein Geschäft. Der Kunde ist an einem bestimmten Produkt interessiert,
+mehrere Kunden und ein Geschäft. Der Kunde ist an einem bestimmten Produkt interessiert,
 das bald erhältlich sein soll.
 
 Der Kunde kann das Geschäft jeden Tag aufsuchen oder die entsprechende WebSite konsultieren,
 um die Verfügbarkeit des Produkts zu überprüfen.
-Solange das Produkt aber noch gefertigt wird oder sich auf dem Versand zum Laden befindet,
+Solange das Produkt aber noch gefertigt wird oder sich auf dem Versand zum Geschäft befindet,
 sind all diese Nachfragen sinnlos.
 
-Auf den anderen Seite könnte der Laden genau dann, wenn das Produkt abholbereit ist,
+Auf der anderen Seite könnte der Laden genau dann, wenn das Produkt abholbereit ist,
 dem oder den interessierten Kunden eine Nachricht zukommen lassen. Auf diese Weise
 ist die Information über die Verfügbarkeit am effizientesten gegeben.
 
 
 #### Lösung:
 
-Das Objekt, dass den bereitzustellenden Status besitzt, wird häufig als "*Subject*" oder auch
+Das Objekt, das den bereitzustellenden Status besitzt, wird häufig als "*Subject*" oder auch
 "*Publisher*" bezeichnet. Diejenigen Objekte, die die Änderungen am Status des *Publishers* verfolgen möchten,
-werden als "*Subscriber*" oder auch "*Observer*" bezeichnet. Das Pendant eines "*Observer*"
+werden als "*Subscriber*" oder auch "*Observer*" bezeichnet. Das Pendant eines "*Observers*"
 kann man auch als "*Observable*" bezeichnen.
 
 Das *Observer Pattern* sieht vor, dass das "*Subject*" einen Benachrichtigungsmechanismus der Gestalt aufweist, 
 dass einzelne Objekte (*Subscriber*) sich für das Benachrichtigen von Ereignissen
-an- oder abmelden können.
+an- und abmelden können.
 
 Typischerweise lässt sich diese Funktionalität mit einer Liste (`std::list` oder ähnliches)
 zum Speichern von Verweisen auf *Subscriber*-Objekte realisieren.

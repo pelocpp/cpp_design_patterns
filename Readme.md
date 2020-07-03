@@ -27,13 +27,9 @@ Zeitgleich schulen Design Pattern die Fähigkeit zur effektiven objektorientierte
 
 ---
 
-Es folgt eine Auflistung der Beispiele (bzw. Unterverzeichnisse):
-
-##### Beispiel *Strategy Pattern* (Unterverzeichnis *StrategyPattern*):
-
-##### Beispiel *Template Method Pattern* (Unterverzeichnis *TemplatePattern*):
-
----
-
 ## TODO: Interceptor Pattern ergänzen
+
+## TODO: In den Listen taucht der Opaque Pointer nicht auf // was ist mit Pimpl
+
+
 
