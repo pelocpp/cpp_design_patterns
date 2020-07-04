@@ -29,7 +29,7 @@ ist die Information über die Verfügbarkeit am effizientesten gegeben.
 #### Lösung:
 
 Das Objekt, das den bereitzustellenden Status besitzt, wird häufig als "*Subject*" oder auch
-"*Publisher*" bezeichnet. Diejenigen Objekte, die die Änderungen am Status des *Publishers* verfolgen möchten,
+"*Publisher*" bezeichnet. Diejenigen Objekte, die die Änderungen am Status des *Publishers* verfolgen,
 werden als "*Subscriber*" oder auch "*Observer*" bezeichnet. Das Pendant eines "*Observers*"
 kann man auch als "*Observable*" bezeichnen.
 

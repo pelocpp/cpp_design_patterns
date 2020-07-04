@@ -12,29 +12,29 @@
 class AbstractObject
 {
 public:
-    virtual std::string  operation() const = 0;
+    virtual std::string operation() const = 0;
 };
 
 /**
- * Implementation of a real object.
+ * Implementation of a real object
  */
 class RealObject : public AbstractObject
 {
 public:
-    virtual std::string  operation() const override
-    {
-     //   std::cout << "do something" << std::endl;
+    std::string  operation() const override {
         return std::string("computed something!");
     }
 };
 
 /**
- * Implementation of a null object.
+ * Implementation of a null object
  */
 class NullObject : public AbstractObject
 {
 public:
-    virtual std::string operation() const override { return std::string(""); }
+    std::string operation() const override {
+        return std::string(""); 
+    }
 };
 
 /**

@@ -50,4 +50,9 @@
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\OpaquePointer.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

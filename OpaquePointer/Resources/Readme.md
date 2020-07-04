@@ -230,15 +230,9 @@ Damit haben einen ersten minimalistischen Durchlauf durch das Pimlp-Idiom beschr
 
 #### Struktur (UML):
 
-<img src="XXX.png" width="600">
+<img src="OpaquePointer.png" width="600">
 
-Abbildung: XXX
-
-
-
-## Anwendungsbeispiel:
-
-  * TBD
+Abbildung: Strukur des Pimpl-Idioms
 
 
 ## Literaturhinweise
@@ -246,8 +240,6 @@ Abbildung: XXX
 https://www.bfilipek.com/2018/01/pimpl.html
 
 https://www.geeksforgeeks.org/pimpl-idiom-in-c-with-examples/
-
-
 
 https://www.gamasutra.com/view/news/167098/Indepth_PIMPL_vs_pure_virtual_interfaces.php
 

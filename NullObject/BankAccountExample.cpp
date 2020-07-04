@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <memory>
 
 class Logger
@@ -47,30 +48,52 @@ public:
       int balance, 
       const std::shared_ptr<Logger>& logger = nullLogger)
     :
-      m_log{ logger },
-      m_name{ name },
-      m_balance{ balance }
+      m_log{ logger }, m_name{ name }, m_balance{ balance }
     {}
 
     void deposit(int amount)
     {
         m_balance += amount;
-        m_log->info("Deposited $" + std::to_string(amount)
-            + " to " + m_name + ", balance is now $" + std::to_string(m_balance));
+
+        std::ostringstream oss;
+        oss << "Deposited ";
+        oss << std::to_string(amount);
+        oss << "€ to ";
+        oss << m_name;
+        oss << ", balance is now ";
+        oss << std::to_string(m_balance);
+        oss << "€";
+
+        m_log->info(oss.str());
     }
 
     void withdraw(int amount)
     {
+        std::ostringstream oss;
+
         if (m_balance >= amount)
         {
             m_balance -= amount;
-            m_log->info("Withdrew $" + std::to_string(amount)
-                + " from " + m_name + ", $" + std::to_string(m_balance) + " left");
+
+            oss << "Withdrew ";
+            oss << std::to_string(amount);
+            oss << "€ from ";
+            oss << m_name;
+            oss << ", ";
+            oss << std::to_string(m_balance);
+            oss << "€ left";
+
+            m_log->info(oss.str());
         } 
         else
         {
-            m_log->warn("Tried to withdraw $" + std::to_string(amount) +
-                " from " + m_name + " but couldn't due to low balance");
+            oss << "Tried to withdraw ";
+            oss << std::to_string(amount);
+            oss << "€ from ";
+            oss << m_name;
+            oss << " but couldn't due to low balance";
+
+            m_log->warn(oss.str());
         }
     }
 };
@@ -85,5 +108,12 @@ void test_bank_account()
     account.deposit(2000);
     account.withdraw(2500);
     account.withdraw(1000);
+    std::cout << "First account done." << std::endl;
+
+    // note: default value of third parameter yields NullLogger object
+    BankAccount account2{ "second account", 1000 };
+    account2.deposit(2000);
+    account2.withdraw(2500);
+    account2.withdraw(1000);
     std::cout << "Done." << std::endl;
 }

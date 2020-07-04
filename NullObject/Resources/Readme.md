@@ -4,10 +4,10 @@
 
 Das *Null Object Pattern* ist ein Entwurfsmuster, das sich der Thematik von Null-Referenzen annimmt.
 Null-Referenzen gibt es in anderen Programmiersprachen sehr wohl, in C++ sind sie per Definition nicht existent.
-Wir sprechen daher besser von so genannten Null-Objekten, also Objekten, die keinerlei Funktionalität haben.
+Wir sprechen daher besser von so genannten *Null*-Objekten, also Objekten, die keinerlei Funktionalität haben.
 
-Der Sinn des Musters besteht darin, einer Referenz ein Objekt zuzuweisen, das keine Aktion ausführt,
-anstatt die Referenz zu invalidieren. Dadurch wird erreicht, dass die Referenz auf die Variable zu jedem Zeitpunkt auf ein gültiges Objekt verweist,
+Der Sinn des Musters besteht darin, einer Referenz ein Objekt zuzuweisen, das keine Aktion ausführt.
+Dadurch wird erreicht, dass die Referenz zu jedem Zeitpunkt auf ein gültiges Objekt verweist,
 was Behandlungen von Sonderfällen (das Nichtvorhandensein) erübrigt.
 
 #### Kategorie: *Behavioural Pattern*
@@ -22,7 +22,7 @@ Das Null-Objekt spiegelt folglich eine "*Do-Nothing*"-Beziehung wieder.
 #### Problem:
 
 Das  *Null Object* Entwurfsmuster befreit uns von der Pflicht, zur Laufzeit Abfragen bzgl. gewisser Zustände vornehmen zu müssen.
-Überall im Quellcode, wo Überprüfungen auf Nullwerte erfoderlich wären (was in C++ bei Referenzen ohnehin nicht möglich ist),
+Überall im Quellcode, wo Überprüfungen auf Nullwerte erforderlich wären (was in C++ bei Referenzen ohnehin nicht möglich ist),
 kommen Nullobjektklassen zum Einsatz.
 
 #### Lösung:
