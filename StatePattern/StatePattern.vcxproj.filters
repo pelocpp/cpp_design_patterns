@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{28cfce18-f9a1-4903-beda-c33387b50983}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\TrafficLight">
+      <UniqueIdentifier>{7a0fd9b6-b9d2-4325-b1a8-1297668e2e27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample01.cpp">
@@ -30,6 +33,24 @@
     <ClCompile Include="ConceptualExample03.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
+    <ClCompile Include="TrafficLight\GreenLight.cpp">
+      <Filter>Source Files\TrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight\RedLight.cpp">
+      <Filter>Source Files\TrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight\TrafficLight.cpp">
+      <Filter>Source Files\TrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight\YellowLight.cpp">
+      <Filter>Source Files\TrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight\ITrafficLight.h">
+      <Filter>Source Files\TrafficLight</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight\ProgramTL.cpp">
+      <Filter>Source Files\TrafficLight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -42,6 +63,18 @@
     </ClInclude>
     <ClInclude Include="ConceptualExample02.h">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight\GreenLight.h">
+      <Filter>Source Files\TrafficLight</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight\RedLight.h">
+      <Filter>Source Files\TrafficLight</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight\TrafficLight.h">
+      <Filter>Source Files\TrafficLight</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight\YellowLight.h">
+      <Filter>Source Files\TrafficLight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

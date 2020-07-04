@@ -20,7 +20,7 @@ Es scheint, als hätte das Objekt seine Klasse geändert.
 Mit diesem Entwurfsmuster lässt sich das Verhalten eines Objekts
 als Reaktion auf Änderungen seines internen Zustands ändern.
 Das Verhalten ist zur Laufzeit änderbar, ohne dass die für den Zugriff auf das Objekt
-verwendete bzw. vorhandene Schnittstelle sich zu ändert.
+verwendete bzw. vorhandene Schnittstelle sich ändert.
 Die Änderungen sind im Kontext des Objekts verborgen.
 
 Dieses Muster ist sehr nützlich beim Erstellen von Software Zustandsautomaten,
@@ -31,7 +31,7 @@ bei denen sich die Funktionalität eines Objekts je nach Status grundlegend änder
 Das folgende UML-Diagramm beschreibt eine Implementierung des *State Patterns*.
 Es besteht im Wesentlichen aus drei Teilen:
 
-  * **Context**: Diese Klasse hat Zuigriff auf das konkrete Statusobjekt,
+  * **Context**: Diese Klasse hat Zugriff auf das konkrete Statusobjekt,
     das das Verhalten gemäß seinem aktuellen Status bereitstellt.
   * **StateBase**: Abstrakte Klasse für konkrete Zustandsklassen.
     Sie definiert die Schnittstelle, die von der `Context`-Klasse verwendet wird.

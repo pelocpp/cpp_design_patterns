@@ -143,6 +143,12 @@
     <ClCompile Include="ConceptualExample03.cpp" />
     <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="TrafficLight\GreenLight.cpp" />
+    <ClCompile Include="TrafficLight\ITrafficLight.h" />
+    <ClCompile Include="TrafficLight\ProgramTL.cpp" />
+    <ClCompile Include="TrafficLight\RedLight.cpp" />
+    <ClCompile Include="TrafficLight\TrafficLight.cpp" />
+    <ClCompile Include="TrafficLight\YellowLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md" />
@@ -150,6 +156,10 @@
   <ItemGroup>
     <ClInclude Include="ConceptualExample01.h" />
     <ClInclude Include="ConceptualExample02.h" />
+    <ClInclude Include="TrafficLight\GreenLight.h" />
+    <ClInclude Include="TrafficLight\RedLight.h" />
+    <ClInclude Include="TrafficLight\TrafficLight.h" />
+    <ClInclude Include="TrafficLight\YellowLight.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_state_pattern.png" />
