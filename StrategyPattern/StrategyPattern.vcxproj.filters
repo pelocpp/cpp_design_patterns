@@ -91,13 +91,8 @@
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\strategy_design_pattern.png">
+    <None Include="Resources\dp_strategy_pattern.svg">
       <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\StrategyPatternShalloway.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    </None>
   </ItemGroup>
 </Project>

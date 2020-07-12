@@ -162,11 +162,8 @@
     <ClInclude Include="RenderTextProcessor.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dp_strategy_pattern.svg" />
     <None Include="Resources\Readme.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\StrategyPatternShalloway.png" />
-    <Image Include="Resources\strategy_design_pattern.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
