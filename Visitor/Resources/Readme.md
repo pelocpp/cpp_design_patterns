@@ -6,32 +6,43 @@
 
 #### Ziel / Absicht:
 
-Das Visitor Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
-...
+Das *Visitor Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
+das eine Menge strukturierter Daten von den Funktionen trennt,
+die auf ihr ausgeführt werden können. Dies unterstützt zum einen eine lose Kopplung
+und es ermöglicht zum anderen das Hinzufügen zusätzlicher Operationen, ohne an den Datenklassen Änderungen vornehmen zu müssen.
 
 #### Problem:
 
-
+Das Ergebnis der Trennung von Objektstruktur und Funktionen (Algorithmen) ist ein Datenmodell
+mit eingeschränkter Funktionalität und einer Gruppe von "*Besuchern*",
+die Operationen auf den Daten ausführen.
+Ein weiterer Vorteil ist die Möglichkeit, einen neuen *Besuchern* hinzufügen zu können,
+ohne dabei die vorhandene Struktur ändern zu müssen. 
+Die Klassen Daten sind mit Attributen (Eigenschaften, *getter*/*setter*-Methoden) so zu erstellen,
+dass diese vom "Besucher"-Objekt geeignet verwendet werden können.
+Typischerweise wird das Datenobjekt als Parameter an eine Methode des "Besucher"-Objekts übergeben
+(die Konvention besteht darin, diese Methode `visit` zu nennen).
 
 #### Lösung:
+
+TO BE DONE:
+
+https://refactoring.guru/design-patterns/visitor-double-dispatch
+
 
 
 
 #### Struktur (UML):
 
-Das folgende UML-Diagramm beschreibt eine Implementierung des *Command Patterns*.
-Es besteht im Wesentlichen aus drei Teilen:
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Visitor Patterns*.
+Es besteht im Wesentlichen aus sechs Teilen:
 
-  * **Originator**: Erstellt ein Memento-Objekt, das den internen Status des Urhebers erfasst.
-    Der Urheber verwendet das Memento-Objekt, um seinen vorherigen Status wiederherzustellen.
-  * **Memento**: Speichert den internen Status des Urheber-Objekts. Der Status kann beliebig umfangreich sind. Das Memento-Objekt muss zwei Schnittstellen unterstützen:
-    Eine Schnittstelle zum *CareTaker*: Diese Schnittstelle darf keine Operationen oder keinen Zugriff auf den vom Memento-Objekt gespeicherten internen Zustand zulassen und berücksichtigt daher den Zugriffsschutz.
-    Die andere Schnittstelle besteht zum Urheber und ermöglicht ihm den Zugriff auf den gesamten Status, der erforderlich ist,
-    damit der Urheber einen ursprünglichen Zustand wiederherstellen kann.
-  * **CareTaker**: Ist verantwortlich für die Aufbewahrung des Memento-Objekts.
-    Das Memento-Objekt ist für den CareTaker eine Black-Box,
-    der CareTaker kann darauf nicht zugreifen. 
-
+  * **Client**: XXX
+  * **ObjectStructure**: XXX
+  * **ElementBase**: XXX
+  * **ConcreteElement**: XXX
+  * **VisitorBase**: XXX
+  * **ConcreteVisitor**: XXX
 
 <img src="dp_xxx.png" width="500">
 
@@ -46,7 +57,7 @@ Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 und 
 
-[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command)
+[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Visitor)
 
 vor.
 
@@ -55,6 +66,8 @@ vor.
 #### 'Real-World' Beispiel:
 
 To be done:
+
+
 
 "PersonCaretaker"
 
