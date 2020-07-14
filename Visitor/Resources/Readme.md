@@ -29,6 +29,7 @@ TO BE DONE:
 
 https://refactoring.guru/design-patterns/visitor-double-dispatch
 
+http://www.vishalchovatiya.com/double-dispatch-in-cpp/#:~:text=Double%20Dispatch%20in%20C%2B%2B%20is,tables%20of%20respective%20two%20objects.
 
 
 
@@ -37,14 +38,25 @@ https://refactoring.guru/design-patterns/visitor-double-dispatch
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Visitor Patterns*.
 Es besteht im Wesentlichen aus sechs Teilen:
 
-  * **Client**: XXX
-  * **ObjectStructure**: XXX
-  * **ElementBase**: XXX
-  * **ConcreteElement**: XXX
-  * **VisitorBase**: XXX
-  * **ConcreteVisitor**: XXX
+  * **Client**: Anwender des *Visitor Patterns*. Er verwaltet die Objektstruktur und weist die Objekte innerhalb der Struktur an,
+    wann ein Besucher akzeptiert werden soll.
+  * **ObjectStructure**: Dies ist eine Klasse, die alle Objekte enthält, die besucht werden können.
+    Es bietet einen Mechanismus zum Traversieren aller Elemente.
+    Diese Struktur muss nicht zwingend eine *Collection* sein, es kann irgend eine komplexe Struktur sein, beispielsweise ein *Composite Object*.
+  * **ElementBase**: Stellt eine Abstraktionsschnittstelle dar, die die `accept`-Operation deklariert. Dies ist der Einstiegspunkt, an dem ein Objekt vom Besucherobjekt "besucht" werden kann.
+    Jedes Objekt aus einer *Collection* sollte diese Abstraktionsschnittstelle implementieren, um besucht werden zu können.
+  * **ConcreteElement**: Diese Klassen erben von der abstrakten Basisklasse `ElementBase` oder implementieren eine Schnittstelle
+    und definieren eine `accept`-Operation. Das *Visitor*-Objekt wird durch die `accept`-Operation an dieses Objekt übergeben.
+  * **VisitorBase**: Deklariert eine `visit`-Methode (Operation) für jede Klasse von `ConcreteElement` in der Objektstruktur.
+    Der Name und die Signatur der Operation identifizieren die Klasse, die die Anforderung an den Visitor sendet.
+    Auf diese Weise kann der Besucher die konkrete Klasse des besuchten Elements bestimmen.
+    So kann der Besucher direkt über diese spezielle Schnittstelle auf die fraglichen Elemente zugreifen.
+  * **ConcreteVisitor**: Implementiert jede von einem Visitor deklarierte Operation (Methode).
+    Jede Operation implementiert ein Fragment eines Algorithmus, der für die entsprechende Klasse oder das entsprechende Objekt in der Objektstruktur definiert ist.
+    `ConcreteVisitor` stellt den Kontext für den Algorithmus bereit und speichert seinen lokalen Status.
+    Dieser Zustand sammelt häufig Ergebnisse während des Durchlaufens der Struktur.
 
-<img src="dp_xxx.png" width="500">
+<img src="dp_visitor_pattern.svg" width="600">
 
 Abbildung 1: Schematische Darstellung des *Visitor Patterns*.
 

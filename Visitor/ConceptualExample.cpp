@@ -17,98 +17,112 @@ namespace ConceptualExample {
     class ConcreteComponentA;
     class ConcreteComponentB;
 
-    class Visitor {
+    class VisitorBase {
     public:
-        virtual void VisitConcreteComponentA(const ConcreteComponentA* element) const = 0;
-        virtual void VisitConcreteComponentB(const ConcreteComponentB* element) const = 0;
+        virtual void visit(const ConcreteComponentA* element) const = 0;
+        virtual void visit(const ConcreteComponentB* element) const = 0;
     };
 
     /**
-     * The Component interface declares an `accept` method that should take the base
+     * The ElementBase interface declares an `accept` method that should take the base
      * visitor interface as an argument.
      */
 
-    class Component {
+    class ElementBase {
     public:
-        virtual ~Component() {}
-        virtual void Accept(Visitor* visitor) const = 0;
+        virtual ~ElementBase() {}
+        virtual void accept(VisitorBase* visitor) const = 0;
     };
 
     /**
      * Each Concrete Component must implement the `Accept` method in such a way that
      * it calls the visitor's method corresponding to the component's class.
      */
-    class ConcreteComponentA : public Component {
+    class ConcreteComponentA : public ElementBase {
+    public:
         /**
          * Note that we're calling `visitConcreteComponentA`, which matches the
          * current class name. This way we let the visitor know the class of the
          * component it works with.
          */
-    public:
-        void Accept(Visitor* visitor) const override {
-            visitor->VisitConcreteComponentA(this);
+        virtual void accept(VisitorBase* visitor) const override {
+            visitor->visit(this);
         }
+
         /**
          * Concrete Components may have special methods that don't exist in their base
          * class or interface. The Visitor is still able to use these methods since
          * it's aware of the component's concrete class.
          */
-        std::string ExclusiveMethodOfConcreteComponentA() const {
-            return "A";
-        }
+        std::string ExclusiveMethodOfConcreteComponentA() const { return "A"; }
     };
 
-    class ConcreteComponentB : public Component {
+    class ConcreteComponentB : public ElementBase {
+    public:
         /**
          * Same here: visitConcreteComponentB => ConcreteComponentB
          */
-    public:
-        void Accept(Visitor* visitor) const override {
-            visitor->VisitConcreteComponentB(this);
+        virtual void accept(VisitorBase* visitor) const override {
+            visitor->visit(this);
         }
-        std::string SpecialMethodOfConcreteComponentB() const {
-            return "B";
-        }
+
+        std::string SpecialMethodOfConcreteComponentB() const { return "B"; }
     };
 
     /**
-     * Concrete Visitors implement several versions of the same algorithm, which can
-     * work with all concrete component classes.
+     * Concrete Visitors implement several versions of the same algorithm,
+     * which can work with all concrete component classes.
      *
      * You can experience the biggest benefit of the Visitor pattern when using it
      * with a complex object structure, such as a Composite tree. In this case, it
      * might be helpful to store some intermediate state of the algorithm while
      * executing visitor's methods over various objects of the structure.
      */
-    class ConcreteVisitor1 : public Visitor {
+    class ConcreteVisitor1 : public VisitorBase {
     public:
-        void VisitConcreteComponentA(const ConcreteComponentA* element) const override {
-            std::cout << element->ExclusiveMethodOfConcreteComponentA() << " + ConcreteVisitor1\n";
+        virtual void visit(const ConcreteComponentA* element) const override {
+            std::cout
+                << element->ExclusiveMethodOfConcreteComponentA()
+                << " + ConcreteVisitor1"
+                << std::endl;
         }
 
-        void VisitConcreteComponentB(const ConcreteComponentB* element) const override {
-            std::cout << element->SpecialMethodOfConcreteComponentB() << " + ConcreteVisitor1\n";
+        virtual void visit(const ConcreteComponentB* element) const override {
+            std::cout 
+                << element->SpecialMethodOfConcreteComponentB()
+                << " + ConcreteVisitor1"
+                << std::endl;
         }
     };
 
-    class ConcreteVisitor2 : public Visitor {
+    class ConcreteVisitor2 : public VisitorBase {
     public:
-        void VisitConcreteComponentA(const ConcreteComponentA* element) const override {
-            std::cout << element->ExclusiveMethodOfConcreteComponentA() << " + ConcreteVisitor2\n";
+        virtual void visit(const ConcreteComponentA* element) const override {
+            std::cout 
+                << element->ExclusiveMethodOfConcreteComponentA() 
+                << 
+                " + ConcreteVisitor2"
+                << std::endl;
         }
-        void VisitConcreteComponentB(const ConcreteComponentB* element) const override {
-            std::cout << element->SpecialMethodOfConcreteComponentB() << " + ConcreteVisitor2\n";
+
+        virtual void visit(const ConcreteComponentB* element) const override {
+            std::cout
+                << element->SpecialMethodOfConcreteComponentB() 
+                << 
+                " + ConcreteVisitor2"
+                << std::endl;
         }
     };
+
     /**
      * The client code can run visitor operations over any set of elements without
      * figuring out their concrete classes. The accept operation directs a call to
      * the appropriate operation in the visitor object.
      */
-    void ClientCode(std::array<const Component*, 2> components, Visitor* visitor) {
+    void ClientCode(std::array<const ElementBase*, 2> components, VisitorBase* visitor) {
         // ...
-        for (const Component* comp : components) {
-            comp->Accept(visitor);
+        for (const ElementBase* comp : components) {
+            comp->accept(visitor);
         }
         // ...
     }
@@ -118,16 +132,16 @@ void test_conceptual_example() {
 
     using namespace ConceptualExample;
 
-    std::array<const Component*, 2> components = { new ConcreteComponentA, new ConcreteComponentB };
+    std::array<const ElementBase*, 2> components = { new ConcreteComponentA, new ConcreteComponentB };
     std::cout << "The client code works with all visitors via the base Visitor interface:\n";
     ConcreteVisitor1* visitor1 = new ConcreteVisitor1;
     ClientCode(components, visitor1);
-    std::cout << "\n";
+    std::cout << std::endl;
     std::cout << "It allows the same client code to work with different types of visitors:\n";
     ConcreteVisitor2* visitor2 = new ConcreteVisitor2;
     ClientCode(components, visitor2);
 
-    for (const Component* comp : components) {
+    for (const ElementBase* comp : components) {
         delete comp;
     }
     delete visitor1;
