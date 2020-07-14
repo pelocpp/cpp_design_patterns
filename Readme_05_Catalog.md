@@ -66,7 +66,7 @@ Verhaltensentwurfsmuster betrachten Algorithmen und der Aufteilung von Verantwor
 | [State](StatePattern/Resources/Readme.md) | 	Das **State** Entwurfsmuster ermöglicht die elegante Modellierung von zustandsabhängigen Verhalten eines Objekts. Je nach internen Zustand ändert sich das Verhalten des Objekts, es scheint, als hätte das Objekt seine Klasse geändert. |
 | [Strategy Pattern](StrategyPattern/Resources/Readme.md) | Beschreibt eine Familie von Algorithmen, kapselt jeden einzelnen und macht sie austauschbar. Das Strategiemuster ermöglicht es, den Algorithmus unabhängig von ihn nutzenden Klienten zu variieren. |
 | [Template Method](TemplatePattern/Resources/Readme.md) | Definiert das Grundgerüst eines Algorithmus in einer Oberklasse, lässt Unterklassen bestimmte Schritte des Algorithmus überschreiben, ohne dabei Änderungen an der prinzipiellen Algorithmusstruktur zu gestatten. |
-| Visitor | Befasst sich mit der Trennung von Algorithmen von den Objekten, mit denen sie arbeiten. |
+| [Visitor Method](Visitor/Resources/Readme.md) | Befasst sich mit der Trennung von Algorithmen von den Objekten, mit denen sie arbeiten. |
 
 Tabelle 3. Verhaltensmuster (*Behavioral Design Patterns*).
 
