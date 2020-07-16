@@ -259,17 +259,17 @@ Abbildung 1: Strukur des Pimpl-Idioms.
 
 Weitere intessante Artikel und Aufsätze zum *Pimpl-Idiom* finden Sie unter
 
-[The Pimpl Pattern - what you should know](https://www.bfilipek.com/2018/01/pimpl.html)
+[The Pimpl Pattern - what you should know](https://www.bfilipek.com/2018/01/pimpl.html) (Abruf: 16.07.2020)
 
-[PImpl Idiom in C++ with Examples](https://www.geeksforgeeks.org/pimpl-idiom-in-c-with-examples/)
+[PImpl Idiom in C++ with Examples](https://www.geeksforgeeks.org/pimpl-idiom-in-c-with-examples/) (Abruf: 16.07.2020)
 
-[In-depth: PIMPL vs pure virtual interfaces](https://www.gamasutra.com/view/news/167098/Indepth_PIMPL_vs_pure_virtual_interfaces.php)
+[In-depth: PIMPL vs pure virtual interfaces](https://www.gamasutra.com/view/news/167098/Indepth_PIMPL_vs_pure_virtual_interfaces.php) (Abruf: 16.07.2020)
 
-[Pimpl idiom versus Pure virtual class interface](https://stackoverflow.com/questions/825018/pimpl-idiom-vs-pure-virtual-class-interface)
+[Pimpl idiom versus Pure virtual class interface](https://stackoverflow.com/questions/825018/pimpl-idiom-vs-pure-virtual-class-interface) (Abruf: 16.07.2020)
 
-[Pimp My Pimpl - Reloaded](https://marcmutz.wordpress.com/translated-articles/pimp-my-pimpl-reloaded/)
+[Pimp My Pimpl - Reloaded](https://marcmutz.wordpress.com/translated-articles/pimp-my-pimpl-reloaded/) (Abruf: 16.07.2020)
 
-[How to implement the pimpl idiom by using unique_ptr](https://www.fluentcpp.com/2017/09/22/make-pimpl-using-unique_ptr/)
+[How to implement the pimpl idiom by using unique_ptr](https://www.fluentcpp.com/2017/09/22/make-pimpl-using-unique_ptr/) (Abruf: 16.07.2020)
 
 
 ## Weiterarbeit:
