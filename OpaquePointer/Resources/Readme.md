@@ -267,7 +267,7 @@ Weitere intessante Artikel und Aufsätze zum *Pimpl-Idiom* finden Sie unter
 
 [Pimpl idiom versus Pure virtual class interface](https://stackoverflow.com/questions/825018/pimpl-idiom-vs-pure-virtual-class-interface)
 
-[Pimp My Pimpl — Reloaded](https://marcmutz.wordpress.com/translated-articles/pimp-my-pimpl-reloaded/)
+[Pimp My Pimpl - Reloaded](https://marcmutz.wordpress.com/translated-articles/pimp-my-pimpl-reloaded/)
 
 [How to implement the pimpl idiom by using unique_ptr](https://www.fluentcpp.com/2017/09/22/make-pimpl-using-unique_ptr/)
 
