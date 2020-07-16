@@ -250,7 +250,7 @@ Damit haben einen ersten minimalistischen Durchlauf durch das Pimlp-Idiom beschr
 
 #### Struktur (UML):
 
-<img src="dp_pimple_idiom.svg" width="600">
+<img src="dp_pimple_idiom.svg" width="700">
 
 Abbildung 1: Strukur des Pimpl-Idioms.
 
