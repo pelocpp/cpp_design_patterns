@@ -82,8 +82,9 @@ Gruppierungen von Entwurfsmustern. In Büchern über "Modern C++" stößt man häufig
 | [Null Object](NullObject/Resources/Readme.md) | Null Objekt |
 | SFINAE | *Substitution failure is not an error* |
 | CRTP | *Curiously recurring template pattern* |
+| Interceptor | *Interceptor pattern* |
 
-Tabelle 4: Weitere Software (*Modern C++*)
+Tabelle 4: Weitere Softwaremuster (*Modern C++*)
 
 In einem weiteren Buch [Robert Nystrom](https://gameprogrammingpatterns.com/),
 aktuell bei der Fa. Google in der Entwicklung der Programmiersprache Dart beschäftigt,

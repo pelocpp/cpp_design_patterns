@@ -21,6 +21,9 @@
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_pimple_idiom.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h">
@@ -29,24 +32,12 @@
     <ClInclude Include="Engine.h">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClInclude>
-    <ClInclude Include="MyClass.h">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClInclude>
-    <ClInclude Include="MyClassImpl.h">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Car.cpp">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClCompile>
-    <ClCompile Include="MyClass.cpp">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClCompile>
-    <ClCompile Include="MyClassImpl.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>

@@ -26,10 +26,3 @@ Zeitgleich schulen Design Pattern die Fähigkeit zur effektiven objektorientierte
 ## [Literatur](Readme_07_Literature.md)
 
 ---
-
-## TODO: Interceptor Pattern ergänzen
-
-## TODO: In den Listen taucht der Opaque Pointer nicht auf // was ist mit Pimpl
-
-
-

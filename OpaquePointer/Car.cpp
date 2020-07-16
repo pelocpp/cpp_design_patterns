@@ -1,3 +1,4 @@
+#include <iostream>
 #include <memory>
 
 #include "Engine.h"
@@ -9,21 +10,26 @@ public:
     void coolDown()
     {
         /* ... */
+        std::cout << "EngineImpl -> cooling down" << std::endl;
     }
 
 private:
     Engine m_engine;
 };
 
-Car::Car() : m_engine{ new EngineImpl() }, m_engine2(new EngineImpl()) {}
+Car::Car() : m_engineRaw{ new EngineImpl() }, m_engineUnique(std::make_unique<EngineImpl>()) {}
 
-// Car::~Car() { delete m_engine; }
+Car::~Car()
+{ 
+    delete m_engineRaw;
+}
 
-Car::~Car() = default;
+// Car::~Car() = default;
 
 void Car::coolDown()
 {
-    m_engine->coolDown();
+    m_engineRaw->coolDown();
+    m_engineUnique->coolDown();
 }
 
 void test_01() {
