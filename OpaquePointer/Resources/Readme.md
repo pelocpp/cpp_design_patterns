@@ -241,18 +241,37 @@ Es sind zwei Änderungen am aktuellen Programm vorzunehmen:
   * Hinzufügen einer Destruktor-Definition in der Klasse `CarImpl`:<br/>
     `Car::~Car() = default;`
 
+
 ##### *Hinweis*:
 
-Die Fehlermeldung *use of undefined type* ist ab der Visual Studio Version 16.6.4 nicht mehr reproduzierbar!
+Prinzipiell gibt es 2 Möglichkeiten, um diese Fehlermeldung zu beseitigen:
 
-Damit haben einen ersten minimalistischen Durchlauf durch das Pimlp-Idiom beschritten!
+  * Bereitstellung eines benutzerdefinierten Destruktors für die Ausgangsklasse,
+    der explizit implementiert ist (dazu zählt auch eine Implementierung mit `default`).
+    Diese Definition muss im Quellcode nach der vollständigen Definition der *Pimpl*-Klasse stehen.
+  * Bereitstellung eines benutzerdefinierten Deleters für das `std::unique_ptr<>`-Objekt.
+
+
+##### *Weiterer Hinweis*:
+
+Die Fehlermeldung *use of undefined type* tritt nur dann auf, wenn die betrachtete Klasse (mit *Pimpl*-Zeiger)
+und der Anwender der Klasse in verschiedenen Dateien residieren!
+
+Damit haben einen ersten minimalistischen Durchlauf durch das *Pimpl*-Idiom beschritten!
 
 
 #### Struktur (UML):
 
 <img src="dp_pimple_idiom.svg" width="700">
 
-Abbildung 1: Strukur des Pimpl-Idioms.
+Abbildung 1: Struktur des Pimpl-Idioms.
+
+## Pimpl @ Microsoft
+
+Auf der offiziellen WebSite von Microsoft gibt es zu Pimpl auch eine kleine Verfahrensanweisung,
+wenn gleich sehr knapp gehalten:
+
+[Pimpl For Compile-Time Encapsulation (Modern C++)](https://docs.microsoft.com/en-us/cpp/cpp/pimpl-for-compile-time-encapsulation-modern-cpp?view=vs-2019) (Abruf: 16.07.2020)
 
 
 ## Literaturhinweise
