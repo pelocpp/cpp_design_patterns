@@ -66,7 +66,7 @@ Abbildung 1: Schematische Darstellung des *Memento Patterns*.
 
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/command/cpp/example#example-0)
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/command/cpp/example#example-0){:target="_blank"}
 
 und 
 
