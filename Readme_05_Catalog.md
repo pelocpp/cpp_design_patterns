@@ -10,7 +10,7 @@ in die drei Kategorien Erzeugungs-, Struktur- und Verhaltensmuster
 (*Creational*, *Structural* und *Behavioral Design Patterns*) vor. Eine Aufstellung 
 der einzelnen Entwurfsmuster dieser Kategorien finden Sie nachstehend in Abbildung 1 vor:
 
-<img src="Resources/dp_overview.png" width="700">
+<img src="Resources/dp_overview.svg" width="700">
 
 Abbildung 1: Software Entwurfsmuster nach Erich Gamma, Richard Helm, Ralph Johnson und John Vlissides ("*GoF*").
 
@@ -80,9 +80,9 @@ Gruppierungen von Entwurfsmustern. In Büchern über "Modern C++" stößt man häufig
 | RAII (Resource Acquisition Is Initialization) | Objektlebenszeit und Ressourcenverwaltung |
 | [Opaque Pointer / Pimpl](OpaquePointer/Resources/Readme.md)  | *Pointer to implementation* |
 | [Null Object](NullObject/Resources/Readme.md) | Null Objekt |
+| [Intercepting Filter Pattern](InterceptingFilterPattern/Resources/Readme.md) | *Intercepting Filter Pattern* |
 | SFINAE | *Substitution failure is not an error* |
 | CRTP | *Curiously recurring template pattern* |
-| Interceptor | *Interceptor pattern* |
 
 Tabelle 4: Weitere Softwaremuster (*Modern C++*)
 
