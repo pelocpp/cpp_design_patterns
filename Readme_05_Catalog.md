@@ -86,6 +86,17 @@ Gruppierungen von Entwurfsmustern. In Büchern über "Modern C++" stößt man häufig
 
 Tabelle 4: Weitere Softwaremuster (*Modern C++*)
 
+Für den Entwurf von Oberflächen gibt es im Prinzip drei "Klassiker"
+
+| Muster | Kurzbeschreibung |
+|:-------------- |----|
+| MVC | Model-View-Controller |
+| MVP | Model-View-Presenter |
+| MVVM | Model View View-Model |
+
+Tabelle 5. Entwurfsmuster für Oberflächen
+
+
 In einem weiteren Buch [Robert Nystrom](https://gameprogrammingpatterns.com/),
 aktuell bei der Fa. Google in der Entwicklung der Programmiersprache Dart beschäftigt,
 finden sich weitere interessante Entwurfsmuster:
@@ -96,7 +107,7 @@ finden sich weitere interessante Entwurfsmuster:
 | Game Loop | TBD |
 | Update Method | TBD |
 
-Tabelle 5. Sequencing Patterns
+Tabelle 6. Sequencing Patterns
 
 sowie
 
@@ -106,7 +117,7 @@ sowie
 | Subclass Sandbox | TBD |
 | Type Object | TBD |
 
-Tabelle 6. Behavioral Patterns
+Tabelle 7. Behavioral Patterns
 
 und
 
@@ -116,7 +127,7 @@ und
 | Event Queue | TBD |
 | Service Locator | TBD |
 
-Tabelle 7. Decoupling Patterns
+Tabelle 8. Decoupling Patterns
 
 und
 
@@ -126,17 +137,9 @@ und
 | Dirty Flag | TBD |
 | Object Pool | TBD |
 
-Tabelle 8. Optimization Patterns
+Tabelle 9. Optimization Patterns
 
-Für den Entwurf von Oberflächen gibt es im Prinzip drei "Klassiker"
 
-| Muster | Kurzbeschreibung |
-|:-------------- |----|
-| MVC | Model-View-Controller |
-| MVP | Model-View-Presenter |
-| MVVM | Model View View-Model |
-
-Tabelle 9. Entwurfsmuster für Oberflächen
 
 ---
 

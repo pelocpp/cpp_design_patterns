@@ -34,7 +34,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
     Es kann natürlich mehrere Klassen geben, die sich von der `AbstractProduct`-Klasse mit jeweils
     spezifischer Funktionalität ableiten.
 
-<img src="dp_abstract_factory.png" width="800">
+<img src="dp_abstract_factory.svg" width="800">
 
 Abbildung 1: Schematische Darstellung des *Abstract Factory* Entwurfsmusters.
 

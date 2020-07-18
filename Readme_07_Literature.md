@@ -1,7 +1,7 @@
 # Literatur zu Design Patterns (Entwurfsmuster)
 
   * Matthias Geirhos: "Entwurfsmuster: Das umfassende Handbuch".</br>
-    Rheinwerk Verlag GmbH (1. Juni 2015), XXXX Seiten. Sprache: Deutsch. ISBN-10: 3836227622, ISBN-13: 978-3836227629.
+    Rheinwerk Verlag GmbH (1. Juni 2015), 643 Seiten. Sprache: Deutsch. ISBN-10: 3836227622, ISBN-13: 978-3836227629.
 
     Hier werden die wichtigsten Entwurfsmuster für die verschiedensten Anwendungsfälle aufgelistet
     und anschaulich anhand praxisnaher Beispiele erläutert. Kaufempfehlung für alle, die sich mit Entwurfsmustern auseinandersetzen wollen.
@@ -61,6 +61,22 @@
     Klassiker "Game of Life", leider - für diesen Kontext - ebenfalls nur in Java implementiert.
 
 ---
+
+  * Christopher Alexander: "A Pattern Language".</br>
+    Oxford University Press (1977), 1171 Seiten. Sprache: Englisch. ISBN-10: 0195019199, ISBN-13: 978-0195019193.
+
+---
+
+  * Christopher Alexander: "The Timeless Way of Building".</br>
+    Oxford University Press (1979), 552 Seiten. Sprache: Englisch. ISBN-10: 0195024028, ISBN-13: 978-0195024029.
+
+---
+
+  * Martin Fowler: "Patterns of Enterprise Application Architecture".</br>
+    Addison-Wesley Professional (15. November 2002), 560 Seiten. Sprache: Englisch. ISBN-10: 0321127420, ISBN-13: 978-0321127426.
+
+---
+
 
   * EBook<br/><br/>[Refactoring.Guru](https://refactoring.guru/design-patterns/book)
 

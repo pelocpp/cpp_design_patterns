@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Resources\dp_adapter_01.svg" />
+    <None Include="Resources\dp_adapter_02.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>

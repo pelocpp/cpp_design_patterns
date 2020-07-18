@@ -47,7 +47,7 @@ deren Aufgabe die Verknüpfung von Funktionen / das Weiterreichen unabhängiger od
 
 #### Struktur (UML):
 
-<img src="dp_adapter_01.png" width="700">
+<img src="dp_adapter_01.svg" width="700">
 
 Abbildung 1: Schematische Darstellung des *Adapter Pattern*.
 
@@ -85,7 +85,7 @@ Das oben zitierte Beispiel eines MediaPlayers finden Sie im Quellcode exemplaris
 Abbildung 1 gibt das Entwurfsmuster mit dem *Objekt Adapter Ansatz* wieder. In Abbildung 2 finden Sie
 das Muster auf Basis des *Klassen Adapter Ansatzes* vor:
 
-<img src="dp_adapter_02.png" width="700">
+<img src="dp_adapter_02.svg" width="700">
 
 Abbildung 2: Schematische Darstellung des *Adapter Pattern* (*Klassen Adapter Ansatzes*).
 
