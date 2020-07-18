@@ -1,4 +1,4 @@
-# Chain of Responsibility Patterns
+# Chain of Responsibility Pattern
 
 ## Wesentliche Merkmale
 
