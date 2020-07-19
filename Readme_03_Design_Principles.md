@@ -1,42 +1,90 @@
 # Entwurfsprinzipien (Design Principles)
 
-## https://dev.to/pluralsight/my-5-favorite-software-design-principles-4ech
+Neben *Entwurfsmustern* gibt es in der Softwareentwicklung auch *Entwurfsprinzipien*.
+Hierunter versteht man Prinzipien, die die Erzeugung wartbarer und erweiterbarer Software ermöglichen.
 
-## SOLID: 
+#### Robert Cecil Martin 
 
-Wichtig:
+Fünf der bekannstesten dieser Prinzipien - **SOLID** - wurden von Robert Cecil Martin formuliert,
+einem US-amerikanischen Softwareentwickler, IT-Berater und Schriftsteller.
 
-  * **Single-responsibility principle**
-    A class should only have a single responsibility, that is, only changes to one part of the software's specification should be able to affect the specification of the class.
-  * **Open–closed principle**
-    "Software entities ... should be open for extension, but closed for modification."
-  * **Liskov substitution principle**
-    "Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program." See also design by contract.
-  * **Interface segregation principle**
-    "Many client-specific interfaces are better than one general-purpose interface."
-  * **Dependency inversion principle**
-    One should "depend upon abstractions, [not] concretions."
+Interessant sind unter anderem viele seiner Aussagen zum Altern von Software:
+
+  * Auch Software unterliegt einem Alterungsprozess
+  * Symptome des Alterungsprozesses:
+    * Änderungen sind schwer einzupflegen
+    * Anpassungen an geänderte Programmumgebungen wie z. B. Frameworks sind schwer durchzuführen
+  * „Software verrottet und stinkt“ (Robert C. Martin)
+  * Grund: Zu viele Abhängigkeiten im Design
+  * Starke Kopplung der Software-Komponenten führt dazu, dass bei Änderungen unerwünschte Nebeneffekte auftreten
+
+Die Folge: Laufendes Refactoring oder komplette Neuentwicklung der Software sinnvoll!
+
+Gute Software soll
+
+  * erweiterbar,
+  * korrekt,
+  * stabil,
+  * so einfach wie möglich und
+  * verständlich dokumentiert sein.
+
+sein. Um die genannten Ziele erreichen zu können, gibt es
+Prinzipien und Konzepte, die beim Entwurf einzuhalten sind.
+Diese kann man folgendermaßen unterteilen:
+
+  * Prinzipien zum Entwurf von Systemen
+  * Prinzipien zum Entwurf einzelner Klassen
+  * Prinzipien zum Entwurf miteinander kooperierender Klassen
+
+#### SOLID
+
+Robert C. Martin - auch unter den Spitznamen „*Uncle Bob*“ bzw. „*that guy from ObjectMentor*“ bekannt - 
+fasste eine wichtige Gruppe von Prinzipien zur
+Erzeugung wartbarer und erweiterbarer Software unter dem Begriff
+**SOLID** zusammen. Dieser Begriff soll andeuten, dass diese Prinzipien für
+das Schreiben hochwertiger Software unabdingbar sind. Robert C. Martin
+erklärte diese Prinzipien zu den wichtigsten Entwurfsprinzipien:
+
+  * **S**ingle Responsibility Prinzip (SRP)
+  * **O**pen-Closed Prinzip (OCP)
+  * **L**iskovsches Substitutionsprinzip (LSP)
+  * **I**nterface Segregation Prinzip (ISP)
+  * **D**ependency Inversion Prinzip (DIP)
+
+Im Überblick betrachtet lassen sich diese Prinzipien wie folgt zusammenfassen:
+
+  * *Single Responsibility Prinzip*:<br/>Die Regel besagt, dass es für jede Klasse nur einen Grund für Veränderung geben darf – anders gesagt, jede Klasse solle nur genau eine fachliche Verantwortlichkeit abdecken.
+  * *Open Closed Prinzip*:<br/>Klassen sollten sich erweitern lassen, ohne dass sich dadurch ihr Verhalten ändert. Eine Klasse sollte also offen für Erweiterung, aber geschlossen hinsichtlich der Änderungen sein.
+  * *Liskovsches Substitutionsprinzip*:<br/>Dass sich eine abgeleitete Klasse stets so zu verhalten habe, wie die zugrunde liegende Basisklasse, fordert das LSP. Das Ziel ist, jederzeit an Stelle der Superklasse eine Subklasse ohne semantische Änderungen verwenden zu können.
+  * *Interface Segregation Prinzip*:<br/>Große Interfaces sind auf mehrere kleine aufzuteilen, sodass ein Verwender nur genau jene Interfaces implementieren muss, die tatsächlich notwendig sind.
+  * *Dependency Inversion Prinzip*:<br/>Abhängigkeiten sollten stets von konkreten zu abstrakten Modulen verlaufen, sodass konkrete Implementierungen leichter auszutauschen sind und sich voneinander entkoppeln lassen.
+
+#### Weitere Entwurfsprinzipien
+
+SOLID ist bei weitem nicht die einzige Gruppe von Prinzipien für den Entwurf von Software.
+Um den Charakter eines einführenden Textes nicht zu verlassen,
+führe ich in tabellarischer Form - und vor allem ohne jeglichen Anspruch auf Vollständigkeit -
+weitere Entwurfsprinzipien aus:
+
+| Entwurfsprinzip | Kurzbeschreibung |
+|:-------|----|
+| **KISS** | „Keep it simple and stupid“ - Strebe zu einem Problem immer eine möglichst einfache Lösung an. |
+| **DRY** | „Don't repeat yourself“ - Redundant vorhandener Quellcode ist nur aufwändig einheitlich zu pflegen. Bei Systemen, die dem DRY-Prinzip treu sind, brauchen Änderungen nur an einer Stelle vorgenommen zu werden. |
+| **YAGNI** | „You aren't gonna need it“ - „Implementieren Dinge immer dann, wenn Du sie tatsächlich brauchst, niemals, wenn Du nur der Meinung bist, dass Du sie brauchst!“ |
+| Separation of Concerns | Das „Separation of Concerns“ (**SoC**) Prinzip ist eines der grundlegendsten Prinzipien in der Softwareentwicklung. Es ist so wichtig, dass zwei der fünf SOLID-Prinzipien (*Single Responsibility* und *Interface Segregation*) direkte Ableitungen von diesem Konzept sind. Die Aussage des Prinzips ist einfach: Schreiben Sie Ihr Programm nicht als einen festen Block, sondern teilen Sie den Code in Blöcke auf, die winzige Teile des Systems sind, die jeweils einen einfachen, unterschiedlichen Auftrag ausführen. |
+
+Tabelle 1. Weitere Entwurfsprinzipien.
+
+---
+
+## Literaturhinweise
 
 
-Separation of Concerns
-
-YAGNI
-
-KISS
-
-DRY
-
-Code reuse
-Inheritance (object-oriented programming)
-Package principles
-Don't repeat yourself
-GRASP (object-oriented design)
-KISS principle
-You aren't gonna need it
-
+[My 5 Favorite Software Design Principles](https://dev.to/pluralsight/my-5-favorite-software-design-principles-4ech)
 
 ---
 
 [Zurück](Readme.md)
 
 ---
+

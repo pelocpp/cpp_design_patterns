@@ -120,8 +120,6 @@ Siehe Verzeichnis *ConceptualExample*.
 
 ## Literaturhinweise
 
-*Hinweise*:
-
 Die Anregungen zu den Beispielen findet man unter
 
 [refactoring.guru](https://refactoring.guru/design-patterns/decorator/cpp/example#example-0)<br>(abgerufen am 23.06.2020).
