@@ -5,7 +5,7 @@ in der Softwareentwicklung. Sie beschreiben die zentralen Entwurfsentscheidungen
 Durch den Einsatz von Software Entwurfsmustern wird ein Entwurf flexibel, wiederverwendbar, erweiterbar, einfacher zu verwenden und 
 stabiler im Falle von Änderungen.
 
-In den Entwurfsmustern manifestiert sich die jahrelange Entwicklungserfahrung vieler Softewareentwickler. 
+In den Entwurfsmustern manifestiert sich die jahrelange Entwicklungserfahrung vieler Softwareentwickler. 
 Dieses Wissen lässt sich durch die Verwendung von Entwurfsmustern reaktivierbar und nutzbar machen,
 ohne vorher den teuren Prozess der Entwurfsentwicklung erneut durchlaufen zu müssen.
 

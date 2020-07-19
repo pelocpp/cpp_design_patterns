@@ -1,7 +1,7 @@
 # Kritik an Entwurfsmustern
 
-Es scheint, als hätten nur faule Leute Designmuster noch nicht kritisiert.
-Schauen wir uns die typischsten Argumente gegen die Verwendung von Mustern an.
+Es werden hin und wieder auch Argumente gegen die Verwendung von Mustern angeführt.
+Werfen wir einen Blick auf die typischsten Argumente, die gegen die Verwendung von Mustern sprechen.
 
 #### Behelfslösungen für eine schwache Programmiersprache
 
@@ -11,7 +11,7 @@ die der Sprache die dringend benötigten Zusatzfähigkeiten verleiht.
 
 #### Ineffiziente Lösungen
 
-Entwurfsmustern versuchen, einen bereits weit verbreiteten Ansätze zu systematisieren bzw. zu verallgemeinern.
+Entwurfsmustern versuchen, einen bereits weit verbreiteten Ansatz zu systematisieren bzw. zu verallgemeinern.
 Diese Vorlage wird von vielen Entwicklern als Dogma angesehen und sie implementieren das Muster „auf den Punkt“,
 ohne es an den Kontext des Projekts flexibel anzupassen.
 

@@ -16,9 +16,9 @@ Abbildung 1: Software Entwurfsmuster nach Erich Gamma, Richard Helm, Ralph Johns
 
 #### Entwurfsmuster nach Gamma, Helm, Johnson und Vlissides
 
-##### Erzeugungssmuster
+##### Erzeugungsmuster
 
-In der Softwareentwicklung sind Erstellungsmuster (so genannte *Creational Patter*) Entwurfsmuster,
+In der Softwareentwicklung sind Erstellungsmuster (so genannte *Creational Pattern*) Entwurfsmuster,
 die sich mit Objekterstellungsmechanismen befassen und in Situationen verwendet werden,
 in denen die klassischen Formen der Objekterzeugung zu Entwurfsproblemen führen
 oder die Komplexität des Codes erhöhen.
@@ -31,7 +31,7 @@ oder die Komplexität des Codes erhöhen.
 | [Prototype](Prototype/Resources/Readme.md) | Erstellen von Kopien vorhandener Objekte, ohne den Code von diesen Klassen abhängig zu machen. |
 | [Singleton](Singleton/Resources/Readme.md) | Das **Singleton** Entwurfsmuster sorgt dafür, dass es von einer Klasse nur eine einzige Instanz gibt und diese global zugänglich ist. |
 
-Tabelle 1. Erzeugungsmuster (*Creational Design Patterns*).
+Tabelle 1. Erzeugungsmuster (*Creational Design Pattern*).
 
 ##### Strukturmuster
 
@@ -45,10 +45,10 @@ ohne dabei einen Verlust an Flexibilität und Effizient einzugehen.
 | [Composite Pattern](CompositePattern/Resources/Readme.md) | Das **Composite** Entwurfsmuster ermöglicht es, eine verschachtelte (Baum)Struktur einheitlich zu behandeln, unabhängig davon, ob es sich um ein atomares Element oder um ein Behälter für weitere Elemente handelt. Der Client kann elegant mit der Struktur arbeiten. |
 | [Decorator](DecoratorPattern/Resources/Readme.md) | Hinzufügen neuen Verhaltens zu Objekten, indem diese Objekte in speziellen Hüllen-Objekten platziert werden, die dieses Verhalten besitzen. |
 | Facade | Bereitstellung einer vereinfachten Schnittstelle zu einer Bibliothek, einem Framework oder einer Menge von Objekten. |
-| [Flyweight](Flyweight/Resources/Readme.md) | Ermöglicht es, Objekte ressourcenschonended anzulegen, indem diese gemeinsame Zustandsdaten zwischen mehreren Objekten teilen, anstatt derartige Zustandsdaten in jedem Objekt zu duplizieren. |
+| [Flyweight](Flyweight/Resources/Readme.md) | Ermöglicht es, Objekte ressourcenschonend anzulegen, indem diese gemeinsame Zustandsdaten zwischen mehreren Objekten teilen, anstatt derartige Zustandsdaten in jedem Objekt zu duplizieren. |
 | [Proxy](Proxy/Resources/Readme.md) | Bereitstellung eines Platzhalters (Stellvertreters) für ein anderes Objekt. Das Proxy-Objekt steuert den Zugriff auf das ursprüngliche Objekt. Vor oder nach der Ausführung der eigentlichen Anforderung am ursprünglichen Objekt lassen sich zusätzliche Aktionen ergänzen. |
 
-Tabelle 2. Strukturmuster (*Structural Design Patterns*).
+Tabelle 2. Strukturmuster (*Structural Design Pattern*).
 
 ##### Verhaltensmuster
 
@@ -61,18 +61,18 @@ Verhaltensentwurfsmuster betrachten Algorithmen und der Aufteilung von Verantwor
 | Interpreter | Das **Interpreter** Entwurfsmuster definiert eine Repräsentation für die Grammatik einer Sprache und die Möglichkeit, Sätze dieser Sprache zu interpretieren. |
 | [Iterator](IteratorPattern/Resources/Readme.md) | Ermöglicht das Traversieren (Durchlaufen) von Elementen einer listenartigen Datenstruktur, ohne die zugrunde liegende Darstellung (Liste, Array,  Stapel, Baum usw.) bekannt zu machen. |
 | Mediator | Das **Mediator** Muster dient zum Steuern des kooperativen Verhaltens von Objekten, wobei Objekte nicht direkt kooperieren, sondern über einen Vermittler. |
-| [Memento](Memento/Resources/Readme.md) | Das **Memento** Entwurfsmuster dient der Erfassung und Spaicherung des internen Zustands eines Objektes. Hiermit kann man den vorherigen Status eines Objekts speichern und wiederherstellen, ohne Details der Implementierung preisgeben zu müssen. |
+| [Memento](Memento/Resources/Readme.md) | Das **Memento** Entwurfsmuster dient der Erfassung und Speicherung des internen Zustands eines Objektes. Hiermit kann man den vorherigen Status eines Objekts speichern und wiederherstellen, ohne Details der Implementierung preisgeben zu müssen. |
 | [Observer](Observer/Resources/Readme.md) | Das **Observer** Entwurfsmuster ist für Situation geeignet, in denen ein oder mehrere Objekte benachrichtigt werden müssen, sobald sich der Zustand eines bestimmten Objekts ändert. |
-| [State](StatePattern/Resources/Readme.md) | 	Das **State** Entwurfsmuster ermöglicht die elegante Modellierung von zustandsabhängigen Verhalten eines Objekts. Je nach internen Zustand ändert sich das Verhalten des Objekts, es scheint, als hätte das Objekt seine Klasse geändert. |
+| [State](StatePattern/Resources/Readme.md) | 	Das **State** Entwurfsmuster ermöglicht die elegante Modellierung vom zustandsabhängigen Verhalten eines Objekts. Je nach internem Zustand ändert sich das Verhalten des Objekts, es scheint, als hätte das Objekt seine Klasse geändert. |
 | [Strategy Pattern](StrategyPattern/Resources/Readme.md) | Beschreibt eine Familie von Algorithmen, kapselt jeden einzelnen und macht sie austauschbar. Das Strategiemuster ermöglicht es, den Algorithmus unabhängig von ihn nutzenden Klienten zu variieren. |
 | [Template Method](TemplatePattern/Resources/Readme.md) | Definiert das Grundgerüst eines Algorithmus in einer Oberklasse, lässt Unterklassen bestimmte Schritte des Algorithmus überschreiben, ohne dabei Änderungen an der prinzipiellen Algorithmusstruktur zu gestatten. |
 | [Visitor Method](Visitor/Resources/Readme.md) | Befasst sich mit der Trennung von Algorithmen von den Objekten, mit denen sie arbeiten. |
 
-Tabelle 3. Verhaltensmuster (*Behavioral Design Patterns*).
+Tabelle 3. Verhaltensmuster (*Behavioral Design Pattern*).
 
 #### Weitere Entwurfsmuster
 
-Neben diesen klassischen Entwurfsmustern finden sich in verschiendenen Publikationen weiterere
+Neben diesen klassischen Entwurfsmustern finden sich in verschiedenen Publikationen weitere
 Gruppierungen von Entwurfsmustern. In Büchern über "Modern C++" stößt man häufig auf folgende Entwurfsmuster:
 
 | Muster | Kurzbeschreibung |
@@ -138,8 +138,6 @@ und
 | Object Pool | TBD |
 
 Tabelle 9. Optimization Patterns
-
-
 
 ---
 

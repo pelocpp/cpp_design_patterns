@@ -5,7 +5,7 @@ Hierunter versteht man Prinzipien, die die Erzeugung wartbarer und erweiterbarer
 
 #### Robert Cecil Martin 
 
-Fünf der bekannstesten dieser Prinzipien - **SOLID** - wurden von Robert Cecil Martin formuliert,
+Fünf der bekanntesten dieser Prinzipien - **SOLID** - wurden von Robert Cecil Martin formuliert,
 einem US-amerikanischen Softwareentwickler, IT-Berater und Schriftsteller.
 
 Interessant sind unter anderem viele seiner Aussagen zum Altern von Software:
