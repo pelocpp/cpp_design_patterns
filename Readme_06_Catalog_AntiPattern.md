@@ -36,11 +36,12 @@ Tabelle 1. Anti-Pattern
 
 ##### Beschreibung
 
-To be done.
+Gefunden in Entwürfen, in denen eine Klasse die Verarbeitung monopolisiert und andere Klassen hauptsächlich Daten kapseln.
 
 ##### Abhilfe
 
-To be done.
+Zerlegen Sie die *God Object* Klasse und verteilen Sie die Verantwortlichkeiten neu.
+.
 
 #### Input Kludge 
 
@@ -114,22 +115,44 @@ Mutex.
 
 ##### Beschreibung
 
-To be done.
+Zirkuläre Abhängigkeiten (auch als zyklische Abhängigkeiten bezeichnet) treten auf, wenn zwei oder mehr Module aufeinander verweisen.
+Dies könnte eine direkte Referenz sein (z.B. *A* -> *B* -> *A*) oder indirekt (*A* -> *B* -> *C* -> *A*):
 
 ##### Abhilfe
 
-To be done.
+Es gibt verschiedene Möglichkeiten, um zirkuläre Abhängigkeiten zu beseitigen. Bei einer längeren Kette, zum Beispiel *A* -> *B* -> *C* -> *D* -> *A*,
+wird das zyklische Referenzmuster unterbrochen, wenn eine der Referenzen entfernt wird (z. B. die Referenz *D* -> *A*).
+Dies mag manchmal ohne große Probleme machbar sein, in anderen Fällen wiederum nicht.
+
+Für einfachere Muster wie *A* -> *B* -> *A* kann ein *Refactoring* erforderlich sein. Möglicherweise könnten die in *B* vorhandenen
+Module nach *A* verschoben werden. Oder der erforderliche Code könnte in ein neues Modul *C* extrahiert werden,
+auf das sowohl *A* als auch *B* verweisen.
+Wenn die beiden Module ein ähnliches Verhalten aufweisen, könnten sie auch zu einem einzigen Modul kombiniert werden.
 
 
 #### Copy-and-Paste Programming
 
 ##### Beschreibung
 
-To be done.
+Dieses Anti-Pattern wird durch das Vorhandensein mehrerer ähnlicher - noch schlimmer: identischer - Codesegmente identifiziert,
+die im gesamten Softwareprojekt verteilt sind.
+
+Dies führt zu einer Codeduplizierung, die kurzfristig positive Konsequenzen haben kann, z.B.
+das schnellere Erreichen des Entwicklungsziels, da die Maßnahmen zur Abhilfe der Codeduplizierungen in der Regel mit zusätzlichem zeitlichem Aufwand verbunden sind.
+
+Ín erster Linie sind es aber zwei Nachteile, die die Qualität der Software beeinträchtigen:
+
+  * Änderungen an einem derartigen Codesegment müssen mehrere Male im gesamten Projekt nachgezogen werden. Wird eine dieser Codeduplizierungen übersehen,
+   kann dies fatale Folgen haben.
+  * Fehler in einem derartigen Codesegment müssen mehrere Male im gesamten Projekt behoben werden. Wird eine dieser Codeduplizierungen übersehen,
+   kann dies wiederum fatale Folgen haben.
 
 ##### Abhilfe
 
-To be done.
+Die Behebung dieses Antipatterns zum Kopieren und Einfügen ist keine „*One and Done*“ Lösung.
+Sobald ein und derselbe Codeblock mehrmals im Quellcode existiert, sollte jedes Auftreten in eine einzelne Funktion oder Methode abstrahieren werden.
+Dann kann man statt des Codeblocks diese neue Funktion verwenden.
+Schließlich lassen sich alle vorhandenen Codeblöcke in eine neu implementierte und getestete Funktion oder Methode umwandeln.
 
 ---
 
