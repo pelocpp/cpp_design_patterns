@@ -140,7 +140,7 @@ die im gesamten Softwareprojekt verteilt sind.
 Dies führt zu einer Codeduplizierung, die kurzfristig positive Konsequenzen haben kann, z.B.
 das schnellere Erreichen des Entwicklungsziels, da die Maßnahmen zur Abhilfe der Codeduplizierungen in der Regel mit zusätzlichem zeitlichem Aufwand verbunden sind.
 
-Ín erster Linie sind es aber zwei Nachteile, die die Qualität der Software beeinträchtigen:
+In erster Linie sind es aber zwei Nachteile, die die Qualität der Software beeinträchtigen:
 
   * Änderungen an einem derartigen Codesegment müssen mehrere Male im gesamten Projekt nachgezogen werden. Wird eine dieser Codeduplizierungen übersehen,
    kann dies fatale Folgen haben.
