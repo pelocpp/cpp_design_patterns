@@ -97,25 +97,25 @@ Für den Entwurf von Oberflächen gibt es im Prinzip drei "Klassiker"
 Tabelle 5. Entwurfsmuster für Oberflächen
 
 
-In einem weiteren Buch [Robert Nystrom](https://gameprogrammingpatterns.com/),
-aktuell bei der Fa. Google in der Entwicklung der Programmiersprache Dart beschäftigt,
-finden sich weitere interessante Entwurfsmuster:
+In einem weiteren Buch von [Robert Nystrom](https://gameprogrammingpatterns.com/),
+aktuell bei der Fa. Google in der Entwicklung der Programmiersprache *Dart* beschäftigt,
+finden sich weitere interessante Entwurfsmuster vor:
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| Double Buffer | TBD |
-| Game Loop | TBD |
-| Update Method | TBD |
+| Double Buffer | Vermeintliche Ausführung einer Reihe von aufeinanderfolgenden (sequentiellen) Vorgängen (quasi) unverzüglich oder (quasi) gleichzeitig. |
+| Game Loop | Entkopplung des Spieleverlaufs (Ablauf der Anwendung) von Benutzereingaben und Prozessorgeschwindigkeit. |
+| Update Method | Simulation des Anstoßes einer Aktivität bei einer Anzahl unabhängiger Objekte (Ausführung eines *Frames* in regelmäßigen Abständen). |
 
 Tabelle 6. Sequencing Patterns
-
+    
 sowie
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| Bytecode | TBD |
-| Subclass Sandbox | TBD |
-| Type Object | TBD |
+| Bytecode | Schaffung von Flexibilität für die Daten, indem Sie sie als Anweisungen für eine virtuelle Maschine codieren. |
+| Subclass Sandbox | Definieren Sie das Verhalten in einer Unterklasse mithilfe einer Reihe von Operationen, die von der Basisklasse bereitgestellt werden. |
+| Type Object | Ermöglicht die flexible Erstellung neuer „Klassen“, indem Sie eine einzelne Klasse erstellen, von der jede Instanz einen anderen Objekttyp darstellt. |
 
 Tabelle 7. Behavioral Patterns
 
@@ -123,9 +123,9 @@ und
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| Component | TBD |
-| Event Queue | TBD |
-| Service Locator | TBD |
+| Component | Ermöglicht einer einzelnen Entität, mehrere Domänen zu umfassen, ohne die Domänen miteinander zu koppeln. |
+| Event Queue | Entkoppelt die Verarbeitung einer Nachricht oder ein Ereignisses vom Zeitpunkt, zu dem sie gesendet (bzw. empfangen) wird. |
+| Service Locator | Stellt einen globalen Zugriffspunkt auf einen Dienst bereit, ohne Benutzer an eine konkrete Klasse zu koppeln, die den Service implementiert. |
 
 Tabelle 8. Decoupling Patterns
 
@@ -133,9 +133,10 @@ und
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| Data Locality | TBD |
-| Dirty Flag | TBD |
-| Object Pool | TBD |
+| Data Locality | Beschleunigen Sie den Speicherzugriff, indem Sie Daten so anordnen, dass das CPU-Caching genutzt wird. |
+| Dirty Flag | Vermeiden Sie unnötige Rechenzeit, indem Sie diese verschieben, bis das Ergebnis benötigt wird. |
+| Object Pool | Verbesserung von Rechenleistung und Speichernutzung, indem Objekte aus einem festen Pool wiederverwendet werden, anstatt sie einzeln anzufordern und freizugeben. |
+| Spatial Partition | Effizienter Zugriff auf Objekte, indem diese in einer nach ihren Positionen geordneten Datenstruktur gespeichert werden. |
 
 Tabelle 9. Optimization Patterns
 
