@@ -1,4 +1,4 @@
-# Factory Method Pattern
+# Factory Pattern
 
 ## Wesentliche Merkmale
 

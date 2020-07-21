@@ -115,7 +115,7 @@ sowie
 |:-------------- |----|
 | Bytecode | Schaffung von Flexibilität für die Daten, indem Sie sie als Anweisungen für eine virtuelle Maschine codieren. |
 | Subclass Sandbox | Definieren Sie das Verhalten in einer Unterklasse mithilfe einer Reihe von Operationen, die von der Basisklasse bereitgestellt werden. |
-| Type Object | Ermöglicht die flexible Erstellung neuer „*Klassen*“, indem Sie eine einzelne Klasse erstellen, von der jede Instanz einen anderen Objekttyp darstellt. |
+| Type Object | Ermöglicht die flexible Erstellung neuer *Klassen*, indem Sie eine einzelne Klasse erstellen, von der jede Instanz einen anderen Objekttyp darstellt. |
 
 Tabelle 7. Behavioral Patterns
 
