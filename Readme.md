@@ -11,18 +11,18 @@ ohne vorher den teuren Prozess der Entwurfsentwicklung erneut durchlaufen zu müs
 
 Zeitgleich schulen Design Pattern die Fähigkeit zur effektiven objektorientierten Modellierung.
 
-## [Geschichtlicher Überblick](Readme_01_History.md)
+## [Geschichtlicher Überblick](Resources/Readme_01_History.md)
 
-## [Was ist ein Entwurfsmuster?](Readme_02_Description.md)
+## [Was ist ein Entwurfsmuster?](Resources/Readme_02_Description.md)
 
-## [Entwurfsprinzipien](Readme_03_Design_Principles.md)
+## [Entwurfsprinzipien](Resources/Readme_03_Design_Principles.md)
 
-## [Kritik](Readme_04_Criticism.md)
+## [Kritik](Resources/Readme_04_Criticism.md)
 
-## [Katalog der Entwurfsmuster](Readme_05_Catalog.md)
+## [Katalog der Entwurfsmuster](Resources/Readme_05_Catalog.md)
 
-## [Katalog der Anti-Pattern](Readme_06_Catalog_AntiPattern.md)
+## [Katalog der Anti-Pattern](Resources/Readme_06_Catalog_AntiPattern.md)
 
-## [Literatur](Readme_07_Literature.md)
+## [Literatur](Resources/Readme_07_Literature.md)
 
 ---

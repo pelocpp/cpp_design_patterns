@@ -30,6 +30,6 @@ so dass viele andere Muster jetzt auch außerhalb des objektorientierten Designs 
 
 ---
 
-[Zurück](Readme.md)
+[Zurück](../Readme.md)
 
 ---
