@@ -6,6 +6,10 @@
 #include <string>
 #include <memory>
 
+ //https://dzone.com/articles/factory-method-vs-simple-factory-1
+
+ //https://medium.com/bitmountn/factory-vs-factory-method-vs-abstract-factory-c3adaeb5ac9a
+
 namespace ConceptualExample {
 
     class Shape

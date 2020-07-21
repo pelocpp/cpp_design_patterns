@@ -41,7 +41,31 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 Abbildung 1: Schematische Darstellung des *Factory Method Patterns*.
 
-#### Hinweis:
+#### Hinweis 1:
+
+Die beiden Entwurfsmuster *Simple Factory* und *Factory Method* sind nicht 
+miteinander zu verwechseln.
+
+**Simple Factory**<br/>
+  * Mit dem *Simple Factory* Pattern versuchen wir, die Details in der Erstellung eines Objekts vor dem Anrufer (Client) zu abstrahieren.
+    Das einzige, was der Client weiß, indem er eine Methode aufruft und den gewünschten Parameter übergibt, ist,
+    dass er ein Objekt eines bestimten Typs erhält. Aber wie diese Objekt erstellt wird, weiß der Client-Code nicht.
+
+**Factory Method**<br/>
+  * Das *Factory Method* Pattern bietet sich an, wenn die Anforderungen an die Erstellung eines Objekts mehr als nur der Aufruf des `new`-Operators sind.
+    Sind zur Erzeugung des Objekts mehrere Schritte notwendig, möchte man diese Schritte ggf. anpassen können
+    oder sind diese Schritte bei verschiedenen Objekten unterschiedlich, verwendet man das *Factory Method* Pattern.
+  * Oder anders ausgedrückt: 
+    Gibt es einen Algorithmus / eine Strategie, um die Erzeugung einer Produktfamilie zu steuern,
+    dann kommt das *Factory Method* Pattern in Betracht. Dieses lässt sich gut mit dem *Template Pattern*, oder auch *Strategy Pattern* kombinieren,
+    da man mit einer Schablone (Template) die Schritte zum Erstellen des untergeordneten Elements abstrahieren kann.
+
+In den Beispielen zu diesem Entwurfsmuster findet sich ein Programm mit den Klassen `ITelevision`, `LEDTelevision`, `OledTelevision`,
+`AbstractFactory`, `LEDTVFactory` und `OledTVFactory` vor. Studieren Sie die Methode `orderTV`. Beschreiben Sie,
+wie diese Methode mit dem *Template Pattern* zusammenhängt.
+
+
+#### Hinweis 2:
 
 Die beiden Entwurfsmuster *Abstract Factory* und *Factory Method* sind nicht 
 miteinander zu verwechseln.
