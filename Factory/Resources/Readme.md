@@ -6,40 +6,34 @@
 
 #### Ziel / Absicht:
 
-Das *Factory Method Pattern* ist ein Entwurfsmuster, mit dem Objekte erstellt werden können,
-ohne den Objekttyp anzugeben, der im Code erstellt werden soll.
-Eine Factory-Klasse enthält eine Methode, mit der der erstellte Typ zur Laufzeit ermittelt werden kann.
+Das *Factory Pattern* ist ein Entwurfsmuster, mit dem Objekte erstellt werden können,
+ohne die Erstellungslogik dem Client zur Verfügung zu stellen.
+Für die neu erstellten Objekte steht eine gemeinsame Schnittstelle zur Verfügung.
 
 #### Lösung:
 
-Dieses Muster wird auch als *Virtual Constructor* Pattern bezeichnet.
-Das *Factory*-Entwurfsmuster definiert eine Schnittstelle zum Erstellen eines Objekts
-und überlässt die Auswahl des konkreten Klassentyps den Unterklassen.
-Das Entwurfsmuster macht ein Software-Design leichter anpassbar und weniger abhängig 
-von anderen Klassen.
+Dieses Muster wird auch als *Simple Factory* Pattern bezeichnet.
+Das *Factory*-Entwurfsmuster definiert eine Fabrikklasse mit einer Methode zum Erstellen von Objekten unterschiedlichen Typs
+und überlässt die Auswahl des konkreten Klassentyps der Fabrikklasse.
+
 
 #### Struktur (UML):
 
-Das folgende UML-Diagramm beschreibt eine Implementierung des *Factory Method Patterns*.
-Es besteht im Wesentlichen aus vier Teilen:
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Factory Patterns*.
+Es besteht im Wesentlichen aus drei Teilen:
 
-  * **FactoryBase**: Abstrakte Klasse (oder Schnittstelle) für konkrete *Factory*-Klassen,
-    die die gesuchten Objekte zurückgeben.
-    Diese Klasse enthält die Signatur der Methode `FactoryMethod`,
-    die ein `ProductBase`-Objekt zurückliefert.
-  * **ConcreteFactory**: Repräsentiert eine konkrete Umsetzung der `FactoryBase`-Klasse.
-    Normalerweise überschreibt diese Klasse die generierende Methode
-    `FactoryMethod` und gibt ein `ConcreteProduct`-Objekt zurück.
   * **ProductBase**: Basisklasse (oder Schnittstelle) für alle Produkte,
-    die von konkreten *Factory*-Klassen hergestellt werden.
+    die von der *Factory*-Klassen hergestellt werden sollen. Die Schnittstelle beschreibt eine oder mehrere Methoden,
+    die von den konkreten Ableitungen der Klasse implementiert werden.
   * **ConcreteProduct**: Konkrete Implementierung der Klasse `ProductBase`.
-    Konkrete `ProductBase`-Klassen sollten produktspezifische
-    Funktionalitäten enthalten. Objekte des Typs `ConcreteProduct` werden von Methoden
-    der *Factory*-Klassen erstellt.
+    Objekte des Typs `ConcreteProduct` werden von der Klasse *Factory* erzeugt.
+  * **Factory**: Diese Klasse besitzt eine Methode `getProduct`,
+    die Objekte zurückliefert, die die `ProductBase`-Schnittstelle implementieren.
+    Über einen Parameter der `getProduct`-Methode wird typischerweise gesteuert, welches `ConcreteProduct` Objekt zu erzeughen ist.
 
-<img src="dp_factory_method.png" width="450">
+<img src="dp_factory_pattern.svg" width="700">
 
-Abbildung 1: Schematische Darstellung des *Factory Method Patterns*.
+Abbildung 1: Schematische Darstellung des *Factory Patterns*.
 
 #### Hinweis:
 

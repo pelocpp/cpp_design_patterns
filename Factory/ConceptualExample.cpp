@@ -8,61 +8,100 @@
 
 namespace ConceptualExample {
 
-    class ProductBase
+    class Shape
     {
     public:
-        virtual void showInfo() = 0;
+        virtual void draw() = 0;
     };
 
-    class ConcreteProduct1 : public ProductBase {
+    class Rectangle : public Shape {
     public:
-        void showInfo() override
+        void draw() override
         {
-            std::cout << "{ Product1 }" << std::endl;
+            std::cout << "> Rectangle::draw()" << std::endl;
         }
     };
 
-    class ConcreteProduct2 : public ProductBase {
+    class Square : public Shape {
     public:
-        void showInfo() override
+        void draw() override
         {
-            std::cout << "{ Product2 }" << std::endl;
+            std::cout << "> Square::draw()" << std::endl;
         }
     };
 
-    class FactoryBase
-    {
+    class Circle : public Shape {
     public:
-        virtual std::shared_ptr<ProductBase> FactoryMethod(int type) = 0;
+        void draw() override
+        {
+            std::cout << "> Circle ::draw()" << std::endl;
+        }
     };
 
-    class ConcreteFactory : public FactoryBase
+    class ShapeFactory
     {
+        enum class StringCode {
+            Rectangle,
+            Square,
+            Circle,
+            None
+        };
+
     public:
-        std::shared_ptr<ProductBase> FactoryMethod(int type) override
+        std::shared_ptr<Shape> getShape(std::string shapeType)
         {
-            switch (type)
+            enum class StringCode shape = stringToEnum(shapeType);
+
+            switch (shape)
             {
-            case 1:
-                return std::make_shared<ConcreteProduct1>();
-            case 2:
-                return std::make_shared<ConcreteProduct2>();
+            case StringCode::Rectangle:
+                return std::make_shared<ConceptualExample::Rectangle>();
+            case StringCode::Square:
+                return std::make_shared<ConceptualExample::Square>();
+            case StringCode::Circle:
+                return std::make_shared<ConceptualExample::Circle>();
+            case StringCode::None:
+                return std::shared_ptr<Shape>();
             default:
-                std::string msg = "Invalid type: " + std::to_string(type);
+                std::string msg = "Invalid type: " + shapeType;
                 throw std::runtime_error(msg);
+            }
+        }
+
+    private:
+        StringCode stringToEnum(const std::string& s) {
+            if (s == "Rectangle") {
+                return StringCode::Rectangle;
+            }
+            else if (s == "Square") {
+                return StringCode::Square;
+            }
+            else if (s == "Circle") {
+                return StringCode::Circle;
+            }
+            else {
+                return StringCode::None;
             }
         }
     };
 }
 
-void test_conceptual_example_01 () {
-    using namespace ConceptualExample01;
+void test_conceptual_example () {
+    using namespace ConceptualExample;
 
-    std::shared_ptr<FactoryBase> factory = std::make_shared<ConcreteFactory>();
-    std::shared_ptr<ProductBase> product = factory->FactoryMethod(1);
-    product->showInfo();
-    product = factory->FactoryMethod(2);
-    product->showInfo();
+    ShapeFactory shapeFactory;
+
+    // get an object of type Circle and call its draw method
+    std::shared_ptr<Shape> shape1 = shapeFactory.getShape("Circle");
+    shape1->draw();
+
+    // get an object of type Rectangle and call its draw method
+    std::shared_ptr<Shape> shape2 = shapeFactory.getShape("Rectangle");
+    shape2->draw();
+
+    // get an object of type Square and call its draw method
+    std::shared_ptr<Shape> shape3 = shapeFactory.getShape("Square");
+    shape3->draw();
 }
 
 // ===========================================================================
