@@ -53,6 +53,6 @@ Die Klasse `Vehicle` ist eine abstrakte Basisklasse für alle konkreten Produkte.
 
 ---
 
-[Zurück](../../Readme_05_Catalog.md)
+[Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---

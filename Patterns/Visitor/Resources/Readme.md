@@ -92,6 +92,6 @@ https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-De
 
 ---
 
-[Zurück](../../Readme_05_Catalog.md)
+[Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---

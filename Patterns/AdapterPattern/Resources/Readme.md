@@ -98,6 +98,6 @@ Abbildung 2: Schematische Darstellung des *Adapter Pattern* (*Klassen Adapter An
 
 ---
 
-[Zurück](../../Readme_05_Catalog.md)
+[Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---

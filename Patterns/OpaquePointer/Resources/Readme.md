@@ -297,6 +297,6 @@ Stellen Sie einen Vergleich *Pimpl-Idiom* versus *Interface Inheritance* an.
 
 ---
 
-[Zurück](../../Readme_05_Catalog.md)
+[Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---

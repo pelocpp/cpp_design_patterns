@@ -80,6 +80,6 @@ Das Beispiel zu der Auswahl der Bezahlungsmethode in einer E-Commerce App oriere
 
 ---
 
-[Zurück](../../Readme_05_Catalog.md)
+[Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---
