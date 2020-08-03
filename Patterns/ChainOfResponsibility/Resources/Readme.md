@@ -48,10 +48,10 @@ Es besteht im Wesentlichen aus drei Teilen:
   * **Client**: Diese Klasse übergibt das Ereignis (die Anforderung) an das erste Objekt in der Kette der Verarbeitungsobjekte.
   * **HandlerBase**: Repräsentiert eine Schnittstelle oder Basisklasse für die konkreten Handler einer Verarbeitungskette.
     Typischerweise enthält es eine Instanzvariable, die auf das nächste Handlerobjekt in der Verarbeitungskette verweist.
-  * **ConcreteHandlers**: Konkrete Implementierung der `HandlerBase`-Klasse.
+  * **ConcreteHandler**: Konkrete Implementierung der `HandlerBase`-Klasse.
 
 
-<img src="dp_chain_of_responsibility.png" width="600">
+<img src="dp_chain_of_responsibility.svg" width="700">
 
 Abbildung 1: Schematische Darstellung des *Chain of Responsibility Patterns*.
 

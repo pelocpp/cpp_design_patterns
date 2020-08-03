@@ -11,47 +11,45 @@
 namespace ConceptualExample02 {
 
     /**
-     * The Command interface declares a method for executing a command.
+     * The CommandBase interface declares a method for executing a command
      */
-    class Command {
+    class CommandBase {
     public:
-        virtual ~Command() {}
+        virtual ~CommandBase() {}
         virtual void execute() const = 0;
     };
 
     /**
      * Some commands can implement simple operations on their own:
-     * Not the standard use case
+     * Not the standard use case: no 'receiver' object used
      */
-    class SimpleCommand : public Command {
+    class SimpleCommand : public CommandBase {
     private:
         std::string m_payLoad;
 
     public:
         explicit SimpleCommand(std::string pay_load) : m_payLoad(pay_load) {}
 
-        ~SimpleCommand() { std::cout << "d'tor SimpleCommand" << std::endl; }
+        ~SimpleCommand() {}
 
         void execute() const override {
-            std::cout << "SimpleCommand: See, I can do simple things like printing (" << m_payLoad << ")" << std::endl;
+            std::cout << "SimpleCommand: Doing simple things like printing (" << m_payLoad << ")" << std::endl;
         }
     };
 
     /**
-     * Receiver classes contain business logic. They know how to
-     * perform all kinds of operations, associated with carrying out a command.
-     * In fact, any class may serve as a Receiver.
+     * Receiver class with 'business logic'
      */
     class Receiver {
     public:
-        ~Receiver() { std::cout << "d'tor Receiver" << std::endl; }
+        ~Receiver() {}
 
         void doSomething(const std::string& a) {
-            std::cout << "Receiver: Working on (" << a << ".)" << std::endl;;
+            std::cout << "Receiver: Working on (" << a << ".)" << std::endl;
         }
 
         void doSomethingElse(const std::string& b) {
-            std::cout << "Receiver: Also working on (" << b << ".)" << std::endl;;
+            std::cout << "Receiver: Also working on (" << b << ".)" << std::endl;
         }
     };
 
@@ -59,9 +57,9 @@ namespace ConceptualExample02 {
      * Mostly commands delegate more complex operations to other objects,
      * called "receivers"
      */
-    class ComplexCommand : public Command {
+    class ComplexCommand : public CommandBase {
     private:
-        std::shared_ptr<Receiver>  m_receiver;
+        std::shared_ptr<Receiver> m_receiver;
 
         /**
          * Context data, required for launching the receiver's methods.
@@ -77,7 +75,7 @@ namespace ConceptualExample02 {
         ComplexCommand(std::shared_ptr<Receiver> receiver, std::string a, std::string b)
             : m_receiver(receiver), m_a(a), m_b(b) {}
 
-        ~ComplexCommand() { std::cout << "d'tor ComplexCommand" << std::endl; }
+        ~ComplexCommand() {}
 
         /**
          * Commands can delegate to any methods of a receiver.
@@ -95,23 +93,19 @@ namespace ConceptualExample02 {
      */
     class Invoker {
     private:
-        std::shared_ptr<Command> m_onStart;
-        std::shared_ptr<Command> m_onFinish;
+        std::shared_ptr<CommandBase> m_onStart;
+        std::shared_ptr<CommandBase> m_onFinish;
 
     public:
-        Invoker() : m_onStart({ nullptr }), m_onFinish({ nullptr }) { 
-            std::cout << "c'tor Invoker()" << std::endl;
-        }
+        Invoker() : m_onStart({ nullptr }), m_onFinish({ nullptr }) {}
 
-        ~Invoker() {
-            std::cout << "d'tor Invoker" << std::endl;
-        }
+        ~Invoker() {}
 
-        void setOnStart(std::shared_ptr<Command> command) {
+        void setOnStart(std::shared_ptr<CommandBase> command) {
             m_onStart = command;
         }
 
-        void setOnFinish(std::shared_ptr<Command> command) {
+        void setOnFinish(std::shared_ptr<CommandBase> command) {
             m_onFinish = command;
         }
 
@@ -120,12 +114,12 @@ namespace ConceptualExample02 {
          * The Invoker passes a request to a receiver indirectly, by executing a command.
          */
         void doSomethingImportant() {
-            std::cout << "Invoker: Does anybody want something done before I begin?\n";
+            std::cout << "Invoker: Does anybody want something done before I begin?" << std::endl;
             if (m_onStart) {
                 m_onStart->execute();
             }
-            std::cout << "Invoker: ...doing something really important...\n";
-            std::cout << "Invoker: Does anybody want something done after I finish?\n";
+            std::cout << "Invoker: ... doing something really important ..." << std::endl;
+            std::cout << "Invoker: Does anybody want something done after I finish?" << std::endl;
             if (m_onFinish) {
                 m_onFinish->execute();
             }
@@ -143,6 +137,7 @@ void test_conceptual_example_02() {
     std::shared_ptr<Invoker> invoker = std::make_shared<Invoker>();
 
     std::shared_ptr<SimpleCommand> simpleCmd = std::make_shared<SimpleCommand>("Say Hi!");
+
     invoker->setOnStart(simpleCmd);
 
     std::shared_ptr<Receiver> receiver = std::make_shared<Receiver>();
@@ -155,6 +150,7 @@ void test_conceptual_example_02() {
         );
 
     invoker->setOnFinish(complexCmd);
+
     invoker->doSomethingImportant();
 }
 

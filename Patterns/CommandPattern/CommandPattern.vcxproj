@@ -143,6 +143,7 @@
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dp_command_pattern.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>

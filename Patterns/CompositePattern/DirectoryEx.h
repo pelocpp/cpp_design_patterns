@@ -7,7 +7,7 @@ public:
     // c'tor(s), d'tor
     DirectoryEx() = default;
     DirectoryEx(const std::string& name);
-    ~DirectoryEx() = default;;
+    ~DirectoryEx() = default;
 
     // getter
     std::string getName();

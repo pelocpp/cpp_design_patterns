@@ -54,7 +54,7 @@ namespace ConceptualExample03 {
          * The Context allows changing the State object at runtime.
          */
         void transitionTo(State* state) {
-            std::cout << "Context: Transition to " << typeid(*state).name() << "." << std::endl;;
+            std::cout << "Context: Transition to " << typeid(*state).name() << "." << std::endl;
             if (m_state != nullptr)
                 delete m_state;
             m_state = state;
@@ -82,7 +82,7 @@ namespace ConceptualExample03 {
         void handle1() override;
 
         void handle2() override {
-            std::cout << "ConcreteStateA handles request2." << std::endl;;
+            std::cout << "ConcreteStateA handles request2." << std::endl;
         }
     };
 
@@ -99,7 +99,7 @@ namespace ConceptualExample03 {
     };
 
     void ConcreteStateA::handle1() {
-        std::cout << "ConcreteStateA handles request1." << std::endl;;
+        std::cout << "ConcreteStateA handles request1." << std::endl;
         std::cout << "ConcreteStateA wants to change the state of the context." << std::endl;
         m_context->transitionTo(new ConcreteStateB());
     }

@@ -40,7 +40,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
   * **Invoker**: Objekt, das entscheidet, wann das Kommando ausgeführt werden soll.
 
 
-<img src="dp_command_pattern.png" width="700">
+<img src="dp_command_pattern.svg" width="700">
 
 Abbildung 1: Schematische Darstellung des *Command Patterns*.
 

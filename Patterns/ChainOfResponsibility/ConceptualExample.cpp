@@ -36,15 +36,15 @@ public:
     }
 };
 
-class ConcreteHandler1 : public Handler
+class ConcreteHandlerA : public Handler
 {
 public:
-    ConcreteHandler1() = default;
+    ConcreteHandlerA() = default;
 
     void handleRequest(const Request& req) override
     { 
         if (req.getType() >= 0 && req.getType() < 10) {
-            std::cout << "Concrete Handler 01 handles: " << req.getParam() << std::endl;
+            std::cout << "Concrete Handler A handles: " << req.getParam() << std::endl;
         }
         else if(m_successor) {
             m_successor->handleRequest(req);
@@ -52,15 +52,15 @@ public:
     }
 };
 
-class ConcreteHandler2 : public Handler
+class ConcreteHandlerB : public Handler
 {
 public:
-    ConcreteHandler2() = default;
+    ConcreteHandlerB() = default;
 
     void handleRequest(const Request& req) override
     { 
         if(req.getType() >= 10 && req.getType() < 20) {
-            std::cout << "Concrete Handler 02 handles: " << req.getParam() << std::endl;
+            std::cout << "Concrete Handler B handles: " << req.getParam() << std::endl;
         }
         else if(m_successor) {
             m_successor->handleRequest(req);
@@ -68,15 +68,15 @@ public:
     }
 };
 
-class ConcreteHandler3 : public Handler
+class ConcreteHandlerC : public Handler
 {
 public:
-    ConcreteHandler3() = default;
+    ConcreteHandlerC() = default;
 
     void handleRequest(const Request& req) override
     { 
         if(req.getType() >= 20 && req.getType() < 30) {
-            std::cout << "Concrete Handler 03 handles: " << req.getParam() << std::endl;
+            std::cout << "Concrete Handler C handles: " << req.getParam() << std::endl;
         }
         else if(m_successor) {
             m_successor->handleRequest(req);
@@ -86,9 +86,9 @@ public:
 
 void test_conceptual_example() {
 
-    std::shared_ptr<Handler> h1 = std::make_shared<ConcreteHandler1>();
-    std::shared_ptr<Handler> h2 = std::make_shared<ConcreteHandler2>();
-    std::shared_ptr<Handler> h3 = std::make_shared<ConcreteHandler3>();
+    std::shared_ptr<Handler> h1 = std::make_shared<ConcreteHandlerA>();
+    std::shared_ptr<Handler> h2 = std::make_shared<ConcreteHandlerB>();
+    std::shared_ptr<Handler> h3 = std::make_shared<ConcreteHandlerC>();
     h1->setSuccessor(h2);
     h2->setSuccessor(h3);
 

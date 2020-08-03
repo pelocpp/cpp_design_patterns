@@ -21,6 +21,9 @@
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_chain_of_responsibility.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp">
