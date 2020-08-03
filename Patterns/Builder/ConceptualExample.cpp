@@ -44,8 +44,8 @@ public:
 
 
 /**
- * The Builder interface specifies methods for creating the different parts of
- * the Product objects.
+ * The Builder interface specifies methods for creating the different parts
+ * of the Product objects.
  */
 class Builder {
 public:
@@ -104,16 +104,16 @@ public:
      * Usually, after returning the end result to the client, a builder instance
      * is expected to be ready to start producing another product. That's why
      * it's a usual practice to call the reset method at the end of the
-     * `getProduct` method body. However, this behavior is not mandatory, and
+     * 'getProduct' method body. However, this behavior is not mandatory, and
      * you can make your builders wait for an explicit reset call from the
      * client code before disposing of the previous result.
      */
 
      /**
       * Please be careful here with the memory ownership. Once you call
-      * getProduct the user of this function is responsable to release this
+      * 'getProduct' the user of this function is responsable to release this
       * memory. Here could be a better option to use smart pointers to avoid
-      * memory leaks
+      * memory leaks, see below
       */
 
     std::unique_ptr<Product> getProduct() {
@@ -179,7 +179,7 @@ void clientCode(std::shared_ptr<Director> director)
     p = builder->getProduct();
     std::cout << (*p)() << std::endl;
 
-    // Remember, the Builder pattern can be used without a Director class.
+    // remember, the Builder pattern can be used without a Director class.
     std::cout << "Custom product:" << std::endl;
     builder->createProducePartA();
     builder->createProducePartC();

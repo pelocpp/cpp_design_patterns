@@ -15,7 +15,7 @@ das nur den Objekttyp kennen muss, den es erstellen soll.
 Das *Builder Pattern* ist ein Entwurfsmuster aus der Kategorie der *Creational Pattern*. 
 Mit diesem Entwurfsmuster soll die Konstruktion eines komplexen Objekts von seiner Darstellung getrennt werden.
 Dieses Muster wird verwendet, wenn komplexe Objekte, die erstellt werden müssen, aus Bestandteilen bestehen,
-die in bestimmten Reihenfolge oder unter Verwendung eines bestimmten Algorithmus erstellt werden müssen.
+die in einer bestimmten Reihenfolge oder unter Verwendung eines bestimmten Algorithmus erstellt werden müssen.
 
 #### Lösung:
 
@@ -32,7 +32,7 @@ Es besteht im Wesentlichen aus vier Teilen:
     das andere komplexe Objekte ("Produkte") erstellen kann.
   * **Director**: Stellt die Klasse dar, die den Algorithmus steuert, der zum Erstellen des komplexen Objekts verwendet wird.
 
-<img src="dp_builder_pattern.png" width="550">
+<img src="dp_builder_pattern.svg" width="550">
 
 Abbildung 1: Schematische Darstellung des *Builder Patterns*.
 

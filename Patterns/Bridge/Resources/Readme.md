@@ -51,7 +51,7 @@ Es besteht im Wesentlichen aus vier Teilen:
     die dieselbe Schnittstelle unterstützen, aber plattformspezifische Funktionen bereitstellen.
 
 
-<img src="dp_bridge_pattern.png" width="600">
+<img src="dp_bridge_pattern.svg" width="600">
 
 Abbildung 1: Schematische Darstellung des *Bridge Patterns*.
 
