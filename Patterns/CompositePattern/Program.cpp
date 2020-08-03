@@ -14,7 +14,8 @@
 #endif  // _DEBUG
 
 // function prototypes
-void test_conceptual_example();
+void test_conceptual_example_01();
+void test_conceptual_example_02();
 void test_filesystem_01();
 void test_filesystem_02();
 
@@ -22,7 +23,8 @@ int main() {
 
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    test_conceptual_example();
+    test_conceptual_example_01();
+    test_conceptual_example_02();
     //test_filesystem_01();
     //test_filesystem_02();
     return 0;

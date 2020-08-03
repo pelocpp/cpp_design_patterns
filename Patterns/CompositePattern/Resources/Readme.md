@@ -65,7 +65,7 @@ Es besteht im Wesentlichen aus drei Teilen:
   * **Leaf**: 
     Stellt ein "Blatt"-Objekt in der Komposition (Baumstruktur) dar. Es werden alle Methoden der `Component`-Klasse implementiert.
 
-<img src="dp_composite_pattern.png" width="600">
+<img src="dp_composite_pattern.svg" width="600">
 
 Abbildung 1: Schematische Darstellung des *Composite Entwurfsmusters*.
 
@@ -76,6 +76,45 @@ Die Anregung zum konzeptionellen Beispiel finden Sie unter
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/composite/cpp/example#example-0)
 
 vor.
+
+**Hinweis**:
+
+Das *Conceptual Example* liegt in zwei Varianten vor:
+
+  * Variante 1: klassisch - d.h. mit "raw"-Zeigern.
+  * Variante 3: Wie Variante 1, aber mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
+
+In Variante 2 wird prinzipiell ohne "raw"-Zeiger gearbeitet, also so,
+wie man es der "reinen Lehre" nach machen sollte. Dabei stellt sich aber eine Frage:
+Wie erhalte ich von einem Objekt einen `std::shared_ptr`, desses Objekterzeugung
+außerhalb meines Wirkungskreises liegt. Die Frage lautet also gewissermaßen:
+
+```cpp
+component->setParent((std::shared_ptr<Component>) this);
+```
+
+Das geht so nicht, wie zu erwarten war. Es gibt aber den folgenden Weg:
+
+```cpp
+class Composite : public Component, public std::enable_shared_from_this<Composite> {
+    ...
+}
+```
+
+Die Klasse `Composite` leitet sich von einer Standard-Klasse `std::enable_shared_from_this<>` ab,
+die genau zu diesem Zweck realisiert wurde.
+Damit vererbt sie eine Methode `shared_from_this` an die Kindklasse:
+
+```cpp
+component->setParent(shared_from_this());
+```
+
+
+**Achtung**: Der Aufruf `shared_from_this` ist aber nur dann zulässig,
+wenn es von dem Objekt (hier: Klasse `Composite`) bereits einen Shared Pointer gibt!
+Das muss nicht immer der Fall sein!
+Weitere Details der Realisierung entnehmen Sie bitte der zweiten Variante des *Conceptual Example*.
+
 
 #### Beginners Example:
 

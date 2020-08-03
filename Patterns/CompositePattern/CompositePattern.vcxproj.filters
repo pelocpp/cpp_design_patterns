@@ -39,7 +39,10 @@
     <ClCompile Include="FileSystemAdvanced.cpp">
       <Filter>FileSystem</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample.cpp">
+    <ClCompile Include="ConceptualExample01.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -73,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_composite_pattern.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

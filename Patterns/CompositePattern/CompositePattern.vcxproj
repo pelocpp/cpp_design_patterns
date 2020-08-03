@@ -142,7 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ConceptualExample.cpp" />
+    <ClCompile Include="ConceptualExample01.cpp" />
+    <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="Directory.cpp" />
     <ClCompile Include="DirectoryEx.cpp" />
     <ClCompile Include="FileSystemBeginners.cpp" />
@@ -163,6 +164,7 @@
     <Image Include="Resources\dp_composite_pattern.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dp_composite_pattern.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
