@@ -61,16 +61,9 @@ vor.
 
 #### 'Real-World' Beispiel:
 
-To be done:
-
-"Robot Movements"
+Siehe das Beispiel zu "Robot Movements" unter
 
 https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command
-
-
-## Literaturhinweise
-
-*Hinweise*:
 
 ---
 

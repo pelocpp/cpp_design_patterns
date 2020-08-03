@@ -68,20 +68,11 @@ und
 
 vor.
 
-#### Beginners Example:
+#### Weiterarbeit:
 
-#### 'Real-World' Beispiel:
-
-To be done:
-
-"FiftyPenceHandler"
+Siehe das Beispiel unter
 
 https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command
-
-
-## Literaturhinweise
-
-*Hinweise*:
 
 ---
 

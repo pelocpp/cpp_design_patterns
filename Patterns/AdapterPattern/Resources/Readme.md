@@ -89,13 +89,6 @@ das Muster auf Basis des *Klassen Adapter Ansatzes* vor:
 
 Abbildung 2: Schematische Darstellung des *Adapter Pattern* (*Klassen Adapter Ansatzes*).
 
-
-## Literaturhinweise
-
-*Hinweise*:
-
-## Weitere Beispiele
-
 ---
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)

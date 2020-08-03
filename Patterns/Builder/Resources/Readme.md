@@ -50,10 +50,6 @@ und
 
 vor.
 
-## Literaturhinweise
-
-*Hinweise*:
-
 ---
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)

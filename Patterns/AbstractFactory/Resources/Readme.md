@@ -41,15 +41,27 @@ Abbildung 1: Schematische Darstellung des *Abstract Factory* Entwurfsmusters.
 Die Klassen `ProductA` und `ProductB` sind Stellvertreter der `ConcreteProduct` Klasse
 aus Abbildung 1.
 
+#### Conceptual Example:
+
+Die Anregung zum konzeptionellen Beispiel finden Sie unter
+
+[https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#AbstractFactory)
+
+vor.
+
 #### 'Real-World' Example:
 
-Im  'Real-World' Beispiel zu diesem Entwurfsmuster wird
+Im 'Real-World' Beispiel zu diesem Entwurfsmuster wird
 die Herstellung verschiedener Fahrzeugtypen verschiedener Hersteller betrachtet.
 Es gibt eine abstrakte Fabrikschnittstelle namens `IVehicleFactory` (*abstract Factory*)
 und zwei konkrete Fabrikimplementierungen namens `FordFactory`  und `MitsubishiFactory`. 
 `IVehicleFactory` verfügt über drei Methoden `createEconomyCar`, `createRacingCar` und `createSUV`,
 mit denen `Vehicle`-Objekte zurückgegeben werden.
 Die Klasse `Vehicle` ist eine abstrakte Basisklasse für alle konkreten Produkte.
+
+Das Beispiel ist portiert von C# nach C++ ebenfalls bzgl. der Vorlage unter
+
+[https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#AbstractFactory)
 
 ---
 
