@@ -21,19 +21,19 @@
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_flyweight_pattern.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample.cpp">
+    <ClCompile Include="ConceptualExample01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
-    <ClCompile Include="Example01.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Example02.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ConceptualExample02.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
