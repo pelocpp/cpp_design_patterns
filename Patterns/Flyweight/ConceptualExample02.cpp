@@ -66,24 +66,24 @@ namespace ConceptualExample02 {
     class Flyweight
     {
     private:
-        std::shared_ptr<SharedState> m_sharedState;
+        std::shared_ptr<SharedState> m_repeatingState;
 
     public:
         Flyweight(const SharedState& state)
         {
-            m_sharedState = std::make_shared<SharedState>(state);
+            m_repeatingState = std::make_shared<SharedState>(state);
         }
 
         ~Flyweight() {}
 
         std::shared_ptr<SharedState> getSharedState() const
         {
-            return m_sharedState;
+            return m_repeatingState;
         }
 
         void operation(const UniqueState& unique_state) const
         {
-            std::cout << "Flyweight: Displaying shared (" << *m_sharedState << ") and unique (" << unique_state << ") state.\n";
+            std::cout << "Flyweight: Displaying shared (" << *m_repeatingState << ") and unique (" << unique_state << ") state.\n";
         }
     };
 
