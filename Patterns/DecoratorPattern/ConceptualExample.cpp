@@ -15,7 +15,7 @@
 class Component {
 public:
     virtual ~Component() {}
-    virtual std::string Operation() const = 0;
+    virtual std::string operation() const = 0;
 };
 
 /**
@@ -24,7 +24,7 @@ public:
  */
 class ConcreteComponent final : public Component {
 public:
-    std::string Operation() const override {
+    std::string operation() const override {
         return "CONCRETE COMPONENT";
     }
 };
@@ -46,8 +46,8 @@ public:
     /**
      * The Decorator delegates all work to the wrapped component.
      */
-    std::string Operation() const override {
-        return m_component->Operation();
+    std::string operation() const override {
+        return m_component->operation();
     }
 };
 
@@ -64,8 +64,8 @@ public:
     ConcreteDecoratorA(const std::shared_ptr<Component>& component)
         : DecoratorBase(component) {}
 
-    std::string Operation() const override {
-        std::string parentResult = DecoratorBase::Operation();
+    std::string operation() const override {
+        std::string parentResult = DecoratorBase::operation();
         std::string decoratedResult = "ConcreteDecoratorA ( " + parentResult + " )";
         return decoratedResult;
     }
@@ -80,8 +80,8 @@ public:
     ConcreteDecoratorB(const std::shared_ptr<Component>& component) 
         : DecoratorBase(component) {}
 
-    std::string Operation() const override {
-        std::string parentResult = DecoratorBase::Operation();
+    std::string operation() const override {
+        std::string parentResult = DecoratorBase::operation();
         std::string decoratedResult = "ConcreteDecoratorB [ " + parentResult + " ]";
         return decoratedResult;
     }
@@ -95,8 +95,8 @@ public:
     ConcreteDecoratorC(const std::shared_ptr<Component>& component) 
         : DecoratorBase(component) {}
 
-    std::string Operation() const override {
-        std::string parentResult = DecoratorBase::Operation();
+    std::string operation() const override {
+        std::string parentResult = DecoratorBase::operation();
         std::string decoratedResult = "ConcreteDecoratorC { " + parentResult + " }";
         return decoratedResult;
     }
@@ -108,7 +108,7 @@ public:
  * it works with.
  */
 void clientCode(std::shared_ptr<Component> component) {
-    std::cout << "Result: " << component->Operation();
+    std::cout << "Result: " << component->operation();
 }
 
 void test_conceptual_example() {

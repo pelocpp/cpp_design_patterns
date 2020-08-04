@@ -146,6 +146,8 @@
     <ClCompile Include="StaticShapes.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dp_decorator_01.svg" />
+    <None Include="Resources\dp_decorator_02.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>

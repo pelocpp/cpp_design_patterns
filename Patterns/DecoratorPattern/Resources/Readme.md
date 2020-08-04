@@ -7,7 +7,7 @@
 #### Ziel / Absicht:
 
 Das *Decorator Pattern* ist ein strukturelles Entwurfsmuster, das die Funktionalität eines Objekts erweitert,
-indem es dieses mit einer oder mehreren Dekorationsklassen "umhüllt", oder gewissermaßen dekoriert.
+indem es dieses mit einer oder mehreren Dekorationsklassen "umhüllt", oder gewissermaßen *dekoriert*.
 *Decorator* Klassen können vorhandene Elemente ändern und zur Laufzeit neue Methoden und Eigenschaften hinzufügen.
 
 
@@ -22,20 +22,21 @@ Die Vererbung weist jedoch einige schwerwiegende Einschränkungen auf, die es zu 
     Ferner kann man nur ein ganzes Objekt durch ein anderes Objekt ersetzen, das aus einer anderen Unterklasse erstellt wurde.
     Das *Decorator Pattern* zielt auf das Ändern von Verhaltensweisen bestimmter Methoden ab.
   * Unterklassen können nur eine übergeordnete Klasse haben. In den meisten Sprachen lässt das Prinzip der Vererbung nicht zu,
-    dass eine Klasse das Verhalten mehrerer Klassen gleichzeitig erbt (Prinzip der Mehrfachvererbung, in C++ allerdings möglich)
+    dass eine Klasse das Verhalten mehrerer Klassen gleichzeitig erbt (Prinzip der Mehrfachvererbung, in C++ allerdings möglich).
 
 Eine Möglichkeit, diese Einschränkungen zu überwinden, ist die Verwendung von
 *Aggregation* oder *Komposition* anstelle von Vererbung.
 Beide Alternativen funktionieren fast gleich: Ein Objekt hat einen Verweis (Referenz, Zeiger) 
-auf ein anderes und *delegiert* ihm dadurch Tätigkeiten.
+auf ein anderes Objekt und *delegiert* ihm dadurch Tätigkeiten.
 Bei der Vererbung kann das Objekt diese Arbeit *selbst* ausführen,
 es *erbt* das Verhalten von seiner Oberklasse.
 
 Mit diesem Ansatz (Gebrauch eines Verweises) können Sie das verknüpfte "Hilfs"-Objekt leicht durch ein
 anderes ersetzen und so das Verhalten des Containers zur Laufzeit ändern.
-Ein Objekt kann das Verhalten mehrerer Klassen verwenden, indem es Verweise auf mehrere Objekte verwaltet und an diese alle Arten von Arbeit delegieren.
+Ein Objekt kann das Verhalten mehrerer Klassen verwenden,
+indem es Verweise auf mehrere Objekte verwaltet.
 
-<img src="dp_decorator_01.png" width="500">
+<img src="dp_decorator_01.svg" width="550">
 
 Abbildung 1: Vererbung versus Aggregation.
 
@@ -74,12 +75,12 @@ Es besteht im Wesentlichen aus vier Teilen:
     Sie können unverändert bleiben und in diesem Fall wird die Basisklassenmethode der Komponente aufgerufen
     oder die `operation`-Methode kann geändert werden oder vollständig durch eine neue Implementierung ersetzt werden.
 
-<img src="dp_decorator_02.png" width="650">
+<img src="dp_decorator_02.svg" width="700">
 
 Abbildung 2: Schematische Darstellung des *Decorator* Patterns.
 
 
-###### Hinweis:
+##### Hinweis:
 
 Während ein Dekorateur seine Funktionalität vor oder nach Weiterleiten der Anforderung an das Objekt,
 was es dekoriert, hinzufügen kann, sollte die Kette der Instanziierung
@@ -111,11 +112,6 @@ vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge
 #### Beispiel:
 
 Siehe Verzeichnis *ConceptualExample*.
-
-
-## Anwendungsbeispiel:
-
-  * TBD
 
 
 ## Literaturhinweise
