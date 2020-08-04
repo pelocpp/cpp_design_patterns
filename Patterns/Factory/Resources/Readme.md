@@ -29,7 +29,7 @@ Es besteht im Wesentlichen aus drei Teilen:
     Objekte des Typs `ConcreteProduct` werden von der Klasse *Factory* erzeugt.
   * **Factory**: Diese Klasse besitzt eine Methode `getProduct`,
     die Objekte zurückliefert, die die `ProductBase`-Schnittstelle implementieren.
-    Über einen Parameter der `getProduct`-Methode wird typischerweise gesteuert, welches `ConcreteProduct` Objekt zu erzeughen ist.
+    Über einen Parameter der `getProduct`-Methode wird typischerweise gesteuert, welches `ConcreteProduct` Objekt zu erzeugen ist.
 
 <img src="dp_factory_pattern.svg" width="700">
 
@@ -42,41 +42,34 @@ miteinander zu verwechseln.
 
 Sie haben zumindest gemeinsam, dass sie beide den Client von konkreten Typen entkoppeln.
 Der Client kennt nur die Schnittstelle zur Factory und den Produkten. Welche Produkte konkret erstellt werden, entscheidet die Unterklasse/Implementierung der Schnittstelle. Der Client stützt sich allein auf Abstraktion.
-
 Damit zu den Unterschieden:
 
 **Abstract Factory**<br/>
   * Bietet eine Schnittstelle zum Erstellen von Familien verwandter oder abhängiger Objekte, ohne deren konkrete Klassen anzugeben.
   * Ganze Produktfamilie wird erstellt.
-  * Breite Schnittstelle
+  * Breite Schnittstelle.
   * Schnittstelle (Abstract Factory) ist oft nur ein Interface und enthält keinen Implementierungscode.
 
 **Factory Method**<br/>
   * Definiert eine Schnittstelle zum Erstellen eines Objekts, aber lässt
-    die Unterklassen entscheiden, welche Klasse instanziiert werden soll. Mit dem *Factory Method Pattern*  kann eine Klasse die Instanziierung auf Unterklassen verschieben
-  * Schmale Schnittstelle
+    die Unterklassen entscheiden, welche Klasse instanziiert werden soll. Mit dem *Factory Method Pattern*  kann eine Klasse die Instanziierung auf Unterklassen verschieben.
+  * Schmale Schnittstelle.
   * Schnittstelle ist oft abstrakt und enthält generischen Code (Herstellungscode, den alle Produkte durchlaufen müssen).
  
 #### Conceptual Example:
 
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/factory-method/cpp/example#example-0)
+[Factory Method vs. Simple Factory](https://dzone.com/articles/factory-method-vs-simple-factory-1)
 
 und 
 
-[https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#FactoryMethod)
+[Factory vs Factory Method vs Abstract Factory](https://medium.com/bitmountn/factory-vs-factory-method-vs-abstract-factory-c3adaeb5ac9a)
 
 vor.
-
-## Literaturhinweise
-
-*Hinweise*:
 
 ---
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---
-
-

@@ -129,8 +129,3 @@ und
 [Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---
-
-## Weiterarbeit:
-
-a) Beispiel Dmitri Nesteruk !!!
-
