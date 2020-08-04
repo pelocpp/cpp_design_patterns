@@ -92,13 +92,6 @@ namespace CompositePatternSmartPointer {
             component->setParent(shared_from_this());
         }
 
-        /**
-         * Note: list stores 'std::weak_ptr' objects
-         */
-        void remove(std::shared_ptr<Component> component) {
-            component->setParent(nullptr);
-        }
-
         bool isComposite() const override {
             return true;
         }

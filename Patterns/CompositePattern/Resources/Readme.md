@@ -82,7 +82,7 @@ vor.
 Das *Conceptual Example* liegt in zwei Varianten vor:
 
   * Variante 1: klassisch - d.h. mit "raw"-Zeigern.
-  * Variante 3: Wie Variante 1, aber mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
+  * Variante 2: Wie Variante 1, aber mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
 
 In Variante 2 wird prinzipiell ohne "raw"-Zeiger gearbeitet, also so,
 wie man es der "reinen Lehre" nach machen sollte. Dabei stellt sich aber eine Frage:
@@ -109,11 +109,28 @@ Damit vererbt sie eine Methode `shared_from_this` an die Kindklasse:
 component->setParent(shared_from_this());
 ```
 
-
 **Achtung**: Der Aufruf `shared_from_this` ist aber nur dann zulässig,
 wenn es von dem Objekt (hier: Klasse `Composite`) bereits einen Shared Pointer gibt!
 Das muss nicht immer der Fall sein!
 Weitere Details der Realisierung entnehmen Sie bitte der zweiten Variante des *Conceptual Example*.
+
+Noch ein zweiter **Hinweis**:
+In der zweiten Variante gibt es in der Klasse `Composite` einen STL_Container (typischerweise `std::list` oder `std::vector`)
+zur Verwaltung der Kind-Elemente. Beim Gebrauch von `std::shared_ptr`-Objekten können hier zirkuläre Referenzen 
+entstehen - der Container in meinem Beispiel wurde deshalb als
+
+```cpp
+std::vector<std::weak_ptr<Component>> m_children;
+```
+
+definiert! Dies löst das Problem zirkulärer Referenzen, generiert gleichzeitig aber ein zweites Problem:
+Für `std::weak_ptr`-Objekte ist kein `==`-Operator definiert! Damit kommt es bei der Anwendung vieler STL-Algorithmen,
+sei es explizit oder implizit (z.B. in einer *range-based loop*), zu Übersetzungsfehlern!
+Aus diesem Grund habe ich in der zweiten Variante die Methode `remove` weggelassen,
+da sie intern den `==`-Operator benötigen würde. Wer ebenfalls diese Methode implementieren
+möchte, findet unter dem Stichwort *"removing an item from a list of weak_ptrs"*
+Lösungsmöglichkeiten im Netz angeboten (Stichwort *Custom Deleter*), die ich aus Aufwandsgründen
+in diesem Beispiel nicht umsetzen wollte.
 
 
 #### Beginners Example:
