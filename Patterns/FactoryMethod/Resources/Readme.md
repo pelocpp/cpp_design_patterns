@@ -37,7 +37,7 @@ Es besteht im Wesentlichen aus vier Teilen:
     Funktionalitäten enthalten. Objekte des Typs `ConcreteProduct` werden von Methoden
     der *Factory*-Klassen erstellt.
 
-<img src="dp_factory_method.png" width="450">
+<img src="dp_factory_method_pattern.svg" width="550">
 
 Abbildung 1: Schematische Darstellung des *Factory Method Patterns*.
 
@@ -49,7 +49,7 @@ miteinander zu verwechseln.
 **Simple Factory**<br/>
   * Mit dem *Simple Factory* Pattern versuchen wir, die Details in der Erstellung eines Objekts vor dem Anrufer (Client) zu abstrahieren.
     Das einzige, was der Client weiß, indem er eine Methode aufruft und den gewünschten Parameter übergibt, ist,
-    dass er ein Objekt eines bestimten Typs erhält. Aber wie diese Objekt erstellt wird, weiß der Client-Code nicht.
+    dass er ein Objekt eines bestimmten Typs erhält. Aber wie dieses Objekt erstellt wird, weiß der Client-Code nicht.
 
 **Factory Method**<br/>
   * Das *Factory Method* Pattern bietet sich an, wenn die Anforderungen an die Erstellung eines Objekts mehr als nur der Aufruf des `new`-Operators sind.
@@ -78,13 +78,13 @@ Damit zu den Unterschieden:
 **Abstract Factory**<br/>
   * Bietet eine Schnittstelle zum Erstellen von Familien verwandter oder abhängiger Objekte, ohne deren konkrete Klassen anzugeben.
   * Ganze Produktfamilie wird erstellt.
-  * Breite Schnittstelle
+  * Breite Schnittstelle.
   * Schnittstelle (Abstract Factory) ist oft nur ein Interface und enthält keinen Implementierungscode.
 
 **Factory Method**<br/>
   * Definiert eine Schnittstelle zum Erstellen eines Objekts, aber lässt
-    die Unterklassen entscheiden, welche Klasse instanziiert werden soll. Mit dem *Factory Method Pattern*  kann eine Klasse die Instanziierung auf Unterklassen verschieben
-  * Schmale Schnittstelle
+    die Unterklassen entscheiden, welche Klasse instanziiert werden soll. Mit dem *Factory Method Pattern*  kann eine Klasse die Instanziierung auf Unterklassen verschieben.
+  * Schmale Schnittstelle.
   * Schnittstelle ist oft abstrakt und enthält generischen Code (Herstellungscode, den alle Produkte durchlaufen müssen).
  
 #### Conceptual Example:

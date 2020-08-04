@@ -11,23 +11,23 @@ namespace ConceptualExample02 {
      * The Product interface declares the operations that all concrete products must
      * implement.
      */
-    class Product {
+    class ProductBase {
     public:
-        virtual ~Product() {}
+        virtual ~ProductBase() {}
         virtual std::string Operation() const = 0;
     };
 
     /**
      * Concrete Products provide various implementations of the Product interface.
      */
-    class ConcreteProduct1 : public Product {
+    class ConcreteProduct1 : public ProductBase {
     public:
         std::string Operation() const override {
             return "{ Result of the ConcreteProduct1 }";
         }
     };
 
-    class ConcreteProduct2 : public Product {
+    class ConcreteProduct2 : public ProductBase {
     public:
         std::string Operation() const override {
             return "{ Result of the ConcreteProduct2 }";
@@ -46,7 +46,7 @@ namespace ConceptualExample02 {
          */
     public:
         virtual ~FactoryBase() {};
-        virtual std::shared_ptr<Product> FactoryMethod() const = 0;
+        virtual std::shared_ptr<ProductBase> FactoryMethod() const = 0;
 
         /**
          * Note that the FactoryBase's class primary responsibility is
@@ -56,11 +56,11 @@ namespace ConceptualExample02 {
          * returning a different type of product from it.
          */
         std::string someOperation() const {
-            // Call the factory method to create a Product object.
-            std::shared_ptr<Product> product = this->FactoryMethod();
-            // Now, use the product.
-            std::string result = "FactoryBase: The same factory's code has just worked with " + product->Operation();
-            //    delete product;
+            // call the factory method to create a Product object.
+            std::shared_ptr<ProductBase> product = this->FactoryMethod();
+            // now, use the product.
+            std::string result = 
+                "FactoryBase: The same factory's code has just worked with " + product->Operation();
             return result;
         }
     };
@@ -76,16 +76,16 @@ namespace ConceptualExample02 {
          * way the FactoryBase can stay independent of concrete product classes.
          */
     public:
-        std::shared_ptr<Product> FactoryMethod() const override {
-            std::shared_ptr<Product> product = std::make_shared<ConcreteProduct1>();
+        std::shared_ptr<ProductBase> FactoryMethod() const override {
+            std::shared_ptr<ProductBase> product = std::make_shared<ConcreteProduct1>();
             return product;
         }
     };
 
     class ConcreteFactory2 : public FactoryBase {
     public:
-        std::shared_ptr<Product> FactoryMethod() const override {
-            std::shared_ptr<Product> product = std::make_shared<ConcreteProduct2>();
+        std::shared_ptr<ProductBase> FactoryMethod() const override {
+            std::shared_ptr<ProductBase> product = std::make_shared<ConcreteProduct2>();
             return product;
         }
     };
@@ -98,7 +98,8 @@ namespace ConceptualExample02 {
     void clientCode(const std::shared_ptr<FactoryBase> factory) {
         // ...
         std::cout
-            << "Client: I'm not aware of the factory's class, but it still works.\n"
+            << "Client: I'm not aware of the factory's class, but it still works." 
+            << std::endl 
             << factory->someOperation() << std::endl;
         // ...
     }
@@ -111,11 +112,11 @@ namespace ConceptualExample02 {
 void test_conceptual_example_02() {
     using namespace ConceptualExample02;
 
-    std::cout << "App: Launched with the ConcreteFactory1.\n";
+    std::cout << "App: Launched with the ConcreteFactory1." << std::endl;
     std::shared_ptr<FactoryBase> factory1 = std::make_shared<ConcreteFactory1>();
     clientCode(factory1);
     std::cout << std::endl;
-    std::cout << "App: Launched with the ConcreteFactory2.\n";
+    std::cout << "App: Launched with the ConcreteFactory2." << std::endl;
     std::shared_ptr<FactoryBase> factory2 = std::make_shared<ConcreteFactory2>();
     clientCode(factory2);
 }

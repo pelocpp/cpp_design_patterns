@@ -86,7 +86,6 @@ namespace SimpleFactoryVsFactoryMethod {
     }
 }
 
-
 // The Application picks a factory's type depending on the configuration or environment
 void test_conceptual_example_03() {
     using namespace SimpleFactoryVsFactoryMethod;
