@@ -16,7 +16,7 @@ jederzeit in den gespeicherten Zustand zurückversetzt werden.
 
 Manchmal ist es erforderlich, den (internen) Status eines Objekts zu einem bestimmten Zeitpunkt zu erfassen
 und diesen Status zu einem späteren Zeitpunkt wieder zu restaurieren.
-Häufig wird dieses Enwurfsmuster verwendet, um eine Anwendung um die "*Undo*"-Funktionalität zu bereichern.
+Häufig wird dieses Entwurfsmuster verwendet, um eine Anwendung um die "*Undo*"-Funktionalität zu bereichern.
 Aus diesem Grund wird das Muster auch als "*Undo via Rollback*" bezeichnet,
 in anderen Büchern wiederum tritt es als *Snapshot* Entwurfsmuster in Erscheinung.
 
@@ -57,7 +57,7 @@ Es besteht im Wesentlichen aus drei Teilen:
     der CareTaker kann darauf nicht zugreifen. 
 
 
-<img src="dp_memento.png" width="500">
+<img src="dp_memento.svg" width="600">
 
 Abbildung 1: Schematische Darstellung des *Memento Patterns*.
 
@@ -73,21 +73,6 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Memento)
 
 vor.
-
-#### Beginners Example:
-
-#### 'Real-World' Beispiel:
-
-To be done:
-
-"PersonCaretaker"
-
-https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Memento
-
-
-## Literaturhinweise
-
-*Hinweise*:
 
 ---
 
