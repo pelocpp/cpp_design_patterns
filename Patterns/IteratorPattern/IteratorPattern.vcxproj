@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Resources\dp_iterator_pattern.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>

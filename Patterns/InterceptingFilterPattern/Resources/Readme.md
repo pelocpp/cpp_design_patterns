@@ -33,7 +33,7 @@ zum Hinzufügen und Entfernen von Verarbeitungskomponenten, bei dem jede Komponen
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Intercepting Filter Patterns*.
 Es besteht im Wesentlichen aus fünf Teilen:
 
-  * **Filter**: Definiert eine bestimmte Aufgabe, die vor oder nach der Ausführung der eigentlichen Anforderung durch das `FilterManager`-Objekt initiert wird.
+  * **Filter**: Definiert eine bestimmte Aufgabe, die vor oder nach der Ausführung der eigentlichen Anforderung durch das `FilterManager`-Objekt initiiert wird.
   * **FilterChain**: Verwaltet ein oder mehrere Filter und führt diese in definierter Reihenfolge auf dem Ziel-Objekt aus.
   * **Target**: Zielobjekt der Anforderung
   * **FilterManager**: Kennt das Zielobjekt und verwaltet ein `FilterChain` Objekt
@@ -56,11 +56,6 @@ Die Anregung zum konzeptionellen Beispiel finden Sie unter
 [Design Pattern - Intercepting Filter Pattern](https://www.tutorialspoint.com/design_pattern/intercepting_filter_pattern.htm)
 
 vor.
-
-
-## Literaturhinweise
-
-*Hinweise*:
 
 ---
 

@@ -29,13 +29,13 @@ so dass ein anderer Code diese Elemente verwenden kann.
 Es versteht sich dabei von selbst, dass bei einem derartigen Durchlauf kein Element 
 mehrfach oder überhaupt nicht erfasst werden darf.
 
-Dies mag nach einer einfachen Aufgabe klingen, wenn die Elemene beispielsweise in einem Array
+Dies mag nach einer einfachen Aufgabe klingen, wenn die Elemente beispielsweise in einem Array
 oder einer listenartigen Struktur abgelegt sind.
 Es werden einfach alle Elemente der Reihe nach (Index eines Arrays, *next*-Zeiger in einer Liste) erfasst.
 In einer komplexen Datenstruktur wie beispielsweise einer Baumstruktur
 ist dies nicht so einfach! Hier gibt es zum Beispiel 
 den "*Depth-First Traversal*" oder "*Breadth-First Traversal*" Algorithmus,
-die bzgl. der Reihenfolge des Durchlaufen der Baumstruktur sehr unterschiedlich funktionieren:
+die bzgl. der Reihenfolge des Durchlaufens der Baumstruktur sehr unterschiedlich funktionieren:
 
 <img src="dp_collections_iterator_tree_structures.png" width="600">
 
@@ -62,12 +62,12 @@ Das folgende UML-Diagramm beschreibt eine Implementierung des *Iterator Patterns
 Es besteht im Wesentlichen aus fünf Teilen:
 
   * **Client**: Fordert das *Iterator*-Objekt von einem aggregierten Objekt an und "konsumiert" es, wenn die Elemente durchlaufen werden sollen.
-  * **AggregateBase**: Abstrakte Basisklasse (oder Schnittstelle) für alle konkreten Aggregate. Diese Klasse enthält eine Methode, die auf Anfage ein Iterator-Objekt zurückgibt.
+  * **AggregateBase**: Abstrakte Basisklasse (oder Schnittstelle) für alle konkreten Aggregate. Diese Klasse enthält eine Methode, die auf Anfrage ein Iterator-Objekt zurückgibt.
   * **ConcreteAggregate**: Repräsentiert die konkrete Implementierung der `AggregateBase`-Schnittstelle. Hat Zugriff auf die Elemente, die mit dem Iterator durchlaufen werden sollen.
   * **IteratorBase**: Abstrakte Klasse (oder Schnittstelle) eines konkreten Iterators. Enthält Methoden (präziser: die Signaturen von Methoden), mit denen die Elemente durchlaufen werden können.
   * **ConcreteIterator**: Konkrete Realisierung von `IteratorBase`.
 
-<img src="dp_iterator_pattern.png" width="700">
+<img src="dp_iterator_pattern.svg" width="800">
 
 Abbildung 1: Schematische Darstellung des *Iterator Patterns*.
 
@@ -83,23 +83,6 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Iterator)
 
 vor.
-
-#### Beginners Example:
-
-#### 'Real-World' Beispiel:
-
-To be done:
-
-Beispiel aus
-
-https://refactoring.guru/design-patterns/iterator/cpp/example#example-0
-
-Ist bei Conceptual 2 einzufügen !!!
-
-
-## Literaturhinweise
-
-*Hinweise*:
 
 ---
 
