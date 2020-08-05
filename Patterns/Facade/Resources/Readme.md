@@ -42,7 +42,7 @@ Verfügung stellen.
 #### Hinweis 2:
 Eine Facadenklasse soll eine Vereinfachung in der Komplexität des/der unterlagerten Subsystem darstellen.
 Dies hat allerdings auch zur Folge, dass die Facadenklasse nur einen Teil
-(in machen Fällen sogar nur einen Bruchteil) von den Fähigkeiten der Subsysteme besitzt.
+(in manchen Fällen sogar nur einen Bruchteil) von den Fähigkeiten der Subsysteme besitzt.
 
 #### Struktur (UML):
 
