@@ -40,6 +40,7 @@ Mit Hilfe einer Facade kann man eine objektorientierte Sicht auf eine reine C-Bi
 Verfügung stellen.
 
 #### Hinweis 2:
+
 Eine Facadenklasse soll eine Vereinfachung in der Komplexität des/der unterlagerten Subsystem darstellen.
 Dies hat allerdings auch zur Folge, dass die Facadenklasse nur einen Teil
 (in manchen Fällen sogar nur einen Bruchteil) von den Fähigkeiten der Subsysteme besitzt.
