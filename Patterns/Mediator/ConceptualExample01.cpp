@@ -83,8 +83,8 @@ namespace ConceptualExample01 {
     };
 
     /**
-     * Concrete Mediators implement cooperative behavior by coordinating several
-     * components.
+     * Concrete Mediators implement cooperative behavior
+     * by coordinating several components.
      */
     class ConcreteMediator : public MediatorBase {
     private:
@@ -92,7 +92,8 @@ namespace ConceptualExample01 {
         ConcreteColleagueB* m_component2;
 
     public:
-        ConcreteMediator(ConcreteColleagueA* c1, ConcreteColleagueB* c2) : m_component1(c1), m_component2(c2)
+        ConcreteMediator(ConcreteColleagueA* c1, ConcreteColleagueB* c2) 
+            : m_component1(c1), m_component2(c2)
         {
             m_component1->setMediator(this);
             m_component2->setMediator(this);
@@ -100,7 +101,6 @@ namespace ConceptualExample01 {
 
         void notify(ColleagueBase* sender, std::string event) const override
         {
-
             if (event == "A")
             {
                 std::cout << "Mediator reacts on A and triggers following operations:" << std::endl;

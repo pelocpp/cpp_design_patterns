@@ -32,5 +32,8 @@
     <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
+    <ClCompile Include="ConceptualExample03.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
