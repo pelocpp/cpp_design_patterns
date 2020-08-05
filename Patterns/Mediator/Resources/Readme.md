@@ -55,7 +55,7 @@ Es besteht im Wesentlichen aus vier Teilen:
    Diese Klasse enthält Verweise auf alle Kollegen, die miteinander kommunizieren müssen.
    Konkrete Mediatoren kapseln die Beziehungen zwischen verschiedenen Kollegen.
 
-<img src="dp_mediator_pattern.svg" width="700">
+<img src="dp_mediator_pattern.svg" width="800">
 
 Abbildung 1: Schematische Darstellung des *Mediator Patterns*.
 
