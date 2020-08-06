@@ -21,7 +21,7 @@ Das Null-Objekt spiegelt folglich eine "*Do-Nothing*"-Beziehung wieder.
 
 #### Problem:
 
-Das  *Null Object* Entwurfsmuster befreit uns von der Pflicht, zur Laufzeit Abfragen bzgl. gewisser Zustände vornehmen zu müssen.
+Das *Null Object* Entwurfsmuster befreit uns von der Pflicht, zur Laufzeit Abfragen bzgl. gewisser Zustände vornehmen zu müssen.
 Überall im Quellcode, wo Überprüfungen auf Nullwerte erforderlich wären (was in C++ bei Referenzen ohnehin nicht möglich ist),
 kommen Nullobjektklassen zum Einsatz.
 
@@ -42,7 +42,7 @@ Realisierung (temporär) nicht anwendbar ist.
 ##### *Hinweis*: Abgrenzung von *Null*-Objekten zu *Mock*-Objekten
 
 *Null*-Objekte sind nicht mit *Mock*-Objekten zu verwechseln bzw. gleichzusetzen.
-Ein *Mock*-Objekt (auch als *Attrappe* bezeichet, von englisch *to mock*: etwas vortäuschen)
+Ein *Mock*-Objekt (auch als *Attrappe* bezeichnet, von englisch *to mock*: etwas vortäuschen)
 ist in der Softwareentwicklung ein Objekt,
 das zur Durchführung von Modultests als Platzhalter für echte Objekte verwendet wird.
 
