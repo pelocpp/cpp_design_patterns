@@ -143,10 +143,8 @@
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dp_null_object.svg" />
     <None Include="Resources\Readme.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\db_null_object.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
