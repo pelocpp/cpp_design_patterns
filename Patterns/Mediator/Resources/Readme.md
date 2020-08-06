@@ -42,15 +42,17 @@ Es besteht im Wesentlichen aus vier Teilen:
   * **ConcreteColleague**: Eine Implementierung der `ColleagueBase`-Klasse. Konkrete Kollegen sind Klassen,
    die miteinander kommunizieren. *Kollegen*
    sollten keine anderen Komponenten kennen. Wenn innerhalb oder mit einer Komponente etwas Wichtiges passiert,
-   muss dieser nur den Mediator benachrichtigen.
-   Wenn der Mediator die Benachrichtigung erhält, kann er den Absender leicht identifizieren, was möglicherweise gerade ausreicht,
-   um zu entscheiden, welche Komponente im Gegenzug aktiviert werden soll (Aufruf einer Methode).
+   muss diese nur den Mediator benachrichtigen.
+   Wenn der Mediator die Benachrichtigung erhält, kann er den Absender leicht identifizieren, 
+   was ausreichend sein sollte,
+   um zu entscheiden, welche Komponente(n) im Gegenzug zu aktivieren ist (sind) - Aufruf einer Methode.
   * **MediatorBase**: Abstrakte Klasse (Schnittstelle) für das `Mediator`-Objekt.
    Diese Klasse enthält Methoden, die von Kollegen verwendet werden können.
-   Die Mediator-Schnittstelle deklariert Kommunikationsmethoden mit Komponenten,
-   die normalerweise nur eine einzige Benachrichtigungsmethode enthalten.
-   Komponenten können jeden Kontext als Argumente dieser Methode übergeben, einschließlich ihrer eigenen Objekte,
-   jedoch nur so, dass keine Kopplung zwischen einer empfangenden Komponente und der Klasse des Absenders auftritt.
+   Die Mediator-Schnittstelle deklariert Kommunikationsmethoden für Komponenten,
+   in der Regel sind dies nur wenige Benachrichtigungsmethoden.
+   Komponenten können jeden Kontext als Argument dieser Methode übergeben,
+   einschließlich eines Verweises auf sich selbst (`this`),
+   jedoch ist dabei zu beachten, dass keine Kopplung zwischen einer empfangenden Komponente und der Klasse des Absenders entsteht.
   * **ConcreateMediator**: Implementierung der Methoden der `MediatorBase`-Klasse.
    Diese Klasse enthält Verweise auf alle Kollegen, die miteinander kommunizieren müssen.
    Konkrete Mediatoren kapseln die Beziehungen zwischen verschiedenen Kollegen.
