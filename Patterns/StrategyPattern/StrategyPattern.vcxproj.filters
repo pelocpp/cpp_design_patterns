@@ -57,6 +57,9 @@
     <ClCompile Include="RenderMarkdownListStrategy.cpp">
       <Filter>Source Files\RenderApp</Filter>
     </ClCompile>
+    <ClCompile Include="ECommerceApp.cpp">
+      <Filter>Source Files\ECommerceApp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PayByPayPal.h">

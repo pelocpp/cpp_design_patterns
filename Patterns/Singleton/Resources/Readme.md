@@ -71,20 +71,14 @@ und
 
 vor.
 
-#### Beginners Example:
+## Weiterarbeit:
 
-#### 'Real-World' Beispiel:
+Ein seht guter Aufsatz, wie `std::shared_ptr`-, `std::weak_ptr`- und Singleton-Objekte zusammenarbeiten,
+kann unter
 
-## Literaturhinweise
+[Shared Singleton's](http://btorpey.github.io/blog/2014/02/12/shared-singletons/)
 
-*Hinweise*:
-
-TO BE DONE:
-
-Ein guter Aufsatz, wie shared_ptr, weak_ptr und Singletons zusammenarbeiten !!!
-
-http://btorpey.github.io/blog/2014/02/12/shared-singletons/
-
+nachgelesen werden.
 
 ---
 

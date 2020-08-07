@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="CreditCard.cpp" />
+    <ClCompile Include="ECommerceApp.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="PayByCreditCard.cpp" />
     <ClCompile Include="PayByPayPal.cpp" />

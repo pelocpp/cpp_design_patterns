@@ -77,14 +77,14 @@ namespace ConceptualExample02 {
     /**
      * The first time we call getInstance we will lock the storage location
      *      and then we make sure again that the variable is null and then we
-     *      set the value. RU:
+     *      set the value.
      */
     Singleton* Singleton::getInstance(const std::string& value)
     {
         if (m_pinstance == nullptr)
         {
             std::lock_guard<std::mutex> lock(m_mutex);
-            if (m_pinstance == nullptr)  // <=== NTOE: double-check of m_pinstance being nullptr
+            if (m_pinstance == nullptr)  // <=== NOTE: double-check of m_pinstance being nullptr
             {
                 m_pinstance = new Singleton(value);
             }

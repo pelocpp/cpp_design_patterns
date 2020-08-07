@@ -131,7 +131,7 @@ public:
  * to make the right choice.
  */
 
-void ClientCode()
+void clientCode()
 {
     Strategy* strategy = new ConcreteStrategyA();
     Context* context = new Context(strategy);
@@ -149,7 +149,7 @@ void ClientCode()
 
 void test_conceptual_example()
 {
-    ClientCode();
+    clientCode();
 }
 
 // ===========================================================================

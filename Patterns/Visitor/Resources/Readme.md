@@ -11,7 +11,7 @@ das eine Menge strukturierter Daten von den Funktionen trennt,
 die auf ihr ausgeführt werden. Dies unterstützt zum einen eine lose Kopplung
 und es ermöglicht zum anderen das Hinzufügen zusätzlicher Operationen, ohne an den Datenklassen Änderungen vornehmen zu müssen.
 
-#### Problem:
+#### Lösung:
 
 Das Ergebnis der Trennung von Objektstruktur und Funktionen (Algorithmen) ist ein Datenmodell
 mit eingeschränkter Funktionalität und einer Gruppe von "*Besuchern*",
@@ -22,10 +22,6 @@ Die Daten-Klassen sind mit Attributen (Eigenschaften, *getter*/*setter*-Methoden
 dass diese vom "Besucher"-Objekt geeignet verwendet werden können.
 Typischerweise wird das Datenobjekt als Parameter an eine Methode des "Besucher"-Objekts übergeben
 (die Konvention besteht darin, diese Methode `visit` zu nennen).
-
-#### Lösung:
-
-
 
 #### Struktur (UML):
 
