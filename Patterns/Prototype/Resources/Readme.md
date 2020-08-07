@@ -64,7 +64,7 @@ Es besteht im Wesentlichen aus zwei Teilen:
   * **ConcretePrototype**: Klasse, die sich von der Prototype-Basisklasse ableitet. Sie kann zusätzliche Funktionen enthalten.
     In dieser Klasse wird die `clone`-Methode überschrieben.
 
-<img src="dp_prototype_pattern.png" width="400">
+<img src="dp_prototype_pattern.svg" width="500">
 
 Abbildung 1: Schematische Darstellung des *Prototype Patterns*.
 
@@ -74,7 +74,7 @@ In JavaScript ist das *Prototype Pattern* quasi nativ enthalten.
 
 Die Erstellung von Objekten erfolgt hier - unter anderem - auf der Basis von so genannten
 "Konstruktorfunktionen", die als Blaupausen für neue Objekte verwendet werden können,
-Man spricht dabei auch von der so genannten *"Prototypischen Vererbung"*.
+man spricht dabei auch von der so genannten *"Prototypischen Vererbung"*.
 
 
 #### Conceptual Example:

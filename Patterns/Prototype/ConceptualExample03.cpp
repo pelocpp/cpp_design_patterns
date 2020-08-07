@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample02.cpp // Prototype Pattern
+// ConceptualExample03.cpp // Prototype Pattern
 // ===========================================================================
 
 #include <iostream>
@@ -24,9 +24,10 @@
 //Lets you copy existing objects without making your code dependent on
 //their classes.
 
-namespace ConceptualExample02 {
+namespace ConceptualExample03 {
 
-    enum class Type {
+    enum class Type
+    {
         PROTOTYPE_1,
         PROTOTYPE_2
     };
@@ -36,7 +37,8 @@ namespace ConceptualExample02 {
      * with different types will be cloned.
      */
 
-    class Prototype {
+    class Prototype
+    {
     protected:
         std::string m_prototypeName;
         float m_prototypeField;
@@ -50,7 +52,7 @@ namespace ConceptualExample02 {
 
         virtual ~Prototype() {}
 
-        virtual Prototype* clone() const = 0;
+        virtual std::unique_ptr<Prototype> clone() const = 0;
 
         virtual void print() {
             std::cout << "print:  " << m_prototypeName << " with field : " << m_prototypeField << std::endl;
@@ -58,39 +60,51 @@ namespace ConceptualExample02 {
 
         virtual void update(float prototype_field) {
             this->m_prototypeField = prototype_field;
-            std::cout << "Call update from " << m_prototypeName << " with field : " << prototype_field << std::endl;
+            std::cout << "update: " << m_prototypeName << " with updated field : " << prototype_field << std::endl;
         }
     };
 
     /**
-     * ConcretePrototype1 is a Sub-Class of Prototype and implement the Clone Method
+     * ConcretePrototype1 is a Sub-Class of Prototype and implements the clone Method
      * In this example all data members of Prototype Class are in the Stack. If you
-     * have pointers in your properties for ex: String* name_ ,you will need to
+     * have pointers in your properties for ex: String* m_name, you will need to
      * implement the Copy-Constructor to make sure you have a deep copy from the
      * clone method
      */
 
-    class ConcretePrototype1 : public Prototype {
+    class ConcretePrototype1 : public Prototype
+    {
     private:
         float m_concretePrototypeField1;
 
     public:
+
+        //ConcretePrototype1(const ConcretePrototype1& p) {
+        //    m_concretePrototypeField1 = p.m_concretePrototypeField1;
+        //    Prototype::m_prototypeField = p.m_concretePrototypeField1;
+        //}
+
+        //ConcretePrototype1(ConcretePrototype1&& p) noexcept {
+        //    m_concretePrototypeField1 = p.m_concretePrototypeField1;
+        //}
+
         ConcretePrototype1(std::string prototype_name, float concrete_prototype_field)
             : Prototype(prototype_name), m_concretePrototypeField1(concrete_prototype_field) {
         }
 
         /**
-         * Notice that Clone method return a Pointer to a new ConcretePrototype1
-         * replica. so, the client (who calls the clone method) has the responsability
-         * to free that memory. I you have smart pointer knowledge you may prefer to
-         * use unique_pointer here.
+         * Notice that clone method returns a Pointer to a new ConcretePrototype1 replica.
+         * So the client (who calls the clone method) has the responsability
+         * to free that memory - or if you have smart pointer knowledge
+         * you may prefer to use unique_pointer here.
          */
-        Prototype* clone() const override {
-            return new ConcretePrototype1(*this);
+        std::unique_ptr<Prototype> clone() const override {
+            return std::make_unique<ConcretePrototype1>(*this);
         }
     };
 
-    class ConcretePrototype2 : public Prototype {
+    class ConcretePrototype2 : public Prototype
+    {
     private:
         float m_concretePrototypeField2;
 
@@ -99,8 +113,8 @@ namespace ConceptualExample02 {
             : Prototype(prototype_name), m_concretePrototypeField2(concrete_prototype_field) {
         }
 
-        Prototype* clone() const override {
-            return new ConcretePrototype2(*this);
+        std::unique_ptr<Prototype> clone() const override {
+            return std::make_unique<ConcretePrototype2>(*this);
         }
     };
 
@@ -110,62 +124,62 @@ namespace ConceptualExample02 {
      * existing ones and clone those.
      */
 
-    class PrototypeFactory {
+    class PrototypeFactory
+    {
     private:
-        std::unordered_map<Type, Prototype*> m_originals;
-
-    public:
-        PrototypeFactory() {
-            m_originals[Type::PROTOTYPE_1] = new ConcretePrototype1("PROTOTYPE_1 ", 50.f);
-            m_originals[Type::PROTOTYPE_2] = new ConcretePrototype2("PROTOTYPE_2 ", 60.f);
-        }
+        // reserve space for two originals
+        std::unordered_map<Type, std::shared_ptr<Prototype>> m_originals;
 
         /**
          * Be carefull of free all memory allocated. Again, if you have smart pointers
          * knowelege will be better to use it here.
          */
 
-        ~PrototypeFactory() {
-            delete m_originals[Type::PROTOTYPE_1];
-            delete m_originals[Type::PROTOTYPE_2];
+    public:
+        PrototypeFactory()
+        {
+            m_originals[Type::PROTOTYPE_1] = std::make_shared<ConcretePrototype1>("PROTOTYPE_1", 100.0f);
+            m_originals[Type::PROTOTYPE_2] = std::make_shared<ConcretePrototype2>("PROTOTYPE_2", 200.0f);
         }
+
+        ~PrototypeFactory() {}
 
         /**
          * Notice here that you just need to specify the type of the prototype you
          * want and the method will create from the object with this type.
          */
-        Prototype* createPrototype(Type type) {
+
+        std::unique_ptr<Prototype> createPrototype(Type type) {
             return m_originals[type]->clone();
         }
     };
 
-    void client(PrototypeFactory& factory) {
+    void client(PrototypeFactory& factory)
+    {
         std::cout << "Let's create a Prototype 1" << std::endl;
 
-        Prototype* prototype = factory.createPrototype(Type::PROTOTYPE_1);
-        prototype->print();
-        prototype->update(10);
-        delete prototype;
+        std::unique_ptr<Prototype> prototype1 = factory.createPrototype(Type::PROTOTYPE_1);
+        prototype1->print();
+        prototype1->update(10);
 
         std::cout << std::endl;
-
         std::cout << "Let's create a Prototype 2" << std::endl;
 
-        prototype = factory.createPrototype(Type::PROTOTYPE_2);
-        prototype->print();
-        prototype->update(20);
-
-        delete prototype;
+        std::unique_ptr<Prototype> prototype2 = factory.createPrototype(Type::PROTOTYPE_2);
+        prototype2->print();
+        prototype2->update(20);
     }
 }
 
-void test_conceptual_example_02()
-{
-    using namespace ConceptualExample02;
 
-    PrototypeFactory* prototype_factory = new PrototypeFactory();
-    client(*prototype_factory);
-    delete prototype_factory;
+void test_conceptual_example_03()
+{
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+    using namespace ConceptualExample03;
+
+    PrototypeFactory prototype_factory;
+    client(prototype_factory);
 }
 
 // ===========================================================================
