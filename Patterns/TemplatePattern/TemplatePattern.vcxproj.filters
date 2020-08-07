@@ -36,6 +36,9 @@
     <ClCompile Include="Twitter.cpp">
       <Filter>Source Files\SocialNetworking</Filter>
     </ClCompile>
+    <ClCompile Include="SocialNetworking.cpp">
+      <Filter>Source Files\SocialNetworking</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Facebook.h">

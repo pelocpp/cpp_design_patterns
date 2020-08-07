@@ -142,6 +142,7 @@
     <ClCompile Include="Facebook.cpp" />
     <ClCompile Include="Network.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="SocialNetworking.cpp" />
     <ClCompile Include="Twitter.cpp" />
   </ItemGroup>
   <ItemGroup>

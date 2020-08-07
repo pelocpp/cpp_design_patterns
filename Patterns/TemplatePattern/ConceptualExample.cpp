@@ -2,8 +2,6 @@
 // ConceptualExample.cpp // Template Method
 // ===========================================================================
 
-// https://refactoring.guru/design-patterns/template-method/cpp/example#example-0
-
 #include <iostream>
 
 /**
@@ -93,7 +91,7 @@ protected:
  * code does not have to know the concrete class of an object it works with, as
  * long as it works with objects through the interface of their base class.
  */
-void ClientCode(AbstractClass* class_) {
+void clientCode(AbstractClass* class_) {
     // ...
     class_->TemplateMethod();
     // ...
@@ -102,12 +100,12 @@ void ClientCode(AbstractClass* class_) {
 void test_conceptual_example() {
     std::cout << "Same client code can work with different subclasses (1):\n";
     ConcreteClass1* concreteClass1 = new ConcreteClass1;
-    ClientCode(concreteClass1);
+    clientCode(concreteClass1);
     std::cout << std::endl;
 
     std::cout << "Same client code can work with different subclasses (2):\n";
     ConcreteClass2* concreteClass2 = new ConcreteClass2;
-    ClientCode(concreteClass2);
+    clientCode(concreteClass2);
     std::cout << std::endl;
 
     delete concreteClass1;

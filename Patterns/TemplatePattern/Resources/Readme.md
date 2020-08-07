@@ -11,7 +11,7 @@ Diese lagert einen oder vorzugsweise mehrere Teilschritte in Methoden abgeleitet
 Änderungen an den Teilschritten haben keine Auswirkungen auf die Arbeitsweise (Realisierung)
 der zentralen Methode.
 
-Das Template Method Pattern ist ein Verhaltensentwurfsmuster,
+Das *Template Method Pattern* ist ein Verhaltensentwurfsmuster,
 das das Grundgerüst eines Algorithmus in einer Oberklasse definiert,
 Unterklassen jedoch bestimmte Schritte des Algorithmus überschreiben lässt,
 ohne dabei seine prinzipielle Struktur zu ändern.
@@ -27,42 +27,48 @@ In einer niedrigeren Abstraktionsebene (Detailebene) können die Teilmethoden ein
 
 #### Lösung:
 
-Das *Template Method Pattern* schlägt vor, dass Sie einen Algorithmus in eine Reihe von Schritten aufteilen,
+Das *Template Method Pattern* hat zum Inhalt, dass Sie einen Algorithmus in eine Reihe von Schritten aufteilen,
 diese Schritte in Methoden umwandeln und diese Methoden in einer einzigen „Vorlagenmethode“ aufrufen,
 daher auch der Name dieses Entwurfsmusters.
 Die Schritte können entweder abstrakt sein oder eine Standardimplementierung aufweisen.
-Um den Algorithmus zu verwenden, muss der Client eine eigene Unterklasse bereitstellen, alle abstrakten Schritte implementieren und bei Bedarf einige der optionalen Schritte überschreiben
-Die Vorlagenmethode sollte dabei nicht überschrieben oder verändert werden.
+Um den Algorithmus zu verwenden, muss der Client eine eigene Unterklasse bereitstellen, alle abstrakten Schritte implementieren und bei Bedarf einige der optionalen Schritte überschreiben.
+Die Vorlagenmethode sollte dabei nicht überschrieben oder verändert werden!
 
 Das *Template Method Pattern* ermöglicht die Realisierung von variierenden Teilschritten, während ein konsistenter Grundprozess beibehalten wird.
 
 
 #### Struktur (UML):
 
-<img src="dp_template_method_pattern.svg" width="600">
+<img src="dp_template_method_pattern.svg" width="500">
 
 Abbildung: Schematische Darstellung des *Template Method Patterns*.
 
 
 #### Hinweis:
 
-Template Method Pattern und Strategy Pattern besitzen viele Gemeinsamkeiten. Ein Unterschied zwischen den beiden Mustern ist,
-dass das Template Method Pattern auf Vererbung beruht, dass Strategy Pattern hingehen auf Komposition.
+*Template Method Pattern* und *Strategy Pattern* besitzen viele Gemeinsamkeiten. Ein Unterschied zwischen den beiden Mustern ist,
+dass das *Template Method Pattern* auf Vererbung beruht, dass *Strategy Pattern* hingehen auf Komposition.
 
 ## Anwendungsbeispiel:
 
 In Spezialisierungen der Oberklasse können bzw. sollten ein oder mehrere Teilmethoden überschrieben werden,
-um die **Template Methode* in der Oberklasse zu vervollständigen. 
+um die **Template Methode** in der Oberklasse zu vervollständigen. 
 
 Die Skelett-Methode ist davon ausgenommen - die prinzipielle Struktur des Algorithmus ist beizubehalten,
 also nicht zu verändern.
 
 
-#### Beispiele:
+#### Conceptual Example:
 
-Die Beispiele zu diesem Pattern orientieren sich an:
+Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
-[https://refactoring.guru/design-patterns/strategy](https://refactoring.guru/design-patterns/strategy/java/example)
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/template-method/cpp/example#example-0)
+
+und
+
+[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Template)
+
+vor.
 
 ---
 
