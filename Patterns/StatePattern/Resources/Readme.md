@@ -38,7 +38,7 @@ Es besteht im Wesentlichen aus drei Teilen:
   * **ConcreteState**: Konkrete Implementierung der `StateBase`-Klasse.
     Die Funktionalität dieser Objekte wird von der Kontextklasse genutzt.
 
-<img src="dp_state_pattern.png" width="500">
+<img src="dp_state_pattern.svg" width="600">
 
 Abbildung 1: Schematische Darstellung des *State Patterns*.
 

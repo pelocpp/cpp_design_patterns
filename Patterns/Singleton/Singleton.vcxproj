@@ -145,6 +145,7 @@
     <ClCompile Include="ConceptualExample02.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dp_singleton_pattern.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>

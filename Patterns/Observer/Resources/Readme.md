@@ -45,15 +45,15 @@ um *Subscriber* zu dieser Liste hinzuzufügen und aus dieser wieder zu entfernen.
 
 #### Struktur (UML):
 
-<img src="dp_observer_01.png" width="400">
+<img src="dp_observer_01.svg" width="400">
 
 Abbildung 1: Schematische Darstellung des *Observer Pattern Musters*: An- und Abmelden.
 
-<img src="dp_observer_02.png" width="500">
+<img src="dp_observer_02.svg" width="500">
 
 Abbildung 2: Schematische Darstellung des *Observer Pattern Musters*: Benachrichtigungen.
 
-<img src="dp_observer_03.png" width="700">
+<img src="dp_observer_03.svg" width="700">
 
 Abbildung 3: Schematische Darstellung des *Observer Pattern Musters*: Abstraktion des Observers mittels Schnittstelle `IObserver`. 
 

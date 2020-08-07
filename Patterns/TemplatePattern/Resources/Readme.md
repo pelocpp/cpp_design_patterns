@@ -39,7 +39,7 @@ Das *Template Method Pattern* ermöglicht die Realisierung von variierenden Teils
 
 #### Struktur (UML):
 
-<img src="dp_template_method_pattern.png" width="600">
+<img src="dp_template_method_pattern.svg" width="600">
 
 Abbildung: Schematische Darstellung des *Template Method Patterns*.
 

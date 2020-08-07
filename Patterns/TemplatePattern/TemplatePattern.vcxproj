@@ -150,6 +150,7 @@
     <ClInclude Include="Twitter.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dp_template_method_pattern.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>

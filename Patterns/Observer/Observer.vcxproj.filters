@@ -35,6 +35,15 @@
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_observer_01.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_observer_02.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_observer_03.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_observer_01.png">

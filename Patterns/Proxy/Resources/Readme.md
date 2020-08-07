@@ -36,7 +36,7 @@ Es besteht im Wesentlichen aus drei Teilen:
     Die Client-Anwendung ruft Methoden an der `Proxy`-Klasse aus,
     die an entsprechende Methoden des `RealSubject`-Objekts transferiert werden.
 
-<img src="dp_proxy_pattern.png" width="400">
+<img src="dp_proxy_pattern.svg" width="500">
 
 Abbildung 1: Schematische Darstellung des *Proxy Patterns*.
 

@@ -55,7 +55,7 @@ Es besteht nur aus einer einzigen Klasse:
     die pro Aufruf eine einzelne Instanz zurückgibt (Referenz, Zeiger),
     die in einer privaten Variablen residiert.
 
-<img src="dp_singleton_pattern.png" width="300">
+<img src="dp_singleton_pattern.svg" width="300">
 
 Abbildung 1: Schematische Darstellung des *Singleton Patterns*.
 
