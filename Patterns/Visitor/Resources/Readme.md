@@ -8,7 +8,7 @@
 
 Das *Visitor Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 das eine Menge strukturierter Daten von den Funktionen trennt,
-die auf ihr ausgeführt werden können. Dies unterstützt zum einen eine lose Kopplung
+die auf ihr ausgeführt werden. Dies unterstützt zum einen eine lose Kopplung
 und es ermöglicht zum anderen das Hinzufügen zusätzlicher Operationen, ohne an den Datenklassen Änderungen vornehmen zu müssen.
 
 #### Problem:
@@ -16,20 +16,14 @@ und es ermöglicht zum anderen das Hinzufügen zusätzlicher Operationen, ohne an d
 Das Ergebnis der Trennung von Objektstruktur und Funktionen (Algorithmen) ist ein Datenmodell
 mit eingeschränkter Funktionalität und einer Gruppe von "*Besuchern*",
 die Operationen auf den Daten ausführen.
-Ein weiterer Vorteil ist die Möglichkeit, einen neuen *Besuchern* hinzufügen zu können,
+Ein weiterer Vorteil ist die Möglichkeit, einen neuen *Besucher* hinzufügen zu können,
 ohne dabei die vorhandene Struktur ändern zu müssen. 
-Die Klassen Daten sind mit Attributen (Eigenschaften, *getter*/*setter*-Methoden) so zu erstellen,
+Die Daten-Klassen sind mit Attributen (Eigenschaften, *getter*/*setter*-Methoden) so zu erstellen,
 dass diese vom "Besucher"-Objekt geeignet verwendet werden können.
 Typischerweise wird das Datenobjekt als Parameter an eine Methode des "Besucher"-Objekts übergeben
 (die Konvention besteht darin, diese Methode `visit` zu nennen).
 
 #### Lösung:
-
-TO BE DONE:
-
-https://refactoring.guru/design-patterns/visitor-double-dispatch
-
-http://www.vishalchovatiya.com/double-dispatch-in-cpp/#:~:text=Double%20Dispatch%20in%20C%2B%2B%20is,tables%20of%20respective%20two%20objects.
 
 
 
@@ -65,7 +59,7 @@ Abbildung 1: Schematische Darstellung des *Visitor Patterns*.
 
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/command/cpp/example#example-0)
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/visitor/cpp/example#example-0)
 
 und 
 
@@ -73,22 +67,15 @@ und
 
 vor.
 
-#### Beginners Example:
+## Weiterarbeit:
 
-#### 'Real-World' Beispiel:
+Eng verwandt mit dem  *Visitor Pattern* ist das  *Double Dispatch* Pattern. Siehe hierzu
 
-To be done:
+[Visitor and Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)
 
+und 
 
-
-"PersonCaretaker"
-
-https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Memento
-
-
-## Literaturhinweise
-
-*Hinweise*:
+[Double Dispatch in C++](http://www.vishalchovatiya.com/double-dispatch-in-cpp/)
 
 ---
 
