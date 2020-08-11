@@ -57,8 +57,6 @@ und
 
 vor.
 
-#### Beginners Example:
-
 #### 'Real-World' Beispiel:
 
 Siehe das Beispiel zu "Robot Movements" unter

@@ -112,16 +112,6 @@ Deshalb ist in der vorliegenden Fallstudie zumindest eine Methode im Stile von `
 aber nicht ein entsprechendes Gegenstück zum Anmelden. Weitere Details der Realisierung
 entnehmen Sie bitte der dritten Variante des *Conceptual Example*.
 
-
-#### Beginners Example:
-
-#### 'Real-World' Beispiel:
-
-
-## Literaturhinweise
-
-*Hinweise*:
-
 ---
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)

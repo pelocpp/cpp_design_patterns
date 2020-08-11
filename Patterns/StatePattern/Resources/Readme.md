@@ -63,14 +63,6 @@ und
 
 vor.
 
-#### Beginners Example:
-
-#### 'Real-World' Beispiel:
-
-## Literaturhinweise
-
-*Hinweise*:
-
 ---
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)

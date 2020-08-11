@@ -53,16 +53,6 @@ und
 
 vor.
 
-#### Beginners Example:
-
-#### 'Real-World' Beispiel:
-
-To be done
-
-## Literaturhinweise
-
-*Hinweise*:
-
 ---
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)
