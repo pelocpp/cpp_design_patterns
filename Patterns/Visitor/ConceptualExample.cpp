@@ -14,13 +14,15 @@ namespace ConceptualExample {
      * component classes. The signature of a visiting method allows the visitor to
      * identify the exact class of the component that it's dealing with.
      */
-    class ConcreteComponentA;
-    class ConcreteComponentB;
+
+    // forward declaration - see short variant below
+    // class ConcreteComponentA;
+    // class ConcreteComponentB;
 
     class VisitorBase {
     public:
-        virtual void visit(const ConcreteComponentA* element) const = 0;
-        virtual void visit(const ConcreteComponentB* element) const = 0;
+        virtual void visit(const class ConcreteComponentA* element) const = 0;
+        virtual void visit(const class ConcreteComponentB* element) const = 0;
     };
 
     /**
@@ -35,7 +37,7 @@ namespace ConceptualExample {
     };
 
     /**
-     * Each Concrete Component must implement the `Accept` method in such a way that
+     * Each Concrete Component must implement the `accept` method in such a way that
      * it calls the visitor's method corresponding to the component's class.
      */
     class ConcreteComponentA : public ElementBase {
