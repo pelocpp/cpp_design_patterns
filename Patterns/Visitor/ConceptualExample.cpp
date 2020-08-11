@@ -43,7 +43,7 @@ namespace ConceptualExample {
     class ConcreteComponentA : public ElementBase {
     public:
         /**
-         * Note that we're calling `visitConcreteComponentA`, which matches the
+         * Note that we're calling `visit (ConcreteComponentA)`, which matches the
          * current class name. This way we let the visitor know the class of the
          * component it works with.
          */
