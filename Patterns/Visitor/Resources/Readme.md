@@ -8,10 +8,34 @@
 
 Das *Visitor Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 das eine Menge strukturierter Daten von den Funktionen trennt,
-die auf ihr ausgeführt werden. Dies unterstützt zum einen eine lose Kopplung
+die auf ihr ausgeführt werden. Dies unterstützt zum einen das Prinzip der "losen Kopplung"
 und es ermöglicht zum anderen das Hinzufügen zusätzlicher Operationen, ohne an den Datenklassen Änderungen vornehmen zu müssen.
 
+#### Prinzip:
+
+Das Muster definiert eine Art Infrastruktur für den Zugriff auf komplexe dynamische Daten- und Objektstrukturen.
+Dabei wird der dynamischen Struktur eine Methodenschnittstelle gegeben, die ein sogenanntes "Besucher"-Objekt entgegennimmt
+und über alle Daten der Struktur leitet. Das "Besucher"-Objekt läuft also an allen Elementen der Struktur entlang
+und wird von den Elementen über eine Methode „akzeptiert“.
+Dabei ruft das Strukturelement eine Methode im "Besucher"-Objekt auf,
+die speziell für den Typ des Strukturelements geschrieben wurde und eine Referenz oder einen Zeiger
+auf das Strukturelement in ihrer Parameterliste entgegennimmt.
+Damit hat der Visitor wiederum die Chance eine Operation auf das Strukturelement auszuführen
+und dabei auf dessen Typ zu reagieren.
+
+Der Sinn des Visitors besteht darin, die eigentliche Operation auf die Daten von der Traver­sierung
+über die Verwaltungs­struktur zu trennen. Aus der Entkopplung dieser beiden Aspekte entstehen
+Freiheitsgrade für Variationen derselben.
+
+
 #### Lösung:
+
+Die Traver­sierung wird durch die erwähnte Infra­struktur aus Methoden übernommen.
+Die durch den Visitor transpor­tierte Operation wird in einer Kindklasse der Visitor­schnitt­stelle implementiert.
+Damit lassen sich beliebige Operationen definieren
+und durch den allgemeinen Traversierungs­mechanismus in die Objekt­struktur tragen.
+Mit dem Namen des Visitors wird das Verhalten des Musters gewürdigt.
+Das Visitor­objekt geht die Objekte in der Objekt­struktur „besuchen“.
 
 Das Ergebnis der Trennung von Objektstruktur und Funktionen (Algorithmen) ist ein Datenmodell
 mit eingeschränkter Funktionalität und einer Gruppe von "*Besuchern*",
