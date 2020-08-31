@@ -24,7 +24,7 @@ namespace ConceptualExample02 {
          * operator.
          */
     private:
-        static Singleton* m_pinstance;
+        static Singleton* m_instance;
         static std::mutex m_mutex;
 
     protected:
@@ -35,12 +35,12 @@ namespace ConceptualExample02 {
 
     public:
         /**
-         * Singletons should not be cloneable.
+         * Singletons should not be cloneable!
          */
         Singleton(Singleton& other) = delete;
 
         /**
-         * Singletons should not be assignable.
+         * Singletons should not be assignable!
          */
         void operator=(const Singleton&) = delete;
 
@@ -52,6 +52,7 @@ namespace ConceptualExample02 {
          */
 
         static Singleton* getInstance(const std::string& value);
+        static Singleton* getInstanceEx(const std::string& value);
 
         /**
          * Finally, any singleton should define some business logic, which can be
@@ -67,44 +68,40 @@ namespace ConceptualExample02 {
         }
     };
 
+    Singleton* Singleton::m_instance{ nullptr };
+    std::mutex Singleton::m_mutex;
+
     /**
      * Static methods should be defined outside the class.
      */
 
-    Singleton* Singleton::m_pinstance{ nullptr };
-    std::mutex Singleton::m_mutex;
-
-    /**
-     * The first time we call getInstance we will lock the storage location
-     *      and then we make sure again that the variable is null and then we
-     *      set the value.
-     */
+    // simple implementation
     Singleton* Singleton::getInstance(const std::string& value)
     {
-        if (m_pinstance == nullptr)
+        if (m_instance == nullptr) {
+            m_instance = new Singleton(value);
+        }
+
+        return m_instance;
+    }
+
+    /**
+     * The first time we call getInstanceEx we will lock the storage location
+     * and then we make sure again that the variable is null and then we
+     * set the value.
+     */
+    Singleton* Singleton::getInstanceEx(const std::string& value)
+    {
+        if (m_instance == nullptr)
         {
-            std::lock_guard<std::mutex> lock(m_mutex);
-            if (m_pinstance == nullptr)  // <=== NOTE: double-check of m_pinstance being nullptr
+            std::scoped_lock<std::mutex> lock{ m_mutex };
+            if (m_instance == nullptr)  // <=== NOTE: double-check of m_instance being nullptr
             {
-                m_pinstance = new Singleton(value);
+                m_instance = new Singleton(value);
             }
         }
 
-        return m_pinstance;
-    }
-
-    void threadFoo() {
-        // Following code emulates slow initialization.
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-        Singleton* singleton = Singleton::getInstance("FOO");
-        std::cout << singleton->value() << "\n";
-    }
-
-    void threadBar() {
-        // Following code emulates slow initialization.
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-        Singleton* singleton = Singleton::getInstance("BAR");
-        std::cout << singleton->value() << "\n";
+        return m_instance;
     }
 }
 
@@ -112,15 +109,20 @@ void test_singleton_02()
 {
     using namespace ConceptualExample02;
 
-    std::cout 
-        << "Same value, then singleton was reused (!!!)\n" <<
-        "Different values, then 2 singletons were created (???)\n\n" <<
-        "RESULT:\n";
+    Singleton* singleton1 = Singleton::getInstance("foo");
+    Singleton* singleton2 = Singleton::getInstance("bar");
 
-    std::thread t1(threadFoo);
-    std::thread t2(threadBar);
-    t1.join();
-    t2.join();
+    std::cout << std::boolalpha << (singleton1 == singleton2) << std::endl;
+
+    Singleton* singleton3 = Singleton::getInstanceEx("bar");
+    Singleton* singleton4 = Singleton::getInstanceEx("bar");
+
+    std::cout << std::boolalpha << (singleton3 == singleton4) << std::endl;
+
+    std::cout << singleton1->value() << std::endl;
+    std::cout << singleton2->value() << std::endl;
+    std::cout << singleton3->value() << std::endl;
+    std::cout << singleton4->value() << std::endl;
 }
 
 // ===========================================================================

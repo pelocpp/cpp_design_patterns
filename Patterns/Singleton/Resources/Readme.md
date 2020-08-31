@@ -25,11 +25,11 @@ würde dies zu mehreren Zugriffspunkten führen und damit zu Dateninkonsistenzen f
   * `HttpContext`-Klasse (Java, C# und andere).
  
 Ein weiteres Beispiel für Singletons sind Klassen wie zum Beispiel `Color`.
-Würde man - zum Beispiel bei jeder Notwendigkeit im Gebrauch einer Farbe wie zum Beispiel *rot* -
+Würde man - zum Beispiel bei jeder Notwendigkeit im Gebrauch einer Farbe wie *rot* -
 ein entsprechendes `Color`-Objekt erzeugen, würde man die Speicherplatzanforderungen
 dieser Anwendung nicht mehr in den Griff bekommen. 
 
-Aus diesem Grund gibt es in den entsprechenden Frameworks (JSEE, .NET) für diesen
+Aus diesem Grund gibt es in den entsprechenden Frameworks (J2SE, .NET) für diesen
 Anwendungsfall zugeschnittene (leicht
 modifizierte `getSingleton`) Methoden, die für jeweils eine Farbe immer dasselbe Objekt
 zurückliefern:
@@ -58,6 +58,54 @@ Es besteht nur aus einer einzigen Klasse:
 <img src="dp_singleton_pattern.svg" width="300">
 
 Abbildung 1: Schematische Darstellung des *Singleton Patterns*.
+
+#### Double-Checked Locking / Doppelt überprüfte Sperrung:
+
+Eine *doppelt überprüfte Sperrung* (englisch *double-checked locking*) ist ein Muster in der Softwareentwicklung,
+welches dazu dient den Zugriff auf ein gemeinsames Objekt durch mehrere gleichzeitig laufende Threads zu regeln.
+
+Die klassische Realisierung der `getInstance`-Methode weist einen kleinen Schönheitsfehler auf:
+
+```cpp
+Singleton* Singleton::getInstance()
+{
+    {
+        std::scoped_lock<std::mutex> lock{ m_mutex };
+        if (m_instance == nullptr) {
+            m_instance = new Singleton();
+        }
+    }
+
+    return m_instance;
+}
+```
+
+Das Erzeugen des (einzigen) Objekts erfolgt thread-sicher, so weit, so gut. Der Schönheitsfehler dabei ist,
+dass der Zugriff auf das Objekt (präziser: der lesende Zugriff zum Erlangen einer Zeigervariaben, die auf das Objekt zeigt)
+über diesselbe Methode (!) aber sehr oft geschehen kann und damit auch
+die lesenden Zugriffe auf das Singleton-Objekt thread-sicher ausgeführt werden, was überflüssig ist und
+unnötige Rechenzeit beansprucht.
+
+Die `getInstance`-Methode sollte deshalb mit einer so genannten *doppelt überprüften Sperrung*
+realisiert werden. Hier wird nur das Erzeugen des Singleton-Objekts thread-sicher ausgeführt,
+der (lesende) Zugriff auf die Zeigervariabe des Objekts wird ohne Sperre durchgeführt:
+
+```cpp
+Singleton* Singleton::getInstance()
+{
+    if (m_instance == nullptr)
+    {
+        std::scoped_lock<std::mutex> lock{ m_mutex };
+        if (m_instance == nullptr)  // <= NOTE: double-check of m_instance being nullptr
+        {
+            m_instance = new Singleton(value);
+        }
+    }
+
+    return m_instance;
+}
+```
+
 
 #### Conceptual Example:
 
