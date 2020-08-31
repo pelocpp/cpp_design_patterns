@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample03.h // State Pattern
+// ConceptualExample02.h // State Pattern
 // ===========================================================================
 
 namespace ConceptualExample02 {

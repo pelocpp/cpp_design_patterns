@@ -54,11 +54,11 @@ Das folgende UML-Diagramm beschreibt eine Implementierung des *State Patterns*.
 Es besteht im Wesentlichen aus drei Teilen:
 
   * **Context**: Diese Klasse hat Zugriff auf das konkrete Statusobjekt,
-    das das Verhalten gemäß seinem aktuellen Status bereitstellt.
+    das das Verhalten gemäß seinem aktuellen Status bereitstellt. Ohne dieses Entwurfsmuster würde die Klasse `Context` die gesamte Funktionalität realisieren müssen.
   * **StateBase**: Abstrakte Klasse für konkrete Zustandsklassen.
-    Sie definiert die Schnittstelle, die von der `Context`-Klasse verwendet wird.
+    Sie definiert die Schnittstelle, die von der `Context`-Klasse verwendet wird und die in irgendeiner Form mit den Zuständen zu tun hat.
   * **ConcreteState**: Konkrete Implementierung der `StateBase`-Klasse.
-    Die Funktionalität dieser Objekte wird von der Kontextklasse genutzt.
+    Die Funktionalität dieser Objekte wird von der `Context`-Klasse genutzt.
 
 <img src="dp_state_pattern.svg" width="600">
 

@@ -12,8 +12,8 @@ namespace ConceptualExample03 {
     /**
      * The base State class declares methods that all Concrete State should
      * implement and also provides a backreference to the Context object, associated
-     * with the State. This backreference can be used by States to transition the
-     * Context to another State.
+     * with the State.
+     * This backreference can be used by States to transition the Context to another State.
      */
 
     class Context;
@@ -50,6 +50,7 @@ namespace ConceptualExample03 {
         ~Context() {
             delete m_state;
         }
+
         /**
          * The Context allows changing the State object at runtime.
          */
@@ -67,41 +68,51 @@ namespace ConceptualExample03 {
         void request1() {
             m_state->handle1();
         }
+
         void request2() {
             m_state->handle2();
         }
     };
 
     /**
-     * Concrete States implement various behaviors, associated with a state of the
-     * Context.
+     * Concrete States implement various behaviors,
+     * associated with a state of the Context.
      */
 
     class ConcreteStateA : public State {
     public:
         void handle1() override;
-
-        void handle2() override {
-            std::cout << "ConcreteStateA handles request2." << std::endl;
-        }
+        void handle2() override;
     };
 
     class ConcreteStateB : public State {
     public:
-        void handle1() override {
-            std::cout << "ConcreteStateB handles request1." << std::endl;
-        }
-        void handle2() override {
-            std::cout << "ConcreteStateB handles request2." << std::endl;
-            std::cout << "ConcreteStateB wants to change the state of the context." << std::endl;
-            m_context->transitionTo(new ConcreteStateA());
-        }
+        void handle1() override;
+        void handle2() override;
     };
 
-    void ConcreteStateA::handle1() {
+    void ConcreteStateA::handle1() 
+    {
         std::cout << "ConcreteStateA handles request1." << std::endl;
         std::cout << "ConcreteStateA wants to change the state of the context." << std::endl;
         m_context->transitionTo(new ConcreteStateB());
+    }
+
+    void ConcreteStateA::handle2()
+    {
+        std::cout << "ConcreteStateA handles request2." << std::endl;
+    }
+
+    void ConcreteStateB::handle1() 
+    {
+        std::cout << "ConcreteStateB handles request1." << std::endl;
+    }
+
+    void ConcreteStateB::handle2() 
+    {
+        std::cout << "ConcreteStateB handles request2." << std::endl;
+        std::cout << "ConcreteStateB wants to change the state of the context." << std::endl;
+        m_context->transitionTo(new ConcreteStateA());
     }
 
     /**
@@ -109,6 +120,8 @@ namespace ConceptualExample03 {
      */
     void clientCode() {
         Context* context = new Context(new ConcreteStateA);
+        context->request1();
+        context->request2();
         context->request1();
         context->request2();
         delete context;

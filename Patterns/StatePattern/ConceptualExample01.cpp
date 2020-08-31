@@ -44,8 +44,8 @@ void test_conceptual_example_01() {
 
     using namespace ConceptualExample01;
 
-    ConcreteStateA* ptr = new ConcreteStateA();
-    Context* context = new Context(ptr);
+    ConcreteStateA* state = new ConcreteStateA();
+    Context* context = new Context(state);
     context->request();
     context->request();
     context->request();

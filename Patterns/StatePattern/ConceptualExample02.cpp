@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample03.cpp // State Pattern
+// ConceptualExample02.cpp // State Pattern
 // ===========================================================================
 
 #include <iostream>
@@ -35,7 +35,6 @@ namespace ConceptualExample02 {
 
     void ConcreteStateB::handle(Context& context)
     {
-       // context->setState (new ConcreteStateA());
         std::shared_ptr<ConcreteStateA> newState = std::make_shared<ConcreteStateA>();
         context.setState(newState);
     }
@@ -47,8 +46,6 @@ void test_conceptual_example_02() {
 
     std::shared_ptr<StateBase> initialState = std::make_shared<ConcreteStateA>();
     Context context(initialState);
-    context.request();
-    context.request();
     context.request();
     context.request();
     context.request();
