@@ -15,8 +15,8 @@ Es scheint, als hätte das Objekt seine Klasse geändert.
 #### Problem:
 
 Dass sich der Zustand eines Objekts verändert, ist zunächst einmal eine grundlegende Eigenschaft der OO-Programmierung.
-Klassen besitzen eine Zustand, über das Verhalten (Methoden) der Klasse ändert sich dieser Zustand.
-Was ist nun das Besondere am   *State Pattern* Entwurfsmuster?
+Klassen besitzen einen Zustand, über das Verhalten (Methoden) der Klasse ändert sich dieser Zustand.
+Was ist nun das Besondere am *State Pattern* Entwurfsmuster?
 
 Manchmal ändert sich ein Zustand eines Objekts so grundlegend, dass man sich wünschen würde, man hätte ein Objekt einer anderen Klasse.
 Und genau das leistet dieses Muster: Wenn sich der Zustand ändert, wird das Objekt ausgetauscht, genauer der Teil, der den Zustand abbildet.
@@ -24,21 +24,23 @@ Und genau das leistet dieses Muster: Wenn sich der Zustand ändert, wird das Obje
 Ein gerne zitiertes Beispiel für dieses Muster ist ein Objekt der Java-Klasse `Thread`.
 Dieses kann eine Reihe sehr unterschiedlicher Zustände annehmen:
 
-<img src="java_thread_states.png" width="400">
+<img src="java_thread_states.png" width="500">
 
 Abbildung 2: Der Lebenszyklus eines `Thread`-Objekts.
 
 Zu Beginn ist ein `Thread`-Objekt noch nicht gestartet (*ready_to_run*). Danach wird es gestartet (*running*) und der Thread läuft,
 bis er sein natürliches Ende erreicht (*dead*). Es kann auch vorkommen, dass der Thread angehalten (*blocked* oder *sleeping*) und wieder fortgesetzt wird (*waiting*).
-Es wird deutlich, dass ein Thread, der gerade inaktiv ist, sich völlig anders verhält als ein Thread, läuft oder sich schon beendet hat.
-Die klassische Herangehensweise an ein derartiges Problem  wären eine Reihe von Zustandsvariablen. 
-Und eine Menge von `if`- und/oder `switch`-Anweisungen, die zerstreut in der Klasse die Komplexität versuchen,
-in den Griff zu bekommen.
+Es wird deutlich, dass ein Thread, der gerade inaktiv ist, sich völlig anders verhält als ein Thread, der läuft oder sich schon beendet hat.
+Die klassische Herangehensweise an ein derartiges Problem  wäre die Festlegung einer Reihe von Zustandsvariablen. 
+Und eine Menge von `if`- und/oder `switch`-Anweisungen, die zerstreut in der Klasse vorliegen und versuchen,
+die Komplexität in den Griff zu bekommen.
 
 #### Lösung:
 
-Mit diesem Entwurfsmuster lässt sich das Verhalten eines Objekts
-als Reaktion auf Änderungen seines internen Zustands ändern.
+Nicht so bei diesem Muster: Das *State Pattern* trennt das eigentliche Objekt und das Objekt, das seinen Zustand verkörpert.
+Ändert sich der Zustand, wird dieses Zustandsobjekt ausgetauscht.
+Da hinter jedem Zustandsobjekt eine Klasse steckt, wird der Code für jeden Zustand fein säuberlich von dem Code der anderen Zustände getrennt.
+
 Das Verhalten ist zur Laufzeit änderbar, ohne dass die für den Zugriff auf das Objekt
 verwendete bzw. vorhandene Schnittstelle sich ändert.
 Die Änderungen sind im Kontext des Objekts verborgen.
