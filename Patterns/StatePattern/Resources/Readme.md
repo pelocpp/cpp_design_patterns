@@ -14,7 +14,27 @@ Es scheint, als hätte das Objekt seine Klasse geändert.
 
 #### Problem:
 
-    
+Dass sich der Zustand eines Objekts verändert, ist zunächst einmal eine grundlegende Eigenschaft der OO-Programmierung.
+Klassen besitzen eine Zustand, über das Verhalten (Methoden) der Klasse ändert sich dieser Zustand.
+Was ist nun das Besondere am   *State Pattern* Entwurfsmuster?
+
+Manchmal ändert sich ein Zustand eines Objekts so grundlegend, dass man sich wünschen würde, man hätte ein Objekt einer anderen Klasse.
+Und genau das leistet dieses Muster: Wenn sich der Zustand ändert, wird das Objekt ausgetauscht, genauer der Teil, der den Zustand abbildet.
+
+Ein gerne zitiertes Beispiel für dieses Muster ist ein Objekt der Java-Klasse `Thread`.
+Dieses kann eine Reihe sehr unterschiedlicher Zustände annehmen:
+
+<img src="java_thread_states.png" width="400">
+
+Abbildung 2: Der Lebenszyklus eines `Thread`-Objekts.
+
+Zu Beginn ist ein `Thread`-Objekt noch nicht gestartet (*ready_to_run*). Danach wird es gestartet (*running*) und der Thread läuft,
+bis er sein natürliches Ende erreicht (*dead*). Es kann auch vorkommen, dass der Thread angehalten (*blocked* oder *sleeping*) und wieder fortgesetzt wird (*waiting*).
+Es wird deutlich, dass ein Thread, der gerade inaktiv ist, sich völlig anders verhält als ein Thread, läuft oder sich schon beendet hat.
+Die klassische Herangehensweise an ein derartiges Problem  wären eine Reihe von Zustandsvariablen. 
+Und eine Menge von `if`- und/oder `switch`-Anweisungen, die zerstreut in der Klasse die Komplexität versuchen,
+in den Griff zu bekommen.
+
 #### Lösung:
 
 Mit diesem Entwurfsmuster lässt sich das Verhalten eines Objekts
@@ -40,7 +60,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 <img src="dp_state_pattern.svg" width="600">
 
-Abbildung 1: Schematische Darstellung des *State Patterns*.
+Abbildung 2: Schematische Darstellung des *State Patterns*.
 
 
 #### Conceptual Example:
