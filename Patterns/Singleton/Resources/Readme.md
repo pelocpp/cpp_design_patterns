@@ -62,7 +62,7 @@ Abbildung 1: Schematische Darstellung des *Singleton Patterns*.
 #### Double-Checked Locking / Doppelt überprüfte Sperrung:
 
 Eine *doppelt überprüfte Sperrung* (englisch *double-checked locking*) ist ein Muster in der Softwareentwicklung,
-welches dazu dient den Zugriff auf ein gemeinsames Objekt durch mehrere gleichzeitig laufende Threads zu regeln.
+welches dazu dient, den Zugriff auf ein gemeinsames Objekt durch mehrere gleichzeitig laufende Threads zu regeln.
 
 Die klassische Realisierung der `getInstance`-Methode weist einen kleinen Schönheitsfehler auf:
 
@@ -81,14 +81,14 @@ Singleton* Singleton::getInstance()
 ```
 
 Das Erzeugen des (einzigen) Objekts erfolgt thread-sicher, so weit, so gut. Der Schönheitsfehler dabei ist,
-dass der Zugriff auf das Objekt (präziser: der lesende Zugriff zum Erlangen einer Zeigervariaben, die auf das Objekt zeigt)
-über diesselbe Methode (!) aber sehr oft geschehen kann und damit auch
+dass der Zugriff auf das Objekt (präziser: der lesende Zugriff zum Erlangen einer Zeigervariablen, die auf das Objekt zeigt)
+über dieselbe Methode (!) aber sehr oft geschehen kann und damit auch
 die lesenden Zugriffe auf das Singleton-Objekt thread-sicher ausgeführt werden, was überflüssig ist und
 unnötige Rechenzeit beansprucht.
 
 Die `getInstance`-Methode sollte deshalb mit einer so genannten *doppelt überprüften Sperrung*
 realisiert werden. Hier wird nur das Erzeugen des Singleton-Objekts thread-sicher ausgeführt,
-der (lesende) Zugriff auf die Zeigervariabe des Objekts wird ohne Sperre durchgeführt:
+der (lesende) Zugriff auf die Zeigervariable des Objekts wird ohne Sperre durchgeführt:
 
 ```cpp
 Singleton* Singleton::getInstance()

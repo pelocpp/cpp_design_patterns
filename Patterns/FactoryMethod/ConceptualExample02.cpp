@@ -7,6 +7,7 @@
 #include <memory>
 
 namespace ConceptualExample02 {
+
     /**
      * The Product interface declares the operations that all concrete products must
      * implement.
@@ -14,7 +15,7 @@ namespace ConceptualExample02 {
     class ProductBase {
     public:
         virtual ~ProductBase() {}
-        virtual std::string Operation() const = 0;
+        virtual std::string operation() const = 0;
     };
 
     /**
@@ -22,14 +23,14 @@ namespace ConceptualExample02 {
      */
     class ConcreteProduct1 : public ProductBase {
     public:
-        std::string Operation() const override {
+        std::string operation() const override {
             return "{ Result of the ConcreteProduct1 }";
         }
     };
 
     class ConcreteProduct2 : public ProductBase {
     public:
-        std::string Operation() const override {
+        std::string operation() const override {
             return "{ Result of the ConcreteProduct2 }";
         }
     };
@@ -40,13 +41,9 @@ namespace ConceptualExample02 {
      * implementation of this method.
      */
     class FactoryBase {
-        /**
-         * Note that the FactoryBase may also provide some
-         * default implementation of the factory method.
-         */
     public:
         virtual ~FactoryBase() {};
-        virtual std::shared_ptr<ProductBase> FactoryMethod() const = 0;
+        virtual std::shared_ptr<ProductBase> factoryMethod() const = 0;
 
         /**
          * Note that the FactoryBase's class primary responsibility is
@@ -57,11 +54,12 @@ namespace ConceptualExample02 {
          */
         std::string someOperation() const {
             // call the factory method to create a Product object.
-            std::shared_ptr<ProductBase> product = this->FactoryMethod();
-            // now, use the product.
-            std::string result = 
-                "FactoryBase: The same factory's code has just worked with " + product->Operation();
-            return result;
+            std::shared_ptr<ProductBase> product = this->factoryMethod();  // <= abstract method (!)
+
+            // now, use the product:
+            std::string result1 = product->operation();
+            std::string result2 = "FactoryBase: This factory's code has just created a " + result1;
+            return result2;
         }
     };
 
@@ -76,7 +74,7 @@ namespace ConceptualExample02 {
          * way the FactoryBase can stay independent of concrete product classes.
          */
     public:
-        std::shared_ptr<ProductBase> FactoryMethod() const override {
+        std::shared_ptr<ProductBase> factoryMethod() const override {
             std::shared_ptr<ProductBase> product = std::make_shared<ConcreteProduct1>();
             return product;
         }
@@ -84,7 +82,7 @@ namespace ConceptualExample02 {
 
     class ConcreteFactory2 : public FactoryBase {
     public:
-        std::shared_ptr<ProductBase> FactoryMethod() const override {
+        std::shared_ptr<ProductBase> factoryMethod() const override {
             std::shared_ptr<ProductBase> product = std::make_shared<ConcreteProduct2>();
             return product;
         }
@@ -96,27 +94,27 @@ namespace ConceptualExample02 {
      * via the base interface, you can pass it any FactoryBase's subclass.
      */
     void clientCode(const std::shared_ptr<FactoryBase> factory) {
-        // ...
+
         std::cout
-            << "Client: I'm not aware of the factory's class, but it still works." 
+            << "Client (doesn't know the factory's concrete class type)" 
             << std::endl 
             << factory->someOperation() << std::endl;
-        // ...
     }
 }
 
 /**
- * The Application picks a factory's type depending on the configuration or
- * environment.
+ * The Application picks a factory's type
+ * depending on the configuration or environment.
  */
 void test_conceptual_example_02() {
     using namespace ConceptualExample02;
 
-    std::cout << "App: Launched with the ConcreteFactory1." << std::endl;
+    std::cout << "Example launched with ConcreteFactory1:" << std::endl;
     std::shared_ptr<FactoryBase> factory1 = std::make_shared<ConcreteFactory1>();
     clientCode(factory1);
     std::cout << std::endl;
-    std::cout << "App: Launched with the ConcreteFactory2." << std::endl;
+
+    std::cout << "Example launched with ConcreteFactory2:" << std::endl;
     std::shared_ptr<FactoryBase> factory2 = std::make_shared<ConcreteFactory2>();
     clientCode(factory2);
 }

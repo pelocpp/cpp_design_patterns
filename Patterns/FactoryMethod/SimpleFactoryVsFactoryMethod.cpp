@@ -46,8 +46,8 @@ namespace SimpleFactoryVsFactoryMethod {
 
         virtual void orderTV() final {
 
-            createTelevision();
-            int charge = shippingCharge();
+            createTelevision();              // <= abstract method (!)
+            int charge = shippingCharge();   // <= abstract method (!)
             std::cout << "Shipping charge: " << charge << " Euro" << std::endl;
         }
 
@@ -86,15 +86,15 @@ namespace SimpleFactoryVsFactoryMethod {
     }
 }
 
-// The Application picks a factory's type depending on the configuration or environment
 void test_conceptual_example_03() {
     using namespace SimpleFactoryVsFactoryMethod;
 
-    std::cout << "App: Launched with the LEDTVFactory.\n";
+    std::cout << "Example launched with the LEDTVFactory.\n";
     std::shared_ptr<AbstractFactory> factory1 = std::make_shared<LEDTVFactory>();
     clientCode(factory1);
     std::cout << std::endl;
-    std::cout << "App: Launched with the OledTVFactory.\n";
+
+    std::cout << "Example launched with the OledTVFactory.\n";
     std::shared_ptr<AbstractFactory> factory2 = std::make_shared<OledTVFactory>();
     clientCode(factory2);
 }

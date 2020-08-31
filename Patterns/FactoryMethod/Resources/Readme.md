@@ -7,8 +7,9 @@
 #### Ziel / Absicht:
 
 Das *Factory Method Pattern* ist ein Entwurfsmuster, mit dem Objekte erstellt werden können,
-ohne den Objekttyp anzugeben, der im Code erstellt werden soll.
-Eine Factory-Klasse enthält eine Methode, mit der der erstellte Typ zur Laufzeit ermittelt werden kann.
+ohne den Objekttyp anzugeben, der hierzu verwendet werden soll.
+Das Entwurfsmuster definiert zuallererst eine Methode, die ein Objekt erzeugt.
+Welche Klasse hierbei herangezogen wird, entscheidet die konkrete Klasse, die diese Methode implementiert.
 
 #### Lösung:
 
@@ -17,6 +18,9 @@ Das *Factory*-Entwurfsmuster definiert eine Schnittstelle zum Erstellen eines Ob
 und überlässt die Auswahl des konkreten Klassentyps den Unterklassen.
 Das Entwurfsmuster macht ein Software-Design leichter anpassbar und weniger abhängig 
 von anderen Klassen.
+
+In dem Muster kommen zwei Vererbungshierarchien vor: eine mit den *Factory*-Klassen und
+eine zweite mit den zu erzeugenden Objekten. Diese werden in dem Muster häufig als *Produkte* bezeichnet.
 
 #### Struktur (UML):
 
@@ -71,7 +75,8 @@ Die beiden Entwurfsmuster *Abstract Factory* und *Factory Method* sind nicht
 miteinander zu verwechseln.
 
 Sie haben zumindest gemeinsam, dass sie beide den Client von konkreten Typen entkoppeln.
-Der Client kennt nur die Schnittstelle zur Factory und den Produkten. Welche Produkte konkret erstellt werden, entscheidet die Unterklasse/Implementierung der Schnittstelle. Der Client stützt sich allein auf Abstraktion.
+Der Client kennt nur die Schnittstelle zur *Factory* und den Produkten. Welche Produkte konkret erstellt werden,
+entscheidet die Unterklasse/Implementierung der Schnittstelle. Der Client stützt sich allein auf Abstraktion.
 
 Damit zu den Unterschieden:
 
@@ -83,7 +88,8 @@ Damit zu den Unterschieden:
 
 **Factory Method**<br/>
   * Definiert eine Schnittstelle zum Erstellen eines Objekts, aber lässt
-    die Unterklassen entscheiden, welche Klasse instanziiert werden soll. Mit dem *Factory Method Pattern*  kann eine Klasse die Instanziierung auf Unterklassen verschieben.
+    die Unterklassen entscheiden, welche Klasse instanziiert werden soll.
+    Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterklassen verschieben.
   * Schmale Schnittstelle.
   * Schnittstelle ist oft abstrakt und enthält generischen Code (Herstellungscode, den alle Produkte durchlaufen müssen).
  
