@@ -72,7 +72,7 @@ Das oben zitierte Beispiel eines MediaPlayers finden Sie im Quellcode exemplaris
     Diese Implementierung verwendet das Prinzip der Komposition von Objekten:
     Der Adapter implementiert die Schnittstelle eines Objekts, die für den Client relevant sind.
     Die anderen Objekte werden "umhüllt", deren Funktionalität ist über die eine bekannte Schnittstelle nach außen zu transportieren.
-    Der Zugriff auf die - schnittstellentechnisch gesehen - inkompatiblen Funktion dieser Objekt ist die eigentliche Dienstleistung des Adapter-Objekts.
+    Der Zugriff auf die - schnittstellentechnisch gesehen - inkompatiblen Funktion dieser Objekte ist die eigentliche Dienstleistung des Adapter-Objekts.
     Dieser Ansatz kann in allen gängigen Programmiersprachen implementiert werden ("*has-a*" Relationship / "*hat-ein*" Beziehung).
 
   * **Klassen Adapter Ansatz**:

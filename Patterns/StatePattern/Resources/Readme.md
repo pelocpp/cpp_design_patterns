@@ -92,7 +92,11 @@ von Matthias Geirhos findet sich zu diesem Entwurfsmuster ein Beispiel zur Model
 Einem Bewerbungsprozess können in naheliegender Weise Zustände wie *Eingegangen*, *Eingeladen* usw. zugeordnet werden.
 Sehen Sie die detaillierte Beispielbeschreibung ab Seite 336 an.
 
-Schreiben Sie den Beispielcode aus dem Buch in ein C++-Programm um.
+Schreiben Sie den Beispielcode aus dem Buch in ein C++-Programm um. Verwenden Sie hierzu die Klassennamen aus Abbildung 3:
+
+<img src="dp_state_pattern_job_application.svg" width="700">
+
+Abbildung 3: Ein Bewerbungsprozess modelliert mit dem *State Pattern*.
 
 Erstellen Sie eine Testmethode, die exemplarisch eine Bewerbung vom Status *Received* (*Eingegangen*) bis zum Status *Hired* (*Eingestellt*) verfolgt.
 
