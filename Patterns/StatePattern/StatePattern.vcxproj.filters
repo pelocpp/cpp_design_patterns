@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{28cfce18-f9a1-4903-beda-c33387b50983}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\JobApplication">
+      <UniqueIdentifier>{2762b449-7e1a-4e1e-bc25-aee5321471ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample01.cpp">
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="ConceptualExample03.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="JobApplication.cpp">
+      <Filter>Source Files\JobApplication</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

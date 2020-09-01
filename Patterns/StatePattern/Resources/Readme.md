@@ -85,6 +85,15 @@ und
 
 vor.
 
+#### 'Real-World' Example:
+
+Im Buch [Entwurfsmuster: Das umfassende Handbuch](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
+von Matthias Geirhos findet sich zu diesem Entwurfsmuster ein Beispiel zur Modellierung eines Bewerbungsprozesses vor.
+Einem Bewerbungsprozess können in naheliegender Weise Zustände wie *Eingegangen*, *Eingeladen* usw. zugeordnet werden.
+Sehen Sie die detaillierte Beispielbeschreibung ab Seite 336 an.
+
+Schreiben Sie den Beispielcode aus dem Buch in ein C++-Programm um.
+
 ---
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)
