@@ -94,6 +94,8 @@ Sehen Sie die detaillierte Beispielbeschreibung ab Seite 336 an.
 
 Schreiben Sie den Beispielcode aus dem Buch in ein C++-Programm um.
 
+Erstellen Sie eine Testmethode, die exemplarisch eine Bewerbung vom Status *Received* (*Eingegangen*) bis zum Status *Hired* (*Eingestellt*) verfolgt.
+
 ---
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)
