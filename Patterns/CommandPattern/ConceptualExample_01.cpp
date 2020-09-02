@@ -2,8 +2,6 @@
 // ConceptualExample_01.cpp // Command Pattern
 // ===========================================================================
 
-// https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command
-
 #include <iostream>
 #include <string>
 #include <memory>

@@ -2,8 +2,6 @@
 // ConceptualExample_02.cpp // Command Pattern
 // ===========================================================================
 
-// https://refactoring.guru/design-patterns/command/cpp/example#example-0
-
 #include <iostream>
 #include <string>
 #include <memory>

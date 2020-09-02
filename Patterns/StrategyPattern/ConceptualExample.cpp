@@ -2,8 +2,6 @@
 // ConceptualExample.cpp // Strategy Pattern
 // ===========================================================================
 
-// https://refactoring.guru/design-patterns/strategy/cpp/example
-
 #include <iostream>
 #include <string>
 #include <vector>

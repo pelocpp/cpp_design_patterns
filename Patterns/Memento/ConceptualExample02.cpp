@@ -2,8 +2,6 @@
 // ConceptualExample02.cpp // Memento Pattern
 // ===========================================================================
 
-// https://refactoring.guru/design-patterns/memento/cpp/example#example-0
-
 #include <iostream>
 #include <string>
 #include <memory>
