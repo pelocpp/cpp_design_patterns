@@ -63,8 +63,8 @@ Es besteht im Wesentlichen aus vier Teilen:
 
   * **Component**: Abstrakte Basisklasse für alle konkreten Komponenten und Decorator-Klassen.
     Diese Klasse definiert diejenigen Klassenelemente, die standardmäßig von diesen Klassentypen implementiert werden müssen.
-  * **ConcreteComponent**: Diese Klasse erbt von der Klasse `Component`. Es kann diese Klasse mehrfach geben. Es damit jeweils einen Objekttyp definiert,
-    der von einer Decorator-Klasse umhüllt wird.
+  * **ConcreteComponent**: Diese Klasse erbt von der Klasse `Component`. Es kann diese Klasse mehrfach geben.
+    Es wird damit jeweils einen Objekttyp definiert, der von einer Decorator-Klasse umhüllt werden kann.
   * **DecoratorBase**: Stellt die abstrakte Basisklasse für alle Decorator-Klassen dar. Es wird ein Konstruktor hinzugefügt,
     der ein `Component-Objekt` als Parameter akzeptiert. Das übergebene Objekt ist die Komponente, die umhüllt wird.
     Da das umhüllte Objekt von `Component` erben muss, kann es sich um ein `ConcreteComponent`-Objekt

@@ -103,7 +103,7 @@ public:
 };
 
 /**
- * The client code works with all objects using the Component interface.
+ * The client code works with only with objects using the Component interface.
  * This way it can stay independent of the concrete classes of components
  * it works with.
  */
@@ -129,6 +129,7 @@ void test_conceptual_example() {
      */
     std::shared_ptr<Component> decorator1 = std::make_shared<ConcreteDecoratorA>(component);
     std::shared_ptr<Component> decorator2 = std::make_shared<ConcreteDecoratorB>(decorator1);
+
     std::cout << "Client: Now I've got a decorated component:" << std::endl;
     clientCode(decorator2);
     std::cout << std::endl << std::endl;
