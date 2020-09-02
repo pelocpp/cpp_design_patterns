@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
+    <ClCompile Include="OnlineShop.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dp_visitor_pattern.svg" />
+    <None Include="Resources\dp_visitor_pattern_onlineshop.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

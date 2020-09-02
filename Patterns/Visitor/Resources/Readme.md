@@ -11,21 +11,24 @@ das eine Menge strukturierter Daten von den Funktionen trennt,
 die auf ihr ausgeführt werden. Dies unterstützt zum einen das Prinzip der "losen Kopplung"
 und es ermöglicht zum anderen das Hinzufügen zusätzlicher Operationen, ohne an den Datenklassen Änderungen vornehmen zu müssen.
 
+Im Kern geht es darum, eine Hierarchie von Klassen und Operationen auf diesen Klassen voneinander zu trennen.
+
 #### Prinzip:
 
 Das Muster definiert eine Art Infrastruktur für den Zugriff auf komplexe dynamische Daten- und Objektstrukturen.
 Dabei wird der dynamischen Struktur eine Methodenschnittstelle gegeben, die ein sogenanntes "Besucher"-Objekt entgegennimmt
-und über alle Daten der Struktur leitet. Das "Besucher"-Objekt läuft also an allen Elementen der Struktur entlang
+und über alle Daten der Struktur leitet. Das „Besucher“-Objekt läuft also an allen Elementen der Struktur entlang
 und wird von den Elementen über eine Methode „akzeptiert“.
+Die Konvention besteht darin, diese Methode `accept` zu nennen.
 Dabei ruft das Strukturelement eine Methode im "Besucher"-Objekt auf,
 die speziell für den Typ des Strukturelements geschrieben wurde und eine Referenz oder einen Zeiger
-auf das Strukturelement in ihrer Parameterliste entgegennimmt.
-Damit hat der Visitor wiederum die Chance eine Operation auf das Strukturelement auszuführen
+auf das Strukturelement in ihrer Parameterliste hat.
+Damit hat der Visitor wiederum die Chance, eine Operation auf dem Strukturelement auszuführen
 und dabei auf dessen Typ zu reagieren.
 
 Der Sinn des Visitors besteht darin, die eigentliche Operation auf die Daten von der Traver­sierung
 über die Verwaltungs­struktur zu trennen. Aus der Entkopplung dieser beiden Aspekte entstehen
-Freiheitsgrade für Variationen derselben.
+Freiheitsgrade für Variationen dieses Entwurfsmusters.
 
 
 #### Lösung:
@@ -86,6 +89,38 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Visitor)
 
 vor.
+
+#### 'Real-World' Example:
+
+Im Buch [Entwurfsmuster: Das umfassende Handbuch](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
+von Matthias Geirhos findet sich zu diesem Entwurfsmuster ein Beispiel aus der Welt des Onlinehandels vor.
+Sagen wir, ein Onlinehändler würde Bücher, Spiele und Videos verkaufen.
+Das ist nichts Neues, und ein Warenkorb mit Büchern, Spielen und Videos stellt auch keine große Herausforderung dar.
+
+Nun aber kommen die Methoden ins Spiel. Mit den Elementen eines Warenkorb kann man sehr unterschiedliche Dinge anstellen wie zum Beispiel:
+
+  * Berechnung des Gesamtpreises aller Artikel im Warenkorb,
+  * Zusammenstellung des Inhalts des Warenkorbs als HTML für die WebSite des Onlinehandels,
+  * Erstellung einer Rechnung zum Inhalt des Warenkorbs als PDF,
+  * ...
+
+Und natürlich gibt es noch viele Methoden, die nur einzelnen Klassen (Buch, Spiel, ...) vorbehalten sind.
+
+Damit sind wir im Zentrum des Musters angekommen: Es trennt die Klassenhierarchie von den Operationen, die
+stattdessen in eine zweite Hierarchie wandern. Und anstatt die Operation direkt aufzurufen,
+erstellen wir ein Objekt für diese auszuführende Operation (den so genannten *Visitor*) und übergeben es
+dem Objekt der fachlichen Hierarchie (der so genannten *ObjectStructure*),
+die dann die Operation aufruft.
+
+Studieren Sie den Beispielcode aus dem Buch und führen Sie diesen in ein C++-Programm über. Betrachten Sie hierzu auch Abbildung 2:
+
+<img src="dp_visitor_pattern_onlineshop.svg" width="700">
+
+Abbildung 2: Ein Onlinehandel modelliert mit dem *Visitor Pattern*.
+
+Implementieren Sie zwei *Visitor*-Klassen, eine für die Berechnung des Gesamtpreises aller Artikel im Warenkorb und eine weitere
+zur Darstellung des Inhalts des Warenkorbs in HTML.
+
 
 ## Weiterarbeit:
 

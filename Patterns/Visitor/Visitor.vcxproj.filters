@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{9507cec9-2285-4be5-bdac-96d1b8affcc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\OnlineShop">
+      <UniqueIdentifier>{f3737cd6-36ea-43be-b2a4-dcc35b048538}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp">
@@ -24,12 +27,18 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OnlineShop.cpp">
+      <Filter>Source Files\OnlineShop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\dp_visitor_pattern.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_visitor_pattern_onlineshop.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
