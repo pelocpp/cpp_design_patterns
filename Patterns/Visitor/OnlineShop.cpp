@@ -197,7 +197,9 @@ namespace OnlineShopExample {
                 element->accept(priceVisitor);
             }
 
-            return priceVisitor->getPrice();
+            double totalPrice = priceVisitor->getPrice();
+            delete priceVisitor;
+            return totalPrice;
         }
 
         std::string toHTML()
@@ -210,6 +212,8 @@ namespace OnlineShopExample {
                 element->accept(htmlVisitor);
                 htmlResult += "    "  + htmlVisitor->getHTML() + '\n';
             }
+
+            delete htmlVisitor;
 
             htmlResult += "</body>\n</html>";
             return htmlResult;
@@ -240,6 +244,10 @@ namespace OnlineShopExample {
         std::string html = basket.toHTML();
         std::cout << "ShoppingBasket in HTML: " << totalPrice << std::endl;
         std::cout << html << std::endl;
+
+        delete book;
+        delete game;
+        delete movie;
     }
 }
 
