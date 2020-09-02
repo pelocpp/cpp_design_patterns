@@ -97,10 +97,10 @@ von Matthias Geirhos findet sich zu diesem Entwurfsmuster ein Beispiel aus der W
 Sagen wir, ein Onlinehändler würde Bücher, Spiele und Videos verkaufen.
 Das ist nichts Neues, und ein Warenkorb mit Büchern, Spielen und Videos stellt auch keine große Herausforderung dar.
 
-Nun aber kommen die Methoden ins Spiel. Mit den Elementen eines Warenkorb kann man sehr unterschiedliche Dinge anstellen wie zum Beispiel:
+Nun aber kommen die Methoden ins Spiel. Mit den Elementen eines Warenkorbs kann man sehr unterschiedliche Dinge anstellen wie zum Beispiel:
 
   * Berechnung des Gesamtpreises aller Artikel im Warenkorb,
-  * Zusammenstellung des Inhalts des Warenkorbs als HTML für die WebSite des Onlinehandels,
+  * Zusammenstellung des Inhalts des Warenkorbs als HTML für die Website des Onlinehandels,
   * Erstellung einer Rechnung zum Inhalt des Warenkorbs als PDF,
   * ...
 
