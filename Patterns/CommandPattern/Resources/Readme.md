@@ -59,9 +59,29 @@ vor.
 
 #### 'Real-World' Beispiel:
 
-Siehe das Beispiel zu "Robot Movements" unter
+Für das *Command Pattern* wird in
+["Entwurfsmuster: Das umfassende Handbuch" von Matthias Geirhos](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
+ein Beispiel aus dem Umfeld der Spieleprogrammierung betrachtet: Die Implementierung eines Ausschnitts aus dem Schachspiel,
+soweit er die Verwendung des *Command Pattern* Entwurfsmusters betrifft, siehe Abbildung 2:
 
-https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command
+<img src="dp_command_pattern_chess.svg" width="700">
+
+Abbildung 2: Ein Schachspiel modelliert mit dem *Command Pattern*.
+
+Ein Kommando wird in Abbildung durch die Klasse `Move` dargestellt.
+Davon leiten sich unterschiedliche Kommandos ab, beim Schachspiel reden wir hier von einem bestimmten Spielzug.
+Neben einem "normalen" Zug, der nur die Regeln der jeweiligen Spielfigur zu beachten hat, gibt es auch spezielle Züge
+wie "Rochaden" (engl. *Castling*)
+und die "Umwandlung eines Bauern" (engl. *PromotePawn*).
+
+Ein Spielfeld (engl. *Board*) verwaltet Spielzüge, oder eben Kommandos, um in der Nomenklatur dieses Entwurfsmusters zu bleiben.
+In einer listenartigen Datenstruktur (`std::queue`) kann es mehrere Züge (Kommandos) abspeichern, ohne diese sofort auszuführen.
+
+Für die konkrete Ausführung eines Spielzugs ist die Klasse `ChessPiece` verantwortlich. 
+
+  * Bringen Sie das Beispiel auf Ihrem Rechner zum Laufen.
+  * Überlegen Sie, welche Beteiligten des allgemeines Musters (*Receiver*, *CommandBase*, etc.) welchen Klassen des Schachspiels zuzuordnen sind. 
+  * Ergänzen Sie eine Klasse `PromotePawn` und integrieren Sie das Kommande "Umwandlung des Bauern" in das Spiel.
 
 ---
 

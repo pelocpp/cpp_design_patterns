@@ -138,12 +138,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chess.cpp" />
     <ClCompile Include="ConceptualExample_01.cpp" />
     <ClCompile Include="ConceptualExample_02.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dp_command_pattern.svg" />
+    <None Include="Resources\dp_command_pattern_chess.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
