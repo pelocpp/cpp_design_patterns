@@ -16,9 +16,18 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{e8ab896c-b54c-4f71-8311-bbb1875534c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\FileStream">
+      <UniqueIdentifier>{6a747024-a653-4634-8577-d7466b6e5069}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_raii_idiom_01.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_raii_idiom_02.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -31,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="Dummy.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="RAII_Ofstream.cpp">
+      <Filter>Source Files\FileStream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

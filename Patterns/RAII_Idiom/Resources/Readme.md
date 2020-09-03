@@ -8,8 +8,7 @@
 Bjarne Stroustrup und Andrew Koenig zurückzuführen ist. Die Idee ist, eine Ressource
 (Speicherbereich auf der Halde (*Heap Memory*), Datei, Socket, Mutex, ...) an ein Objekt zu binden
 und den Mechanismus der Objektkonstruktion und -destruktion  (Konstruktor, Destruktor) zu nutzen,
-um  Ressourcen in einem Programm automatisch
-zu verwalten.
+um  Ressourcen in einem Programm automatisch zu verwalten.
 
 #### Prinzip:
 
@@ -222,68 +221,44 @@ Done.
 Die folgenden beiden Abbildungen beschreiben konzeptionell die Allokation
 einer Ressource mit und ohne RAII-Idiom:
 
-<img src="xxx.svg" width="600">
+<img src="dp_raii_idiom_01.svg" width="700">
 
-Abbildung 1: XXX.
+Beachten Sie in Abbildung 1: Es ist offen bzw. Pflicht für den Verwender des Speicherbereichs,
+diesen nach Gebrauch mit dem `delete`-Operator wieder freizugeben.
 
-<img src="xxx.svg" width="600">
+Abbildung 1: Klassische Anforderung für einen Speicherbereich.
 
-Abbildung 2: XXX.
+<img src="dp_raii_idiom_02.svg" width="700">
+
+Abbildung 2: Anforderung eines Speicherbereichs mit dem RAII-Idiom.
+
+In Abbildung 2 können Sie erkennen, dass der Destruktor des RAII-Objekts den allokierten Speicherbereich wieder freigibt.
 
 
 #### Conceptual Example:
 
-Die Anregung zum konzeptionellen Beispiel finden Sie unter
+Die Anregung zum konzeptionellen Beispiel sind teilweise entnommen aus
 
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/visitor/cpp/example#example-0)
+[Design Patterns with C++](https://www.amazon.de/-/en/Fedor-G-Pikus/dp/1788832566)
 
-und 
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Visitor)
-
-vor.
 
 #### 'Real-World' Example:
 
-Im Buch [Entwurfsmuster: Das umfassende Handbuch](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
-von Matthias Geirhos findet sich zu diesem Entwurfsmuster ein Beispiel aus der Welt des Onlinehandels vor.
-Sagen wir, ein Onlinehändler würde Bücher, Spiele und Videos verkaufen.
-Das ist nichts Neues, und ein Warenkorb mit Büchern, Spielen und Videos stellt auch keine große Herausforderung dar.
+In der Datei *RAII_Ofstream.cpp* finden Sie eine Funktion `writeToFile` vor,
+die das RAII-Idiom verwendet.
 
-Nun aber kommen die Methoden ins Spiel. Mit den Elementen eines Warenkorbs kann man sehr unterschiedliche Dinge anstellen wie zum Beispiel:
+Es ist zu beachten, dass der Standard-C++-Klasse `std::ofstream` dieser Mechanismus ebenfalls zu Grunde liegt.
+Diese Eigenschaft ist in der offiziellen Dokumentation leider nur sehr versteckt erwähnt:
 
-  * Berechnung des Gesamtpreises aller Artikel im Warenkorb,
-  * Zusammenstellung des Inhalts des Warenkorbs als HTML für die Website des Onlinehandels,
-  * Erstellung einer Rechnung zum Inhalt des Warenkorbs als PDF,
-  * ...
+In [std::basic_ofstream<CharT,Traits>::close](https://en.cppreference.com/w/cpp/io/basic_ofstream/close)
+heißt es in den Erläuterungen zur Methode `close`:
 
-Und natürlich gibt es noch viele Methoden, die nur einzelnen Klassen (Buch, Spiel, ...) vorbehalten sind.
+*"This function is called by the destructor of basic_ofstream when the stream object goes out of scope
+and is not usually invoked directly."*
 
-Damit sind wir im Zentrum des Musters angekommen: Es trennt die Klassenhierarchie von den Operationen, die
-stattdessen in eine zweite Hierarchie wandern. Und anstatt die Operation direkt aufzurufen,
-erstellen wir ein Objekt für diese auszuführende Operation (den so genannten *Visitor*) und übergeben es
-dem Objekt der fachlichen Hierarchie (der so genannten *ObjectStructure*),
-die dann die Operation aufruft.
+und
 
-Studieren Sie den Beispielcode aus dem Buch und führen Sie diesen in ein C++-Programm über. Betrachten Sie hierzu auch Abbildung 2:
-
-<img src="dp_visitor_pattern_onlineshop.svg" width="700">
-
-Abbildung 2: Ein Onlinehandel modelliert mit dem *Visitor Pattern*.
-
-Implementieren Sie zwei *Visitor*-Klassen, eine für die Berechnung des Gesamtpreises aller Artikel im Warenkorb und eine weitere
-zur Darstellung des Inhalts des Warenkorbs in HTML.
-
-
-## Weiterarbeit:
-
-Eng verwandt mit dem  *Visitor Pattern* ist das  *Double Dispatch* Pattern. Siehe hierzu
-
-[Visitor and Double Dispatch](https://refactoring.guru/design-patterns/visitor-double-dispatch)
-
-und 
-
-[Double Dispatch in C++](http://www.vishalchovatiya.com/double-dispatch-in-cpp/)
+*"Note that any open file is automatically closed when the ofstream object is destroyed."*
 
 ---
 
