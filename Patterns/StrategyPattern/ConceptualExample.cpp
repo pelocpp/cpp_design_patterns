@@ -41,9 +41,7 @@ private:
      * but also provides a setter to change it at runtime.
      */
 public:
-    Context(Strategy* strategy = nullptr) : m_strategy(strategy)
-    {
-    }
+    Context(Strategy* strategy = nullptr) : m_strategy(strategy) {}
 
     ~Context()
     {
@@ -61,19 +59,21 @@ public:
 
     /**
      * The Context delegates some work to the Strategy object instead of
-     * implementing +multiple versions of the algorithm on its own.
+     * implementing multiple versions of the algorithm on its own.
      */
     void doSomeBusinessLogic() const
     {
-        // ...
         std::vector<std::string> someStrings {"A", "E", "C", "B", "D"};
+
         std::cout 
             << "Context: Sorting data using strategy " 
-            << "'" << m_strategy->getName() << "'" << std::endl;
+            << "'" 
+            << m_strategy->getName()
+            << "'"
+            << std::endl;
         
         std::string result = m_strategy->doAlgorithm(someStrings);
-        std::cout << result << "\n";
-        // ...
+        std::cout << result << std::endl;
     }
 };
 
@@ -91,11 +91,16 @@ public:
     std::string doAlgorithm(const std::vector<std::string>& data) const override
     {
         std::string result;
-        std::for_each(std::begin(data), std::end(data), [&result](const std::string& letter) {
-            result += letter;
-            });
+        
+        std::for_each(
+            std::begin(data), 
+            std::end(data), 
+            [&result](const std::string& letter) {
+                result += letter;
+            }
+        );
+        
         std::sort(std::begin(result), std::end(result));
-
         return result;
     }
 };
@@ -110,15 +115,16 @@ public:
     std::string doAlgorithm(const std::vector<std::string>& data) const override
     {
         std::string result;
-        std::for_each(std::begin(data), std::end(data), [&result](const std::string& letter) {
-            result += letter;
-            });
-        std::sort(std::begin(result), std::end(result));
-        for (unsigned i = 0; i < result.size() / 2; i++)
-        {
-            std::swap(result[i], result[result.size() - i - 1]);
-        }
+        std::for_each(
+            std::begin(data), 
+            std::end(data),
+            [&result](const std::string& letter) {
+                result += letter;
+            }
+        );
 
+        std::sort(std::begin(result), std::end(result));
+        std::reverse(std::begin(result), std::end(result));
         return result;
     }
 };

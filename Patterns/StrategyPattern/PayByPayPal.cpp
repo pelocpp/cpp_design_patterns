@@ -16,6 +16,7 @@ PayByPayPal::PayByPayPal() {
 
     m_paypal_DataBase = {
         { "secret", "hans@web.de" },
+        { "peter", "peter@web.de" },
         { "geheim", "sepp@web.de" },
         { "12345678", "georg@web.de" }
     };

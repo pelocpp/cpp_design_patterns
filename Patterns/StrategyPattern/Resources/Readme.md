@@ -17,7 +17,7 @@ Dieses Entwurfsmuster empfiehlt sich für Situationen,
 in denen sich Klassen nur im Verhalten (*Behavior*) unterscheiden.
 In diesem Fall sind die Algorithmen in separate Klassen zu unterteilen,
 die zur Laufzeit ausgewählt werden können.
-Inbesondere kapselt das Entwurfsmuster die Algorithmen und macht sie austauschbar.
+Insbesondere kapselt das Entwurfsmuster die Algorithmen und macht sie austauschbar.
 
 Diese Trennung ermöglicht, dass das Verhalten (Methode, Algorithmus) unabhängig von den Clients ist,
 die es verwenden  und auf diese Weise variieren kann.
@@ -25,7 +25,7 @@ Es ermöglicht es der Anwendung auch, mit dem Fortschreiten der Anwendungsentwick
 weitere, neue Algorithmen nahtlos hinzuzufügen.
 
 Das "Strategie Entwurfsmuster" zählt zur Kategorie der "Verhaltensmuster" / "Behavioral Pattern".
-Es injiziiert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung ("*Object* / *Context*") austauschen lassen.
+Es injiziert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung ("*Object* / *Context*") austauschen lassen.
 
 #### Problem:
 
