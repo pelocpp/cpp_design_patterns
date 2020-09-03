@@ -72,6 +72,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Facade", "Patterns\Facade\F
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mediator", "Patterns\Mediator\Mediator.vcxproj", "{AA54CB96-0C86-4061-830C-45E4213B8A75}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RAII_Idiom", "Patterns\RAII_Idiom\RAII_Idiom.vcxproj", "{E78CE94A-7606-4F5D-8658-C2561F3B1E68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -288,6 +290,14 @@ Global
 		{AA54CB96-0C86-4061-830C-45E4213B8A75}.Release|x64.Build.0 = Release|x64
 		{AA54CB96-0C86-4061-830C-45E4213B8A75}.Release|x86.ActiveCfg = Release|Win32
 		{AA54CB96-0C86-4061-830C-45E4213B8A75}.Release|x86.Build.0 = Release|Win32
+		{E78CE94A-7606-4F5D-8658-C2561F3B1E68}.Debug|x64.ActiveCfg = Debug|x64
+		{E78CE94A-7606-4F5D-8658-C2561F3B1E68}.Debug|x64.Build.0 = Debug|x64
+		{E78CE94A-7606-4F5D-8658-C2561F3B1E68}.Debug|x86.ActiveCfg = Debug|Win32
+		{E78CE94A-7606-4F5D-8658-C2561F3B1E68}.Debug|x86.Build.0 = Debug|Win32
+		{E78CE94A-7606-4F5D-8658-C2561F3B1E68}.Release|x64.ActiveCfg = Release|x64
+		{E78CE94A-7606-4F5D-8658-C2561F3B1E68}.Release|x64.Build.0 = Release|x64
+		{E78CE94A-7606-4F5D-8658-C2561F3B1E68}.Release|x86.ActiveCfg = Release|Win32
+		{E78CE94A-7606-4F5D-8658-C2561F3B1E68}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
