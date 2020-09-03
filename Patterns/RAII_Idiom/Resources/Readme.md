@@ -13,7 +13,7 @@ um  Ressourcen in einem Programm automatisch zu verwalten.
 #### Prinzip:
 
 Jedes Mal, wenn wir eine Ressource erwerben wollen, tun wir dies, indem wir ein Objekt erstellen,
-dass diese Ressource besitzt. Wann immer das Objekt den Gültigkeitsbereich verlässt, wird die Ressource
+das diese Ressource besitzt. Wann immer das Objekt den Gültigkeitsbereich verlässt, wird die Ressource
 automatisch freigegeben.
 
 #### Lösung:
@@ -42,7 +42,7 @@ private:
 
 ---
 
-##### 2. Einfache Anwendung eines RAII-Objekts (*Compound-Statement*):
+##### 2. Einfache Anwendung eines RAII-Objekts (*Compound-Statement* / *Block*):
 
 ```cpp
 void test() 
@@ -65,7 +65,7 @@ Done.
 
 ---
 
-##### 3. Zugriff auf die Ressoure (Überladener `->` und `&` Operator):
+##### 3. Zugriff auf die Ressource (Überladener `->` und `&` Operator):
 
 ```cpp
 void test() 
@@ -126,7 +126,7 @@ Done.
 
 ---
 
-##### 5. Verhalten des RAII-Idioms bei Eintreten eines Ausnahme (*Exception*):
+##### 5. Verhalten des RAII-Idioms bei Eintreten einer Ausnahme (*Exception*):
 
 ```cpp
 void test_04()
