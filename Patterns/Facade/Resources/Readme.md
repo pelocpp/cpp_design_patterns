@@ -13,12 +13,11 @@ die die Implementierungsdetails des zugrunde liegenden Codes verbirgt.
 
 #### Problem:
 
-Das *Facade Pattern* definiert eine vereinfache Schnittstelle zur Benutzung eines Systems (Bibliothek) oder einer Menge von Objekten.
-
 Gegeben sei ein komplexes Subsystem mit vielen Klassen und Abhängigkeiten zwischen ihnen.
 Clients die dieses Subsystem oder Teile davon nutzen möchten,
 müssen sich mit den verschiedenen Schnittstellen der enthaltenen Klassen befassen und die Funktionsweise verstehen.
 Dabei bauen sie zwangläufig viele Abhängigkeiten zu verschiedenen Objekten auf und koppeln sich eng an die Klassen des Subsystems.
+Das *Facade Pattern* definiert eine vereinfachte Schnittstelle zur Benutzung eines Systems (Bibliothek) oder einer Menge von Objekten.
 
 #### Lösung:
 
