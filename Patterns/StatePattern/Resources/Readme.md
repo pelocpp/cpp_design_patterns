@@ -67,15 +67,15 @@ Abbildung 2: Schematische Darstellung des *State Patterns*.
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample01.cpp)
+[Quellcode 1 / .cpp](../ConceptualExample01.cpp)
 
-[Quellcode](../ConceptualExample01.h)
+[Quellcode 1 / .h](../ConceptualExample01.h)
 
-[Quellcode](../ConceptualExample02.cpp)
+[Quellcode 2 / .cpp](../ConceptualExample02.cpp)
 
-[Quellcode](../ConceptualExample02.h)
+[Quellcode 2 / .h](../ConceptualExample02.h)
 
-[Quellcode](../ConceptualExample03.cpp)
+[Quellcode 3 / .cpp](../ConceptualExample03.cpp)
 
 ---
 
@@ -111,6 +111,12 @@ Schreiben Sie den Beispielcode aus dem Buch in ein C++-Programm um. Verwenden Si
 Abbildung 3: Ein Bewerbungsprozess modelliert mit dem *State Pattern*.
 
 Erstellen Sie eine Testmethode, die exemplarisch eine Bewerbung vom Status *Received* (*Eingegangen*) bis zum Status *Hired* (*Eingestellt*) verfolgt.
+
+###### Zusatzaufgabe:
+
+Ergänzen Sie das Prgramm um einen weiteren Status `Assessment`. 
+Im Zustandsdiagramm des Beispiels ist dieser Zustand zwischen die beiden Zustände *Eingeladen* (*Invited*) und *Eingestellt* (*Hired*) einzufügen.
+Eine Einstellung erfolgt somit erst, wenn der Bewerber das Assessment Center erfolgreich durchlaufen hat.
 
 ---
 
