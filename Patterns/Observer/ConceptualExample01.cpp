@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Observer
+// ConceptualExample.cpp // Observer // Variant 1
 // ===========================================================================
 
 #include <iostream>
@@ -74,8 +74,8 @@ namespace ObserverDesignPatternClassic {
         }
 
         void createMessage(std::string message = "<empty>") {
-            this->m_message = message;
-            this->notify();
+            m_message = message;
+            notify();
         }
 
         void howManyObserver() {
@@ -106,13 +106,13 @@ namespace ObserverDesignPatternClassic {
 
     public:
         Observer(Subject& subject) : m_subject(subject) {
-            this->m_subject.attach(this);
+            m_subject.attach(this);
             std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
-            this->m_number = Observer::m_static_number;
+            m_number = Observer::m_static_number;
         }
 
         virtual ~Observer() {
-            std::cout << "Goodbye, I was the Observer \"" << this->m_number << "\".\n";
+            std::cout << "Goodbye, I was the Observer \"" << m_number << "\".\n";
         }
 
         void update(const std::string& m_messagefrom_subject) override {
@@ -126,7 +126,7 @@ namespace ObserverDesignPatternClassic {
         }
 
         void printInfo() {
-            std::cout << "Observer \"" << this->m_number << "\": a new message is available --> " << this->m_messageFromSubject << "\n";
+            std::cout << "Observer \"" << m_number << "\": a new message is available --> " << m_messageFromSubject << "\n";
         }
     };
 

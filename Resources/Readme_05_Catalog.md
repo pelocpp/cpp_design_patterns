@@ -57,7 +57,7 @@ ohne dabei einen Verlust an Flexibilität und Effizient einzugehen.
 |:-------------- |----|
 | [Adapter](../Patterns/AdapterPattern/Resources/Readme.md) | Ermöglicht die Interaktion von Objekten mit inkompatiblen Schnittstellen. |
 | [Bridge](../Patterns/Bridge/Resources/Readme.md) | Aufteilung einer größeren Klasse oder einer Reihe eng verwandter Klassen in zwei separate Hierarchien - Abstraktion und Implementierung. |
-| [Composite Pattern](../Patterns/CompositePattern/Resources/Readme.md) | Das **Composite** Entwurfsmuster ermöglicht es, eine verschachtelte (Baum)Struktur einheitlich zu behandeln, unabhängig davon, ob es sich um ein atomares Element oder um ein Behälter für weitere Elemente handelt. Der Client kann elegant mit der Struktur arbeiten. |
+| [Composite Pattern](../Patterns/CompositePattern/Resources/Readme.md) | Das **Composite** Entwurfsmuster ermöglicht es, eine verschachtelte (Baum)Struktur einheitlich zu behandeln, unabhängig davon, ob es sich um ein atomares Element oder um einen Behälter für weitere Elemente handelt. Der Client kann elegant mit der Struktur arbeiten. |
 | [Decorator](../Patterns/DecoratorPattern/Resources/Readme.md) | Hinzufügen neuen Verhaltens zu Objekten, indem diese Objekte in speziellen Hüllen-Objekten platziert werden, die dieses Verhalten besitzen. |
 | [Facade](../Patterns/Facade/Resources/Readme.md) | Bereitstellung einer vereinfachten Schnittstelle zu einer Bibliothek, einem Framework oder einer Menge von Objekten. |
 | [Flyweight](../Patterns/Flyweight/Resources/Readme.md) | Ermöglicht es, Objekte ressourcenschonend anzulegen, indem diese gemeinsame Zustandsdaten zwischen mehreren Objekten teilen, anstatt derartige Zustandsdaten in jedem Objekt zu duplizieren. |

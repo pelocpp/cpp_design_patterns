@@ -45,7 +45,7 @@ constexpr const char* path1 =
 
 // directory without subdirectories
 constexpr const char* path2 =
-    R"(C:\Development\GitRepositoryCPlusPlus\Cpp_DesignPatterns\CompositePattern)";
+    R"(C:\Development\GitRepositoryCPlusPlus\Cpp_DesignPatterns\Patterns\CompositePattern)";
 
 void test_filesystem_02() {
 

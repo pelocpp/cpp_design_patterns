@@ -55,7 +55,7 @@ Das folgende UML-Diagramm beschreibt eine Implementierung des *Composite Pattern
 Es besteht im Wesentlichen aus drei Teilen:
 
   * **Component**: Stellt eine Abstraktion (abstrakte Klasse, Interface) für alle Komponenten dar (elementare und zusammengesetzte).
-    Manchmal wird neben den eigentlichen Methoden der Komponente auch zusätzlich Methoden für den Zugriff
+    Manchmal werden neben den eigentlichen Methoden der Komponente auch zusätzlich Methoden für den Zugriff
     auf das übergeordnete Element einer Komponente in der rekursiven Struktur definiert.
   * **Composite**: Kernstück des Entwurfsmusters. Es handelt sich gewissermaßen um eine *zusammengesetzte Komponente*.
     Das heißt, dass ein `Composite`-Objekt eine Liste für die Kind-Elemente verwaltet.
