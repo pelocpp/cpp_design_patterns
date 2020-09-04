@@ -72,6 +72,7 @@ Abbildung 1: Schematische Darstellung des *Null Object* Entwurfsmusters.
 [Quellcode](../ConceptualExample.cpp)
 
 
+
 ## Literaturhinweise:1
 
 Die Anregungen zu den Beispielen zum *Null Object Pattern* stammen aus

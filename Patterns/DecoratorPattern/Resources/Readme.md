@@ -112,6 +112,8 @@ vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge
 
 [Quellcode](../ConceptualExample.cpp)
 
+---
+
 
 ## Literaturhinweise
 

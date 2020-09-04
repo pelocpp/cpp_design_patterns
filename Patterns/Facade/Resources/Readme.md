@@ -63,6 +63,8 @@ Abbildung 1: Schematische Darstellung des *Facade Patterns*.
 
 [Quellcode](../ConceptualExample.cpp)
 
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/facade/cpp/example#lang-features)

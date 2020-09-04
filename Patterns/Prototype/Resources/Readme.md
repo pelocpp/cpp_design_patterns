@@ -85,6 +85,8 @@ man spricht dabei auch von der so genannten *"Prototypischen Vererbung"*.
 
 [Quellcode 3](../ConceptualExample03.cpp)
 
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/prototype/cpp/example#example-0)

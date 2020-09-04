@@ -58,6 +58,8 @@ Abbildung 1: Schematische Darstellung des *Bridge Patterns*.
 
 [Quellcode](../ConceptualExample.cpp)
 
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/bridge/cpp/example#example-0)

@@ -45,6 +45,8 @@ aus Abbildung 1.
 
 [Quellcode](../ConceptualExample.cpp)
 
+---
+
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 [https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#AbstractFactory)

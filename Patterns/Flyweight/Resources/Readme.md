@@ -86,6 +86,8 @@ Abbildung 1: Schematische Darstellung des *Flyweight Patterns*.
 
 [Quellcode 2](../ConceptualExample02.cpp)
 
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/flyweight)

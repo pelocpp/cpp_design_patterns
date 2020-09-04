@@ -51,6 +51,8 @@ Abbildung 1: Schematische Darstellung des *Command Patterns*.
 
 [Quellcode 2](../ConceptualExample_02.cpp)
 
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/command/cpp/example#example-0)

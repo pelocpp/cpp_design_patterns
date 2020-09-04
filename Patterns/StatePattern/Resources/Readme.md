@@ -77,6 +77,8 @@ Abbildung 2: Schematische Darstellung des *State Patterns*.
 
 [Quellcode](../ConceptualExample03.cpp)
 
+---
+
 *Hinweis*:
 
 Das *Conceptual Example* liegt in drei Versionen vor:

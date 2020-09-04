@@ -60,6 +60,8 @@ Abbildung 1: Schematische Darstellung des *Chain of Responsibility Patterns*.
 
 [Quellcode](../ConceptualExample.cpp)
 
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/chain-of-responsibility/cpp/example#example-0)

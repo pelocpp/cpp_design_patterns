@@ -113,6 +113,8 @@ Singleton* Singleton::getInstance()
 
 [Quellcode 2](../ConceptualExample02.cpp)
 
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/singleton/cpp/example#example-0)

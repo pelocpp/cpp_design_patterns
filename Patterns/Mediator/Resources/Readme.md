@@ -78,6 +78,8 @@ Das *Conceptual Example* liegt in drei Varianten vor:
 
 [Quellcode 3](../ConceptualExample03.cpp)
 
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/mediator/cpp/example#lang-features)
