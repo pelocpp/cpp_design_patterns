@@ -34,12 +34,12 @@ mit verschiedenen Versionen einer *Shared*-Bibliothek zu gewährleisten.
 In seiner Grundform sieht das Muster wie folgt aus:
 
   * Ausgangspunkt ist eine Klasse (Hauptklasse), die eine zweite Klasse (Hilfsklasse) benutzt und damit in Abhängigkeit zu dieser Klasse steht.
-    Alle Änderungen an der unterlagerten Klasse würde eine Neuübersetzung beider Klassen nach sich ziehen.
+    Alle Änderungen an der unterlagerten Klasse würden eine Neuübersetzung beider Klassen nach sich ziehen.
   * In der Hauptklasse verschieben wir alle privaten Member (vor allem die der Hilfsklasse)
     in einen neu deklarierten Typ - z.B. Klasse `PrivateImpl`.
   * Zu diesem neu deklarierten Typ gibt es in der Header-Datei der Hauptklasse nur eine Forward-Deklaration.
   * Die `PrivateImpl`-Klasse wird in gewohnter Manier in einer *cpp*- und *h*-Datei deklariert und implementiert.
-  * Der Client-Code der Hauptklasse muss nun nicht neu kompiliert werden, wenn sich Änderungen an der Implementierung der privaten Hilfsklasse `PrivateImpl` ergeben
+  * Der Client-Code der Hauptklasse muss nun nicht neu kompiliert werden, wenn sich Änderungen an der **Implementierung** der privaten Hilfsklasse `PrivateImpl` ergeben
     (da sich die Schnittstelle nicht geändert hat). Im Headerfile der Hauptklasse ist die benutzte Hilfsklasse nur über eine Vorwärtsdeklaration bekannt.
   * Im Umkehrschluss bedeutet dies natürlich, dass Änderungen an der Schnittstelle tabu sind.
 
