@@ -102,16 +102,14 @@ namespace ConceptualExample {
         virtual void visit(const ConcreteComponentA* element) const override {
             std::cout 
                 << element->ExclusiveMethodOfConcreteComponentA() 
-                << 
-                " + ConcreteVisitor2"
+                << " + ConcreteVisitor2"
                 << std::endl;
         }
 
         virtual void visit(const ConcreteComponentB* element) const override {
             std::cout
                 << element->SpecialMethodOfConcreteComponentB() 
-                << 
-                " + ConcreteVisitor2"
+                << " + ConcreteVisitor2"
                 << std::endl;
         }
     };
@@ -122,11 +120,10 @@ namespace ConceptualExample {
      * the appropriate operation in the visitor object.
      */
     void ClientCode(std::array<const ElementBase*, 2> components, VisitorBase* visitor) {
-        // ...
+
         for (const ElementBase* comp : components) {
             comp->accept(visitor);
         }
-        // ...
     }
 }
 

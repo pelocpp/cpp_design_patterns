@@ -122,8 +122,11 @@ Studieren Sie den Beispielcode aus dem Buch und führen Sie diesen in ein C++-Pro
 
 Abbildung 2: Ein Onlinehandel modelliert mit dem *Visitor Pattern*.
 
-Implementieren Sie zwei *Visitor*-Klassen, eine für die Berechnung des Gesamtpreises aller Artikel im Warenkorb und eine weitere
+Studieren Sie die Realisierung der zwei *Visitor*-Klassen, eine für die Berechnung des Gesamtpreises aller Artikel im Warenkorb und eine weitere
 zur Darstellung des Inhalts des Warenkorbs in HTML.
+
+Implementieren Sie zwei weitere *Visitor*-Klassen: Eine namens `CountVisitor`, die einfach die Anzahl aller Artikel im Warenkorb bestimmt.
+Und eine zweite Klasse `TextVisitor`, die den Inhalt des Warenkorbs in textueller Form für eine Versandbestätigung zusammenstellt.
 
 
 ## Weiterarbeit:
