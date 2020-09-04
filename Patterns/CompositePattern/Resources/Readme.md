@@ -71,6 +71,10 @@ Abbildung 1: Schematische Darstellung des *Composite Entwurfsmusters*.
 
 #### Conceptual Example:
 
+[Quellcode 1](../ConceptualExample01.cpp)
+
+[Quellcode 2](../ConceptualExample02.cpp)
+
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/composite/cpp/example#example-0)

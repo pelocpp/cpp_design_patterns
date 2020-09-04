@@ -51,6 +51,8 @@ Es bestehen gewisse Ähnlichkeiten zum *Chain of Responsibility* Pattern.
 
 #### Conceptual Example:
 
+[Quellcode](../ConceptualExample.cpp)
+
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 [Design Pattern - Intercepting Filter Pattern](https://www.tutorialspoint.com/design_pattern/intercepting_filter_pattern.htm)

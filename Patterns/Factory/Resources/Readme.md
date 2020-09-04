@@ -58,7 +58,9 @@ Damit zu den Unterschieden:
  
 #### Conceptual Example:
 
-Die Anregung zum konzeptionellen Beispiel finden Sie unter
+[Quellcode](../ConceptualExample.cpp)
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [Factory Method vs. Simple Factory](https://dzone.com/articles/factory-method-vs-simple-factory-1)
 

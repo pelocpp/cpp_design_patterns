@@ -63,7 +63,9 @@ die zur Laufzeit austauschbar sind.
 
 #### Conceptual Example:
 
-Die Anregung zum konzeptionellen Beispiel finden Sie unter
+[Quellcode](../ConceptualExample.cpp)
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/strategy/cpp/example#example-0)
 

@@ -237,9 +237,9 @@ In Abbildung 2 können Sie erkennen, dass der Destruktor des RAII-Objekts den all
 
 #### Conceptual Example:
 
-Die Anregung zum konzeptionellen Beispiel sind teilweise entnommen aus
+Die Anregungen zum konzeptionellen Beispiel sind teilweise entnommen aus
 
-[Design Patterns with C++](https://www.amazon.de/-/en/Fedor-G-Pikus/dp/1788832566)
+[Design Patterns with C++](https://www.amazon.de/-/en/Fedor-G-Pikus/dp/1788832566).
 
 
 #### 'Real-World' Example:

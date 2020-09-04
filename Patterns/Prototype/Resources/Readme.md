@@ -79,7 +79,13 @@ man spricht dabei auch von der so genannten *"Prototypischen Vererbung"*.
 
 #### Conceptual Example:
 
-Die Anregung zum konzeptionellen Beispiel finden Sie unter
+[Quellcode 1](../ConceptualExample01.cpp)
+
+[Quellcode 2](../ConceptualExample02.cpp)
+
+[Quellcode 3](../ConceptualExample03.cpp)
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/prototype/cpp/example#example-0)
 

@@ -23,6 +23,7 @@
     <ProjectGuid>{D59D5682-450F-4DB0-A823-4603F50FB541}</ProjectGuid>
     <RootNamespace>OpaquePointer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Pimpl</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

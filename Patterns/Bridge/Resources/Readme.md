@@ -10,7 +10,6 @@ Das *Bridge Pattern* ist ein strukturelles Entwurfsmuster,
 mit dem sich eine große Klasse oder eine Reihe eng verwandter Klassen in zwei separate Hierarchien aufteilen lassen - 
 Abstraktion und Implementierung - die beide unabhängig voneinander entwickelt werden können.
 
-
 #### Problem:
 
 Das *Bridge Pattern* genießt einen guten Ruf,
@@ -50,7 +49,6 @@ Es besteht im Wesentlichen aus vier Teilen:
   * **ConcreteImplementor**: Diese Klasse erbt von der Klasse `RefinedAbstraction`. Es kann mehr als eine Instanz von `Implementor`-Klassen geben,
     die dieselbe Schnittstelle unterstützen, aber plattformspezifische Funktionen bereitstellen.
 
-
 <img src="dp_bridge_pattern.svg" width="600">
 
 Abbildung 1: Schematische Darstellung des *Bridge Patterns*.
@@ -58,7 +56,9 @@ Abbildung 1: Schematische Darstellung des *Bridge Patterns*.
 
 #### Conceptual Example:
 
-Die Anregung zum konzeptionellen Beispiel finden Sie unter
+[Quellcode](../ConceptualExample.cpp)
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/bridge/cpp/example#example-0)
 

@@ -10,7 +10,6 @@ Das *Decorator Pattern* ist ein strukturelles Entwurfsmuster, das die Funktional
 indem es dieses mit einer oder mehreren Dekorationsklassen "umhüllt", oder gewissermaßen *dekoriert*.
 *Decorator* Klassen können vorhandene Elemente ändern und zur Laufzeit neue Methoden und Eigenschaften hinzufügen.
 
-
 ##### Hinweis:
 
 Das Spezialisieren (Vererbung) einer Klasse ist typischerweise das Erste, was einem einfällt,
@@ -109,9 +108,9 @@ vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge
   * Es ist schwierig, einen Dekorateur so zu implementieren, dass sein Verhalten nicht von der Reihenfolge im Dekorationsstapel abhängt.
   * Der anfängliche Konfigurationscode von Ebenen (Hüllen) sieht möglicherweise nicht sehr gut aus.
 
-#### Beispiel:
+#### Conceptual Example:
 
-Siehe Verzeichnis *ConceptualExample*.
+[Quellcode](../ConceptualExample.cpp)
 
 
 ## Literaturhinweise

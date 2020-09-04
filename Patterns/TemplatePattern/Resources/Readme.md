@@ -60,7 +60,9 @@ also nicht zu verändern.
 
 #### Conceptual Example:
 
-Die Anregung zum konzeptionellen Beispiel finden Sie unter
+[Quellcode](../ConceptualExample.cpp)
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/template-method/cpp/example#example-0)
 

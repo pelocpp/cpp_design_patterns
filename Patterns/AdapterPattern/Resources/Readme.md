@@ -56,6 +56,8 @@ Der Klassenname `Adaptee` steht stellvertretend für Service-Klassen, die es gilt
 
 #### Conceptual Example:
 
+[Quellcode](../ConceptualExample.cpp)
+
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/adapter/cpp/example#example-0)

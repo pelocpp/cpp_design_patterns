@@ -64,7 +64,11 @@ Abbildung 1: Schematische Darstellung des *Memento Patterns*.
 
 #### Conceptual Example:
 
-Die Anregung zum konzeptionellen Beispiel finden Sie unter
+[Quellcode 1](../ConceptualExample01.cpp)
+
+[Quellcode 2](../ConceptualExample02.cpp)
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/memento/cpp/example#example-0)
 

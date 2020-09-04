@@ -60,6 +60,12 @@ Abbildung 3: Schematische Darstellung des *Observer Pattern Musters*: Abstraktio
 
 #### Conceptual Example:
 
+[Quellcode 1](../ConceptualExample01.cpp)
+
+[Quellcode 2](../ConceptualExample02.cpp)
+
+[Quellcode 3](../ConceptualExample03.cpp)
+
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/observer/cpp/example#example-0)
