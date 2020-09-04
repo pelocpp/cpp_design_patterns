@@ -14,8 +14,8 @@ void test_conceptual_example();
 void test_social_networking();
 
 int main() {
-    // test_conceptual_example();
-    test_social_networking();
+    test_conceptual_example();
+    //test_social_networking();
     return 0;
 }
 

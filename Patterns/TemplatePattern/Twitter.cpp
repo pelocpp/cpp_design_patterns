@@ -26,7 +26,7 @@ bool Twitter::logIn(const std::string& username, const std::string& password) {
     }
 
     simulateNetworkLatency();
-    std::cout << std::endl << "LogIn success on Facebook" << std::endl;
+    std::cout << std::endl << "LogIn success on Twitter" << std::endl;
     return true;
 }
 
@@ -43,7 +43,7 @@ bool Twitter::sendData(const std::string& data) {
 }
 
 void Twitter::logOut() {
-    std::cout << "User: '" << m_username << "' was logged out from Facebook" << std::endl;
+    std::cout << "User: '" << m_username << "' was logged out from Twitter" << std::endl;
 }
 
 void Twitter::simulateNetworkLatency() {
