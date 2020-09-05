@@ -39,7 +39,7 @@ public:
 
 /**
  * The client code works with all of the objects via the base interface.
- * The function which requires an AbstractObject instance, and will not accept null
+ * The function which requires an AbstractObject instance, will not accept null
  */
 void clientCode(const AbstractObject& obj) {
     // obj may never be null here
