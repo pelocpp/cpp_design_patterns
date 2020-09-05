@@ -8,7 +8,7 @@
 
 Das *Intercepting Filter Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*, das sich der Vor- und Nachbearbeitung einer Anforderung ("*Request*", typischerweise ein Methodenaufruf)
 zuwendet. 
-Die Vor- und Nachbearbeitung definiert Aktionen, die vor und nach der Kernverarbeitung der Anforderung ausgeführt wurden.
+Die Vor- und Nachbearbeitung definiert Aktionen, die vor und nach der Kernverarbeitung der Anforderung ausgeführt werden.
 Es ist auch möglich, dass eine Aktion entscheiden kann, ob die eigentliche Kernverarbeitung überhaupt ausgeführt wird.
 In der Regel bearbeiten Aktionen den eingehenden oder ausgehenden Datenstrom in einer Form,
 die für die weitere Verarbeitung geeignet ist.
@@ -25,7 +25,7 @@ Verschachtelte `if` / `else`-Anweisungen sind eine Standardstrategie, die aber z
 #### Lösung:
 
 Der Schlüssel zur flexiblen und unauffälligen Lösung dieses Problems besteht in einem einfachen Mechanismus
-zum Hinzufügen und Entfernen von Verarbeitungskomponenten, bei dem jede Komponente eine bestimmte Filteraktion ausführt.
+zum Hinzufügen und Entfernen von Verarbeitungskomponenten, jede Komponente führt eine bestimmte Filteraktion aus.
 
 
 #### Struktur (UML):
