@@ -25,12 +25,6 @@ Dies wird solange fortgesetzt, bis der Befehl verarbeitet wurde oder das Ende de
 Das Objekt, das den Befehl sendet (das Ereignis ausgelöst hat), weiß nicht, welches Objekt in der Kette aller Verarbeitungsobjekte
 den Befehl verarbeitet hat.
 
-Bzgl. der Verarbeitung sind mehrere Szenarien denkbar: Hat ein Verarbeitungsobjekt die Anfrage übernommen,
-kann es das Weiterreichen der Anfrage an die noch vorhandenen Objekte in der Kette unterlassen ("*Single-Cast*" Szenario).
-Umgekehrt ist es denkbar, dass eine Anfrage prinzipiell die gesamte Kette aller Verarbeitungsobjekte durchläuft.
-Kein, ein oder mehrere Objekte können hierbei ihren Beitrag zur Abarbeitung des Ereignisses beitragen.
-
-
 #### Lösung:
 
 Das Pattern ermöglicht es, eine Anfrage an eine Kette von Verarbeitungsobjekten zu senden,
@@ -39,6 +33,10 @@ Die Anfrage wird entlang der Kette weitergeleitet, bis ein oder mehrere Empfänge
 Es kann auch sein, dass das Ereignis von keinem Empfänger bearbeitet wird.
 Der Absender eines Ereignisses ist nicht mit einem bestimmten Empfänger direkt verbunden.
 
+Bzgl. der Verarbeitung sind mehrere Szenarien denkbar: Hat ein Verarbeitungsobjekt die Anfrage übernommen,
+kann es das Weiterreichen der Anfrage an die noch vorhandenen Objekte in der Kette unterlassen ("*Single-Cast*" Szenario).
+Umgekehrt ist es denkbar, dass eine Anfrage prinzipiell die gesamte Kette aller Verarbeitungsobjekte durchläuft.
+Kein, ein oder mehrere Objekte können hierbei ihren Beitrag zur Abarbeitung des Ereignisses beitragen.
 
 #### Struktur (UML):
 
@@ -71,12 +69,6 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Chain)
 
 vor.
-
-## Weiterarbeit:
-
-Siehe das Beispiel unter
-
-https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command
 
 ---
 
