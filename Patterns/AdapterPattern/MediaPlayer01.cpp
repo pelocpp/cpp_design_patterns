@@ -1,5 +1,5 @@
 // ===========================================================================
-// MediaPlayer.cpp // Adapter Pattern // Classical approach (Object adapter)
+// MediaPlayer.cpp // Adapter Pattern // Classical Approach (Object Adapter)
 // ===========================================================================
 
 #include <iostream>
@@ -26,22 +26,23 @@ namespace ApdaterPatternClassicalApproach {
     // concrete class VlcPlayer, implementing interface AdvancedMediaPlayer
     class VlcPlayer : public AdvancedMediaPlayer {
     public:
-        void playVlc(std::string fileName) override {
+        virtual void playVlc(std::string fileName) override
+        {
             std::cout << "Playing vlc file: name = " << fileName << std::endl;
         }
 
         // do nothing
-        void playMp4(std::string fileName) override {}
+        virtual void playMp4(std::string fileName) override {}
     };
 
     // concrete class Mp4Player, implementing interface AdvancedMediaPlayer
     class Mp4Player : public AdvancedMediaPlayer {
     public:
         // do nothing
-        void playVlc(std::string fileName) override {}
+        virtual void playVlc(std::string fileName) override {}
 
-
-        void playMp4(std::string fileName) override {
+        virtual void playMp4(std::string fileName) override
+        {
             std::cout << "Playing mp4 file: name = " << fileName << std::endl;
         }
     };
@@ -82,7 +83,7 @@ namespace ApdaterPatternClassicalApproach {
 
     // ===========================================================================
 
-    // create concrete class 'AudioPlayer' implementing 'MediaPlayer' interface
+    // create class 'AudioPlayer' implementing 'MediaPlayer' interface
     // without adapter addition
     class AudioPlayer : public MediaPlayer {
     public:
@@ -94,14 +95,15 @@ namespace ApdaterPatternClassicalApproach {
         // inbuilt support to play mp3 music files
         if (audioType == std::string("mp3")) {
             std::cout << "Playing mp3 file: name = " << fileName << std::endl;
-            return;
         }
         else {
             std::cout << "Invalid media: " << audioType << " format not supported!" << std::endl;
         }
     }
 
-    // create concrete class 'AudioPlayer' implementing 'MediaPlayer' interface
+    // ===========================================================================
+
+    // create class 'AudioPlayerExtended' implementing 'MediaPlayer' interface
     // with adapter addition
     class AudioPlayerExtended : public MediaPlayer {
     private:
@@ -113,36 +115,34 @@ namespace ApdaterPatternClassicalApproach {
 
     void AudioPlayerExtended::play(std::string audioType, std::string fileName) {
 
-        // inbuilt support to play mp3 music files
         if (audioType == std::string("mp3")) {
+
+            // inbuilt support to play mp3 music files
             std::cout << "Playing mp3 file: name = " << fileName << std::endl;
-            return;
         }
+        else if (audioType == std::string("vlc") or audioType == std::string("mp4")) {
 
-        // use m_mediaAdapter is providing support to play other file formats
-        if (audioType == std::string("vlc") or audioType == std::string("mp4")) {
-
+            // use of m_mediaAdapter is providing support to play other file formats
             m_mediaAdapter = std::make_shared<MediaAdapter>(audioType);
             m_mediaAdapter->play(audioType, fileName);
-            return;
         }
         else {
             std::cout << "Invalid media: " << audioType << " format not supported!" << std::endl;
         }
     }
+
+    /**
+     * The client code supports all classes that follow the MediaPlayer interface.
+     */
+    static void clientCode(std::shared_ptr<MediaPlayer>& player) {
+        player->play("mp3", "beyond the horizon.mp3");
+        player->play("mp4", "alone again.mp4");
+        player->play("vlc", "far far away.vlc");
+        player->play("avi", "mind me.avi");
+    }
 }
 
 // ===========================================================================
-
-/**
- * The client code supports all classes that follow the MediaPlayer interface.
- */
-static void clientCode(std::shared_ptr<ApdaterPatternClassicalApproach::MediaPlayer>& player) {
-    player->play("mp3", "beyond the horizon.mp3");
-    player->play("mp4", "alone again.mp4");
-    player->play("vlc", "far far away.vlc");
-    player->play("avi", "mind me.avi");
-}
 
 void test_media_player_01()
 {
@@ -150,6 +150,7 @@ void test_media_player_01()
     std::shared_ptr <MediaPlayer> audioPlayer1 = std::make_shared<AudioPlayer>();
     clientCode(audioPlayer1);
     std::cout << std::endl;
+
     std::shared_ptr <MediaPlayer> audioPlayer2 = std::make_shared<AudioPlayerExtended>();
     clientCode(audioPlayer2);
     std::cout << std::endl;

@@ -26,19 +26,19 @@ Diese Klassen können Dateien im VLC- und MP4-Format abspielen.
 Wir wollen nun erreichen, dass die `AudioPlayer` Klasse auch die Formate VLC und MP4 wiedergibt.
 Um dies zu erreichen, erstellen wir eine Adapterklasse `MediaAdapter`.
 Diese Klasse `MediaAdapter` implementiert einerseits die `MediaPlayer`-Schnittstelle,
-und damit die Kompatibilität zu dieser Schnittstelle aufrecht zu erhalten. 
+um damit die Kompatibilität zu dieser Schnittstelle aufrecht zu erhalten. 
 Zum Anderen benutzt sie (*hat-sie*) eine Instanz der Klasse `AdvancedMediaPlayer`,
-um auch dies weiteren Formate VLC und MP4 abspielen zu können.
+um auch die weiteren Formate VLC und MP4 abspielen zu können.
 
 Ein Redesign der Klasse `AudioPlayer` verwendet nun die Adapterklasse `MediaAdapter`.
-Die Klasse `AudioPlayer` kennt dabei nicht die tatsächlichen Klasse, die das gewünschte Format wiedergeben können.
+Die Klasse `AudioPlayer` kennt dabei nicht die tatsächlichen Klassen, die das gewünschte Format wiedergeben können.
 Sie reicht allerdings bei Anforderung entsprechender Audiotypen bei Benutzung der Klasse `AudioPlayer`
-diese an die Adapterklasse weiter, so dass die Anforderung ebenfalls unterstützt werden kann.
+diese an die Adapterklasse weiter, so dass die Anforderung doch unterstützt werden kann.
 
 *Hinweis*: Der Clientcode wird bei Einhaltung des Patterns nicht an die konkrete Adapterklasse gekoppelt,
 sondern er darf nur über die vorhandene Clientschnittstelle mit dem Adapter zusammenarbeiten
 (im vorliegenden Beispiel: Schnittstelle `MediaPlayer`). Auf diese Weise lassen sich neue Adapterklassen
-in das Programm einführen, ohne imkompatibel zum vorhandenen Client-Code zu sein!
+in das Programm einführen, ohne inkompatibel zum vorhandenen Client-Code zu sein!
 
 #### Lösung:
 
@@ -46,6 +46,14 @@ Das Pattern steht im Prinzip für eine einzige Klasse (Adapterklasse),
 deren Aufgabe die Verknüpfung von Funktionen / das Weiterreichen unabhängiger oder inkompatibler Schnittstellen ist.
 
 #### Struktur (UML):
+
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Adapter Patterns*.
+Es besteht im Wesentlichen aus vier Teilen:
+
+  * **Client**: Stellt die Klasse dar, die eine inkompatible Schnittstelle verwenden muss. Diese inkompatible Schnittstelle wird von der Klasse `Adaptee` implementiert.
+  * **ITarget**: Definiert eine Schnittstelle, die der Client verwendet.
+  * **Adaptee**: Stellt eine Klasse dar, die eine vom Client benötigte Funktionalität bietet. Typischerweise unterstützt die Adaptee-Klasse die `ITarget`-Schnittstelle nicht.
+  * **Adapter**: Konkrete Implementierung des Adapters. Diese Klasse übersetzt die inkompatible Schnittstelle von `Adaptee` in die Schnittstelle, die der Client verwendet.
 
 <img src="dp_adapter_01.svg" width="700">
 
@@ -70,7 +78,7 @@ vor.
 
 Das oben zitierte Beispiel eines MediaPlayers finden Sie im Quellcode exemplarisch umgesetzt vor.
 
-*Hinweis*: Prinzipiell gibt es für das Adapter Pattern zwei Vorgehensweisen in der realen Umsetzung in einer Programmiersprache:
+*Hinweis*: Prinzipiell gibt es für das Adapter Pattern zwei Vorgehensweisen in der Umsetzung mit einer realen Programmiersprache:
 
   * **Objekt Adapter Ansatz**:
     Diese Implementierung verwendet das Prinzip der Komposition von Objekten:

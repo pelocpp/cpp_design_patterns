@@ -1,5 +1,5 @@
 // ===========================================================================
-// MediaPlayer02.cpp // Adapter Pattern // Class adapter approach
+// MediaPlayer02.cpp // Adapter Pattern // Class Adapter Approach
 // ===========================================================================
 
 #include <iostream>
@@ -36,7 +36,8 @@ namespace ApdaterPatternClassAdapterApproach {
 
     // create concrete class 'AudioPlayer' implementing the 'MediaPlayer' interface
     // without new services additions
-    class AudioPlayer : public MediaPlayer {
+    class AudioPlayer : public MediaPlayer 
+    {
     public:
         void play(std::string audioType, std::string fileName) override;
     };
@@ -61,7 +62,7 @@ namespace ApdaterPatternClassAdapterApproach {
     // Obviously this approach can only be implemented in programming languages
     // that support multiple inheritance, such as C++.
 
-    class MediaAdapter : public MediaPlayer, public VlcPlayer, public Mp4Player {
+    class MediaAdapter : public MediaPlayer, private VlcPlayer, private Mp4Player {
     public:
         // c'tor
         MediaAdapter() = default;
@@ -79,29 +80,27 @@ namespace ApdaterPatternClassAdapterApproach {
         // use new inherited service classes to play additional file formats
         if (audioType == std::string("vlc")) {
             playVlc(fileName);
-            return;
         }
         else if (audioType == std::string("mp4")) {
             playMp4(fileName);
-            return;
         }
         else {
             std::cout << "Invalid media: " << audioType << " format not supported!" << std::endl;
         }
     }
+
+    /**
+     * The client code supports all classes that follow the MediaPlayer interface.
+     */
+    static void clientCode(std::shared_ptr<MediaPlayer>& player) {
+        player->play("mp3", "beyond the horizon.mp3");
+        player->play("mp4", "alone again.mp4");
+        player->play("vlc", "far far away.vlc");
+        player->play("avi", "mind me.avi");
+    }
 }
 
 // ===========================================================================
-
-/**
- * The client code supports all classes that follow the MediaPlayer interface.
- */
-static void clientCode(std::shared_ptr<ApdaterPatternClassAdapterApproach::MediaPlayer>& player) {
-    player->play("mp3", "beyond the horizon.mp3");
-    player->play("mp4", "alone again.mp4");
-    player->play("vlc", "far far away.vlc");
-    player->play("avi", "mind me.avi");
-}
 
 void test_media_player_02()
 {
@@ -109,6 +108,7 @@ void test_media_player_02()
     std::shared_ptr <MediaPlayer> audioPlayer1 = std::make_shared<AudioPlayer>();
     clientCode(audioPlayer1);
     std::cout << std::endl;
+
     std::shared_ptr <MediaPlayer> audioPlayer2 = std::make_shared<MediaAdapter>();
     clientCode(audioPlayer2);
     std::cout << std::endl;

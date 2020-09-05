@@ -63,7 +63,7 @@ static void clientCode(std::shared_ptr<Target> target) {
 
 void test_conceptual_example() {
 
-    std::cout << "Client: I can work just fine with the Target objects" << std::endl;
+    std::cout << "Client: I can work just fine with the Target object" << std::endl;
     std::shared_ptr<Target> target = std::shared_ptr<Target>(new Target{});
     clientCode(target);
 
