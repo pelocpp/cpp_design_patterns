@@ -44,6 +44,9 @@
     <ClCompile Include="RAII_Ofstream.cpp">
       <Filter>Source Files\FileStream</Filter>
     </ClCompile>
+    <ClCompile Include="RAII_File.cpp">
+      <Filter>Source Files\FileStream</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dummy.h">

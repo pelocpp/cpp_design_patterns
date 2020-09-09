@@ -147,6 +147,7 @@
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Dummy.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="RAII_File.cpp" />
     <ClCompile Include="RAII_Ofstream.cpp" />
   </ItemGroup>
   <ItemGroup>
