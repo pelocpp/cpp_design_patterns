@@ -9,15 +9,15 @@
 #include "RenderListStrategy.h"
 #include "RenderHtmlListStrategy.h"
 
-void HtmlListStrategy::start(std::ostringstream& oss) {
+void RenderHtmlListStrategy::start(std::ostringstream& oss) {
     oss << "<ul>\n";
 }
 
-void HtmlListStrategy::end(std::ostringstream& oss) {
+void RenderHtmlListStrategy::end(std::ostringstream& oss) {
     oss << "</ul>\n";
 }
 
-void HtmlListStrategy::addListItem(std::ostringstream& oss, const std::string& item) {
+void RenderHtmlListStrategy::addListItem(std::ostringstream& oss, const std::string& item) {
     oss << "<li>" << item << "</li>\n";
 }
 

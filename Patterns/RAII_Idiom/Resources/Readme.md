@@ -223,10 +223,10 @@ einer Ressource mit und ohne RAII-Idiom:
 
 <img src="dp_raii_idiom_01.svg" width="700">
 
+Abbildung 1: Klassische Anforderung für einen Speicherbereich.
+
 Beachten Sie in Abbildung 1: Es ist offen bzw. Pflicht für den Verwender des Speicherbereichs,
 diesen nach Gebrauch mit dem `delete`-Operator wieder freizugeben.
-
-Abbildung 1: Klassische Anforderung für einen Speicherbereich.
 
 <img src="dp_raii_idiom_02.svg" width="700">
 

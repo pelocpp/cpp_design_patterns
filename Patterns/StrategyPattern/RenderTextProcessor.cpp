@@ -18,10 +18,10 @@ void TextProcessor::setOutputFormat(const OutputFormat format) {
     switch (format)
     {
     case OutputFormat::Markdown:
-        m_listStrategy = std::make_unique<MarkdownListStrategy>();
+        m_listStrategy = std::make_unique<RenderMarkdownListStrategy>();
         break;
     case OutputFormat::Html:
-        m_listStrategy = std::make_unique<HtmlListStrategy>();
+        m_listStrategy = std::make_unique<RenderHtmlListStrategy>();
         break;
     default:
         throw std::runtime_error("Unsupported strategy!");

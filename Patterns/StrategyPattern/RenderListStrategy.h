@@ -2,10 +2,10 @@
 // RenderListStrategy.h
 // ===========================================================================
 
-class ListStrategy
+class RenderListStrategy
 {
 public:
-    virtual ~ListStrategy() = default;
+    virtual ~RenderListStrategy() = default;
 
     virtual void start(std::ostringstream&) {};
     virtual void addListItem(std::ostringstream&, const std::string& item) {};

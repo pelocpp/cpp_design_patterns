@@ -60,12 +60,12 @@ public:
 void test_render_app_statically()
 {
     // 'markdown' strategy
-    AnotherTextProcessor<MarkdownListStrategy> tpm;
+    AnotherTextProcessor<RenderMarkdownListStrategy> tpm;
     tpm.appendList({ "foo", "bar", "baz" });
     std::cout << tpm.toString() << std::endl;
 
     // 'html' strategy
-    AnotherTextProcessor<HtmlListStrategy> tph;
+    AnotherTextProcessor<RenderHtmlListStrategy> tph;
     tph.appendList({ "foo", "bar", "baz" });
     std::cout << tph.toString() << std::endl;
 }

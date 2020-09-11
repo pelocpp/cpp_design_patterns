@@ -12,7 +12,7 @@ public:
 
 private:
     std::ostringstream m_oss;
-    std::unique_ptr<ListStrategy> m_listStrategy;
+    std::unique_ptr<RenderListStrategy> m_listStrategy;
 };
 
 // ===========================================================================

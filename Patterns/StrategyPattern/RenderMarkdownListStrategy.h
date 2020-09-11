@@ -2,7 +2,7 @@
 // RenderMarkdownListStrategy.h
 // ===========================================================================
 
-class MarkdownListStrategy : public ListStrategy
+class RenderMarkdownListStrategy : public RenderListStrategy
 {
 public:
     void addListItem(std::ostringstream&, const std::string&) override;

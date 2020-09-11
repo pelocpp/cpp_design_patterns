@@ -2,7 +2,7 @@
 // RenderHtmlListStrategy.h
 // ===========================================================================
 
-class HtmlListStrategy : public ListStrategy
+class RenderHtmlListStrategy : public RenderListStrategy
 {
 public:
     void start(std::ostringstream&) override;
