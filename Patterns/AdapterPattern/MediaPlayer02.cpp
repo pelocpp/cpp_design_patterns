@@ -11,6 +11,7 @@ namespace ApdaterPatternClassAdapterApproach {
     // interface MediaPlayer
     class MediaPlayer {
     public:
+        virtual ~MediaPlayer() {};
         virtual void play(std::string audioType, std::string fileName) = 0;
     };
 

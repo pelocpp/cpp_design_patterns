@@ -9,6 +9,7 @@ namespace ConceptualExample02 {
     class StateBase
     {
     public:
+        virtual ~StateBase() {};
         virtual void handle(Context& context) = 0;
     };
 

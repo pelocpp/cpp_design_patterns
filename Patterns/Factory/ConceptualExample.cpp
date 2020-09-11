@@ -11,6 +11,7 @@ namespace ConceptualExample {
     class Shape
     {
     public:
+        virtual ~Shape() {};
         virtual void draw() = 0;
     };
 

@@ -2,8 +2,6 @@
 // ConceptualExample.cpp // Observer // Variant 1
 // ===========================================================================
 
-#include <iostream>
-
 /**
  * Observer Design Pattern
  *

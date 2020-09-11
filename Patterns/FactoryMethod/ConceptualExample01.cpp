@@ -11,6 +11,7 @@ namespace ConceptualExample01 {
     class ProductBase
     {
     public:
+        virtual ~ProductBase() {}
         virtual void showInfo() = 0;
     };
 
