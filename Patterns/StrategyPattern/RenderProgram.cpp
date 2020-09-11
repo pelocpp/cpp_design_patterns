@@ -17,12 +17,12 @@ void test_render_app_dynamically()
 {
     RenderTextProcessor processor;
 
-    // 'markdown' strategy
+    // 'markdown' strategy (should be created externally to client)
     processor.setOutputFormat(std::make_unique<RenderMarkdownListStrategy>());
     processor.appendList({ "foo", "bar", "baz" });
     std::cout << processor.toString() << std::endl;
 
-    // 'html' strategy
+    // 'html' strategy (should be created externally to client)
     processor.clear();
     processor.setOutputFormat(std::make_unique<RenderHtmlListStrategy>());
     processor.appendList({ "FOO", "BAR", "BAZ" });

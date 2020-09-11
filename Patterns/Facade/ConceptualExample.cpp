@@ -51,7 +51,7 @@ namespace ConceptualExample {
      * complexity of the subsystem.
      */
     class Facade {
-    protected:
+    private:
         std::shared_ptr<Subsystem1> m_subsystem1;
         std::shared_ptr<Subsystem2> m_subsystem2;
 

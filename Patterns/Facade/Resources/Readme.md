@@ -7,7 +7,8 @@
 #### Ziel / Absicht:
 
 Das *Facade Pattern* ist ein strukturelles Entwurfsmuster,
-das verwendet wird, um den Zugriff auf Funktionen in komplexen oder schlecht gestalteten Subsystemen/Bibliotheken oder Vergleichbares zu vereinfachen.
+das verwendet wird, um den Zugriff auf Funktionen in komplexen oder schlecht gestalteten Subsystemen/Bibliotheken
+oder Vergleichbares zu vereinfachen.
 Die Fassadenklasse stellt eine einfache Schnittstelle zur Verfügung,
 die die Implementierungsdetails des zugrunde liegenden Codes verbirgt.
 
@@ -16,7 +17,7 @@ die die Implementierungsdetails des zugrunde liegenden Codes verbirgt.
 Gegeben sei ein komplexes Subsystem mit vielen Klassen und Abhängigkeiten zwischen ihnen.
 Clients die dieses Subsystem oder Teile davon nutzen möchten,
 müssen sich mit den verschiedenen Schnittstellen der enthaltenen Klassen befassen und die Funktionsweise verstehen.
-Dabei bauen sie zwangläufig viele Abhängigkeiten zu verschiedenen Objekten auf und koppeln sich eng an die Klassen des Subsystems.
+Dabei bauen sie zwangsläufig viele Abhängigkeiten zu verschiedenen Objekten auf und koppeln sich eng an die Klassen des Subsystems.
 Das *Facade Pattern* definiert eine vereinfachte Schnittstelle zur Benutzung eines Systems (Bibliothek) oder einer Menge von Objekten.
 
 #### Lösung:
@@ -40,7 +41,7 @@ Verfügung stellen.
 
 #### Hinweis 2:
 
-Eine Facadenklasse soll eine Vereinfachung in der Komplexität des/der unterlagerten Subsystem darstellen.
+Eine Facadenklasse soll eine Vereinfachung in der Komplexität des/der unterlagerten Subsystems/Subsysteme darstellen.
 Dies hat allerdings auch zur Folge, dass die Facadenklasse nur einen Teil
 (in manchen Fällen sogar nur einen Bruchteil) von den Fähigkeiten der Subsysteme besitzt.
 
