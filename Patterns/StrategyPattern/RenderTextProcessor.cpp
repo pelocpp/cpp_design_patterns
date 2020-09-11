@@ -8,40 +8,43 @@
 #include <vector>
 #include <memory>
 
-#include "RenderOutputFormats.h"
 #include "RenderListStrategy.h"
 #include "RenderMarkdownListStrategy.h"
 #include "RenderHtmlListStrategy.h"
 #include "RenderTextProcessor.h"
 
-void TextProcessor::setOutputFormat(const OutputFormat format) {
-    switch (format)
-    {
-    case OutputFormat::Markdown:
-        m_listStrategy = std::make_unique<RenderMarkdownListStrategy>();
-        break;
-    case OutputFormat::Html:
-        m_listStrategy = std::make_unique<RenderHtmlListStrategy>();
-        break;
-    default:
-        throw std::runtime_error("Unsupported strategy!");
-    }
+void RenderTextProcessor::setOutputFormat(std::unique_ptr<RenderListStrategy>&& format) {
+    m_format = std::move(format);
 }
 
-void TextProcessor::appendList(const std::vector<std::string>& items) {
-    m_listStrategy->start(m_oss);
+//void RenderTextProcessor::setOutputFormat(const OutputFormat format) {
+//    switch (format)
+//    {
+//    case OutputFormat::Markdown:
+//        m_listStrategy = std::make_unique<RenderMarkdownListStrategy>();
+//        break;
+//    case OutputFormat::Html:
+//        m_listStrategy = std::make_unique<RenderHtmlListStrategy>();
+//        break;
+//    default:
+//        throw std::runtime_error("Unsupported strategy!");
+//    }
+//}
+
+void RenderTextProcessor::appendList(const std::vector<std::string>& items) {
+    m_format->start(m_oss);
 
     for (const auto& item : items)
-        m_listStrategy->addListItem(m_oss, item);
+        m_format->add(m_oss, item);
 
-    m_listStrategy->end(m_oss);
+    m_format->end(m_oss);
 }
 
-std::string TextProcessor::toString() const {
+std::string RenderTextProcessor::toString() const {
     return m_oss.str();
 }
 
-void TextProcessor::clear() {
+void RenderTextProcessor::clear() {
     m_oss.str("");
     m_oss.clear();
 }

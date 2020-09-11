@@ -5,7 +5,7 @@
 class RenderMarkdownListStrategy : public RenderListStrategy
 {
 public:
-    void addListItem(std::ostringstream&, const std::string&) override;
+    void add(std::ostringstream&, const std::string&) override;
 };
 
 // ===========================================================================

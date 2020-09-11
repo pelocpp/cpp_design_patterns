@@ -9,7 +9,7 @@
 #include "RenderListStrategy.h"
 #include "RenderMarkdownListStrategy.h"
 
-void RenderMarkdownListStrategy::addListItem(std::ostringstream& oss, const std::string& item) {
+void RenderMarkdownListStrategy::add(std::ostringstream& oss, const std::string& item) {
     oss << "  * " << item << std::endl;
 }
 

@@ -27,9 +27,6 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderOutputFormats.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="ConceptualExample.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
@@ -59,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="ECommerceApp.cpp">
       <Filter>Source Files\ECommerceApp</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderProgramTemplates.cpp">
+      <Filter>Source Files\RenderApp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
