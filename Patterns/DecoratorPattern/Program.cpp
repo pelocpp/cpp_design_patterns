@@ -3,18 +3,28 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
+void test_conceptual_example_01();
+void test_conceptual_example_02();
+void test_conceptual_example_03();
+
 void test_dynamic_decoration_01();
 void test_dynamic_decoration_02();
 void test_dynamic_decoration_03();
 void test_static_decoration_01();
 
 int main() {
-    test_conceptual_example();
-    //test_dynamic_decoration_01();
-    //test_dynamic_decoration_02();
-    //test_dynamic_decoration_03();
-    //test_static_decoration_01();
+    // conceptual example
+    test_conceptual_example_01();
+    test_conceptual_example_02();
+    test_conceptual_example_03();
+
+    // real-world example (shapes)
+    test_dynamic_decoration_01();
+    test_dynamic_decoration_02();
+    test_dynamic_decoration_03();
+
+    // same real-world example with templates
+    test_static_decoration_01();
     return 0;
 }
 

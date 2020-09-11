@@ -111,15 +111,17 @@ void clientCode(std::shared_ptr<Component> component) {
     std::cout << "Result: " << component->operation();
 }
 
-void test_conceptual_example() {
+void test_conceptual_example_01() {
     /**
-     * This way the client code can support both simple components...
+     * This way the client code can support both simple components ...
      */
     std::shared_ptr<Component> component = std::make_shared<ConcreteComponent> ();
     std::cout << "Client: I've got a simple component:\n";
     clientCode(component);
     std::cout << std::endl << std::endl;
+}
 
+void test_conceptual_example_02() {
 
     /**
      * ...as well as decorated ones.
@@ -127,6 +129,7 @@ void test_conceptual_example() {
      * Note how decorators can wrap not only simple components
      * but the other decorators as well.
      */
+    std::shared_ptr<Component> component = std::make_shared<ConcreteComponent>();
     std::shared_ptr<Component> decorator1 = std::make_shared<ConcreteDecoratorA>(component);
     std::shared_ptr<Component> decorator2 = std::make_shared<ConcreteDecoratorB>(decorator1);
 
@@ -154,6 +157,37 @@ void test_conceptual_example() {
     std::cout << "Client: Reverse Decoration:" << std::endl;
     clientCode(decorator);
     std::cout << std::endl;
+}
+
+void test_conceptual_example_03() {
+
+    /**
+     * ... and at least: changing decorators at runtime
+     */
+
+    // component which is going to be decorated
+    std::shared_ptr<Component> component = std::make_shared<ConcreteComponent>();
+
+    // run-time dependent decorator
+    std::shared_ptr<Component> decorator;
+
+    if (true)   // <== change 'true' to 'false'
+    { 
+        std::shared_ptr<Component> decorator1 = std::make_shared<ConcreteDecoratorA>(component);
+        decorator = std::make_shared<ConcreteDecoratorB>(component);
+
+        std::cout << "Client: Now I've this decorated component (if):" << std::endl;
+        clientCode(decorator);
+        std::cout << std::endl << std::endl;
+    }
+    else {
+        std::shared_ptr<Component> decorator1 = std::make_shared<ConcreteDecoratorB>(component);
+        decorator = std::make_shared<ConcreteDecoratorA>(component);
+
+        std::cout << "Client: Now I've that decorated component (else):" << std::endl;
+        clientCode(decorator);
+        std::cout << std::endl << std::endl;
+    }
 }
 
 // ===========================================================================
