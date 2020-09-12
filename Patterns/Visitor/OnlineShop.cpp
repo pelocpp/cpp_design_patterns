@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <memory>
 
 namespace OnlineShopExample {
 
@@ -17,6 +18,11 @@ namespace OnlineShopExample {
         virtual void visit(const class Book*) = 0;
         virtual void visit(const class Movie*) = 0;
         virtual void visit(const class Game*) = 0;
+
+        // other names (e.g. no method overloading) is also possible
+        // virtual void visitBook(const class Book*) = 0;
+        // virtual void visitMovie(const class Movie*) = 0;
+        // virtual void visitGame(const class Game*) = 0;
     };
 
     class Element
@@ -36,7 +42,7 @@ namespace OnlineShopExample {
         double getPrice() const { return m_price; }
         std::string getTitle() const { return m_title; }
 
-        virtual void accept(Visitor* visitor) const = 0;
+        virtual void accept(Visitor& visitor) const = 0;
     };
 
     class Book : public Element
@@ -58,9 +64,9 @@ namespace OnlineShopExample {
         void setAuthor(std::string author) { m_author = author; }
         void setPublisher(std::string publisher) { m_publisher = publisher; }
 
-        virtual void accept(Visitor* visitor) const override
+        virtual void accept(Visitor& visitor) const override
         {
-            visitor->visit(this);
+            visitor.visit(this);
         }
     };
 
@@ -88,9 +94,9 @@ namespace OnlineShopExample {
         void setIsHD(bool isHD) { m_isHD = isHD; }
         void setDirector(std::string director) { m_director = director; }
 
-        virtual void accept(Visitor* visitor) const override
+        virtual void accept(Visitor& visitor) const override
         {
-            visitor->visit(this);
+            visitor.visit(this);
         }
     };
 
@@ -114,9 +120,9 @@ namespace OnlineShopExample {
         void setConsoleType(int consoleType) { m_consoleType = consoleType; }
         void setLicenseKey(std::string licenseKey) { m_licenseKey = licenseKey; }
 
-        virtual void accept(Visitor* visitor) const override
+        virtual void accept(Visitor& visitor) const override
         {
-            visitor->visit(this);
+            visitor.visit(this);
         }
     };
 
@@ -175,47 +181,44 @@ namespace OnlineShopExample {
     class ShoppingBasket
     {
     private:
-        std::list<Element*> m_products;
+        std::list<std::shared_ptr<Element>> m_products;
 
     public:
         ShoppingBasket() = default;
 
-        std::list<Element*> GetProdukte()
+        std::list<std::shared_ptr<Element>> GetProdukte()
         {
             return m_products;
         }
 
-        void addElement(Element* element)
+        void addElement(std::shared_ptr<Element> element)
         {
             m_products.push_back(element);
         }
 
         double calculateTotalPrice()
         {
-            CalculatePriceVisitor* priceVisitor = new CalculatePriceVisitor();
+            CalculatePriceVisitor priceVisitor;
 
-            for (Element* element : m_products)
+            for (std::shared_ptr<Element> element : m_products)
             {
                 element->accept(priceVisitor);
             }
 
-            double totalPrice = priceVisitor->getPrice();
-            delete priceVisitor;
+            double totalPrice = priceVisitor.getPrice();
             return totalPrice;
         }
 
         std::string toHTML()
         {
-            HTMLVisitor* htmlVisitor = new HTMLVisitor();
+            HTMLVisitor htmlVisitor;
             std::string htmlResult = "<!doctype html>\n<html>\n<head>\n</head>\n<body>\n";
 
-            for (Element* element : m_products)
+            for (std::shared_ptr<Element> element : m_products)
             {
                 element->accept(htmlVisitor);
-                htmlResult += "    "  + htmlVisitor->getHTML() + '\n';
+                htmlResult += "    "  + htmlVisitor.getHTML() + '\n';
             }
-
-            delete htmlVisitor;
 
             htmlResult += "</body>\n</html>";
             return htmlResult;
@@ -226,13 +229,13 @@ namespace OnlineShopExample {
     {
         ShoppingBasket basket;
 
-        Book* book = new Book(1, 10.0f, "The C Programming Language");
+        std::shared_ptr<Book> book = std::make_shared<Book>(1, 10.0f, "The C Programming Language");
         book->setAuthor("Brian Kernighan / Dennis Ritchie");
 
-        Game* game = new Game(3, 5.0f, "Tetris");
+        std::shared_ptr<Game> game = std::make_shared<Game>(3, 5.0f, "Tetris");
         game->setLicenseKey("12345678");
 
-        Movie* movie = new Movie(3, 19.99f, "Once upon a time in Hollywood");
+        std::shared_ptr<Movie> movie = std::make_shared<Movie>(3, 19.99f, "Once upon a time in Hollywood");
         movie->setDirector("Quentin Tarantino");
 
         basket.addElement(book);
@@ -246,10 +249,6 @@ namespace OnlineShopExample {
         std::string html = basket.toHTML();
         std::cout << "ShoppingBasket in HTML: " << totalPrice << std::endl;
         std::cout << html << std::endl;
-
-        delete book;
-        delete game;
-        delete movie;
     }
 }
 

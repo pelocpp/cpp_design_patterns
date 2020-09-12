@@ -23,6 +23,10 @@ namespace ConceptualExample {
     public:
         virtual void visit(const class ConcreteComponentA* element) const = 0;
         virtual void visit(const class ConcreteComponentB* element) const = 0;
+
+        // other names (e.g. no method overloading) is also possible
+        // virtual void visitConcreteComponentA(const class ConcreteComponentA* element) const = 0;
+        // virtual void visitConcreteComponentB(const class ConcreteComponentB* element) const = 0;
     };
 
     /**
