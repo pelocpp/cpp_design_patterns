@@ -19,9 +19,6 @@
     <Filter Include="Source Files\ECommerceApp">
       <UniqueIdentifier>{425126ef-a763-4635-a176-f5dccdf5fb9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\RenderApp">
-      <UniqueIdentifier>{ed3aa8c8-1977-4b43-96f1-881e36064528}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -42,23 +39,8 @@
     <ClCompile Include="PayByPayPal.cpp">
       <Filter>Source Files\ECommerceApp</Filter>
     </ClCompile>
-    <ClCompile Include="RenderHtmlListStrategy.cpp">
-      <Filter>Source Files\RenderApp</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderTextProcessor.cpp">
-      <Filter>Source Files\RenderApp</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderProgram.cpp">
-      <Filter>Source Files\RenderApp</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderMarkdownListStrategy.cpp">
-      <Filter>Source Files\RenderApp</Filter>
-    </ClCompile>
     <ClCompile Include="ECommerceApp.cpp">
       <Filter>Source Files\ECommerceApp</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderProgramTemplates.cpp">
-      <Filter>Source Files\RenderApp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,18 +57,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CreditCard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderListStrategy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderHtmlListStrategy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderMarkdownListStrategy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderTextProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
