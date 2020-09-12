@@ -126,6 +126,12 @@ namespace OnlineShopExample {
         }
     };
 
+    // =======================================================================
+    // DATEN ... loose Kopplung ... Prinzip
+    // -----------------------------------------------------------------------
+    // OPERATIONEN ... greifen auf die Daten zu
+    // =======================================================================
+
     class CalculatePriceVisitor : public Visitor
     {
     private:

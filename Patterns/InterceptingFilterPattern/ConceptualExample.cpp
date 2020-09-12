@@ -17,7 +17,7 @@ class DebugFilter : public IFilter
 {
 public:
     virtual void execute(const std::string& request) override {
-        std::cout << "Log Request: " << request << std::endl;
+        std::cout << "[Log Request: " << request << "]" << std::endl;
     }
 };
 
@@ -25,14 +25,14 @@ class AuthenticationFilter : public IFilter
 {
 public:
     virtual void execute(const std::string& request) override {
-        std::cout << "Authenticating Request: " << request << std::endl;
+        std::cout << "[Authenticating Request: " << request << "]" << std::endl;
     }
 };
 
 class Target
 {
 public:
-    void execute(const std::string& request) {
+    void operation(const std::string& request) {
         std::cout << "Executing Request: " << request << std::endl;
     }
 };
@@ -64,37 +64,32 @@ public:
         m_target = target;
     }
 
-    void execute(std::string request)
+    void executeRequest(std::string request)
     {
         for (const std::shared_ptr<IFilter>& filter : m_filters) {
             filter->execute(request);
         }
 
-        m_target->execute(request);
+        m_target->operation(request);
     }
 };
 
 class FilterManager
 {
 private:
-    FilterChain m_filterChain;
+    std::shared_ptr<FilterChain> m_filterChain;
 
 public:
     FilterManager() = default;
 
-    FilterManager(const std::shared_ptr<Target>& target)
+    void setFilterChain(std::shared_ptr<FilterChain>& chain)
     {
-        m_filterChain.setTarget(target);
+        m_filterChain = chain;
     }
 
-    void setFilter(const std::shared_ptr<IFilter>& filter)
+    void request(std::string request)
     {
-        m_filterChain.addFilter(filter);
-    }
-
-    void filterRequest(std::string request)
-    {
-        m_filterChain.execute(request);
+        m_filterChain->executeRequest(request);
     }
 };
 
@@ -113,24 +108,56 @@ public:
 
     void sendRequest(const std::string& request)
     {
-        m_filterManager.filterRequest(request);
+        m_filterManager.request(request);
     }
 };
 
-void test_conceptual_example() {
+void test_conceptual_example_01() {
 
     std::shared_ptr<Target> target = std::make_shared<Target>();
-    FilterManager filterManager(target);
+   
+    FilterManager filterManager;
+
+    std::shared_ptr<FilterChain> chain = std::make_shared<FilterChain>();
+    chain->setTarget(target);
 
     std::shared_ptr<IFilter> filter1 = std::make_shared<DebugFilter>();
-    filterManager.setFilter(filter1);
-
+    chain->addFilter(filter1);
     std::shared_ptr<IFilter> filter2 = std::make_shared<AuthenticationFilter>();
-    filterManager.setFilter(filter2);
+    chain->addFilter(filter2);
 
-    Client* client = new Client();
-    client->setFilterManager(filterManager);
-    client->sendRequest("Starting Downloads");
+    filterManager.setFilterChain(chain);
+
+    Client client;
+    client.setFilterManager(filterManager);
+    client.sendRequest("Starting Downloads");
+}
+
+void test_conceptual_example_02() {
+
+    std::shared_ptr<Target> target = std::make_shared<Target>();
+
+    FilterManager filterManager;
+
+    std::shared_ptr<FilterChain> chain = std::make_shared<FilterChain>();
+    chain->setTarget(target);
+
+    std::shared_ptr<IFilter> filter1 = std::make_shared<DebugFilter>();
+    chain->addFilter(filter1);
+    std::shared_ptr<IFilter> filter2 = std::make_shared<AuthenticationFilter>();
+    chain->addFilter(filter2);
+
+    filterManager.setFilterChain(chain);
+
+    Client client;
+    client.setFilterManager(filterManager);
+    client.sendRequest("Starting Downloads");
+
+    chain->removeFilter(filter1);
+    client.sendRequest("Starting Downloads again");
+
+    chain->removeFilter(filter2);
+    client.sendRequest("Starting Downloads once again");
 }
 
 // ===========================================================================
