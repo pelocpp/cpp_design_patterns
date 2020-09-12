@@ -85,24 +85,39 @@ namespace ConceptualExample {
             }
         }
     };
+
+    void test_without_factory()
+    {
+        // using classes explicitely
+        Rectangle* rect = new Rectangle();
+        rect->draw();
+        Circle* circle = new Circle();
+        circle->draw();
+        Square* square = new Square();
+        square->draw();
+    }
+
+    void test_with_factory()
+    {
+        // using classes indirectly with factory
+        // (knowledge about explicit classes not necessary)
+        ShapeFactory shapeFactory;
+
+        std::shared_ptr<Shape> shape;
+        shape = shapeFactory.getShape("Circle");
+        shape->draw();
+        shape = shapeFactory.getShape("Rectangle");
+        shape->draw();
+        shape = shapeFactory.getShape("Square");
+        shape->draw();
+    }
 }
 
-void test_conceptual_example () {
+void test_conceptual_example ()
+{
     using namespace ConceptualExample;
-
-    ShapeFactory shapeFactory;
-
-    // get an object of type Circle and call its draw method
-    std::shared_ptr<Shape> shape1 = shapeFactory.getShape("Circle");
-    shape1->draw();
-
-    // get an object of type Rectangle and call its draw method
-    std::shared_ptr<Shape> shape2 = shapeFactory.getShape("Rectangle");
-    shape2->draw();
-
-    // get an object of type Square and call its draw method
-    std::shared_ptr<Shape> shape3 = shapeFactory.getShape("Square");
-    shape3->draw();
+    test_without_factory();
+    test_with_factory();
 }
 
 // ===========================================================================
