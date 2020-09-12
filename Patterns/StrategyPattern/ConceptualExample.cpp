@@ -6,10 +6,11 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <memory>
 
 /**
- * The Strategy interface declares operations common to all supported versions
- * of some algorithm.
+ * The Strategy interface declares operations common
+ * to all supported versions of some algorithm.
  *
  * The Context uses this interface to call the algorithm
  * defined by Concrete Strategies.
@@ -25,7 +26,6 @@ public:
 /**
  * The Context defines the interface of interest to clients.
  */
-
 class Context
 {
     /**
@@ -34,27 +34,24 @@ class Context
      * should work with all strategies via the Strategy interface.
      */
 private:
-    Strategy* m_strategy;
+    std::unique_ptr<Strategy> m_strategy;
 
     /**
      * Usually, the Context accepts a strategy through the constructor,
      * but also provides a setter to change it at runtime.
      */
 public:
-    Context(Strategy* strategy = nullptr) : m_strategy(strategy) {}
+    Context(std::unique_ptr<Strategy> strategy)
+        : m_strategy(std::move(strategy)) {}
 
-    ~Context()
-    {
-        delete m_strategy;
-    }
+    ~Context() {}
 
     /**
      * Usually, the Context allows replacing a Strategy object at runtime.
      */
-    void setStrategy(Strategy* strategy)
+    void setStrategy(std::unique_ptr<Strategy> strategy)
     {
-        delete m_strategy;
-        m_strategy = strategy;
+        m_strategy = std::move(strategy);
     }
 
     /**
@@ -137,18 +134,15 @@ public:
 
 void clientCode()
 {
-    Strategy* strategy = new ConcreteStrategyA();
-    Context* context = new Context(strategy);
+    Context context(std::make_unique<ConcreteStrategyA>());
+
     std::cout << "Client: Strategy is set to normal sorting:" << std::endl;
-    context->doSomeBusinessLogic();
+    context.doSomeBusinessLogic();
     std::cout << std::endl;
 
     std::cout << "Client: Strategy is set to reverse sorting:" << std::endl;
-    strategy = new ConcreteStrategyB();
-    context->setStrategy(strategy);
-    context->doSomeBusinessLogic();
-
-    delete context;
+    context.setStrategy(std::make_unique<ConcreteStrategyB>());
+    context.doSomeBusinessLogic();
 }
 
 void test_conceptual_example()

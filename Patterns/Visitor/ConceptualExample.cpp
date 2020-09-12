@@ -143,6 +143,7 @@ void test_conceptual_example() {
     for (const ElementBase* comp : components) {
         delete comp;
     }
+
     delete visitor1;
     delete visitor2;
 }
