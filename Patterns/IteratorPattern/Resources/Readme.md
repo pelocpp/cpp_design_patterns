@@ -74,9 +74,9 @@ Abbildung 1: Schematische Darstellung des *Iterator Patterns*.
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp)
+[Quellcode 1](../ConceptualExample01.cpp) - Standard Variante
 
-[Quellcode 2](../ConceptualExample02.cpp)
+[Quellcode 2](../ConceptualExample02.cpp) - C++ spezifische Variante
 
 ---
 

@@ -61,7 +61,10 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 Abbildung 1: Schematische Darstellung des *Mediator Patterns*.
 
-**Hinweis**:
+
+#### Conceptual Example:
+
+*Hinweis*:
 
 Das *Conceptual Example* liegt in drei Varianten vor:
 
@@ -69,8 +72,6 @@ Das *Conceptual Example* liegt in drei Varianten vor:
   * Variante 2: Wie Variante 1, aber mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
   * Variante 3: Prinzipiell wie Variante 2, nur: Die Entscheidung, welche empfangende Komponente
     aufzurufen ist, wird dieses Mal über das Absenderobjekt getroffen (und nicht über eine Parameterkennung).
-
-#### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample01.cpp)
 

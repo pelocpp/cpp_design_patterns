@@ -47,9 +47,9 @@ Abbildung 1: Schematische Darstellung des *Command Patterns*.
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample_01.cpp)
+[Quellcode 1](../ConceptualExample_01.cpp) - Einfaches Beispiel
 
-[Quellcode 2](../ConceptualExample_02.cpp)
+[Quellcode 2](../ConceptualExample_02.cpp) - Ein etwas ausführlicheres Beispiel
 
 ---
 

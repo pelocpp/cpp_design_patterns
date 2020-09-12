@@ -71,9 +71,9 @@ Abbildung 1: Schematische Darstellung des *Composite Entwurfsmusters*.
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp)
+[Quellcode 1](../ConceptualExample01.cpp) - Variante mit "Raw"-Zeiger
 
-[Quellcode 2](../ConceptualExample02.cpp)
+[Quellcode 2](../ConceptualExample02.cpp) - Variante mit `std::shared_ptr`-Zeiger
 
 ---
 

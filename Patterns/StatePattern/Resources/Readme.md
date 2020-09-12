@@ -67,18 +67,6 @@ Abbildung 2: Schematische Darstellung des *State Patterns*.
 
 #### Conceptual Example:
 
-[Quellcode 1 / .cpp](../ConceptualExample01.cpp)
-
-[Quellcode 1 / .h](../ConceptualExample01.h)
-
-[Quellcode 2 / .cpp](../ConceptualExample02.cpp)
-
-[Quellcode 2 / .h](../ConceptualExample02.h)
-
-[Quellcode 3 / .cpp](../ConceptualExample03.cpp)
-
----
-
 *Hinweis*:
 
 Das *Conceptual Example* liegt in drei Versionen vor:
@@ -86,6 +74,14 @@ Das *Conceptual Example* liegt in drei Versionen vor:
   * Ein einfaches Beispiel - mit *raw*-Zeigern 
   * Dasselbe Beispiel - mit `std::shared_ptr`-Zeigern
   * Ein zweites einfaches Beispiel
+
+[Quellcode 1 / .cpp](../ConceptualExample01.cpp)<br/>
+[Quellcode 1 / .h](../ConceptualExample01.h)
+
+[Quellcode 2 / .cpp](../ConceptualExample02.cpp)<br/>
+[Quellcode 2 / .h](../ConceptualExample02.h)
+
+[Quellcode 3 / .cpp](../ConceptualExample03.cpp)
 
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 

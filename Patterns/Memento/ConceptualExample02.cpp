@@ -173,7 +173,6 @@ namespace ConceptualExample02 {
     };
 
     void clientCode() {
-        // std::shared_ptr<Originator> originator = std::make_shared<Originator>("Super-duper-super-puper-super.");
         std::shared_ptr<Originator> originator = std::make_shared<Originator>("I'm the original state of this Originator"); 
         std::shared_ptr<CareTaker> caretaker = std::make_shared<CareTaker>(originator);
 

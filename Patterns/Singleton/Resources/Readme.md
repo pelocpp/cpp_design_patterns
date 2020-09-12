@@ -109,9 +109,9 @@ Singleton* Singleton::getInstance()
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp)
+[Quellcode 1](../ConceptualExample01.cpp) - Sehr einfache Version
 
-[Quellcode 2](../ConceptualExample02.cpp)
+[Quellcode 2](../ConceptualExample02.cpp) - Mit *Double-Checked Locking*
 
 ---
 
