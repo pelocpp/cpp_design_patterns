@@ -145,7 +145,7 @@
     <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="ConceptualExample01.cpp" />
-    <ClCompile Include="SimpleFactoryVsFactoryMethod.cpp" />
+    <ClCompile Include="RealWorldFactoryMethod.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_factory_method.png" />

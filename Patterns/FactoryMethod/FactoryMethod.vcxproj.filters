@@ -16,7 +16,7 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{4b1debd8-8361-4ee2-a659-3e3293a48c44}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\SimpleFactoryVsFactoryMethod">
+    <Filter Include="Source Files\RealWorldFactoryMethod">
       <UniqueIdentifier>{404fcebc-85c6-453f-b8c7-4ffae595d3e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -38,8 +38,8 @@
     <ClCompile Include="ConceptualExample01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleFactoryVsFactoryMethod.cpp">
-      <Filter>Source Files\SimpleFactoryVsFactoryMethod</Filter>
+    <ClCompile Include="RealWorldFactoryMethod.cpp">
+      <Filter>Source Files\RealWorldFactoryMethod</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

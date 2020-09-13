@@ -64,10 +64,6 @@ miteinander zu verwechseln.
     dann kommt das *Factory Method* Pattern in Betracht. Dieses lässt sich gut mit dem *Template Pattern*, oder auch *Strategy Pattern* kombinieren,
     da man mit einer Schablone (Template) die Schritte zum Erstellen des untergeordneten Elements abstrahieren kann.
 
-In den Beispielen zu diesem Entwurfsmuster findet sich ein Programm mit den Klassen `ITelevision`, `LEDTelevision`, `OledTelevision`,
-`AbstractFactory`, `LEDTVFactory` und `OledTVFactory` vor. Studieren Sie die Methode `orderTV`. Beschreiben Sie,
-wie diese Methode mit dem *Template Pattern* zusammenhängt.
-
 
 #### Hinweis 2:
 
@@ -95,9 +91,13 @@ Damit zu den Unterschieden:
  
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp)
+[Quellcode 1](../ConceptualExample01.cpp) - Sehr einfaches Beispiel<br/>
+[Quellcode 2](../ConceptualExample02.cpp) - Beispiel, das "konzeptionell" den Einsatz von *Factory Methods* aufzeigt.<br/>
+[Quellcode 3](../RealWorldFactoryMethod.cpp) - *Real-World*-Beispiel (`ITelevision`), das exemplarisch mehrere *Factory Methods* betrachtet.<br/>
 
-[Quellcode 2](../ConceptualExample02.cpp)
+In *Quellcode 3* findet sich ein Programm mit den Klassen `ITelevision`, `LEDTelevision`, `OledTelevision`,
+`AbstractFactory`, `LEDTVFactory` und `OledTVFactory` vor. Studieren Sie die Methode `orderTV`. Beschreiben Sie,
+wie diese Methode zur Namensgebung des *Factory Method Patterns* beiträgt.
 
 ---
 
