@@ -260,6 +260,23 @@ und
 
 *"Note that any open file is automatically closed when the ofstream object is destroyed."*
 
+#### Weiterarbeit:
+
+Erstellen Sie eine RAII-konforme Klasse `RAIIFile`. Für den Anwender offenbart sich
+diese Klasse mit einer einzigen Methode `write`, um eine Zeichenkette in einer Datei zu schreiben.
+
+Zum Zwecke des Übens verwenden Sie intern in der Klasse `RAIIFile` die Funktionen
+`fopen`, `fclose` und `fprintf` aus der *CRT* (*C-Runtime-Library*).
+Sinn und Zweck der Übung ist, dass die Funktion `fclose` **immer** zur Ausführung gelangt, also auch für den Fall,
+dass Fehlersituationen oder unerwartete Situationen eintreten.
+
+###### Beispiel:
+
+```cpp
+RAIIFile file("example.txt");
+file.write("123\n");
+```
+
 ---
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)

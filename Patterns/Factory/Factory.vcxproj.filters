@@ -16,6 +16,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Source Files\MobilePhones">
+      <UniqueIdentifier>{ca191107-8f54-44a3-be13-b43b46d6c066}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -31,6 +34,9 @@
     </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MobilePhones.cpp">
+      <Filter>Source Files\MobilePhones</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

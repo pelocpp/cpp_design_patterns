@@ -33,9 +33,9 @@ private:
 
 void test_file_example()
 {
-    RAIIFile rfile("example.txt");
-    rfile.write("123\n");
-    rfile.write("456\n");
+    RAIIFile file("example.txt");
+    file.write("123\n");
+    file.write("456\n");
 }
 
 // =====================================================================================
