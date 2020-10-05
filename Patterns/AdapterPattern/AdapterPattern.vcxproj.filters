@@ -21,17 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Readme.md">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\dp_adapter_01.svg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Resources\dp_adapter_02.svg">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
@@ -46,11 +35,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\dp_adapter_01.png">
+    <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\dp_adapter_02.png">
+    </None>
+    <None Include="Resources\dp_adapter_01.svg">
       <Filter>Resource Files</Filter>
-    </Image>
+    </None>
+    <None Include="Resources\dp_adapter_02.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
