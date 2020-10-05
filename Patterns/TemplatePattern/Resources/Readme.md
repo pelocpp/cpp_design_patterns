@@ -76,6 +76,26 @@ vor.
 
 ---
 
+#### 'Real-World' Example:
+
+Im 'Real-World' Beispiel zu diesem Entwurfsmuster 
+definiert die Template-Methode einen Algorithmus für die Arbeit mit einem sozialen Netzwerk.
+Unterklassen, die einem bestimmten sozialen Netzwerk entsprechen,
+implementieren diese Schritte gemäß der vom sozialen Netzwerk bereitgestellten API.
+
+Die Klasse `Network` repräsentiert die Basisklasse des sozialen Netzwerks.
+Zwei weitere Klassen `Twitter` und `Facebook` stehen für konkrete Beispiele sozialer Netzwerke.
+
+Die „Vorlagenmethode“ ist in der Klasse `Network` vorgegeben, sie lautet `post`:
+
+```cpp
+bool post(const std::string& message);
+```
+
+Ihre Implementierung darf nicht verändert werden, um dem Charakter dieses Entwurfsmusters gerecht zu werden.
+
+---
+
 [Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---
