@@ -1,10 +1,10 @@
 // ===========================================================================
-// Network.h
+// SocialNetwork.h
 // ===========================================================================
 
-class Network {
+class SocialNetwork {
 public:
-    Network();
+    SocialNetwork();
 
     /**
      * The template method defines the skeleton of an algorithm:

@@ -2,7 +2,7 @@
 // Facebook.h
 // ===========================================================================
 
-class Facebook : public Network {
+class Facebook : public SocialNetwork {
 public:
     Facebook(const std::string& username, const std::string& password);
 

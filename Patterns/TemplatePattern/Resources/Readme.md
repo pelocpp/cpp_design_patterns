@@ -41,7 +41,7 @@ Das *Template Method Pattern* ermöglicht die Realisierung von variierenden Teils
 
 <img src="dp_template_method_pattern.svg" width="500">
 
-Abbildung: Schematische Darstellung des *Template Method Patterns*.
+Abbildung 1: Schematische Darstellung des *Template Method Patterns*.
 
 
 #### Hinweis:
@@ -83,16 +83,23 @@ definiert die Template-Methode einen Algorithmus für die Arbeit mit einem sozial
 Unterklassen, die einem bestimmten sozialen Netzwerk entsprechen,
 implementieren diese Schritte gemäß der vom sozialen Netzwerk bereitgestellten API.
 
-Die Klasse `Network` repräsentiert die Basisklasse des sozialen Netzwerks.
+Die Klasse `SocialNetwork` repräsentiert die Basisklasse des sozialen Netzwerks.
 Zwei weitere Klassen `Twitter` und `Facebook` stehen für konkrete Beispiele sozialer Netzwerke.
 
-Die „Vorlagenmethode“ ist in der Klasse `Network` vorgegeben, sie lautet `post`:
+Die „Vorlagenmethode“ ist in der Klasse `SocialNetwork` vorgegeben, sie lautet `post`:
 
 ```cpp
 bool post(const std::string& message);
 ```
 
-Ihre Implementierung darf nicht verändert werden, um dem Charakter dieses Entwurfsmusters gerecht zu werden.
+Ihre Implementierung darf nicht verändert werden, um dem Charakter des Entwurfsmusters gerecht zu werden.
+Die Teilschritte, die zur Realisierung der `post`-Methode erforderlich sind, lauten in dem Beispiel
+`logIn`, `logOut` und `sendData`. Diese drei Methoden sind geeignet von konkreten Social Media Klassen
+zu überschreiben, siehe dazu auch Abbildng 2:
+
+<img src="dp_template_method_pattern_social_media.svg" width="800">
+
+Abbildung 2: Das *Template Method Pattern* am Beispiel sozialer Netzwerke.
 
 ---
 

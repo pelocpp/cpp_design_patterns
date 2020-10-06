@@ -7,11 +7,11 @@
 #include <thread>
 #include <chrono>
 
-#include "Network.h"
+#include "SocialNetwork.h"
 #include "Twitter.h"
 
 Twitter::Twitter(const std::string& username, const std::string& password)
-    : Network()
+    : SocialNetwork()
 {
     m_username = username;
     m_password = password;

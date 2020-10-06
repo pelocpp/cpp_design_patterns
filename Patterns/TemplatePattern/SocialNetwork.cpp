@@ -5,11 +5,11 @@
 #include <iostream>
 #include <string>
 
-#include "Network.h"
+#include "SocialNetwork.h"
 
-Network::Network() : m_username{ "" }, m_password{ "" } {}
+SocialNetwork::SocialNetwork() : m_username{ "" }, m_password{ "" } {}
 
-bool Network::post(const std::string& message) {
+bool SocialNetwork::post(const std::string& message) {
 
     // authenticate before posting:
     // every network uses a different authentication method

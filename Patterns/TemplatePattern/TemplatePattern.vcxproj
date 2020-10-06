@@ -140,18 +140,19 @@
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Facebook.cpp" />
-    <ClCompile Include="Network.cpp" />
+    <ClCompile Include="SocialNetwork.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="SocialNetworking.cpp" />
     <ClCompile Include="Twitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Facebook.h" />
-    <ClInclude Include="Network.h" />
+    <ClInclude Include="SocialNetwork.h" />
     <ClInclude Include="Twitter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dp_template_method_pattern.svg" />
+    <None Include="Resources\dp_template_method_pattern_social_media.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>

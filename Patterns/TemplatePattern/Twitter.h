@@ -2,7 +2,7 @@
 // Twitter.h
 // ===========================================================================
 
-class Twitter : public Network {
+class Twitter : public SocialNetwork {
 public:
     Twitter(const std::string& username, const std::string& password);
 

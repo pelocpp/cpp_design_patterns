@@ -30,13 +30,13 @@
     <ClCompile Include="Facebook.cpp">
       <Filter>Source Files\SocialNetworking</Filter>
     </ClCompile>
-    <ClCompile Include="Network.cpp">
-      <Filter>Source Files\SocialNetworking</Filter>
-    </ClCompile>
     <ClCompile Include="Twitter.cpp">
       <Filter>Source Files\SocialNetworking</Filter>
     </ClCompile>
     <ClCompile Include="SocialNetworking.cpp">
+      <Filter>Source Files\SocialNetworking</Filter>
+    </ClCompile>
+    <ClCompile Include="SocialNetwork.cpp">
       <Filter>Source Files\SocialNetworking</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,10 +44,10 @@
     <ClInclude Include="Facebook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Network.h">
+    <ClInclude Include="Twitter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Twitter.h">
+    <ClInclude Include="SocialNetwork.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,6 +56,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\dp_template_method_pattern.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_template_method_pattern_social_media.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
