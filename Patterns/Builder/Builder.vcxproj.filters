@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{c0ef7a80-f706-487b-8b19-7a5a4a5155a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\LayoutManager">
+      <UniqueIdentifier>{8b99f8a4-12d3-489e-a493-ef15c8477ff4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -31,6 +34,9 @@
     </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutManagerExample.cpp">
+      <Filter>Source Files\LayoutManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
