@@ -41,6 +41,19 @@ Abbildung 1: Schematische Darstellung des *Builder Patterns*.
 
 [Quellcode](../ConceptualExample.cpp)
 
+Die Ausgaben des konzeptionellen Beispiels lauten:
+
+```
+Standard basic product:
+Product parts: Part A1
+
+Standard full featured product:
+Product parts: Part A1, Part B1, Part C1
+
+Custom product:
+Product parts: Part A1, Part C1
+```
+
 ---
 
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter

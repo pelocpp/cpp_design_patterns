@@ -63,35 +63,34 @@ public:
  */
 class ConcreteBuilder : public Builder {
 private:
-    std::unique_ptr<Product> m_p;
-
+    std::unique_ptr<Product> m_product;
 
 public:
     /**
-     * A fresh builder instance should contain a blank product object, which is
-     * used in further assembly.
+     * A fresh builder instance should contain a blank product object,
+     * which is used in further assembly.
      */
     ConcreteBuilder() {
         this->reset();
     }
 
     void reset() {
-        m_p = std::make_unique<Product>();
+        m_product = std::make_unique<Product>();
     }
 
     /**
      * All production steps work with the same product instance.
      */
     void createProducePartA() const override {
-        m_p->addPart(std::string("Part A1"));
+        m_product->addPart(std::string("Part A1"));
     }
 
     void createProducePartB() const override {
-        m_p->addPart(std::string("Part B1"));
+        m_product->addPart(std::string("Part B1"));
     }
 
     void createProducePartC() const override {
-        m_p->addPart(std::string("Part C1"));
+        m_product->addPart(std::string("Part C1"));
     }
 
     /**
@@ -117,7 +116,7 @@ public:
       */
 
     std::unique_ptr<Product> getProduct() {
-        std::unique_ptr<Product> result = std::move(m_p);
+        std::unique_ptr<Product> result = std::move(m_product);
         reset();
         return std::move(result);
     }
@@ -159,38 +158,37 @@ public:
     }
 };
 
-
 /**
  * The client code creates a builder object, passes it to the director and then
  * initiates the construction process. The end result is retrieved from the
  * builder object.
  */
-void clientCode(std::shared_ptr<Director> director)
+void clientCode(Director& director)
 {
     std::shared_ptr<ConcreteBuilder> builder = std::make_shared<ConcreteBuilder>();
-    director->set_builder(builder);
+    director.set_builder(builder);
     std::cout << "Standard basic product:" << std::endl;
-    director->buildMinimalViableProduct();
-    std::unique_ptr<Product> p = builder->getProduct();
-    std::cout << (*p)() << std::endl;
+    director.buildMinimalViableProduct();
+    std::unique_ptr<Product> product = builder->getProduct();
+    std::cout << (*product)() << std::endl;
 
     std::cout << "Standard full featured product:" << std::endl;
-    director->buildFullFeaturedProduct();
-    p = builder->getProduct();
-    std::cout << (*p)() << std::endl;
+    director.buildFullFeaturedProduct();
+    product = builder->getProduct();
+    std::cout << (*product)() << std::endl;
 
     // remember, the Builder pattern can be used without a Director class.
     std::cout << "Custom product:" << std::endl;
     builder->createProducePartA();
     builder->createProducePartC();
-    p = builder->getProduct();
-    std::cout << (*p)() << std::endl;
+    product = builder->getProduct();
+    std::cout << (*product)() << std::endl;
 }
 
 // function prototypes
 void test_conceptual_example()
 {
-    std::shared_ptr<Director> director = std::make_shared<Director>();
+    Director director;
     clientCode(director);
 }
 
