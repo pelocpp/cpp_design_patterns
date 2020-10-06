@@ -95,7 +95,7 @@ bool post(const std::string& message);
 Ihre Implementierung darf nicht verändert werden, um dem Charakter des Entwurfsmusters gerecht zu werden.
 Die Teilschritte, die zur Realisierung der `post`-Methode erforderlich sind, lauten in dem Beispiel
 `logIn`, `logOut` und `sendData`. Diese drei Methoden sind geeignet von konkreten Social Media Klassen
-zu überschreiben, siehe dazu auch Abbildng 2:
+zu überschreiben, siehe dazu auch Abbildung 2:
 
 <img src="dp_template_method_pattern_social_media.svg" width="800">
 
