@@ -21,8 +21,8 @@ protected:
     int m_doors;
     std::list<std::string> m_accessories;
 
-    // c'tors
 private:
+    // c'tors
     Vehicle() = delete; // class shoud be abstract
 
 public:
@@ -75,7 +75,12 @@ class FordExplorer : public Vehicle
 {
 public:
     FordExplorer() 
-        : Vehicle("Ford Explorer", "4.0 L Cologne V6", "5-speed M50D-R1 manual", "SUV", 5)
+        : Vehicle(
+            "Ford Explorer",
+            "4.0 L Cologne V6",
+            "5-speed M50D-R1 manual",
+            "SUV",
+            5)
     {
         m_accessories.push_back("Car Cover");
         m_accessories.push_back("Sun Shade");
@@ -86,10 +91,14 @@ class FordFocus : public Vehicle
 {
 public:
     FordFocus()
-        : Vehicle("Ford Focus", "1.0 L EcoBoost I3", "6-speed PowerShift automatic", "5-door hatchback", 5)
+        : Vehicle(
+            "Ford Focus",
+            "1.0 L EcoBoost I3", 
+            "6-speed PowerShift automatic", 
+            "5-door hatchback", 
+            5)
     {
         m_accessories.push_back("Car Cover");
-        m_accessories.push_back("Sun Shade");
     }
 };
 
@@ -97,32 +106,48 @@ class FordGT1 : public Vehicle
 {
 public:
     FordGT1()
-        : Vehicle("Ford GT1", "5.4 L Supercharged Modular V8", "6-speed manual", "Roadster", 2)
-    {}
+        : Vehicle(
+            "Ford GT1", 
+            "5.4 L Supercharged Modular V8",
+            "6-speed manual",
+            "Roadster", 
+            2) {}
 };
 
 class MitsubishiPajero : public Vehicle
 {
 public:
     MitsubishiPajero()
-        : Vehicle("Mitsubishi Pajero Super Exceed", "6G75 3.8 V6", "5-speed manual", "SUV", 5)
-    {}
+        : Vehicle(
+            "Mitsubishi Pajero Super Exceed",
+            "6G75 3.8 V6",
+            "5-speed manual", 
+            "SUV", 
+            5) {}
 };
 
 class MitsubishiI : public Vehicle
 {
 public:
     MitsubishiI()
-        : Vehicle("Mitsubishi I", "659 cc DOHC MIVEC", "6-speed automatic", "Kei car", 5)
-    {}
+        : Vehicle(
+            "Mitsubishi I",
+            "659 cc DOHC MIVEC",
+            "6-speed automatic",
+            "Kei car", 
+            5) {}
 };
 
 class MitsubishiLancerEvoIX : public Vehicle
 {
 public:
     MitsubishiLancerEvoIX()
-        : Vehicle("Mitsubishi Lancer Evo IX", "4B10 1.8 L DOHC I4", "6-speed twin-clutch transmission", "4-door sedar", 4)
-    {}
+        : Vehicle(
+            "Mitsubishi Lancer Evo IX",
+            "4B10 1.8 L DOHC I4",
+            "6-speed twin-clutch transmission", 
+            "4-door sedar", 
+            4) {}
 };
 
 // ===========================================================================

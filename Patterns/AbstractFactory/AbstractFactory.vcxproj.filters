@@ -24,7 +24,7 @@
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\dp_abstract_factory.svg">
+    <None Include="Resources\dp_abstract_factory_pattern.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -38,10 +38,5 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\dp_abstract_factory.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
 </Project>

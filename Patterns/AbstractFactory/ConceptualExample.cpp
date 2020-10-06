@@ -8,7 +8,7 @@
 
 /**
  * Each distinct product of a product family should have a base interface.
- * All variants of the product must implement this interface.
+ * All variants of this product must implement this interface.
  */
 class AbstractProductA {
 public:
@@ -44,6 +44,7 @@ class AbstractProductB {
 public:
     virtual ~AbstractProductB() {};
     virtual std::string usefulFunctionB() const = 0;
+
     /**
      * ...but it also can collaborate with the ProductA.
      *
@@ -61,6 +62,7 @@ public:
     std::string usefulFunctionB() const override {
         return "The result of the product B1.";
     }
+
     /**
      * The variant, Product B1, is only able to work correctly with the variant,
      * Product A1. Nevertheless, it accepts any instance of AbstractProductA as an
@@ -77,6 +79,7 @@ public:
     std::string usefulFunctionB() const override {
         return "The result of the product B2.";
     }
+
     /**
      * The variant, Product B2, is only able to work correctly with the variant,
      * Product A2. Nevertheless, it accepts any instance of AbstractProductA as an
@@ -104,18 +107,19 @@ public:
 
 /**
  * Concrete Factories produce a family of products that belong to a single
- * variant. The factory guarantees that resulting products are compatible. Note
- * that signatures of the Concrete Factory's methods return an abstract product,
- * while inside the method a concrete product is instantiated.
+ * variant. The factory guarantees that resulting products are compatible.
+ * 
+ * NOTE: Signatures of the Concrete Factory's methods return an abstract product,
+ *       while inside the method a concrete product is instantiated.
  */
 class ConcreteFactory1 : public AbstractFactory {
 public:
     std::shared_ptr<AbstractProductA> createProductA() const override {
-        return std::make_shared<ConcreteProductA1>();
+        return std::make_shared<ConcreteProductA1>();  // <== concrete product returned
     }
 
     std::shared_ptr<AbstractProductB> createProductB() const override {
-        return std::make_shared<ConcreteProductB1>();
+        return std::make_shared<ConcreteProductB1>();  // <== concrete product returned
     }
 };
 
