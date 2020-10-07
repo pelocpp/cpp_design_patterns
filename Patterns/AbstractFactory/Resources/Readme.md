@@ -16,7 +16,7 @@ Eine von mehreren Factory-Klassen generiert die jeweiligen Objektmengen.
 Dieses Muster ist sehr gut, wenn Sie die Details der Objektinstanziierung trennen möchten.
 Im Allgemeinen haben Fabriken mehr als eine Factory-Methode.
 Jede Factory-Methode kapselt den `new`-Operator und die konkreten, plattformspezifischen Klassen.
-Jede Plattform wird dann von einer Klasse reräsentiert, die sich von einer der Fabriken ableitet.
+Jede Plattform wird dann von einer Klasse repräsentiert, die sich von einer der Fabriken ableitet.
 
 #### Struktur (UML):
 
@@ -65,7 +65,7 @@ Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 vor.
 
-#### 'Real-World' Example:
+#### 'Real-World' Beispiel:
 
 Ein Klassiker für dieses Entwurfsmuster ist die Java Swing Oberflächenbibliothek und hier im
 Speziellen der Aspekt "*Look and Feel*".
@@ -89,7 +89,7 @@ der unterschiedlichen Bibliotheken, also sprich konkreten UI-Fabriken vor:
 Tabelle 1: Verfügbare *Look and Feel* UI-Fabriken.
 
 
-#### Zweites 'Real-World' Example:
+#### Zweites 'Real-World' Beispiel:
 
 Im 'Real-World' Beispiel zu diesem Entwurfsmuster wird
 die Herstellung verschiedener Fahrzeugtypen verschiedener Hersteller betrachtet.

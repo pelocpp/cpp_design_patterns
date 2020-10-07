@@ -76,7 +76,7 @@ vor.
 
 ---
 
-#### 'Real-World' Example:
+#### 'Real-World' Beispiel:
 
 Im 'Real-World' Beispiel zu diesem Entwurfsmuster 
 definiert die Template-Methode einen Algorithmus für die Arbeit mit einem sozialen Netzwerk.

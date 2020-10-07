@@ -242,7 +242,7 @@ Die Anregungen zum konzeptionellen Beispiel sind teilweise entnommen aus
 [Design Patterns with C++](https://www.amazon.de/-/en/Fedor-G-Pikus/dp/1788832566).
 
 
-#### 'Real-World' Example:
+#### 'Real-World' Beispiel:
 
 In der Datei *RAII_Ofstream.cpp* finden Sie eine Funktion `writeToFile` vor,
 die das RAII-Idiom verwendet.
