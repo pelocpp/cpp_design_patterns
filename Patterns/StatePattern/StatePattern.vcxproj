@@ -155,7 +155,6 @@
     <ClInclude Include="ConceptualExample02.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\dp_state_pattern.png" />
     <Image Include="Resources\java_thread_states.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

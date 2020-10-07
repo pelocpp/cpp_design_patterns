@@ -32,10 +32,8 @@
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\dp_memento.png">
+    <None Include="Resources\dp_memento.svg">
       <Filter>Resource Files</Filter>
-    </Image>
+    </None>
   </ItemGroup>
 </Project>

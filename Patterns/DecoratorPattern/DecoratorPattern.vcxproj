@@ -150,10 +150,6 @@
     <None Include="Resources\dp_decorator_02.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\dp_decorator_01.png" />
-    <Image Include="Resources\dp_decorator_02.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

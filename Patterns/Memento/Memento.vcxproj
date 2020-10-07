@@ -144,10 +144,8 @@
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dp_memento.svg" />
     <None Include="Resources\Readme.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\dp_memento.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

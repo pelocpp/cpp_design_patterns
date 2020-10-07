@@ -39,9 +39,4 @@
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\dp_prototype_pattern.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
 </Project>

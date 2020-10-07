@@ -147,9 +147,6 @@
     <ClCompile Include="ConceptualExample01.cpp" />
     <ClCompile Include="RealWorldFactoryMethod.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\dp_factory_method.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

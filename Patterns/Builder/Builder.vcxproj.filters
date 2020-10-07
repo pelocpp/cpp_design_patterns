@@ -27,6 +27,9 @@
     <None Include="Resources\dp_builder_pattern.svg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_builder_pattern_layoutmanager.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp">
@@ -38,10 +41,5 @@
     <ClCompile Include="LayoutManagerExample.cpp">
       <Filter>Source Files\LayoutManager</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\dp_builder_pattern.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
 </Project>

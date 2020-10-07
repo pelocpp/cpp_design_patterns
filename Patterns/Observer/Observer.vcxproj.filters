@@ -45,15 +45,4 @@
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\dp_observer_01.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\dp_observer_02.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\dp_observer_03.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
 </Project>
