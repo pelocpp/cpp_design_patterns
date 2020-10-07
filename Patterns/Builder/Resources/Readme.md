@@ -102,14 +102,21 @@ Das Pendant zur `construct`-Methode ist hier die `doLayout`-Methode.
 
 Die Klasse `Widget` ist eine Hilfsklasse und verwaltet den erzeugten HTML-Code.
 
-
 Einen Überblick über die beteiligten Klassen und ihren Zusammenhang mit dem *Builder Pattern*
 entnehmen Sie Abbildung 2:
 
-<img src="dp_builder_pattern.svg" width="550">
+<img src="dp_builder_pattern_layoutmanager.svg" width="750">
 
 Abbildung 2: Implementierung eines LayoutManagers mit dem *Builder Pattern*.
 
+Weitere Details zur Umsetzung des Beispiels entnehmen Sie bitte dem [Quellcode](../LayoutManagerExample.cpp).
+Die Ausgaben des 'Real-World'-Beispiels lauten:
+
+```
+HTML: HTML-Code for BorderLayoutManager
+HTML: HTML-Code for BoxLayoutManager
+HTML: HTML-Code for FlowLayout
+```
 
 ---
 
