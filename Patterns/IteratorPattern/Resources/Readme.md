@@ -39,12 +39,12 @@ die bzgl. der Reihenfolge des Durchlaufens der Baumstruktur sehr unterschiedlich
 
 <img src="dp_collections_iterator_tree_structures.png" width="600">
 
-Abbildung 2: Eine Collection kann auf verschiedene Arten durchlaufen werden.
+Abbildung 2: Eine Collection kann auf verschiedene Arten durchlaufen werden: *Depth-First Traversal* (links) versus *Breadth-First Traversal* (rechts).
 
 #### Lösung:
 
 Die Kernidee des *Iterator Patterns* besteht darin,
-die Art und Weise des Durchlaufs einer Collection in ein separates Objekt zu extrahieren, das als *Iterator* bezeichnet wird.
+die Art und Weise des Durchlaufens einer Collection in ein separates Objekt zu extrahieren, das als *Iterator* bezeichnet wird.
 
 Alle Iteratoren müssen dieselbe Schnittstelle implementieren.
 Dadurch ist ein Clientcode mit jedem Typ von Collection oder jedem Traversierungsalgorithmus kompatibel,
@@ -53,7 +53,7 @@ sofern ein *Iterator*-Objekt vorhanden ist.
 Möchte man eine Collection auf eine bestimmte Art und Weise durchlaufen
 (z.B. "*Depth-First Traversal*" oder "*Breadth-First Traversal*"),
 implementiert man einfach eine neue Iteratorklasse.
-So muss man weder Änderungen an der Collection oder am Client vornehmen.
+So muss man weder Änderungen an der Collection noch am Client vornehmen.
 
 
 #### Struktur (UML):
@@ -77,6 +77,24 @@ Abbildung 1: Schematische Darstellung des *Iterator Patterns*.
 [Quellcode 1](../ConceptualExample01.cpp) - Standard Variante
 
 [Quellcode 2](../ConceptualExample02.cpp) - C++ spezifische Variante
+
+Die zweite Umsetzung des *Iterator Patterns* berücksichtig, dass es in C++ für Container bereits vordefinierte Iteratoren gibt.
+Dies kann man - wenn es sich bei der *ConcreteAggregate*-Klasse um einen STL-Standardcontainer handelt - berücksichtigen.
+Sollte die *ConcreteAggregate*-Klasse kein STL-Standardcontainer sein, und dies dürfte in der Mehrzahl der zu betrachtenden 
+Beispiele der Fall sein, dann muss containerspezifisch eine Realisierung der Iteratoren-Methoden
+`reset`, `getCurrent` und `hasNext` erfolgen, siehe dazu folgende Definition der Basisklasse `IteratorBase`:
+
+```cpp
+template <typename T>
+class IteratorBase
+{
+public:
+    virtual ~IteratorBase() = default;
+    virtual void reset() = 0;
+    virtual const T& getCurrent() const = 0;
+    virtual bool hasNext() = 0;
+};
+```
 
 ---
 

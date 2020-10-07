@@ -35,30 +35,35 @@ namespace IteratorPatternStandard {
     class ConcreteAggregate : public AggregateBase<T>
     {
     private:
-        std::vector<T> m_list;
+        std::vector<T> m_vector;
 
     public:
-        IteratorBase<T>* createForwardIterator();
-        IteratorBase<T>* createBackwardIterator();
+        IteratorBase<T>* createForwardIterator() {
+            return new class ForwardIterator<T>(this);
+        }
+
+        IteratorBase<T>* createBackwardIterator() {
+            return new class BackwardIterator<T>(this);
+        }
 
         void add(const T& content)
         {
-            m_list.push_back(content);
+            m_vector.push_back(content);
         }   
 
         int size() const
         {
-            return static_cast<int> (m_list.size());
+            return static_cast<int> (m_vector.size());
         }
 
         T& get(int index)
         {
-            return m_list[index];
+            return m_vector[index];
         }
 
         const T& get(int index) const
         {
-            return m_list[index];
+            return m_vector[index];
         }
     };
 
@@ -73,7 +78,7 @@ namespace IteratorPatternStandard {
 
     public:
         ForwardIterator(const ConcreteAggregate<T>* agg) 
-            : m_aggregate(agg), m_pos(-1) { }
+            : m_aggregate(agg), m_pos(-1) {}
 
         void reset() override
         {
@@ -106,7 +111,7 @@ namespace IteratorPatternStandard {
 
     public:
         BackwardIterator(const ConcreteAggregate<T>* agg) 
-            : m_aggregate(agg), m_pos(agg->size()) { }
+            : m_aggregate(agg), m_pos(agg->size()) {}
 
         void reset() override
         {
@@ -131,34 +136,34 @@ namespace IteratorPatternStandard {
     };
 
     // =======================================================================
-
-    template <typename T>
-    IteratorBase<T>* ConcreteAggregate<T>::createForwardIterator()
-    {
-        return new ForwardIterator<T>(this);
-    }
-
-    template <typename T>
-    IteratorBase<T>* ConcreteAggregate<T>::createBackwardIterator()
-    {
-        return new BackwardIterator<T>(this);
-    }
-
-    // =======================================================================
 }
 
 void test_conceptual_example_01() {
 
     using namespace IteratorPatternStandard;
 
-    ConcreteAggregate<std::string> container;
-    container.add("123");
-    container.add("456");
-    container.add("789");
-    std::cout << "Size: " << container.size() << std::endl;
-    std::cout << "[2]:  " << container.get(1) << std::endl;
+    ConcreteAggregate<int> intContainer;
 
-    IteratorBase<std::string>* it = container.createForwardIterator();
+    for (int i = 0; i < 3; i++) {
+        intContainer.add(i);
+    }
+
+    IteratorBase<int>* intIter = intContainer.createForwardIterator();
+    while (intIter->hasNext())
+    {
+        std::cout << intIter->getCurrent() << std::endl;
+    }
+    delete intIter;
+    std::cout << std::endl;
+
+    ConcreteAggregate<std::string> stringContainer;
+    stringContainer.add("123");
+    stringContainer.add("456");
+    stringContainer.add("789");
+    std::cout << "Size: " << stringContainer.size() << std::endl;
+    std::cout << "[1]:  " << stringContainer.get(1) << std::endl;
+
+    IteratorBase<std::string>* it = stringContainer.createForwardIterator();
     while (it->hasNext())
     {
         std::cout << it->getCurrent() << std::endl;
@@ -166,7 +171,7 @@ void test_conceptual_example_01() {
     delete it;
     std::cout << std::endl;
 
-    it = container.createBackwardIterator();
+    it = stringContainer.createBackwardIterator();
     while (it->hasNext())
     {
         std::cout << it->getCurrent() << std::endl;

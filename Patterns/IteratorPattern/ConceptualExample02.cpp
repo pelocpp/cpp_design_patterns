@@ -25,164 +25,169 @@ namespace IteratorPatternCpp {
     {
     public:
         virtual ~AggregateBase() = default;
-        virtual IteratorBase<T>* createIterator() = 0;
+        virtual IteratorBase<T>* createForwardIterator() = 0;
+        virtual IteratorBase<T>* createBackwardIterator() = 0;
     };
 
     // =======================================================================
 
     /**
-     * C++ has its own implementation of iterator that works with a different
-     * generics containers defined by the standard library.
+     * C++ has its own implementation of iterator that works with
+     * different generics containers defined by the standard library.
      */
 
-    template <typename T, typename U>
-    class Iterator : public IteratorBase<T>   {
+    template <typename TElement, typename TContainer>
+    class Iterator : public IteratorBase<TElement> {
+
+        using TIterator = typename std::vector<TElement>::iterator;
+        using TIteratorReverse = typename std::vector<TElement>::reverse_iterator;
+
+    private:
+        TContainer* m_container;
+        TIterator m_iterator;
+        bool m_reverse;
+        bool m_notFirstAccess;
+
     public:
-        typedef typename std::vector<T>::iterator iter_type;
-
-        Iterator(U* p_data, bool reverse = false) : m_p_data_(p_data) {
-            m_it_ = m_p_data_->m_data_.begin();
+        Iterator(TContainer* p_data, bool reverse)
+            : m_container(p_data),
+            m_reverse(reverse),
+            m_notFirstAccess(false)
+        {
+            m_iterator = (m_reverse)
+                ? std::prev(m_container->m_vector.end())
+                : m_container->m_vector.begin();
         }
 
-        void First() {
-            m_it_ = m_p_data_->m_data_.begin();
-        }
-
-        void Next() {
-            m_it_++;
-        }
-
-        bool IsDone() {
-            return (m_it_ == m_p_data_->m_data_.end());
-        }
-
-        iter_type Current() {
-            return m_it_;
-        }
-
-        // new interface
+        // interface 'IteratorBase'
         void reset() override {
-            m_it_ = m_p_data_->m_data_.begin();
+            m_iterator = (m_reverse)
+                ? std::prev(m_container->m_vector.end())
+                : m_container->m_vector.begin();
+
+            m_notFirstAccess = false;
         };
 
-        const T& getCurrent() const  override {
-            return *m_it_;
+        const TElement& getCurrent() const override {
+            return *m_iterator;
         };
 
         bool hasNext()  override {
-
-            if (m_it_ == m_p_data_->m_data_.end()) {
-                return false;
+            bool result;
+            if (m_reverse) {
+                if (m_iterator == m_container->m_vector.begin()) {
+                    result = false;
+                }
+                else {
+                    result = true;
+                    if (m_notFirstAccess) {
+                        m_iterator--;
+                    }
+                    m_notFirstAccess = true;
+                }
             }
             else {
-                m_it_++;
-                return true;
+                if (m_iterator == std::prev(m_container->m_vector.end())) {
+                    result = false;
+                }
+                else {
+                    result = true;
+                    if (m_notFirstAccess) {
+                        m_iterator++;
+                    }
+                    m_notFirstAccess = true;
+                }
             }
+            return result;
         };
-
-    private:
-        U* m_p_data_;
-        iter_type m_it_;
     };
 
     // =======================================================================
 
-    template <class T>
-    class Container : public AggregateBase<T> {
-        friend class Iterator<T, Container>;
+    template <class TElement>
+    class ConcreteAggregate : public AggregateBase<TElement> {
+
+        friend class Iterator<TElement, ConcreteAggregate>;
+
+    private:
+        std::vector<TElement> m_vector;
 
     public:
-        void Add(T a) {
-            m_data_.push_back(a);
+        void add(TElement a) {
+            m_vector.push_back(a);
         }
 
-        Iterator<T, Container>* CreateIterator() {
-            return new Iterator<T, Container>(this);
+        int size() const
+        {
+            return static_cast<int> (m_vector.size());
         }
 
-        IteratorBase<T>* Container<T>::createIterator() {
-            return new Iterator<T, Container>(this);
+        TElement& get(int index)
+        {
+            return m_vector[index];
         }
 
+        const TElement& get(int index) const
+        {
+            return m_vector[index];
+        }
 
-    private:
-        std::vector<T> m_data_;
+        IteratorBase<TElement>* createForwardIterator() {
+            return new Iterator<TElement, ConcreteAggregate>(this, false);
+        }
+
+        IteratorBase<TElement>* createBackwardIterator() {
+            return new Iterator<TElement, ConcreteAggregate>(this, true);
+        }
     };
-
-    // =======================================================================
-
-    //template <typename T>
-    //IteratorBase<T>* Container<T>::createIterator()
-    //{
-    //    return new Iterator<T>(this);
-    //}
-
-    //template <typename T>
-    //IteratorBase<T>* ConcreteAggregate<T>::createForwardIterator()
-    //{
-    //    return new ForwardIterator<T>(this);
-    //}
-
-    //template <typename T>
-    //IteratorBase<T>* ConcreteAggregate<T>::createBackwardIterator()
-    //{
-    //    return new BackwardIterator<T>(this);
-    //}
-
-    // =======================================================================
 }
 
 void test_conceptual_example_02() {
 
     using namespace IteratorPatternCpp;
 
-    Container<int> cont;
+    ConcreteAggregate<int> intContainer;
 
     for (int i = 0; i < 3; i++) {
-        cont.Add(i);
+        intContainer.add(i);
     }
 
-    //Iterator<int, Container<int>>* it = cont.CreateIterator();
-    //for (it->First(); !it->IsDone(); it->Next()) {
-    //    std::cout << *it->Current() << std::endl;
-    //}
-
-    IteratorBase<int>* it2 = cont.createIterator();
-    while (it2->hasNext())
+    IteratorBase<int>* intIter = intContainer.createForwardIterator();
+    while (intIter->hasNext())
     {
-        std::cout << it2->getCurrent() << std::endl;
+        std::cout << intIter->getCurrent() << std::endl;
     }
-    delete it2;
+    delete intIter;
     std::cout << std::endl;
 
-    //Container<std::string> container;
-    //container.add("123");
-    //container.add("456");
-    //container.add("789");
-    //std::cout << "Size: " << container.size() << std::endl;
-    //std::cout << "[2]:  " << container.get(1) << std::endl;
+    ConcreteAggregate<std::string> stringContainer;
+    stringContainer.add("123");
+    stringContainer.add("456");
+    stringContainer.add("789");
+    std::cout << "Size: " << stringContainer.size() << std::endl;
+    std::cout << "[1]:  " << stringContainer.get(1) << std::endl;
 
-    //IteratorBase<std::string>* it = container.createIterator();
-    //while (it->hasNext())
-    //{
-    //    std::cout << it->getCurrent() << std::endl;
-    //}
-    //delete it;
-    //std::cout << std::endl;
+    IteratorBase<std::string>* it = stringContainer.createForwardIterator();
+    while (it->hasNext())
+    {
+        std::cout << it->getCurrent() << std::endl;
+    }
+    delete it;
+    std::cout << std::endl;
 
-    //it = container.createBackwardIterator();
-    //while (it->hasNext())
-    //{
-    //    std::cout << it->getCurrent() << std::endl;
-    //}
-    //std::cout << std::endl;
+    it = stringContainer.createBackwardIterator();
+    while (it->hasNext())
+    {
+        std::cout << it->getCurrent() << std::endl;
+    }
+    std::cout << std::endl;
 
-    //it->reset();
-    //while (it->hasNext())
-    //{
-    //    std::cout << it->getCurrent() << std::endl;
-    //}
-    //delete it;
+    it->reset();
+    while (it->hasNext())
+    {
+        std::cout << it->getCurrent() << std::endl;
+    }
+    delete it;
 }
 
 // ===========================================================================
