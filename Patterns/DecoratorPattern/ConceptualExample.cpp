@@ -165,29 +165,28 @@ void test_conceptual_example_03() {
      * ... and at least: changing decorators at runtime
      */
 
-    // component which is going to be decorated
+     // component which is going to be decorated
     std::shared_ptr<Component> component = std::make_shared<ConcreteComponent>();
 
     // run-time dependent decorator
     std::shared_ptr<Component> decorator;
 
     if (true)   // <== change 'true' to 'false'
-    { 
+    {
         std::shared_ptr<Component> decorator1 = std::make_shared<ConcreteDecoratorA>(component);
-        decorator = std::make_shared<ConcreteDecoratorB>(component);
+        decorator = std::make_shared<ConcreteDecoratorB>(decorator1);
 
         std::cout << "Client: Now I've this decorated component (if):" << std::endl;
-        clientCode(decorator);
-        std::cout << std::endl << std::endl;
     }
     else {
         std::shared_ptr<Component> decorator1 = std::make_shared<ConcreteDecoratorB>(component);
-        decorator = std::make_shared<ConcreteDecoratorA>(component);
+        decorator = std::make_shared<ConcreteDecoratorA>(decorator1);
 
         std::cout << "Client: Now I've that decorated component (else):" << std::endl;
-        clientCode(decorator);
-        std::cout << std::endl << std::endl;
     }
+
+    clientCode(decorator);
+    std::cout << std::endl << std::endl;
 }
 
 // ===========================================================================
