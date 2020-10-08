@@ -47,5 +47,8 @@
     <None Include="Resources\dp_decorator_02.svg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_decorator_03_shapes.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

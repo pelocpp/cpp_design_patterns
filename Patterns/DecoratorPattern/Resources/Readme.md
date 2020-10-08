@@ -82,8 +82,7 @@ Abbildung 2: Schematische Darstellung des *Decorator* Patterns.
 ##### Hinweis:
 
 Während ein Dekorateur seine Funktionalität vor oder nach Weiterleiten der Anforderung an das Objekt,
-was es dekoriert, hinzufügen kann, sollte die Kette der Instanziierung
-immer mit dem `ConcreteComponent`-Objekt enden.
+was es dekoriert, hinzufügen kann, sollte die Kette der Instanziierung immer mit dem `ConcreteComponent`-Objekt enden.
 
 #### Implementierung:
 
@@ -114,6 +113,99 @@ vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge
 
 ---
 
+#### 'Real-World' Beispiel:
+
+Das 'Real-World' Beispiel zu diesem Entwurfsmuster beschäftigt sich mit semi-grafischen GDI-Elementen (*Graphics Device Interface*)
+wie Kreisen, Rechtecken, etc.
+In einer Grundausführung lassen sich derartige Figuren einfach zeichnen. Auf Wunsch, auch zur Laufzeit, könnte man diese Figuren
+farbig und/oder mit einer entsprechenden Transparenz zeichnen.
+
+Diese "Zusatzwünsche" lassen sich sehr einfach und elegant mit dem *Decorator Pattern* Entwurfsmuster in die Tat umsetzen.
+Einen entsprechenden Satz an GDI- und Decorator-Klassen finden Sie in Abbildung 3 vor:
+
+<img src="dp_decorator_03_shapes.svg" width="700">
+
+Abbildung 3: Das *Decorator* Pattern in der Anwendung mit GDI-Elementen.
+
+Es folgen vier exemplarische Anwendungsbeispiele, die das Zeichen von GDI-Elementen
+
+  * ohne Dekoration
+  * mit Farbe
+  * mit Transparenz
+  * mit Farbe und Transparenz
+
+verdeutlichen sollen. 
+
+###### *Szenario* 1:
+
+*Code*:
+
+```cpp
+std::shared_ptr<Shape> circle = std::make_shared<Circle>(0.5f);
+std::cout << circle->draw() << std::endl;
+```
+
+*Ausgabe*:
+
+```
+A circle of radius 0.5
+```
+
+###### *Szenario* 2:
+
+*Code*:
+
+```cpp
+std::shared_ptr<Shape> circle = std::make_shared<Circle>(0.5f);
+std::shared_ptr<Shape> redCircle = std::make_shared<ColoredShapeDecorator>(circle, "red");
+std::cout << redCircle->draw() << std::endl;
+```
+
+*Ausgabe*:
+
+```
+A circle of radius 0.5 has color red
+```
+
+###### *Szenario* 3:
+
+*Code*:
+
+```cpp
+std::shared_ptr<Shape> square
+    = std::make_shared<Square>(3.0);
+std::shared_ptr<Shape> transparentSquare
+    = std::make_shared<TransparentShapeDecorator>(square, static_cast<uint8_t>(85));
+std::cout << transparentSquare->draw() << std::endl;
+```
+
+*Ausgabe*:
+
+```
+A square with side 3 has 33.3333% transparency
+```
+
+###### *Szenario* 4:
+
+*Code*:
+
+```cpp
+std::shared_ptr<Shape> circle 
+    = std::make_shared<Circle>(static_cast<float>(15));
+std::shared_ptr<Shape> greenCircle 
+    = std::make_shared<ColoredShapeDecorator>(circle, "green");
+std::shared_ptr<Shape> greenTransparentCircle 
+    = std::make_shared<TransparentShapeDecorator>(greenCircle, static_cast<uint8_t>(50));
+std::cout << greenTransparentCircle->draw() << std::endl;
+```
+
+*Ausgabe*:
+
+```
+A circle of radius 15 has color green has 19.6078% transparency
+```
+
+---
 
 ## Literaturhinweise
 

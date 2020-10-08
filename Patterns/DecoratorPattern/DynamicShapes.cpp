@@ -49,12 +49,12 @@ public:
 };
 
 // corresponds to 'base decorator class'
-class Decorator : public Shape {
+class ShapeDecorator : public Shape {
 protected:
     std::shared_ptr<Shape> m_component;
 
 public:
-    Decorator(const std::shared_ptr<Shape>& component) 
+    ShapeDecorator(const std::shared_ptr<Shape>& component)
       : m_component(component) {}
 
     // base decorator class delegates all work to the wrapped component
@@ -64,64 +64,75 @@ public:
 };
 
 // corresponds to 'concrete decorator class'
-class ColoredShape : public Decorator
+class ColoredShapeDecorator : public ShapeDecorator
 {
 private:
     std::string m_color;
 
 public:
-    ColoredShape(const std::shared_ptr<Shape>& shape, const std::string& color) 
-        : Decorator(shape), m_color{ color } {}
+    ColoredShapeDecorator(const std::shared_ptr<Shape>& shape, const std::string& color)
+        : ShapeDecorator(shape), m_color{ color } {}
 
     std::string draw() const override
     {
         std::ostringstream oss;
-        oss << Decorator::draw() << " has color " << m_color;
+        oss << ShapeDecorator::draw() << " has color " << m_color;
         return oss.str();
     }
 };
 
 // corresponds to another 'concrete decorator class' 
-class TransparentShape : public Decorator
+class TransparentShapeDecorator : public ShapeDecorator
 {
 private:
     uint8_t m_transparency;
 
 public:
-    TransparentShape(const std::shared_ptr<Shape>& shape, uint8_t transparency)
-        : Decorator(shape), m_transparency{ transparency } {}
+    TransparentShapeDecorator(const std::shared_ptr<Shape>& shape, uint8_t transparency)
+        : ShapeDecorator(shape), m_transparency{ transparency } {}
 
     std::string draw() const override
     {
         std::ostringstream oss;
-        oss << Decorator::draw() << " has "
+        oss << ShapeDecorator::draw() << " has "
             << m_transparency / 255.f * 100.f
             << "% transparency";
         return oss.str();
     }
 };
 
+void test_dynamic_decoration_00() {
+    std::shared_ptr<Shape> circle
+        = std::make_shared<Circle>(0.5f);
+    std::cout << circle->draw() << std::endl;
+    // "A circle of radius 0.5"
+}
+
 void test_dynamic_decoration_01() {
-    std::shared_ptr<Shape> circle = std::make_shared<Circle>(0.5f);
+    std::shared_ptr<Shape> circle 
+        = std::make_shared<Circle>(0.5f);
     std::shared_ptr<Shape> redCircle 
-        = std::make_shared<ColoredShape>(circle, "red");
+        = std::make_shared<ColoredShapeDecorator>(circle, "red");
     std::cout << redCircle->draw() << std::endl;
     // "A circle of radius 0.5 has color red"
 }
 
 void test_dynamic_decoration_02() {
-    std::shared_ptr<Shape> square = std::make_shared<Square>(3.0);
+    std::shared_ptr<Shape> square
+        = std::make_shared<Square>(3.0);
     std::shared_ptr<Shape> transparentSquare
-        = std::make_shared<TransparentShape>(square, static_cast<uint8_t>(85));
+        = std::make_shared<TransparentShapeDecorator>(square, static_cast<uint8_t>(85));
     std::cout << transparentSquare->draw() << std::endl;
     // "A square with side 3 has 33.3333 % transparency"
 }
 
 void test_dynamic_decoration_03() {
-    std::shared_ptr<Shape> circle = std::make_shared<Circle>(static_cast<float>(15));
-    std::shared_ptr<Shape> greenCircle = std::make_shared<ColoredShape>(circle, "green");
+    std::shared_ptr<Shape> circle 
+        = std::make_shared<Circle>(static_cast<float>(15));
+    std::shared_ptr<Shape> greenCircle 
+        = std::make_shared<ColoredShapeDecorator>(circle, "green");
     std::shared_ptr<Shape> greenTransparentCircle 
-        = std::make_shared<TransparentShape>(greenCircle, static_cast<uint8_t>(50));
+        = std::make_shared<TransparentShapeDecorator>(greenCircle, static_cast<uint8_t>(50));
     std::cout << greenTransparentCircle->draw() << std::endl;
     // "A circle of radius 15 has color green has 19.6078% transparency"
 }

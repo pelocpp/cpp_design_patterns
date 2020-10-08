@@ -148,6 +148,7 @@
   <ItemGroup>
     <None Include="Resources\dp_decorator_01.svg" />
     <None Include="Resources\dp_decorator_02.svg" />
+    <None Include="Resources\dp_decorator_03_shapes.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
