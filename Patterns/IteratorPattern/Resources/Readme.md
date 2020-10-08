@@ -106,6 +106,22 @@ public:
 
 ---
 
+#### *Hinweis* Änderungen am Container während des Iterierens:
+
+Prinzipiell sollte man erwähnen, dass Sie bei der Realisierung eines Iterators zugrunde legen dürfen,
+dass während des Iterierens **keine** Änderungen am Container erfolgen dürfen.
+
+Würden Sie das Verändern des Containers hier zulassen, würde die Komplexität in der Realisierung eines korrekt funktionierenden
+Iterators unverhältnismäßig stark zunehmen. Dies ist auch der Grund, warum Standard-Iteratoren in den Frameworks
+J2SE und .NET in diesen Fällen eine Ausnahme werfen
+(Java: `ConcurrentModificationException`, C#: `System.InvalidOperationException`).
+
+Eine einfache Lösung dieses Problems bestünde darin, die zu iterierenden Elemente vor dem Beginn des Traversierens 
+einfach zu kopieren. In der Regel dürfte dies aus Gründen der Performance und des benötigten Arbeitsspeichers in der Regel
+aber ausscheiden.
+ 
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/iterator/cpp/example#example-0)
