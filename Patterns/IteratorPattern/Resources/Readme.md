@@ -108,12 +108,12 @@ public:
 
 #### *Hinweis* Änderungen am Container während des Iterierens:
 
-Prinzipiell sollte man erwähnen, dass Sie bei der Realisierung eines Iterators zugrunde legen dürfen,
+Prinzipiell sollte man erwähnen, dass Sie bei der Realisierung eines Iterators zugrunde legen sollten,
 dass während des Iterierens **keine** Änderungen am Container erfolgen dürfen.
 
 Würden Sie das Verändern des Containers hier zulassen, würde die Komplexität in der Realisierung eines korrekt funktionierenden
 Iterators unverhältnismäßig stark zunehmen. Dies ist auch der Grund, warum Standard-Iteratoren in den Frameworks
-J2SE und .NET in diesen Fällen eine Ausnahme werfen
+J2SE und .NET in derartigen Fällen eine Ausnahme werfen
 (Java: `ConcurrentModificationException`, C#: `System.InvalidOperationException`).
 
 Eine einfache Lösung dieses Problems bestünde darin, die zu iterierenden Elemente vor dem Beginn des Traversierens 
