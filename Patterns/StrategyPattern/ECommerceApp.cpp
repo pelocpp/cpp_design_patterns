@@ -12,12 +12,6 @@
 #include "PayByCreditCard.h"
 #include "Order.h"
 
-// function prototypes
-void test_conceptual_example();
-void test_ecommerce_app();
-void test_render_app_dynamically();
-void test_render_app_statically();
-
 void test_ecommerce_app() {
 
     Order order;

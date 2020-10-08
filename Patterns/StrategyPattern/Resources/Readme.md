@@ -11,7 +11,7 @@ in dem eine Reihe ähnlicher Algorithmen definiert und jeweils in eigenen Klassen
 Der für einen bestimmten Zweck geeignete Algorithmus kann dann zur Laufzeit gemäß der vorliegenden Anforderungen ausgewählt
 und eingesetzt werden.
 
-## Wesentliche Merkmale
+#### Problem:
 
 Dieses Entwurfsmuster empfiehlt sich für Situationen,
 in denen sich Klassen nur im Verhalten (*Behavior*) unterscheiden.
@@ -24,12 +24,10 @@ die es verwenden  und auf diese Weise variieren kann.
 Es ermöglicht es der Anwendung auch, mit dem Fortschreiten der Anwendungsentwicklung
 weitere, neue Algorithmen nahtlos hinzuzufügen.
 
+#### Lösung:
+
 Das "Strategie Entwurfsmuster" zählt zur Kategorie der "Verhaltensmuster" / "Behavioral Pattern".
 Es injiziert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung ("*Object* / *Context*") austauschen lassen.
-
-#### Problem:
-
-#### Lösung:
 
 Das Strategie Pattern wird häufig eingesetzt, um das Verhalten einer Klasse zu ändern,
 ohne dies über eine Spezialisierung vorzunehmen.
@@ -46,7 +44,7 @@ Es besteht im Wesentlichen aus drei Teilen:
     Jede Instanz implementiert einen anderen Algorithmus, der (über die `ConcreteStrategy`-Schnittstelle)
     vom Client verwendet werden kann.
 
-<img src="dp_strategy_pattern.svg" width="600">
+<img src="dp_strategy_pattern.svg" width="700">
 
 Abbildung 1: Schematische Darstellung des *Strategy Patterns*.
 

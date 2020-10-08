@@ -29,8 +29,8 @@ public:
 class Context
 {
     /**
-     * @var Strategy The Context maintains a reference to one of the Strategy
-     * objects. The Context does not know the concrete class of a strategy. It
+     * The Context maintains a reference to one of the Strategy objects.
+     * The Context does not know the concrete class of a strategy. It
      * should work with all strategies via the Strategy interface.
      */
 private:
@@ -134,13 +134,14 @@ public:
 
 void clientCode()
 {
-    Context context(std::make_unique<ConcreteStrategyA>());
-
     std::cout << "Client: Strategy is set to normal sorting:" << std::endl;
+
+    Context context(std::make_unique<ConcreteStrategyA>());
     context.doSomeBusinessLogic();
     std::cout << std::endl;
 
     std::cout << "Client: Strategy is set to reverse sorting:" << std::endl;
+
     context.setStrategy(std::make_unique<ConcreteStrategyB>());
     context.doSomeBusinessLogic();
 }

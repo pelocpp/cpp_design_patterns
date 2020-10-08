@@ -74,7 +74,7 @@ Es besteht im Wesentlichen aus vier Teilen:
     Sie können unverändert bleiben und in diesem Fall wird die Basisklassenmethode der Komponente aufgerufen
     oder die `operation`-Methode kann geändert werden oder vollständig durch eine neue Implementierung ersetzt werden.
 
-<img src="dp_decorator_02.svg" width="700">
+<img src="dp_decorator_02.svg" width="750">
 
 Abbildung 2: Schematische Darstellung des *Decorator* Patterns.
 
