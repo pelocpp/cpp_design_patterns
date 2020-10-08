@@ -18,14 +18,14 @@ Speziell im Umfeld von *Modern C++* haben sich folgende Entwurfsmuster etabliert
 
 <img src="dp_overview_modern_cpp.svg" width="370">
 
-Abbildung 2: Software Entwurfsmuster nach Erich Gamma, Richard Helm, Ralph Johnson und John Vlissides ("*GoF*").
+Abbildung 2: *Modern C++* Entwurfsmuster.
 
 Die drei Klassiker für Entwurfsmuster in Anwendungen mit Oberflächen sind in Abbildung 3 
 zusammengestellt:
 
 <img src="dp_overview_ui.svg" width="230">
 
-Abbildung 3: Software Entwurfsmuster nach Erich Gamma, Richard Helm, Ralph Johnson und John Vlissides ("*GoF*").
+Abbildung 3: Entwurfsmuster für die Gestaltung von Oberflächen.
 
 
 #### Entwurfsmuster nach Gamma, Helm, Johnson und Vlissides
