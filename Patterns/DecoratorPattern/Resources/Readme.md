@@ -117,11 +117,11 @@ vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge
 
 Das 'Real-World' Beispiel zu diesem Entwurfsmuster beschäftigt sich mit semi-grafischen GDI-Elementen (*Graphics Device Interface*)
 wie Kreisen, Rechtecken, etc.
-In einer Grundausführung lassen sich derartige Figuren einfach zeichnen. Auf Wunsch, auch zur Laufzeit, könnte man diese Figuren
+In einer Grundausführung lassen sich derartige Figuren einfach schwarz-weiß zeichnen. Auf Wunsch, auch zur Laufzeit, könnte man diese Figuren
 farbig und/oder mit einer entsprechenden Transparenz zeichnen.
 
 Diese "Zusatzwünsche" lassen sich sehr einfach und elegant mit dem *Decorator Pattern* Entwurfsmuster in die Tat umsetzen.
-Einen entsprechenden Satz an GDI- und Decorator-Klassen finden Sie in Abbildung 3 vor:
+Einen entsprechenden Satz an GDI- und Dekorator-Klassen finden Sie in Abbildung 3 vor:
 
 <img src="dp_decorator_03_shapes.svg" width="700">
 
