@@ -40,7 +40,6 @@ namespace IteratorPatternCpp {
     class Iterator : public IteratorBase<TElement> {
 
         using TIterator = typename std::vector<TElement>::iterator;
-        using TIteratorReverse = typename std::vector<TElement>::reverse_iterator;
 
     private:
         TContainer* m_container;

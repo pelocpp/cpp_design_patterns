@@ -78,8 +78,16 @@ Abbildung 1: Schematische Darstellung des *Iterator Patterns*.
 
 [Quellcode 2](../ConceptualExample02.cpp) - C++ spezifische Variante
 
-Die zweite Umsetzung des *Iterator Patterns* berücksichtig, dass es in C++ für Container bereits vordefinierte Iteratoren gibt.
-Dies kann man - wenn es sich bei der *ConcreteAggregate*-Klasse um einen STL-Standardcontainer handelt - berücksichtigen.
+Die zweite Umsetzung des *Iterator Patterns* berücksichtigt, dass es in C++ für Container bereits vordefinierte Iteratoren gibt.
+Dies kann man - wenn es sich bei der *ConcreteAggregate*-Klasse um einen STL-Standardcontainer handelt - ausnutzen.
+Im zweiten Beispiel wird mittels
+
+```cpp
+using TIterator = typename std::vector<TElement>::iterator;
+```
+
+der Standard-Iterator des STL-Containers `std::vector<TElement>` verwendet.
+
 Sollte die *ConcreteAggregate*-Klasse kein STL-Standardcontainer sein, und dies dürfte in der Mehrzahl der zu betrachtenden 
 Beispiele der Fall sein, dann muss containerspezifisch eine Realisierung der Iteratoren-Methoden
 `reset`, `getCurrent` und `hasNext` erfolgen, siehe dazu folgende Definition der Basisklasse `IteratorBase`:
