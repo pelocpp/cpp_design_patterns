@@ -13,7 +13,6 @@ Welche Klasse hierbei herangezogen wird, entscheidet die konkrete Klasse, die di
 
 #### Lösung:
 
-Dieses Muster wird auch als *Virtual Constructor* Pattern bezeichnet.
 Das *Factory*-Entwurfsmuster definiert eine Schnittstelle zum Erstellen eines Objekts
 und überlässt die Auswahl des konkreten Klassentyps den Unterklassen.
 Das Entwurfsmuster macht ein Software-Design leichter anpassbar und weniger abhängig 
@@ -69,6 +68,22 @@ Beschreiben Sie, wie diese Methoden zur Namensgebung des *Factory Method Pattern
 Abbildung 2: Das *Factory Method Pattern* am Beispiel der Produktion von Fernsehgeräten.
 
 ---
+
+#### *Virtual Constructor* Entwurfsmuster:
+
+Das *Factory Method* Muster wird auch als *Virtual Constructor* Pattern bezeichnet.
+Dieses Idiom bringt zum Ausdruck, dass der Client mit einem Konstruktor ein Objekt erzeugt, dessen Typ er nicht kennt.
+Der gesamte Zweck dieser Redewendung besteht darin, das Klonen eines Objekts über den Basisklassenzeiger zu ermöglichen.
+Hier ist ein Beispiel:
+
+WEITER: Quellcodedatei ergänzen ....
+
+https://stackoverflow.com/questions/11574075/virtual-constructor-idiom-and-factory-design
+
+---
+
+
+
 
 #### Hinweis 1:
 
