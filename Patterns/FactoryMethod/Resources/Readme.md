@@ -69,20 +69,99 @@ Abbildung 2: Das *Factory Method Pattern* am Beispiel der Produktion von Fernseh
 
 ---
 
-#### *Virtual Constructor* Entwurfsmuster:
+#### *Virtual Constructor Idiom*:
 
 Das *Factory Method* Muster wird auch als *Virtual Constructor* Pattern bezeichnet.
 Dieses Idiom bringt zum Ausdruck, dass der Client mit einem Konstruktor ein Objekt erzeugt, dessen Typ er nicht kennt.
-Der gesamte Zweck dieser Redewendung besteht darin, das Klonen eines Objekts über den Basisklassenzeiger zu ermöglichen.
+Der gesamte Zweck dieser Redewendung besteht darin, das Klonen eines Objekts über einen Basisklassenzeiger zu ermöglichen.
 Hier ist ein Beispiel:
 
-WEITER: Quellcodedatei ergänzen ....
+```cpp
+class Base
+{
+public:
+    Base() {}
+    virtual ~Base() {}
 
-https://stackoverflow.com/questions/11574075/virtual-constructor-idiom-and-factory-design
+    // the "Virtual Constructor"
+    static Base* Create(int id);
+
+    // the "Virtual Copy Constructor"
+    virtual Base* Clone() = 0;
+
+    virtual void printMe() = 0;
+};
+
+class Derived1 : public Base
+{
+public:
+    Derived1()
+    {
+        std::cout << "default c'tor Derived1" << std::endl;
+    }
+
+    Derived1(const Derived1& rhs)
+    {
+        std::cout << "copy c'tor Derived1" << std::endl;
+    }
+
+    ~Derived1()
+    {
+        std::cout << "c'tor Derived1" << std::endl;
+    }
+
+    Base* Clone() override
+    {
+        return new Derived1(*this);
+    }
+
+    void printMe()
+    {
+        std::cout << "I'm a Derived1" << std::endl;
+    }
+};
+
+// dto. Derived2
+
+Base* Base::Create(int id)
+{
+    if (id == 1)
+    {
+        return new Derived1();
+    }
+    else
+    {
+        return new Derived2();
+    }
+}
+
+Base* CreateCopy(Base* pBase)
+{
+    return pBase->Clone();
+}
+
+void test_virtual_constructor_idiom()
+{
+    using namespace VirtualConstructorIdiom;
+
+    std::cout << "Enter Id (1 or 2): ";
+    int input;
+    std::cin >> input;
+    Base* pBase = Base::Create(input);
+    Base* pCopy = CreateCopy(pBase);
+
+    // dont know what object is created but still access functions through base pointer
+    pBase->printMe();
+    pCopy->printMe();
+
+    delete pBase;
+    delete pCopy;
+}
+```
+
+*Beachte*: Der Client kennt den von `Base` geerbten Klassentyp nicht, ruft aber Methoden an diesem Objekt auf!
 
 ---
-
-
 
 
 #### Hinweis 1:
@@ -142,10 +221,12 @@ und
 
 vor.
 
+Das Beispiel zum *Virtual Constructor Idiom* stammt aus
+
+[Stackoverflow: Virtual constructor idiom and factory design](https://stackoverflow.com/questions/11574075/virtual-constructor-idiom-and-factory-design)
+
 ---
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---
-
-

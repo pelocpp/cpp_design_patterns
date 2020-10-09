@@ -19,6 +19,9 @@
     <Filter Include="Source Files\RealWorldFactoryMethod">
       <UniqueIdentifier>{404fcebc-85c6-453f-b8c7-4ffae595d3e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\VirtualConstructorIdiom">
+      <UniqueIdentifier>{e4a299be-8046-4fa9-856b-00eead4f0b33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -43,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="RealWorldFactoryMethod.cpp">
       <Filter>Source Files\RealWorldFactoryMethod</Filter>
+    </ClCompile>
+    <ClCompile Include="VirtualConstructorIdiom.cpp">
+      <Filter>Source Files\VirtualConstructorIdiom</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

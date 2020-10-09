@@ -155,7 +155,8 @@ namespace RealWorldFactoryMethod {
     }
 }
 
-void test_conceptual_example_03() {
+void test_real_world_example() {
+
     using namespace RealWorldFactoryMethod;
 
     std::cout << "Example launched with the LEDTVFactory." << std::endl;
