@@ -41,7 +41,7 @@ Es besteht im Wesentlichen aus vier Teilen:
     Funktionalitäten enthalten. Objekte des Typs `ConcreteProduct` werden von Methoden
     der *Factory*-Klassen erstellt.
 
-<img src="dp_factory_method_pattern.svg" width="550">
+<img src="dp_factory_method_pattern.svg" width="500">
 
 Abbildung 1: Schematische Darstellung des *Factory Method Patterns*.
 
@@ -64,7 +64,7 @@ Studieren Sie die Methoden `manufactureTelevision`, `assembleTelevision`, `shipp
 und `productionCharge` der Klasse `AbstractTVFactory`.
 Beschreiben Sie, wie diese Methoden zur Namensgebung des *Factory Method Patterns* beitragen.
 
-<img src="dp_factory_method_pattern_television.svg" width="800">
+<img src="dp_factory_method_pattern_television.svg" width="900">
 
 Abbildung 2: Das *Factory Method Pattern* am Beispiel der Produktion von Fernsehgeräten.
 
