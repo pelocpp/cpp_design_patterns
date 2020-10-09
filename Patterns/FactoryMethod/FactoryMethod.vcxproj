@@ -139,6 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Resources\dp_factory_method_pattern.svg" />
+    <None Include="Resources\dp_factory_method_pattern_television.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>

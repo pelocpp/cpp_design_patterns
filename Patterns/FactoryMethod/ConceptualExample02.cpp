@@ -9,8 +9,8 @@
 namespace ConceptualExample02 {
 
     /**
-     * The Product interface declares the operations that all concrete products must
-     * implement.
+     * The Product interface declares the operations
+     * that all concrete products must implement.
      */
     class ProductBase {
     public:
@@ -47,16 +47,17 @@ namespace ConceptualExample02 {
 
         /**
          * Note that the FactoryBase's class primary responsibility is
-         * not creating products. Usually, it contains some core business logic that
-         * relies on Product objects, returned by the factory method. Subclasses can
-         * indirectly change that business logic by overriding the factory method and
-         * returning a different type of product from it.
+         * *not* creating products. Usually, it contains some core business logic that
+         * relies on Product objects, returned by the factory method.
+         * Subclasses can indirectly change that business logic
+         * by overriding the factory method
+         * and returning a different type of product from it.
          */
         std::string someOperation() const {
             // call the factory method to create a Product object.
             std::shared_ptr<ProductBase> product = this->factoryMethod();  // <= abstract method (!)
 
-            // now, use the product:
+            // now, *use* the product:
             std::string result1 = product->operation();
             std::string result2 = "FactoryBase: This factory's code has just created a " + result1;
             return result2;
@@ -70,8 +71,8 @@ namespace ConceptualExample02 {
     class ConcreteFactory1 : public FactoryBase {
         /**
          * Note that the signature of the method still uses the abstract product type,
-         * even though the concrete product is actually returned from the method. This
-         * way the FactoryBase can stay independent of concrete product classes.
+         * even though the concrete product is actually returned from the method.
+         * This way the FactoryBase can stay independent of concrete product classes.
          */
     public:
         std::shared_ptr<ProductBase> factoryMethod() const override {

@@ -12,38 +12,47 @@ namespace RealWorldFactoryMethod {
     class ITelevision {
     public:
         virtual ~ITelevision() {}
-        virtual std::string createTelevision() const = 0;
+        virtual std::string getManufacturer() const = 0;
         virtual void switchOn() = 0;
+        virtual void switchOff() = 0;
     };
 
     // concrete Products provide various implementations
     // of the ITelevision interface
     class LEDTelevision : public ITelevision {
     public:
-        virtual std::string createTelevision() const override {
+        virtual std::string getManufacturer() const final {
             return "LED TV";
         }
 
         virtual void switchOn() override {
             std::cout << "Switched on my LED TV" << std::endl;
         };
+
+        virtual void switchOff() override {
+            std::cout << "Switched off my LED TV" << std::endl;
+        };
     };
 
     class OledTelevision : public ITelevision {
     public:
-        virtual std::string createTelevision() const override {
+        virtual std::string getManufacturer() const final {
             return "Oled TV";
         }
 
         virtual void switchOn() override {
             std::cout << "Switched on my OLED TV" << std::endl;
         };
+
+        virtual void switchOff() override {
+            std::cout << "Switched off my OLED TV" << std::endl;
+        };
     };
 
-    class AbstractFactory {
+    class AbstractTVFactory {
 
     public:
-        virtual ~AbstractFactory() {};
+        virtual ~AbstractTVFactory() {};
 
         /**
          * Note that the FactoryBase's class primary responsibility is
@@ -55,9 +64,15 @@ namespace RealWorldFactoryMethod {
 
         virtual void orderTV() final {
 
-            createTelevision();                // <= abstract method (!)
+            manufactureTelevision();           // <= abstract method (!)
             float charge = shippingCharge();   // <= abstract method (!)
+
             std::cout << "Shipping charge: " << charge << " Euro" << std::endl;
+        }
+
+        virtual ITelevision* orderTVExtended() final {
+            // client receives 'ITelevision' (e.g. 'Product') pointer
+            return assembleTelevision();    // <= abstract method (!)
         }
 
         virtual float totalCharge() final {
@@ -69,26 +84,24 @@ namespace RealWorldFactoryMethod {
             return charge;
         }
 
-        virtual ITelevision* orderTVExtended() final {
-            return createTelevisionExtended();
-        }
-
     protected:
+        virtual void manufactureTelevision() = 0;
+        virtual ITelevision* assembleTelevision() = 0;
         virtual float shippingCharge() const = 0;
         virtual float productionCharge() const = 0;
-        virtual void createTelevision() = 0;
-        virtual ITelevision* createTelevisionExtended() = 0;
     };
 
 
-    class LEDTVFactory : public AbstractFactory {
+    class LEDTVFactory : public AbstractTVFactory {
 
     public:
-        virtual void createTelevision() override  {
-            std::cout << "Assembling LED tv" << std::endl;
+        virtual void manufactureTelevision() override  {
+            ITelevision* newTV = assembleTelevision();
+            std::cout << "Manufacturing LED tv" << std::endl;
         }
 
-        virtual ITelevision* createTelevisionExtended() override {
+        virtual ITelevision* assembleTelevision() override {
+            std::cout << "Assembling LED tv" << std::endl;
             return new LEDTelevision();
         }
 
@@ -101,13 +114,14 @@ namespace RealWorldFactoryMethod {
         }
     };
 
-    class OledTVFactory : public AbstractFactory {
+    class OledTVFactory : public AbstractTVFactory {
     public:
-        virtual void createTelevision() override {
-            std::cout << "Assembling Oled tv" << std::endl;
+        virtual void manufactureTelevision() override {
+            std::cout << "Manufacturing Oled tv" << std::endl;
         }
 
-        virtual ITelevision* createTelevisionExtended() override {
+        virtual ITelevision* assembleTelevision() override {
+            std::cout << "Assembling Oled tv" << std::endl;
             return new OledTelevision();
         }
 
@@ -120,33 +134,43 @@ namespace RealWorldFactoryMethod {
         }
     };
 
-    void clientCode01(const std::shared_ptr<AbstractFactory> factory) {
+    void clientCode01(const std::shared_ptr<AbstractTVFactory> factory) {
         factory->orderTV();
     }
 
-    void clientCode02(const std::shared_ptr<AbstractFactory> factory) {
+    void clientCode02(const std::shared_ptr<AbstractTVFactory> factory) {
         std::cout
-            << "Mein neuer Fernseher kostet mich "
+            << "My new television receiver cost me "
             << factory->totalCharge()
             << std::endl;
 
         ITelevision* tvPtr = factory->orderTVExtended();
         tvPtr->switchOn();
+
+        std::cout 
+            << "My new TV is a " 
+            << tvPtr ->getManufacturer()
+            << " device." 
+            << std::endl;
     }
 }
 
 void test_conceptual_example_03() {
     using namespace RealWorldFactoryMethod;
 
-    std::cout << "Example launched with the LEDTVFactory.\n";
-    std::shared_ptr<AbstractFactory> factory1 = std::make_shared<LEDTVFactory>();
+    std::cout << "Example launched with the LEDTVFactory." << std::endl;
+    std::shared_ptr<AbstractTVFactory> factory1 = std::make_shared<LEDTVFactory>();
     clientCode01(factory1);
+    std::cout << std::endl;
     clientCode02(factory1);
+    std::cout << std::endl;
 
-    std::cout << "Example launched with the OledTVFactory.\n";
-    std::shared_ptr<AbstractFactory> factory2 = std::make_shared<OledTVFactory>();
+    std::cout << "Example launched with the OledTVFactory." << std::endl;;
+    std::shared_ptr<AbstractTVFactory> factory2 = std::make_shared<OledTVFactory>();
     clientCode01(factory2);
+    std::cout << std::endl;
     clientCode02(factory2);
+    std::cout << std::endl;
 }
 
 // ===========================================================================

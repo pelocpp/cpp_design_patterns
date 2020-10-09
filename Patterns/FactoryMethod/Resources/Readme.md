@@ -45,6 +45,31 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 Abbildung 1: Schematische Darstellung des *Factory Method Patterns*.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode 1](../ConceptualExample01.cpp) - Sehr einfaches Beispiel<br/>
+[Quellcode 2](../ConceptualExample02.cpp) - Beispiel, das "konzeptionell" den Einsatz von *Factory Methods* aufzeigt.<br/>
+
+---
+
+#### 'Real-World' Beispiel:
+
+[Quellcode 3](../RealWorldFactoryMethod.cpp) - *Real-World*-Beispiel (`ITelevision`), das exemplarisch mehrere *Factory Methods* betrachtet.<br/>
+
+In *Quellcode 3* findet sich ein Programm mit den Klassen `ITelevision`, `LEDTelevision`, `OledTelevision`,
+`AbstractTVFactory`, `LEDTVFactory` und `OledTVFactory` vor.
+Studieren Sie die Methoden `manufactureTelevision`, `assembleTelevision`, `shippingCharge` 
+und `productionCharge` der Klasse `AbstractTVFactory`.
+Beschreiben Sie, wie diese Methoden zur Namensgebung des *Factory Method Patterns* beitragen.
+
+<img src="dp_factory_method_pattern_television.svg" width="800">
+
+Abbildung 2: Das *Factory Method Pattern* am Beispiel der Produktion von Fernsehgeräten.
+
+---
+
 #### Hinweis 1:
 
 Die beiden Entwurfsmuster *Simple Factory* und *Factory Method* sind nicht 
@@ -64,6 +89,7 @@ miteinander zu verwechseln.
     dann kommt das *Factory Method* Pattern in Betracht. Dieses lässt sich gut mit dem *Template Pattern*, oder auch *Strategy Pattern* kombinieren,
     da man mit einer Schablone (Template) die Schritte zum Erstellen des untergeordneten Elements abstrahieren kann.
 
+---
 
 #### Hinweis 2:
 
@@ -88,16 +114,6 @@ Damit zu den Unterschieden:
     Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterklassen verschieben.
   * Schmale Schnittstelle.
   * Schnittstelle ist oft abstrakt und enthält generischen Code (Herstellungscode, den alle Produkte durchlaufen müssen).
- 
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample01.cpp) - Sehr einfaches Beispiel<br/>
-[Quellcode 2](../ConceptualExample02.cpp) - Beispiel, das "konzeptionell" den Einsatz von *Factory Methods* aufzeigt.<br/>
-[Quellcode 3](../RealWorldFactoryMethod.cpp) - *Real-World*-Beispiel (`ITelevision`), das exemplarisch mehrere *Factory Methods* betrachtet.<br/>
-
-In *Quellcode 3* findet sich ein Programm mit den Klassen `ITelevision`, `LEDTelevision`, `OledTelevision`,
-`AbstractFactory`, `LEDTVFactory` und `OledTVFactory` vor. Studieren Sie die Methode `orderTV`. Beschreiben Sie,
-wie diese Methode zur Namensgebung des *Factory Method Patterns* beiträgt.
 
 ---
 
