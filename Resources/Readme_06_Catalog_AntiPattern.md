@@ -19,10 +19,9 @@ schlechte Aussichten auf eine qualitativ gelungene Architektur bescheinigt werde
 | Golden Hammer | Eine vertraute Technologie oder ein bekanntes Konzept, das zwanghaft auf (zu viele) Softwareprobleme angewendet wird. |
 | Dead End | Die direkte Änderung von kommerzieller Software oder wiederverwendbarer Software führt zu erheblichen Aufwendungen in der Wartung eines Softwaresystems. Das „*Dead End*“ wird durch Ändern einer wiederverwendbaren Komponente erreicht, wenn die geänderte Komponente nicht mehr vom Lieferanten gewartet und unterstützt wird. |
 | Spaghetti Code | Ad-hoc-Softwarestrukturen machen es schwierig, die Software zu erweitern und den Code zu optimieren. „*Spaghetti-Code*“ zeugt von Software, die nur sehr wenig Softwarestruktur enthält. Codierung und progressive Erweiterungen beeinträchtigen die Softwarestruktur in einem solchen Ausmaß, dass die Struktur selbst für den ursprünglichen Entwickler nicht klar genug ist, wenn dieser für längere Zeit von der Software entfernt ist. |
-| Input Kludge | Ein *Input Kludge* - zu Deutsch etwa "Eingabe-Flickschusterei, -Behelfslösung" ist eine Art von Fehler in der Software (ein Anti-Pattern), bei dem einfache Benutzereingaben nicht richtig behandelt werden. |
 | [Input Kludge](#Input-Kludge) | Ein *Input Kludge* - zu Deutsch etwa "Eingabe-Flickschusterei, -Behelfslösung" ist eine Art von Fehler in der Software (ein Anti-Pattern), bei dem einfache Benutzereingaben nicht richtig behandelt werden. |
 | Walking through a Minefield | Der Gebrauch von Software, die zum Kunden ausgeliefert wurde, kann mit dem Gehen durch ein Minenfeld verglichen werden. Dieses Mini-Anti-Muster ist auch bekannt als *Nothing Works* oder *Do You Believe in Magic*? In freigegebenen Softwareprodukten treten zahlreiche Fehler auf. Experten schätzen, dass der ursprüngliche Quellcode zwei bis fünf Fehler pro Codezeile enthält. Dies bedeutet, dass der Code zwei oder mehr Änderungen pro Zeile erfordert, um alle Fehler zu beseitigen. |
-| [Cut-and-Paste Programming](#Cut-and-Paste-Programming) | Durch das Kopieren von Quellanweisungen wiederverwendeter Code führt zu erheblichen Wartungsproblemen. |
+| [Copy-and-Paste Programming](#Copy-and-Paste-Programming) | Durch das Kopieren von Quellanweisungen wiederverwendeter Code führt zu erheblichen Wartungsproblemen. |
 | Mushroom Management | In einigen Software-Architekturkreisen gibt es eine explizite Richtlinie, die besagt, dass Systementwickler von den Endbenutzern des Systems zu isolieren sind. Anforderungen werden aus zweiter Hand von Vermittlern weitergeleitet, einschließlich Architekten, Managern oder Anforderungsanalysten. „*Mushroom Management*“ legt zugrunde, dass die Anforderungen sowohl vom Endbenutzer als auch von den Entwicklern gut verstanden werden. Ferner wird davon ausgegangen, dass die Anforderungen stabil sind. |
 | [Interface Bloat](#Interface-Bloat) | *Interface Bloat* sind Interfaces (Zusammenfassung mehrerer Methodenschnittstellen), die zu viele Methoden in einer einzigen Schnittstelle integrieren. |
 | [Race Conditions](#Race-Conditions) | Unter einer "Race-Condition" versteht man im Ablauf eines multi-threading / multi-processing Programms eine Situation, die auftritt, wenn versucht wird, zwei oder mehr Funktionen/Methoden gleichzeitig ("parallel") auszuführen. |
@@ -41,7 +40,7 @@ Gefunden in Entwürfen, in denen eine Klasse die Verarbeitung monopolisiert:
 
   * Konzentration zu vieler Funktionen (Methoden) in einem Teil des Designs (Klasse)
   * Weiß typischerweise alles darüber, was in der Anwendung passiert, und weiß, wie man mit allen Daten in der Anwendung interagiert
-  * Oft wird es im Laufe der Zeit unglaublich schwierig, die  God Object Klasse zu warten, da Änderungen weitreichende Nebenwirkungen haben
+  * Oft wird es im Laufe der Zeit unglaublich schwierig, die *God Object* Klasse zu warten, da Änderungen weitreichende Nebenwirkungen haben
   * Übermäßig kompliziert, weil es den Status eines Großteils der Anwendung verwaltet - und wird damit zum Mediator aller Abläufe in der Anwendung
   * Das Muster wird häufig in Mikrocontroller-Software verwendet, bei denen die zentrale Steuerung wichtiger ist als Eleganz und einfache Wartbarkeit der Software
 
@@ -169,7 +168,7 @@ die auftritt, wenn versucht wird, zwei oder mehr Funktionen/Methoden gleichzeiti
 Aufgrund der Art des Geräts oder Systems müssen die Vorgänge jedoch sequentiell ausgeführt werden,
 um korrekt ausgeführt zu werden.
 
-Ein Beispielszenario wird in Abbilding 1 dargestellt:
+Ein Beispielszenario wird in Abbildung 1 dargestellt:
 
 <img src="race_condition_revised.png" width="700">
 
@@ -226,10 +225,21 @@ Wenn die beiden Module ein ähnliches Verhalten aufweisen, könnten sie auch zu ei
 Dieses Anti-Pattern wird durch das Vorhandensein mehrerer ähnlicher - noch schlimmer: identischer - Codesegmente identifiziert,
 die im gesamten Softwareprojekt verteilt sind.
 
-Dies führt zu einer Codeduplizierung, die kurzfristig positive Konsequenzen haben kann, z.B.
-das schnellere Erreichen des Entwicklungsziels, da die Maßnahmen zur Abhilfe der Codeduplizierungen in der Regel mit zusätzlichem zeitlichem Aufwand verbunden sind.
+###### Symptome und Folgen
 
-In erster Linie sind es aber zwei Nachteile, die die Qualität der Software beeinträchtigen:
+  * Trotz vieler lokaler Korrekturen treten in der gesamten Software immer wieder dieselben Softwarefehler auf
+  * Die Anzahl der "Lines of Code" erhöht sich, ohne die Gesamtproduktivität zu erhöhen
+  * Code Reviews und Inspektionen werden unnötig verlängert und erschwert
+  * Es wird schwierig, alle Fälle eines bestimmten Fehlers zu lokalisieren und zu beheben
+  * Dieses Anti Pattern führt zu übermäßigen Softwarewartungskosten
+  * Entwickler beheben Fehler mehrere Male, ohne die Ursache des Fehlers in einer Art Standardkorrektur zu beseitigen
+  * Durch "Copy-and-Paste" Programmierung wird die Anzahl der entwickelten Codezeilen unnötigerweise erhöht, ohne dass diese mit anderen Formen der Wiederverwendung von Code zum Zwecke der damit verbundenen Wartungskosten gesenkt wird
+
+Dies führt zu einer Codeduplizierung, die kurzfristig positive Konsequenzen haben kann, z.B.
+das schnellere Erreichen des Entwicklungsziels, da die Maßnahmen zur Abhilfe der Codeduplizierungen
+in der Regel mit zusätzlichem zeitlichem Aufwand verbunden sind.
+
+In erster Linie sind es aber zwei wesentliche Nachteile, die die Qualität der Software beeinträchtigen:
 
   * Änderungen an einem derartigen Codesegment müssen mehrere Male im gesamten Projekt nachgezogen werden. Wird eine dieser Codeduplizierungen übersehen,
    kann dies fatale Folgen haben.
