@@ -37,7 +37,14 @@ Tabelle 1. Anti-Pattern
 
 ##### Beschreibung
 
-Gefunden in Entwürfen, in denen eine Klasse die Verarbeitung monopolisiert und andere Klassen hauptsächlich Daten kapseln.
+Gefunden in Entwürfen, in denen eine Klasse die Verarbeitung monopolisiert:
+
+  * Konzentration zu vieler Funktionen (Methoden) in einem Teil des Designs (Klasse)
+  * Weiß typischerweise alles darüber, was in der Anwendung passiert, und weiß, wie man mit allen Daten in der Anwendung interagiert
+  * Oft wird es im Laufe der Zeit unglaublich schwierig, die  God Object Klasse zu warten, da Änderungen weitreichende Nebenwirkungen haben
+  * Übermäßig kompliziert, weil es den Status eines Großteils der Anwendung verwaltet - und wird damit zum Mediator aller Abläufe in der Anwendung
+  * Das Muster wird häufig in Mikrocontroller-Software verwendet, bei denen die zentrale Steuerung wichtiger ist als Eleganz und einfache Wartbarkeit der Software
+
 
 ##### Abhilfe
 
@@ -48,11 +55,59 @@ Zerlegen Sie die *God Object* Klasse und verteilen Sie die Verantwortlichkeiten 
 
 ##### Beschreibung
 
-Ein *Input Kludge* - zu Deutsch etwa "Eingabe-Flickschusterei, -Behelfslösung" ist eine Art von Fehler in der Software (ein Anti-Pattern),
+Ein *Input Kludge* - zu Deutsch etwa "Eingabe-Flickschusterei, -Behelfslösung" ist eine Art von Fehler in der Software (Anti-Pattern),
 bei dem einfache Benutzereingaben nicht richtig behandelt werden.
 Dies kann zu Abstürzen beim Pufferüberlauf führen.
 
-Bekannteste Vertreter:
+##### Identifizierung
+
+Eine offensichtliche *Code Geruchsbelästigung*, die auf dieses Muster hinweisen kann, sind Ad-hoc-Routinen zur Validierung von Eingaben.
+
+*Beispiel*:
+
+  * JavaScript-Validierungsfunktionen, die direkt in der Webseite oder in der View definiert sind.
+  * Serverseitige Validierungsroutinen, die im Presentation Layer oder im Controller definiert ist.
+
+###### Beispiel
+
+```javascript
+$('form').on('submit', function(event) {
+    if (!(/^.*@.*\.(com|edu|net|org)$/g.exec($('#email').val()))) {
+        alert('You must enter a valid email address.');
+        return false;
+    }
+})
+```
+
+Unser erster Hinweis, dass es ein Problem geben könnte, besteht darin,
+dass die Validierungsroutine (in diesem Fall `regex`) für diese bestimmte Eingabe ad-hoc definiert ist.
+Dies bedeutet nicht sofort, dass ein Problem vorliegt, aber dies ist eine *Code Geruchsbelästigung*, die bedeutet,
+dass wir diese Code-Passagen mit einem größeren Augenmerk unterziehen sollten.
+
+Bei näherer Betrachtung wird es ziemlich schnell klar, dass dies definitiv ein *Input Kludge* ist.
+Alle gültigen E-Mail-Adressen mit einem weniger gebräuchlichen Domain-Suffix (z. B. `email@ddress.us`) werden abgelehnt.
+
+Außerdem würden ungültige E-Mail-Adressen akzeptiert (zum Beispiel `@.com`).
+
+
+###### Lösung
+
+Die Lösung für dieses Problem (und die meisten Eingabeprobleme) besteht darin,
+eine gemeinsam genutzte, weit verbreitete und gründlich getestete Bibliothek für Standardvalidierungen zu verwenden.
+
+Hier ist unser Beispiel, das mithilfe einer fiktiven Validierungsbibliothek überarbeitet wurde (die natürlich gründlich getestet wurde):
+
+```javascript
+$('form').on('submit', function(event) {
+    if (!$.isValid.email($('#email').val())) {
+        alert('You must enter a valid email address.');
+        return false;
+    }
+})
+```
+
+
+Weitere bekannte Vertreter für mögliche *Input Kludge* ´Schwachstellen:
 
   * CRT (C-Runtime-Library)
 
@@ -81,9 +136,15 @@ Siehe eine Beschreibung hier:
 ##### Beschreibung
 
 *Interface Bloat*, von Bjarne Stroustrup auch als *Fat Interfaces* und von Martin Fowler als *Refused Bequests* bezeichnet,
-sind Interfaces (Zusammenfassung mehrerer Methodenschnittstellen), die zu viele Methoden in einer einzigen Schnittstelle integrieren.
+sind Interfaces (Zusammenfassung mehrerer Methoden), die zu viele Methoden in eine einzige Schnittstelle integrieren.
 Wollte man eine derartige Schnittstelle implementieren, stellt man fest, dass die meisten Klassen auf Grund der Komplexität der Schnittstelle
 keine Realisierung bereitstellen können.
+
+##### Identifizierung
+
+  * Eine Schnittstelle wird immer wieder mit neuen Methoden erweitert, ohne dass es zu einer Trennung kommt, sodass Sie eine monolithische Implementierungs-Klasse erhalten, die nur noch schwer zu warten und zu verwenden ist.
+  * Die in einer vorhandenen Schnittstelle deklarierten Methoden erhalten immer wieder neue Parameter zu ihren Signaturen, sodass Sie ständig aktualisieren müssen und Ihre vorhandenen Anwendungen nicht abwärtskompatibel sind.
+  * Methoden in einer vorhandenen Schnittstelle werden immer wieder mit sehr ähnlichen Varianten überladen (*method overloading*), was zu Schwierigkeiten bei der Auswahl der zu verwendenden relevanten Methode führen kann.
 
 ##### Abhilfe
 
@@ -92,10 +153,10 @@ Entwickler einer Klasse gezwungen werden sollte, Methoden zu implementieren, die
 
 Das "Interface Segregation Principle" (ISP) teilt sehr große Schnittstellen in kleinere und spezifischere Schnittstellen auf,
 sodass Clients nur die für sie interessanten Methoden kennen müssen.
-Solche geschrumpften Schnittstellen werden auch Rollenschnittstellen (role interfaces) genannt. 
+Solche geschrumpften Schnittstellen werden auch Rollenschnittstellen (*role interfaces*) genannt.
 
-Die Intention von ISP ist es, eine Menge von Klassen entkoppeln zu können und somit flexibler interagieren zu können in Bezug auf
-"Klassen umgestalten, ändern und neu bereitstellen"
+Die Intention von ISP ist es, eine Menge von Klassen zu entkoppeln und somit flexibler interagieren zu können in Bezug auf
+"Klassen umgestalten, ändern und neu bereitstellen".
 
 ISP ist eines der fünf SOLID-Prinzipien des objektorientierten Designs!
 
@@ -103,14 +164,41 @@ ISP ist eines der fünf SOLID-Prinzipien des objektorientierten Designs!
 
 ##### Beschreibung
 
-Unter einer "Race-Condition" versteht man im Ablauf eines multi-threading / multi-processing Programms eine Situation,
+Unter einer "Race-Condition" versteht man im Ablauf eines Multi-Threading / Multi-Processing Programms eine Situation,
 die auftritt, wenn versucht wird, zwei oder mehr Funktionen/Methoden gleichzeitig ("parallel") auszuführen.
 Aufgrund der Art des Geräts oder Systems müssen die Vorgänge jedoch sequentiell ausgeführt werden,
 um korrekt ausgeführt zu werden.
 
+Ein Beispielszenario wird in Abbilding 1 dargestellt:
+
+<img src="race_condition_revised.png" width="700">
+
+Abbildung 1: Konkurrierender Zugriff auf gemeinsame Daten.
+
+
 ##### Abhilfe
 
-Mutex.
+Sogenannte "Mutex"-Objekte:
+
+Der Sinn eines Mutex-Objekts (*"Mutual Exclusion"*) besteht darin, zwei Threads zu synchronisieren.
+Wenn zwei Threads versuchen, auf eine einzelne Ressource zuzugreifen, besteht das allgemeine Muster darin,
+dass der erste Thread versucht, das Mutex-Objekt zu "setzen" (`lock`), bevor er die kritische Code-Passage ausführt. 
+Wenn der zweite Thread versucht, dieselbe Code-Passage auszuführen, sieht er, dass das Mutex-Objekt gesetzt ist,
+und wartet, bis der erste Thread vollständig diese Code-Passage verlassen hat. 
+Unter anderem es bei Verlassen der Code-Passage zwingend erforderlich, das Mutex-Objekt "zurück zu setzen" (`unlock`).
+Nun kann der zweite Thread mit demselben Regelwerk () die  kritische Code-Passage ausführen.
+
+Prinzipiell wird die Funktionalität eines Mutex-Objekts auf der Ebene eines Betriebssystems realisiert und eben damit auch
+zur Verfügung gestellt. In *Modern C++* gibt es eine Abstraktion von Mutex-Objekten in Gestalt mehrerer Klassen:
+
+  * `std::mutex`
+  * `std::lock_guard`
+  * `std::unique_lock`
+  * `std::scoped_lock`
+ 
+Diese Klassen können zur Synchronisation von Threads in **einem** Prozess eingesetzt werden.
+Für die Inter-Prozess-Kommunikation sind sie nicht verwendbar!
+
 
 #### Circular Dependencies
 

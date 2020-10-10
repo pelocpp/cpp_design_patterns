@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Resources\dp_overview.svg = Resources\dp_overview.svg
 		Resources\dp_overview_modern_cpp.svg = Resources\dp_overview_modern_cpp.svg
 		Resources\dp_overview_ui.svg = Resources\dp_overview_ui.svg
+		Resources\race_condition_revised.png = Resources\race_condition_revised.png
 		Readme.md = Readme.md
 		Resources\Readme_01_History.md = Resources\Readme_01_History.md
 		Resources\Readme_02_Description.md = Resources\Readme_02_Description.md
@@ -52,7 +53,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NullObject", "Patterns\Null
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Observer", "Patterns\Observer\Observer.vcxproj", "{D1BF6DA8-D23E-40A0-A58F-BEE71C4A7B69}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpaquePointer", "Patterns\OpaquePointer\OpaquePointer.vcxproj", "{D59D5682-450F-4DB0-A823-4603F50FB541}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pimpl", "Patterns\OpaquePointer\OpaquePointer.vcxproj", "{D59D5682-450F-4DB0-A823-4603F50FB541}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Prototype", "Patterns\Prototype\Prototype.vcxproj", "{A57FC3E0-39FC-41A8-85A8-094B6DF7D13C}"
 EndProject
