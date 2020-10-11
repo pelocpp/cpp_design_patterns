@@ -91,9 +91,9 @@ protected:
  * code does not have to know the concrete class of an object it works with, as
  * long as it works with objects through the interface of their base class.
  */
-void clientCode(AbstractClass* class_) {
+void clientCode(AbstractClass* obj) {
     // ...
-    class_->TemplateMethod();
+    obj->TemplateMethod();
     // ...
 }
 
