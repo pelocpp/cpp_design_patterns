@@ -95,7 +95,7 @@ Gruppierungen von Entwurfsmustern. In Büchern über "Modern C++" stößt man häufig
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
 | [RAII (Resource Acquisition Is Initialization)](../Patterns/RAII_Idiom/Resources/Readme.md)  | *Resource Acquisition Is Initialization* |
-| [Opaque Pointer / Pimpl](../Patterns/OpaquePointer/Resources/Readme.md)  | *Pointer to implementation* |
+| [Opaque Pointer / Pimpl](../Patterns/Pimpl/Resources/Readme.md)  | *Pointer to implementation* |
 | [Null Object](../Patterns/NullObject/Resources/Readme.md) | Null Objekt |
 | [Intercepting Filter Pattern](../Patterns/InterceptingFilterPattern/Resources/Readme.md) | *Intercepting Filter Pattern* |
 | SFINAE | *Substitution failure is not an error* |
