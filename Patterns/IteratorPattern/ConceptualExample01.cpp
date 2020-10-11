@@ -186,6 +186,47 @@ void test_conceptual_example_01() {
     delete it;
 }
 
+void test_conceptual_example_02() {
+
+    using namespace IteratorPatternStandard;
+
+    ConcreteAggregate<int> intContainer;
+
+    for (int i = 0; i < 10; i++) {
+        intContainer.add(i);
+    }
+
+    IteratorBase<int>* intIter1 = intContainer.createForwardIterator();
+    IteratorBase<int>* intIter2 = intContainer.createForwardIterator();
+
+    // using first iterator three times
+    if (intIter1->hasNext()) {
+        std::cout << "First Iterator:  " << intIter1->getCurrent() << std::endl;
+    }
+    if (intIter1->hasNext()) {
+        std::cout << "First Iterator:  " << intIter1->getCurrent() << std::endl;
+    }
+    if (intIter1->hasNext()) {
+        std::cout << "First Iterator:  " << intIter1->getCurrent() << std::endl;
+    }
+    std::cout << std::endl;
+
+    // now using second iterator three times
+    if (intIter2->hasNext()) {
+        std::cout << "Second Iterator: " << intIter2->getCurrent() << std::endl;
+    }
+    if (intIter2->hasNext()) {
+        std::cout << "Second Iterator: " << intIter2->getCurrent() << std::endl;
+    }
+    if (intIter2->hasNext()) {
+        std::cout << "Second Iterator: " << intIter2->getCurrent() << std::endl;
+    }
+
+    delete intIter1;
+    delete intIter2;
+    std::cout << std::endl;
+}
+
 // ===========================================================================
 // End-of-File
 // ===========================================================================

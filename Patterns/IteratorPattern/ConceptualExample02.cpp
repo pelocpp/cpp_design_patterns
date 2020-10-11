@@ -141,7 +141,7 @@ namespace IteratorPatternCpp {
     };
 }
 
-void test_conceptual_example_02() {
+void test_conceptual_example_03() {
 
     using namespace IteratorPatternCpp;
 

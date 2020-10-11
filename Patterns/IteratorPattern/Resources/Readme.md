@@ -106,19 +106,27 @@ public:
 
 ---
 
-#### *Hinweis* Änderungen am Container während des Iterierens:
+#### *Hinweis* 1: Mehrere Iterator-Objekte zu einem Container:
+
+Natürlich ist es möglich, von einem Container mehrere Iterator-Objekte zu erzeugen.
+Wie immer Sie die Klasse `ConcreteIterator` realisieren: Wenn gleichzeitig mehrere Iterator-Objekte
+einen Container traversieren, dann muss jeder Iterator für sich *autark* arbeiten.
+ 
+---
+
+#### *Hinweis* 2: Änderungen am Container während des Iterierens:
 
 Prinzipiell sollte man erwähnen, dass Sie bei der Realisierung eines Iterators zugrunde legen sollten,
 dass während des Iterierens **keine** Änderungen am Container erfolgen dürfen.
 
 Würden Sie das Verändern des Containers hier zulassen, würde die Komplexität in der Realisierung eines korrekt funktionierenden
-Iterators unverhältnismäßig stark zunehmen. Dies ist auch der Grund, warum Standard-Iteratoren in den Frameworks
+Iterators unverhältnismäßig stark ansteigen. Dies ist auch der Grund, warum Standard-Iteratoren in den Frameworks
 J2SE und .NET in derartigen Fällen eine Ausnahme werfen
 (Java: `ConcurrentModificationException`, C#: `System.InvalidOperationException`).
 
 Eine einfache Lösung dieses Problems bestünde darin, die zu iterierenden Elemente vor dem Beginn des Traversierens 
-einfach zu kopieren. In der Regel dürfte dies aus Gründen der Performance und des benötigten Arbeitsspeichers in der Regel
-aber ausscheiden.
+einfach zu kopieren.
+In der Regel dürfte dies aus Gründen der Performance und des benötigten Arbeitsspeichers aber ausscheiden.
  
 ---
 
