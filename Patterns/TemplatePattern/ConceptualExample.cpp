@@ -31,13 +31,15 @@ public:
      */
 protected:
     void BaseOperation1() const {
-        std::cout << "AbstractClass says: I am doing the bulk of the work\n";
+        std::cout << "AbstractClass says: I am doing the bulk of the work" << std::endl;
     }
+
     void BaseOperation2() const {
-        std::cout << "AbstractClass says: But I let subclasses override some operations\n";
+        std::cout << "AbstractClass says: But I let subclasses override some operations" << std::endl;
     }
+
     void BaseOperation3() const {
-        std::cout << "AbstractClass says: But I am doing the bulk of the work anyway\n";
+        std::cout << "AbstractClass says: But I am doing the bulk of the work anyway" << std::endl;
     }
 
     /**
@@ -63,10 +65,10 @@ protected:
 class ConcreteClass1 : public AbstractClass {
 protected:
     void RequiredOperations1() const override {
-        std::cout << "ConcreteClass1 says: Implemented Operation1\n";
+        std::cout << "ConcreteClass1 says: Implemented Operation1" << std::endl;
     }
     void RequiredOperation2() const override {
-        std::cout << "ConcreteClass1 says: Implemented Operation2\n";
+        std::cout << "ConcreteClass1 says: Implemented Operation2" << std::endl;
     }
 };
 
@@ -76,13 +78,13 @@ protected:
 class ConcreteClass2 : public AbstractClass {
 protected:
     void RequiredOperations1() const override {
-        std::cout << "ConcreteClass2 says: Implemented Operation1\n";
+        std::cout << "ConcreteClass2 says: Implemented Operation1" << std::endl;
     }
     void RequiredOperation2() const override {
-        std::cout << "ConcreteClass2 says: Implemented Operation2\n";
+        std::cout << "ConcreteClass2 says: Implemented Operation2" << std::endl;
     }
     void Hook1() const override {
-        std::cout << "ConcreteClass2 says: Overridden Hook1\n";
+        std::cout << "ConcreteClass2 says: Overridden Hook1" << std::endl;
     }
 };
 
@@ -98,12 +100,12 @@ void clientCode(AbstractClass* obj) {
 }
 
 void test_conceptual_example() {
-    std::cout << "Same client code can work with different subclasses (1):\n";
+    std::cout << "Same client code can work with different subclasses (1):" << std::endl;
     ConcreteClass1* concreteClass1 = new ConcreteClass1;
     clientCode(concreteClass1);
     std::cout << std::endl;
 
-    std::cout << "Same client code can work with different subclasses (2):\n";
+    std::cout << "Same client code can work with different subclasses (2):" << std::endl;
     ConcreteClass2* concreteClass2 = new ConcreteClass2;
     clientCode(concreteClass2);
     std::cout << std::endl;
