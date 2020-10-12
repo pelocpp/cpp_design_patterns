@@ -140,7 +140,7 @@ namespace OnlineShopExample {
     public:
         CalculatePriceVisitor() : m_totalPrice(0.0) {}
 
-        double getPrice() { return m_totalPrice; }
+        double getTotalPrice() { return m_totalPrice; }
 
         virtual void visit(const Book* book) override
         {
@@ -211,7 +211,7 @@ namespace OnlineShopExample {
                 element->accept(priceVisitor);
             }
 
-            double totalPrice = priceVisitor.getPrice();
+            double totalPrice = priceVisitor.getTotalPrice();
             return totalPrice;
         }
 
