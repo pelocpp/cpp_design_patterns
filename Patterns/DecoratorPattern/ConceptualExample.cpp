@@ -165,7 +165,7 @@ void test_conceptual_example_03() {
      * ... and at least: changing decorators at runtime
      */
 
-     // component which is going to be decorated
+    // component which is going to be decorated
     std::shared_ptr<Component> component = std::make_shared<ConcreteComponent>();
 
     // run-time dependent decorator

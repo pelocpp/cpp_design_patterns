@@ -50,11 +50,11 @@ public:
 class Builder {
 public:
     virtual ~Builder() {}
+
     virtual void createProducePartA() const = 0;
     virtual void createProducePartB() const = 0;
     virtual void createProducePartC() const = 0;
 };
-
 
 /**
  * The Concrete Builder classes follow the Builder interface and provide
@@ -81,15 +81,13 @@ public:
     /**
      * All production steps work with the same product instance.
      */
-    void createProducePartA() const override {
+    virtual void createProducePartA() const override {
         m_product->addPart(std::string("Part A1"));
     }
-
-    void createProducePartB() const override {
+    virtual void createProducePartB() const override {
         m_product->addPart(std::string("Part B1"));
     }
-
-    void createProducePartC() const override {
+    virtual void createProducePartC() const override {
         m_product->addPart(std::string("Part C1"));
     }
 
@@ -138,7 +136,7 @@ public:
      * to it. This way, the client code may alter the final type of the newly
      * assembled product.
      */
-    void set_builder(std::shared_ptr<Builder> builder) {
+    void setBuilder(std::shared_ptr<Builder> builder) {
         m_builder = builder;
     }
 
@@ -166,7 +164,7 @@ public:
 void clientCode(Director& director)
 {
     std::shared_ptr<ConcreteBuilder> builder = std::make_shared<ConcreteBuilder>();
-    director.set_builder(builder);
+    director.setBuilder(builder);
     std::cout << "Standard basic product:" << std::endl;
     director.buildMinimalViableProduct();
     std::unique_ptr<Product> product = builder->getProduct();

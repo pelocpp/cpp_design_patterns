@@ -45,7 +45,7 @@ namespace VirtualConstructorIdiom {
             return new Derived1(*this);
         }
 
-        void printMe()
+        virtual void printMe() override
         {
             std::cout << "I'm a Derived1" << std::endl;
         }
@@ -74,7 +74,7 @@ namespace VirtualConstructorIdiom {
             return new Derived2(*this);
         }
 
-        void printMe()
+        virtual void printMe() override
         {
             std::cout << "I'm a Derived2" << std::endl;
         }

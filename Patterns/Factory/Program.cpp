@@ -8,7 +8,6 @@ void test_mobile_phones_01();
 void test_mobile_phones_02();
 
 int main() {
-
     test_conceptual_example();
     test_mobile_phones_01();
     test_mobile_phones_02();

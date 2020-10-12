@@ -3,6 +3,7 @@
 // ===========================================================================
 
 #include <iostream>
+#include <memory>
 
 /**
  * The Abstract Class defines a template method that contains a skeleton of some
@@ -30,15 +31,15 @@ public:
      * These operations already have implementations.
      */
 protected:
-    void BaseOperation1() const {
+    virtual void BaseOperation1() const {
         std::cout << "AbstractClass says: I am doing the bulk of the work" << std::endl;
     }
 
-    void BaseOperation2() const {
+    virtual void BaseOperation2() const {
         std::cout << "AbstractClass says: But I let subclasses override some operations" << std::endl;
     }
 
-    void BaseOperation3() const {
+    virtual void BaseOperation3() const {
         std::cout << "AbstractClass says: But I am doing the bulk of the work anyway" << std::endl;
     }
 
@@ -64,10 +65,10 @@ protected:
  */
 class ConcreteClass1 : public AbstractClass {
 protected:
-    void RequiredOperations1() const override {
+    virtual void RequiredOperations1() const override {
         std::cout << "ConcreteClass1 says: Implemented Operation1" << std::endl;
     }
-    void RequiredOperation2() const override {
+    virtual void RequiredOperation2() const override {
         std::cout << "ConcreteClass1 says: Implemented Operation2" << std::endl;
     }
 };
@@ -77,13 +78,17 @@ protected:
  */
 class ConcreteClass2 : public AbstractClass {
 protected:
-    void RequiredOperations1() const override {
+    virtual void RequiredOperations1() const override {
         std::cout << "ConcreteClass2 says: Implemented Operation1" << std::endl;
     }
-    void RequiredOperation2() const override {
+    virtual void RequiredOperation2() const override {
         std::cout << "ConcreteClass2 says: Implemented Operation2" << std::endl;
     }
-    void Hook1() const override {
+    virtual void BaseOperation1() const override {
+        AbstractClass::BaseOperation1();
+        std::cout << "ConcreteClass2 says: Overridden BaseOperation1" << std::endl;
+    }
+    virtual void Hook1() const override {
         std::cout << "ConcreteClass2 says: Overridden Hook1" << std::endl;
     }
 };
@@ -93,7 +98,7 @@ protected:
  * code does not have to know the concrete class of an object it works with, as
  * long as it works with objects through the interface of their base class.
  */
-void clientCode(AbstractClass* obj) {
+void clientCode(std::shared_ptr<AbstractClass> obj) {
     // ...
     obj->TemplateMethod();
     // ...
@@ -101,17 +106,14 @@ void clientCode(AbstractClass* obj) {
 
 void test_conceptual_example() {
     std::cout << "Same client code can work with different subclasses (1):" << std::endl;
-    ConcreteClass1* concreteClass1 = new ConcreteClass1;
+    std::shared_ptr<AbstractClass> concreteClass1 = std::make_shared<ConcreteClass1>();
     clientCode(concreteClass1);
     std::cout << std::endl;
 
     std::cout << "Same client code can work with different subclasses (2):" << std::endl;
-    ConcreteClass2* concreteClass2 = new ConcreteClass2;
+    std::shared_ptr<AbstractClass> concreteClass2 = std::make_shared<ConcreteClass2>();
     clientCode(concreteClass2);
     std::cout << std::endl;
-
-    delete concreteClass1;
-    delete concreteClass2;
 }
 
 // ===========================================================================

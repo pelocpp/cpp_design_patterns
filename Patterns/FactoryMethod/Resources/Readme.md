@@ -115,7 +115,7 @@ public:
         return new Derived1(*this);
     }
 
-    void printMe()
+    virtual void printMe() override
     {
         std::cout << "I'm a Derived1" << std::endl;
     }
