@@ -159,6 +159,174 @@ Die Intention von ISP ist es, eine Menge von Klassen zu entkoppeln und somit fle
 
 ISP ist eines der fünf SOLID-Prinzipien des objektorientierten Designs!
 
+##### Ein Beispiel
+
+```cpp
+#include <iostream>
+#include <string>
+#include <stdexcept>
+
+/*
+ * The ILog interface contains the declaration of the Log method
+ * that logs a text to a file or a database.
+ * It also contains two other methods -- the OpenConnection 
+ * and the CloseConnection methods. Note that these methods are used
+ * to open and close database connections while logging data to a database.
+ * These methods are not needed when you need to log data in a file.
+ */
+
+class ILog
+{
+public:
+    virtual void Log(std::string message) = 0;
+    virtual void OpenConnection() = 0;
+    virtual void CloseConnection() = 0;
+};
+
+/*
+ * The FileLogger class implements the ILog interface and defines the Log method.
+ */
+
+class FileLogger : public ILog
+{
+public:
+    void Log(std::string message)
+    {
+        // code to log to a file           
+    }
+};
+
+/*
+ * The DBLogger class implements the ILog interface and implements
+ * all of the methods of the ILog interface
+ */
+
+class DBLogger : public ILog
+{
+public:
+    void Log(std::string message)
+    {
+        // code to log data to a database
+    }
+
+    void OpenConnection()
+    {
+        // opens database connection
+    }
+
+    void CloseConnection()
+    {
+        // closes the database connection
+    }
+};
+
+/*
+ * When you compile the code, you'll see that the compiler flags errors
+ * stating that the FileLogger class doesn't implement the interface members
+ * ILog.OpenConnection() and ILog.OpenConnection().
+ * To fix this, you are constrained to implement the
+ * ILog.OpenConnection() and ILog.CloseConnection() methods 
+ * in the FileLogger class even if you would never need them.
+ * The modified version of the FileLogger class looks like this.
+ */
+
+class FileLogger2 : public ILog
+{
+public:
+    void Log(std::string message)
+    {
+        // code to log to a file           
+    }
+
+    void CloseConnection()
+    {
+        throw std::exception("not implemented");
+    }
+
+    void OpenConnection()
+    {
+        throw std::exception("not implemented");
+    }
+};
+
+// ====================================================
+
+/*
+ * Here is how you can segregate the interfaces and ensure 
+ * that the Interface Segregation principle is adhered to.
+*/
+
+class ILogEx
+{
+public:
+    virtual void Log(std::string message) = 0;
+};
+
+class IDBLogEx : public ILogEx
+{
+public:
+    virtual void OpenConnection() = 0;
+    virtual void CloseConnection() = 0;
+};
+
+class IFileLogEx : public ILogEx
+{
+public:
+    virtual void CheckFileSize() = 0;
+    virtual void GenerateFileName() = 0;
+};
+
+/*
+* Note that two new interfaces have been introduced -- IDBLog and IFileLog.
+* I've also introduced two new methods in the IFileLog interface -- these
+* are specific to file logging operations.
+* While the CheckFileSize method would be used to check the size
+* of the log file -- this would be handy in case you would like to restrict
+* the file size to a pre-defined limit and then rollover the file.
+* The GenerateFileName method would be used to generate the new name
+* for the log file if the current log file size has reached
+* the maximum file size threshold.
+*/
+
+class FileLoggerEx : IFileLogEx
+{
+public:
+    void CheckFileSize()
+    {
+        // code to check log file size
+    }
+
+    void GenerateFileName()
+    {
+        // code to generate a new file name
+    }
+
+    void Log(std::string message)
+    {
+        // code to log data to the log file
+    }
+};
+
+class DBLoggerEx : public IDBLogEx
+{
+public:
+    void Log(std::string message)
+    {
+        // code to log data to the database
+    }
+
+    void OpenConnection()
+    {
+        // code to open database connection
+    }
+
+    void CloseConnection()
+    {
+        // code to close database connection
+    }
+};
+```
+
 #### Race Conditions
 
 ##### Beschreibung
