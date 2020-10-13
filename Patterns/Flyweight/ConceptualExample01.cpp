@@ -125,7 +125,7 @@ namespace ConceptualExample01 {
         /**
          * Returns an existing Flyweight with a given state or creates a new one.
          */
-        Flyweight getFlyweight(const SharedState& shared_state)
+        Flyweight& getFlyweight(const SharedState& shared_state)
         {
             std::string key = this->getKey(shared_state);
             if (this->m_flyweights.find(key) == this->m_flyweights.end())
