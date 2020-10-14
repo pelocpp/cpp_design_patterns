@@ -82,6 +82,9 @@ Abbildung 1: Schematische Darstellung des *Visitor Patterns*.
 
 [Quellcode](../ConceptualExample.cpp)
 
+*Hinweis*: Im konzeptionellen Beispiel ist der Aspekt `enable_shared_from_this` und `shared_from_this` 
+mit abgehandelt.
+
 ---
 
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
