@@ -104,6 +104,44 @@ public:
 };
 ```
 
+#### Regelwerk für die Methoden `reset`, `getCurrent` und `hasNext`:
+
+Ähnlich wie für C++ Standard-Iteratoren gelten auch für die drei Methoden `reset`, `getCurrent` und `hasNext`
+einige Regeln bzw. Konventionen:
+
+  * Der Aufruf von `getCurrent` muss "geschützt" sein:
+    ```cpp
+    while (iter.hasNext()) { 
+        elem = iter.getCurrent();
+    }
+    ```
+
+  * Ein Aufruf von `getCurrent` ohne vorhergehenden Aufruf von `hasNext` bewirkt ein *"undefined behaviour"*:
+    ```cpp
+    // no preceding call of 'hasNext':
+    elem = iter.getCurrent();  // "undefined behaviour", z.B. exception 
+    ```
+
+  * Wiederholter Aufruf von `getCurrent()` ohne `hasNext()`:
+
+    In diesem Fall liefert `getCurrent` immer dasselbe Objekt bzw. Element der Aufzählung zurück. 
+
+  * `reset`-Methode
+
+    Mit `reset` kann ich eine aktive Traversierung / Iteration von Anfang an neu beginnen.
+
+  * Aufruf einer `reset()`-Methode am Ende einer Iteration:
+
+    Die Frage, die sich hier stellt, lautet: "Muss ich `reset` am Ende einer Iteration aufrufen,
+    wenn ich mit demselben Iterator den Container  zum zweiten Mal durchlaufen möchte?"
+    Die Antwort lautet: Nein.
+
+  * Prinzipieller Aufruf von `hasNext()`:
+
+    Wie reagiert ein Aufruf von `hasNext()`, wenn der Rückgabewert `false` ist?	
+    Wenn ich genau dann `hasNext()` wieder aufrufe, sollte `hasNext()` `true` zurückliefern
+    und damit eine zweite Iteration von Anfang an einleiten.
+
 ---
 
 #### *Hinweis* 1: Mehrere Iterator-Objekte zu einem Container:
