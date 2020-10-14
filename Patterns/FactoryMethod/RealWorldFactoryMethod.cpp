@@ -93,8 +93,7 @@ namespace RealWorldFactoryMethod {
 
 
     class LEDTVFactory : public AbstractTVFactory {
-
-    public:
+    protected:
         virtual void manufactureTelevision() override  {
             ITelevision* newTV = assembleTelevision();
             std::cout << "Manufacturing LED tv" << std::endl;
@@ -115,7 +114,7 @@ namespace RealWorldFactoryMethod {
     };
 
     class OledTVFactory : public AbstractTVFactory {
-    public:
+    protected:
         virtual void manufactureTelevision() override {
             std::cout << "Manufacturing Oled tv" << std::endl;
         }
