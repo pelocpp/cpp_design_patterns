@@ -14,15 +14,13 @@
 #endif  // _DEBUG
 
 // function prototypes
-void test_conceptual_example_01();
-void test_conceptual_example_02();
+void test_conceptual_example();
 
 int main() {
 
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    test_conceptual_example_01();
-    test_conceptual_example_02();
+    test_conceptual_example();
     return 0;
 }
 

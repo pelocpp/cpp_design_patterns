@@ -82,9 +82,7 @@ Abbildung 1: Schematische Darstellung des *Flyweight Patterns*.
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp)
-
-[Quellcode 2](../ConceptualExample02.cpp)
+[Quellcode](../ConceptualExample.cpp)
 
 ---
 

@@ -8,7 +8,7 @@
 #include <unordered_map>
 
 // very simple example of flyweight pattern
-namespace ConceptualExample02 {
+namespace ConceptualExample {
 
      /**
      * Flyweight Design Pattern
@@ -83,7 +83,13 @@ namespace ConceptualExample02 {
 
         void operation(const UniqueState& unique_state) const
         {
-            std::cout << "Flyweight: Displaying shared (" << *m_repeatingState << ") and unique (" << unique_state << ") state.\n";
+            std::cout
+                << "Flyweight: Displaying shared ("
+                << *m_repeatingState
+                << ") and unique ("
+                << unique_state
+                << ") state."
+                << std::endl;
         }
     };
 
@@ -96,7 +102,7 @@ namespace ConceptualExample02 {
     class FlyweightFactory
     {
     private:
-        std::unordered_map<std::string, Flyweight> m_flyweights;
+        std::unordered_map<std::string, std::shared_ptr<Flyweight>> m_flyweights;
 
         /**
          * Returns a Flyweight's string hash for a given state.
@@ -112,8 +118,8 @@ namespace ConceptualExample02 {
             for (const SharedState& state : share_states)
             {
                 std::string key = getKey(state);
-                Flyweight flyweight(state);
-                std::pair<std::string, Flyweight> pair = std::make_pair<>(key, flyweight);
+                std::shared_ptr<Flyweight> flyweight = std::make_shared<Flyweight>(state);
+                std::pair<std::string, std::shared_ptr<Flyweight>> pair = std::make_pair<>(key, flyweight);
                 m_flyweights.insert(pair);
             }
         }
@@ -121,14 +127,14 @@ namespace ConceptualExample02 {
         /**
          * Returns an existing Flyweight with a given state or creates a new one.
          */
-        Flyweight& getFlyweight(const SharedState& shared_state)
+        std::shared_ptr<Flyweight> getFlyweight(const SharedState& sharedState)
         {
-            std::string key = getKey(shared_state);
+            std::string key = getKey(sharedState);
             if (m_flyweights.find(key) == m_flyweights.end())
             {
                 std::cout << "FlyweightFactory: Can't find a flyweight, creating new one." << std::endl;
-                Flyweight flyweight(shared_state);
-                std::pair<std::string, Flyweight> pair = std::make_pair<>(key, flyweight);
+                std::shared_ptr<Flyweight> flyweight = std::make_shared<Flyweight>(sharedState);
+                std::pair<std::string, std::shared_ptr<Flyweight>> pair = std::make_pair<>(key, flyweight);
                 m_flyweights.insert(pair);
             }
             else
@@ -144,7 +150,7 @@ namespace ConceptualExample02 {
             size_t count = m_flyweights.size();
             std::cout << "FlyweightFactory: " << count << " flyweights:" << std::endl;
 
-            for (std::pair<std::string, Flyweight> pair : m_flyweights) 
+            for (std::pair<std::string, std::shared_ptr<Flyweight>> pair : m_flyweights)
             {
                 std::cout << pair.first << std::endl;
             }
@@ -157,21 +163,20 @@ namespace ConceptualExample02 {
         const std::string& brand, const std::string& model, const std::string& color)
     {
         std::cout << std::endl << "Client: Adding a car to database." << std::endl;
-
-        const Flyweight& flyweight = factory.getFlyweight({ brand, model, color });
+        std::shared_ptr<Flyweight> flyweight = factory.getFlyweight({ brand, model, color });
         
-        // The client code either stores or calculates extrinsic state
+        // client code either stores or calculates extrinsic state
         // and passes it to the flyweight's methods.
-        flyweight.operation({ plates, owner });
+        flyweight->operation({ plates, owner });
     }
 }
 
-void test_conceptual_example_02() {
+void test_conceptual_example() {
 
-    using namespace ConceptualExample02;
+    using namespace ConceptualExample;
 
     /**
-     * The client code usually creates a bunch of pre-populated flyweights in the
+     * client code usually creates a bunch of pre-populated flyweights in the
      * initialization stage of the application.
      */
 
@@ -191,8 +196,8 @@ void test_conceptual_example_02() {
         factory,
         "CL234IR",
         "James Doe",
-        "BMW",
-        "M5",
+        "BMW",          
+        "M5",       // <== this car variant always exists
         "red");
 
     addCarToDatabase(
@@ -200,7 +205,7 @@ void test_conceptual_example_02() {
         "CL234IR",
         "James Doe",
         "BMW",
-        "X1",
+        "X1",       // <== this car variant doesn't exist
         "red");
 
     std::cout << std::endl;
