@@ -4,7 +4,7 @@
 
 class SocialNetwork {
 public:
-    SocialNetwork();
+    SocialNetwork(const std::string& username, const std::string& password);
 
     /**
      * The template method defines the skeleton of an algorithm:
@@ -12,7 +12,7 @@ public:
      */
     bool post(const std::string& message);
 
-    virtual bool logIn(const std::string& username, const std::string& password) = 0;
+    virtual bool logIn() = 0;
     virtual bool sendData(const std::string& data) = 0;
     virtual void logOut() = 0;
 

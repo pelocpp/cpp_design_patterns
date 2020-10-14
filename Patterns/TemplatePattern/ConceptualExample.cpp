@@ -18,13 +18,21 @@ class AbstractClass {
      */
 public:
     void TemplateMethod() const {
-        this->BaseOperation1();         // may be overriden, but it's not mandatory
-        this->RequiredOperations1();    // MUST be overriden
-        this->BaseOperation2();         // may be overriden, but it's not mandatory
-        this->Hook1();                  // may be overriden, but it's not mandatory
-        this->RequiredOperation2();     // MUST be overriden
-        this->BaseOperation3();         // may be overriden, but it's not mandatory
-        this->Hook2();                  // may be overriden, but it's not mandatory
+        BaseOperation1();         // may be overriden, but it's not mandatory
+        RequiredOperations1();    // MUST be overriden
+        BaseOperation2();         // may be overriden, but it's not mandatory
+        Hook1();                  // may be overriden, but it's not mandatory
+        RequiredOperation2();     // MUST be overriden
+        BaseOperation3();         // may be overriden, but it's not mandatory
+        Hook2();                  // may be overriden, but it's not mandatory
+    }
+
+    /**
+     * or
+     * (Note: order of keywords 'const' and 'final' is significant)
+     */
+    virtual void TemplateMethodEx() const final {
+        // ...
     }
 
     /**
@@ -85,7 +93,6 @@ protected:
         std::cout << "ConcreteClass2 says: Implemented Operation2" << std::endl;
     }
     virtual void BaseOperation1() const override {
-        AbstractClass::BaseOperation1();
         std::cout << "ConcreteClass2 says: Overridden BaseOperation1" << std::endl;
     }
     virtual void Hook1() const override {

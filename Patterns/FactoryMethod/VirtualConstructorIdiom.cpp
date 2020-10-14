@@ -40,7 +40,7 @@ namespace VirtualConstructorIdiom {
             std::cout << "c'tor Derived1" << std::endl;
         }
 
-        Base* Clone() override
+        virtual Base* Clone() override
         {
             return new Derived1(*this);
         }
@@ -69,7 +69,7 @@ namespace VirtualConstructorIdiom {
             std::cout << "c'tor Derived2" << std::endl;
         }
 
-        Base* Clone() override
+        virtual Base* Clone() override
         {
             return new Derived2(*this);
         }
@@ -80,6 +80,7 @@ namespace VirtualConstructorIdiom {
         }
     };
 
+    // static method
     Base* Base::Create(int id)
     {
         if (id == 1)
@@ -92,6 +93,7 @@ namespace VirtualConstructorIdiom {
         }
     }
 
+    // global function
     Base* CreateCopy(Base* pBase)
     {
         return pBase->Clone();

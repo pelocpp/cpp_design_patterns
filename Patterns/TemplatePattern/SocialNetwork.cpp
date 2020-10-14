@@ -7,13 +7,14 @@
 
 #include "SocialNetwork.h"
 
-SocialNetwork::SocialNetwork() : m_username{ "" }, m_password{ "" } {}
+SocialNetwork::SocialNetwork(const std::string& username, const std::string& password) 
+    : m_username{ username }, m_password{ password } {}
 
 bool SocialNetwork::post(const std::string& message) {
 
     // authenticate before posting:
     // every network uses a different authentication method
-    if (logIn(m_username, m_password)) {
+    if (logIn()) {
         
         // send data
         bool result = sendData(message);

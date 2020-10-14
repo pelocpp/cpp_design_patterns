@@ -11,13 +11,9 @@
 #include "Facebook.h"
 
 Facebook::Facebook(const std::string& username, const std::string& password)
-    : SocialNetwork()
-{
-    m_username = username;
-    m_password = password;
-}
+    : SocialNetwork(username, password) {}
 
-bool Facebook::logIn(const std::string& username, const std::string& password) {
+bool Facebook::logIn() {
     std::cout << "Checking user's parameters" << std::endl;
     std::cout << "Name: " << m_username << std::endl;
     std::cout << "Password: ";

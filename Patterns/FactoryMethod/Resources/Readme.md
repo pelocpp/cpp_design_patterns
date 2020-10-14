@@ -110,7 +110,7 @@ public:
         std::cout << "c'tor Derived1" << std::endl;
     }
 
-    Base* Clone() override
+    virtual Base* Clone() override
     {
         return new Derived1(*this);
     }
@@ -123,6 +123,7 @@ public:
 
 // dto. Derived2
 
+// static method
 Base* Base::Create(int id)
 {
     if (id == 1)
@@ -135,6 +136,7 @@ Base* Base::Create(int id)
     }
 }
 
+// global function
 Base* CreateCopy(Base* pBase)
 {
     return pBase->Clone();

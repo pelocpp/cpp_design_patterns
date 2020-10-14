@@ -136,8 +136,9 @@ Siehe eine Beschreibung hier:
 
 *Interface Bloat*, von Bjarne Stroustrup auch als *Fat Interfaces* und von Martin Fowler als *Refused Bequests* bezeichnet,
 sind Interfaces (Zusammenfassung mehrerer Methoden), die zu viele Methoden in eine einzige Schnittstelle integrieren.
-Wollte man eine derartige Schnittstelle implementieren, stellt man fest, dass die meisten Klassen auf Grund der Komplexität der Schnittstelle
-keine Realisierung bereitstellen können.
+Wollte man eine derartige Schnittstelle implementieren, stellt man fest,
+dass die meisten Klassen auf Grund der Komplexität der Schnittstelle
+erhebliche Probleme haben, eine Realisierung bereitzustellen.
 
 ##### Identifizierung
 
@@ -190,7 +191,7 @@ public:
 class FileLogger : public ILog
 {
 public:
-    void Log(std::string message)
+    virtual void Log(std::string message) override
     {
         // code to log to a file           
     }
@@ -204,17 +205,17 @@ public:
 class DBLogger : public ILog
 {
 public:
-    void Log(std::string message)
+    virtual void Log(std::string message) override
     {
         // code to log data to a database
     }
 
-    void OpenConnection()
+    virtual void OpenConnection() override
     {
         // opens database connection
     }
 
-    void CloseConnection()
+    virtual void CloseConnection() override
     {
         // closes the database connection
     }
@@ -223,7 +224,7 @@ public:
 /*
  * When you compile the code, you'll see that the compiler flags errors
  * stating that the FileLogger class doesn't implement the interface members
- * ILog.OpenConnection() and ILog.OpenConnection().
+ * ILog.OpenConnection() and ILog.CloseConnection().
  * To fix this, you are constrained to implement the
  * ILog.OpenConnection() and ILog.CloseConnection() methods 
  * in the FileLogger class even if you would never need them.
@@ -233,17 +234,17 @@ public:
 class FileLogger2 : public ILog
 {
 public:
-    void Log(std::string message)
+    virtual void Log(std::string message) override
     {
         // code to log to a file           
     }
 
-    void CloseConnection()
+    virtual void CloseConnection() override
     {
         throw std::exception("not implemented");
     }
 
-    void OpenConnection()
+    virtual void OpenConnection() override
     {
         throw std::exception("not implemented");
     }
@@ -291,17 +292,17 @@ public:
 class FileLoggerEx : IFileLogEx
 {
 public:
-    void CheckFileSize()
+    virtual void CheckFileSize() override
     {
         // code to check log file size
     }
 
-    void GenerateFileName()
+    virtual void GenerateFileName() override
     {
         // code to generate a new file name
     }
 
-    void Log(std::string message)
+    virtual void Log(std::string message) override
     {
         // code to log data to the log file
     }
@@ -310,17 +311,17 @@ public:
 class DBLoggerEx : public IDBLogEx
 {
 public:
-    void Log(std::string message)
+    virtual void Log(std::string message) override
     {
         // code to log data to the database
     }
 
-    void OpenConnection()
+    virtual void OpenConnection() override
     {
         // code to open database connection
     }
 
-    void CloseConnection()
+    virtual void CloseConnection() override
     {
         // code to close database connection
     }
