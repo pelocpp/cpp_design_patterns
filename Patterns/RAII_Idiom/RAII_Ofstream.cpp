@@ -19,7 +19,7 @@ namespace RAIIDemoOfstream {
         static std::mutex mtex;
 
         // lock mutex before accessing file
-        std::lock_guard<std::mutex> lock(mtex);
+        std::scoped_lock<std::mutex> lock(mtex);
 
         // try to open file
         std::ofstream file("example.txt");
