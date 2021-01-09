@@ -146,6 +146,7 @@
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Clipboard.cpp" />
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Dummy.cpp" />
     <ClCompile Include="Program.cpp" />

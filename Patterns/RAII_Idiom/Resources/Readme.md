@@ -242,7 +242,28 @@ Die Anregungen zum konzeptionellen Beispiel sind teilweise entnommen aus
 [Design Patterns with C++](https://www.amazon.de/-/en/Fedor-G-Pikus/dp/1788832566).
 
 
-#### 'Real-World' Beispiel:
+#### 'Real-World' Beispiel zu Windows Clipboard:
+
+In der Datei *Clipboard.cpp* finden Sie mehrere Klassen und Methoden vor,
+die den schreibenden und lesenden Zugriff auf das Windows Clipboard in RAII-konformer Manier demonstrieren.
+
+Windows-Resourcen werden in diesem Beispiel durch folgende Win32-API-Methoden in Anspruch genommen:
+
+* `GlobalAlloc`
+* `GlobalFree`
+* `GlobalLock`
+* `GlobalUnlock`
+
+und
+
+* `OpenClipboard`
+* `EmptyClipboard`
+* `SetClipboardData`
+* `CloseClipboard`
+* `GetClipboardData`
+
+
+#### 'Real-World' Beispiel zu `std::ofstream`:
 
 In der Datei *RAII_Ofstream.cpp* finden Sie eine Funktion `writeToFile` vor,
 die das RAII-Idiom verwendet.

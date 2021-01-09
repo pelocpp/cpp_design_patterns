@@ -19,6 +19,9 @@
     <Filter Include="Source Files\FileStream">
       <UniqueIdentifier>{6a747024-a653-4634-8577-d7466b6e5069}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Clipboard">
+      <UniqueIdentifier>{e27ccc7a-18ae-4c31-908f-1832a575fa9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -46,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="RAII_File.cpp">
       <Filter>Source Files\FileStream</Filter>
+    </ClCompile>
+    <ClCompile Include="Clipboard.cpp">
+      <Filter>Source Files\Clipboard</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
