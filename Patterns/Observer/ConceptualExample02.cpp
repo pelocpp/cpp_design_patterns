@@ -102,7 +102,6 @@ namespace ObserverDesignPatternSmartPointer {
     class Observer : public IObserver {
     private:
         std::string m_messageFromSubject;
-        std::shared_ptr<Subject> m_subject;
         static int m_static_number;
         int m_number;
 
