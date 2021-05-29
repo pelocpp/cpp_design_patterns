@@ -8,7 +8,7 @@
 
 Das *Flyweight Pattern* ist ein Entwurfsmuster aus der Kategorie der *Structural Pattern*,
 das verwendet wird, um den Ressourcenverbrauch eines Programms mit einer sehr großen Anzahl von Objekten zu minimieren.
-Beim Erzeugen von vielen tausend identischen Objekten können zustandslose &ldqo;Flyweight&rdqo;-Objekte
+Beim Erzeugen von vielen tausend identischen Objekten können zustandslose &ldquo;Flyweight&rdquo;-Objekte
 den in Anspruch genommen Speicher auf ein vertretbares Maß reduzieren.
 
 #### Problem:
@@ -59,9 +59,9 @@ Das folgende UML-Diagramm beschreibt eine Implementierung des *Flyweight Pattern
 Es besteht im Wesentlichen aus vier Teilen:
 
   * **Flyweight**: Beschreibt eine Klasse *Flyweight*, die den Teil des Status des zu betrachtenden Objekts enthält, der von mehreren Objekten gemeinsam genutzt werden kann.
-    Dieses Objekt kann mehrfach verwendet werden. Der im *Flyweight* Objekt gespeicherte Zustand wird als &ldqo;intrinsisch&rdqo; oder &ldqo;repeating&rdqo; bezeichnet.
-    Der Zustand, der an die Methoden des *Flyweight* Objekt übergeben wird, wird als &ldqo;extrinsisch&rdqo; bezeichnet.
-    Ein Flyweight-Objekt muss &ldqo;gemeinsam nutzbar&rdqo; (*sharable*) sein.
+    Dieses Objekt kann mehrfach verwendet werden. Der im *Flyweight* Objekt gespeicherte Zustand wird als &ldquo;intrinsisch&rdquo; oder &ldquo;repeating&rdquo; bezeichnet.
+    Der Zustand, der an die Methoden des *Flyweight* Objekt übergeben wird, wird als &ldquo;extrinsisch&rdquo; bezeichnet.
+    Ein Flyweight-Objekt muss &ldquo;gemeinsam nutzbar&rdquo; (*sharable*) sein.
     Jeder Zustand, den dieses Objekt speichert, muss intrinsisch sein.
   * **FlyweightBase**: Abstraktion der Klasse *Flyweight* zu einem Schnittstellentyp.
   * **UnsharedFlyweight**: Nicht alle *Flyweight* Objekte können gemeinsam genutzt werden.
