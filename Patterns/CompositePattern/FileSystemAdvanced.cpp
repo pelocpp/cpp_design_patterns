@@ -53,5 +53,5 @@ void test_filesystem_02() {
     std::filesystem::path path = { s };
     std::shared_ptr<DirectoryEx> dir = std::make_shared<DirectoryEx>(s);
     exploreDirectory(path, dir);
-    dir->display("");
+    dir->display(" ");
 }

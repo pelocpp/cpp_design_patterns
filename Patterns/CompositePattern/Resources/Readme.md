@@ -60,8 +60,8 @@ Es besteht im Wesentlichen aus drei Teilen:
   * **Composite**: Kernstück des Entwurfsmusters. Es handelt sich gewissermaßen um eine *zusammengesetzte Komponente*.
     Das heißt, dass ein `Composite`-Objekt eine Liste für die Kind-Elemente verwaltet.
     Das Objekt stellt Methoden zum Hinzufügen und Entfernen von Kind-Elementen bereit.
-    Zusätzlich werden die Methoden der `Component`-Klasse implementiert. Typischerweise werden deren
-    Realisierung an die entsprechende Methode der Kind-Elemente delegiert.
+    Zusätzlich werden die Methoden der `Component`-Klasse implementiert. Typischerweise wird deren
+    Realisierung an die entsprechende Methode des Kind-Elements delegiert.
   * **Leaf**: 
     Stellt ein "Blatt"-Objekt in der Komposition (Baumstruktur) dar. Es werden alle Methoden der `Component`-Klasse implementiert.
 

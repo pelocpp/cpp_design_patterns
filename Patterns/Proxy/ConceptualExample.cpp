@@ -12,7 +12,7 @@
  */
 class Subject {
 public:
-    virtual void Request() const = 0;
+    virtual void request() const = 0;
 };
 
 /**
@@ -23,8 +23,8 @@ public:
  */
 class RealSubject : public Subject {
 public:
-    void Request() const override {
-        std::cout << "RealSubject: Handling request.\n";
+    void request() const override {
+        std::cout << "RealSubject: Handling request." << std::endl;
     }
 };
 
@@ -33,16 +33,16 @@ public:
  */
 class Proxy : public Subject {
 private:
-    // RealSubject* m_realSubject;
     std::shared_ptr<RealSubject> m_realSubject;
 
-    bool CheckAccess() const {
-        // Some real checks should go here.
-        std::cout << "Proxy: Checking access prior to executing a real request.\n";
+    bool checkAccess() const {
+        // some real checks should go here.
+        std::cout << "Proxy: Checking access prior to executing a real request." << std::endl;
         return true;
     }
-    void LogAccess() const {
-        std::cout << "Proxy: Logging the time of request.\n";
+
+    void logAccess() const {
+        std::cout << "Proxy: Logging the time of request." << std::endl;
     }
 
     /**
@@ -50,25 +50,18 @@ private:
      * can be either lazy-loaded or passed to the Proxy by the client.
      */
 public:
-
     Proxy(std::shared_ptr<RealSubject> realSubject) : m_realSubject(realSubject) {}
 
-    //Proxy(RealSubject* real_subject) : m_realSubject(new RealSubject(*real_subject)) {
-    //}
-
-    //~Proxy() {
-    //    delete m_realSubject;
-    //}
     /**
      * The most common applications of the Proxy pattern are lazy loading,
      * caching, controlling the access, logging, etc. A Proxy can perform one of
      * these things and then, depending on the result, pass the execution to the
      * same method in a linked RealSubject object.
      */
-    void Request() const override {
-        if (this->CheckAccess()) {
-            this->m_realSubject->Request();
-            this->LogAccess();
+    void request() const override {
+        if (checkAccess()) {
+            m_realSubject->request();
+            logAccess();
         }
     }
 };
@@ -81,19 +74,18 @@ public:
  * your proxy from the real subject's class.
  */
 void clientCode(std::shared_ptr<Subject> subject) {
-    // ...
-    subject->Request();
-    // ...
+
+    subject->request();
 }
 
 void test_conceptual_example() {
-    std::cout << "Client: Executing the client code with a real subject:\n";
-    std::shared_ptr<RealSubject> realSubject = std::make_shared<RealSubject>();
+    std::cout << "Client: Executing the client code with a real subject:" << std::endl;
+    std::shared_ptr<RealSubject> realSubject{ std::make_shared<RealSubject>() };
     clientCode(realSubject);
-    std::cout << "\n";
+    std::cout << std::endl;
 
-    std::cout << "Client: Executing the same client code with a proxy:\n";
-    std::shared_ptr<Proxy> proxy = std::make_shared<Proxy>(realSubject);
+    std::cout << "Client: Executing the same client code with a proxy:" << std::endl;
+    std::shared_ptr<Proxy> proxy{ std::make_shared<Proxy>(realSubject) };
     clientCode(proxy);
 }
 

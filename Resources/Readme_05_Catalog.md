@@ -8,24 +8,24 @@ Diese Autoren, zusammen auch als "*Gang of Four*" ("*GOF*") bekannt,
 nehmen hier eine Kategorisierung der von ihnen beschriebenen Entwurfsmuster
 in die drei Kategorien Erzeugungs-, Struktur- und Verhaltensmuster
 (*Creational*, *Structural* und *Behavioral Design Patterns*) vor. Eine Aufstellung 
-der einzelnen Entwurfsmuster dieser Kategorien finden Sie nachstehend in Abbildung 1 vor:
+der einzelnen Entwurfsmuster dieser Kategorien finden Sie nachstehend in *Abbildung* 1 vor:
 
 <img src="dp_overview.svg" width="700">
 
-Abbildung 1: Software Entwurfsmuster nach Erich Gamma, Richard Helm, Ralph Johnson und John Vlissides ("*GoF*").
+*Abbildung* 1: Software Entwurfsmuster nach Erich Gamma, Richard Helm, Ralph Johnson und John Vlissides ("*GoF*").
 
-Speziell im Umfeld von *Modern C++* haben sich folgende Entwurfsmuster etabliert (Abbildung 2):
+Speziell im Umfeld von *Modern C++* haben sich folgende Entwurfsmuster etabliert (*Abbildung* 2):
 
 <img src="dp_overview_modern_cpp.svg" width="370">
 
-Abbildung 2: *Modern C++* Entwurfsmuster.
+*Abbildung* 2: *Modern C++* Entwurfsmuster.
 
-Die drei Klassiker für Entwurfsmuster in Anwendungen mit Oberflächen sind in Abbildung 3 
+Die drei Klassiker für Entwurfsmuster in Anwendungen mit Oberflächen sind in *Abbildung* 3 
 zusammengestellt:
 
 <img src="dp_overview_ui.svg" width="230">
 
-Abbildung 3: Entwurfsmuster für die Gestaltung von Oberflächen.
+*Abbildung* 3: Entwurfsmuster für die Gestaltung von Oberflächen.
 
 
 #### Entwurfsmuster nach Gamma, Helm, Johnson und Vlissides

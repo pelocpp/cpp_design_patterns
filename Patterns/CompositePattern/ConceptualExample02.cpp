@@ -60,10 +60,20 @@ namespace CompositePatternSmartPointer {
      * Usually, it's the Leaf objects that do the actual work, whereas Composite
      * objects only delegate to their sub-components.
      */
+    //class Leaf : public Component {
+    //public:
+    //    std::string operation() const override {
+    //        return "Leaf";
+    //    }
+    //};
     class Leaf : public Component {
+    private:
+        std::string m_description;
     public:
+        Leaf() = delete;
+        Leaf(std::string description) : m_description{ description } {}
         std::string operation() const override {
-            return "Leaf";
+            return m_description;
         }
     };
 
@@ -103,7 +113,7 @@ namespace CompositePatternSmartPointer {
          * forth, the whole object tree is traversed as a result.
          */
         std::string operation() const override {
-            std::string result;
+            std::string result{};
 
             // note: using simple 'old-fashioned' for-loop here - std::weak_ptr doesn't has
             // a comparison operator (!), therefore modern style loops don't work
@@ -111,15 +121,17 @@ namespace CompositePatternSmartPointer {
                 std::weak_ptr<Component> wcomp = m_children[i];
                 std::shared_ptr<Component> comp = wcomp.lock();
 
-                if (i == m_children.size() - 1) {
-                    result = result + comp->operation();
-                }
-                else {
-                    result = result + comp->operation() + "+";
+                if (comp != nullptr) {
+                    if (i == m_children.size() - 1) {
+                        result += comp->operation();
+                    }
+                    else {
+                        result += comp->operation() + " + ";
+                    }
                 }
             }
 
-            return "Branch(" + result + ")";
+            return "Branch [ " + result + " ]";
         }
     };
 
@@ -148,7 +160,7 @@ void test_conceptual_example_02() {
 
     using namespace CompositePatternSmartPointer;
 
-    std::shared_ptr<Component> simple = std::make_shared<Leaf>();
+    std::shared_ptr<Component> simple = std::make_shared<Leaf>("Simple");
     std::cout << "Client: I've got a simple component:\n";
     clientCode(simple);
     std::cout << std::endl << std::endl;
@@ -156,26 +168,25 @@ void test_conceptual_example_02() {
     /**
      * ...as well as the complex composites.
      */
-
     std::shared_ptr<Component> tree = std::make_shared<Composite>();
     std::shared_ptr<Component> branch1 = std::make_shared<Composite>();
-    std::shared_ptr<Component> leaf_1 = std::make_shared<Leaf>();
-    std::shared_ptr<Component> leaf_2 = std::make_shared<Leaf>();
-    std::shared_ptr<Component> leaf_3 = std::make_shared<Leaf>();
-
+    std::shared_ptr<Component> leaf_1 = std::make_shared<Leaf>("Leaf_1");
+    std::shared_ptr<Component> leaf_2 = std::make_shared<Leaf>("Leaf_2");
     branch1->add(leaf_1);
     branch1->add(leaf_2);
+    tree->add(branch1);
 
     std::shared_ptr<Component> branch2 = std::make_shared<Composite>();
-
+    std::shared_ptr<Component> leaf_3 = std::make_shared<Leaf>("Leaf_3");
     branch2->add(leaf_3);
-    tree->add(branch1);
     tree->add(branch2);
-    std::cout << "Client: Now I've got a composite tree:\n";
+    std::cout << "Client: Now I've got a composite tree:" << std::endl;
     clientCode(tree);
     std::cout << std::endl << std::endl;
 
-    std::cout << "Client: I don't need to check the components classes even when managing the tree:\n";
+    std::cout
+        << "Client: I don't need to check the components "
+        << "classes even when managing the tree:" << std::endl;
     clientCode2(tree, simple);
     std::cout << std::endl;
 }

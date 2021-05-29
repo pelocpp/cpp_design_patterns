@@ -13,7 +13,7 @@ das nur den Objekttyp kennen muss, den es erstellen soll.
 #### Ziel / Absicht:
 
 Das *Builder Pattern* ist ein Entwurfsmuster aus der Kategorie der *Creational Pattern*. 
-Mit diesem Entwurfsmuster soll die Konstruktion eines komplexen Objekts von seiner Darstellung getrennt werden.
+Mit diesem Entwurfsmuster soll die Konstruktion eines komplexen Objekts von seiner Repräsentation getrennt werden.
 Dieses Muster wird verwendet, wenn komplexe Objekte, die erstellt werden müssen, aus Bestandteilen bestehen,
 die in einer bestimmten Reihenfolge oder unter Verwendung eines bestimmten Algorithmus erstellt werden müssen.
 

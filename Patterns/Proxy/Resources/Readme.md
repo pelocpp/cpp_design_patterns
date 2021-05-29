@@ -8,18 +8,16 @@
 
 Das *Proxy Pattern* ist ein strukturelles Entwurfsmuster,
 das für ein anderes Objekt (Ressource) einen Art Ersatz oder Platzhalter bereitstellt.
+
+#### Problem:
+
 Ein Proxy-Objekt kann zum Beispiel dann verwendet werden,
 wenn aus bestimmten Gründen nicht direkt auf die Ressource zugegriffen werden kann
 oder wenn nicht alle Methoden des ursprünglichen Objekt offen gelegt werden sollen.
 Es ist auch denkbar, dass ein Proxy-Objekt dem ursprünglichen Objekt
 zusätzliche Funktionen hinzufügt.
 Die Verwendung von Proxys ist hilfreich, wenn die Ressource schwer zu instanziieren
-oder sehr ressourcensensitiv ist (Beispiel: XML-Parser)
-
-
-#### Problem:
-
-#### Lösung:
+oder sehr ressourcensensitiv ist (Beispiel: XML-Parser).
 
 #### Struktur (UML):
 

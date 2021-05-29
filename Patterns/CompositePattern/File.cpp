@@ -18,10 +18,7 @@ std::string File::getData() { return m_data; }
 
 void File::display(const std::string& indent) const {
 
-    // std::string s = indent + indent;
     std::string s = indent + "    ";
-
-    // std::cout << "File: " << s << m_name << " - data: " << m_data << std::endl;
     std::cout << s << m_name << " - data: " << m_data << std::endl;
 }
 

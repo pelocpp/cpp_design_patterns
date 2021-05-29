@@ -48,12 +48,11 @@ namespace CompositePatternRawPointer {
 
         /**
          * The base Component may implement some default behavior or leave it to
-         * concrete classes (by declaring the method containing the behavior as
-         * "abstract").
+         * concrete classes (by declaring the method containing
+         * the behavior as "abstract").
          */
         virtual std::string operation() const = 0;
     };
-
 
     /**
      * The Leaf class represents the end objects of a composition.
@@ -63,16 +62,20 @@ namespace CompositePatternRawPointer {
      * objects only delegate to their sub-components.
      */
     class Leaf : public Component {
+    private:
+        std::string m_description;
     public:
+        Leaf() = delete;
+        Leaf (std::string description) : m_description{ description } {}
         std::string operation() const override {
-            return "Leaf";
+            return m_description;
         }
     };
 
     /**
      * The Composite class represents the complex components that may have children.
      * Usually, the Composite objects delegate the actual work to their children and
-     * then "sum-up" the result.
+     * then "sums-up" the result.
      */
     class Composite : public Component {
 
@@ -81,8 +84,8 @@ namespace CompositePatternRawPointer {
 
     public:
         /**
-         * A composite object can add or remove other components (both simple or
-         * complex) to or from its child list.
+         * A composite object can add or remove other components
+         * (both simple or complex) to or from its child list.
          */
         void add(Component* component) {
             m_children.push_back(component);
@@ -91,7 +94,7 @@ namespace CompositePatternRawPointer {
 
         /**
          * Have in mind that this method removes the pointer to the list but doesn't
-         * frees the memory, you should do it manually or better use smart pointers.
+         * free the memory, you should do it manually or better use smart pointers.
          */
         void remove(Component* component) {
             m_children.remove(component);
@@ -109,16 +112,16 @@ namespace CompositePatternRawPointer {
          * forth, the whole object tree is traversed as a result.
          */
         std::string operation() const override {
-            std::string result;
+            std::string result{};
             for (const Component* comp : m_children) {
                 if (comp == m_children.back()) {
-                    result = result + comp->operation();
+                    result += comp->operation();
                 }
                 else {
-                    result = result + comp->operation() + "+";
+                    result += comp->operation() + " + ";
                 }
             }
-            return "Branch(" + result + ")";
+            return "Branch [ " + result + " ]";
         }
     };
 
@@ -147,34 +150,35 @@ void test_conceptual_example_01() {
 
     using namespace CompositePatternRawPointer;
 
-    Component* simple = new Leaf;
+    Component* simple = new Leaf{"Simple"};
     std::cout << "Client: I've got a simple component:\n";
     clientCode(simple);
-    std::cout << "\n\n";
+    std::cout << std::endl << std::endl;
 
     /**
      * ...as well as the complex composites.
      */
     Component* tree = new Composite;
-
     Component* branch1 = new Composite;
-    Component* leaf_1 = new Leaf;
-    Component* leaf_2 = new Leaf;
-    Component* leaf_3 = new Leaf;
+    Component* leaf_1 = new Leaf{"Leaf_1"};
+    Component* leaf_2 = new Leaf{"Leaf_2"};
     branch1->add(leaf_1);
     branch1->add(leaf_2);
-
-    Component* branch2 = new Composite;
-    branch2->add(leaf_3);
     tree->add(branch1);
+    Component* branch2 = new Composite;
+    Component* leaf_3 = new Leaf{ "Leaf_3" };
+    branch2->add(leaf_3);
     tree->add(branch2);
-    std::cout << "Client: Now I've got a composite tree:\n";
-    clientCode(tree);
-    std::cout << "\n\n";
 
-    std::cout << "Client: I don't need to check the components classes even when managing the tree:\n";
+    std::cout << "Client: Now I've got a composite tree:" << std::endl;
+    clientCode(tree);
+    std::cout << std::endl << std::endl;
+
+    std::cout 
+        << "Client: I don't need to check the components " 
+        << "classes even when managing the tree:" << std::endl;
     clientCode2(tree, simple);
-    std::cout << "\n";
+    std::cout << std::endl;
 
     delete simple;
     delete tree;
