@@ -12,7 +12,8 @@ namespace ConceptualExample02 {
      * The Product interface declares the operations
      * that all concrete products must implement.
      */
-    class ProductBase {
+    class ProductBase 
+    {
     public:
         virtual ~ProductBase() {}
         virtual std::string operation() const = 0;
@@ -21,14 +22,17 @@ namespace ConceptualExample02 {
     /**
      * Concrete Products provide various implementations of the Product interface.
      */
-    class ConcreteProduct1 : public ProductBase {
+    class ConcreteProduct1 : public ProductBase 
+    {
     public:
-        std::string operation() const override {
+        std::string operation() const override 
+        {
             return "{ Result of the ConcreteProduct1 }";
         }
     };
 
-    class ConcreteProduct2 : public ProductBase {
+    class ConcreteProduct2 : public ProductBase 
+    {
     public:
         std::string operation() const override {
             return "{ Result of the ConcreteProduct2 }";
@@ -37,8 +41,8 @@ namespace ConceptualExample02 {
 
     /**
      * The FactoryBase class declares the factory method that is supposed to return an
-     * object of a Product class. The FactoryBase's subclasses usually provide the
-     * implementation of this method.
+     * object of a Product class.
+     * The FactoryBase's subclasses usually provide the implementation of this method.
      */
     class FactoryBase {
     public:
@@ -68,7 +72,8 @@ namespace ConceptualExample02 {
      * Concrete FactoryBase classes override the factory method
      * in order to change the resulting product's type.
      */
-    class ConcreteFactory1 : public FactoryBase {
+    class ConcreteFactory1 : public FactoryBase 
+    {
         /**
          * Note that the signature of the method still uses the abstract product type,
          * even though the concrete product is actually returned from the method.
@@ -81,7 +86,8 @@ namespace ConceptualExample02 {
         }
     };
 
-    class ConcreteFactory2 : public FactoryBase {
+    class ConcreteFactory2 : public FactoryBase 
+    {
     public:
         std::shared_ptr<ProductBase> factoryMethod() const override {
             std::shared_ptr<ProductBase> product = std::make_shared<ConcreteProduct2>();

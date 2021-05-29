@@ -59,6 +59,32 @@ The result of the B2 collaborating with ( The result of the product A2. )
 
 ---
 
+#### Hinweis:
+
+Die beiden Entwurfsmuster *Abstract Factory* und *Factory Method* sind nicht 
+miteinander zu verwechseln.
+
+Sie haben zumindest gemeinsam, dass sie beide den Client von konkreten Typen entkoppeln.
+Der Client kennt nur die Schnittstelle zur *Factory* und den Produkten. Welche Produkte konkret erstellt werden,
+entscheidet die Unterklasse/Implementierung der Schnittstelle. Der Client stützt sich allein auf Abstraktion.
+
+Damit zu den Unterschieden:
+
+**Abstract Factory**<br/>
+  * Bietet eine Schnittstelle zum Erstellen von Familien verwandter oder abhängiger Objekte, ohne deren konkrete Klassen anzugeben.
+  * Ganze Produktfamilie wird erstellt.
+  * Breite Schnittstelle.
+  * Schnittstelle (Abstract Factory) ist oft nur ein Interface und enthält keinen Implementierungscode.
+
+**Factory Method**<br/>
+  * Definiert eine Schnittstelle zum Erstellen eines Objekts, aber lässt
+    die Unterklassen entscheiden, welche Klasse instanziiert werden soll.
+    Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterklassen verschieben.
+  * Schmale Schnittstelle.
+  * Schnittstelle ist oft abstrakt und enthält generischen Code (Herstellungscode, den alle Produkte durchlaufen müssen).
+
+---
+
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 [https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#AbstractFactory)
@@ -148,7 +174,7 @@ Model: Mitsubishi Pajero Super Exceed
   Accessories:
 ```
 
-Das Beispiel ist portiert von C# nach C++ ebenfalls bzgl. der Vorlage unter
+Das Beispiel ist portiert von C# nach C++ bzgl. der Vorlage unter
 
 [https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#AbstractFactory)
 

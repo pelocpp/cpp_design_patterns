@@ -129,10 +129,10 @@ public:
 class ConcreteFactory2 : public AbstractFactory {
 public:
     std::shared_ptr<AbstractProductA> createProductA() const override {
-        return std::make_shared<ConcreteProductA2>();
+        return std::make_shared<ConcreteProductA2>();  // <== concrete product returned
     }
     std::shared_ptr<AbstractProductB> createProductB() const override {
-        return std::make_shared<ConcreteProductB2>();
+        return std::make_shared<ConcreteProductB2>();  // <== concrete product returned
     }
 };
 
@@ -145,19 +145,19 @@ public:
 void clientCode(const std::shared_ptr<AbstractFactory>& factory) {
     const std::shared_ptr<AbstractProductA> product_a = factory->createProductA();
     const std::shared_ptr<AbstractProductB> product_b = factory->createProductB();
-    std::cout << product_b->usefulFunctionB() << "\n";
-    std::cout << product_b->anotherUsefulFunctionB(*product_a) << "\n";
+    std::cout << product_b->usefulFunctionB() << std::endl;
+    std::cout << product_b->anotherUsefulFunctionB(*product_a) << std::endl;
 }
 
 // function prototypes
 void test_conceptual_example()
 {
-    std::cout << "Client: Testing client code with the first factory type:\n";
+    std::cout << "Client: Testing client code with the first factory type:" << std::endl;;
     std::shared_ptr<ConcreteFactory1> f1 = std::make_shared<ConcreteFactory1>();
     clientCode(f1);
     std::cout << std::endl;
 
-    std::cout << "Client: Testing the same client code with the second factory type:\n";
+    std::cout << "Client: Testing the same client code with the second factory type:" << std::endl;;
     std::shared_ptr<ConcreteFactory2> f2 = std::make_shared<ConcreteFactory2>();
     clientCode(f2);
 }

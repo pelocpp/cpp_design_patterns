@@ -9,7 +9,8 @@
 namespace RealWorldFactoryMethod {
 
     // interface declares the methods that all concrete products must implement
-    class ITelevision {
+    class ITelevision 
+    {
     public:
         virtual ~ITelevision() {}
         virtual std::string getManufacturer() const = 0;
@@ -19,7 +20,8 @@ namespace RealWorldFactoryMethod {
 
     // concrete Products provide various implementations
     // of the ITelevision interface
-    class LEDTelevision : public ITelevision {
+    class LEDTelevision : public ITelevision 
+    {
     public:
         virtual std::string getManufacturer() const final {
             return "LED TV";
@@ -34,7 +36,8 @@ namespace RealWorldFactoryMethod {
         };
     };
 
-    class OledTelevision : public ITelevision {
+    class OledTelevision : public ITelevision 
+    {
     public:
         virtual std::string getManufacturer() const final {
             return "Oled TV";
@@ -49,8 +52,8 @@ namespace RealWorldFactoryMethod {
         };
     };
 
-    class AbstractTVFactory {
-
+    class AbstractTVFactory 
+    {
     public:
         virtual ~AbstractTVFactory() {};
 
@@ -62,7 +65,7 @@ namespace RealWorldFactoryMethod {
          * returning a different type of product from it.
          */
 
-        virtual void orderTV() final {
+        virtual void orderTV() final {         // <= final method (!)
 
             manufactureTelevision();           // <= abstract method (!)
             float charge = shippingCharge();   // <= abstract method (!)
@@ -70,16 +73,16 @@ namespace RealWorldFactoryMethod {
             std::cout << "Shipping charge: " << charge << " Euro" << std::endl;
         }
 
-        virtual ITelevision* orderTVExtended() final {
-            // client receives 'ITelevision' (e.g. 'Product') pointer
-            return assembleTelevision();    // <= abstract method (!)
+        virtual ITelevision* orderTVExtended() final {       // <= final method (!)
+            // Note: client receives 'ITelevision' pointer
+            return assembleTelevision();                     // <= abstract method (!)
         }
 
-        virtual float totalCharge() final {
+        virtual float totalCharge() final {       // <= final method (!)
 
             float charge =
-                shippingCharge() +      // <= abstract method (!)
-                productionCharge();     // <= abstract method (!)
+                shippingCharge() +                // <= abstract method (!)
+                productionCharge();               // <= abstract method (!)
 
             return charge;
         }
@@ -139,7 +142,7 @@ namespace RealWorldFactoryMethod {
 
     void clientCode02(const std::shared_ptr<AbstractTVFactory> factory) {
         std::cout
-            << "My new television receiver cost me "
+            << "My new television receiver costs me "
             << factory->totalCharge()
             << std::endl;
 

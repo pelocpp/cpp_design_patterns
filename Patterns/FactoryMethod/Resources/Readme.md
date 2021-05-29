@@ -165,8 +165,7 @@ void test_virtual_constructor_idiom()
 
 ---
 
-
-#### Hinweis 1:
+#### Hinweis:
 
 Die beiden Entwurfsmuster *Simple Factory* und *Factory Method* sind nicht 
 miteinander zu verwechseln.
@@ -184,32 +183,6 @@ miteinander zu verwechseln.
     Gibt es einen Algorithmus / eine Strategie, um die Erzeugung einer Produktfamilie zu steuern,
     dann kommt das *Factory Method* Pattern in Betracht. Dieses lässt sich gut mit dem *Template Pattern*, oder auch *Strategy Pattern* kombinieren,
     da man mit einer Schablone (Template) die Schritte zum Erstellen des untergeordneten Elements abstrahieren kann.
-
----
-
-#### Hinweis 2:
-
-Die beiden Entwurfsmuster *Abstract Factory* und *Factory Method* sind nicht 
-miteinander zu verwechseln.
-
-Sie haben zumindest gemeinsam, dass sie beide den Client von konkreten Typen entkoppeln.
-Der Client kennt nur die Schnittstelle zur *Factory* und den Produkten. Welche Produkte konkret erstellt werden,
-entscheidet die Unterklasse/Implementierung der Schnittstelle. Der Client stützt sich allein auf Abstraktion.
-
-Damit zu den Unterschieden:
-
-**Abstract Factory**<br/>
-  * Bietet eine Schnittstelle zum Erstellen von Familien verwandter oder abhängiger Objekte, ohne deren konkrete Klassen anzugeben.
-  * Ganze Produktfamilie wird erstellt.
-  * Breite Schnittstelle.
-  * Schnittstelle (Abstract Factory) ist oft nur ein Interface und enthält keinen Implementierungscode.
-
-**Factory Method**<br/>
-  * Definiert eine Schnittstelle zum Erstellen eines Objekts, aber lässt
-    die Unterklassen entscheiden, welche Klasse instanziiert werden soll.
-    Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterklassen verschieben.
-  * Schmale Schnittstelle.
-  * Schnittstelle ist oft abstrakt und enthält generischen Code (Herstellungscode, den alle Produkte durchlaufen müssen).
 
 ---
 

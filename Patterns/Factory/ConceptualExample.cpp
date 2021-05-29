@@ -17,6 +17,7 @@ namespace ConceptualExample {
 
     class Rectangle : public Shape {
     public:
+        Rectangle() = default;
         void draw() override
         {
             std::cout << "> Rectangle::draw()" << std::endl;
@@ -25,6 +26,7 @@ namespace ConceptualExample {
 
     class Square : public Shape {
     public:
+        Square() = default;
         void draw() override
         {
             std::cout << "> Square::draw()" << std::endl;
@@ -33,6 +35,7 @@ namespace ConceptualExample {
 
     class Circle : public Shape {
     public:
+        Circle() = default;
         void draw() override
         {
             std::cout << "> Circle ::draw()" << std::endl;
@@ -65,7 +68,7 @@ namespace ConceptualExample {
                 return std::shared_ptr<Shape>();
             default:
                 std::string msg = "Invalid type: " + shapeType;
-                throw std::runtime_error(msg);
+                throw std::runtime_error{ msg };
             }
         }
 
@@ -89,11 +92,11 @@ namespace ConceptualExample {
     void test_without_factory()
     {
         // using classes explicitely
-        Rectangle* rect = new Rectangle();
+        Rectangle* rect = new Rectangle{};
         rect->draw();
-        Circle* circle = new Circle();
+        Circle* circle = new Circle{};
         circle->draw();
-        Square* square = new Square();
+        Square* square = new Square{};
         square->draw();
     }
 
@@ -103,7 +106,7 @@ namespace ConceptualExample {
         // (knowledge about explicit classes not necessary)
         ShapeFactory shapeFactory;
 
-        std::shared_ptr<Shape> shape;
+        std::shared_ptr<Shape> shape{};
         shape = shapeFactory.getShape("Circle");
         shape->draw();
         shape = shapeFactory.getShape("Rectangle");
