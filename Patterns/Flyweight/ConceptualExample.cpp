@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample02.cpp // Flyweight Pattern (using smart pointer)
+// ConceptualExample.cpp // Flyweight Pattern (using smart pointer)
 // ===========================================================================
 
 #include <iostream>
@@ -26,7 +26,7 @@ namespace ConceptualExample {
         std::string m_color;
 
         SharedState(const std::string& brand, const std::string& model, const std::string& color)
-            : m_brand(brand), m_model(model), m_color(color)
+            : m_brand{ brand }, m_model{ model }, m_color{color }
         {
         }
 
@@ -45,7 +45,7 @@ namespace ConceptualExample {
         std::string m_plates;
 
         UniqueState(const std::string& owner, const std::string& plates)
-            : m_owner(owner), m_plates(plates)
+            : m_owner{ owner }, m_plates{ plates }
         {
         }
 
@@ -136,6 +136,8 @@ namespace ConceptualExample {
                 std::shared_ptr<Flyweight> flyweight = std::make_shared<Flyweight>(sharedState);
                 std::pair<std::string, std::shared_ptr<Flyweight>> pair = std::make_pair<>(key, flyweight);
                 m_flyweights.insert(pair);
+                // or
+                // m_flyweights[key] = flyweight;
             }
             else
             {
@@ -159,8 +161,11 @@ namespace ConceptualExample {
 
     void addCarToDatabase(
         FlyweightFactory& factory, 
-        const std::string& plates, const std::string& owner,
-        const std::string& brand, const std::string& model, const std::string& color)
+        const std::string& plates, 
+        const std::string& owner,
+        const std::string& brand, 
+        const std::string& model,
+        const std::string& color)
     {
         std::cout << std::endl << "Client: Adding a car to database." << std::endl;
         std::shared_ptr<Flyweight> flyweight = factory.getFlyweight({ brand, model, color });
@@ -180,15 +185,13 @@ void test_conceptual_example() {
      * initialization stage of the application.
      */
 
-    FlyweightFactory factory (
-        {
-            {"Chevrolet", "Camaro2018", "pink"},
-            {"Mercedes Benz", "C300", "black"},
-            {"Mercedes Benz", "C500", "red"},
-            {"BMW", "M5", "red"}, 
-            {"BMW", "X6", "white"}
-        }
-    );
+    FlyweightFactory factory {
+        {"Chevrolet", "Camaro2018", "pink"},
+        {"Mercedes Benz", "C300", "black"},
+        {"Mercedes Benz", "C500", "red"},
+        {"BMW", "M5", "red"},
+        {"BMW", "X6", "white"}
+    };
 
     factory.listFlyweights();
 

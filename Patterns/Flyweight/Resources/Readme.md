@@ -77,7 +77,7 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 <img src="dp_flyweight_pattern.svg" width="800">
 
-Abbildung 1: Schematische Darstellung des *Flyweight Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Flyweight Patterns*.
 
 
 #### Conceptual Example:

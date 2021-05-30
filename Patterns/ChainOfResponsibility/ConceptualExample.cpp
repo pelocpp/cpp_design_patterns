@@ -16,7 +16,8 @@ namespace ConceptualExampleChainOfResponsibility {
         std::string m_param;
 
     public:
-        explicit Request(int type, const std::string& param) : m_type(type), m_param(param) {}
+        explicit Request(int type, const std::string& param) 
+            : m_type{ type }, m_param{ param } {}
 
         int getType() const { return m_type; }
         std::string getParam() const { return m_param; }
@@ -28,7 +29,7 @@ namespace ConceptualExampleChainOfResponsibility {
         std::shared_ptr<Handler> m_successor;
 
     public:
-        Handler() : m_successor(nullptr) {}
+        Handler() : m_successor{ nullptr } {}
         virtual ~Handler() {}
 
         virtual void handleRequest(const Request&) = 0;
@@ -113,9 +114,9 @@ void test_conceptual_example_01() {
 
     using namespace ConceptualExampleChainOfResponsibility;
 
-    std::shared_ptr<Handler> h1 = std::make_shared<ConcreteHandlerA>();
-    std::shared_ptr<Handler> h2 = std::make_shared<ConcreteHandlerB>();
-    std::shared_ptr<Handler> h3 = std::make_shared<ConcreteHandlerC>();
+    std::shared_ptr<Handler> h1 { std::make_shared<ConcreteHandlerA>() };
+    std::shared_ptr<Handler> h2 { std::make_shared<ConcreteHandlerB>() };
+    std::shared_ptr<Handler> h3 { std::make_shared<ConcreteHandlerC>() };
     h1->setSuccessor(h2);
     h2->setSuccessor(h3);
 
@@ -139,9 +140,9 @@ void test_conceptual_example_02() {
 
     using namespace ConceptualExampleChainOfResponsibility;
 
-    std::shared_ptr<Handler> h1 = std::make_shared<ConcreteHandlerA>();
-    std::shared_ptr<Handler> h2 = std::make_shared<ConcreteHandlerB>();
-    std::shared_ptr<Handler> h3 = std::make_shared<ConcreteHandlerC>();
+    std::shared_ptr<Handler> h1 { std::make_shared<ConcreteHandlerA>() };
+    std::shared_ptr<Handler> h2 { std::make_shared<ConcreteHandlerB>() };
+    std::shared_ptr<Handler> h3 { std::make_shared<ConcreteHandlerC>() };
     h1->setSuccessor(h2);
     h2->setSuccessor(h3);
 
