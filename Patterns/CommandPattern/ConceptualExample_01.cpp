@@ -30,7 +30,7 @@ namespace ConceptualExample01 {
         std::shared_ptr<Receiver> m_receiver;
 
     public:
-        CommandBase(std::shared_ptr<Receiver> receiver) : m_receiver(receiver) {}
+        CommandBase(std::shared_ptr<Receiver> receiver) : m_receiver{ receiver } {}
         virtual ~CommandBase() {}
         virtual void execute() const = 0;
     };
@@ -40,7 +40,7 @@ namespace ConceptualExample01 {
     private:
         std::string m_data;
     public:
-        ConcreteCommand(std::shared_ptr<Receiver> receiver) : CommandBase(receiver) {}
+        ConcreteCommand(std::shared_ptr<Receiver> receiver) : CommandBase{ receiver } {}
 
         void setData(std::string data) { 
             m_data = data;

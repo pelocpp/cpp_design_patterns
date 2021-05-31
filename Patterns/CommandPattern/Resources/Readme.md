@@ -42,7 +42,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 <img src="dp_command_pattern.svg" width="700">
 
-Abbildung 1: Schematische Darstellung des *Command Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Command Patterns*.
 
 
 #### Conceptual Example:
@@ -68,13 +68,13 @@ vor.
 Für das *Command Pattern* wird in
 ["Entwurfsmuster: Das umfassende Handbuch" von Matthias Geirhos](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
 ein Beispiel aus dem Umfeld der Spieleprogrammierung betrachtet: Die Implementierung eines Ausschnitts aus dem Schachspiel,
-soweit er die Verwendung des *Command Pattern* Entwurfsmusters betrifft, siehe Abbildung 2:
+soweit er die Verwendung des *Command Pattern* Entwurfsmusters betrifft, siehe *Abbildung* 2:
 
 <img src="dp_command_pattern_chess.svg" width="800">
 
-Abbildung 2: Ein Schachspiel modelliert mit dem *Command Pattern*.
+*Abbildung* 2: Ein Schachspiel modelliert mit dem *Command Pattern*.
 
-Ein Kommando wird in Abbildung 2 durch die Klasse `Move` dargestellt.
+Ein Kommando wird in *Abbildung* 2 durch die Klasse `Move` dargestellt.
 Davon leiten sich unterschiedliche Kommandos ab, beim Schachspiel reden wir hier von einem Spielzug.
 Neben einem "normalen" Zug, der nur die Regeln der jeweiligen Spielfigur zu beachten hat, gibt es auch spezielle Züge
 wie "Rochaden" (engl. *Castling*)

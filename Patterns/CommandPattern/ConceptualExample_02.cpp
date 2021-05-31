@@ -42,12 +42,12 @@ namespace ConceptualExample02 {
     public:
         ~Receiver() {}
 
-        void doSomething(const std::string& a) {
-            std::cout << "Receiver: Working on (" << a << ".)" << std::endl;
+        void doSomething(const std::string& s) {
+            std::cout << "Receiver: Working on (" << s << ".)" << std::endl;
         }
 
-        void doSomethingElse(const std::string& b) {
-            std::cout << "Receiver: Also working on (" << b << ".)" << std::endl;
+        void doSomethingElse(const std::string& s) {
+            std::cout << "Receiver: Also working on (" << s << ".)" << std::endl;
         }
     };
 
@@ -71,7 +71,7 @@ namespace ConceptualExample02 {
          */
     public:
         ComplexCommand(std::shared_ptr<Receiver> receiver, std::string a, std::string b)
-            : m_receiver(receiver), m_a(a), m_b(b) {}
+            : m_receiver{ receiver }, m_a{ a }, m_b{ b } {}
 
         ~ComplexCommand() {}
 
@@ -95,7 +95,7 @@ namespace ConceptualExample02 {
         std::shared_ptr<CommandBase> m_onFinish;
 
     public:
-        Invoker() : m_onStart({ nullptr }), m_onFinish({ nullptr }) {}
+        Invoker() : m_onStart{ nullptr }, m_onFinish{ nullptr } {}
 
         ~Invoker() {}
 
