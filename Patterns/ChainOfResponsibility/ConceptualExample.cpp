@@ -94,14 +94,14 @@ namespace ConceptualExampleChainOfResponsibility {
     void clientCode(std::shared_ptr<Handler> handler) {
 
         std::array<Request, 8> requests = {
-            Request{ 7, std::string("Req. No.  7")},
-            Request{25, std::string("Req. No. 25")},
-            Request{17, std::string("Req. No. 17")},
-            Request{21, std::string("Req. No. 21")},
-            Request{18, std::string("Req. No. 18")},
-            Request{ 3, std::string("Req. No. 03")},
-            Request{19, std::string("Req. No. 19")},
-            Request{20, std::string("Req. No. 20")}
+            Request{ 7, std::string{ "Req. No.  7"} },
+            Request{25, std::string{ "Req. No. 25"} },
+            Request{17, std::string{ "Req. No. 17"} },
+            Request{21, std::string{ "Req. No. 21"} },
+            Request{18, std::string{ "Req. No. 18"} },
+            Request{ 3, std::string{ "Req. No. 03"} },
+            Request{19, std::string{ "Req. No. 19"} },
+            Request{20, std::string{ "Req. No. 20"} }
         };
 
         for (Request request : requests) {
@@ -121,14 +121,14 @@ void test_conceptual_example_01() {
     h2->setSuccessor(h3);
 
     std::array<Request, 8> requests = {
-        Request{ 7, std::string("Req. No.  7")},
-        Request{25, std::string("Req. No. 25")},
-        Request{17, std::string("Req. No. 17")}, 
-        Request{21, std::string("Req. No. 21")}, 
-        Request{18, std::string("Req. No. 18")}, 
-        Request{ 3, std::string("Req. No. 03")},
-        Request{19, std::string("Req. No. 19")}, 
-        Request{20, std::string("Req. No. 20")}
+        Request{ 7, std::string{ "Req. No.  7"} },
+        Request{25, std::string{ "Req. No. 25"} },
+        Request{17, std::string{ "Req. No. 17"} },
+        Request{21, std::string{ "Req. No. 21"} },
+        Request{18, std::string{ "Req. No. 18"} },
+        Request{ 3, std::string{ "Req. No. 03"} },
+        Request{19, std::string{ "Req. No. 19"} },
+        Request{20, std::string{ "Req. No. 20"} }
     };
 
     for (Request request : requests) {
