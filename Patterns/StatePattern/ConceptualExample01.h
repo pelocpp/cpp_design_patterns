@@ -9,6 +9,7 @@ namespace ConceptualExample01 {
     class StateBase
     {
     public:
+        virtual ~StateBase() {};
         virtual void handle(Context* context) = 0;
         virtual std::string getDescription() = 0;
     };
@@ -30,6 +31,7 @@ namespace ConceptualExample01 {
     class ConcreteStateA : public StateBase {
     private:
         std::string m_description;
+
     public:
         ConcreteStateA() : m_description{"State A"} {}
         virtual void handle(Context* context) override;
@@ -41,6 +43,7 @@ namespace ConceptualExample01 {
     class ConcreteStateB : public StateBase {
     private:
         std::string m_description;
+
     public:
         ConcreteStateB() : m_description{ "State B" } {}
         virtual void handle(Context* context) override;

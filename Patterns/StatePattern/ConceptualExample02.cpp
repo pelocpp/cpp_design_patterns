@@ -19,39 +19,42 @@ namespace ConceptualExample02 {
 
     void Context::request()
     {
-        m_state->handle(*this);
+        m_state->handle(shared_from_this());
     }
 
-    void Context::setState(std::shared_ptr<StateBase> base) {
+    void Context::setState(std::shared_ptr<StateBase> base)
+    {
         m_state = base;
-        std::cout << "Current state: " << typeid(*m_state).name() << std::endl;
+        std::cout << "Current state: " << m_state->getDescription() << std::endl;
     }
 
-    //void ConcreteStateA::handle(Context& context) 
-    //{
-    //    std::shared_ptr<ConcreteStateB> newState = std::make_shared<ConcreteStateB>();
-    //    context.setState(newState);
-    //}
+    void ConcreteStateA::handle(std::shared_ptr<Context> context)
+    {
+        std::shared_ptr<ConcreteStateB> newState = std::make_shared<ConcreteStateB>();
+        context->setState(newState);
+    }
 
-    //void ConcreteStateB::handle(Context& context)
-    //{
-    //    std::shared_ptr<ConcreteStateA> newState = std::make_shared<ConcreteStateA>();
-    //    context.setState(newState);
-    //}
+    void ConcreteStateB::handle(std::shared_ptr<Context> context)
+    {
+        std::shared_ptr<ConcreteStateA> newState = std::make_shared<ConcreteStateA>();
+        context->setState(newState);
+    }
 }
 
 void test_conceptual_example_02() {
 
     using namespace ConceptualExample02;
 
-    std::shared_ptr<StateBase> initialState = std::make_shared<ConcreteStateA>();
-    Context context(initialState);
-    context.request();
-    context.request();
-    context.request();
-    context.request();
-    context.request();
-    context.request();
+    std::shared_ptr<StateBase> initialState{ std::make_shared<ConcreteStateA>() };
+
+    std::shared_ptr<Context> context{ std::make_shared<Context>(initialState) };
+
+    context->request();
+    context->request();
+    context->request();
+    context->request();
+    context->request();
+    context->request();
 }
 
 // ===========================================================================

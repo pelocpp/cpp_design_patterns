@@ -22,7 +22,8 @@ namespace ConceptualExample01 {
         m_state->handle(this);
     }
 
-    void Context::setState(StateBase* base) {
+    void Context::setState(StateBase* base)
+    {
         m_state = base;
         std::cout << "Current state: " << m_state->getDescription() << std::endl;
     }
@@ -44,14 +45,16 @@ void test_conceptual_example_01() {
 
     using namespace ConceptualExample01;
 
-    ConcreteStateA* state = new ConcreteStateA();
-    Context* context = new Context(state);
-    context->request();
-    context->request();
-    context->request();
-    context->request();
-    context->request();
-    context->request();
+    ConcreteStateA* initialState{ new ConcreteStateA };
+
+    Context context (initialState);
+
+    context.request();
+    context.request();
+    context.request();
+    context.request();
+    context.request();
+    context.request();
 }
 
 // ===========================================================================
