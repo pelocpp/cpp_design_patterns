@@ -27,17 +27,17 @@ namespace ConceptualExample02 {
         std::cout << "Current state: " << typeid(*m_state).name() << std::endl;
     }
 
-    void ConcreteStateA::handle(Context& context) 
-    {
-        std::shared_ptr<ConcreteStateB> newState = std::make_shared<ConcreteStateB>();
-        context.setState(newState);
-    }
+    //void ConcreteStateA::handle(Context& context) 
+    //{
+    //    std::shared_ptr<ConcreteStateB> newState = std::make_shared<ConcreteStateB>();
+    //    context.setState(newState);
+    //}
 
-    void ConcreteStateB::handle(Context& context)
-    {
-        std::shared_ptr<ConcreteStateA> newState = std::make_shared<ConcreteStateA>();
-        context.setState(newState);
-    }
+    //void ConcreteStateB::handle(Context& context)
+    //{
+    //    std::shared_ptr<ConcreteStateA> newState = std::make_shared<ConcreteStateA>();
+    //    context.setState(newState);
+    //}
 }
 
 void test_conceptual_example_02() {

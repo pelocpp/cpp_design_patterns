@@ -24,7 +24,7 @@ namespace ConceptualExample01 {
 
     void Context::setState(StateBase* base) {
         m_state = base;
-        std::cout << "Current state: " << typeid(*m_state).name() << std::endl;
+        std::cout << "Current state: " << m_state->getDescription() << std::endl;
     }
 
     void ConcreteStateA::handle(Context* context) 

@@ -26,7 +26,7 @@ Dieses kann eine Reihe sehr unterschiedlicher Zustände annehmen:
 
 <img src="java_thread_states.png" width="500">
 
-Abbildung 2: Der Lebenszyklus eines `Thread`-Objekts.
+*Abbildung* 2: Der Lebenszyklus eines `Thread`-Objekts.
 
 Zu Beginn ist ein `Thread`-Objekt noch nicht gestartet (*ready_to_run*). Danach wird es gestartet (*running*) und der Thread läuft,
 bis er sein natürliches Ende erreicht (*dead*). Es kann auch vorkommen, dass der Thread angehalten (*blocked* oder *sleeping*) und wieder fortgesetzt wird (*waiting*).
@@ -62,7 +62,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 <img src="dp_state_pattern.svg" width="600">
 
-Abbildung 2: Schematische Darstellung des *State Patterns*.
+*Abbildung* 2: Schematische Darstellung des *State Patterns*.
 
 
 #### Conceptual Example:
@@ -100,17 +100,17 @@ von Matthias Geirhos findet sich zu diesem Entwurfsmuster als Beispiel die Model
 Einem Bewerbungsprozess können in naheliegender Weise Zustände wie *Eingegangen*, *Eingeladen* usw. zugeordnet werden.
 Sehen Sie die detaillierte Beispielbeschreibung ab Seite 336 an.
 
-Schreiben Sie den Beispielcode aus dem Buch in ein C++-Programm um. Verwenden Sie hierzu die Klassennamen aus Abbildung 3:
+Schreiben Sie den Beispielcode aus dem Buch in ein C++-Programm um. Verwenden Sie hierzu die Klassennamen aus *Abbildung* 3:
 
 <img src="dp_state_pattern_job_application.svg" width="700">
 
-Abbildung 3: Ein Bewerbungsprozess modelliert mit dem *State Pattern*.
+*Abbildung* 3: Ein Bewerbungsprozess modelliert mit dem *State Pattern*.
 
 Erstellen Sie eine Testmethode, die exemplarisch eine Bewerbung vom Status *Received* (*Eingegangen*) bis zum Status *Hired* (*Eingestellt*) verfolgt.
 
 ###### Zusatzaufgabe:
 
-Ergänzen Sie das Prgramm um einen weiteren Status `Assessment`. 
+Ergänzen Sie das Programm um einen weiteren Status `Assessment`. 
 Im Zustandsdiagramm des Beispiels ist dieser Zustand zwischen die beiden Zustände *Eingeladen* (*Invited*) und *Eingestellt* (*Hired*) einzufügen.
 Eine Einstellung erfolgt somit erst, wenn der Bewerber das Assessment Center erfolgreich durchlaufen hat.
 
