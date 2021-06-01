@@ -19,7 +19,7 @@ Eine *Collection* stellt einen *Container* für eine Gruppe von Objekten dar:
 
 <img src="dp_collections_iterator.png" width="600">
 
-Abbildung 1: Unterschiedliche Arten von *Collections*.
+*Abbildung* 1: Unterschiedliche Arten von *Collections*.
 
 Die meisten Collections speichern ihre Elemente in einfachen linearen (verketteten) Listen ab.
 Wiederum andere basieren auf komplexeren Datenstrukturen wie Stapeln (Stack), Bäumen (Tree), Diagrammen oder anderen.
@@ -39,7 +39,7 @@ die bzgl. der Reihenfolge des Durchlaufens der Baumstruktur sehr unterschiedlich
 
 <img src="dp_collections_iterator_tree_structures.png" width="600">
 
-Abbildung 2: Eine Collection kann auf verschiedene Arten durchlaufen werden: *Depth-First Traversal* (links) versus *Breadth-First Traversal* (rechts).
+*Abbildung* 2: Eine Collection kann auf verschiedene Arten durchlaufen werden: *Depth-First Traversal* (links) versus *Breadth-First Traversal* (rechts).
 
 #### Lösung:
 
@@ -69,7 +69,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 <img src="dp_iterator_pattern.svg" width="800">
 
-Abbildung 1: Schematische Darstellung des *Iterator Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Iterator Patterns*.
 
 
 #### Conceptual Example:
@@ -128,7 +128,7 @@ einige Regeln bzw. Konventionen:
 
   * `reset`-Methode
 
-    Mit `reset` kann ich eine aktive Traversierung / Iteration von Anfang an neu beginnen.
+    Mit `reset` kann man eine aktive Traversierung / Iteration von Anfang an neu beginnen.
 
   * Aufruf einer `reset()`-Methode am Ende einer Iteration:
 
@@ -140,7 +140,7 @@ einige Regeln bzw. Konventionen:
 
     Wie reagiert ein Aufruf von `hasNext()`, wenn der Rückgabewert `false` ist?	
     Wenn ich genau dann `hasNext()` wieder aufrufe, sollte `hasNext()` `true` zurückliefern
-    und damit eine zweite Iteration von Anfang an einleiten.
+    und damit eine zweite Iteration von Beginn an einleiten.
 
 ---
 

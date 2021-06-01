@@ -78,7 +78,7 @@ namespace IteratorPatternStandard {
 
     public:
         ForwardIterator(const ConcreteAggregate<T>* agg) 
-            : m_aggregate(agg), m_pos(-1) {}
+            : m_aggregate{ agg }, m_pos{ -1 } {}
 
         void reset() override
         {
@@ -111,7 +111,7 @@ namespace IteratorPatternStandard {
 
     public:
         BackwardIterator(const ConcreteAggregate<T>* agg) 
-            : m_aggregate(agg), m_pos(agg->size()) {}
+            : m_aggregate{ agg }, m_pos{ agg->size() } {}
 
         void reset() override
         {

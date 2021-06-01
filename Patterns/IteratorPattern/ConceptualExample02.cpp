@@ -49,9 +49,7 @@ namespace IteratorPatternCpp {
 
     public:
         Iterator(TContainer* p_data, bool reverse)
-            : m_container(p_data),
-            m_reverse(reverse),
-            m_notFirstAccess(false)
+            : m_container{ p_data }, m_reverse{ reverse }, m_notFirstAccess{ false }
         {
             m_iterator = (m_reverse)
                 ? std::prev(m_container->m_vector.end())
