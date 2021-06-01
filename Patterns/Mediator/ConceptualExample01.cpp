@@ -32,8 +32,8 @@ namespace ConceptualExample01 {
     };
 
     /**
-     * The Base Component provides the basic functionality of storing a mediator's
-     * instance inside component objects.
+     * The Base Component provides the basic functionality
+     * of storing a mediator's instance inside component objects.
      */
     class ColleagueBase {
     protected:
@@ -54,30 +54,30 @@ namespace ConceptualExample01 {
      */
     class ConcreteColleagueA : public ColleagueBase {
     public:
-        void DoA() 
+        void operationA() 
         {
-            std::cout << "Component 1 does A." << std::endl;
+            std::cout << "Component 1 does operation A." << std::endl;
             m_mediator->notify(this, "A");
         }
 
-        void DoB() 
+        void operationB()
         {
-            std::cout << "Component 1 does B." << std::endl;
+            std::cout << "Component 1 does operation B." << std::endl;
             m_mediator->notify(this, "B");
         }
     };
 
     class ConcreteColleagueB : public ColleagueBase {
     public:
-        void DoC()
+        void operationC()
         {
-            std::cout << "Component 2 does C." << std::endl;
+            std::cout << "Component 2 does operation C." << std::endl;
             m_mediator->notify(this, "C");
         }
 
-        void DoD()
+        void operationD()
         {
-            std::cout << "Component 2 does D." << std::endl;
+            std::cout << "Component 2 does operation D." << std::endl;
             m_mediator->notify(this, "D");
         }
     };
@@ -103,29 +103,29 @@ namespace ConceptualExample01 {
         {
             if (event == "A")
             {
-                std::cout << "Mediator reacts on A and triggers following operations:" << std::endl;
-                m_component2->DoC();
+                std::cout << "Mediator reacts on operation A and triggers following operations:" << std::endl;
+                m_component2->operationC();
             }
 
             if (event == "D")
             {
-                std::cout << "Mediator reacts on D and triggers following operations:" << std::endl;
-                m_component1->DoB();
-                m_component2->DoC();
+                std::cout << "Mediator reacts on operation D and triggers following operations:" << std::endl;
+                m_component1->operationB();
+                m_component2->operationC();
             }
         }
     };
 
     void clientCode()
     {
-        ConcreteColleagueA* c1 = new ConcreteColleagueA;
-        ConcreteColleagueB* c2 = new ConcreteColleagueB;
-        ConcreteMediator* mediator = new ConcreteMediator(c1, c2);
+        ConcreteColleagueA* c1{ new ConcreteColleagueA{} };
+        ConcreteColleagueB* c2{ new ConcreteColleagueB{} };
+        ConcreteMediator* mediator{ new ConcreteMediator(c1, c2) };
         std::cout << "Client triggers operation A." << std::endl;
-        c1->DoA();
+        c1->operationA();
         std::cout << std::endl;
         std::cout << "Client triggers operation D." << std::endl;
-        c2->DoD();
+        c2->operationD();
 
         delete c1;
         delete c2;

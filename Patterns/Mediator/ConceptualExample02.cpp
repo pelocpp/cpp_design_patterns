@@ -58,16 +58,16 @@ namespace ConceptualExample02 {
      */
     class ConcreteColleagueA : public ColleagueBase, public std::enable_shared_from_this<ConcreteColleagueA> {
     public:
-        void DoA()
+        void operationA()
         {
-            std::cout << "Component 1 does A." << std::endl;
+            std::cout << "Component 1 does operation A." << std::endl;
             std::shared_ptr<MediatorBase> sp = m_mediator.lock();
-            sp->notify(shared_from_this(), "A");
+            sp->notify(shared_from_this(), "operation A");
         }
 
-        void DoB()
+        void operationB()
         {
-            std::cout << "Component 1 does B." << std::endl;
+            std::cout << "Component 1 does operation B." << std::endl;
             std::shared_ptr<MediatorBase> sp = m_mediator.lock();
             sp->notify(shared_from_this(), "B");
         }
@@ -76,16 +76,16 @@ namespace ConceptualExample02 {
     class ConcreteColleagueB : public ColleagueBase, public std::enable_shared_from_this<ConcreteColleagueB> {
     public:
 
-        void DoC()
+        void operationC()
         {
-            std::cout << "Component 2 does C." << std::endl;
+            std::cout << "Component 2 does operation C." << std::endl;
             std::shared_ptr<MediatorBase> sp = m_mediator.lock();
             sp->notify(shared_from_this(), "C");
         }
 
-        void DoD()
+        void operationD()
         {
-            std::cout << "Component 2 does D." << std::endl;
+            std::cout << "Component 2 does operation D." << std::endl;
             std::shared_ptr<MediatorBase> sp = m_mediator.lock();
             sp->notify(shared_from_this(), "D");
         }
@@ -127,23 +127,23 @@ namespace ConceptualExample02 {
 
             if (event == "A") {
                 std::cout << "Mediator reacts on A and triggers following operations:" << std::endl;
-                m_component2->DoC();
+                m_component2->operationC();
             }
 
             if (event == "D") {
                 std::cout << "Mediator reacts on D and triggers following operations:" << std::endl;
-                m_component1->DoB();
-                m_component2->DoC();
+                m_component1->operationB();
+                m_component2->operationC();
             }
         }
     };
 
     void clientCode()
     {
-        std::shared_ptr<ConcreteColleagueA> c1 = std::shared_ptr<ConcreteColleagueA>(new ConcreteColleagueA());
-        std::shared_ptr<ConcreteColleagueB> c2 = std::shared_ptr<ConcreteColleagueB>(new ConcreteColleagueB());
+        std::shared_ptr<ConcreteColleagueA> c1{ std::shared_ptr<ConcreteColleagueA>(new ConcreteColleagueA()) };
+        std::shared_ptr<ConcreteColleagueB> c2{ std::shared_ptr<ConcreteColleagueB>(new ConcreteColleagueB()) };
 
-        std::shared_ptr<ConcreteMediator> mediator = std::make_shared<ConcreteMediator>(c1, c2);
+        std::shared_ptr<ConcreteMediator> mediator{ std::make_shared<ConcreteMediator>(c1, c2) };
 
         // Note: this method call CANNOT be integrated into the c'tor call before:
         // the shared pointer object must be fully constructed before 'shared_from_this()'
@@ -151,10 +151,10 @@ namespace ConceptualExample02 {
         mediator->setConcreteColleagues();
 
         std::cout << "Client triggers operation A." << std::endl;
-        c1->DoA();
+        c1->operationA();
         std::cout << std::endl;
         std::cout << "Client triggers operation D." << std::endl;
-        c2->DoD();
+        c2->operationD();
     }
 }
 

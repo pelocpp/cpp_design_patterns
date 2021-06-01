@@ -44,7 +44,7 @@ namespace ConceptualExample03 {
         // Important !!! Otherwise child classes like ConcreteColleagueA won't compile !!!
         ColleagueBase() = default;
 
-        ColleagueBase(std::shared_ptr<MediatorBaseAlternate> mediator) : m_mediator(mediator) {}
+        ColleagueBase(std::shared_ptr<MediatorBaseAlternate> mediator) : m_mediator{ mediator } {}
 
         void setMediator(std::shared_ptr<MediatorBaseAlternate> mediator)
         {
@@ -58,37 +58,37 @@ namespace ConceptualExample03 {
      */
     class ConcreteColleagueA : public ColleagueBase, public std::enable_shared_from_this<ConcreteColleagueA> {
     public:
-        void DoA()
+        void operationA()
         {
-            std::cout << "Component 1 does A." << std::endl;
+            std::cout << "Component 1 does operation A." << std::endl;
             std::shared_ptr<MediatorBaseAlternate> sp = m_mediator.lock();
             sp->notify(shared_from_this());
         }
 
-        void DoX()
+        void operationX()
         {
-            std::cout << "Component 1 does X." << std::endl;
+            std::cout << "Component 1 does operation X." << std::endl;
         }
     };
 
     class ConcreteColleagueB : public ColleagueBase, public std::enable_shared_from_this<ConcreteColleagueB> {
     public:
 
-        void DoB()
+        void operationB()
         {
-            std::cout << "Component 2 does B." << std::endl;
+            std::cout << "Component 2 does operation B." << std::endl;
             std::shared_ptr<MediatorBaseAlternate> sp = m_mediator.lock();
             sp->notify(shared_from_this());
         }
 
-        void DoY()
+        void operationY()
         {
-            std::cout << "Component 2 does Y." << std::endl;
+            std::cout << "Component 2 does operation Y." << std::endl;
         }
 
-        void DoZ()
+        void operationZ()
         {
-            std::cout << "Component 2 does Z." << std::endl;
+            std::cout << "Component 2 does operation Z." << std::endl;
         }
     };
 
@@ -127,15 +127,15 @@ namespace ConceptualExample03 {
         {
             if (sender == m_component1) {
                 std::cout << "Mediator reacts on Component A and triggers following operations:" << std::endl;
-                m_component1->DoX();
-                m_component2->DoY();
+                m_component1->operationX();
+                m_component2->operationY();
             }
 
             if (sender == m_component2) {
                 std::cout << "Mediator reacts on Component B and triggers following operations:" << std::endl;
-                m_component1->DoX();
-                m_component2->DoY();
-                m_component2->DoZ();
+                m_component1->operationX();
+                m_component2->operationY();
+                m_component2->operationZ();
             }
         }
     };
@@ -153,10 +153,10 @@ namespace ConceptualExample03 {
         mediator->setConcreteColleagues();
 
         std::cout << "Client triggers operation A." << std::endl;
-        c1->DoA();
+        c1->operationA();
         std::cout << std::endl;
         std::cout << "Client triggers operation D." << std::endl;
-        c2->DoB();
+        c2->operationB();
     }
 }
 

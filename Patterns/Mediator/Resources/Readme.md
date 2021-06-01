@@ -7,26 +7,26 @@
 #### Ziel / Absicht:
 
 Das *Mediator Pattern* ist ein Verhaltensentwurfsmuster, das die lose Kopplung von Objekten propagiert,
-indem Klassen nicht mehr direkt miteinander kommunizieren müssen.
+indem Klassen nicht mehr direkt miteinander kommunizieren.
 Stattdessen werden Mediatorobjekte verwendet, um die Interaktionen zwischen Klassen zu kapseln
 und zu zentralisieren.
 
 #### Problem:
 
-Nicht selten bestehen Programme - zumindest in Teilen - aus umfangreichen Klassen.
+Nicht selten bestehen Programme &ndash; zumindest in Teilen &ndash; aus umfangreichen Klassen.
 Dies ist nicht ungewöhnlich, aber es kommt zu Problemen, wenn diese Klassen miteinander kommunizieren müssen.
 Bei Verwendung des traditionellen Ansatzes, wenn Klassen direkt kommunizieren,
 müssen diese Klassen ihre internen Implementierungen kennen bzw. im Zuge der Kommunikation offenlegen.
 
-Dies führt zu der bekannten Beobachtung, da es zunehmend schwieriger, die Implementierung einer Klasse zu lesen und zu verstehen,
+Dies führt zu der bekannten Beobachtung, da es zunehmend schwieriger wird, die Implementierung einer Klasse zu lesen und zu verstehen,
 wenn das Programm immer komplexer wird. Derartige Klassen sind eng miteinander verbunden,
 was aus konzeptioneller Sicht nicht gut ist.
 
 #### Lösung:
 
-Das *Mediator Pattern* löst dieses Problem. In diesem Muster ist die Kommunikation zwischen Objekten in einem Mediatorobjekt gekapselt.
+Das *Mediator Pattern* löst dieses Problem, in diesem Muster ist die Kommunikation zwischen Objekten in einem Mediatorobjekt gekapselt.
 Anstatt dass Klassen direkt kommunizieren, senden Klassen Nachrichten an den Mediator und der Mediator sendet
-diese Nachrichten an die anderen Klassen.
+diese Nachrichten an die anderen Klassen weiter.
 
 #### Struktur (UML):
 
@@ -45,7 +45,7 @@ Es besteht im Wesentlichen aus vier Teilen:
    muss diese nur den Mediator benachrichtigen.
    Wenn der Mediator die Benachrichtigung erhält, kann er den Absender leicht identifizieren, 
    was ausreichend sein sollte,
-   um zu entscheiden, welche Komponente(n) im Gegenzug zu aktivieren ist (sind) - Aufruf einer Methode.
+   um zu entscheiden, welche Komponente(n) im Gegenzug zu aktivieren ist (sind) &ndash; Aufruf einer Methode.
   * **MediatorBase**: Abstrakte Klasse (Schnittstelle) für das `Mediator`-Objekt.
    Diese Klasse enthält Methoden, die von Kollegen verwendet werden können.
    Die Mediator-Schnittstelle deklariert Kommunikationsmethoden für Komponenten,
@@ -54,12 +54,12 @@ Es besteht im Wesentlichen aus vier Teilen:
    einschließlich eines Verweises auf sich selbst (`this`),
    jedoch ist dabei zu beachten, dass keine Kopplung zwischen einer empfangenden Komponente und der Klasse des Absenders entsteht.
   * **ConcreateMediator**: Implementierung der Methoden der `MediatorBase`-Klasse.
-   Diese Klasse enthält Verweise auf alle Kollegen, die miteinander kommunizieren müssen.
+   Diese Klasse enthält Verweise auf alle Kollegen, die miteinander kommunizieren wollen.
    Konkrete Mediatoren kapseln die Beziehungen zwischen verschiedenen Kollegen.
 
 <img src="dp_mediator_pattern.svg" width="800">
 
-Abbildung 1: Schematische Darstellung des *Mediator Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Mediator Patterns*.
 
 
 #### Conceptual Example:
@@ -68,7 +68,7 @@ Abbildung 1: Schematische Darstellung des *Mediator Patterns*.
 
 Das *Conceptual Example* liegt in drei Varianten vor:
 
-  * Variante 1: klassisch - d.h. mit "raw"-Zeigern.
+  * Variante 1: klassisch &ndash; d.h. mit "raw"-Zeigern.
   * Variante 2: Wie Variante 1, aber mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
   * Variante 3: Prinzipiell wie Variante 2, nur: Die Entscheidung, welche empfangende Komponente
     aufzurufen ist, wird dieses Mal über das Absenderobjekt getroffen (und nicht über eine Parameterkennung).
