@@ -14,7 +14,7 @@
  */
 PayByPayPal::PayByPayPal() {
 
-    m_paypal_DataBase = {
+    m_paypalDataBase = {
         { "secret", "hans@web.de" },
         { "peter", "peter@web.de" },
         { "geheim", "sepp@web.de" },
@@ -60,7 +60,7 @@ bool PayByPayPal::pay(int paymentAmount) {
  */
 bool PayByPayPal::verify() {
 
-    m_isSignedIn = (m_email == m_paypal_DataBase[m_password]);
+    m_isSignedIn = (m_email == m_paypalDataBase[m_password]);
     return m_isSignedIn;
 }
 

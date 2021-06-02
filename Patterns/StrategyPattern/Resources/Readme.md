@@ -21,13 +21,13 @@ Insbesondere kapselt das Entwurfsmuster die Algorithmen und macht sie austauschb
 
 Diese Trennung ermöglicht, dass das Verhalten (Methode, Algorithmus) unabhängig von den Clients ist,
 die es verwenden  und auf diese Weise variieren kann.
-Es ermöglicht es der Anwendung auch, mit dem Fortschreiten der Anwendungsentwicklung
+Eine Anwendung kann mit dem Fortschreiten der Anwendungsentwicklung
 weitere, neue Algorithmen nahtlos hinzuzufügen.
 
 #### Lösung:
 
-Das "Strategie Entwurfsmuster" zählt zur Kategorie der "Verhaltensmuster" / "Behavioral Pattern".
-Es injiziert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung ("*Object* / *Context*") austauschen lassen.
+Das &ldquo;Strategie Entwurfsmuster&rdquo; zählt zur Kategorie der &ldquo;Verhaltensmuster&rdquo; / &ldquo;Behavioral Pattern&rdquo;.
+Es injiziert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung (&ldquo;*Object* / *Context*&rdquo;) austauschen lassen.
 
 Das Strategie Pattern wird häufig eingesetzt, um das Verhalten einer Klasse zu ändern,
 ohne dies über eine Spezialisierung vorzunehmen.
@@ -46,7 +46,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 <img src="dp_strategy_pattern.svg" width="700">
 
-Abbildung 1: Schematische Darstellung des *Strategy Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Strategy Patterns*.
 
 ## Anwendungen des Design Pattern in der STL:
 

@@ -14,8 +14,7 @@
  * In this example class Order has the role of the so called 'Context':
  * The Context maintains a reference to one of the Strategy objects.
  */
-Order::Order() : m_totalCost{ 0 }, m_isClosed{ false } {
-}
+Order::Order() : m_totalCost{ 0 }, m_isClosed{ false } {}
 
 /**
  * public interface

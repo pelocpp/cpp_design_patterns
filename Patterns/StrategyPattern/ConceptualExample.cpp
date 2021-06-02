@@ -9,8 +9,8 @@
 #include <memory>
 
 /**
- * The Strategy interface declares operations common
- * to all supported versions of some algorithm.
+ * The Strategy interface declares operations
+ * common to all supported versions of some algorithm.
  *
  * The Context uses this interface to call the algorithm
  * defined by Concrete Strategies.
@@ -30,8 +30,8 @@ class Context
 {
     /**
      * The Context maintains a reference to one of the Strategy objects.
-     * The Context does not know the concrete class of a strategy. It
-     * should work with all strategies via the Strategy interface.
+     * The Context does not know the concrete class of a strategy.
+     * It should work with all strategies via the Strategy interface.
      */
 private:
     std::unique_ptr<Strategy> m_strategy;
@@ -98,6 +98,7 @@ public:
         );
         
         std::sort(std::begin(result), std::end(result));
+
         return result;
     }
 };
@@ -122,26 +123,26 @@ public:
 
         std::sort(std::begin(result), std::end(result));
         std::reverse(std::begin(result), std::end(result));
+
         return result;
     }
 };
 
 /**
  * The client code picks a concrete strategy and passes it to the context.
- * The client should be aware of the differences between strategies in order
- * to make the right choice.
+ * The client should be aware of the differences between strategies
+ * in order to make the right choice.
  */
 
 void clientCode()
 {
     std::cout << "Client: Strategy is set to normal sorting:" << std::endl;
 
-    Context context(std::make_unique<ConcreteStrategyA>());
+    Context context{ std::make_unique<ConcreteStrategyA>() };
     context.doSomeBusinessLogic();
     std::cout << std::endl;
 
     std::cout << "Client: Strategy is set to reverse sorting:" << std::endl;
-
     context.setStrategy(std::make_unique<ConcreteStrategyB>());
     context.doSomeBusinessLogic();
 }

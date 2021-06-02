@@ -13,10 +13,11 @@ private:
     std::string m_password;
     bool m_isSignedIn;
 
-    std::map<std::string, std::string> m_paypal_DataBase;
+    std::map<std::string, std::string> m_paypalDataBase;
 
 public:
     PayByPayPal();
+    ~PayByPayPal() = default;
 
     virtual bool pay(int paymentAmount) override;
     virtual void collectPaymentDetails() override;
