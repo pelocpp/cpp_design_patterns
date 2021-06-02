@@ -13,10 +13,11 @@
  * method itself intact.
  */
 class AbstractClass {
-    /**
-     * The template method defines the skeleton of an algorithm.
-     */
+
 public:
+    /**
+     * The template method defines the skeleton of an algorithm:
+     */
     void TemplateMethod() const {
         BaseOperation1();         // may be overriden, but it's not mandatory
         RequiredOperations1();    // MUST be overriden
@@ -76,6 +77,7 @@ protected:
     virtual void RequiredOperations1() const override {
         std::cout << "ConcreteClass1 says: Implemented Operation1" << std::endl;
     }
+
     virtual void RequiredOperation2() const override {
         std::cout << "ConcreteClass1 says: Implemented Operation2" << std::endl;
     }
@@ -89,12 +91,15 @@ protected:
     virtual void RequiredOperations1() const override {
         std::cout << "ConcreteClass2 says: Implemented Operation1" << std::endl;
     }
+
     virtual void RequiredOperation2() const override {
         std::cout << "ConcreteClass2 says: Implemented Operation2" << std::endl;
     }
+
     virtual void BaseOperation1() const override {
         std::cout << "ConcreteClass2 says: Overridden BaseOperation1" << std::endl;
     }
+
     virtual void Hook1() const override {
         std::cout << "ConcreteClass2 says: Overridden Hook1" << std::endl;
     }

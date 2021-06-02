@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <memory>
 
 #include "SocialNetwork.h"
 #include "Facebook.h"
@@ -31,18 +32,19 @@ void test_social_networking() {
     int choice;
     std::cin >> choice;
 
-    // create proper network object and send the message
-    SocialNetwork* socialNetwork = nullptr;
+    // create proper network object
+    std::unique_ptr<SocialNetwork> socialNetwork;
     if (choice == 1) {
-        socialNetwork = new Facebook(userName, password);
+        socialNetwork = std::make_unique<Facebook>(userName, password);
     }
     else if (choice == 2) {
-        socialNetwork = new Twitter(userName, password);
+        socialNetwork = std::make_unique<Twitter>(userName, password);
     }
     else {
         std::cout << "Wrong Choice!" << std::endl;
     }
 
+    // send the message to network object
     if (socialNetwork != nullptr) {
         socialNetwork->post(message);
     }

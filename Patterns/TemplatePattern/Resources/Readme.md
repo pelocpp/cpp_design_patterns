@@ -28,7 +28,7 @@ In einer niedrigeren Abstraktionsebene (Detailebene) können die Teilmethoden ein
 #### Lösung:
 
 Das *Template Method Pattern* hat zum Inhalt, dass Sie einen Algorithmus in eine Reihe von Schritten aufteilen,
-diese Schritte in Methoden umwandeln und diese Methoden in einer einzigen „Vorlagenmethode“ aufrufen,
+diese Schritte in Methoden umwandeln und diese Methoden in einer einzigen &ldquo;Vorlagenmethode&rdquo; aufrufen,
 daher auch der Name dieses Entwurfsmusters.
 Die Schritte können entweder abstrakt sein oder eine Standardimplementierung aufweisen.
 Um den Algorithmus zu verwenden, muss der Client eine eigene Unterklasse bereitstellen, alle abstrakten Schritte implementieren und bei Bedarf einige der optionalen Schritte überschreiben.
@@ -39,9 +39,9 @@ Das *Template Method Pattern* ermöglicht die Realisierung von variierenden Teils
 
 #### Struktur (UML):
 
-<img src="dp_template_method_pattern.svg" width="500">
+<img src="dp_template_method_pattern.svg" width="450">
 
-Abbildung 1: Schematische Darstellung des *Template Method Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Template Method Patterns*.
 
 
 #### Hinweis:
@@ -86,7 +86,7 @@ implementieren diese Schritte gemäß der vom sozialen Netzwerk bereitgestellten A
 Die Klasse `SocialNetwork` repräsentiert die Basisklasse des sozialen Netzwerks.
 Zwei weitere Klassen `Twitter` und `Facebook` stehen für konkrete Beispiele sozialer Netzwerke.
 
-Die „Vorlagenmethode“ ist in der Klasse `SocialNetwork` vorgegeben, sie lautet `post`:
+Die &ldquo;Vorlagenmethode&rdquo; ist in der Klasse `SocialNetwork` vorgegeben, sie lautet `post`:
 
 ```cpp
 bool post(const std::string& message);
@@ -95,11 +95,11 @@ bool post(const std::string& message);
 Ihre Implementierung darf nicht verändert werden, um dem Charakter des Entwurfsmusters gerecht zu werden.
 Die Teilschritte, die zur Realisierung der `post`-Methode erforderlich sind, lauten in dem Beispiel
 `logIn`, `logOut` und `sendData`. Diese drei Methoden sind geeignet von konkreten Social Media Klassen
-zu überschreiben, siehe dazu auch Abbildung 2:
+zu überschreiben, siehe dazu auch *Abbildung* 2:
 
 <img src="dp_template_method_pattern_social_media.svg" width="800">
 
-Abbildung 2: Das *Template Method Pattern* am Beispiel sozialer Netzwerke.
+*Abbildung* 2: Das *Template Method Pattern* am Beispiel sozialer Netzwerke.
 
 ---
 
