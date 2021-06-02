@@ -111,7 +111,7 @@ Nun aber kommen die Methoden ins Spiel. Mit den Elementen eines Warenkorbs kann 
   * Erstellung einer Rechnung zum Inhalt des Warenkorbs als PDF,
   * ...
 
-Und natürlich gibt es noch viele Methoden, die nur einzelnen Klassen (Buch, Spiel, ...) vorbehalten sind.
+Und natürlich gibt es noch viele Methoden, die nur einzelnen Klassen (`Buch`, `Spiel`, ...) vorbehalten sind.
 
 Damit sind wir im Zentrum des Musters angekommen: Es trennt die Klassenhierarchie von den Operationen, die
 stattdessen in eine zweite Hierarchie wandern. Und anstatt die Operation direkt aufzurufen,

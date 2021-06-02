@@ -40,10 +40,9 @@ namespace ConceptualExample {
     };
 
     /**
-     * The ElementBase interface declares an `accept` method that should take the base
-     * visitor interface as an argument.
+     * The ElementBase interface declares an `accept` method that should take
+     * the base visitor interface as an argument.
      */
-
     class ElementBase {
     public:
         virtual ~ElementBase() {}
@@ -190,8 +189,8 @@ namespace ConceptualExample {
      */
     void clientCode(
         std::array<std::shared_ptr<ElementBase>, 3> components,
-        std::shared_ptr<VisitorBase> visitor) {
-
+        std::shared_ptr<VisitorBase> visitor) 
+    {
         for (std::shared_ptr<ElementBase> comp : components) {
             comp->accept(visitor);
         }
@@ -212,6 +211,7 @@ void test_conceptual_example() {
     std::shared_ptr<VisitorBase> visitor1 = std::make_shared<ConcreteVisitor1>();
     clientCode(components, visitor1);
     std::cout << std::endl;
+
     std::cout << "It allows the same client code to work with different types of visitors:\n";
     std::shared_ptr<VisitorBase> visitor2 = std::make_shared<ConcreteVisitor2>();
     clientCode(components, visitor2);

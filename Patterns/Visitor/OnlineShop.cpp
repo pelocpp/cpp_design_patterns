@@ -35,7 +35,7 @@ namespace OnlineShopExample {
     public:
         // c'tor
         Element(int count, double price, std::string title) :
-            m_count(count), m_price(price), m_title(title) {}
+            m_count{ count }, m_price{ price }, m_title{title } {}
 
         // getter / setter
         int getCount() const { return m_count; }
@@ -54,7 +54,7 @@ namespace OnlineShopExample {
 
     public:
         Book(int count, double price, std::string title)
-            : Element(count, price, title) { }
+            : Element{ count, price, title } { }
 
         // getter / setter
         std::string getISBN() const { return m_ISBN; }
@@ -79,7 +79,7 @@ namespace OnlineShopExample {
 
     public:
         Movie(long count, double price, std::string title)
-            : Element(count, price, title)
+            : Element{ count, price, title }
         {
             m_length = 0;
             m_isHD = false;
@@ -108,7 +108,7 @@ namespace OnlineShopExample {
 
     public:
         Game(int count, double price, std::string title)
-            : Element(count, price, title)
+            : Element{ count, price, title }
         {
             m_consoleType = 0;
             m_licenseKey = "";
@@ -138,7 +138,7 @@ namespace OnlineShopExample {
         double m_totalPrice;
 
     public:
-        CalculatePriceVisitor() : m_totalPrice(0.0) {}
+        CalculatePriceVisitor() : m_totalPrice{ 0.0 } {}
 
         double getTotalPrice() { return m_totalPrice; }
 
@@ -164,7 +164,7 @@ namespace OnlineShopExample {
         std::string m_html;
 
     public:
-        HTMLVisitor() : m_html("") {}
+        HTMLVisitor() : m_html{ "" } {}
 
         std::string getHTML() { return m_html; }
 
@@ -192,7 +192,7 @@ namespace OnlineShopExample {
     public:
         ShoppingBasket() = default;
 
-        std::list<std::shared_ptr<Element>> GetProdukte()
+        std::list<std::shared_ptr<Element>> GetProducts()
         {
             return m_products;
         }
@@ -211,14 +211,14 @@ namespace OnlineShopExample {
                 element->accept(priceVisitor);
             }
 
-            double totalPrice = priceVisitor.getTotalPrice();
+            double totalPrice{ priceVisitor.getTotalPrice() };
             return totalPrice;
         }
 
         std::string toHTML()
         {
             HTMLVisitor htmlVisitor;
-            std::string htmlResult = "<!doctype html>\n<html>\n<head>\n</head>\n<body>\n";
+            std::string htmlResult{ "<!doctype html>\n<html>\n<head>\n</head>\n<body>\n" };
 
             for (std::shared_ptr<Element> element : m_products)
             {
@@ -235,24 +235,24 @@ namespace OnlineShopExample {
     {
         ShoppingBasket basket;
 
-        std::shared_ptr<Book> book = std::make_shared<Book>(1, 10.0f, "The C Programming Language");
+        std::shared_ptr<Book> book{ std::make_shared<Book>(1, 10.0f, "The C Programming Language") };
         book->setAuthor("Brian Kernighan / Dennis Ritchie");
 
-        std::shared_ptr<Game> game = std::make_shared<Game>(3, 5.0f, "Tetris");
+        std::shared_ptr<Game> game{ std::make_shared<Game>(3, 5.0f, "Tetris") };
         game->setLicenseKey("12345678");
 
-        std::shared_ptr<Movie> movie = std::make_shared<Movie>(3, 19.99f, "Once upon a time in Hollywood");
+        std::shared_ptr<Movie> movie{ std::make_shared<Movie>(3, 19.99f, "Once upon a time in Hollywood") };
         movie->setDirector("Quentin Tarantino");
 
         basket.addElement(book);
         basket.addElement(game);
         basket.addElement(movie);
 
-        double totalPrice = basket.calculateTotalPrice();
+        double totalPrice{ basket.calculateTotalPrice() };
         std::cout << "OnlineShop Example:" << std::endl;
         std::cout << "Price: " << totalPrice << std::endl;
 
-        std::string html = basket.toHTML();
+        std::string html{ basket.toHTML() };
         std::cout << "ShoppingBasket in HTML: " << totalPrice << std::endl;
         std::cout << html << std::endl;
     }
