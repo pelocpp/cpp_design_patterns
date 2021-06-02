@@ -16,18 +16,18 @@ Im Kern geht es darum, eine Hierarchie von Klassen und Operationen auf diesen Kl
 #### Prinzip:
 
 Das Muster definiert eine Art Infrastruktur für den Zugriff auf komplexe dynamische Daten- und Objektstrukturen.
-Dabei wird der dynamischen Struktur eine Methodenschnittstelle gegeben, die ein sogenanntes "Besucher"-Objekt entgegennimmt
-und über alle Daten der Struktur leitet. Das „Besucher“-Objekt läuft also an allen Elementen der Struktur entlang
-und wird von den Elementen über eine Methode „akzeptiert“.
+Dabei wird der dynamischen Struktur eine Methodenschnittstelle gegeben, die ein sogenanntes &ldquo;Besucher&rdquo;-Objekt entgegennimmt
+und über alle Daten der Struktur schleust. Das &ldquo;Besucher&rdquo;-Objekt läuft also an allen Elementen der Struktur entlang
+und wird von den Elementen über eine Methode &ldquo;akzeptiert&rdquo;.
 Die Konvention besteht darin, diese Methode `accept` zu nennen.
-Dabei ruft das Strukturelement eine Methode im "Besucher"-Objekt auf,
+Dabei ruft das Strukturelement eine Methode im &ldquo;Besucher&rdquo;-Objekt auf,
 die speziell für den Typ des Strukturelements geschrieben wurde und eine Referenz oder einen Zeiger
 auf das Strukturelement in ihrer Parameterliste hat.
 Damit hat der Visitor wiederum die Chance, eine Operation auf dem Strukturelement auszuführen
 und dabei auf dessen Typ zu reagieren.
 
-Der Sinn des Visitors besteht darin, die eigentliche Operation auf die Daten von der Traver­sierung
-über die Verwaltungs­struktur zu trennen. Aus der Entkopplung dieser beiden Aspekte entstehen
+Der Sinn des Visitors besteht darin, die eigentliche Operation auf den Daten von der Traver­sierung
+der Verwaltungs­struktur zu trennen. Aus der Entkopplung dieser beiden Aspekte entstehen
 Freiheitsgrade für Variationen dieses Entwurfsmusters.
 
 
@@ -38,16 +38,16 @@ Die durch den Visitor transpor­tierte Operation wird in einer Kindklasse der Vis
 Damit lassen sich beliebige Operationen definieren
 und durch den allgemeinen Traversierungs­mechanismus in die Objekt­struktur tragen.
 Mit dem Namen des Visitors wird das Verhalten des Musters gewürdigt.
-Das Visitor­objekt geht die Objekte in der Objekt­struktur „besuchen“.
+Das Visitor­objekt geht die Objekte in der Objekt­struktur &ldquo;besuchen&rdquo;.
 
 Das Ergebnis der Trennung von Objektstruktur und Funktionen (Algorithmen) ist ein Datenmodell
-mit eingeschränkter Funktionalität und einer Gruppe von "*Besuchern*",
+mit eingeschränkter Funktionalität und einer Gruppe von &ldquo;*Besuchern*&rdquo;,
 die Operationen auf den Daten ausführen.
 Ein weiterer Vorteil ist die Möglichkeit, einen neuen *Besucher* hinzufügen zu können,
 ohne dabei die vorhandene Struktur ändern zu müssen. 
 Die Daten-Klassen sind mit Attributen (Eigenschaften, *getter*/*setter*-Methoden) so zu erstellen,
-dass diese vom "Besucher"-Objekt geeignet verwendet werden können.
-Typischerweise wird das Datenobjekt als Parameter an eine Methode des "Besucher"-Objekts übergeben
+dass diese vom &ldquo;Besucher&rdquo;-Objekt geeignet verwendet werden können.
+Typischerweise wird das Datenobjekt als Parameter an eine Methode des &ldquo;Besucher&rdquo;-Objekts übergeben
 (die Konvention besteht darin, diese Methode `visit` zu nennen).
 
 #### Struktur (UML):
@@ -60,7 +60,7 @@ Es besteht im Wesentlichen aus sechs Teilen:
   * **ObjectStructure**: Dies ist eine Klasse, die alle Objekte enthält, die besucht werden können.
     Es bietet einen Mechanismus zum Traversieren aller Elemente.
     Diese Struktur muss nicht zwingend eine *Collection* sein, es kann irgend eine komplexe Struktur sein, beispielsweise ein *Composite Object*.
-  * **ElementBase**: Stellt eine Abstraktionsschnittstelle dar, die die `accept`-Operation deklariert. Dies ist der Einstiegspunkt, an dem ein Objekt vom Besucherobjekt "besucht" werden kann.
+  * **ElementBase**: Stellt eine Abstraktionsschnittstelle dar, die die `accept`-Operation deklariert. Dies ist der Einstiegspunkt, an dem ein Objekt vom Besucherobjekt &ldquo;besucht&rdquo; werden kann.
     Jedes Objekt aus einer *Collection* sollte diese Abstraktionsschnittstelle implementieren, um besucht werden zu können.
   * **ConcreteElement**: Diese Klassen erben von der abstrakten Basisklasse `ElementBase` oder implementieren eine Schnittstelle
     und definieren eine `accept`-Operation. Das *Visitor*-Objekt wird durch die `accept`-Operation an dieses Objekt übergeben.
@@ -75,7 +75,7 @@ Es besteht im Wesentlichen aus sechs Teilen:
 
 <img src="dp_visitor_pattern.svg" width="600">
 
-Abbildung 1: Schematische Darstellung des *Visitor Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Visitor Patterns*.
 
 
 #### Conceptual Example:
@@ -119,11 +119,11 @@ erstellen wir ein Objekt für diese auszuführende Operation (den so genannten *Vi
 dem Objekt der fachlichen Hierarchie (der so genannten *ObjectStructure*),
 die dann die Operation aufruft.
 
-Studieren Sie den Beispielcode aus dem Buch und führen Sie diesen in ein C++-Programm über. Betrachten Sie hierzu auch Abbildung 2:
+Studieren Sie den Beispielcode aus dem Buch und führen Sie diesen in ein C++-Programm über. Betrachten Sie hierzu auch *Abbildung* 2:
 
 <img src="dp_visitor_pattern_onlineshop.svg" width="700">
 
-Abbildung 2: Ein Onlinehandel modelliert mit dem *Visitor Pattern*.
+*Abbildung* 2: Ein Onlinehandel modelliert mit dem *Visitor Pattern*.
 
 Studieren Sie die Realisierung der zwei *Visitor*-Klassen, eine für die Berechnung des Gesamtpreises aller Artikel im Warenkorb und eine weitere
 zur Darstellung des Inhalts des Warenkorbs in HTML.
