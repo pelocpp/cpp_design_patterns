@@ -94,8 +94,8 @@ Gruppierungen von Entwurfsmustern. In Büchern über "Modern C++" stößt man häufig
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| [RAII (Resource Acquisition Is Initialization)](../Patterns/RAII_Idiom/Resources/Readme.md)  | *Resource Acquisition Is Initialization* |
-| [Opaque Pointer / Pimpl](../Patterns/Pimpl/Resources/Readme.md)  | *Pointer to implementation* |
+| [RAII (Resource Acquisition Is Initialization)](../Patterns/RAII_Idiom/Resources/Readme.md) | *Resource Acquisition Is Initialization* |
+| [Opaque Pointer / Pimpl](../Patterns/Pimpl/Resources/Readme.md) | *Pointer to implementation* |
 | [Null Object](../Patterns/NullObject/Resources/Readme.md) | Null Objekt |
 | [Intercepting Filter Pattern](../Patterns/InterceptingFilterPattern/Resources/Readme.md) | *Intercepting Filter Pattern* |
 | SFINAE | *Substitution failure is not an error* |
@@ -107,7 +107,7 @@ Für den Entwurf von Oberflächen gibt es im Prinzip drei "Klassiker"
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| MVC | Model-View-Controller |
+| [MVC ](../Patterns/MVC/Resources/Readme.md) | Model-View-Controller |
 | MVP | Model-View-Presenter |
 | MVVM | Model View View-Model |
 
