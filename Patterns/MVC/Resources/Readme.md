@@ -29,7 +29,7 @@ geeigneten Variablen ablegen und Methoden für den Zugriff anbieten.
 
 Eine *Ansicht* ist eine grafische Visualisierung des Modells. Um wieder beim Beispiel der Uhr zu bleiben: Zur
 Darstellung der Uhrzeit könnte ein Steuerelement mit GDI-Hilfsmitteln das Ziffernblatt einer Uhr mit Stunden-
-und Minutenzeiger visualisieren, siehe Abbildung 1. Bei anderen Modellen ist es vorstellbar, dass auf
+und Minutenzeiger visualisieren, siehe *Abbildung* 1. Bei anderen Modellen ist es vorstellbar, dass auf
 Grund der Komplexität des Modells nur eine Teilmenge der Daten zur Ansicht gelangt.
 
 <img src="clock_01.png" width="150">
@@ -45,7 +45,7 @@ zu müssen.
 Ein herausragendes Merkmal MVC-basierter Steuerelemente ist ihre Eigenschaft, dass typischerweise mehrere,
 zum Teil gänzlich unterschiedliche Ansichten zu einem Modell existieren. Selbst an einem so einfachen
 Beispiel wie der Anzeige einer Uhrzeit lässt sich dieses Merkmal demonstrieren: Neben einer grafischen
-Ansicht wie der aus Abbildung 1 eignet sich auch eine digitale Darstellung (Abbildung 2) für die Visualisierung
+Ansicht wie der aus *Abbildung* 1 eignet sich auch eine digitale Darstellung (*Abbildung* 2) für die Visualisierung
 der Uhrzeit. Das zugrunde liegende Modell der Komponente ist von den unterschiedlichen Darstellungsvarianten
 seines Datenbestands völlig entkoppelt, es verwaltet ausschließlich die Daten der aktuellen
 Uhrzeit.
@@ -56,8 +56,8 @@ Uhrzeit.
 
 Ein Controller behandelt Eingaben des Benutzers und wandelt diese in entsprechende Methodenaufrufe für
 das Modell um. Am Beispiel der Uhr betrachtet hieße das, dass Tastatur- oder Mausereignisse in einem Steuerelement
-zu verarbeiten sind, die entsprechend aufbereitet zu Änderungen am Modell führen. In Abbildung
-17.9 erkennen wir beispielsweise ein NumericUpDown-Steuerelement, das auf der Basis einer entsprechenden
+zu verarbeiten sind, die entsprechend aufbereitet zu Änderungen am Modell führen. In *Abbildung* 3
+erkennen wir beispielsweise ein NumericUpDown-Steuerelement, das auf der Basis einer entsprechenden
 Selektion in dem links davon befindlichen Textfeld entweder die Stunden, Minuten oder Sekunden
 ändert.
 
@@ -87,7 +87,7 @@ Anpassungen vorzunehmen sind.
 ## Kommunikationswege
 
 In einer MVC-Komponente gibt es zwischen den drei Einheiten Modell, Ansicht und Controller folgende
-Kommunikationswege (siehe dazu auch Abbildung 4):
+Kommunikationswege (siehe dazu auch *Abbildung* 4):
 
   * Modell &rarr; Ansicht: Eine Änderung von Modellzuständen führt zu einer Änderung der Ansicht(en),
     wobei dies durch das Versenden eines Ereignisses ausgelöst wird.
@@ -111,7 +111,7 @@ Kommunikationswege (siehe dazu auch Abbildung 4):
 ## Eine Ventilsteuerung mit MVC-Architektur
 
 Lassen Sie uns das Model-View-Controller Paradigma am Beispiel eines Ventils betrachten (siehe dazu auch
-Abbildung 17.11). Ein Ventil, so wie wir es beispielsweise im Maschinenbau vorfinden, kann als Zustand entweder
+*Abbildung* 5). Ein Ventil, so wie wir es beispielsweise im Maschinenbau vorfinden, kann als Zustand entweder
 &ldquo;offen&rdquo;, &ldquo;geschlossen&rdquo; oder möglicherweise auch &ldquo;zu einem gewissen Grad geöffnet&rdquo; besitzen. Neben
 diesem (passiven) Verhalten ist es auch möglich, aktiv über das Auslösen von Funktionen den Zustand des
 Modells zu beeinflussen, das Ventil kann (teilweise) geöffnet oder (teilweise) geschlossen werden
