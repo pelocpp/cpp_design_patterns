@@ -22,19 +22,17 @@ Betrachten wir ein Beispiel, in dem eine Implementierung auf zwei oder mehreren 
 Zum Beispiel ein Programm, das die Persistenz von Objekten auf verschiedenen Plattformen (Betriebssystemen) realisiert.
 Einige Objekte sollen in einer Datenbank und andere Objekte wiederum im Dateisystem des unterlagerten
 Betriebssystems gespeichert werden. 
-Wird das Programm um diese Funktionalität "straight forward" erweitert,
+Wird das Programm um diese Funktionalität &ldquo;straight forward&rdquo; erweitert,
 sind Probleme vorprogrammiert, da die Abstraktion mit der Implementierung verknüpft wird.
 In diesem Fall ist es besser, das *Bridge Pattern*  zu verwenden und die Abstraktion von der Implementierung zu trennen.
-Wird dieses Muster nicht verwenden, kann man die Beobachtung machen,
+Wird dieses Muster nicht verwendet, kann man die Beobachtung machen,
 dass Implementierungsdetails in einer Abstraktion enthalten sind.
 
 Ein weiterer Vorteil des *Bridge Patterns* ist die Möglichkeit, Implementierungsdetails zur Laufzeit zu ändern.
 Dies ermöglicht es dem Benutzer, Implementierungen zu wechseln, um auf diese Weise zu bestimmen,
 wie die Software mit anderen Systemen zusammenarbeitet.
 
-
 #### Lösung:
-
 
 #### Struktur (UML):
 
@@ -44,9 +42,9 @@ Es besteht im Wesentlichen aus vier Teilen:
   * **Abstraction**: Definiert eine Abstraktionsschnittstelle. Sie fungiert als Basisklasse für andere verfeinerte Abstraktionsklassen.
     Sie bezieht sich auch auf eine bestimmte Implementierung, die für plattformspezifische Funktionen verwendet wird.
   * **RefinedAbstraction**: Stellt eine verfeinerte Variation einer Abstraktionsschnittstelle dar,
-    enthält jedoch keine Implementierungsdetails. De facto erweitert sie nur die Abstraktion.
+    enthält jedoch keine Implementierungsdetails. *De facto* erweitert sie nur die Abstraktion.
   * **Implementor**: Definiert die Schnittstelle für Implementierungsklassen.
-  * **ConcreteImplementor**: Diese Klasse erbt von der Klasse `RefinedAbstraction`. Es kann mehr als eine Instanz von `Implementor`-Klassen geben,
+  * **ConcreteImplementor**: Diese Klasse erbt von der Klasse `Implementor`. Es kann mehr als eine Instanz von `Implementor`-Klassen geben,
     die dieselbe Schnittstelle unterstützen, aber plattformspezifische Funktionen bereitstellen.
 
 <img src="dp_bridge_pattern.svg" width="600">

@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Bridge Pattern
+// ConceptualExample02.cpp // Bridge Pattern
 // ===========================================================================
 
 #include <iostream>
@@ -26,14 +26,14 @@ public:
 class ConcreteImplementationA : public Implementor {
 public:
     std::string OperationImplementation() const override {
-        return "ConcreteImplementationA: Here's the result on the platform A.\n";
+        return "ConcreteImplementationA: Here's the result on the platform A.";
     }
 };
 
 class ConcreteImplementationB : public Implementor {
 public:
     std::string OperationImplementation() const override {
-        return "ConcreteImplementationB: Here's the result on the platform B.\n";
+        return "ConcreteImplementationB: Here's the result on the platform B.";
     }
 };
 
@@ -78,9 +78,9 @@ public:
  * the Abstraction class. This way the client code can support any abstraction-
  * implementation combination.
  */
-void clientCode(std::shared_ptr<Abstraction> abstraction) {
+void clientCode2(std::shared_ptr<Abstraction> abstraction) {
     // ...
-    std::cout << abstraction->Operation();
+    std::cout << abstraction->Operation() << std::endl;
     // ...
 }
 
@@ -88,17 +88,16 @@ void clientCode(std::shared_ptr<Abstraction> abstraction) {
  * The client code should be able to work with any pre-configured abstraction-
  * implementation combination.
  */
-void test_conceptual_example() {
+void test_conceptual_example_02() {
 
     std::shared_ptr<Implementor> implementor = std::make_shared<ConcreteImplementationA>();
     std::shared_ptr<Abstraction> abstraction = std::make_shared<Abstraction>(implementor);
-    clientCode(abstraction);
+    clientCode2(abstraction);
     std::cout << std::endl;
-
 
     implementor = std::make_shared<ConcreteImplementationB>();
     abstraction = std::make_shared<ExtendedAbstraction>(implementor);
-    clientCode(abstraction);
+    clientCode2(abstraction);
 }
 
 // ===========================================================================
