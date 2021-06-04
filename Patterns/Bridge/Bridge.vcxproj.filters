@@ -16,12 +16,18 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{39d8aff3-ae0b-41db-bfff-b6e2b1ed50ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DrawShapes">
+      <UniqueIdentifier>{2c55045e-640d-4b3b-a52c-7569d6a384fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\dp_bridge_pattern.svg">
+    <None Include="Resources\dp_bridge_pattern_01.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_bridge_pattern_02.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -34,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes.cpp">
+      <Filter>Source Files\DrawShapes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

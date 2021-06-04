@@ -47,9 +47,9 @@ Es besteht im Wesentlichen aus vier Teilen:
   * **ConcreteImplementor**: Diese Klasse erbt von der Klasse `Implementor`. Es kann mehr als eine Instanz von `Implementor`-Klassen geben,
     die dieselbe Schnittstelle unterstützen, aber plattformspezifische Funktionen bereitstellen.
 
-<img src="dp_bridge_pattern.svg" width="600">
+<img src="dp_bridge_pattern_01_.svg" width="600">
 
-Abbildung 1: Schematische Darstellung des *Bridge Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Bridge Patterns*.
 
 
 #### Conceptual Example:
@@ -57,6 +57,33 @@ Abbildung 1: Schematische Darstellung des *Bridge Patterns*.
 [Quellcode 1](../ConceptualExample01.cpp)
 
 [Quellcode 2](../ConceptualExample02.cpp)
+
+---
+
+#### 'Real-World' Beispiel:
+
+Bei diesem Muster steht eine Schnittstelle im Mittelpunkt,
+die als Brücke fungiert, die die Funktionalität konkreter Klassen unabhängig
+von den Schnittstellenimplementierungsklassen macht.
+Beide Klassentypen können strukturell verändert werden, ohne sich gegenseitig zu beeinflussen.
+
+Wir demonstrieren die Verwendung des Bridge-Entwurfsmusters anhand des folgenden Beispiels,
+in dem ein Kreis in verschiedenen Farben mit derselben abstrakten Basisklassenmethode,
+aber unterschiedlichen Bridge-Implementiererungsklassen gezeichnet werden kann.
+
+In *Abbildung* finden Sie eine `IDrawAPI`-Schnittstelle vor, die als Bridge-Implementierer fungiert,
+und zwei konkrete Klassen `RedCircleDrawer` und `GreenCircleDrawer`,
+die die `IDrawAPI`-Schnittstelle implementieren.
+
+`Shape` ist eine abstrakte Klasse und verwendet eine Instanz,
+die die `IDrawAPI`-Schnittstelle implementiert.
+
+In der Anwendung finden Sie ein Beispiel, in dem ein Kreis mit zwei verschiedenen Farben 
+gezeichnet wird:
+
+<img src="dp_bridge_pattern_02_.svg" width="600">
+
+*Abbildung* 2: Ein Anwendungsbeispiel des *Bridge Patterns*.
 
 ---
 

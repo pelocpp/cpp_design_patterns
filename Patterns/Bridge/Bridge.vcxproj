@@ -139,13 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Resources\dp_bridge_pattern.svg" />
+    <None Include="Resources\dp_bridge_pattern_01.svg" />
+    <None Include="Resources\dp_bridge_pattern_02.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="ConceptualExample01.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Shapes.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
