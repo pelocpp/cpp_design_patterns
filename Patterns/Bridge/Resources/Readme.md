@@ -54,7 +54,9 @@ Abbildung 1: Schematische Darstellung des *Bridge Patterns*.
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample.cpp)
+[Quellcode 1](../ConceptualExample01.cpp)
+
+[Quellcode 2](../ConceptualExample02.cpp)
 
 ---
 

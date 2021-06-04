@@ -9,56 +9,62 @@
  *  Basic Example
  */
 
-class Implementor
-{
-public:
-    virtual void concreteOperation() = 0;
-};
+namespace ConceptualExampleBridge01 {
 
-class Abstraction
-{
-protected:
-    std::shared_ptr<Implementor> m_implementor;
-
-public:
-    void setImplementor(std::shared_ptr<Implementor> value) {
-        m_implementor = value;
-    }
-
-    virtual void operation()
+    class Implementor
     {
-        m_implementor->concreteOperation();
-    }
-};
+    public:
+        virtual void concreteOperation() = 0;
+    };
 
-class RefinedAbstraction : public Abstraction
-{
-public:
-    virtual void operation() override
+    class Abstraction
     {
-        m_implementor->concreteOperation();
-    }
-};
+    protected:
+        std::shared_ptr<Implementor> m_implementor;
 
-class ConcreteImplementorA : public Implementor
-{
-public:
-    void concreteOperation() override
+    public:
+        void setImplementor(std::shared_ptr<Implementor> value)
+        {
+            m_implementor = value;
+        }
+
+        virtual void operation()
+        {
+            m_implementor->concreteOperation();
+        }
+    };
+
+    class RefinedAbstraction : public Abstraction
     {
-        std::cout << "Concrete Implementor's Operation" << std::endl;
-    }
-};
+    public:
+        virtual void operation() override
+        {
+            m_implementor->concreteOperation();
+        }
+    };
 
-void clientCode1(std::shared_ptr<Abstraction> abstraction) {
-    // ...
-    abstraction->operation();
-    // ...
+    class ConcreteImplementor : public Implementor
+    {
+    public:
+        void concreteOperation() override
+        {
+            std::cout << "Concrete Implementor's Operation" << std::endl;
+        }
+    };
+
+    void clientCode1(std::shared_ptr<Abstraction> abstraction) {
+        // ...
+        abstraction->operation();
+        // ...
+    }
 }
 
-void test_conceptual_example_01() {
+void test_conceptual_example_01()
+{
+    using namespace ConceptualExampleBridge01;
 
     std::shared_ptr<Abstraction> abstraction = std::make_shared<RefinedAbstraction>();
-    abstraction->setImplementor(std::make_shared<ConcreteImplementorA>());
+    abstraction->setImplementor(std::make_shared<ConcreteImplementor>());
     clientCode1(abstraction);
 }
 
