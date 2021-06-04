@@ -47,7 +47,7 @@ Es besteht im Wesentlichen aus vier Teilen:
   * **ConcreteImplementor**: Diese Klasse erbt von der Klasse `Implementor`. Es kann mehr als eine Instanz von `Implementor`-Klassen geben,
     die dieselbe Schnittstelle unterstützen, aber plattformspezifische Funktionen bereitstellen.
 
-<img src="dp_bridge_pattern_01_.svg" width="600">
+<img src="dp_bridge_pattern_01.svg" width="600">
 
 *Abbildung* 1: Schematische Darstellung des *Bridge Patterns*.
 
@@ -81,7 +81,7 @@ die die `IDrawAPI`-Schnittstelle implementiert.
 In der Anwendung finden Sie ein Beispiel, in dem ein Kreis mit zwei verschiedenen Farben 
 gezeichnet wird:
 
-<img src="dp_bridge_pattern_02_.svg" width="600">
+<img src="dp_bridge_pattern_02.svg" width="600">
 
 *Abbildung* 2: Ein Anwendungsbeispiel des *Bridge Patterns*.
 
