@@ -2,26 +2,13 @@
 // Program.cpp // Adapter Pattern
 // ===========================================================================
 
-#define _CRTDBG_MAP_ALLOC
-#include <cstdlib>
-#include <crtdbg.h>
-
-#ifdef _DEBUG
-#ifndef DBG_NEW
-#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-#define new DBG_NEW
-#endif
-#endif  // _DEBUG
-
 // function prototypes
 void test_conceptual_example();
 void test_media_player_01();
 void test_media_player_02();
 
-int main() {
-
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
+int main() 
+{
     test_conceptual_example();
     test_media_player_01();
     test_media_player_02();

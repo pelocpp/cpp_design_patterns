@@ -85,15 +85,16 @@ namespace ApdaterPatternClassicalApproach {
 
     // ===========================================================================
 
-    // create class 'AudioPlayer' implementing 'MediaPlayer' interface
+    // create class 'AudioPlayer'
+    // implementing 'MediaPlayer' interface
     // without adapter addition
     class AudioPlayer : public MediaPlayer {
     public:
         void play(std::string audioType, std::string fileName) override;
     };
 
-    void AudioPlayer::play(std::string audioType, std::string fileName) {
-
+    void AudioPlayer::play(std::string audioType, std::string fileName)
+    {
         // inbuilt support to play mp3 music files
         if (audioType == std::string("mp3")) {
             std::cout << "Playing mp3 file: name = " << fileName << std::endl;
@@ -105,7 +106,8 @@ namespace ApdaterPatternClassicalApproach {
 
     // ===========================================================================
 
-    // create class 'AudioPlayerExtended' implementing 'MediaPlayer' interface
+    // create class 'AudioPlayerExtended'
+    // implementing 'MediaPlayer' interface
     // with adapter addition
     class AudioPlayerExtended : public MediaPlayer {
     private:
@@ -115,8 +117,8 @@ namespace ApdaterPatternClassicalApproach {
         void play(std::string audioType, std::string fileName) override;
     };
 
-    void AudioPlayerExtended::play(std::string audioType, std::string fileName) {
-
+    void AudioPlayerExtended::play(std::string audioType, std::string fileName)
+    {
         if (audioType == std::string("mp3")) {
 
             // inbuilt support to play mp3 music files

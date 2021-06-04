@@ -15,8 +15,9 @@ public:
 
     virtual ~Target() = default;
 
-    virtual std::string getRequest() const {
-        return std::string{ "Target: The default target's behavior." };
+    virtual std::string getRequest() const
+    {
+        return std::string{ "Target: The target's default behavior." };
     }
 };
 
@@ -29,8 +30,9 @@ class Adaptee {
 public:
     Adaptee() = default;
 
-    std::string getSpecificRequest() const {
-        return std::string{ ".eetpadA eht fo roivaheb laicepS" };
+    std::string getSpecificRequest() const
+    {
+        return { ".eetpadA eht fo roivaheb laicepS" };
     }
 };
 
@@ -45,11 +47,12 @@ public:
     Adapter(std::shared_ptr<Adaptee> adaptee) : m_adaptee(adaptee) {}
 
     std::string getRequest() const override {
-        std::string to_reverse = m_adaptee->getSpecificRequest();
 
-        // note: std::reverse() operates in place
-        std::reverse(to_reverse.begin(), to_reverse.end());
-        return "Adapter: (TRANSLATED) " + to_reverse;
+        std::string toReverse{ m_adaptee->getSpecificRequest() };
+
+        std::reverse(toReverse.begin(), toReverse.end());
+
+        return { "Adapter: (TRANSLATED) " + toReverse };
     }
 };
 

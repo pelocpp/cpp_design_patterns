@@ -20,7 +20,7 @@ namespace ApdaterPatternClassAdapterApproach {
     // concrete class VlcPlayer - new service functionality
     class VlcPlayer {
     public:
-        void playVlc(std::string fileName) {
+        void play(std::string fileName) {
             std::cout << "Playing vlc file: name = " << fileName << std::endl;
         }
     };
@@ -28,14 +28,15 @@ namespace ApdaterPatternClassAdapterApproach {
     // concrete class Mp4Player - new service functionality
     class Mp4Player {
     public:
-        void playMp4(std::string fileName) {
+        void play(std::string fileName) {
             std::cout << "Playing mp4 file: name = " << fileName << std::endl;
         }
     };
 
     // ===========================================================================
 
-    // create concrete class 'AudioPlayer' implementing the 'MediaPlayer' interface
+    // create concrete class 'AudioPlayer' 
+    // implementing the 'MediaPlayer' interface
     // without new services additions
     class AudioPlayer : public MediaPlayer 
     {
@@ -70,8 +71,8 @@ namespace ApdaterPatternClassAdapterApproach {
         void play(std::string audioType, std::string fileName) override;
     };
 
-    void MediaAdapter::play(std::string audioType, std::string fileName) {
-
+    void MediaAdapter::play(std::string audioType, std::string fileName) 
+    {
         // traditional support to play mp3 music files
         if (audioType == std::string("mp3")) {
             std::cout << "Playing mp3 file: name = " << fileName << std::endl;
@@ -80,10 +81,10 @@ namespace ApdaterPatternClassAdapterApproach {
 
         // use new inherited service classes to play additional file formats
         if (audioType == std::string("vlc")) {
-            playVlc(fileName);
+            VlcPlayer::play(fileName);
         }
         else if (audioType == std::string("mp4")) {
-            playMp4(fileName);
+            Mp4Player::play(fileName);
         }
         else {
             std::cout << "Invalid media: " << audioType << " format not supported!" << std::endl;
