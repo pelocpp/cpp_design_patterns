@@ -32,7 +32,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConceptualExample.cpp">
+    <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
     <ClCompile Include="Program.cpp">
@@ -40,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="LayoutManagerExample.cpp">
       <Filter>Source Files\LayoutManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample01.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

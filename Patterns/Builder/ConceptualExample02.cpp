@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Builder Pattern
+// ConceptualExample02.cpp // Builder Pattern
 // ===========================================================================
 
 #include <iostream>
@@ -183,7 +183,7 @@ void clientCode(Director& director)
 }
 
 // function prototypes
-void test_conceptual_example()
+void test_conceptual_example_02()
 {
     Director director;
     clientCode(director);
