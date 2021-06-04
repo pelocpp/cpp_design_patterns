@@ -71,14 +71,12 @@ Wir demonstrieren die Verwendung des Bridge-Entwurfsmusters anhand des folgenden
 in dem ein Kreis in verschiedenen Farben mit derselben abstrakten Basisklassenmethode,
 aber unterschiedlichen Bridge-Implementiererungsklassen gezeichnet werden kann.
 
-In *Abbildung* finden Sie eine `IDrawAPI`-Schnittstelle vor, die als Bridge-Implementierer fungiert,
+In *Abbildung* 2 finden Sie eine `IDrawAPI`-Schnittstelle vor, die als Bridge-Schnittstellenklasse fungiert,
 und zwei konkrete Klassen `RedCircleDrawer` und `GreenCircleDrawer`,
 die die `IDrawAPI`-Schnittstelle implementieren.
 
-`Shape` ist eine abstrakte Klasse und verwendet eine Instanz,
-die die `IDrawAPI`-Schnittstelle implementiert.
-
-In der Anwendung finden Sie ein Beispiel, in dem ein Kreis mit zwei verschiedenen Farben 
+`Shape` ist eine abstrakte Klasse und besitzt einen `IDrawAPI`-Schnittstellenzeiger
+(*Raw*-Pointer oder Smart-Pointer). In der Anwendung finden Sie ein Beispiel, in dem ein Kreis mit zwei verschiedenen Farben 
 gezeichnet wird:
 
 <img src="dp_bridge_pattern_02.svg" width="600">
