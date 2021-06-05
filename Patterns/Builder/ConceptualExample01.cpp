@@ -3,9 +3,8 @@
 // ===========================================================================
 
 #include <iostream>
+#include <iomanip>
 #include <string>
-#include <sstream>
-#include <vector>
 #include <list>
 #include <memory>
 
@@ -17,32 +16,31 @@ namespace ConceptualExampleBuilder01 {
         std::list<std::string> m_parts;
 
     public:
-        void add(std::string part)
-        {
+        void add(const std::string& part) {
             m_parts.push_back(part);
         }
 
-        void show()
-        {
-            std::cout << "Parts:";
-            for (std::string part : m_parts)
-                std::cout << "\t" << part;
+        void show() {
+            std::cout << "Parts:" << std::endl;
+            for (const auto& part : m_parts) {
+                std::cout << std::setw(10) << part << std::endl;
+            }
         }
     };
 
     class Builder
     {
     public:
+        virtual ~Builder() {}
         virtual void buildPartA() = 0;
         virtual void buildPartB() = 0;
-        virtual Product* getResult() = 0;
+        virtual std::shared_ptr<Product> getResult() = 0;
     };
 
     class Director
     {
     public:
-        void construct(Builder* builder)
-        {
+        void construct(std::shared_ptr<Builder> builder) {
             builder->buildPartA();
             builder->buildPartB();
         }
@@ -51,32 +49,32 @@ namespace ConceptualExampleBuilder01 {
     class ConcreteBuilder : public Builder
     {
     private:
-        Product* _product = new Product();
+        std::shared_ptr<Product> m_product;
 
     public:
-        virtual void buildPartA() override
-        {
-            _product->add("Part A");
+        ConcreteBuilder() : m_product{ std::make_shared<Product>() } {}
+
+        virtual ~ConcreteBuilder() override {}
+
+        virtual void buildPartA() override {
+            m_product->add("Part A");
         }
 
-        virtual void buildPartB() override
-        {
-            _product->add("Part B");
+        virtual void buildPartB() override {
+            m_product->add("Part B");
         }
 
-        virtual Product* getResult() override
-        {
-            return _product;
+        virtual std::shared_ptr<Product> getResult() override {
+            return m_product;
         }
     };
 
     void clientCode(Director& director)
     {
-        Builder* b1 = new ConcreteBuilder();
-
-        director.construct(b1);
-        auto p1 = b1->getResult();
-        p1->show();
+        std::shared_ptr<Builder> builder = std::make_shared<ConcreteBuilder>();
+        director.construct(builder);
+        std::shared_ptr<Product> product = builder->getResult();
+        product->show();
     }
 }
 
