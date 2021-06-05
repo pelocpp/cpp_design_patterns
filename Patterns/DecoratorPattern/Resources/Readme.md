@@ -7,7 +7,7 @@
 #### Ziel / Absicht:
 
 Das *Decorator Pattern* ist ein strukturelles Entwurfsmuster, das die Funktionalität eines Objekts erweitert,
-indem es dieses mit einer oder mehreren Dekorationsklassen "umhüllt", oder gewissermaßen *dekoriert*.
+indem es dieses mit einer oder mehreren Dekorationsklassen &ldquo;umhüllt&rdquo;, oder gewissermaßen *dekoriert*.
 *Decorator* Klassen können vorhandene Elemente ändern und zur Laufzeit neue Methoden und Eigenschaften hinzufügen.
 
 ##### Hinweis:
@@ -21,7 +21,7 @@ Die Vererbung weist jedoch einige schwerwiegende Einschränkungen auf, die es zu 
     Ferner kann man nur ein ganzes Objekt durch ein anderes Objekt ersetzen, das aus einer anderen Unterklasse erstellt wurde.
     Das *Decorator Pattern* zielt auf das Ändern von Verhaltensweisen bestimmter Methoden ab.
   * Unterklassen können nur eine übergeordnete Klasse haben. In den meisten Sprachen lässt das Prinzip der Vererbung nicht zu,
-    dass eine Klasse das Verhalten mehrerer Klassen gleichzeitig erbt (Prinzip der Mehrfachvererbung, in C++ allerdings möglich).
+    dass eine Klasse das Verhalten mehrerer Klassen gleichzeitig erbt (Prinzip der *Mehrfachvererbung*, in C++ allerdings möglich).
 
 Eine Möglichkeit, diese Einschränkungen zu überwinden, ist die Verwendung von
 *Aggregation* oder *Komposition* anstelle von Vererbung.
@@ -30,7 +30,7 @@ auf ein anderes Objekt und *delegiert* ihm dadurch Tätigkeiten.
 Bei der Vererbung kann das Objekt diese Arbeit *selbst* ausführen,
 es *erbt* das Verhalten von seiner Oberklasse.
 
-Mit diesem Ansatz (Gebrauch eines Verweises) können Sie das verknüpfte "Hilfs"-Objekt leicht durch ein
+Mit diesem Ansatz (Gebrauch eines Verweises) können Sie das verknüpfte &ldquo;Hilfs&rdquo;-Objekt leicht durch ein
 anderes ersetzen und so das Verhalten des Containers zur Laufzeit ändern.
 Ein Objekt kann das Verhalten mehrerer Klassen verwenden,
 indem es Verweise auf mehrere Objekte verwaltet.
@@ -48,8 +48,8 @@ die vor oder nach der Basisfunktionalität des betrachteten Objekts auszuführen s
 #### Lösung:
 
 *Wrapper* oder Hülle ist der alternative Kurzname für das Decorator-Pattern,
-der die Hauptidee des Musters klar zum Ausdruck bringt. Ein "Wrapper" ist ein Objekt,
-das mit einem "Ziel"-Objekt verknüpft werden kann. Das Wrapper-Objekt enthält die gleichen Methoden
+der die Hauptidee des Musters klar zum Ausdruck bringt. Ein &ldquo;Wrapper&rdquo; ist ein Objekt,
+das mit einem &ldquo;Ziel&rdquo;-Objekt verknüpft werden kann. Das Wrapper-Objekt enthält die gleichen Methoden
 wie das Ziel und delegiert alle eingehenden Requests an es.
 Der Wrapper kann das Verhalten jedoch ändern,
 indem er entweder vor oder nach dem Weiterleiten der Anforderung an das Ziel
@@ -63,7 +63,7 @@ Es besteht im Wesentlichen aus vier Teilen:
   * **Component**: Abstrakte Basisklasse für alle konkreten Komponenten und Decorator-Klassen.
     Diese Klasse definiert diejenigen Klassenelemente, die standardmäßig von diesen Klassentypen implementiert werden müssen.
   * **ConcreteComponent**: Diese Klasse erbt von der Klasse `Component`. Es kann diese Klasse mehrfach geben.
-    Es wird damit jeweils einen Objekttyp definiert, der von einer Decorator-Klasse umhüllt werden kann.
+    Es wird damit jeweils ein Objekttyp definiert, der von einer Decorator-Klasse umhüllt werden kann.
   * **DecoratorBase**: Stellt die abstrakte Basisklasse für alle Decorator-Klassen dar. Es wird ein Konstruktor hinzugefügt,
     der ein `Component-Objekt` als Parameter akzeptiert. Das übergebene Objekt ist die Komponente, die umhüllt wird.
     Da das umhüllte Objekt von `Component` erben muss, kann es sich um ein `ConcreteComponent`-Objekt
@@ -120,7 +120,7 @@ wie Kreisen, Rechtecken, etc.
 In einer Grundausführung lassen sich derartige Figuren einfach schwarz-weiß zeichnen. Auf Wunsch, auch zur Laufzeit, könnte man diese Figuren
 farbig und/oder mit einer entsprechenden Transparenz zeichnen.
 
-Diese "Zusatzwünsche" lassen sich sehr einfach und elegant mit dem *Decorator Pattern* Entwurfsmuster in die Tat umsetzen.
+Diese &ldquo;Zusatzwünsche&rdquo; lassen sich sehr einfach und elegant mit dem *Decorator Pattern* Entwurfsmuster in die Tat umsetzen.
 Einen entsprechenden Satz an GDI- und Dekorator-Klassen finden Sie in Abbildung 3 vor:
 
 <img src="dp_decorator_03_shapes.svg" width="700">
@@ -215,7 +215,7 @@ Die Anregungen zu den Beispielen findet man unter
 
 und 
 
-[Dmitri Nesteruk "Design Patterns in Modern C++](https://github.com/Apress/design-patterns-in-modern-cpp)<br>(abgerufen am 14.05.2020).
+[Dmitri Nesteruk &ldquo;Design Patterns in Modern C++&rdquo;](https://github.com/Apress/design-patterns-in-modern-cpp)<br>(abgerufen am 14.05.2020).
 
 ---
 

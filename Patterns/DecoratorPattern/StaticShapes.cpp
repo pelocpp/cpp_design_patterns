@@ -1,111 +1,151 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <sstream>
 #include <memory>
 
-class Shape
-{
-public:
-    virtual ~Shape() {}
-    virtual std::string draw() const = 0;
-};
+namespace StaticDecoration {
 
-class Circle : Shape
-{
-private:
-    float m_radius;
-
-public:
-    explicit Circle() : m_radius{ 0.0 } {}
-    explicit Circle(const float radius) : m_radius{ radius } {}
-
-    void resize(float factor) { m_radius *= factor; }
-
-    std::string draw() const override {
-        std::ostringstream oss;
-        oss << "A circle of radius " << m_radius;
-        return oss.str();
-    }
-};
-
-struct Square : Shape
-{
-private:
-    float m_side;
-
-public:
-    explicit Square() : m_side{ 0.0 } {}
-    explicit Square(const float side) : m_side{ side } {}
-
-    void setSide(float side) { m_side = side; }
-
-    std::string draw() const override
+    class Shape
     {
-        std::ostringstream oss;
-        oss << "A square with side " << m_side;
-        return oss.str();
-    }
-};
+    public:
+        virtual ~Shape() {}
+        virtual std::string draw() const = 0;
+    };
 
-// note: class, not typename
-template <typename T> 
-class ColoredShape2 : public T
-{
-    static_assert (
-        std::is_base_of<Shape, T>::value,
-        "Template argument must be a Shape");
-
-private:
-    std::string m_color;
-
-public:
-    void setColor(const std::string& color) { m_color = color; }
-
-    template <typename...Args>
-    ColoredShape2(const std::string& color, Args ...args)
-        : T(std::forward<Args>(args)...), m_color{ color }
+    class Circle : public Shape
     {
-    }
+    private:
+        double m_radius;
 
-    std::string draw() const override
+    public:
+        Circle() : m_radius{ 0.0 } {}
+
+        Circle(double radius) : m_radius{ radius } {}
+
+        void resize(double factor) { m_radius *= factor; }
+
+        virtual std::string draw() const override {
+            std::ostringstream oss;
+            oss << "A circle of radius " << std::setprecision(5) << m_radius;
+            return oss.str();
+        }
+    };
+
+    struct Square : public Shape
     {
-        std::ostringstream oss;
-        oss << T::draw() << " has the color " << m_color;
-        return oss.str();
-    }
-};
+    private:
+        double m_side;
 
-template <typename T> 
-struct TransparentShape2 : public T
-{
-private:
-    uint8_t transparency;
+    public:
+        Square() : m_side{ 0.0 } {}
 
-public:
-    template<typename...Args>
-    TransparentShape2(const uint8_t transparency, Args ...args)
-        : T(std::forward<Args>(args)...), transparency{ transparency }
+        Square(double side) : m_side{ side } {}
+
+        void setSide(double side) { m_side = side; }
+
+        virtual std::string draw() const override {
+            std::ostringstream oss;
+            oss << "A square with side " << m_side;
+            return oss.str();
+        }
+    };
+
+    struct Rectangle : public Shape
     {
-    }
+    private:
+        double m_width;
+        double m_height;
 
-    std::string draw() const override
+    public:
+        Rectangle() : m_width{ 0.0 }, m_width{ 0.0 } {}
+
+        Rectangle(double width, double height) : m_width{ width }, m_width{ height } {}
+
+        void setWidth(double ) { m_side = side; }
+        void setHeight(double side) { m_side = side; }
+
+        virtual std::string draw() const override {
+            std::ostringstream oss;
+            oss << "A square with side " << m_side;
+            return oss.str();
+        }
+    };
+
+    template <typename T>
+    class ColoredShape : public T
     {
-        std::ostringstream oss;
-        oss << T::draw() << " has "
-            << static_cast<float>(transparency) / 255.f * 100.f
-            << "% transparency";
-        return oss.str();
-    }
-};
+        static_assert (
+            std::is_base_of<Shape, T>::value,
+            "Template argument must be a Shape");
+
+    private:
+        std::string m_color;
+
+    public:
+        void setColor(const std::string& color) { m_color = color; }
+
+        template <typename ...Args>
+        ColoredShape(const std::string& color, Args ...args)
+            : T{ std::forward<Args>(args)... }, m_color{ color } {}
+
+        virtual std::string draw() const override {
+            std::ostringstream oss;
+            std::string s{ T::draw() };
+            oss << s << " has color " << m_color;
+            return oss.str();
+        }
+    };
+
+    template <typename T>
+    struct TransparentShape : public T
+    {
+        static_assert (
+            std::is_base_of<Shape, T>::value,
+            "Template argument must be a Shape");
+
+    private:
+        uint8_t m_transparency;
+
+    public:
+        template<typename ...Args>
+        TransparentShape(uint8_t transparency, Args ...args)
+            : T{ std::forward<Args>(args)... }, m_transparency{ transparency } {}
+
+        virtual std::string draw() const override {
+            std::ostringstream oss;
+            std::string s{ T::draw() };
+            oss << s << " has "
+                << static_cast<double>(m_transparency) / 255.f * 100.f
+                << "% transparency";
+            return oss.str();
+        }
+    };
+}
 
 void test_static_decoration_01()
 {
-    // won't work without a default constructor
-    ColoredShape2<Circle> green_circle{ "green", static_cast<float>(5) };
-    std::cout << green_circle.draw() << std::endl;
+    using namespace StaticDecoration;
 
-    TransparentShape2<ColoredShape2<Square>> blue_invisible_square{ 0, "blue", static_cast<float>(10) };
-    blue_invisible_square.setColor("blue");
-    blue_invisible_square.setSide(321);
-    std::cout << blue_invisible_square.draw() << std::endl;
+    Circle circle{ 3.0 };
+    std::cout << circle.draw() << std::endl;
+
+    Square square{ 20.0 };
+    std::cout << square.draw() << std::endl;
+
+    ColoredShape<Circle> greenCircle{ std::string{ "green" }, 5.0 };
+    std::cout << greenCircle.draw() << std::endl;
+
+    TransparentShape<Square> transparentSquare(static_cast<uint8_t>(0), 0.0);
+    std::cout << transparentSquare.draw() << std::endl;
+
+    TransparentShape<ColoredShape<Square>> blueTransparentSquare{ 0, "blue", 0.0 };
+    blueTransparentSquare.setColor("yellow");
+    blueTransparentSquare.setSide(100);
+    std::cout << blueTransparentSquare.draw() << std::endl;
+
+    ColoredShape<TransparentShape<Square>> redOpaqueSquare{"red",  0, 255.0 };
+    redOpaqueSquare.setColor("red");
+    redOpaqueSquare.setSide(300);
+    std::cout << redOpaqueSquare.draw() << std::endl;
 }
