@@ -6,10 +6,10 @@
 
 #### Ziel / Absicht:
 
-Das *Intercepting Filter Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*, das sich der Vor- und Nachbearbeitung einer Anforderung ("*Request*", typischerweise ein Methodenaufruf)
-zuwendet. 
+Das *Intercepting Filter Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
+das sich der Vor- und Nachbearbeitung einer Anforderung (*&ldquo;Request&rdquo;*, typischerweise ein Methodenaufruf) zuwendet. 
 Die Vor- und Nachbearbeitung definiert Aktionen, die vor und nach der Kernverarbeitung der Anforderung ausgeführt werden.
-Es ist auch möglich, dass eine Aktion entscheiden kann, ob die eigentliche Kernverarbeitung überhaupt ausgeführt wird.
+Es ist auch möglich, dass eine Aktion entscheiden kann, ob die eigentliche Kernverarbeitung überhaupt stattfindet.
 In der Regel bearbeiten Aktionen den eingehenden oder ausgehenden Datenstrom in einer Form,
 die für die weitere Verarbeitung geeignet ist.
 
@@ -20,7 +20,8 @@ Nachverfolgung von Anforderungen durchführen und die Anforderungen dann an die e
 
 Ohne das *Intercepting Filter Pattern* beruht die klassische Lösung auf einer Reihe von bedingten Anweisungen,
 wobei jede fehlgeschlagene Bedingungsanweisung die Anforderung abbricht.
-Verschachtelte `if` / `else`-Anweisungen sind eine Standardstrategie, die aber zu einer Code-Unübersichtlichkeit bzw. Code-Fragilität führen.
+Verschachtelte `if` / `else`-Anweisungen stehen für eine Standardstrategie,
+die aber zu einer Code-Unübersichtlichkeit bzw. Code-Fragilität führen.
 
 #### Lösung:
 
