@@ -111,9 +111,38 @@ vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge
 
 [Quellcode](../ConceptualExample.cpp)
 
+*Hinweis*: Man beachte in dem konzeptionellen Beispiel auch die Demonstration
+der Dekaration zur Laufzeit:
+
+```cpp
+01: // component which is going to be decorated
+02: std::shared_ptr<Component> component{ std::make_shared<ConcreteComponent>() };
+03: 
+04: // run-time dependent decorator
+05: std::shared_ptr<Component> decorator;
+06: 
+07: if (true)   // <== change 'true' to 'false'
+08: {
+09:     std::shared_ptr<Component> decorator1{ std::make_shared<ConcreteDecoratorA>(component) };
+10:     decorator = std::make_shared<ConcreteDecoratorB>(decorator1);
+11: 
+12:     std::cout << "Client: Now I've this decorated component (if):" << std::endl;
+13: }
+14: else {
+15:     std::shared_ptr<Component> decorator1 {std::make_shared<ConcreteDecoratorB>(component)};
+16:     decorator = std::make_shared<ConcreteDecoratorA>(decorator1);
+17: 
+18:     std::cout << "Client: Now I've that decorated component (else):" << std::endl;
+19: }
+```
+
 ---
 
 #### 'Real-World' Beispiel:
+
+[Quellcode &ldquo;Dynamic Shapes&rdquo;](../DynamicShapes.cpp)
+
+---
 
 Das 'Real-World' Beispiel zu diesem Entwurfsmuster beschäftigt sich mit semi-grafischen GDI-Elementen (*Graphics Device Interface*)
 wie Kreisen, Rechtecken, etc.
@@ -148,7 +177,7 @@ std::cout << circle->draw() << std::endl;
 *Ausgabe*:
 
 ```
-A circle of radius 0.5
+A circle of radius 0.500000
 ```
 
 ###### *Szenario* 2:
@@ -156,15 +185,19 @@ A circle of radius 0.5
 *Code*:
 
 ```cpp
-std::shared_ptr<Shape> circle = std::make_shared<Circle>(0.5f);
-std::shared_ptr<Shape> redCircle = std::make_shared<ColoredShapeDecorator>(circle, "red");
+std::shared_ptr<Shape> circle{
+    std::make_shared<Circle>(0.5)
+};
+std::shared_ptr<Shape> redCircle{
+    std::make_shared<ColoredShapeDecorator>(circle, "red") 
+};
 std::cout << redCircle->draw() << std::endl;
 ```
 
 *Ausgabe*:
 
 ```
-A circle of radius 0.5 has color red
+A circle of radius 0.500000 has color red
 ```
 
 ###### *Szenario* 3:
@@ -172,10 +205,14 @@ A circle of radius 0.5 has color red
 *Code*:
 
 ```cpp
-std::shared_ptr<Shape> square
-    = std::make_shared<Square>(3.0);
-std::shared_ptr<Shape> transparentSquare
-    = std::make_shared<TransparentShapeDecorator>(square, static_cast<uint8_t>(85));
+std::shared_ptr<Shape> square{
+    std::make_shared<Square>(3.0) 
+};
+
+std::shared_ptr<Shape> transparentSquare{
+    std::make_shared<TransparentShapeDecorator>(square, static_cast<uint8_t>(85)) 
+};
+
 std::cout << transparentSquare->draw() << std::endl;
 ```
 
@@ -190,20 +227,39 @@ A square with side 3 has 33.3333% transparency
 *Code*:
 
 ```cpp
-std::shared_ptr<Shape> circle 
-    = std::make_shared<Circle>(static_cast<float>(15));
-std::shared_ptr<Shape> greenCircle 
-    = std::make_shared<ColoredShapeDecorator>(circle, "green");
-std::shared_ptr<Shape> greenTransparentCircle 
-    = std::make_shared<TransparentShapeDecorator>(greenCircle, static_cast<uint8_t>(50));
+std::shared_ptr<Shape> circle{
+    std::make_shared<Circle>(15.0) 
+};
+
+std::shared_ptr<Shape> greenCircle{ 
+    std::make_shared<ColoredShapeDecorator>(circle, "green")
+};
+
+std::shared_ptr<Shape> greenTransparentCircle{
+    std::make_shared<TransparentShapeDecorator>(greenCircle, static_cast<uint8_t>(50)) 
+};
 std::cout << greenTransparentCircle->draw() << std::endl;
 ```
 
 *Ausgabe*:
 
 ```
-A circle of radius 15 has color green has 19.6078% transparency
+A circle of radius 15.000000 has color green has 19.6078% transparency
 ```
+
+---
+
+#### 'Real-World' Beispiel zum Zweiten:
+
+[Quellcode &ldquo;Statische Shapes&rdquo;](../StaticShapes.cpp)
+
+---
+
+Das &ldquo;Real-World&rdquo;-Beispiel liegt in einer zweiten, alternativen Version vor.
+Wenngleich es dem Charakter des *Decorator Patterns* etwas widerspricht, kann man
+das Entwurfsmuster auch mit Template Klassen umsetzen: 
+Auf diese Weise muss man zwar die Dekoration zur Übersetzungszeit festlegen,
+mit Hilfe der Templates bewahrt man sich aber doch eine gewisse Flexibilität!
 
 ---
 

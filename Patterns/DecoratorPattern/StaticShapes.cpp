@@ -58,16 +58,16 @@ namespace StaticDecoration {
         double m_height;
 
     public:
-        Rectangle() : m_width{ 0.0 }, m_width{ 0.0 } {}
+        Rectangle() : m_width{ 0.0 }, m_height{ 0.0 } {}
 
-        Rectangle(double width, double height) : m_width{ width }, m_width{ height } {}
+        Rectangle(double width, double height) : m_width{ width }, m_height{ height } {}
 
-        void setWidth(double ) { m_side = side; }
-        void setHeight(double side) { m_side = side; }
+        void setWidth(double width) { m_width = width; }
+        void setHeight(double height) { m_height = height; }
 
         virtual std::string draw() const override {
             std::ostringstream oss;
-            oss << "A square with side " << m_side;
+            oss << "A Rectangle with width " << m_width << " and height " << m_height;
             return oss.str();
         }
     };
@@ -116,7 +116,7 @@ namespace StaticDecoration {
             std::ostringstream oss;
             std::string s{ T::draw() };
             oss << s << " has "
-                << static_cast<double>(m_transparency) / 255.f * 100.f
+                << (static_cast<double>(m_transparency) / 255.0) * 100.0
                 << "% transparency";
             return oss.str();
         }
@@ -133,11 +133,17 @@ void test_static_decoration_01()
     Square square{ 20.0 };
     std::cout << square.draw() << std::endl;
 
+    Rectangle rectangle{ 30.0, 40.0 };
+    std::cout << rectangle.draw() << std::endl;
+
     ColoredShape<Circle> greenCircle{ std::string{ "green" }, 5.0 };
     std::cout << greenCircle.draw() << std::endl;
 
     TransparentShape<Square> transparentSquare(static_cast<uint8_t>(0), 0.0);
     std::cout << transparentSquare.draw() << std::endl;
+
+    ColoredShape<Rectangle> yellowRectangle{ std::string{ " yellow" }, 50.0, 60.0 };
+    std::cout << yellowRectangle.draw() << std::endl;
 
     TransparentShape<ColoredShape<Square>> blueTransparentSquare{ 0, "blue", 0.0 };
     blueTransparentSquare.setColor("yellow");
@@ -148,4 +154,7 @@ void test_static_decoration_01()
     redOpaqueSquare.setColor("red");
     redOpaqueSquare.setSide(300);
     std::cout << redOpaqueSquare.draw() << std::endl;
+
+    TransparentShape<ColoredShape<Rectangle>> whiteNonTransparentRectangle{ 127, "white", 70.0, 80.0, };
+    std::cout << whiteNonTransparentRectangle.draw() << std::endl;
 }

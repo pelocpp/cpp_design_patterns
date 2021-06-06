@@ -21,9 +21,9 @@ namespace DynamicDecoration {
 
     public:
         Circle() : m_radius{ 0.0 } {}
-        explicit Circle(const double radius) : m_radius{ radius } {}
+        explicit Circle(double radius) : m_radius{ radius } {}
 
-        void resize(float factor) { m_radius *= factor; }
+        void resize(double factor) { m_radius *= factor; }
 
         virtual std::string draw() const override {
             std::ostringstream oss;
@@ -98,7 +98,7 @@ namespace DynamicDecoration {
         {
             std::ostringstream oss;
             oss << ShapeDecorator::draw() << " has "
-                << m_transparency / 255.f * 100.f
+                << (static_cast<double>(m_transparency) / 255.0) * 100.0
                 << "% transparency";
             return oss.str();
         }
@@ -108,7 +108,7 @@ namespace DynamicDecoration {
 void test_dynamic_decoration_00() {
     using namespace DynamicDecoration;
 
-    std::shared_ptr<Shape> circle{ std::make_shared<Circle>(0.5f) };
+    std::shared_ptr<Shape> circle{ std::make_shared<Circle>(0.5) };
     std::cout << circle->draw() << std::endl;
     // "A circle of radius 0.5"
 }
@@ -117,13 +117,13 @@ void test_dynamic_decoration_01() {
     using namespace DynamicDecoration;
 
     std::shared_ptr<Shape> circle{
-        std::make_shared<Circle>(0.5f)
+        std::make_shared<Circle>(0.5)
     };
     std::shared_ptr<Shape> redCircle{
         std::make_shared<ColoredShapeDecorator>(circle, "red") 
     };
     std::cout << redCircle->draw() << std::endl;
-    // "A circle of radius 0.5 has color red"
+    // "A circle of radius 0.500000 has color red"
 }
 
 void test_dynamic_decoration_02() {
@@ -138,7 +138,7 @@ void test_dynamic_decoration_02() {
     };
 
     std::cout << transparentSquare->draw() << std::endl;
-    // "A square with side 3 has 33.3333 % transparency"
+    // "A square with side 3 has 33.3333% transparency"
 }
 
 void test_dynamic_decoration_03() {
@@ -156,5 +156,5 @@ void test_dynamic_decoration_03() {
         std::make_shared<TransparentShapeDecorator>(greenCircle, static_cast<uint8_t>(50)) 
     };
     std::cout << greenTransparentCircle->draw() << std::endl;
-    // "A circle of radius 15 has color green has 19.6078% transparency"
+    // "A circle of radius 15.000000 has color green has 19.6078% transparency"
 }
