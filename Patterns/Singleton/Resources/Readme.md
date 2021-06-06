@@ -57,7 +57,7 @@ Es besteht nur aus einer einzigen Klasse:
 
 <img src="dp_singleton_pattern.svg" width="300">
 
-Abbildung 1: Schematische Darstellung des *Singleton Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Singleton Patterns*.
 
 #### Double-Checked Locking / Doppelt überprüfte Sperrung:
 

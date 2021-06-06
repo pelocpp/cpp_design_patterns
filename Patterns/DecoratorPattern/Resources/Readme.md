@@ -37,7 +37,7 @@ indem es Verweise auf mehrere Objekte verwaltet.
 
 <img src="dp_decorator_01.svg" width="550">
 
-Abbildung 1: Vererbung versus Aggregation.
+*Abbildung* 1: Vererbung versus Aggregation.
 
 #### Problem:
 
@@ -76,7 +76,7 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 <img src="dp_decorator_02.svg" width="750">
 
-Abbildung 2: Schematische Darstellung des *Decorator* Patterns.
+*Abbildung* 2: Schematische Darstellung des *Decorator* Patterns.
 
 
 ##### Hinweis:
@@ -150,11 +150,11 @@ In einer Grundausführung lassen sich derartige Figuren einfach schwarz-weiß zeic
 farbig und/oder mit einer entsprechenden Transparenz zeichnen.
 
 Diese &ldquo;Zusatzwünsche&rdquo; lassen sich sehr einfach und elegant mit dem *Decorator Pattern* Entwurfsmuster in die Tat umsetzen.
-Einen entsprechenden Satz an GDI- und Dekorator-Klassen finden Sie in Abbildung 3 vor:
+Einen entsprechenden Satz an GDI- und Dekorator-Klassen finden Sie in *Abbildung* 3 vor:
 
 <img src="dp_decorator_03_shapes.svg" width="700">
 
-Abbildung 3: Das *Decorator* Pattern in der Anwendung mit GDI-Elementen.
+*Abbildung* 3: Das *Decorator* Pattern in der Anwendung mit GDI-Elementen.
 
 Es folgen vier exemplarische Anwendungsbeispiele, die das Zeichen von GDI-Elementen
 

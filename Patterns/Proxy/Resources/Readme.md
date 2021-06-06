@@ -36,7 +36,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 <img src="dp_proxy_pattern.svg" width="500">
 
-Abbildung 1: Schematische Darstellung des *Proxy Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Proxy Patterns*.
 
 
 #### Conceptual Example:

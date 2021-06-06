@@ -66,7 +66,7 @@ Es besteht im Wesentlichen aus zwei Teilen:
 
 <img src="dp_prototype_pattern.svg" width="500">
 
-Abbildung 1: Schematische Darstellung des *Prototype Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Prototype Patterns*.
 
 #### Hinweis:
 

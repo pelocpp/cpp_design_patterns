@@ -36,10 +36,10 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 <img src="dp_abstract_factory_pattern.svg" width="800">
 
-Abbildung 1: Schematische Darstellung des *Abstract Factory* Entwurfsmusters.
+*Abbildung* 1: Schematische Darstellung des *Abstract Factory* Entwurfsmusters.
 
 Die Klassen `ProductA1` und `ProductA2` bzw. `ProductB1` und `ProductB2` sind Stellvertreter
-der `ConcreteProductA`- bzw. `ConcreteProductB`-Klasse aus Abbildung 1.
+der `ConcreteProductA`- bzw. `ConcreteProductB`-Klasse aus *Abbildung* 1.
 
 #### Conceptual Example:
 

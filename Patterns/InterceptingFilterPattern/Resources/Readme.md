@@ -42,7 +42,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 <img src="dp_interceptor_filter_pattern.svg" width="800">
 
-Abbildung 1: Schematische Darstellung des *Intercepting Filter Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Intercepting Filter Patterns*.
 
 
 #### Hinweis:

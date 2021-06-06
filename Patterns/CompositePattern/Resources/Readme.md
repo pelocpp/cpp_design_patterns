@@ -67,7 +67,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 <img src="dp_composite_pattern.svg" width="600">
 
-Abbildung 1: Schematische Darstellung des *Composite Entwurfsmusters*.
+*Abbildung* 1: Schematische Darstellung des *Composite Entwurfsmusters*.
 
 #### Conceptual Example:
 
@@ -144,7 +144,7 @@ in diesem Beispiel nicht umsetzen wollte.
 Ein typisches Beispiel für das *Composite Entwurfsmuster* ist ein Dateisystem mit Ordnern und Dateien:
 Ordner können Dateien oder andere Ordner enthalten oder leer sein. Andererseits enthalten Dateien keine Ordner oder andere Dateien!
 
-Um eine Analogie zur Abbildung 1 herzustellen, stellen wir die drei relevanten Header-Dateien kurz vor.
+Um eine Analogie zur *Abbildung* 1 herzustellen, stellen wir die drei relevanten Header-Dateien kurz vor.
 Die Schnittstelle für die Beschreibung der übergreifenden Komponente könnte so aussehen:
 
 ```cpp

@@ -56,7 +56,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 <img src="dp_facade_pattern.svg" width="700">
 
-Abbildung 1: Schematische Darstellung des *Facade Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Facade Patterns*.
 
 
 #### Conceptual Example:

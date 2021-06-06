@@ -264,7 +264,7 @@ Damit haben einen ersten minimalistischen Durchlauf durch das *Pimpl*-Idiom besc
 
 <img src="dp_pimple_idiom.svg" width="700">
 
-Abbildung 1: Struktur des Pimpl-Idioms.
+*Abbildung* 1: Struktur des Pimpl-Idioms.
 
 ## Pimpl @ Microsoft
 

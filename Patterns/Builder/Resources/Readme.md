@@ -34,7 +34,7 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 <img src="dp_builder_pattern.svg" width="550">
 
-Abbildung 1: Schematische Darstellung des *Builder Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Builder Patterns*.
 
 
 #### Conceptual Example:
@@ -105,11 +105,11 @@ Das Pendant zur `construct`-Methode ist hier die `doLayout`-Methode.
 Die Klasse `Widget` ist eine Hilfsklasse und verwaltet den erzeugten HTML-Code.
 
 Einen Überblick über die beteiligten Klassen und ihren Zusammenhang mit dem *Builder Pattern*
-entnehmen Sie Abbildung 2:
+entnehmen Sie *Abbildung* 2:
 
 <img src="dp_builder_pattern_layoutmanager.svg" width="750">
 
-Abbildung 2: Implementierung eines LayoutManagers mit dem *Builder Pattern*.
+*Abbildung* 2: Implementierung eines LayoutManagers mit dem *Builder Pattern*.
 
 Weitere Details zur Umsetzung des Beispiels entnehmen Sie bitte dem [Quellcode](../LayoutManagerExample.cpp).
 Die Ausgaben des 'Real-World'-Beispiels lauten:

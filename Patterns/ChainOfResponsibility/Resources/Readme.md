@@ -51,7 +51,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 <img src="dp_chain_of_responsibility.svg" width="700">
 
-Abbildung 1: Schematische Darstellung des *Chain of Responsibility Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Chain of Responsibility Patterns*.
 
 
 #### Conceptual Example:

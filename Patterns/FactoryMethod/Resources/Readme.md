@@ -42,7 +42,7 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 <img src="dp_factory_method_pattern.svg" width="500">
 
-Abbildung 1: Schematische Darstellung des *Factory Method Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Factory Method Patterns*.
 
 ---
 
@@ -65,7 +65,7 @@ Beschreiben Sie, wie diese Methoden zur Namensgebung des *Factory Method Pattern
 
 <img src="dp_factory_method_pattern_television.svg" width="900">
 
-Abbildung 2: Das *Factory Method Pattern* am Beispiel der Produktion von Fernsehgeräten.
+*Abbildung* 2: Das *Factory Method Pattern* am Beispiel der Produktion von Fernsehgeräten.
 
 ---
 

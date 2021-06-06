@@ -65,7 +65,7 @@ dass sich das *Mock*-Objekt quasi täuschend echt im Vergleich zum eigentlichen r
 
 <img src="dp_null_object.svg" width="600">
 
-Abbildung 1: Schematische Darstellung des *Null Object* Entwurfsmusters.
+*Abbildung* 1: Schematische Darstellung des *Null Object* Entwurfsmusters.
 
 #### Conceptual Example:
 

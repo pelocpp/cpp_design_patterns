@@ -33,7 +33,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 <img src="dp_factory_pattern.svg" width="700">
 
-Abbildung 1: Schematische Darstellung des *Factory Patterns*.
+*Abbildung* 1: Schematische Darstellung des *Factory Patterns*.
 
 #### Conceptual Example:
 

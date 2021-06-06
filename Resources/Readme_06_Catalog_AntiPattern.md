@@ -337,11 +337,11 @@ die auftritt, wenn versucht wird, zwei oder mehr Funktionen/Methoden gleichzeiti
 Aufgrund der Art des Geräts oder Systems müssen die Vorgänge jedoch sequentiell ausgeführt werden,
 um korrekt ausgeführt zu werden.
 
-Ein Beispielszenario wird in Abbildung 1 dargestellt:
+Ein Beispielszenario wird in *Abbildung* 1 dargestellt:
 
 <img src="race_condition_revised.png" width="700">
 
-Abbildung 1: Konkurrierender Zugriff auf gemeinsame Daten.
+*Abbildung* 1: Konkurrierender Zugriff auf gemeinsame Daten.
 
 
 ##### Abhilfe

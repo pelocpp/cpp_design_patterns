@@ -223,16 +223,16 @@ einer Ressource mit und ohne RAII-Idiom:
 
 <img src="dp_raii_idiom_01.svg" width="700">
 
-Abbildung 1: Klassische Anforderung für einen Speicherbereich.
+*Abbildung* 1: Klassische Anforderung für einen Speicherbereich.
 
-Beachten Sie in Abbildung 1: Es ist offen bzw. Pflicht für den Verwender des Speicherbereichs,
+Beachten Sie in *Abbildung* 1: Es ist offen bzw. Pflicht für den Verwender des Speicherbereichs,
 diesen nach Gebrauch mit dem `delete`-Operator wieder freizugeben.
 
 <img src="dp_raii_idiom_02.svg" width="700">
 
-Abbildung 2: Anforderung eines Speicherbereichs mit dem RAII-Idiom.
+*Abbildung* 2: Anforderung eines Speicherbereichs mit dem RAII-Idiom.
 
-In Abbildung 2 können Sie erkennen, dass der Destruktor des RAII-Objekts den allokierten Speicherbereich wieder freigibt.
+In *Abbildung* 2 können Sie erkennen, dass der Destruktor des RAII-Objekts den allokierten Speicherbereich wieder freigibt.
 
 
 #### Conceptual Example:
