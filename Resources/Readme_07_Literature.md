@@ -13,7 +13,7 @@
 
     Ein vergleichsweise anspruchsvolles Buch zu Entwurfsmustern in C++. Neben Klassikern wir *Singleton*, *Factory* und *Adapter*
     werden moderne C++-Konzepte wie RAII, SFINAE, CRTP und Type Erasure betrachtet. Sehr gut geschrieben,
-    möglicherweise nichts für den Einsteiger in dieses Thematik.
+    möglicherweise nichts für den Einsteiger in diese Thematik.
 
 ---
 
