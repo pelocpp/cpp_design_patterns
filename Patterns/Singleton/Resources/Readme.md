@@ -14,18 +14,18 @@ wird die zuvor erstellte Einzelinstanz bereitgestellt.
 #### Problem:
 
 In einigen Fällen ist es wichtig, zu einer konkreten Klasse maximal nur eine Instanz zu haben.
-Zum Beispiel dann wenn man nur einen einzigen globalen Zugriffspunkt
+Zum Beispiel dann, wenn man nur einen einzigen globalen Zugriffspunkt
 auf eine begrenzte Ressource benötigt. 
 
 Würde man eine derartige globale Variable erstellen, die kopiert wird,
-würde dies zu mehreren Zugriffspunkten führen und damit zu Dateninkonsistenzen führen.
+würde dies zu mehreren Zugriffspunkten führen und damit zu möglichen Dateninkonsistenzen.
 
 *Beispiele*:
   * Stream Objekte von C++: `std::cout`, `std::cin` und `std::cerr`.
   * `HttpContext`-Klasse (Java, C# und andere).
  
 Ein weiteres Beispiel für Singletons sind Klassen wie zum Beispiel `Color`.
-Würde man - zum Beispiel bei jeder Notwendigkeit im Gebrauch einer Farbe wie *rot* -
+Würde man &ndash; beispielsweise bei jeder Notwendigkeit im Gebrauch einer Farbe wie *rot* &ndash;
 ein entsprechendes `Color`-Objekt erzeugen, würde man die Speicherplatzanforderungen
 dieser Anwendung nicht mehr in den Griff bekommen. 
 
@@ -42,9 +42,6 @@ public static Color FromArgb (byte a, byte r, byte g, byte b);
 Natürlich setzt dies voraus, dass die Klasse Color in derartigen Anwendungsfällen
 *immutable*, also unveränderbar ist. Andernfalls könnte zur Laufzeit aus einer
 roten eine blaue Farbe werden, was so sicherlich nicht erwünscht ist.
-
-
-#### Lösung:
 
 #### Struktur (UML):
 
@@ -82,7 +79,7 @@ Singleton* Singleton::getInstance()
 
 Das Erzeugen des (einzigen) Objekts erfolgt thread-sicher, so weit, so gut. Der Schönheitsfehler dabei ist,
 dass der Zugriff auf das Objekt (präziser: der lesende Zugriff zum Erlangen einer Zeigervariablen, die auf das Objekt zeigt)
-über dieselbe Methode (!) aber sehr oft geschehen kann und damit auch
+über dieselbe Methode (!) sehr oft geschehen kann und damit auch
 die lesenden Zugriffe auf das Singleton-Objekt thread-sicher ausgeführt werden, was überflüssig ist und
 unnötige Rechenzeit beansprucht.
 
@@ -109,9 +106,9 @@ Singleton* Singleton::getInstance()
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) - Sehr einfache Version
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version
 
-[Quellcode 2](../ConceptualExample02.cpp) - Mit *Double-Checked Locking*
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; Mit *Double-Checked Locking*
 
 ---
 

@@ -47,13 +47,13 @@ void test_singleton_01()
 {
     using namespace ConceptualExample01;
 
-    auto singleton1 = Singleton::getInstance();
-    auto singleton2 = Singleton::getInstance();
+    auto singleton1 { Singleton::getInstance() };
+    auto singleton2 { Singleton::getInstance() };
 
     std::cout << std::boolalpha << (singleton1 == singleton2) << std::endl;
 
-    auto singleton3 = Singleton::getInstanceThreadSafe();
-    auto singleton4 = Singleton::getInstanceThreadSafe();
+    auto singleton3 { Singleton::getInstanceThreadSafe() };
+    auto singleton4 { Singleton::getInstanceThreadSafe() };
 
     std::cout << std::boolalpha << (singleton3 == singleton4) << std::endl;
 }

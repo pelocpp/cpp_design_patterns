@@ -28,7 +28,7 @@ namespace ConceptualExample02 {
         static std::mutex m_mutex;
 
     protected:
-        Singleton(const std::string value) : m_value(value) {}
+        Singleton(const std::string value) : m_value{ value } {}
         ~Singleton() {}
 
         std::string m_value;
@@ -109,13 +109,13 @@ void test_singleton_02()
 {
     using namespace ConceptualExample02;
 
-    Singleton* singleton1 = Singleton::getInstance("foo");
-    Singleton* singleton2 = Singleton::getInstance("bar");
+    Singleton* singleton1 { Singleton::getInstance("foo") };
+    Singleton* singleton2 { Singleton::getInstance("bar") };
 
     std::cout << std::boolalpha << (singleton1 == singleton2) << std::endl;
 
-    Singleton* singleton3 = Singleton::getInstanceEx("bar");
-    Singleton* singleton4 = Singleton::getInstanceEx("bar");
+    Singleton* singleton3 { Singleton::getInstanceEx("bar") };
+    Singleton* singleton4 { Singleton::getInstanceEx("bar") };
 
     std::cout << std::boolalpha << (singleton3 == singleton4) << std::endl;
 
