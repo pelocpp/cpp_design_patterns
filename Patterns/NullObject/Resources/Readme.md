@@ -1,5 +1,9 @@
 # *Null Object* Entwurfsmuster
 
+[Zurück](../../../Resources/Readme_05_Catalog.md)
+
+---
+
 ## Wesentliche Merkmale
 
 Das *Null Object Pattern* ist ein Entwurfsmuster, das sich der Thematik von Null-Referenzen annimmt.

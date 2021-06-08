@@ -1,5 +1,9 @@
 # Prototype Pattern
 
+[Zurück](../../../Resources/Readme_05_Catalog.md)
+
+---
+
 ## Wesentliche Merkmale
 
 ##### Kategorie: Erzeugungsmuster / *Creational Pattern*
@@ -79,7 +83,7 @@ man spricht dabei auch von der so genannten *"Prototypischen Vererbung"*.
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp)
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version
 
 [Quellcode 2](../ConceptualExample02.cpp)
 

@@ -1,5 +1,9 @@
 # Command Pattern
 
+[Zurück](../../../Resources/Readme_05_Catalog.md)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: *Behavioral Pattern*
@@ -47,9 +51,9 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample_01.cpp) - Einfaches Beispiel
+[Quellcode 1](../ConceptualExample_01.cpp) &ndash; Sehr einfaches Beispiel
 
-[Quellcode 2](../ConceptualExample_02.cpp) - Ein etwas ausführlicheres Beispiel
+[Quellcode 2](../ConceptualExample_02.cpp) &ndash; Ein etwas ausführlicheres Beispiel
 
 ---
 

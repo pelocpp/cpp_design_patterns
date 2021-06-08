@@ -1,5 +1,9 @@
 # Intercepting Filter Pattern
 
+[Zurück](../../../Resources/Readme_05_Catalog.md)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: *Behavioral Pattern*
@@ -52,8 +56,9 @@ Es bestehen gewisse Ähnlichkeiten zum *Chain of Responsibility* Pattern.
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample01.cpp) - Standardvariante<br/>
-[Quellcode](../ConceptualExample02.cpp) - Siehe Weiterarbeit
+[Quellcode](../ConceptualExample01.cpp) &ndash; Standardvariante
+
+[Quellcode](../ConceptualExample02.cpp) &ndash; Siehe Weiterarbeit
 
 #### Weiterarbeit:
 

@@ -1,5 +1,9 @@
 # Observer Pattern
 
+[Zurück](../../../Resources/Readme_05_Catalog.md)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: *Behavioral Pattern*
@@ -28,12 +32,12 @@ ist die Information über die Verfügbarkeit am effizientesten gegeben.
 
 #### Lösung:
 
-Das Objekt, das den bereitzustellenden Status besitzt, wird häufig als "*Subject*" oder auch
-"*Publisher*" bezeichnet. Diejenigen Objekte, die die Änderungen am Status des *Publishers* verfolgen,
-werden als "*Subscriber*" oder auch "*Observer*" bezeichnet. Das Pendant eines "*Observers*"
-kann man auch als "*Observable*" bezeichnen.
+Das Objekt, das den bereitzustellenden Status besitzt, wird häufig als &ldquo;*Subject*&rdquo; oder auch
+&ldquo;*Publisher*&rdquo; bezeichnet. Diejenigen Objekte, die die Änderungen am Status des *Publishers* verfolgen,
+werden als &ldquo;*Subscriber*&rdquo; oder auch &ldquo;*Observer*&rdquo; bezeichnet. Das Pendant eines &ldquo;*Observers*&rdquo;
+kann man auch als &ldquo;*Observable*&rdquo; bezeichnen.
 
-Das *Observer Pattern* sieht vor, dass das "*Subject*" einen Benachrichtigungsmechanismus der Gestalt aufweist, 
+Das *Observer Pattern* sieht vor, dass das &ldquo;*Subject*&rdquo; einen Benachrichtigungsmechanismus der Gestalt aufweist, 
 dass einzelne Objekte (*Subscriber*) sich für das Benachrichtigen von Ereignissen
 an- und abmelden können.
 
@@ -60,6 +64,12 @@ um *Subscriber* zu dieser Liste hinzuzufügen und aus dieser wieder zu entfernen.
 
 #### Conceptual Example:
 
+Das *Conceptual Example* liegt in drei Varianten vor:
+
+  * Variante 1: klassisch - d.h. mit &ldquo;raw&rdquo;-Zeigern.
+  * Variante 2: Mit `std::shared_ptr` Objekten.
+  * Variante 3: Wie Variante 2, aber mit `std::enable_shared_from_this<>` Mechanismus.
+
 [Quellcode 1](../ConceptualExample01.cpp)
 
 [Quellcode 2](../ConceptualExample02.cpp)
@@ -76,14 +86,8 @@ vor.
 
 **Hinweis**:
 
-Das *Conceptual Example* liegt in drei Varianten vor:
-
-  * Variante 1: klassisch - d.h. mit "raw"-Zeigern.
-  * Variante 2: Mit `std::shared_ptr` Objekten.
-  * Variante 3: Wie Variante 2, aber mit `std::enable_shared_from_this<>` Mechanismus.
-
-In Variante 2 wird prinzipiell ohne "raw"-Zeiger gearbeitet, also so,
-wie man es der "reinen Lehre" nach machen sollte. Dabei stellt sich aber eine Frage:
+In Variante 2 wird prinzipiell ohne &ldquo;raw&rdquo;-Zeiger gearbeitet, also so,
+wie man es der &ldquo;reinen Lehre&rdquo; nach machen sollte. Dabei stellt sich aber eine Frage:
 Wie erhalte ich von einem Objekt einen `std::shared_ptr`, desses Objekterzeugung
 außerhalb meines Wirkungskreises liegt. Die Frage lautet also gewissermaßen:
 

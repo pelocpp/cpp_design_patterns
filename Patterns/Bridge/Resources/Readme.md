@@ -1,5 +1,9 @@
 # Bridge Pattern
 
+[Zurück](../../../Resources/Readme_05_Catalog.md)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: *Structural Pattern*
@@ -54,9 +58,9 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp)
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version
 
-[Quellcode 2](../ConceptualExample02.cpp)
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; Ein etwas ausführlicheres Beispiel
 
 ---
 

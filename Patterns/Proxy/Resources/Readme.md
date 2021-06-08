@@ -1,5 +1,9 @@
 # Proxy Pattern
 
+[Zurück](../../../Resources/Readme_05_Catalog.md)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: *Structural Pattern*

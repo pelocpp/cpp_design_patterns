@@ -1,5 +1,9 @@
 # Iterator Pattern
 
+[Zurück](../../../Resources/Readme_05_Catalog.md)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: *Behavioral Pattern*
@@ -74,9 +78,9 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) - Standard Variante
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Standard Variante
 
-[Quellcode 2](../ConceptualExample02.cpp) - C++ spezifische Variante
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; C++ spezifische Variante
 
 Die zweite Umsetzung des *Iterator Patterns* berücksichtigt, dass es in C++ für Container bereits vordefinierte Iteratoren gibt.
 Dies kann man - wenn es sich bei der *ConcreteAggregate*-Klasse um einen STL-Standardcontainer handelt - ausnutzen.

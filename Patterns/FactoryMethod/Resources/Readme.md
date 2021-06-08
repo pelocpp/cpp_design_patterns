@@ -1,5 +1,9 @@
 # Factory Method Pattern
 
+[Zurück](../../../Resources/Readme_05_Catalog.md)
+
+---
+
 ## Wesentliche Merkmale
 
 ##### Kategorie: Erzeugungsmuster / *Creational Pattern*
@@ -48,8 +52,9 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) - Sehr einfaches Beispiel<br/>
-[Quellcode 2](../ConceptualExample02.cpp) - Beispiel, das "konzeptionell" den Einsatz von *Factory Methods* aufzeigt.<br/>
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfaches Beispiel
+
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; Beispiel, das "konzeptionell" den Einsatz von *Factory Methods* aufzeigt.
 
 ---
 
