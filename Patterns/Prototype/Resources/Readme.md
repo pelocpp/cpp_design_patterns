@@ -11,8 +11,8 @@
 #### Ziel / Absicht:
 
 Das *Prototype Pattern* ist ein Entwurfsmuster,
-das zum Instanziieren einer Klasse auf das Kopieren oder Klonen der Eigenschaften eines vorhandenen Objekts zurückgreift.
-Das neue Objekt ist eine exakte Kopie des Prototyps, ermöglicht jedoch Änderungen, ohne das Original zu verändern.
+das zum Instanziieren einer Klasse auf das Kopieren oder Klonen der Eigenschaften eines anderen, vorhandenen Objekts zurückgreift.
+Das neue Objekt ist eine exakte Kopie des Prototyps, ermöglicht jedoch Änderungen an diesem, ohne das Original zu verändern.
 
 #### Problem:
 
@@ -32,10 +32,10 @@ Das Entwurfsmuster ist erforderlich, wenn die Objekterstellung zeitaufwändig und
 Daher erstellen wir ein neues Objekt auf Basis eines vorhandenen Objekts.
 
 Diese Art der Objekterstellung wird als *Klonen* bezeichnet.
-Wenn das ursprüngliche Objekt geklont wird, ist das neue Objekt - in Abhängigkeit von der Implementierung
-der `clone`-Methode - eine flache (*shallow*) oder tiefe (*deep*) Kopie.
+Wenn das ursprüngliche Objekt geklont wird, ist das neue Objekt &ndash; in Abhängigkeit von der Implementierung
+der `clone`-Methode &ndash; eine flache (*shallow*) oder tiefe (*deep*) Kopie.
 Diese Kopie dupliziert alle Eigenschaften und Felder des ursprünglichen Objekts.
-Wenn eine Eigenschaft vom Referenztyp ist, sollte vom referenzierten Objekt ebenfalls eine tiefe Kopie erstellt werden,
+Wenn eine Eigenschaft ein Referenztyp ist, sollte vom referenzierten Objekt ebenfalls eine tiefe Kopie erstellt werden,
 um insgesamt zu einer echten Kopie des ursprünglichen Objekts zu gelangen.
 
 In manchen Programmiersprachen wird die `clone`-Methode automatisch bereitgestellt bzw. vom Programmersteller erzwungen:
@@ -76,18 +76,18 @@ Es besteht im Wesentlichen aus zwei Teilen:
 
 In JavaScript ist das *Prototype Pattern* quasi nativ enthalten.
 
-Die Erstellung von Objekten erfolgt hier - unter anderem - auf der Basis von so genannten
-"Konstruktorfunktionen", die als Blaupausen für neue Objekte verwendet werden können,
-man spricht dabei auch von der so genannten *"Prototypischen Vererbung"*.
+Die Erstellung von Objekten erfolgt hier &ndash; unter anderem &ndash; auf der Basis von so genannten
+&ldquo;Konstruktorfunktionen&rdquo;, die als Blaupausen für neue Objekte verwendet werden können.
+Man spricht dabei auch von der so genannten &ldquo;*Prototypischen Vererbung*&rdquo;.
 
 
 #### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version
 
-[Quellcode 2](../ConceptualExample02.cpp)
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; Ein Beispiel mit einer Factory für Prototypen
 
-[Quellcode 3](../ConceptualExample03.cpp)
+[Quellcode 3](../ConceptualExample03.cpp) &ndash; Wie Variante 2, nur mit Smart Pointer
 
 ---
 

@@ -10,7 +10,7 @@
 /**
  * c'tor(s) / d'tor
  */
-CreditCard::CreditCard() : m_number{ "" }, m_date{ "" }, m_cvv{ "" } {
+CreditCard::CreditCard() : m_number{ }, m_date{ }, m_cvv{ } {
     m_isValid = false;
     m_amount = 0;
 }

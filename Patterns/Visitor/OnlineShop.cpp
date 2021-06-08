@@ -164,7 +164,7 @@ namespace OnlineShopExample {
         std::string m_html;
 
     public:
-        HTMLVisitor() : m_html{ "" } {}
+        HTMLVisitor() : m_html{ } {}
 
         std::string getHTML() { return m_html; }
 

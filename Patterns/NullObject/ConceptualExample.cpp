@@ -33,7 +33,7 @@ class NullObject : public AbstractObject
 {
 public:
     std::string operation() const override {
-        return std::string(""); 
+        return {};
     }
 };
 

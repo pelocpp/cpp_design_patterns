@@ -18,11 +18,13 @@
 #endif
 #endif  // _DEBUG
 
-//Prototype Design Pattern
-
-//Intent:
-//Lets you copy existing objects without making your code dependent on
-//their classes.
+/**
+* Prototype Design Pattern
+*
+* Intent:
+* Lets you copy existing objects without making your code dependent on
+* their classes.
+*/
 
 namespace ConceptualExample03 {
 
@@ -44,11 +46,10 @@ namespace ConceptualExample03 {
         float m_prototypeField;
 
     public:
-        Prototype() : m_prototypeName(std::string("")), m_prototypeField(0.0F) {}
+        Prototype() : m_prototypeName{}, m_prototypeField{} {}
 
-        Prototype(std::string prototype_name)
-            : m_prototypeName(prototype_name), m_prototypeField(0.0F) {
-        }
+        Prototype(std::string prototype_name) 
+            : m_prototypeName{ prototype_name }, m_prototypeField{} {}
 
         virtual ~Prototype() {}
 
@@ -89,8 +90,7 @@ namespace ConceptualExample03 {
         //}
 
         ConcretePrototype1(std::string prototype_name, float concrete_prototype_field)
-            : Prototype(prototype_name), m_concretePrototypeField1(concrete_prototype_field) {
-        }
+            : Prototype{ prototype_name }, m_concretePrototypeField1{ concrete_prototype_field } {}
 
         /**
          * Notice that clone method returns a Pointer to a new ConcretePrototype1 replica.
@@ -98,7 +98,7 @@ namespace ConceptualExample03 {
          * to free that memory - or if you have smart pointer knowledge
          * you may prefer to use unique_pointer here.
          */
-        std::unique_ptr<Prototype> clone() const override {
+        virtual std::unique_ptr<Prototype> clone() const override {
             return std::make_unique<ConcretePrototype1>(*this);
         }
     };
@@ -110,10 +110,9 @@ namespace ConceptualExample03 {
 
     public:
         ConcretePrototype2(std::string prototype_name, float concrete_prototype_field)
-            : Prototype(prototype_name), m_concretePrototypeField2(concrete_prototype_field) {
-        }
+            : Prototype{ prototype_name }, m_concretePrototypeField2{ concrete_prototype_field } {}
 
-        std::unique_ptr<Prototype> clone() const override {
+        virtual std::unique_ptr<Prototype> clone() const override {
             return std::make_unique<ConcretePrototype2>(*this);
         }
     };
@@ -161,13 +160,13 @@ namespace ConceptualExample03 {
         std::unique_ptr<Prototype> prototype1 = factory.createPrototype(Type::PROTOTYPE_1);
         prototype1->print();
         prototype1->update(10);
-
         std::cout << std::endl;
-        std::cout << "Let's create a Prototype 2" << std::endl;
 
+        std::cout << "Let's create a Prototype 2" << std::endl;
         std::unique_ptr<Prototype> prototype2 = factory.createPrototype(Type::PROTOTYPE_2);
         prototype2->print();
         prototype2->update(20);
+        std::cout << std::endl;
     }
 }
 

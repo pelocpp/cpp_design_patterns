@@ -203,7 +203,7 @@ namespace Clipboard {
             m_conv = std::accumulate(
                 std::begin(m_code),
                 std::end(m_code),
-                std::string(""), 
+                std::string{},
                 [indent, counter = 0](const std::string& first, const std::string& next) mutable {
             
                 counter++;
