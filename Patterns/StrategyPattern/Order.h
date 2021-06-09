@@ -6,7 +6,7 @@ class Order {
 public:
     Order();
 
-    void processOrder(PaymentStrategy* strategy);
+    void processOrder(std::shared_ptr<PaymentStrategy> strategy);
 
     void setTotalCost(int cost);
     int getTotalCost();

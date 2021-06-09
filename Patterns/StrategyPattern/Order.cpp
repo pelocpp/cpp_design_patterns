@@ -2,6 +2,10 @@
 // Order.cpp
 // ===========================================================================
 
+#include <iostream>
+#include <string>
+#include <memory>
+
 #include "PaymentStrategy.h"
 #include "Order.h"
 
@@ -14,12 +18,12 @@
  * In this example class Order has the role of the so called 'Context':
  * The Context maintains a reference to one of the Strategy objects.
  */
-Order::Order() : m_totalCost{ 0 }, m_isClosed{ false } {}
+Order::Order() : m_totalCost{ }, m_isClosed{ false } {}
 
 /**
  * public interface
  */
-void Order::processOrder(PaymentStrategy* strategy) {
+void Order::processOrder(std::shared_ptr<PaymentStrategy> strategy) {
 
     strategy->collectPaymentDetails();
 }

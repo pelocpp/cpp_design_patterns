@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <memory>
 
 #include "PaymentStrategy.h"
 #include "CreditCard.h"
@@ -14,10 +15,6 @@
  */
 PayByCreditCard::PayByCreditCard() {
     m_card = nullptr;
-}
-
-PayByCreditCard::~PayByCreditCard() {
-    delete m_card;
 }
 
 /**
@@ -39,7 +36,7 @@ void PayByCreditCard::collectPaymentDetails() {
 
     // validate credit card number...
 
-    m_card = new CreditCard(number, date, cvv);
+    m_card = std::make_unique<CreditCard>(number, date, cvv);
     m_card->setValid(true);
 }
 

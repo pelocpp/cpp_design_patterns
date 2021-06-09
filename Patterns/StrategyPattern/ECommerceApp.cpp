@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <memory>
 
 #include "CreditCard.h"
 #include "PaymentStrategy.h"
@@ -15,7 +16,7 @@
 void test_ecommerce_app() {
 
     Order order;
-    PaymentStrategy* strategy = nullptr;
+    std::shared_ptr<PaymentStrategy> strategy = nullptr;
 
     std::map<int, int> priceOnProducts;
     priceOnProducts[1] = 2000;
@@ -65,10 +66,10 @@ void test_ecommerce_app() {
             // application creates different strategies
             // based on input from user, application configuration, etc.
             if (paymentMethod == "1") {
-                strategy = new PayByPayPal();
+                strategy = std::make_shared<PayByPayPal>();
             }
             else {
-                strategy = new PayByCreditCard();
+                strategy = std::make_shared <PayByCreditCard>();
             }
 
             // Order object delegates gathering payment data to strategy object,

@@ -9,11 +9,11 @@
 class PayByCreditCard : public PaymentStrategy {
 
 private:
-    CreditCard* m_card;
+    std::unique_ptr<CreditCard> m_card;
 
 public:
     PayByCreditCard();
-    ~PayByCreditCard();
+    ~PayByCreditCard() = default;
 
     virtual bool pay(int paymentAmount) override;
     virtual void collectPaymentDetails() override;
