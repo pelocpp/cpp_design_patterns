@@ -86,7 +86,7 @@ namespace StaticDecoration {
         void setColor(const std::string& color) { m_color = color; }
 
         template <typename ...Args>
-        ColoredShape(const std::string& color, Args ...args)
+        ColoredShape(const std::string& color, Args&& ...args)
             : T{ std::forward<Args>(args)... }, m_color{ color } {}
 
         virtual std::string draw() const override {
@@ -109,7 +109,7 @@ namespace StaticDecoration {
 
     public:
         template<typename ...Args>
-        TransparentShape(uint8_t transparency, Args ...args)
+        TransparentShape(uint8_t transparency, Args&& ...args)
             : T{ std::forward<Args>(args)... }, m_transparency{ transparency } {}
 
         virtual std::string draw() const override {

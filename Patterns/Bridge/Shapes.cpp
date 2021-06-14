@@ -9,7 +9,7 @@
 namespace ShapesExample {
 
     /**
-     *  Bridge implementer interface.
+     *  Bridge implementor interface.
      */
     class IDrawAPI {
     public:
@@ -17,7 +17,7 @@ namespace ShapesExample {
     };
 
     /**
-     *  Create concrete bridge implementer classes implementing the IDrawAPI interface.
+     *  Create concrete bridge implementor classes implementing the IDrawAPI interface.
      */
     class RedCircleDrawer : public IDrawAPI {
     public:
@@ -85,7 +85,7 @@ namespace ShapesExample {
      */
     void clientCode01()
     {
-        // 2 different bridge implementer classes
+        // two different bridge implementor classes
         std::shared_ptr<RedCircleDrawer> redCircleDrawer = 
             std::make_shared<RedCircleDrawer>();
 
@@ -103,7 +103,7 @@ namespace ShapesExample {
 
     void clientCode02()
     {
-        // Two different bridge implementer classes
+        // two different bridge implementor classes
         std::shared_ptr<IDrawAPI> redCircleDrawer = 
             std::make_shared<RedCircleDrawer>();
 

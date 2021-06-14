@@ -49,7 +49,6 @@ namespace ApdaterPatternClassAdapterApproach {
         // inbuilt support to play mp3 music files
         if (audioType == std::string("mp3")) {
             std::cout << "Playing mp3 file: name = " << fileName << std::endl;
-            return;
         }
         else {
             std::cout << "Invalid media: " << audioType << " format not supported!" << std::endl;

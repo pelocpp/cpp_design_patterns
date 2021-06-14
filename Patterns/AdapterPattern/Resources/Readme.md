@@ -41,8 +41,8 @@ Es besteht im Wesentlichen aus vier Teilen:
 
   * **Client**: Stellt die Klasse dar, die eine inkompatible Schnittstelle verwenden muss.
     Diese inkompatible Schnittstelle wird von der Klasse `Adaptee` implementiert.
-  * **ITarget**: Definiert die Schnittstelle, die der Client kennt und verwendet.
-  * **Adaptee**: Stellt eine Klasse dar, die eine vom Client benötigte Funktionalität bietet. Typischerweise unterstützt die `Adaptee`-Klasse die `ITarget`-Schnittstelle nicht.
+  * **Target**: Definiert die Schnittstelle, die der Client kennt und verwendet.
+  * **Adaptee**: Stellt eine Klasse dar, die eine vom Client benötigte Funktionalität bietet. Typischerweise unterstützt die `Adaptee`-Klasse die `Target`-Schnittstelle nicht.
   * **Adapter**: Konkrete Implementierung des Adapters. Diese Klasse übersetzt die inkompatible Schnittstelle von `Adaptee` in die Schnittstelle, die der Client verwendet.
 
 <img src="dp_adapter_01.svg" width="700">
