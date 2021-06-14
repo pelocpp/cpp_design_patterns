@@ -41,7 +41,6 @@ namespace ConceptualExample03 {
         std::weak_ptr<MediatorBaseAlternate> m_mediator;
 
     public:
-        // Important !!! Otherwise child classes like ConcreteColleagueA won't compile !!!
         ColleagueBase() = default;
 
         ColleagueBase(std::shared_ptr<MediatorBaseAlternate> mediator) : m_mediator{ mediator } {}
@@ -60,14 +59,14 @@ namespace ConceptualExample03 {
     public:
         void operationA()
         {
-            std::cout << "Component 1 does operation A." << std::endl;
+            std::cout << "Component Colleague A does operation A." << std::endl;
             std::shared_ptr<MediatorBaseAlternate> sp = m_mediator.lock();
             sp->notify(shared_from_this());
         }
 
         void operationX()
         {
-            std::cout << "Component 1 does operation X." << std::endl;
+            std::cout << "Component Colleague A does operation X." << std::endl;
         }
     };
 
@@ -76,19 +75,19 @@ namespace ConceptualExample03 {
 
         void operationB()
         {
-            std::cout << "Component 2 does operation B." << std::endl;
+            std::cout << "Component Colleague B does operation B." << std::endl;
             std::shared_ptr<MediatorBaseAlternate> sp = m_mediator.lock();
             sp->notify(shared_from_this());
         }
 
         void operationY()
         {
-            std::cout << "Component 2 does operation Y." << std::endl;
+            std::cout << "Component Colleague B does operation Y." << std::endl;
         }
 
         void operationZ()
         {
-            std::cout << "Component 2 does operation Z." << std::endl;
+            std::cout << "Component Colleague B does operation Z." << std::endl;
         }
     };
 
@@ -98,44 +97,44 @@ namespace ConceptualExample03 {
      */
     class ConcreteMediator : public MediatorBaseAlternate, public std::enable_shared_from_this<ConcreteMediator> {
     private:
-        std::shared_ptr<ConcreteColleagueA> m_component1;
-        std::shared_ptr<ConcreteColleagueB> m_component2;
+        std::shared_ptr<ConcreteColleagueA> m_componentA;
+        std::shared_ptr<ConcreteColleagueB> m_componentB;
 
     public:
         ConcreteMediator(std::shared_ptr<ConcreteColleagueA> c1, std::shared_ptr<ConcreteColleagueB> c2)
-            : m_component1(c1), m_component2(c2) {}
+            : m_componentA(c1), m_componentB(c2) {}
 
         ~ConcreteMediator() {}
 
         void setConcreteColleagueA()
         {
-            m_component1->setMediator(shared_from_this());
+            m_componentA->setMediator(shared_from_this());
         }
 
         void setConcreteColleagueB()
         {
-            m_component2->setMediator(shared_from_this());
+            m_componentB->setMediator(shared_from_this());
         }
 
         void setConcreteColleagues()
         {
-            m_component1->setMediator(shared_from_this());
-            m_component2->setMediator(shared_from_this());
+            m_componentA->setMediator(shared_from_this());
+            m_componentB->setMediator(shared_from_this());
         }
 
         void notify(std::shared_ptr<ColleagueBase> sender) const override
         {
-            if (sender == m_component1) {
+            if (sender == m_componentA) {
                 std::cout << "Mediator reacts on Component A and triggers following operations:" << std::endl;
-                m_component1->operationX();
-                m_component2->operationY();
+                m_componentA->operationX();
+                m_componentB->operationY();
             }
 
-            if (sender == m_component2) {
+            if (sender == m_componentB) {
                 std::cout << "Mediator reacts on Component B and triggers following operations:" << std::endl;
-                m_component1->operationX();
-                m_component2->operationY();
-                m_component2->operationZ();
+                m_componentA->operationX();
+                m_componentB->operationY();
+                m_componentB->operationZ();
             }
         }
     };
