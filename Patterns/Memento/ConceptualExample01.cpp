@@ -73,7 +73,7 @@ void test_conceptual_example_01() {
     using namespace ConceptualExample01;
 
     // create originator with state 'A'
-    std::shared_ptr<Originator> originator = std::make_shared<Originator>(std::string("State A"));
+    std::shared_ptr<Originator> originator = std::make_shared<Originator>(std::string{ "State A" });
     std::cout << originator->getState() << std::endl;
 
     // save state of originator using a Memento object with the help of a CareTaker
@@ -82,7 +82,7 @@ void test_conceptual_example_01() {
     caretaker->setMemento(memento);
 
     // originator changes state
-    originator->setState(std::string("State B"));
+    originator->setState(std::string{ "State B" });
     std::cout << originator->getState() << std::endl;
     
     // originator restores state

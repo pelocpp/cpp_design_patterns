@@ -33,7 +33,7 @@ namespace ConceptualExample02 {
         std::string m_date;
 
     public:
-        ConcreteMemento(std::string state) : m_state(state) {
+        ConcreteMemento(std::string state) : m_state{ state } {
             m_state = state;
             m_date = currentTimeToString();
         }
@@ -53,7 +53,7 @@ namespace ConceptualExample02 {
          * The rest of the methods are used by the CareTaker to display metadata.
          */
         std::string getName() const override {
-            return m_date + " / (" + m_state.substr(0, 9) + " ...)";
+            return m_date + " / [" + m_state.substr(0, 9) + " ...]";
         }
 
         std::string date() const override {
@@ -79,7 +79,7 @@ namespace ConceptualExample02 {
         std::string m_state;  // originator's state
 
     public:
-        Originator(std::string state) : m_state(state) {
+        Originator(std::string state) : m_state{ state } {
             std::cout << "Originator: My initial state is: " << m_state << std::endl;
         }
 
@@ -115,6 +115,7 @@ namespace ConceptualExample02 {
                 "0123456789"
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 "abcdefghijklmnopqrstuvwxyz";
+
             int stringLength = sizeof(alphanum) - 1;
 
             std::string random_string;
@@ -138,7 +139,7 @@ namespace ConceptualExample02 {
         std::shared_ptr<Originator> m_originator;
 
     public:
-        CareTaker(std::shared_ptr<Originator> originator) : m_originator(originator) {
+        CareTaker(std::shared_ptr<Originator> originator) : m_originator{ originator } {
             m_originator = originator;
         }
 
@@ -173,7 +174,10 @@ namespace ConceptualExample02 {
     };
 
     void clientCode() {
-        std::shared_ptr<Originator> originator = std::make_shared<Originator>("I'm the original state of this Originator"); 
+        std::shared_ptr<Originator> originator{ 
+            std::make_shared<Originator>("I'm the original state of this Originator")
+        };
+
         std::shared_ptr<CareTaker> caretaker = std::make_shared<CareTaker>(originator);
 
         caretaker->backup();
