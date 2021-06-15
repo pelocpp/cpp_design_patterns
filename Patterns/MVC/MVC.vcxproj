@@ -148,6 +148,10 @@
     <Image Include="Resources\mvc_01.png" />
     <Image Include="Resources\mvc_02.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ConceptualExample.cpp" />
+    <ClCompile Include="Program.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
