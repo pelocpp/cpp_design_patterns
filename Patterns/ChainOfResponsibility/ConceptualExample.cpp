@@ -23,23 +23,23 @@ namespace ConceptualExampleChainOfResponsibility {
         std::string getParam() const { return m_param; }
     };
 
-    class Handler
+    class HandlerBase
     {
     protected:
-        std::shared_ptr<Handler> m_successor;
+        std::shared_ptr<HandlerBase> m_successor;
 
     public:
-        Handler() : m_successor{ nullptr } {}
-        virtual ~Handler() {}
+        HandlerBase() : m_successor{ nullptr } {}
+        virtual ~HandlerBase() {}
 
         virtual void handleRequest(const Request&) = 0;
 
-        void setSuccessor(std::shared_ptr<Handler> ptr) {
+        void setSuccessor(std::shared_ptr<HandlerBase> ptr) {
             m_successor = ptr;
         }
     };
 
-    class ConcreteHandlerA : public Handler
+    class ConcreteHandlerA : public HandlerBase
     {
     public:
         ConcreteHandlerA() = default;
@@ -55,7 +55,7 @@ namespace ConceptualExampleChainOfResponsibility {
         }
     };
 
-    class ConcreteHandlerB : public Handler
+    class ConcreteHandlerB : public HandlerBase
     {
     public:
         ConcreteHandlerB() = default;
@@ -71,7 +71,7 @@ namespace ConceptualExampleChainOfResponsibility {
         }
     };
 
-    class ConcreteHandlerC : public Handler
+    class ConcreteHandlerC : public HandlerBase
     {
     public:
         ConcreteHandlerC() = default;
@@ -91,7 +91,7 @@ namespace ConceptualExampleChainOfResponsibility {
      * The client code is usually suited to work with a single handler.
      * In most cases, it is not even aware that the handler is part of a chain.
      */
-    void clientCode(std::shared_ptr<Handler> handler) {
+    void clientCode(std::shared_ptr<HandlerBase> handler) {
 
         std::array<Request, 8> requests = {
             Request{ 7, std::string{ "Req. No.  7"} },
@@ -114,9 +114,9 @@ void test_conceptual_example_01() {
 
     using namespace ConceptualExampleChainOfResponsibility;
 
-    std::shared_ptr<Handler> h1 { std::make_shared<ConcreteHandlerA>() };
-    std::shared_ptr<Handler> h2 { std::make_shared<ConcreteHandlerB>() };
-    std::shared_ptr<Handler> h3 { std::make_shared<ConcreteHandlerC>() };
+    std::shared_ptr<HandlerBase> h1 { std::make_shared<ConcreteHandlerA>() };
+    std::shared_ptr<HandlerBase> h2 { std::make_shared<ConcreteHandlerB>() };
+    std::shared_ptr<HandlerBase> h3 { std::make_shared<ConcreteHandlerC>() };
     h1->setSuccessor(h2);
     h2->setSuccessor(h3);
 
@@ -140,9 +140,9 @@ void test_conceptual_example_02() {
 
     using namespace ConceptualExampleChainOfResponsibility;
 
-    std::shared_ptr<Handler> h1 { std::make_shared<ConcreteHandlerA>() };
-    std::shared_ptr<Handler> h2 { std::make_shared<ConcreteHandlerB>() };
-    std::shared_ptr<Handler> h3 { std::make_shared<ConcreteHandlerC>() };
+    std::shared_ptr<HandlerBase> h1 { std::make_shared<ConcreteHandlerA>() };
+    std::shared_ptr<HandlerBase> h2 { std::make_shared<ConcreteHandlerB>() };
+    std::shared_ptr<HandlerBase> h3 { std::make_shared<ConcreteHandlerC>() };
     h1->setSuccessor(h2);
     h2->setSuccessor(h3);
 
