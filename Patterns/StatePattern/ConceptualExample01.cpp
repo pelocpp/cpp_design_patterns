@@ -13,8 +13,15 @@ namespace ConceptualExample01 {
 
     Context::Context(StateBase* state)
     {
-        m_state = state;
+        m_state = (StateBase*) 0;
         setState(state);
+    }
+
+    Context::~Context()
+    {
+        if (m_state != NULL) {
+            delete m_state;
+        }
     }
 
     void Context::request()
@@ -24,7 +31,12 @@ namespace ConceptualExample01 {
 
     void Context::setState(StateBase* base)
     {
+        if (m_state != (StateBase*) 0) {
+            delete m_state;
+        }
+
         m_state = base;
+
         std::cout << "Current state: " << m_state->getDescription() << std::endl;
     }
 

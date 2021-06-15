@@ -21,6 +21,8 @@ namespace ConceptualExample01 {
 
     public:
         Context(StateBase* state);
+        ~Context();
+
         void request();
         void setState(StateBase* base);
     };
