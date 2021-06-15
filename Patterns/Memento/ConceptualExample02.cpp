@@ -111,12 +111,12 @@ namespace ConceptualExample02 {
 
     private:
         std::string generateRandomString(int length = 10) {
-            const char alphanum[] =
+            const char alphanum[]{
                 "0123456789"
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                "abcdefghijklmnopqrstuvwxyz";
+                "abcdefghijklmnopqrstuvwxyz" };
 
-            int stringLength = sizeof(alphanum) - 1;
+            int stringLength{ sizeof(alphanum) - 1 };
 
             std::string random_string;
             for (int i = 0; i < length; i++) {
@@ -153,7 +153,7 @@ namespace ConceptualExample02 {
                 return;
             }
 
-            std::shared_ptr<Memento> memento = m_mementos.back();
+            std::shared_ptr<Memento> memento{ m_mementos.back() };
             m_mementos.pop_back();
             std::cout << "CareTaker: Restoring state to: " << memento->getName() << std::endl;
             
@@ -178,7 +178,7 @@ namespace ConceptualExample02 {
             std::make_shared<Originator>("I'm the original state of this Originator")
         };
 
-        std::shared_ptr<CareTaker> caretaker = std::make_shared<CareTaker>(originator);
+        std::shared_ptr<CareTaker> caretaker{ std::make_shared<CareTaker>(originator) };
 
         caretaker->backup();
         originator->doSomething();

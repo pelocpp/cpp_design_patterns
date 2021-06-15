@@ -63,7 +63,7 @@ namespace ObserverDesignPatternClassic {
         }
 
         void notify() override {
-            std::list<IObserver*>::iterator iterator = m_list_observers.begin();
+            std::list<IObserver*>::iterator iterator{ m_list_observers.begin() };
             howManyObserver();
             while (iterator != m_list_observers.end()) {
                 (*iterator)->update(m_message);
@@ -103,27 +103,32 @@ namespace ObserverDesignPatternClassic {
         int m_number;
 
     public:
-        Observer(Subject& subject) : m_subject(subject) {
+        Observer(Subject& subject) : m_subject{ subject } 
+        {
             m_subject.attach(this);
             std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
             m_number = Observer::m_static_number;
         }
 
-        virtual ~Observer() {
+        virtual ~Observer() 
+        {
             std::cout << "Goodbye, I was the Observer \"" << m_number << "\".\n";
         }
 
-        void update(const std::string& m_messagefrom_subject) override {
+        void update(const std::string& m_messagefrom_subject) override
+        {
             m_messageFromSubject = m_messagefrom_subject;
             printInfo();
         }
 
-        void removeMeFromTheList() {
+        void removeMeFromTheList() 
+        {
             m_subject.detach(this);
             std::cout << "Observer \"" << m_number << "\" removed from the list.\n";
         }
 
-        void printInfo() {
+        void printInfo() 
+        {
             std::cout << "Observer \"" << m_number << "\": a new message is available --> " << m_messageFromSubject << "\n";
         }
     };
@@ -131,10 +136,10 @@ namespace ObserverDesignPatternClassic {
     int Observer::m_static_number = 0;
 
     void clientCode() {
-        Subject* subject = new Subject;
-        Observer* observer1 = new Observer(*subject);
-        Observer* observer2 = new Observer(*subject);
-        Observer* observer3 = new Observer(*subject);
+        Subject* subject{ new Subject };
+        Observer* observer1 { new Observer(*subject) };
+        Observer* observer2 { new Observer(*subject) };
+        Observer* observer3 { new Observer(*subject) };
         Observer* observer4;
         Observer* observer5;
 

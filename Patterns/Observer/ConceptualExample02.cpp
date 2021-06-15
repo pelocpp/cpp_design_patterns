@@ -66,7 +66,7 @@ namespace ObserverDesignPatternSmartPointer {
         }
 
         void notify() override {
-            std::list<std::shared_ptr<IObserver>>::iterator iterator = m_list_observers.begin();
+            std::list<std::shared_ptr<IObserver>>::iterator iterator{ m_list_observers.begin() };
             howManyObserver();
             while (iterator != m_list_observers.end()) {
                 std::shared_ptr<IObserver> ptr = *iterator;
@@ -106,21 +106,25 @@ namespace ObserverDesignPatternSmartPointer {
         int m_number;
 
     public:
-        Observer() {
+        Observer() 
+        {
             std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
             m_number = Observer::m_static_number;
         }
 
-        virtual ~Observer() {
+        virtual ~Observer() 
+        {
             std::cout << "Goodbye, I was the Observer \"" << m_number << "\".\n";
         }
 
-        void update(const std::string& m_messagefrom_subject) override {
+        void update(const std::string& m_messagefrom_subject) override 
+        {
             m_messageFromSubject = m_messagefrom_subject;
             printInfo();
         }
 
-        void printInfo() {
+        void printInfo() 
+        {
             std::cout << "Observer \"" << m_number << "\": a new message is available --> " << m_messageFromSubject << "\n";
         }
     };
@@ -129,27 +133,27 @@ namespace ObserverDesignPatternSmartPointer {
 
     void clientCode() {
 
-        std::shared_ptr<Subject> subject = std::make_shared<Subject>();
+        std::shared_ptr<Subject> subject{ std::make_shared<Subject>() };
 
-        std::shared_ptr<Observer> observer1 = std::make_shared<Observer>();
+        std::shared_ptr<Observer> observer1{ std::make_shared<Observer>() };
         subject->attach(observer1);
 
-        std::shared_ptr<Observer> observer2 = std::make_shared<Observer>();
+        std::shared_ptr<Observer> observer2{ std::make_shared<Observer>() };
         subject->attach(observer2);
 
-        std::shared_ptr<Observer> observer3 = std::make_shared<Observer>();
+        std::shared_ptr<Observer> observer3{ std::make_shared<Observer>() };
         subject->attach(observer3);
 
         subject->createMessage("Hello World! :D");
         subject->detach(observer3);
 
         subject->createMessage("The weather is hot today! :p");
-        std::shared_ptr<Observer> observer4 = std::make_shared<Observer>();
+        std::shared_ptr<Observer> observer4{ std::make_shared<Observer>() };
         subject->attach(observer4);
 
         subject->detach(observer2);
 
-        std::shared_ptr<Observer> observer5 = std::make_shared<Observer>();
+        std::shared_ptr<Observer> observer5{ std::make_shared<Observer>() };
         subject->attach(observer5);
 
         subject->createMessage("My new car is great! ;)");
