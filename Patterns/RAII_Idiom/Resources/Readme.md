@@ -33,6 +33,10 @@ public:
     explicit RAII(T* p) : m_p(p) {}
     ~RAII() { delete m_p; };
 
+    // prevent copy semantics
+    RAII(const RAII&) = delete;
+    RAII& operator=(const RAII&) = delete;
+
     // grant access to pointer inside RAII object
     T* operator->() { return m_p; }
     const T* operator->() const { return m_p; }
