@@ -139,9 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Resources\OpenClosedPrinciple.md" />
     <None Include="Resources\SingleResponsibilityPrinciple.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="OCP.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="SRP.cpp" />
   </ItemGroup>

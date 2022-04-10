@@ -15,7 +15,7 @@ In anderen Worten:
 Das *Single-Responsibility-Prinzip* besagt, dass Klassen bis zu dem Punkt &ldquo;kohärent&rdquo; (semantisch zusammenhängend) sein sollten,
 dass sie eine einzige Verantwortung haben, wobei Verantwortung als &ldquo;ein Grund für die Änderung&rdquo; definiert wird.
 
-#### Example violating the Single Responsibility Principle
+#### Example: Violating the Single Responsibility Principle
 
 ```cpp
 01: class Journal
@@ -57,97 +57,52 @@ dass sie eine einzige Verantwortung haben, wobei Verantwortung als &ldquo;ein Gr
     * Änderungen im Zusammenhang mit der `Journal` Klasse
     * Änderungen im Zusammenhang mit der Persistenz (Datenablage) der `Journal` Klasse
 
-// ===============================================
 
-http://www.vishalchovatiya.com/single-responsibility-principle-in-cpp-solid-as-a-rock/
+#### Example: Respecting the Single Responsibility Principle
 
+Als Lösung stellen wir das vor, was man auch unter
+der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; versteht:
 
-ALT
+```cpp
+01: class Journal 
+02: {
+03:     std::string               m_title;
+04:     std::vector<std::string>  m_entries;
+05: 
+06: public:
+07:     explicit Journal(const std::string& title) : m_title{ title } {}
+08: 
+09:     void addEntries(const std::string& entry) {
+10:         static uint32_t count = 0;
+11:         count++;
+12:         std::string text = std::to_string(count) + ": " + entry;
+13:         m_entries.push_back(text);
+14:     }
+15: 
+16:     auto get_entries() const { return m_entries; }
+17: };
+18: 
+19: struct SavingManager
+20: {
+21:     static void save(const Journal& journal, const std::string& filename, std::ostream& os) {
+22: 
+23:         for (auto& entry : journal.get_entries()) {
+24:             os << entry << std::endl;
+25:         }
+26:     }
+27: };
+```
 
-#### Problem:
+  * Klasse `Journal` kümmert sich nur um Daten und Funktionalitäten, die mit dem Journal zusammenhängen.
+  * Das Aspekt des Sichern von Journaldaten ist an einer anderen zentralen Stelle zusammengefasst: 
+    Klasse `SavingManager`.
+  * Wenn Klasse `SavingManager` wächst oder Änderungen bedarf, ist ihr gesamter Code an einer Stelle.
 
-Das *Bridge Pattern* genießt einen guten Ruf,
-da sich mit ihm die abstrakten Elemente der Klasse von den Implementierungsdetails trennen lassen.
-Dieses Muster ist vor allem dann zu empfehlen,
-wenn die betrachteten Klassen häufig variieren,
-da sich dann Änderungen an der Codebasis bei minimalem Wissen über das Programm leicht durchführen lassen.
+#### Vorteile des Single-Responsibility-Prinzips
 
-Betrachten wir ein Beispiel, in dem eine Implementierung auf zwei oder mehreren Realisierungen fußt.
-Zum Beispiel ein Programm, das die Persistenz von Objekten auf verschiedenen Plattformen (Betriebssystemen) realisiert.
-Einige Objekte sollen in einer Datenbank und andere Objekte wiederum im Dateisystem des unterlagerten
-Betriebssystems gespeichert werden. 
-Wird das Programm um diese Funktionalität &ldquo;straight forward&rdquo; erweitert,
-sind Probleme vorprogrammiert, da die Abstraktion mit der Implementierung verknüpft wird.
-In diesem Fall ist es besser, das *Bridge Pattern*  zu verwenden und die Abstraktion von der Implementierung zu trennen.
-Wird dieses Muster nicht verwendet, kann man die Beobachtung machen,
-dass Implementierungsdetails in einer Abstraktion enthalten sind.
-
-Ein weiterer Vorteil des *Bridge Patterns* ist die Möglichkeit, Implementierungsdetails zur Laufzeit zu ändern.
-Dies ermöglicht es dem Benutzer, Implementierungen zu wechseln, um auf diese Weise zu bestimmen,
-wie die Software mit anderen Systemen zusammenarbeitet.
-
-#### Lösung:
-
-#### Struktur (UML):
-
-Das folgende UML-Diagramm beschreibt eine Implementierung des *Bridge Patterns*.
-Es besteht im Wesentlichen aus vier Teilen:
-
-  * **Abstraction**: Definiert eine Abstraktionsschnittstelle. Sie fungiert als Basisklasse für andere verfeinerte Abstraktionsklassen.
-    Sie bezieht sich auch auf eine bestimmte Implementierung, die für plattformspezifische Funktionen verwendet wird.
-  * **RefinedAbstraction**: Stellt eine verfeinerte Variation einer Abstraktionsschnittstelle dar,
-    enthält jedoch keine Implementierungsdetails. *De facto* erweitert sie nur die Abstraktion.
-  * **Implementor**: Definiert die Schnittstelle für Implementierungsklassen.
-  * **ConcreteImplementor**: Diese Klasse erbt von der Klasse `Implementor`. Es kann mehr als eine Instanz von `Implementor`-Klassen geben,
-    die dieselbe Schnittstelle unterstützen, aber plattformspezifische Funktionen bereitstellen.
-
-<img src="dp_bridge_pattern_01.svg" width="600">
-
-*Abbildung* 1: Schematische Darstellung des *Bridge Patterns*.
-
-
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version
-
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Ein etwas ausführlicheres Beispiel
-
----
-
-#### 'Real-World' Beispiel:
-
-Bei diesem Muster steht eine Schnittstelle im Mittelpunkt,
-die als Brücke fungiert, die die Funktionalität konkreter Klassen unabhängig
-von den Schnittstellenimplementierungsklassen macht.
-Beide Klassentypen können strukturell verändert werden, ohne sich gegenseitig zu beeinflussen.
-
-Wir demonstrieren die Verwendung des Bridge-Entwurfsmusters anhand des folgenden Beispiels,
-in dem ein Kreis in verschiedenen Farben mit derselben abstrakten Basisklassenmethode,
-aber unterschiedlichen Bridge-Implementiererungsklassen gezeichnet werden kann.
-
-In *Abbildung* 2 finden Sie eine `IDrawAPI`-Schnittstelle vor, die als Bridge-Schnittstellenklasse fungiert,
-und zwei konkrete Klassen `RedCircleDrawer` und `GreenCircleDrawer`,
-die die `IDrawAPI`-Schnittstelle implementieren.
-
-`Shape` ist eine abstrakte Klasse und besitzt einen `IDrawAPI`-Schnittstellenzeiger
-(*Raw*-Pointer oder Smart-Pointer). In der Anwendung finden Sie ein Beispiel, in dem ein Kreis mit zwei verschiedenen Farben 
-gezeichnet wird:
-
-<img src="dp_bridge_pattern_02.svg" width="600">
-
-*Abbildung* 2: Ein Anwendungsbeispiel des *Bridge Patterns*.
-
----
-
-Die Anregungen zum konzeptionellen Beispiel finden Sie unter
-
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/bridge/cpp/example#example-0)
-
-und 
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/438922/Design-Patterns-2-of-3-Structural-Design-Patterns#Bridge)
-
-vor.
+  * Expressiveness &ndash; Ausdruckskraft
+  * Maintainability &ndash; Wartbarkeit
+  * Reusability &ndash; Wiederverwendbarkeit
 
 ---
 

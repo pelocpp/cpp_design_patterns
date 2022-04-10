@@ -18,12 +18,18 @@
     <None Include="Resources\SingleResponsibilityPrinciple.md">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\OpenClosedPrinciple.md">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SRP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OCP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
