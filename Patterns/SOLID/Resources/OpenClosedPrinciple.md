@@ -9,22 +9,19 @@
 
 #### Ziel / Absicht:
 
-&ldquo;Klassen sollten für Erweiterungen offen, für Änderungen geschlossen sein&rdquo;
+&ldquo;Klassen sollten für Erweiterungen offen, für Änderungen geschlossen sein.&rdquo;
 
 In anderen Worten:
 Das Prinzip bedeutet wörtlich genommen, dass man in der Lage sein sollte,
-das Verhalten einer Klasse zu erweitern, ohne diese dabei zu ändern.
-
+das Verhalten einer Klasse zu erweitern, ohne sie dabei zu verändern.
 Auf den ersten Blick mag das *Open-Closed-Prinzip* etwas seltsam erscheinen und die Frage aufwerfen,
-wie man das Verhalten einer Klasse ändern können soll, ohne diese zu ändern?
+wie man das Verhalten einer Klasse &ldquo;ändern&rdquo; können soll, ohne diese dabei zu &ldquo;verändern&rdquo;?
 
-Es gibt darauf Antworten im objektorientierten Design wie
+Es gibt darauf im objektorientierten Design mehrere Antworten wie beispielsweise
 
   * dynamischer Polymorphismus,
-  * statischer Polymorphismus und
+  * statischer Polymorphismus und/oder
   * C++-Templates
-
-nur um einige Möglichkeiten aufzuzählen. 
 
 Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
 
@@ -35,15 +32,13 @@ Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
 
   * Wir betrachten eine Reihe von Produkten (Klasse `Product`) und filtern diese
     nach einigen ihrer Attribute. An dem Beispielcode ist nichts auszusetzen,
-    solange sich die Anforderungen nicht mehr ändern &ndash; was beim Software-Engineering niemals der Fall ist :).
-
-  * Wir stellen uns nun der Situation, dass nachträglich
+    solange sich die Anforderungen nicht mehr ändern &ndash; was beim Software-Engineering niemals der Fall ist :)
+  * Wir stellen uns nun vor, dass nachträglich
     Anforderungsänderungen und einige neue Filter-Operationen verlangt werden.
-    In diesem Fall sind die Klassen `Product` und `ProductFilter` erneut zu ändern
+    In diesem Fall sind die Klassen `Product` und `ProductFilter` zu ändern
     und neue Filtermethoden hinzufügen.
-
   * Dieser Ansatz ist problematisch, da wir zwei Attribute (`Color` und `Size`) 
-    und drei Funktionen (`Color`, `Size` und ihre Kombination) haben.
+    und drei Filterfunktionen (bzgl. `Color`, `Size` und ihre Kombination) haben.
     Ein weiteres Attribut hätte zur Folge, dass acht neue Funktionen zu implementieren sind.
     Dieser Ansatz ist nicht nur nicht zielführend,
     der bereits existierende, realisierte Quellcode ist zu modifizieren.

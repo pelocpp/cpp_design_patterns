@@ -9,11 +9,11 @@
 
 #### Ziel / Absicht:
 
-&ldquo;Eine Klasse sollte nur einen Grund haben, geändert zu werden&rdquo;
+&ldquo;Eine Klasse sollte nur einen Grund haben, geändert zu werden.&rdquo;
 
 In anderen Worten:
 Das *Single-Responsibility-Prinzip* besagt, dass Klassen bis zu dem Punkt &ldquo;kohärent&rdquo; (semantisch zusammenhängend) sein sollten,
-dass sie eine einzige Verantwortung haben, wobei Verantwortung als &ldquo;ein Grund für die Änderung&rdquo; definiert wird.
+wie sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &ldquo;für eine Änderung&rdquo; definiert wird.
 
 #### Example: Violating the Single Responsibility Principle
 
@@ -44,24 +44,24 @@ dass sie eine einzige Verantwortung haben, wobei Verantwortung als &ldquo;ein Gr
 24: };
 ```
 
-  * Das obige C++-Beispiel könnte in Ordnung zu sein, solange es nur eine einzelne Domänenklasse gibt, z. B. `Journal`.
+  * Das obige C++-Beispiel könnte in Ordnung zu sein, solange es nur eine einzige Domänenklasse gibt, hier die Klasse `Journal`.
     Dies ist jedoch in einer realen Anwendung normalerweise nicht der Fall.
   * Wenn wir beginnen, weitere Domänenklassen wie `Book`, `File` usw. hinzuzufügen,
     ist die Speichermethode `save` für alle Domänenklassen separat zu implementieren.
-  * Das eigentliche Problem entsteht, wenn die Speicherfunktionalität geändert werden soll.
-    Zum Beispiel wäre es denbkbar, dass eines Tages die Daten an Stelle in Dateien in einer Datenbank abgelegt werden sollen.
+  * Das eigentliche Problem entsteht, wenn die Funktionalität für die Datenablage geändert werden soll.
+    Zum Beispiel wäre es denbkbar, dass die Daten an Stelle in Dateien in einer Datenbank abgelegt werden sollen.
     In diesem Fall müsste man jede Domänenklassenimplementierung durchlaufen und den gesamten Code ändern,
-    was natürlich völlig sinnlos ist.
-  * Der Verstoß gegen das Single-Responsibility-Prinzip in diesem Beispiel ist offensichtlich:
+    was natürlich sinnlos ist.
+  * Der Verstoß gegen das *Single-Responsibility-Prinzip* in diesem Beispiel ist offensichtlich:
     Die Klasse `Journal` besitzt zwei Gründe, um geändert zu werden:
-    * Änderungen im Zusammenhang mit der `Journal` Klasse
-    * Änderungen im Zusammenhang mit der Persistenz (Datenablage) der `Journal` Klasse
+    * Änderungen im Zusammenhang mit der `Journal` Klasse selbst.
+    * Änderungen im Zusammenhang mit der Persistenz (Datenablage) der `Journal` Klasse.
 
 
 #### Example: Respecting the Single Responsibility Principle
 
-Als Lösung stellen wir das vor, was man auch unter
-der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; versteht:
+Wir betrachten eine Überarbeitung des letzten Beispiels,
+Die man auch unter der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; einordnen könnte:
 
 ```cpp
 01: class Journal 
@@ -93,10 +93,10 @@ der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; versteht:
 27: };
 ```
 
-  * Klasse `Journal` kümmert sich nur um Daten und Funktionalitäten, die mit dem Journal zusammenhängen.
-  * Das Aspekt des Sichern von Journaldaten ist an einer anderen zentralen Stelle zusammengefasst: 
+  * Die Klasse `Journal` kümmert sich jetzt nur um ihre Daten und Funktionen, die mit dem Journal zusammenhängen.
+  * Der Aspekt des Sicherns von Journaldaten ist an einer anderen, zentralen Stelle zusammengefasst: 
     Klasse `SavingManager`.
-  * Wenn Klasse `SavingManager` wächst oder Änderungen bedarf, ist ihr gesamter Code an einer Stelle.
+  * Wenn Änderungen an der Klasse `SavingManager` notwendig sind, ist ihr gesamter Code an einer Stelle vorhanden.
 
 #### Vorteile des Single-Responsibility-Prinzips
 

@@ -45,8 +45,8 @@ Erzeugung wartbarer und erweiterbarer Software unter dem Begriff
 das Schreiben hochwertiger Software unabdingbar sind. Robert C. Martin
 erklärte diese Prinzipien zu den wichtigsten Entwurfsprinzipien:
 
-  * **S**ingle Responsibility Prinzip (SRP)
-  * **O**pen-Closed Prinzip (OCP)
+  * [**S**ingle Responsibility Prinzip (SRP)](../Patterns/SOLID/Resources/SingleResponsibilityPrinciple.md)
+  * [**O**pen-Closed Prinzip (OCP)](../Patterns/SOLID/Resources/OpenClosedPrinciple.md)
   * **L**iskovsches Substitutionsprinzip (LSP)
   * **I**nterface Segregation Prinzip (ISP)
   * **D**ependency Inversion Prinzip (DIP)
@@ -58,23 +58,6 @@ Im Überblick betrachtet lassen sich diese Prinzipien wie folgt zusammenfassen:
   * *Liskovsches Substitutionsprinzip*:<br/>Dass sich eine abgeleitete Klasse stets so zu verhalten habe, wie die zugrunde liegende Basisklasse, fordert das LSP. Das Ziel ist, jederzeit an Stelle der Superklasse eine Subklasse ohne semantische Änderungen verwenden zu können.
   * *Interface Segregation Prinzip*:<br/>Große Interfaces sind auf mehrere kleine aufzuteilen, sodass ein Verwender nur genau jene Interfaces implementieren muss, die tatsächlich notwendig sind.
   * *Dependency Inversion Prinzip*:<br/>Abhängigkeiten sollten stets von konkreten zu abstrakten Modulen verlaufen, sodass konkrete Implementierungen leichter auszutauschen sind und sich voneinander entkoppeln lassen.
-
-
-// WEITER / NEU
-
-| Muster | Kurzbeschreibung |
-|:-------------- |----|
-| [(Simple) Factory](../Patterns/Factory/Resources/Readme.md) | Ein **Simple Factory** Objekt wird typischerweise vom Client über eine statische Methode aufgerufen und gibt eines von mehreren Objekten zurück, die alle dasselbe übergeordnete Objekt erben bzw. im Falle einer Schnittstelle implementieren. |
-| [Factory Method](../Patterns/FactoryMethod/Resources/Readme.md) | Das **Factory Method** Entwurfsmuster dient der Entkopplung des Clients von der konkreten Instanziierung einer Klasse. Die Klasse des erstellten Objekts kann elegant ausgetauscht werden. |
-| [Abstract Factory](../Patterns/AbstractFactory/Resources/Readme.md) | Das **Abstract Factory** Design Pattern dient der Definition einer zusammenhängenden Familie aus Produkten. Die Familien können elegant ausgetauscht werden. |
-| [Builder](../Patterns/Builder/Resources/Readme.md) | Ermöglicht schrittweises Erstellen komplexer Objekte. |
-| [Prototype](../Patterns/Prototype/Resources/Readme.md) | Erstellen von Kopien vorhandener Objekte, ohne den Code von diesen Klassen abhängig zu machen. |
-| [Single Responsibility Principle](../Patterns/Singleton/Resources/Readme.md) | Das **Singleton** Entwurfsmuster sorgt dafür, dass es von einer Klasse nur eine einzige Instanz gibt und diese global zugänglich ist. |
-
-Tabelle 1. Erzeugungsmuster (*Creational Design Pattern*).
-
-
-
 
 #### Weitere Entwurfsprinzipien
 
