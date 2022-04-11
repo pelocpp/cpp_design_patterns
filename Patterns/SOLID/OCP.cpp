@@ -19,15 +19,16 @@ struct Product
     Size        m_size;
 };
 
-using Products = std::vector<std::shared_ptr<Product>>;
+template <typename T>
+using Products = std::vector<std::shared_ptr<T>>;
 
 namespace AntiConceptualExampleOCP {
 
     struct ProductFilter 
     {
-        static Products byColor(Products products, Color color)
+        static Products<Product> byColor(Products<Product> products, Color color)
         {
-            Products result{};
+            Products<Product> result{};
             for (const auto& product : products) {
                 if (product->m_color == color) {
                     result.push_back(product);
@@ -36,9 +37,9 @@ namespace AntiConceptualExampleOCP {
             return result;
         }
 
-        static Products bySize(Products products, Size size)
+        static Products<Product> bySize(Products<Product> products, Size size)
         {
-            Products result{};
+            Products<Product> result{};
             for (const auto& product : products) {
                 if (product->m_size == size) {
                     result.push_back(product);
@@ -47,9 +48,9 @@ namespace AntiConceptualExampleOCP {
             return result;
         }
 
-        static Products bySizeAndColor(Products products, Size size, Color color)
+        static Products<Product> bySizeAndColor(Products<Product> products, Size size, Color color)
         {
-            Products result{};
+            Products<Product> result{};
             for (const auto& product : products) {
                 if (product->m_size == size && product->m_color == color) {
                     result.push_back(product);
@@ -68,22 +69,24 @@ namespace ConceptualExampleOCP {
         virtual bool isSatisfied(const std::shared_ptr<T>& product) const = 0;
     };
 
-    struct ColorSpecification : Specification<Product> 
+    template <typename T>
+    struct ColorSpecification : public Specification<T> 
     {
         Color m_color;
         ColorSpecification(Color color) : m_color(color) {}
 
-        bool isSatisfied(const std::shared_ptr<Product>& product) const {
+        bool isSatisfied(const std::shared_ptr<T>& product) const {
             return product->m_color == m_color; 
         }
     };
 
-    struct SizeSpecification : Specification<Product> 
+    template <typename T>
+    struct SizeSpecification : public Specification<T>
     {
         Size m_size;
         SizeSpecification(Size size) : m_size(size) {}
         
-        bool isSatisfied(const std::shared_ptr<Product>& product) const {
+        bool isSatisfied(const std::shared_ptr<T>& product) const {
             return product->m_size == m_size;
         }
     };
@@ -97,11 +100,11 @@ namespace ConceptualExampleOCP {
         virtual Items<T> filter(Items<T> products, const Specification<T>& spec) = 0;
     };
 
-    struct ProductFilter : Filter<Product>
+    struct ProductFilter : public Filter<Product>
     {
-        Products filter(Products products, const Specification<Product>& spec)
+        Products<Product> filter(Products<Product> products, const Specification<Product>& spec)
         {
-            Products result;
+            Products<Product> result;
             for (auto& product : products) {
                 if (spec.isSatisfied(product))
                     result.push_back(product);
@@ -110,9 +113,9 @@ namespace ConceptualExampleOCP {
         }
     };
 
-    // logical 'And' specification
+    // combining logical specifications - with logical 'and'
     template <typename T>
-    struct AndSpecification : Specification<T> 
+    struct AndSpecification : public Specification<T>
     {
         const Specification<T>& m_first;
         const Specification<T>& m_second;
@@ -125,44 +128,36 @@ namespace ConceptualExampleOCP {
         }
     };
 
-    // logical 'And' specification using operator notation
+    // combining logical specifications - with logical 'and' using operator notation
     template <typename T>
     AndSpecification<T> operator&&(const Specification<T>& first, const Specification<T>& second) {
         return { first, second };
     }
 
-    // NEU !!!!!!!!!!!!!
+    // combining multiple logical specifications - with variadic templates
     template <typename T>
-    struct GenericSpecification : Specification<T>
+    using ProductSpecification = Specification<T>;
+
+    template <typename T>
+    struct GenericSpecification 
     {
-        std::initializer_list<Specification<T>> m_list;
-
-       // bool m_result;
-
-        //const Specification<T>& first;
-        //const Specification<T>& second;
+        std::vector<std::shared_ptr<Specification<T>>> m_vec;
 
         template <typename ... TARGS>
-        GenericSpecification(const Specification<TARGS>& ... args)
-        { 
-            m_list = { args ... };
-
-            //const std::shared_ptr<Product>& product{};
-
-            //m_result = (... && args.isSatisfied(product));
+        GenericSpecification(const TARGS& ... args)
+        {
+           m_vec = { args  ... };;
         }
 
-        bool isSatisfied(const std::shared_ptr<Product>& product) const {
-            // return first.isSatisfied(product) && second.isSatisfied(product);
-
-           // bool result = (... && item.isSatisfied(product));
+        bool isSatisfied(const std::shared_ptr<T>& product) const {
 
             bool result = std::accumulate(
-                std::begin(m_list),
-                std::end(m_list),
+                std::begin(m_vec),
+                std::end(m_vec),
                 true,
-                [=](bool last, const auto& next) {
-                    return  last && next.isSatisfied(product);
+                [this, product](bool last, const auto& next) {
+                    bool tmp = next->isSatisfied(product);
+                    return last && tmp;
                 }
             );
 
@@ -170,14 +165,30 @@ namespace ConceptualExampleOCP {
         }
     };
 
+    struct ProductEx
+    {
+        std::string m_name;
+        Color       m_color;
+        Size        m_size;
+        double      m_price;
+    };
 
+    struct PriceSpecification : public Specification<ProductEx>
+    {
+        double m_price;
+        PriceSpecification(double price) : m_price(price) {}
+
+        bool isSatisfied(const std::shared_ptr<ProductEx>& product) const {
+            return product->m_price == m_price;
+        }
+    };
 }
 
 void test_anti_conceptual_example_ocp ()
 {
     using namespace AntiConceptualExampleOCP;
 
-    Products products
+    Products<Product> products
     {
         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
         std::make_shared<Product>("Chair", Color::Black, Size::Large),
@@ -195,7 +206,7 @@ void test_conceptual_example_ocp_01()
 {
     using namespace ConceptualExampleOCP;
 
-    Products products
+    Products<Product> products
     {
         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
         std::make_shared<Product>("Chair", Color::Black, Size::Large),
@@ -203,7 +214,7 @@ void test_conceptual_example_ocp_01()
     };
 
     ProductFilter productFilter;
-    ColorSpecification greenProducts = ColorSpecification{ Color::Green };
+    ColorSpecification<Product> greenProducts = ColorSpecification<Product>{ Color::Green };
 
     for (const auto& product : productFilter.filter(products, greenProducts)) {
         std::cout << product->m_name << " is green" << std::endl;
@@ -214,7 +225,7 @@ void test_conceptual_example_ocp_02()
 {
     using namespace ConceptualExampleOCP;
 
-    Products products
+    Products<Product> products
     {
         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
         std::make_shared<Product>("Chair", Color::Black, Size::Large),
@@ -222,8 +233,8 @@ void test_conceptual_example_ocp_02()
     };
 
     ProductFilter productFilter;
-    ColorSpecification greenProducts = ColorSpecification{ Color::Green };
-    SizeSpecification largeProducts = SizeSpecification{ Size::Large };
+    ColorSpecification<Product> greenProducts = ColorSpecification<Product>{ Color::Green };
+    SizeSpecification largeProducts = SizeSpecification<Product>{ Size::Large };
 
     for (const auto& product : productFilter.filter(products, greenProducts && largeProducts)) {
         std::cout << product->m_name << " is green and large" << std::endl;
@@ -234,7 +245,7 @@ void test_conceptual_example_ocp_03()
 {
     using namespace ConceptualExampleOCP;
 
-    Products products
+    Products<Product> products
     {
         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
         std::make_shared<Product>("Chair", Color::Black, Size::Large),
@@ -243,13 +254,13 @@ void test_conceptual_example_ocp_03()
 
     // combined specification
     AndSpecification<Product> specification = {
-        SizeSpecification{ Size::Small },
-        ColorSpecification{ Color::Gray }
+        SizeSpecification<Product>{ Size::Small },
+        ColorSpecification<Product>{ Color::Gray }
     };
 
     // another combined specification - using overloaded operator &&
     AndSpecification<Product> anotherSpecification =
-        SizeSpecification{ Size::Medium } && ColorSpecification{ Color::Red };
+        SizeSpecification<Product>{ Size::Medium } && ColorSpecification<Product>{ Color::Red };
 
     auto computer = std::make_shared<Product>("Computer", Color::Gray, Size::Small);
     auto chair = std::make_shared<Product>("Chair", Color::Black, Size::Large);
@@ -266,13 +277,11 @@ void test_conceptual_example_ocp_03()
     std::cout << "Result: " << std::boolalpha << result << std::endl;
 }
 
-// NEU !!!!!!!!!
-
-void test_conceptual_example_ocp_10()
+void test_conceptual_example_ocp_04()
 {
     using namespace ConceptualExampleOCP;
 
-    Products products
+    Products<Product> products
     {
         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
         std::make_shared<Product>("Chair", Color::Black, Size::Large),
@@ -281,13 +290,15 @@ void test_conceptual_example_ocp_10()
 
     // combined specification
     GenericSpecification<Product> specification {
-        SizeSpecification{ Size::Small },
-        ColorSpecification{ Color::Gray }
+        std::make_shared<SizeSpecification<Product>>(Size::Small) ,
+        std::make_shared<ColorSpecification<Product>>(Color::Gray)
     };
 
-    // another combined specification - using overloaded operator &&
-    //AndSpecification<Product> anotherSpecification =
-    //    SizeSpecification{ Size::Medium } && ColorSpecification{ Color::Red };
+    // another combined specification
+    GenericSpecification<Product> anotherSpecification{
+        std::make_shared<SizeSpecification<Product>>(Size::Medium) ,
+        std::make_shared<ColorSpecification<Product>>(Color::Red)
+    };
 
     auto computer = std::make_shared<Product>("Computer", Color::Gray, Size::Small);
     auto chair = std::make_shared<Product>("Chair", Color::Black, Size::Large);
@@ -297,11 +308,51 @@ void test_conceptual_example_ocp_10()
     result = specification.isSatisfied(computer);
     std::cout << "Result: " << std::boolalpha << result << std::endl;
 
-    //result = specification.isSatisfied(chair);
-    //std::cout << "Result: " << std::boolalpha << result << std::endl;
+    result = specification.isSatisfied(chair);
+    std::cout << "Result: " << std::boolalpha << result << std::endl;
 
-    //result = anotherSpecification.isSatisfied(headset);
-    //std::cout << "Result: " << std::boolalpha << result << std::endl;
+    result = anotherSpecification.isSatisfied(headset);
+    std::cout << "Result: " << std::boolalpha << result << std::endl;
+}
+
+void test_conceptual_example_ocp_05()
+{
+    using namespace ConceptualExampleOCP;
+
+    Products<ProductEx> products
+    {
+        std::make_shared<ProductEx>("Computer", Color::Gray, Size::Small, 999.00),
+        std::make_shared<ProductEx>("Chair", Color::Black, Size::Large, 79.00),
+        std::make_shared<ProductEx>("Headset", Color::Red, Size::Medium, 19.99)
+    };
+
+    // combined specification
+    GenericSpecification<ProductEx> specification{
+        std::make_shared<SizeSpecification<ProductEx>>(Size::Small),
+        std::make_shared<ColorSpecification<ProductEx>>(Color::Gray),
+        std::make_shared<PriceSpecification>(12.00)
+    };
+
+    // another combined specification
+    GenericSpecification<ProductEx> anotherSpecification{
+        std::make_shared<SizeSpecification<ProductEx>>(Size::Medium),
+        std::make_shared<ColorSpecification<ProductEx>>(Color::Red),
+        std::make_shared<PriceSpecification>(19.99)
+    };
+
+    auto computer = std::make_shared<ProductEx>("Computer", Color::Gray, Size::Small, 999.00);
+    auto chair = std::make_shared<ProductEx>("Chair", Color::Black, Size::Large, 79.00);
+    auto headset = std::make_shared<ProductEx>("Headset", Color::Red, Size::Medium, 19.99);
+
+    bool result{};
+    result = specification.isSatisfied(computer);
+    std::cout << "Result: " << std::boolalpha << result << std::endl;
+
+    result = specification.isSatisfied(chair);
+    std::cout << "Result: " << std::boolalpha << result << std::endl;
+
+    result = anotherSpecification.isSatisfied(headset);
+    std::cout << "Result: " << std::boolalpha << result << std::endl;
 }
 
 // ===========================================================================

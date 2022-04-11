@@ -106,6 +106,14 @@ Die man auch unter der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; eino
 
 ---
 
+Die Anregungen zu diesem Beispiel finden Sie unter
+
+[Single Responsibility Principle in C++](http://www.vishalchovatiya.com/single-responsibility-principle-in-cpp-solid-as-a-rock/)
+
+von Vishal Chovatija.
+
+---
+
 [Zurück](../../../Resources/Readme_03_Design_Principles.md)
 
 ---
