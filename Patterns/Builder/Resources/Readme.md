@@ -4,9 +4,9 @@
 
 ---
 
-<img src="dp_builder_pattern_intro.webp" style="padding-left: 100px;" width="500" />
+<img src="dp_builder_pattern_intro.png" width="500" />
 
-<sup>(Quelle: [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/category/design-patterns/))</sup>
+<sup>(Credits: [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/category/design-patterns/))</sup>
 
 ---
 
