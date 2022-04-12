@@ -4,6 +4,12 @@
 
 ---
 
+<img src="dp_builder_pattern_intro.webp" style="padding-left: 100px;" width="500" />
+
+<sup>(Quelle: [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/category/design-patterns/))</sup>
+
+---
+
 ## Wesentliche Merkmale
 
 ##### Kategorie: Erzeugungsmuster / *Creational Pattern*

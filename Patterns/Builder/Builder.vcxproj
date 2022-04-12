@@ -139,6 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Resources\dp_builder_pattern.svg" />
+    <None Include="Resources\dp_builder_pattern_intro.webp" />
     <None Include="Resources\dp_builder_pattern_layoutmanager.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>

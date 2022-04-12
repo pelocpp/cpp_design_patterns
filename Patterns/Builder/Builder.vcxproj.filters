@@ -30,6 +30,9 @@
     <None Include="Resources\dp_builder_pattern_layoutmanager.svg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_builder_pattern_intro.webp">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample02.cpp">
