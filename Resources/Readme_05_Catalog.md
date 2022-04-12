@@ -1,5 +1,9 @@
 # Katalog der Entwurfsmuster
 
+[Zurück](../Readme.md)
+
+---
+
 Historisch gesehen wurde eine erste Aufstellung für Software Entwurfsmuster
 von den vier Autoren Erich Gamma, Richard Helm, Ralph Johnson und John Vlissides im Jahre 1994
 in einem Buch mit dem Titel "Design Patterns - Elemente wiederverwendbarer objektorientierter Software" gegeben.

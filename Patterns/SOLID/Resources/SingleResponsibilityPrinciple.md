@@ -15,7 +15,7 @@ In anderen Worten:
 Das *Single-Responsibility-Prinzip* besagt, dass Klassen bis zu dem Punkt &ldquo;kohärent&rdquo; (semantisch zusammenhängend) sein sollten,
 wie sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &ldquo;für eine Änderung&rdquo; definiert wird.
 
-#### Example: Violating the Single Responsibility Principle
+#### Beispiel: Violating the Single Responsibility Principle
 
 ```cpp
 01: class Journal
@@ -58,7 +58,7 @@ wie sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &ld
     * Änderungen im Zusammenhang mit der Persistenz (Datenablage) der `Journal` Klasse.
 
 
-#### Example: Respecting the Single Responsibility Principle
+#### Beispiel: Respecting the Single Responsibility Principle
 
 Wir betrachten eine Überarbeitung des letzten Beispiels,
 Die man auch unter der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; einordnen könnte:
@@ -106,7 +106,7 @@ Die man auch unter der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; eino
 
 ---
 
-Die Anregungen zu diesem Beispiel finden Sie unter
+Die Anregungen zu diesem Beispiel finden Sie in
 
 [Single Responsibility Principle in C++](http://www.vishalchovatiya.com/single-responsibility-principle-in-cpp-solid-as-a-rock/)
 

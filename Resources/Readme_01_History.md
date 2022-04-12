@@ -1,5 +1,9 @@
 # Geschichtlicher Überblick
 
+[Zurück](../Readme.md)
+
+---
+
 Ende der Siebzigerjahre veröffentlichte *Christopher Alexander* die Bücher „*A Pattern Language*“ und „*A Timeless Way of Building*“
 (siehe [Literatur](Readme_07_Literature.md)), die das Konzept von Entwurfsmustern beziehungsweise Pattern-Sprachen einführten.
 Ein Pattern repräsentiert demzufolge eine bewährte architektonische Lösung für eine häufig wiederkehrende Aufgabe,

@@ -25,7 +25,7 @@ Es gibt darauf im objektorientierten Design mehrere Antworten wie beispielsweise
 
 Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
 
-#### Example: Violating the Open Closed Principle
+#### Beispiel: Violating the Open Closed Principle
 
 ```cpp
 01: enum class Color { Red, Green, Black, Gray };
@@ -108,10 +108,9 @@ Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
     der bereits existierende, realisierte Quellcode ist zu modifizieren.
     Dies ist eine Verletzung des *Open-Closed-Prinzips*:
     Es besagt, dass das System für Erweiterungen offen, aber für Modifikationen geschlossen zu sein hat.
-    Im vorliegenden Beispiel ändern wir den vorhandenen Code, was eine Verletzung von OCP darstellt.
 
 
-#### Example: Respecting the Open Closed Principle
+#### Beispiel: Respecting the Open Closed Principle
 
 
 Es gibt mehr als einen Weg, um das *Open-Closed-Prinzip* zu erreichen.
@@ -236,8 +235,8 @@ Sie kann jetzt mit allen Arten von Spezifikationen arbeiten!
 
 *Hinweis*:
 Die Klasse `AndSpecification` ist nur in der Lage, zwei Spezifikationen aufzunehmen.
-Mit variadischen Templates lassen sich in C++ beliebig viele Spezifikationen in einem Objekt zusammenfassen.
-Sehen Sie hierzu im Quellcode die Klasse `GenericSpecification`!
+Mit variadischen Templates lassen sich in C++ beliebig viele Spezifikationen in einem Objekt zusammenfassen!
+Sehen Sie hierzu eine Realisierung im Quellcode der Klasse `GenericSpecification`!
 
 
 #### Vorteile des *Open-Closed-Prinzips*
@@ -248,7 +247,7 @@ Sehen Sie hierzu im Quellcode die Klasse `GenericSpecification`!
 
 ---
 
-Die Anregungen zu diesem Beispiel finden Sie unter
+Die Anregungen zu diesem Beispiel finden Sie in
 
 [Open Closed Principle in C++](http://www.vishalchovatiya.com/open-closed-principle-in-cpp-solid-as-a-rock/)
 

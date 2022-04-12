@@ -1,5 +1,9 @@
 # Entwurfsprinzipien (Design Principles)
 
+[Zurück](../Readme.md)
+
+---
+
 Neben *Entwurfsmustern* gibt es in der Softwareentwicklung auch *Entwurfsprinzipien*.
 Hierunter versteht man Prinzipien, die die Erzeugung wartbarer und erweiterbarer Software ermöglichen.
 

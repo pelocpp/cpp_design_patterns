@@ -1,5 +1,9 @@
 # Literatur zu Design Patterns (Entwurfsmuster)
 
+[Zurück](../Readme.md)
+
+---
+
   * Matthias Geirhos: "Entwurfsmuster: Das umfassende Handbuch".</br>
     Rheinwerk Verlag GmbH (1. Juni 2015), 643 Seiten. Sprache: Deutsch. ISBN-10: 3836227622, ISBN-13: 978-3836227629.
 
