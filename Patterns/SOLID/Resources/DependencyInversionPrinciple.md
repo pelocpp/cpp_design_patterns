@@ -129,11 +129,11 @@ Betrachten Sie den folgenden Vorschlag:
 
 #### Vorteile des *Dependency-Inversion-Prinzips*
 
-Effektiv gesehen reduziert das *Dependency Inversion Prinzip* (DIP) die Kopplung zwischen verschiedenen Codeteilen.
-Wir erhalten auf diese Weise wiederverwendbaren Code.
+  * Effektiv gesehen reduziert das *Dependency Inversion Prinzip* (DIP) die Kopplung zwischen verschiedenen Codeteilen.
+  Wir erhalten auf diese Weise wiederverwendbaren Code.
 
-Das *Dependency Inversion Prinzip* (DIP) legt nahe, dass die flexibelsten Systeme diejenigen sind, in denen sich Quellecodeabhängigkeiten
-nur auf Abstraktionen, nicht auf Konkretisierungen beziehen!
+  * Das *Dependency Inversion Prinzip* (DIP) legt nahe, dass die flexibelsten Systeme diejenigen sind, in denen sich Quellecodeabhängigkeiten
+  nur auf Abstraktionen, nicht auf Konkretisierungen beziehen!
 
 ---
 
@@ -148,5 +148,3 @@ von Vishal Chovatija.
 [Zurück](../../../Resources/Readme_03_Design_Principles.md)
 
 ---
-
-
