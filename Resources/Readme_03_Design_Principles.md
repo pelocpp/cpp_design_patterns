@@ -53,7 +53,7 @@ erklärte diese Prinzipien zu den wichtigsten Entwurfsprinzipien:
   * [**O**pen-Closed Prinzip (OCP)](../Patterns/SOLID/Resources/OpenClosedPrinciple.md)
   * **L**iskovsches Substitutionsprinzip (LSP)
   * **I**nterface Segregation Prinzip (ISP)
-  * **D**ependency Inversion Prinzip (DIP)
+  * [**D**ependency Inversion Prinzip (DIP)](../Patterns/SOLID/Resources/DependencyInversionPrinciple.md)
 
 Im Überblick betrachtet lassen sich diese Prinzipien wie folgt zusammenfassen:
 

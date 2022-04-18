@@ -112,7 +112,6 @@ Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
 
 #### Beispiel: Respecting the Open Closed Principle
 
-
 Es gibt mehr als einen Weg, um das *Open-Closed-Prinzip* zu erreichen.
 Das Design von Schnittstellen und das Hinzufügen einer Abstraktionsebene für Erweiterbarkeit
 sind die am meisten verbreitete Vorgehensweise:
