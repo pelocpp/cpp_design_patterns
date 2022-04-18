@@ -45,6 +45,7 @@ namespace DependencyInversionPrinciple01
 
 namespace DependencyInversionPrinciple02
 {
+    // abstraction
     struct RelationshipBrowser
     {
         virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
