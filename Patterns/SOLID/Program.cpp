@@ -16,6 +16,9 @@ void test_conceptual_example_ocp_05();
 void test_anti_conceptual_example_dip();
 void test_conceptual_example_dip();
 
+void test_anti_conceptual_example_lsp();
+void test_conceptual_example_lsp();
+
 int main()
 {
     //test_anti_conceptual_example_srp();
@@ -28,8 +31,11 @@ int main()
     //test_conceptual_example_ocp_04();
     //test_conceptual_example_ocp_05();
 
-    test_anti_conceptual_example_dip();
-    test_conceptual_example_dip();
+    //test_anti_conceptual_example_dip();
+    //test_conceptual_example_dip();
+
+    test_anti_conceptual_example_lsp();
+    test_conceptual_example_lsp();
 
     return 0;
 }

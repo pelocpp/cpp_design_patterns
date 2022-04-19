@@ -139,7 +139,7 @@ Betrachten Sie den folgenden Vorschlag:
 
 Die Anregungen zu diesem Beispiel finden Sie in
 
-[Open Closed Principle in C++](http://www.vishalchovatiya.com/open-closed-principle-in-cpp-solid-as-a-rock/)
+[Dependency Inversion Principle in C++](http://www.vishalchovatiya.com/dependency-inversion-principle-in-cpp-solid-as-a-rock/)
 
 von Vishal Chovatija.
 

@@ -51,7 +51,7 @@ erklärte diese Prinzipien zu den wichtigsten Entwurfsprinzipien:
 
   * [**S**ingle Responsibility Prinzip (SRP)](../Patterns/SOLID/Resources/SingleResponsibilityPrinciple.md)
   * [**O**pen-Closed Prinzip (OCP)](../Patterns/SOLID/Resources/OpenClosedPrinciple.md)
-  * **L**iskovsches Substitutionsprinzip (LSP)
+  * [**L**iskovsches Substitutionsprinzip (LSP)](../Patterns/SOLID/Resources/LiskovSubstitutionPrinciple.md)
   * **I**nterface Segregation Prinzip (ISP)
   * [**D**ependency Inversion Prinzip (DIP)](../Patterns/SOLID/Resources/DependencyInversionPrinciple.md)
 
