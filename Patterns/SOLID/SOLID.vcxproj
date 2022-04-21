@@ -141,12 +141,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Resources\DependencyInversionPrinciple.md" />
+    <None Include="Resources\InterfaceSegregationPrinciple.md" />
     <None Include="Resources\LiskovSubstitutionPrinciple.md" />
     <None Include="Resources\OpenClosedPrinciple.md" />
     <None Include="Resources\SingleResponsibilityPrinciple.md" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DIP.cpp" />
+    <ClCompile Include="ISP.cpp" />
     <ClCompile Include="LSP.cpp" />
     <ClCompile Include="OCP.cpp" />
     <ClCompile Include="Program.cpp" />
