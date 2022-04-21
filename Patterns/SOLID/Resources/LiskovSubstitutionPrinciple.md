@@ -1,4 +1,4 @@
-# Liskov’s Substitution Princip
+# Liskovsches Substitutionsprinzip
 
 [Zurück](../../../Resources/Readme_03_Design_Principles.md)
 
@@ -9,7 +9,7 @@
 
 #### Ziel / Absicht:
 
-&ldquo;Abgeleitete Typen müssen durch ihre Basistypen ersetzbar sein, ohne die Korrektheit des Programms zu verändern.&rdquo;
+&ldquo;Abgeleitete Typen müssen durch ihre Basistypen ersetzbar sein, ohne die Korrektheit des Programms zu verändern&rdquo;.
 
 In anderen Worten:
   * Im Zusammenhang mit C++ bedeutet dies, dass Funktionen/Methoden, die Zeiger/Referenzen auf Basisklassen verwenden,
@@ -21,10 +21,9 @@ In anderen Worten:
 #### Beispiel: Violating the Liskov’s Substitution Principle
 
 Wir betrachten das Liskov-Substitutionsprinzip an einem seiner berühmtesten Beispiele.
-
 In der Mathematik ist ein Quadrat ein Rechteck.
-Also haben wir es hier mit der &ldquo;ist-ein&ldquo;-Beziehung
-(&ldquo;is-a&ldquo;-Relationship) zu tun.
+Also haben wir es hier mit der &ldquo;ist-ein&rdquo;-Beziehung
+(&ldquo;is-a&rdquo;-Relationship) zu tun.
 
 Dies wollen wir nun mit dem Prinzip der *Vererbung* modellieren.
 Wenn wir im nachfolgenden Beispiel die Klasse `Square` von `Rectangle` ableiten,
@@ -79,8 +78,8 @@ in der Funktion `prozess` verletzt.
 Daher ist Klasse `Square` kein gültiger Ersatz für Klasse `Rectangle`.
 
 Aus konzeptioneller Sicht ist der Ansatz, Klasse `Square` von Klasse `Rectangle`
-abzuleiten, nicht gut. Selbst wenn dies einer gewissen Anschauung entspricht,
-aber ein Quadrat hat eben keine Höhe und keine Breite, sondern eine (Seiten-)Länge.
+abzuleiten, nicht gut. Selbst wenn dies einer gewissen Anschauung entspricht.
+Aber ein Quadrat hat eben keine Höhe und keine Breite, sondern eine (Seiten-)Länge.
 Und dies ist genau das Problem, das in dem Beispiel zum Ausdruck kommt.
 
 Eine mögliche Verbesserung der Funktion `prozess` könnte so aussehen:
@@ -96,13 +95,13 @@ Eine mögliche Verbesserung der Funktion `prozess` könnte so aussehen:
 08: }
 ```
 
-Aber auch diesem Code-Fragment haftet ein gewisser unangenehmer &ldquo;Geruch&ldquo; an,
-oder wie dies im Fachjargon heißt: *there is a code smell ...*
+Aber auch diesem Code-Fragment haftet ein gewisser &ldquo;unangenehmer Geruch&rdquo; an,
+oder wie es im Fachjargon heißt: *there is a code smell ...*
 
 Wenn in polymorphem Code Anweisungen zur Typprüfung vorhanden sind
 (hier: `dynamic_cast`), dann ist dies mit ziemlicher Sicherheit 
 ein Verstoß gegen das Liskov-Substitutionsprinzip.
-In gutem Quellcode sind derartige Überprüfungen nicht notwendig!
+In gutem Quellcode sind derartige Überprüfungen nicht vorhanden!
 
 
 #### Beispiel: Respecting the Liskov’s Substitution Principle
@@ -156,16 +155,16 @@ In gutem Quellcode sind derartige Überprüfungen nicht notwendig!
 ```
 
 In den meisten Einführungen über objektorientierte Programmierung
-wird Vererbung als &ldquo;ist-ein&ldquo;-Beziehung
+wird Vererbung als &ldquo;ist-ein&rdquo;-Beziehung
 mit dem abgeleiteten Objekt diskutiert bzw. angesehen.
 
 Dies ist notwendig, muss aber nicht ausreichend sind.
 Es ist passender zu sagen, dass eine Klasse so entworfen werden sollte,
 dass sie von einer anderen Klasse erbt, wenn beteiligte Objekte
-eine so genannte &ldquo;Is-Substitutable-For&ldquo;-Beziehung zum geerbten Objekt eingehen können.
+eine so genannte &ldquo;*is-substitutable-for*&rdquo;-Beziehung zum geerbten Objekt eingehen können.
 
 
-#### Vorteile des *Dependency-Inversion-Prinzips*
+#### Vorteile des *Liskovschen Substitutionsprinzips*
 
   * Code, der sich an das Liskov-Substitutionsprinzip hält, ist lose voneinander abhängig und fördert die Wiederverwendbarkeit von Code.
 

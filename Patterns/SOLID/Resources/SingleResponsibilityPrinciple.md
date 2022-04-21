@@ -9,7 +9,7 @@
 
 #### Ziel / Absicht:
 
-&ldquo;Eine Klasse sollte nur einen Grund haben, geändert zu werden.&rdquo;
+&ldquo;Eine Klasse sollte nur einen Grund haben, geändert zu werden&rdquo;.
 
 In anderen Worten:
 Das *Single-Responsibility-Prinzip* besagt, dass Klassen bis zu dem Punkt &ldquo;kohärent&rdquo; (semantisch zusammenhängend) sein sollten,

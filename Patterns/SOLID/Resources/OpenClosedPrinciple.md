@@ -9,7 +9,7 @@
 
 #### Ziel / Absicht:
 
-&ldquo;Klassen sollten für Erweiterungen offen, für Änderungen geschlossen sein.&rdquo;
+&ldquo;Klassen sollten für Erweiterungen offen, für Änderungen geschlossen sein&rdquo;.
 
 In anderen Worten:
 Das Prinzip bedeutet wörtlich genommen, dass man in der Lage sein sollte,
