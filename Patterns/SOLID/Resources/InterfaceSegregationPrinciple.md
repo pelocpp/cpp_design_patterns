@@ -9,14 +9,14 @@
 
 #### Ziel / Absicht:
 
-&ldquo;Clients sollten nicht gezwungen werden, sich auf Schnittstellen zu verlassen, die sie nicht verwenden&rdquo;.
+&ldquo;Clients sollen nicht gezwungen werden, sich auf Schnittstellen zu verlassen, die sie nicht verwenden&rdquo;.
 
 In anderen Worten:
   * Das *Interface-Segregationsprinzip* ist eng mit dem *Single-Responsibility-Prinzip* verwandt.
-  Es bedeutet, dass man Abstraktionen immer so gestalten sollten,
-  dass Clients, die die exponierten Methoden verwenden, stattdessen nicht die gesamte Abstraktion betrachten müssen.
-  * Das erlegt den Kunden die Last auf, Methoden implementieren zu müssen,
-  die er eigentlich nicht braucht.
+  Es bedeutet, dass man Abstraktionen immer so gestalten sollte,
+  dass Clients, die exponierte Methoden verwenden, stattdessen nicht die gesamte Abstraktion betrachten müssen.
+  * Das würde einem Client die Last auferlegen, Methoden implementieren zu müssen,
+  die er gar nicht benötigt.
 
 #### Beispiel: Violating the Interface Segregation Principle
 
@@ -117,13 +117,12 @@ ist kein guter Ansatz.
 Jetzt haben wir eine Flexibilität erzielt,
 Abstraktionen nach Belieben zu kombinieren und Implementierungen ohne unnötigen Ballast bereitzustellen.
 
-Wie bereits im Single-Responsibility-Prinzip erläutert:
-Vermeiden Sie Klassen und Schnittstellen mit mehreren Verantwortlichkeiten.
-Sie ändern sich häufig und erschweren die Wartung der Software.
+  * Wie bereits im *Single-Responsibility-Prinzip* erläutert:
+    Vermeiden Sie Klassen und Schnittstellen mit mehreren Verantwortlichkeiten.
+    Sie ändern sich häufig und erschweren die Wartung der Software.
 
-Versuchen Sie, Schnittstellen basierend auf einer bestimmten Rolle
-in mehrere Schnittstellen aufzuteilen.
-
+  * Versuchen Sie, Schnittstellen basierend auf einer bestimmten Rolle
+    in mehrere Schnittstellen aufzuteilen.
 
 #### Beispiel
 
@@ -135,11 +134,11 @@ class MyMachine : public IMachine
 
 mit
 
-</pre>
+<pre>
 class MyMachine : public IPrinter, public IScanner, public IFaxer
 </pre>
 
-Letzteres sagt viel aus, ersteres lässt Sie bestenfalls raten.
+Die zweite Variante sagt viel aus, die erste Variante stößt bestenfalls zum Raten an.
 
 Das Beantworten einer einzigen Frage zur Entwurfszeit kann helfen,
 ein Design zu korrigieren:
