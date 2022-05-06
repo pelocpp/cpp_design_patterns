@@ -79,6 +79,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MVC", "Patterns\MVC\MVC.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SOLID", "Patterns\SOLID\SOLID.vcxproj", "{E1F898F7-93A7-4D72-AF0C-DFD0F8343AD8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InterpreterPattern", "Patterns\InterpreterPattern\InterpreterPattern.vcxproj", "{ECF95415-81E6-4722-AE72-96D9CC9BE5BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -319,6 +321,14 @@ Global
 		{E1F898F7-93A7-4D72-AF0C-DFD0F8343AD8}.Release|x64.Build.0 = Release|x64
 		{E1F898F7-93A7-4D72-AF0C-DFD0F8343AD8}.Release|x86.ActiveCfg = Release|Win32
 		{E1F898F7-93A7-4D72-AF0C-DFD0F8343AD8}.Release|x86.Build.0 = Release|Win32
+		{ECF95415-81E6-4722-AE72-96D9CC9BE5BB}.Debug|x64.ActiveCfg = Debug|x64
+		{ECF95415-81E6-4722-AE72-96D9CC9BE5BB}.Debug|x64.Build.0 = Debug|x64
+		{ECF95415-81E6-4722-AE72-96D9CC9BE5BB}.Debug|x86.ActiveCfg = Debug|Win32
+		{ECF95415-81E6-4722-AE72-96D9CC9BE5BB}.Debug|x86.Build.0 = Debug|Win32
+		{ECF95415-81E6-4722-AE72-96D9CC9BE5BB}.Release|x64.ActiveCfg = Release|x64
+		{ECF95415-81E6-4722-AE72-96D9CC9BE5BB}.Release|x64.Build.0 = Release|x64
+		{ECF95415-81E6-4722-AE72-96D9CC9BE5BB}.Release|x86.ActiveCfg = Release|Win32
+		{ECF95415-81E6-4722-AE72-96D9CC9BE5BB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
