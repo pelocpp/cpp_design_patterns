@@ -146,6 +146,9 @@
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_chain_of_responsibility_design_pattern_intro.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

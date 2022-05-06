@@ -149,6 +149,9 @@
     <ClCompile Include="RealWorldFactoryMethod.cpp" />
     <ClCompile Include="VirtualConstructorIdiom.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_factory_pattern_intro.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

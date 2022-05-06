@@ -146,6 +146,9 @@
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Vehicles.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_factory_pattern_intro.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

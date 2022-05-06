@@ -155,6 +155,9 @@
     <None Include="Resources\dp_template_method_pattern_social_media.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_template_methodpattern_intro.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

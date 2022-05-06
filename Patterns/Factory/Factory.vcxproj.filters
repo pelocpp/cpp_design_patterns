@@ -39,4 +39,9 @@
       <Filter>Source Files\MobilePhones</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_factory_pattern_intro.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

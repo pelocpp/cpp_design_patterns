@@ -149,6 +149,9 @@
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Shapes.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_bridge_pattern_intro.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

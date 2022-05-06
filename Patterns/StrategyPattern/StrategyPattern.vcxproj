@@ -157,6 +157,9 @@
     <None Include="Resources\dp_strategy_pattern.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_strategy_pattern_intro.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

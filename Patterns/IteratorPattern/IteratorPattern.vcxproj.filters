@@ -46,5 +46,8 @@
     <Image Include="Resources\dp_iterator_pattern.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\dp_iterator_pattern_intro.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

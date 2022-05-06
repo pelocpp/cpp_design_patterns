@@ -162,6 +162,7 @@
     <Image Include="Resources\CompositePattern_02.jpg" />
     <Image Include="Resources\CompositePattern_02.png" />
     <Image Include="Resources\dp_composite_pattern.png" />
+    <Image Include="Resources\dp_composite_pattern_intro.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dp_composite_pattern.svg" />

@@ -147,6 +147,9 @@
     <None Include="Resources\dp_memento.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dp_memento_pattern_intro.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

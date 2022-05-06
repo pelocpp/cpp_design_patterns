@@ -60,5 +60,8 @@
     <Image Include="Resources\java_thread_states.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\dp_state_pattern_info.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
