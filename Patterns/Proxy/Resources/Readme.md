@@ -60,6 +60,129 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
+#### 'Real-World' Beispiel: `std::unique_ptr<>` und `std::shared_ptr<>`
+
+Ein sehr ansprechendes Beispiel aus der STL für das Proxy Design Pattern
+sind die beiden Smart Pointer Klassen `std::unique_ptr<>` und `std::shared_ptr<>`:
+
+```cpp
+std::unique_ptr<int> ptr{ std::make_unique<int>(123) };
+*ptr = 5; 
+```
+
+oder
+
+```cpp
+std::unique_ptr<MyClass> ptr{ std::make_unique<MyClass>() };
+ptr->doSomething();
+```
+
+Wenn wir die beiden Code-Snippets sehen, können wir nicht entscheiden,
+ob `ptr` ein Raw-Zeiger oder ein Smart Pointer ist.
+
+---
+
+#### 'Real-World' Beispiel: Property Proxy
+
+In anderen Programmiersprachen wie C# gibt es das sprachliche Konstrukt der *Properties*:
+Hierunter versteht man &ndash; in C# &ndash; eine private Instanzvariable
+inklusive *getter*- und *setter*-Methoden für diese Variable. 
+
+```cpp
+01: template<typename T>
+02: class Property
+03: {
+04: private:
+05:     T m_value;
+06: 
+07: public:
+08:     Property(const T initialValue) { *this = initialValue; }
+09:     operator T() { return m_value; }
+10:     T operator= (T newValue) { return m_value = newValue; }
+11: };
+12: 
+13: struct Rectangle
+14: {
+15:     Property<size_t> m_top{ 10 };
+16:     Property<size_t> m_left{ 5 };
+17:     Property<size_t> m_width{ 20 };
+18:     Property<size_t> m_height{ 30 };
+19: };
+```
+
+Der Vorteil dieser *Properties* &ndash; samt der vorgestellten Realisierung in C++ &ndash; liegt
+darin begründet, dass man auf diese Weise 
+den (schreibenden und/oder lesenden) Zugriff auf derartige Instanzvariable &ldquo;abfangen&rdquo; bzw. &ldquo;mitloggen&rdquo; kann.
+
+---
+
+#### 'Real-World' Beispiel: Virtual Proxy &ndash; Eager vs. Lazy Proxy
+
+Ein sogenanntes virtuelles *Proxy*-Objekt vermittelt den Anschein,
+als würden Sie mit einem Objekt arbeiten, so wie Sie es gewohnt sind,
+obwohl das Objekt möglicherweise noch nicht einmal erstellt wurde.
+
+Studieren Sie zu diesem Zweck den Beispielcode genau:
+
+```cpp
+01: struct Image {
+02:     virtual void draw() = 0;
+03: };
+04: 
+05: class EagerBitmap : public Image
+06: {
+07: private:
+08:     std::string m_filename;
+09: 
+10: public:
+11:     EagerBitmap(const std::string& filename) : m_filename{ filename } {
+12:         std::cout << "loading image from " << m_filename << std::endl;
+13:         // steps to load the image ...
+14:     }
+15: 
+16:     void draw() { 
+17:         std::cout << "drawing image " << m_filename << std::endl;
+18:     }
+19: };
+20: 
+21: class LazyBitmap : public Image
+22: {
+23: private:
+24:     std::unique_ptr<EagerBitmap>   m_bmp{ nullptr };
+25:     std::string                    m_filename;
+26: 
+27: public:
+28:     LazyBitmap(const std::string& filename) : m_filename{ filename } {}
+29: 
+30:     void draw() {
+31:         if (! m_bmp) {
+32:             m_bmp = std::make_unique<EagerBitmap>(m_filename);
+33:         }
+34: 
+35:         m_bmp->draw();
+36:     }
+37: };
+```
+
+Es gibt dabei zwei Varianten zu betrachten: Klasse `EagerBitmap` und Klasse `LazyBitmap`.
+
+Vergleichen Sie die Ausgaben in der Konsole:
+
+```
+loading image from image_1.png
+loading image from image_2.png
+drawing image image_1.png
+```
+
+versus
+
+```
+loading image from image_1.png
+drawing image image_1.png
+```
+
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/proxy/cpp/example#example-0)
@@ -69,6 +192,9 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/438922/Design-Patterns-2-of-3-Structural-Design-Patterns#Proxy)
 
 vor.
+
+Die beiden Beispiele &ldquo;Property Proxy&ldquo; und &ldquo;Virtual Proxy&ldquo;
+stammen aus dem [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/proxy-design-pattern-in-modern-cpp/).
 
 ---
 

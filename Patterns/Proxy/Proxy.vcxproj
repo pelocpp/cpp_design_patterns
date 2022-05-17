@@ -145,6 +145,8 @@
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="PropertyProxy.cpp" />
+    <ClCompile Include="VirtualProxy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_proxy_pattern_intro.png" />

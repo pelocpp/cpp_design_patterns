@@ -16,6 +16,12 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{1e3bc7d3-9478-459f-8b91-4a7b4016ae93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PropertyProxy">
+      <UniqueIdentifier>{6d6fa41d-a8a0-4a10-a953-90220069d8e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\VirtualProxy">
+      <UniqueIdentifier>{ae403dfd-92e7-4d85-aaa1-13ac2c88e26a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -31,6 +37,12 @@
     </ClCompile>
     <ClCompile Include="ConceptualExample.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyProxy.cpp">
+      <Filter>Source Files\PropertyProxy</Filter>
+    </ClCompile>
+    <ClCompile Include="VirtualProxy.cpp">
+      <Filter>Source Files\VirtualProxy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
