@@ -19,6 +19,9 @@
     <Filter Include="Source Files\MediaPlayer">
       <UniqueIdentifier>{a9b88d91-45d2-454c-a31a-724a52279cb5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PluggableAdapterDesign">
+      <UniqueIdentifier>{e647b368-eb3e-4952-a4b2-cb0c69af0602}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp">
@@ -32,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="MediaPlayer01.cpp">
       <Filter>Source Files\MediaPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="PluggableAdapterDesign.cpp">
+      <Filter>Source Files\PluggableAdapterDesign</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

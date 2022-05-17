@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;... um die gewünschte Schnittstelle von der Schnittstelle zu erhalten, die Sie haben ...&rdquo;
+
 Das *Adapter Pattern* ist ein strukturelles Entwurfsmuster, das es Objekten mit
 inkompatiblen Schnittstellen ermöglicht, zusammenarbeiten zu können.
 
@@ -70,6 +74,61 @@ Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 vor.
 
+---
+
+**Hinweis**: Prinzipiell gibt es für das Adapter Pattern zwei Vorgehensweisen in der Umsetzung mit einer realen Programmiersprache:
+
+  * **Objekt Adapter Ansatz**:
+    Diese Implementierung verwendet das Prinzip der *Komposition* von Objekten:
+    Der Adapter implementiert die Schnittstelle eines Objekts, die für den Client relevant sind.
+    Die anderen Objekte werden &ldquo;umhüllt&rdquo;, deren Funktionalität ist über die eine bekannte Schnittstelle nach außen zu transportieren.
+    Der Zugriff auf die - schnittstellentechnisch gesehen - inkompatiblen Funktion dieser Objekte ist die eigentliche Dienstleistung des Adapter-Objekts.
+    Dieser Ansatz kann in allen gängigen Programmiersprachen implementiert werden (&ldquo;*has-a*&rdquo; Relationship / &ldquo;*hat-ein*&rdquo; Beziehung).
+
+  * **Klassen Adapter Ansatz**:
+    Diese Implementierung verwendet die Vererbung: Der Adapter erbt Schnittstellen von allen Objekten gleichzeitig
+   (vorhandenes Objekt, neue Service-Objekte mit inkompatiblen Service-Funktionen).
+    Beachten Sie, dass dieser Ansatz nur in Programmiersprachen implementiert werden kann,
+    die Mehrfachvererbung unterstützen, z.B. C ++.
+    Wie beim *Objekt Adapter Ansatz* besteht auch hier die eigentliche Aufgabe der Adapter Klasse darin,
+    die geerbten Funktionalitäten über die vorhandene Schnittstelle verfügbar zu machen.
+
+
+*Abbildung* 1 gibt das Entwurfsmuster mit dem *Objekt Adapter* Ansatz wieder. In *Abbildung* 2 finden Sie
+das Muster auf Basis des *Klassen Adapter* Ansatzes vor:
+
+<img src="dp_adapter_02.svg" width="700">
+
+*Abbildung* 2: Schematische Darstellung des *Adapter Patterns* (*Klassen Adapter Ansatzes*).
+
+Im *Real-World* Beispiel zu diesem Entwurfsmuster finden Sie beide Varianten umgesetzt vor.
+
+---
+
+#### Pluggable Adapter Design Pattern mit Modern C++:
+
+Unter 
+[Adapter Design Pattern in Modern C++ (Vishal Chovatiya)](http://www.vishalchovatiya.com/adapter-design-pattern-in-modern-cpp/)
+findet sich eine Umsetzung des Adapter Patterns mit Modern C++ Sprachmitteln vor.
+
+Der Adapter unterstützt hier die Adaptees (die nicht verwandt sind und unterschiedliche Schnittstellen haben)
+unter Verwendung derselben &ldquo;Zielschnittstelle&rdquo;, die dem Client/API-Benutzer bekannt ist.
+
+Das Beispiel erfüllt diese Eigenschaft, indem es die Lambda-Funktionen und das Klassentemplate `std::function<>`
+von C++ 11 verwendet.
+
+*Hinweise zum Quellcode*:
+
+  * Der *Pluggable Adapter* besitzt ab einem bestimmten Zeitpunkt eine Verbindung zu einem Zielobjekt.
+  Sobald das Zielobjekt vorhanden ist und seine Methode(n) an ein *Callable*-Objekt
+  (in unserem Beispiel: `m_request`) zugewiesen wurden, bleibt die Zuordnung bestehen,
+  bis ein anderer Satz von Methode(n) zugewiesen wird.
+
+  * Der *Pluggable Adapter* zeichnet sich dadurch aus, dass er über Konstruktoren für jeden Typ verfügt,
+  für den er die Stellvertreterrolle übernimmt.
+
+---
+
 #### Real-World Example:
 
 Wir demonstrieren den Einsatz des Adapter Patterns anhand des folgenden Beispiels,
@@ -100,35 +159,6 @@ diese an die Adapterklasse weiter, so dass die Anforderung doch unterstützt werd
 sondern er darf nur über die vorhandene Client-Schnittstelle mit dem Adapter zusammenarbeiten
 (im vorliegenden Beispiel: Schnittstelle `MediaPlayer`). Auf diese Weise lassen sich neue Adapterklassen
 in das Programm einführen, ohne inkompatibel zum vorhandenen Client-Code zu sein!
-
----
-
-**Hinweis**: Prinzipiell gibt es für das Adapter Pattern zwei Vorgehensweisen in der Umsetzung mit einer realen Programmiersprache:
-
-  * **Objekt Adapter Ansatz**:
-    Diese Implementierung verwendet das Prinzip der *Komposition* von Objekten:
-    Der Adapter implementiert die Schnittstelle eines Objekts, die für den Client relevant sind.
-    Die anderen Objekte werden &ldquo;umhüllt&rdquo;, deren Funktionalität ist über die eine bekannte Schnittstelle nach außen zu transportieren.
-    Der Zugriff auf die - schnittstellentechnisch gesehen - inkompatiblen Funktion dieser Objekte ist die eigentliche Dienstleistung des Adapter-Objekts.
-    Dieser Ansatz kann in allen gängigen Programmiersprachen implementiert werden (&ldquo;*has-a*&rdquo; Relationship / &ldquo;*hat-ein*&rdquo; Beziehung).
-
-  * **Klassen Adapter Ansatz**:
-    Diese Implementierung verwendet die Vererbung: Der Adapter erbt Schnittstellen von allen Objekten gleichzeitig
-   (vorhandenes Objekt, neue Service-Objekte mit inkompatiblen Service-Funktionen).
-    Beachten Sie, dass dieser Ansatz nur in Programmiersprachen implementiert werden kann,
-    die Mehrfachvererbung unterstützen, z.B. C ++.
-    Wie beim *Objekt Adapter Ansatz* besteht auch hier die eigentliche Aufgabe der Adapter Klasse darin,
-    die geerbten Funktionalitäten über die vorhandene Schnittstelle verfügbar zu machen.
-
-
-*Abbildung* 1 gibt das Entwurfsmuster mit dem *Objekt Adapter* Ansatz wieder. In *Abbildung* 2 finden Sie
-das Muster auf Basis des *Klassen Adapter* Ansatzes vor:
-
-<img src="dp_adapter_02.svg" width="700">
-
-*Abbildung* 2: Schematische Darstellung des *Adapter Patterns* (*Klassen Adapter Ansatzes*).
-
-Im *Real-World* Beispiel zu diesem Entwurfsmuster finden Sie beide Varianten umgesetzt vor.
 
 ---
 

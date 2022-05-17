@@ -142,6 +142,7 @@
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="MediaPlayer01.cpp" />
     <ClCompile Include="MediaPlayer02.cpp" />
+    <ClCompile Include="PluggableAdapterDesign.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>

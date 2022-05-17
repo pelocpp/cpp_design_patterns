@@ -81,12 +81,15 @@
 
 ---
 
-
-  * EBook<br/><br/>[Refactoring.Guru](https://refactoring.guru/design-patterns/book)
+  * Blog von Vishal Chovatiya:<br/>[What Is Design Pattern?](http://www.vishalchovatiya.com/what-is-design-pattern/)
 
 ---
 
-  * Dreiteilige Artikelserie auf *CodeProject.com*:<br/><br/>
+  * EBook:<br/>[Refactoring.Guru](https://refactoring.guru/design-patterns/book)
+
+---
+
+  * Dreiteilige Artikelserie auf *CodeProject.com*:<br/>
     [Design Patterns 1 of 3 - Creational Design Patterns](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns)<br/>
     [Design Patterns 2 of 3 - Structural Design Patterns](https://www.codeproject.com/Articles/438922/Design-Patterns-2-of-3-Structural-Design-Patterns)<br/>
     [Design Patterns 3 of 3 - Behavioral Design Patterns](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns)<br/>
