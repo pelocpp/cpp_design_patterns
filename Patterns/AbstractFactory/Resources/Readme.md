@@ -51,6 +51,8 @@ Es besteht im Wesentlichen aus fünf Teilen:
 Die Klassen `ProductA1` und `ProductA2` bzw. `ProductB1` und `ProductB2` sind Stellvertreter
 der `ConcreteProductA`- bzw. `ConcreteProductB`-Klasse aus *Abbildung* 1.
 
+---
+
 #### Conceptual Example:
 
 [Quellcode](../ConceptualExample.cpp)

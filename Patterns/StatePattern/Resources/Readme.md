@@ -74,6 +74,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 *Abbildung* 2: Schematische Darstellung des *State Patterns*.
 
+---
 
 #### Conceptual Example:
 
@@ -102,6 +103,8 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#State)
 
 vor.
+
+---
 
 #### 'Real-World' Beispiel:
 

@@ -63,6 +63,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Chain of Responsibility Patterns*.
 
+---
 
 #### Conceptual Example:
 

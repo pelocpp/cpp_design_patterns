@@ -71,11 +71,13 @@ dass sich das *Mock*-Objekt quasi täuschend echt im Vergleich zum eigentlichen r
 
 *Abbildung* 1: Schematische Darstellung des *Null Object* Entwurfsmusters.
 
+---
+
 #### Conceptual Example:
 
 [Quellcode](../ConceptualExample.cpp)
 
-
+---
 
 ## Literaturhinweise:1
 

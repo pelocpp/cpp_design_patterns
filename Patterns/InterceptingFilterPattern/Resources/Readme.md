@@ -49,16 +49,19 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Intercepting Filter Patterns*.
 
-
 #### Hinweis:
 
 Es bestehen gewisse Ähnlichkeiten zum *Chain of Responsibility* Pattern.
+
+---
 
 #### Conceptual Example:
 
 [Quellcode](../ConceptualExample01.cpp) &ndash; Standardvariante
 
 [Quellcode](../ConceptualExample02.cpp) &ndash; Siehe Weiterarbeit
+
+---
 
 #### Weiterarbeit:
 

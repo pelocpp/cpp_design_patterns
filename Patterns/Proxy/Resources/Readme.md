@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Eine Schnittstelle für den Zugriff auf eine bestimmte Ressource&rdquo;
+
 Das *Proxy Pattern* ist ein strukturelles Entwurfsmuster,
 das für ein anderes Objekt (Ressource) einen Art Ersatz oder Platzhalter bereitstellt.
 
@@ -48,6 +52,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Proxy Patterns*.
 
+---
 
 #### Conceptual Example:
 

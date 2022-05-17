@@ -45,6 +45,8 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Factory Patterns*.
 
+---
+
 #### Conceptual Example:
 
 [Quellcode](../ConceptualExample.cpp)

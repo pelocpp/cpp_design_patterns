@@ -62,6 +62,8 @@ Es besteht im Wesentlichen aus vier Teilen:
 Der Klassenname `Adaptee` steht stellvertretend für Service-Klassen, die es gilt,
 über Adapter-Klassen verfügbar zu machen.
 
+---
+
 #### Conceptual Example:
 
 [Quellcode](../ConceptualExample.cpp)

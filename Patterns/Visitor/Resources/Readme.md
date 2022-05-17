@@ -87,6 +87,7 @@ Es besteht im Wesentlichen aus sechs Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Visitor Patterns*.
 
+---
 
 #### Conceptual Example:
 

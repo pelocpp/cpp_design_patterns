@@ -67,6 +67,7 @@ um die **Template Methode** in der Oberklasse zu vervollständigen.
 Die Skelett-Methode ist davon ausgenommen - die prinzipielle Struktur des Algorithmus ist beizubehalten,
 also nicht zu verändern.
 
+---
 
 #### Conceptual Example:
 

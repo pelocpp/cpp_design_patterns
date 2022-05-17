@@ -86,6 +86,7 @@ Die Erstellung von Objekten erfolgt hier &ndash; unter anderem &ndash; auf der B
 &ldquo;Konstruktorfunktionen&rdquo;, die als Blaupausen für neue Objekte verwendet werden können.
 Man spricht dabei auch von der so genannten &ldquo;*Prototypischen Vererbung*&rdquo;.
 
+---
 
 #### Conceptual Example:
 

@@ -69,6 +69,8 @@ Die statische Implementierung basiert in C++ auf der Verwendung von Schablonen (
 die dynamische Implementierung auf dynamisch allokierten Strategy-Objekten (`new`),
 die zur Laufzeit austauschbar sind.
 
+---
+
 #### Conceptual Example:
 
 [Quellcode](../ConceptualExample.cpp)

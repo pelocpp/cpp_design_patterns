@@ -242,6 +242,7 @@ diesen nach Gebrauch mit dem `delete`-Operator wieder freizugeben.
 
 In *Abbildung* 2 können Sie erkennen, dass der Destruktor des RAII-Objekts den allokierten Speicherbereich wieder freigibt.
 
+---
 
 #### Conceptual Example:
 
@@ -249,6 +250,7 @@ Die Anregungen zum konzeptionellen Beispiel sind teilweise entnommen aus
 
 [Design Patterns with C++](https://www.amazon.de/-/en/Fedor-G-Pikus/dp/1788832566).
 
+---
 
 #### 'Real-World' Beispiel zu Windows Clipboard:
 

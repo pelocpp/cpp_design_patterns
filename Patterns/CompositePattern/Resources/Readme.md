@@ -79,6 +79,8 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Composite Entwurfsmusters*.
 
+---
+
 #### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample01.cpp) - Variante mit "Raw"-Zeiger

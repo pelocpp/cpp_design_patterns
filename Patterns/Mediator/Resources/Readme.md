@@ -71,6 +71,7 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Mediator Patterns*.
 
+---
 
 #### Conceptual Example:
 

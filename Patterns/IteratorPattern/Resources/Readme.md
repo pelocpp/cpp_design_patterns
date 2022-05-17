@@ -81,6 +81,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Iterator Patterns*.
 
+---
 
 #### Conceptual Example:
 

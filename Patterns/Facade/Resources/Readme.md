@@ -68,6 +68,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Facade Patterns*.
 
+---
 
 #### Conceptual Example:
 

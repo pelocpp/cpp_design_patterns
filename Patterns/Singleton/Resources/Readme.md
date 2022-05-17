@@ -113,6 +113,7 @@ Singleton* Singleton::getInstance()
 }
 ```
 
+---
 
 #### Conceptual Example:
 

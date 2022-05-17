@@ -67,6 +67,7 @@ um *Subscriber* zu dieser Liste hinzuzufügen und aus dieser wieder zu entfernen.
 
 *Abbildung* 3: Schematische Darstellung des *Observer Pattern Musters*: Abstraktion des Observers mittels Schnittstelle `IObserver`. 
 
+---
 
 #### Conceptual Example:
 

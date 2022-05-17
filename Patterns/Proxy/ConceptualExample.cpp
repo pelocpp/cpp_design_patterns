@@ -6,8 +6,8 @@
 #include <memory>
 
 /**
- * The Subject interface declares common operations for both RealSubject and the
- * Proxy. As long as the client works with RealSubject using this interface,
+ * The Subject interface declares common operations for both 'RealSubject' and the
+ * 'Proxy'. As long as the client works with 'RealSubject' using this interface,
  * you'll be able to pass it a proxy instead of a real subject.
  */
 class Subject {
@@ -23,7 +23,7 @@ public:
  */
 class RealSubject : public Subject {
 public:
-    void request() const override {
+    virtual void request() const override {
         std::cout << "RealSubject: Handling request." << std::endl;
     }
 };
@@ -58,7 +58,7 @@ public:
      * these things and then, depending on the result, pass the execution to the
      * same method in a linked RealSubject object.
      */
-    void request() const override {
+    virtual void request() const override {
         if (checkAccess()) {
             m_realSubject->request();
             logAccess();
