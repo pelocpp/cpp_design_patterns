@@ -16,9 +16,13 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Trennung der Schnittstelle von ihrer Implementierung&rdquo;
+
 Das *Bridge Pattern* ist ein strukturelles Entwurfsmuster,
-mit dem sich eine große Klasse oder eine Reihe eng verwandter Klassen in zwei separate Hierarchien aufteilen lassen - 
-Abstraktion und Implementierung - die beide unabhängig voneinander entwickelt werden können.
+mit dem sich eine große Klasse oder eine Reihe eng verwandter Klassen in zwei separate Hierarchien aufteilen
+lassen &ndash; Abstraktion und Implementierung &ndash;, die beide unabhängig voneinander entwickelt werden können.
 
 #### Problem:
 
@@ -26,7 +30,7 @@ Das *Bridge Pattern* genießt einen guten Ruf,
 da sich mit ihm die abstrakten Elemente der Klasse von den Implementierungsdetails trennen lassen.
 Dieses Muster ist vor allem dann zu empfehlen,
 wenn die betrachteten Klassen häufig variieren,
-da sich dann Änderungen an der Codebasis bei minimalem Wissen über das Programm leicht durchführen lassen.
+da sich dann Änderungen an der Codebasis bei minimalem Wissen über das Programm leichter durchführen lassen.
 
 Betrachten wir ein Beispiel, in dem eine Implementierung auf zwei oder mehreren Realisierungen fußt.
 Zum Beispiel ein Programm, das die Persistenz von Objekten auf verschiedenen Plattformen (Betriebssystemen) realisiert.
@@ -38,7 +42,7 @@ In diesem Fall ist es besser, das *Bridge Pattern*  zu verwenden und die Abstrak
 Wird dieses Muster nicht verwendet, kann man die Beobachtung machen,
 dass Implementierungsdetails in einer Abstraktion enthalten sind.
 
-Ein weiterer Vorteil des *Bridge Patterns* ist die Möglichkeit, Implementierungsdetails zur Laufzeit zu ändern.
+Ein weiterer Vorteil des *Bridge Patterns* ist die Möglichkeit, Implementierungsdetails zur Laufzeit zu verändern.
 Dies ermöglicht es dem Benutzer, Implementierungen zu wechseln, um auf diese Weise zu bestimmen,
 wie die Software mit anderen Systemen zusammenarbeitet.
 
@@ -91,7 +95,16 @@ gezeichnet wird:
 
 <img src="dp_bridge_pattern_02.svg" width="600">
 
-*Abbildung* 2: Ein Anwendungsbeispiel des *Bridge Patterns*.
+*Abbildung* 2: Ein Anwendungsbeispiel des *Bridge* Patterns.
+
+---
+
+#### Das *Pimpl* Pattern
+
+Das *Pimpl* Pattern kann als ein Anwendungsfall des *Bridge* Patterns angesehen werden:
+Bei diesem Pattern geht es darum, die Implementierungsdetails einer bestimmten Klasse zu verbergen,
+indem diese in eine separate Implementierungsklasse ausgelagert werden, auf die ein Zeiger zeigt.
+Weitere Details hierzu finden sich [hier](https://github.com/pelocpp/cpp_design_patterns/blob/master/Patterns/Pimpl/Resources/Readme.md).
 
 ---
 

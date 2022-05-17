@@ -23,15 +23,12 @@ namespace ConceptualExampleBridge01 {
         std::shared_ptr<Implementor> m_implementor;
 
     public:
-        void setImplementor(std::shared_ptr<Implementor> value)
+        void setImplementor(std::shared_ptr<Implementor> implementor)
         {
-            m_implementor = value;
+            m_implementor = implementor;
         }
 
-        virtual void operation()
-        {
-            m_implementor->concreteOperation();
-        }
+        virtual void operation() = 0;
     };
 
     class RefinedAbstraction : public Abstraction
@@ -52,7 +49,7 @@ namespace ConceptualExampleBridge01 {
         }
     };
 
-    void clientCode1(std::shared_ptr<Abstraction> abstraction) {
+    void clientCode(std::shared_ptr<Abstraction> abstraction) {
         // ...
         abstraction->operation();
         // ...
@@ -65,7 +62,7 @@ void test_conceptual_example_01()
 
     std::shared_ptr<Abstraction> abstraction = std::make_shared<RefinedAbstraction>();
     abstraction->setImplementor(std::make_shared<ConcreteImplementor>());
-    clientCode1(abstraction);
+    clientCode(abstraction);
 }
 
 // ===========================================================================

@@ -17,7 +17,8 @@ namespace ShapesExample {
     };
 
     /**
-     *  Create concrete bridge implementor classes implementing the IDrawAPI interface.
+     *  Concrete bridge implementor classes 'RedCircleDrawer' and 'GreenCircleDrawer'
+     *  implementing the 'IDrawAPI' interface
      */
     class RedCircleDrawer : public IDrawAPI {
     public:
@@ -40,29 +41,29 @@ namespace ShapesExample {
     };
 
     /**
-     *  Create an abstract class Shape using the IDrawAPI interface.
+     *  Abstract class 'Shape' using the 'IDrawAPI' interface
      */
     class Shape
     {
     protected:
-        std::shared_ptr<IDrawAPI> m_drawAPI;
+        std::shared_ptr<IDrawAPI> m_api;
 
-        Shape(std::shared_ptr<IDrawAPI> drawAPI)
+        Shape(std::shared_ptr<IDrawAPI> api)
         {
-            m_drawAPI = drawAPI;
+            m_api = api;
         }
 
     public:
-        void setImplementor(std::shared_ptr<IDrawAPI> drawAPI)
+        void setImplementor(std::shared_ptr<IDrawAPI> api)
         {
-            m_drawAPI = drawAPI;
+            m_api = api;
         }
 
         virtual void draw() = 0;
     };
 
     /**
-     *  Create concrete class implementing the Shape interface.
+     *  Concrete class 'Circle' implementing the Shape interface
      */
     class Circle : public Shape {
     private:
@@ -71,17 +72,17 @@ namespace ShapesExample {
         int m_radius;
 
     public:
-        Circle(int x, int y, int radius, std::shared_ptr<IDrawAPI> drawAPI)
-            : m_x{ x }, m_y{ y }, m_radius{ radius }, Shape{ drawAPI } { }
+        Circle(int x, int y, int radius, std::shared_ptr<IDrawAPI> api)
+            : Shape{ api }, m_x{ x }, m_y{ y }, m_radius{ radius } { }
 
-        void draw()
+        virtual void draw() override
         {
-            m_drawAPI->drawCircle(m_radius, m_x, m_y);
+            m_api->drawCircle(m_radius, m_x, m_y);
         }
     };
 
     /**
-     *  Use the Shape and IDrawAPI classes to draw different colored circles.
+     *  Use the 'Shape' and 'IDrawAPI' classes to draw different colored circles
      */
     void clientCode01()
     {
@@ -110,6 +111,7 @@ namespace ShapesExample {
         std::shared_ptr<IDrawAPI> greenCircleDrawer =
             std::make_shared<GreenCircleDrawer>();
 
+        // two 'Shape' objects
         std::shared_ptr<Shape> redCircle = 
             std::make_shared<Circle>(100, 10, 20, redCircleDrawer);
 
