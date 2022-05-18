@@ -4,7 +4,7 @@
 
 ---
 
-<img src="dp_bridge_pattern_intro.png" width="500" />
+<img src="dp_bridge_pattern_intro.png" width="600" />
 
 <sup>(Credits: [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/category/design-patterns/))</sup>
 
