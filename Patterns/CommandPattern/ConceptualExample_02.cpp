@@ -132,20 +132,27 @@ void test_conceptual_example_02() {
 
     using namespace ConceptualExample02;
 
-    std::shared_ptr<Invoker> invoker = std::make_shared<Invoker>();
+    std::shared_ptr<Invoker> invoker{
+        std::make_shared<Invoker>() 
+    };
 
-    std::shared_ptr<SimpleCommand> simpleCmd = std::make_shared<SimpleCommand>("Say Hi!");
+    std::shared_ptr<SimpleCommand> simpleCmd{
+        std::make_shared<SimpleCommand>("Say Hi!") 
+    };
 
-    invoker->setOnStart(simpleCmd);
+    std::shared_ptr<Receiver> receiver{
+        std::make_shared<Receiver>()
+    };
 
-    std::shared_ptr<Receiver> receiver = std::make_shared<Receiver>();
-
-    std::shared_ptr<ComplexCommand> complexCmd = 
+    std::shared_ptr<ComplexCommand> complexCmd{
         std::make_shared<ComplexCommand>(
-            receiver, 
+            receiver,
             std::string("Send email"),
             std::string("Save report")
-        );
+        ) 
+    };
+
+    invoker->setOnStart(simpleCmd);
 
     invoker->setOnFinish(complexCmd);
 

@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Entkoppelt einen Sender und Empfänger, indem ein separates Objekt für ein oder mehrere Operationen erstellt wird.&rdquo;
+
 Das *Command Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 das eine Anforderung (einen *Request*, einen *Befehl*) in ein eigenständiges Objekt umwandelt,
 das alle Informationen über das Kommando enthält.
@@ -73,6 +77,8 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command)
 
 vor.
+
+---
 
 #### 'Real-World' Beispiel:
 
