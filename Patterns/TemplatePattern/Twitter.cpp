@@ -11,9 +11,10 @@
 #include "Twitter.h"
 
 Twitter::Twitter(const std::string& username, const std::string& password)
-    : SocialNetwork(username, password) {}
+    : SocialNetwork{ username, password } {}
 
-bool Twitter::logIn() {
+bool Twitter::logIn()
+{
     std::cout << "Checking user's parameters" << std::endl;
     std::cout << "Name: " << m_username << std::endl;
     std::cout << "Password: ";
@@ -26,8 +27,8 @@ bool Twitter::logIn() {
     return true;
 }
 
-bool Twitter::sendData(const std::string& data) {
-
+bool Twitter::sendData(const std::string& data)
+{
     bool messagePosted = true;
     if (messagePosted) {
         std::cout << "Message: '" << data << "' was posted on Twitter" << std::endl;
@@ -38,11 +39,13 @@ bool Twitter::sendData(const std::string& data) {
     }
 }
 
-void Twitter::logOut() {
+void Twitter::logOut()
+{
     std::cout << "User: '" << m_username << "' was logged out from Twitter" << std::endl;
 }
 
-void Twitter::simulateNetworkLatency() {
+void Twitter::simulateNetworkLatency()
+{
     int i = 0;
     std::cout << std::endl;
     while (i < 5) {

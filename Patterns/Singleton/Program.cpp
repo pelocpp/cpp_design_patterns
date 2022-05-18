@@ -6,7 +6,8 @@
 void test_singleton_01();
 void test_singleton_02();
 
-int main() {
+int main()
+{
     test_singleton_01();
     test_singleton_02();
     return 0;

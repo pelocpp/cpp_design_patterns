@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Um Redundanzen beim Speichern von Daten zu vermeiden&rdquo;
+&ldquo;Um Redundanzen beim Speichern von Daten zu vermeiden.&rdquo;
 
 Das *Flyweight Pattern* ist ein Entwurfsmuster aus der Kategorie der *Structural Pattern*,
 das verwendet wird, um den Ressourcenverbrauch eines Programms mit einer sehr groﬂen Anzahl von Objekten zu minimieren.

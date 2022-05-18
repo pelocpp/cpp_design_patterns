@@ -6,8 +6,8 @@
 void test_conceptual_example();
 void test_bank_account();
 
-int main() {
-
+int main()
+{
     test_conceptual_example();
     test_bank_account();
     return 0;

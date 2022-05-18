@@ -2,7 +2,8 @@
 // SocialNetwork.h
 // ===========================================================================
 
-class SocialNetwork {
+class SocialNetwork
+{
 public:
     SocialNetwork(const std::string& username, const std::string& password);
 

@@ -6,7 +6,8 @@
 void test_conceptual_example();
 void test_ecommerce_app();
 
-int main() {
+int main()
+{
     test_conceptual_example();
     test_ecommerce_app();
     return 0;

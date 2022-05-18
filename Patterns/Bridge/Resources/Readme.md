@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Trennung der Schnittstelle von ihrer Implementierung&rdquo;
+&ldquo;Trennung der Schnittstelle von ihrer Implementierung.&rdquo;
 
 Das *Bridge Pattern* ist ein strukturelles Entwurfsmuster,
 mit dem sich eine groﬂe Klasse oder eine Reihe eng verwandter Klassen in zwei separate Hierarchien aufteilen

@@ -16,8 +16,8 @@
 // function prototypes
 void test_conceptual_example();
 
-int main() {
-
+int main()
+{
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
     test_conceptual_example();

@@ -8,7 +8,8 @@ void test_conceptual_example_02();
 void test_real_world_example();
 void test_virtual_constructor_idiom();
 
-int main() {
+int main()
+{
     test_conceptual_example_01();
     test_conceptual_example_02();
     test_real_world_example();

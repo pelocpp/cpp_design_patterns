@@ -1,5 +1,5 @@
 // ===========================================================================
-// SocialNetworking.cpp // Template Pattern
+// SocialNetworkingProgram.cpp // Template Pattern
 // ===========================================================================
 
 #include <iostream>
@@ -10,8 +10,8 @@
 #include "Facebook.h"
 #include "Twitter.h"
 
-void test_social_networking() {
-
+void test_social_networking()
+{
     std::cout << "Input user name: ";
     std::string userName;
     std::cin >> userName;

@@ -33,7 +33,7 @@
     <ClCompile Include="Twitter.cpp">
       <Filter>Source Files\SocialNetworking</Filter>
     </ClCompile>
-    <ClCompile Include="SocialNetworking.cpp">
+    <ClCompile Include="SocialNetworkingProgram.cpp">
       <Filter>Source Files\SocialNetworking</Filter>
     </ClCompile>
     <ClCompile Include="SocialNetwork.cpp">

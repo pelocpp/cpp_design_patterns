@@ -5,7 +5,8 @@
 // function prototypes
 void test_01();
 
-int main() {
+int main()
+{
     test_01();
     return 0;
 }

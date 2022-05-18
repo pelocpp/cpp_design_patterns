@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Um einen Entwurf eines Algorithmus auf einer höheren Ebene bereitzustellen, der von seinen abgeleiteten Klassen zu vervollständigen ist.&rdquo;
+
 Definiert das prinzipielle Grundgerüst eines Algorithmus in einer zentralen Methode.
 Diese lagert einen oder vorzugsweise mehrere Teilschritte in Methoden abgeleiteter Klassen aus.
 Änderungen an den Teilschritten haben keine Auswirkungen auf die Arbeitsweise (Realisierung)
@@ -54,10 +58,17 @@ Das *Template Method Pattern* ermöglicht die Realisierung von variierenden Teils
 *Abbildung* 1: Schematische Darstellung des *Template Method Patterns*.
 
 
-#### Hinweis:
+#### Hinweis: Was ist der Unterschied zwischen dem *Template Method Pattern* und dem *Strategy Pattern*? 
 
-*Template Method Pattern* und *Strategy Pattern* besitzen viele Gemeinsamkeiten. Ein Unterschied zwischen den beiden Mustern ist,
-dass das *Template Method Pattern* auf Vererbung beruht, dass *Strategy Pattern* hingehen auf Komposition.
+*Template Method Pattern* und *Strategy Pattern* besitzen viele Gemeinsamkeiten:
+
+  * Ein Unterschied zwischen den beiden Mustern ist,
+  dass das *Template Method Pattern* auf Vererbung beruht, das *Strategy Pattern* hingehen auf Komposition.
+
+  * Das *Template Method Pattern* funktioniert auf Klassenebene, ist also statisch.
+
+  * Das *Strategy Pattern* funktioniert auf Objektebene, so dass Sie das Verhalten zur Laufzeit ändern können.
+
 
 ## Anwendungsbeispiel:
 

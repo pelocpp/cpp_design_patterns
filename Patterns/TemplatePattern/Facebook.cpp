@@ -11,9 +11,10 @@
 #include "Facebook.h"
 
 Facebook::Facebook(const std::string& username, const std::string& password)
-    : SocialNetwork(username, password) {}
+    : SocialNetwork{ username, password } {}
 
-bool Facebook::logIn() {
+bool Facebook::logIn()
+{
     std::cout << "Checking user's parameters" << std::endl;
     std::cout << "Name: " << m_username << std::endl;
     std::cout << "Password: ";
@@ -26,8 +27,8 @@ bool Facebook::logIn() {
     return true;
 }
 
-bool Facebook::sendData(const std::string& data) {
-
+bool Facebook::sendData(const std::string& data)
+{
     bool messagePosted = true;
     if (messagePosted) {
         std::cout << "Message: '" << data << "' was posted on Facebook" << std::endl;
@@ -38,11 +39,13 @@ bool Facebook::sendData(const std::string& data) {
     }
 }
 
-void Facebook::logOut() {
+void Facebook::logOut()
+{
     std::cout << "User: '" << m_username << "' was logged out from Facebook" << std::endl;
 }
 
-void Facebook::simulateNetworkLatency() {
+void Facebook::simulateNetworkLatency()
+{
     int i = 0;
     std::cout << std::endl;
     while (i < 5) {

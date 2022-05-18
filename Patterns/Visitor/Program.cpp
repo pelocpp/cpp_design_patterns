@@ -6,7 +6,8 @@
 void test_conceptual_example();
 void test_onlineshop_example();
 
-int main() {
+int main()
+{
     test_conceptual_example();
     test_onlineshop_example();
     return 0;
