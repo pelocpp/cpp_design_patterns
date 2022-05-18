@@ -5,7 +5,8 @@
 /**
  * common interface for all strategies
  */
-class PaymentStrategy {
+class PaymentStrategy
+{
 public:
     virtual ~PaymentStrategy() = default;
 

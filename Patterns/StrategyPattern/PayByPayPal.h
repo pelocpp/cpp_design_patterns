@@ -6,8 +6,8 @@
  * Concrete strategy. Implements PayPal payment method.
  */
 
-class PayByPayPal : public PaymentStrategy {
-
+class PayByPayPal : public PaymentStrategy
+{
 private:
     std::string m_email;
     std::string m_password;

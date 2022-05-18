@@ -12,8 +12,8 @@
 /**
  * c'tor(s) / d'tor
  */
-PayByPayPal::PayByPayPal() {
-
+PayByPayPal::PayByPayPal()
+{
     m_paypalDataBase = {
         { "secret", "hans@web.de" },
         { "peter", "peter@web.de" },
@@ -67,4 +67,3 @@ bool PayByPayPal::verify() {
 // ===========================================================================
 // End-of-File
 // ===========================================================================
-

@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Je nach Bedarf einen bestimmten Algorithmus aus einer Familie von Algorithmen auswählen.&rdquo;
+
 Das Strategie-Entwurfsmuster ist ein Entwurfsmuster,
 in dem eine Reihe ähnlicher Algorithmen definiert und jeweils in eigenen Klassen eingekapselt und implementiert werden.
 Der für einen bestimmten Zweck geeignete Algorithmus kann dann zur Laufzeit gemäß der vorliegenden Anforderungen ausgewählt

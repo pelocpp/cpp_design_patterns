@@ -6,7 +6,8 @@
  * Dummy credit card class
  */
 
-class CreditCard {
+class CreditCard
+{
 private:
     bool m_isValid;
     int m_amount;

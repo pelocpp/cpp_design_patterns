@@ -13,8 +13,8 @@
 #include "PayByCreditCard.h"
 #include "Order.h"
 
-void test_ecommerce_app() {
-
+void test_ecommerce_app()
+{
     Order order;
     std::shared_ptr<PaymentStrategy> strategy = nullptr;
 

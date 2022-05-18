@@ -16,8 +16,6 @@
 
 #### Ziel / Absicht:
 
-Das *State Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*.
-
 Das Muster beschreibt, wie ein Objekt sein Verhalten in Abhängigkeit
 von seinem aktuellen internen Zustand vollständig ändern kann.
 Es scheint, als hätte das Objekt seine Klasse geändert.
