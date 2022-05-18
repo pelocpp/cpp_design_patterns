@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Um das durch seinen Zustand bestimmte Verhalten des Objekts zu implementieren.&rdquo;
+
 Das Muster beschreibt, wie ein Objekt sein Verhalten in Abhängigkeit
 von seinem aktuellen internen Zustand vollständig ändern kann.
 Es scheint, als hätte das Objekt seine Klasse geändert.
