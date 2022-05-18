@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Um Redundanzen beim Speichern von Daten zu vermeiden&rdquo;
+
 Das *Flyweight Pattern* ist ein Entwurfsmuster aus der Kategorie der *Structural Pattern*,
 das verwendet wird, um den Ressourcenverbrauch eines Programms mit einer sehr großen Anzahl von Objekten zu minimieren.
 Beim Erzeugen von vielen tausend identischen Objekten können zustandslose &ldquo;Flyweight&rdquo;-Objekte
@@ -97,6 +101,8 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/flyweight)
@@ -106,10 +112,6 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/438922/Design-Patterns-2-of-3-Structural-Design-Patterns#Flyweight)
 
 vor.
-
-## Literaturhinweise
-
-*Hinweise*:
 
 ---
 

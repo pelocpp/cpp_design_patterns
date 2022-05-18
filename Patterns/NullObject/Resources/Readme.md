@@ -79,7 +79,7 @@ dass sich das *Mock*-Objekt quasi täuschend echt im Vergleich zum eigentlichen r
 
 ---
 
-## Literaturhinweise:1
+## Literaturhinweise:
 
 Die Anregungen zu den Beispielen zum *Null Object Pattern* stammen aus
 

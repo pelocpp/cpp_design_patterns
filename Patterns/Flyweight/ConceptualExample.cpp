@@ -26,9 +26,7 @@ namespace ConceptualExample {
         std::string m_color;
 
         SharedState(const std::string& brand, const std::string& model, const std::string& color)
-            : m_brand{ brand }, m_model{ model }, m_color{color }
-        {
-        }
+            : m_brand{ brand }, m_model{ model }, m_color{color } {}
 
         friend std::ostream& operator<<(std::ostream& os, const SharedState& ss);
     };
@@ -45,9 +43,7 @@ namespace ConceptualExample {
         std::string m_plates;
 
         UniqueState(const std::string& owner, const std::string& plates)
-            : m_owner{ owner }, m_plates{ plates }
-        {
-        }
+            : m_owner{ owner }, m_plates{ plates } {}
 
         friend std::ostream& operator<<(std::ostream& os, const UniqueState& us);
     };
