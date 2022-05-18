@@ -30,6 +30,9 @@
     <ClCompile Include="ConceptualExample03.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
+    <ClCompile Include="ConceptualExample04.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">

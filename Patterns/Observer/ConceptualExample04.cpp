@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Observer // Variant 2
+// ConceptualExample.cpp // Observer // Variant 4 / Using Templates
 // ===========================================================================
 
 /**
@@ -9,21 +9,22 @@
 #include <iostream>
 #include <list>
 #include <string>
-#include <memory>
 
-namespace ObserverDesignPatternSmartPointer {
+namespace ObserverDesignPatternClassicWithTemplates {
 
+    template <typename T>
     class IObserver {
     public:
         virtual ~IObserver() {};
-        virtual void update(const std::string&) = 0;
+        virtual void update(const T& data) = 0;
     };
 
+    template <typename T>
     class ISubject {
     public:
         virtual ~ISubject() {};
-        virtual void attach(std::shared_ptr<IObserver>) = 0;
-        virtual void detach(std::shared_ptr<IObserver>) = 0;
+        virtual void attach(IObserver<T>* observer) = 0;
+        virtual void detach(IObserver<T>* observer) = 0;
         virtual void notify() = 0;
     };
 
@@ -34,9 +35,9 @@ namespace ObserverDesignPatternSmartPointer {
      * when the state changes.
      */
 
-    class Subject : public ISubject {
+    class Subject : public ISubject<std::string> {
     private:
-        std::list<std::shared_ptr<IObserver>> m_list_observers;
+        std::list<IObserver<std::string>*> m_list_observers;
         std::string m_message;
 
     public:
@@ -45,22 +46,21 @@ namespace ObserverDesignPatternSmartPointer {
         }
 
         /**
-         * subscription management methods.
+         * The subscription management methods.
          */
-        void attach(std::shared_ptr<IObserver> observer) override {
+        void attach(IObserver<std::string>* observer) override {
             m_list_observers.push_back(observer);
         }
 
-        void detach(std::shared_ptr<IObserver> observer) override {
+        void detach(IObserver<std::string>* observer) override {
             m_list_observers.remove(observer);
         }
 
         void notify() override {
-            std::list<std::shared_ptr<IObserver>>::iterator iterator{ m_list_observers.begin() };
+            std::list<IObserver<std::string>*>::iterator iterator{ m_list_observers.begin() };
             howManyObserver();
             while (iterator != m_list_observers.end()) {
-                std::shared_ptr<IObserver> ptr = *iterator;
-                ptr->update(m_message);
+                (*iterator)->update(m_message);
                 ++iterator;
             }
         }
@@ -87,33 +87,41 @@ namespace ObserverDesignPatternSmartPointer {
         }
     };
 
-    // ===========================================================================
+    // =======================================================================
 
-    class Observer : public IObserver {
+    class Observer : public IObserver<std::string> {
     private:
         std::string m_messageFromSubject;
+        Subject& m_subject;
         static int m_static_number;
         int m_number;
 
     public:
-        Observer() 
+        Observer(Subject& subject) : m_subject{ subject }
         {
+            m_subject.attach(this);
             std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
             m_number = Observer::m_static_number;
         }
 
-        virtual ~Observer() 
+        virtual ~Observer()
         {
             std::cout << "Goodbye, I was the Observer \"" << m_number << "\".\n";
         }
 
-        void update(const std::string& m_messagefrom_subject) override 
+        void update(const std::string& m_messagefrom_subject) override
         {
             m_messageFromSubject = m_messagefrom_subject;
             printInfo();
         }
 
-        void printInfo() 
+        void removeMeFromTheList()
+        {
+            m_subject.detach(this);
+            std::cout << "Observer \"" << m_number << "\" removed from the list.\n";
+        }
+
+        void printInfo()
         {
             std::cout << "Observer \"" << m_number << "\": a new message is available --> " << m_messageFromSubject << "\n";
         }
@@ -122,45 +130,41 @@ namespace ObserverDesignPatternSmartPointer {
     int Observer::m_static_number = 0;
 
     void clientCode() {
-
-        std::shared_ptr<Subject> subject{ std::make_shared<Subject>() };
-
-        std::shared_ptr<Observer> observer1{ std::make_shared<Observer>() };
-        subject->attach(observer1);
-
-        std::shared_ptr<Observer> observer2{ std::make_shared<Observer>() };
-        subject->attach(observer2);
-
-        std::shared_ptr<Observer> observer3{ std::make_shared<Observer>() };
-        subject->attach(observer3);
+        Subject* subject{ new Subject };
+        Observer* observer1{ new Observer(*subject) };
+        Observer* observer2{ new Observer(*subject) };
+        Observer* observer3{ new Observer(*subject) };
+        Observer* observer4;
+        Observer* observer5;
 
         subject->createMessage("Hello World! :D");
-        subject->detach(observer3);
+        observer3->removeMeFromTheList();
 
         subject->createMessage("The weather is hot today! :p");
-        std::shared_ptr<Observer> observer4{ std::make_shared<Observer>() };
-        subject->attach(observer4);
+        observer4 = new Observer(*subject);
 
-        subject->detach(observer2);
-
-        std::shared_ptr<Observer> observer5{ std::make_shared<Observer>() };
-        subject->attach(observer5);
+        observer2->removeMeFromTheList();
+        observer5 = new Observer(*subject);
 
         subject->createMessage("My new car is great! ;)");
-
-        subject->detach(observer5);
+        observer5->removeMeFromTheList();
 
         subject->someBusinessLogic();
 
-        subject->detach(observer4);
-        subject->detach(observer1);
+        observer4->removeMeFromTheList();
+        observer1->removeMeFromTheList();
+
+        delete observer5;
+        delete observer4;
+        delete observer3;
+        delete observer2;
+        delete observer1;
+        delete subject;
     }
 }
 
-// ===========================================================================
-
-void test_conceptual_example_02() {
-    using namespace ObserverDesignPatternSmartPointer;
+void test_conceptual_example_04() {
+    using namespace ObserverDesignPatternClassicWithTemplates;
     clientCode();
 }
 
