@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Zum Speichern und Wiederherstellen des Zustands einer Komponente/eines Objekts.&rdquo;
+
 Das *Memento Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 mit dem der aktuelle Status eines Objekts gespeichert werden kann,
 ohne dabei etwaige Details seiner Realisierung offenzulegen.
@@ -81,6 +85,16 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
+#### Real-World Example:
+
+Wir stellen eine Klasse `BankAccount` vor, 
+in der wir jede Änderung als *Memento* aufzeichnen.
+Zu einem späteren Zeitpunkt kann der Benutzer das `BankAccount`-Objekt auf diesen Snapshot zurückzusetzen.
+
+[Quellcode 3](../BankAccount.cpp) &ndash; Ein Bankkonto mit *Undo*/*Redo*-Funktionalität
+
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/memento/cpp/example#example-0)
@@ -90,6 +104,8 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Memento)
 
 vor.
+
+Das *Real*-*World*-Beispiel kann [hier](http://www.vishalchovatiya.com/memento-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
 
 ---
 

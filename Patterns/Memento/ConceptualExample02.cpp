@@ -74,7 +74,8 @@ namespace ConceptualExample02 {
      * defines a method for saving the state inside a memento and another method for
      * restoring the state from it.
      */
-    class Originator {
+    class Originator 
+    {
     private:
         std::string m_state;  // originator's state
 

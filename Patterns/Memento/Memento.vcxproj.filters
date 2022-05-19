@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{08eb22ac-b003-4110-8b93-1a548ccdab43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\BankAccount">
+      <UniqueIdentifier>{20cc5aa5-5811-4dc4-b571-8126f4404740}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -26,6 +29,9 @@
     </ClCompile>
     <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="BankAccount.cpp">
+      <Filter>Source Files\BankAccount</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

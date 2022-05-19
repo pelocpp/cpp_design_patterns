@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BankAccount.cpp" />
     <ClCompile Include="ConceptualExample01.cpp" />
     <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="Program.cpp" />
