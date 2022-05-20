@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{c25f325a-3d93-41d6-9aa2-9f2580c917a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ChatRoom">
+      <UniqueIdentifier>{784fd1db-61ee-4e86-bf20-ca2d73f3a01f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -37,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="ConceptualExample03.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatRoom.cpp">
+      <Filter>Source Files\ChatRoom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

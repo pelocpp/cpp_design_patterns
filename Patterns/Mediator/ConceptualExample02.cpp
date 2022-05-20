@@ -2,17 +2,6 @@
 // ConceptualExample02.cpp // Mediator
 // ===========================================================================
 
-#define _CRTDBG_MAP_ALLOC
-#include <cstdlib>
-#include <crtdbg.h>
-
-#ifdef _DEBUG
-#ifndef DBG_NEW
-#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-#define new DBG_NEW
-#endif
-#endif  // _DEBUG
-
 #include <iostream>
 #include <string>
 #include <memory>
@@ -36,7 +25,8 @@ namespace ConceptualExample02 {
      * The Base Component provides the basic functionality of storing a mediator's
      * instance inside component objects.
      */
-    class ColleagueBase {
+    class ColleagueBase 
+    {
     protected:
         std::weak_ptr<MediatorBase> m_mediator;
 
@@ -55,7 +45,8 @@ namespace ConceptualExample02 {
      * Concrete Components implement various functionality. They don't depend on
      * other components. They also don't depend on any concrete mediator classes.
      */
-    class ConcreteColleagueA : public ColleagueBase, public std::enable_shared_from_this<ConcreteColleagueA> {
+    class ConcreteColleagueA : public ColleagueBase, public std::enable_shared_from_this<ConcreteColleagueA> 
+    {
     public:
         void operationA()
         {
@@ -139,10 +130,17 @@ namespace ConceptualExample02 {
 
     void clientCode()
     {
-        std::shared_ptr<ConcreteColleagueA> c1{ std::shared_ptr<ConcreteColleagueA>(new ConcreteColleagueA()) };
-        std::shared_ptr<ConcreteColleagueB> c2{ std::shared_ptr<ConcreteColleagueB>(new ConcreteColleagueB()) };
+        std::shared_ptr<ConcreteColleagueA> c1{ 
+            std::shared_ptr<ConcreteColleagueA>(new ConcreteColleagueA())
+        };
 
-        std::shared_ptr<ConcreteMediator> mediator{ std::make_shared<ConcreteMediator>(c1, c2) };
+        std::shared_ptr<ConcreteColleagueB> c2{ 
+            std::shared_ptr<ConcreteColleagueB>(new ConcreteColleagueB())
+        };
+
+        std::shared_ptr<ConcreteMediator> mediator{ 
+            std::make_shared<ConcreteMediator>(c1, c2)
+        };
 
         // Note: this method call CANNOT be integrated into the c'tor call before:
         // the shared pointer object must be fully constructed before 'shared_from_this()'
@@ -159,7 +157,6 @@ namespace ConceptualExample02 {
 
 void test_conceptual_example02()
 {
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     using namespace ConceptualExample02;
     clientCode();
 }

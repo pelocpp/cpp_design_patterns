@@ -16,7 +16,12 @@
 
 #### Ziel / Absicht:
 
-Das *Mediator Pattern* ist ein Verhaltensentwurfsmuster, das die lose Kopplung von Objekten propagiert,
+###### In einem Satz:
+
+&ldquo;Um die Kommunikation zwischen Objekten zu erleichtern.&rdquo;
+
+Das *Mediator Pattern* ist ein Verhaltensentwurfsmuster,
+das die lose Kopplung von Objekten propagiert,
 indem Klassen nicht mehr direkt miteinander kommunizieren.
 Stattdessen werden Mediatorobjekte verwendet, um die Interaktionen zwischen Klassen zu kapseln
 und zu zentralisieren.
@@ -92,6 +97,38 @@ Das *Conceptual Example* liegt in drei Varianten vor:
 
 ---
 
+#### Real-World Example:
+
+Wir betrachten als reale Anwendung dieses Entwurfsmusters die (triviale) Realisierung eines Chatraums.
+
+Die zentrale Komponente &ndash; also der *Mediator* &ndash; ist in diesem Beispiel
+eine Instanz der Klasse `GoogleChat`.
+Jede Person im Chatraum hat eine Referenz oder einen Verweis auf dieses Objekt (hier: `std::weak_ptr<ChatRoom>`).
+Daher kommunizieren sie alle ausschließlich über diesen Knotenpunkt und damit eben nicht direkt.
+
+Die Clients haben keine direkten Referenzen voneinander.
+
+Sie können aber trotzdem Nachrichten an einen bestimmten Client senden,
+wie die Methode `postMessage` demonstriert.
+In diesem Fall wird der Name einer Person als eine Art von Schlüssel für die eigentliche Nachrichtenübermittlung verwendet.
+Der Chatraum ist der eigentliche Vermittler, er kümmert sich um die Details der Nachrichtenzustellung.
+
+##### Zuordnung der Klassen:
+
+  * Klasse `ChatRoom` &ndash; Klasse `MediatorBase` 
+  * Klasse `PersonBase` &ndash; Klasse `ColleagueBase` 
+  * Klasse `Person` &ndash; Klasse `ConcreteColleague` 
+  * Klasse `GoogleChat` &ndash; Klasse `ConcreteMediator` 
+
+[ChatRoom](../ChatRoom.cpp) &ndash; Anwendungsfall zum *Mediator* Pattern.
+
+*Hinweis*: In der Realisierung des Chatraums sind zwei Implementierungsdetails zu beachten:
+
+  * Einsatz von Klasse `std::weak_ptr`
+  * `std::enable_shared_from_this<GoogleChat>` und `shared_from_this()`
+
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/mediator/cpp/example#lang-features)
@@ -101,6 +138,8 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Mediator)
 
 vor.
+
+Das *Real*-*World*-Beispiel kann [hier](http://www.vishalchovatiya.com/mediator-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
 
 ---
 

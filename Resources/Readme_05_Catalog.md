@@ -50,7 +50,7 @@ oder die Komplexität des Codes erhöhen.
 | [Prototype](../Patterns/Prototype/Resources/Readme.md) | Erstellen von Kopien vorhandener Objekte, ohne den Code von diesen Klassen abhängig zu machen. |
 | [Singleton](../Patterns/Singleton/Resources/Readme.md) | Das **Singleton** Entwurfsmuster sorgt dafür, dass es von einer Klasse nur eine einzige Instanz gibt und diese global zugänglich ist. |
 
-Tabelle 1. Erzeugungsmuster (*Creational Design Pattern*).
+*Tabelle* 1: Erzeugungsmuster (*Creational Design Pattern*).
 
 ##### Strukturmuster
 
@@ -67,7 +67,7 @@ ohne dabei einen Verlust an Flexibilität und Effizient einzugehen.
 | [Flyweight](../Patterns/Flyweight/Resources/Readme.md) | Ermöglicht es, Objekte ressourcenschonend anzulegen, indem diese gemeinsame Zustandsdaten zwischen mehreren Objekten teilen, anstatt derartige Zustandsdaten in jedem Objekt zu duplizieren. |
 | [Proxy](../Patterns/Proxy/Resources/Readme.md) | Bereitstellung eines Platzhalters (Stellvertreters) für ein anderes Objekt. Das Proxy-Objekt steuert den Zugriff auf das ursprüngliche Objekt. Vor oder nach der Ausführung der eigentlichen Anforderung am ursprünglichen Objekt lassen sich zusätzliche Aktionen ergänzen. |
 
-Tabelle 2. Strukturmuster (*Structural Design Pattern*).
+*Tabelle* 2: Strukturmuster (*Structural Design Pattern*).
 
 
 ##### Verhaltensmuster
@@ -88,7 +88,7 @@ Verhaltensentwurfsmuster betrachten Algorithmen und der Aufteilung von Verantwor
 | [Template Method](../Patterns/TemplatePattern/Resources/Readme.md) | Definiert das Grundgerüst eines Algorithmus in einer Oberklasse, lässt Unterklassen bestimmte Schritte des Algorithmus überschreiben, ohne dabei Änderungen an der prinzipiellen Algorithmusstruktur zu gestatten. |
 | [Visitor Method](../Patterns/Visitor/Resources/Readme.md) | Befasst sich mit der Trennung von Algorithmen von den Objekten, mit denen sie arbeiten. |
 
-Tabelle 3. Verhaltensmuster (*Behavioral Design Pattern*).
+*Tabelle* 3: Verhaltensmuster (*Behavioral Design Pattern*).
 
 #### Weitere Entwurfsmuster
 
@@ -104,7 +104,7 @@ Gruppierungen von Entwurfsmustern. In Büchern über "Modern C++" stößt man häufig
 | SFINAE | *Substitution failure is not an error* |
 | CRTP | *Curiously recurring template pattern* |
 
-Tabelle 4: Weitere Softwaremuster (*Modern C++*)
+*Tabelle* 4: Weitere Softwaremuster (*Modern C++*)
 
 Für den Entwurf von Oberflächen gibt es im Prinzip drei "Klassiker"
 
@@ -114,7 +114,7 @@ Für den Entwurf von Oberflächen gibt es im Prinzip drei "Klassiker"
 | MVP | Model-View-Presenter |
 | MVVM | Model View View-Model |
 
-Tabelle 5. Entwurfsmuster für Oberflächen
+*Tabelle* 5: Entwurfsmuster für Oberflächen
 
 
 In einem weiteren Buch von [Robert Nystrom](https://gameprogrammingpatterns.com/),
@@ -127,7 +127,7 @@ finden sich weitere interessante Entwurfsmuster vor:
 | Game Loop | Entkopplung des Spieleverlaufs (Ablauf der Anwendung) von Benutzereingaben und Prozessorgeschwindigkeit. |
 | Update Method | Simulation des Anstoßes einer Aktivität bei einer Anzahl unabhängiger Objekte (Ausführung eines *Frames* in regelmäßigen Abständen). |
 
-Tabelle 6. Sequencing Patterns
+*Tabelle* 6: Sequencing Patterns
     
 sowie
 
@@ -137,7 +137,7 @@ sowie
 | Subclass Sandbox | Definieren Sie das Verhalten in einer Unterklasse mithilfe einer Reihe von Operationen, die von der Basisklasse bereitgestellt werden. |
 | Type Object | Ermöglicht die flexible Erstellung neuer *Klassen*, indem Sie eine einzelne Klasse erstellen, von der jede Instanz einen anderen Objekttyp darstellt. |
 
-Tabelle 7. Behavioral Patterns
+*Tabelle* 7: Behavioral Patterns
 
 und
 
@@ -147,7 +147,7 @@ und
 | Event Queue | Entkoppelt die Verarbeitung einer Nachricht oder ein Ereignisses vom Zeitpunkt, zu dem sie gesendet (bzw. empfangen) wird. |
 | Service Locator | Stellt einen globalen Zugriffspunkt auf einen Dienst bereit, ohne Benutzer an eine konkrete Klasse zu koppeln, die den Service implementiert. |
 
-Tabelle 8. Decoupling Patterns
+*Tabelle* 8: Decoupling Patterns
 
 und
 
@@ -158,7 +158,19 @@ und
 | Object Pool | Verbesserung von Rechenleistung und Speichernutzung, indem Objekte aus einem festen Pool wiederverwendet werden, anstatt sie einzeln anzufordern und freizugeben. |
 | Spatial Partition | Effizienter Zugriff auf Objekte, indem diese in einer nach ihren Positionen geordneten Datenstruktur gespeichert werden. |
 
-Tabelle 9. Optimization Patterns
+*Tabelle* 9: Optimization Patterns
+
+---
+
+#### `std::enable_shared_from_this`
+
+Das Thema `std::enable_shared_from_this` wird in einigen Mustern speziell angesprochen:
+
+  * [Mediator](../Patterns/Mediator/Resources/Readme.md)<br/>
+  * [Composite Pattern](../Patterns/CompositePattern/Resources/Readme.md)<br/>
+  * [State](../Patterns/StatePattern/Resources/Readme.md)<br/>
+  * [Observer](../Patterns/Observer/Resources/Readme.md)<br/>
+  * [Visitor Method](../Patterns/Visitor/Resources/Readme.md)<br/>
 
 ---
 

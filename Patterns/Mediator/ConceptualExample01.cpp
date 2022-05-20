@@ -2,17 +2,6 @@
 // ConceptualExample01.cpp // Mediator
 // ===========================================================================
 
-#define _CRTDBG_MAP_ALLOC
-#include <cstdlib>
-#include <crtdbg.h>
-
-#ifdef _DEBUG
-#ifndef DBG_NEW
-#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-#define new DBG_NEW
-#endif
-#endif  // _DEBUG
-
 #include <iostream>
 #include <string>
 #include <memory>
@@ -26,7 +15,8 @@ namespace ConceptualExample01 {
      */
     class ColleagueBase;
 
-    class MediatorBase {
+    class MediatorBase 
+    {
     public:
         virtual void notify(ColleagueBase* sender, std::string event) const = 0;
     };
@@ -35,12 +25,13 @@ namespace ConceptualExample01 {
      * The Base Component provides the basic functionality
      * of storing a mediator's instance inside component objects.
      */
-    class ColleagueBase {
+    class ColleagueBase 
+    {
     protected:
         MediatorBase* m_mediator;
 
     public:
-        ColleagueBase(MediatorBase* mediator = nullptr) : m_mediator(mediator) {}
+        ColleagueBase(MediatorBase* mediator = nullptr) : m_mediator{ mediator } {}
 
         void setMediator(MediatorBase* mediator) 
         {
@@ -52,7 +43,8 @@ namespace ConceptualExample01 {
      * Concrete Components implement various functionality. They don't depend on
      * other components. They also don't depend on any concrete mediator classes.
      */
-    class ConcreteColleagueA : public ColleagueBase {
+    class ConcreteColleagueA : public ColleagueBase 
+    {
     public:
         void operationA() 
         {
@@ -67,7 +59,8 @@ namespace ConceptualExample01 {
         }
     };
 
-    class ConcreteColleagueB : public ColleagueBase {
+    class ConcreteColleagueB : public ColleagueBase 
+    {
     public:
         void operationC()
         {
@@ -86,14 +79,15 @@ namespace ConceptualExample01 {
      * Concrete Mediators implement cooperative behavior
      * by coordinating several components.
      */
-    class ConcreteMediator : public MediatorBase {
+    class ConcreteMediator : public MediatorBase 
+    {
     private:
         ConcreteColleagueA* m_component1;
         ConcreteColleagueB* m_component2;
 
     public:
         ConcreteMediator(ConcreteColleagueA* c1, ConcreteColleagueB* c2) 
-            : m_component1(c1), m_component2(c2)
+            : m_component1{ c1 }, m_component2{ c2 }
         {
             m_component1->setMediator(this);
             m_component2->setMediator(this);
@@ -121,6 +115,7 @@ namespace ConceptualExample01 {
         ConcreteColleagueA* c1{ new ConcreteColleagueA{} };
         ConcreteColleagueB* c2{ new ConcreteColleagueB{} };
         ConcreteMediator* mediator{ new ConcreteMediator(c1, c2) };
+
         std::cout << "Client triggers operation A." << std::endl;
         c1->operationA();
         std::cout << std::endl;
@@ -135,7 +130,6 @@ namespace ConceptualExample01 {
 
 void test_conceptual_example01()
 {
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     using namespace ConceptualExample01;
     clientCode();
 }

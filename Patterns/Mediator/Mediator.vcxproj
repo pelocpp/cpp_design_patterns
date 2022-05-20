@@ -145,6 +145,7 @@
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ChatRoom.cpp" />
     <ClCompile Include="ConceptualExample01.cpp" />
     <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="ConceptualExample03.cpp" />
