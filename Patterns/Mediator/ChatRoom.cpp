@@ -94,7 +94,7 @@ namespace ChatRoomMediatorPattern
 
     void Person::receive(const std::string& from, const std::string& msg) {
         std::string s{ from + ": \"" + msg + "\"" };
-        std::cout << "[" << m_name << "'s chat session]" << s << "\n";
+        std::cout << "[" << m_name << "'s chat session] " << s << "\n";
         m_log.emplace_back(s);
     }
 
@@ -130,7 +130,6 @@ namespace ChatRoomMediatorPattern
     }
 };
 
-
 void test_chatroom_example()
 {
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -161,16 +160,6 @@ void test_chatroom_example()
 
     jane->postMessage("Simon", "Glad you found us, simon!");
 }
-/*
-[John's chat session]room: "Jane joins the chat"
-[Jane's chat session]John: "hi room"
-[John's chat session]Jane: "oh, hey john"
-[John's chat session]room: "Simon joins the chat"
-[Jane's chat session]room: "Simon joins the chat"
-[John's chat session]Simon: "hi everyone!"
-[Jane's chat session]Simon: "hi everyone!"
-[Simon's chat session]Jane: "glad you found us, simon!"
-*/
 
 // ===========================================================================
 // End-of-File

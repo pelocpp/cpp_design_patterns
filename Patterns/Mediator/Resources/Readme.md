@@ -127,6 +127,19 @@ Der Chatraum ist der eigentliche Vermittler, er kümmert sich um die Details der 
   * Einsatz von Klasse `std::weak_ptr`
   * `std::enable_shared_from_this<GoogleChat>` und `shared_from_this()`
 
+*Ausgabe*:
+
+```
+[John's chat session] room: "Jane joins the chat"
+[Jane's chat session] John: "Hi anybody ..."
+[John's chat session] Jane: "Oh, hello John"
+[John's chat session] room: "Simon joins the chat"
+[Jane's chat session] room: "Simon joins the chat"
+[John's chat session] Simon: "Hi everyone!"
+[Jane's chat session] Simon: "Hi everyone!"
+[Simon's chat session] Jane: "Glad you found us, simon!"
+```
+
 ---
 
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
