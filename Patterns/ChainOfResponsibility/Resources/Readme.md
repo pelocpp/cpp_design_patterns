@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Bietet die Möglichkeit, eine Anfrage von mehr als einem Objekt/einer Komponente zu bearbeiten.&rdquo;
+
 Das *Chain of Responsibility Pattern* ist ein Entwurfsmuster,
 das eine verkettete Liste von Methoden (*Handlern*) definiert,
 von denen jede eine bestimmte Anforderung (Funktionalität) verarbeiten kann.
@@ -71,6 +75,51 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
+#### Real-World Example:
+
+Wir betrachten als reale Anwendung dieses Entwurfsmusters die (triviale) Realisierung 
+eines Anmeldeprozesses (Login).
+Dieser erfordert eine bestimmte Anzahl von Schritten, um erfolgreich abgeschlossen werden zu können,
+wie z.B. die Eingabe von Benutzername, Passwort, den Abgleich mit einem Captcha usw.
+
+Ein erster Aufruf von
+
+```cpp
+login->authenticate();
+```
+
+löst eine &ldquo;*Chain of Responsibility*&rdquo; Kette aus,
+um jeden für die Anmeldung erforderlichen Schritt einzeln zu überprüfen.
+
+Man kann den Anmeldeprozess auch auf einfachste Weise um weitere Schritte ergänzen,
+z.B. um einen Captcha-Abgleich hinzuzufügen,
+so wie es für Benutzername und Passwort demonstriert wird.
+
+##### Zuordnung der Klassen und Methoden:
+
+  * Klasse `Authentication` &ndash; Klasse `HandlerBase` 
+  * Methode `authenticate` &ndash; Methode `handleRequest`
+  * Methode `nextAuthentication` &ndash; Methode `setSuccessor` 
+  * Klasse `UserName` &ndash; Klasse `ConcreteHandler` 
+  * Klasse `Password` &ndash; Klasse `ConcreteHandler` 
+
+[Authentication](../Authentication.cpp) &ndash; Anwendungsfall zum *Chain of Responsibility* Pattern.
+
+*Hinweis*: In der Realisierung des Chatraums sind zwei Implementierungsdetails zu beachten:
+
+  * Einsatz von Klasse `std::unique_ptr<>`.
+  * `std::move`: `std::unique_ptr<>`-Objekte unterstützen nur die Verschiebe-Semantik.
+
+*Ausgabe*:
+
+```
+Authentication of User Name succeeded!
+Authentication of Password succeeded!
+Authentication succeeded!
+```
+
+---
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/chain-of-responsibility/cpp/example#example-0)
@@ -80,6 +129,9 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Chain)
 
 vor.
+
+
+Das *Real*-*World*-Beispiel kann [hier](http://www.vishalchovatiya.com/chain-of-responsibility-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
 
 ---
 

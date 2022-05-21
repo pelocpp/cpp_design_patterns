@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{324be436-75fa-442f-8eb4-310ccc1204b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Authentication">
+      <UniqueIdentifier>{27908147-2617-4830-871a-b2af96d20708}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -31,6 +34,9 @@
     </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Authentication.cpp">
+      <Filter>Source Files\Authentication</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,7 @@ namespace ConceptualExampleChainOfResponsibility {
         std::string m_param;
 
     public:
-        explicit Request(int type, const std::string& param) 
+        Request(int type, const std::string& param) 
             : m_type{ type }, m_param{ param } {}
 
         int getType() const { return m_type; }
@@ -32,7 +32,7 @@ namespace ConceptualExampleChainOfResponsibility {
         HandlerBase() : m_successor{ nullptr } {}
         virtual ~HandlerBase() {}
 
-        virtual void handleRequest(const Request&) = 0;
+        virtual void handleRequest(const Request&) const = 0;
 
         void setSuccessor(std::shared_ptr<HandlerBase> ptr) {
             m_successor = ptr;
@@ -44,7 +44,7 @@ namespace ConceptualExampleChainOfResponsibility {
     public:
         ConcreteHandlerA() = default;
 
-        void handleRequest(const Request& req) override
+        void handleRequest(const Request& req) const override
         {
             if (req.getType() >= 0 && req.getType() < 10) {
                 std::cout << "Concrete Handler A handles: " << req.getParam() << std::endl;
@@ -60,7 +60,7 @@ namespace ConceptualExampleChainOfResponsibility {
     public:
         ConcreteHandlerB() = default;
 
-        void handleRequest(const Request& req) override
+        void handleRequest(const Request& req) const override
         {
             if (req.getType() >= 10 && req.getType() < 20) {
                 std::cout << "Concrete Handler B handles: " << req.getParam() << std::endl;
@@ -76,7 +76,7 @@ namespace ConceptualExampleChainOfResponsibility {
     public:
         ConcreteHandlerC() = default;
 
-        void handleRequest(const Request& req) override
+        void handleRequest(const Request& req) const override
         {
             if (req.getType() >= 20 && req.getType() < 30) {
                 std::cout << "Concrete Handler C handles: " << req.getParam() << std::endl;
@@ -91,8 +91,8 @@ namespace ConceptualExampleChainOfResponsibility {
      * The client code is usually suited to work with a single handler.
      * In most cases, it is not even aware that the handler is part of a chain.
      */
-    void clientCode(std::shared_ptr<HandlerBase> handler) {
-
+    void clientCode(std::shared_ptr<HandlerBase> handler)
+    {
         std::array<Request, 8> requests = {
             Request{ 7, std::string{ "Req. No.  7"} },
             Request{25, std::string{ "Req. No. 25"} },
@@ -104,7 +104,7 @@ namespace ConceptualExampleChainOfResponsibility {
             Request{20, std::string{ "Req. No. 20"} }
         };
 
-        for (Request request : requests) {
+        for (const Request& request : requests) {
             handler->handleRequest(request);
         }
     }

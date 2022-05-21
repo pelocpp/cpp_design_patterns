@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Bereitstellung einer einheitlichen (vereinfachten) Schnittstelle durch Verbergen einer vorhandenen Systemkomplexität.&rdquo;
+
 Das *Facade Pattern* ist ein strukturelles Entwurfsmuster,
 das verwendet wird, um den Zugriff auf Funktionen in komplexen oder schlecht gestalteten Subsystemen/Bibliotheken
 oder Vergleichbares zu vereinfachen.
