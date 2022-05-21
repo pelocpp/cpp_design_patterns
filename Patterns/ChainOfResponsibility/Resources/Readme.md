@@ -89,11 +89,11 @@ login->authenticate();
 ```
 
 löst eine &ldquo;*Chain of Responsibility*&rdquo; Kette aus,
-um jeden für die Anmeldung erforderlichen Schritt einzeln zu überprüfen.
+um jeden für die Anmeldung erforderlichen Schritt einzeln in die Wege zu leiten.
 
 Man kann den Anmeldeprozess auch auf einfachste Weise um weitere Schritte ergänzen,
 z.B. um einen Captcha-Abgleich hinzuzufügen,
-so wie es für Benutzername und Passwort demonstriert wird.
+so wie dies für Benutzername und Passwort im [Quellcode](../Authentication.cpp) demonstriert wird.
 
 ##### Zuordnung der Klassen und Methoden:
 
@@ -103,7 +103,7 @@ so wie es für Benutzername und Passwort demonstriert wird.
   * Klasse `UserName` &ndash; Klasse `ConcreteHandler` 
   * Klasse `Password` &ndash; Klasse `ConcreteHandler` 
 
-[Authentication](../Authentication.cpp) &ndash; Anwendungsfall zum *Chain of Responsibility* Pattern.
+[Quellcode zum 'Authentication' Beispiel](../Authentication.cpp) &ndash; Anwendungsfall zum *Chain of Responsibility* Pattern.
 
 *Hinweis*: In der Realisierung des Chatraums sind zwei Implementierungsdetails zu beachten:
 
