@@ -19,6 +19,9 @@
     <Filter Include="Source Files\OnlineShop">
       <UniqueIdentifier>{f3737cd6-36ea-43be-b2a4-dcc35b048538}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Motivation">
+      <UniqueIdentifier>{ff745c2f-460f-46d3-862a-ba1ac9e58917}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp">
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="OnlineShop.cpp">
       <Filter>Source Files\OnlineShop</Filter>
+    </ClCompile>
+    <ClCompile Include="MotivationDocumentHtmlMarkdown.cpp">
+      <Filter>Source Files\Motivation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

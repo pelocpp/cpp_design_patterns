@@ -44,6 +44,103 @@ Der Sinn des Visitors besteht darin, die eigentliche Operation auf den Daten von
 der Verwaltungs­struktur zu trennen. Aus der Entkopplung dieser beiden Aspekte entstehen
 Freiheitsgrade für Variationen dieses Entwurfsmusters.
 
+#### Eine didaktische Herleitung in 4 Schritten:
+
+#### Schritt 1: Ein &ldquo;aufdringlicher&rdquo; Besucher (*intrusive Visitor*)
+
+Nehmen wir an, wir haben eine Hierarchie von Dokumentenobjekten wie folgt:
+
+XXXXXXXXXXXXXXXX
+
+Und nun nehmen wir ferner an,
+Sie müssen einige neue Operationen auf dieser bestehenden Infrastruktur definieren.
+Zum Beispiel haben wir eine `Document`-Klasse wie oben gezeigt
+und möchten jetzt, dass verschiedene Dokumente (z.B. `HTML` und `Markdown`) druckbar sind.
+
+Es gibt also eine neue Anforderung (*Concern*) 
+und wir müssen diese auf irgendeine Weise durch die gesamte Klassenhierarchie verbreiten,
+indem wir im Wesentlichen jede einzelne Dokument-Klasse irgendwie unabhängig um eine Methode `print`
+ergänzen.
+
+Was wir jetzt nicht tun wollen, ist, dass wir jedes Mal eine neues neue Anforderung (*Concern*) haben,
+in den vorhandenen Code zurückkehren und jede Klasse (mit neuer virtueller Funktion)
+in der Hierarchie ändern möchten.
+
+Dies würde einen Verstoß des *Open*-*Closed*-Prinzips darstellen!
+Zum Zweiten gibt es da auch noch das *Single*-*Responsibility*-Prinzip, an das wir uns halten wollen.
+Kurz gesagt besagt diese, dass wir für eine neue Anforderung eine separate Klasse erstellen.
+
+Wenn wir das jetzt alles außer Acht lassen, könnten wir folgende Realisierung betrachten:
+
+XXXXXXXXXXXXXXXXXXXXX
+
+Wie wir sehen können, ist diese Vorgehensweise für zwei bis drei Klassen machbar,
+auch wenn diese gegen einige SOLID-Prinzipien verstößt.
+Aber stellen Sie sich vor, Sie haben 20 Klassen als Teil einer Hierarchie,
+dann versagt diese Strategie.
+
+Darüber hinaus wird dieser Ansatz umständlich, wenn es mehr als ein *Concern* wie
+Speichern (`save`), Verarbeiten (`process`) usw. gibt.
+Jedes *Concern* sollte in einer separaten Klasse abgehandelt werden,
+um vor allem in Richtung des *Single*-*Responsibility*-Prinzips zu gehen.
+
+
+#### Schritt 2: Ein &ldquo;reflektierender&rdquo; Besucher (*reflective Visitor*)
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+Wie bereits erwähnt, haben wir nun eine separate Klasse mit Druckfunktionalität
+für die gesamte Klassenhierarchie erstellt,
+vor allem um das *Single*-*Responsibility*-Prinzip einzuhalten.
+
+Aber bei diesem Ansatz müssen wir Typen für eine bestimmte Klasse identifizieren
+(unter Verwendung von `dynamic_cast<>()`), da wir unabhängig voneinander mit einzelnen Objekten der Hierarchie arbeiten müssen.
+
+Dies ist kein Ansatz, der sich effizient skalieren lässt.
+Wenn Sie vor allem den Satz von Klassen erweitern wollen,
+die Sie verarbeiten, werden Sie am Ende eine lange Liste von `if`/`else`-`if`-Konstrukten haben
+und Leistungskosten für *RTTI* bezahlen.
+
+
+#### Schritt 3: Ein &ldquo;klassischer&rdquo; Besucher (*classic Visitor*)
+
+Damit kommen wir nun auf die klassische Umsetzung des *Visitor* Patterns zu sprechen.
+Diese wird weiter unten noch näher erläutert (begleitender Text und UML-Diagramm):
+
+XXXXXXXXXXXXXXXXXXXXXXXXXX
+
+Wie Sie sehen können, haben wir es nun mit zwei Ebenen der Indirektion zu tun,
+um das zu erreichen, was wir wollten, ohne die zwei Prinzipien
+*Open*-*Closed*-Prinzip und *Single*-*Responsibility*-Prinzip zu verletzen.
+
+Hierfür gibt es ein spezielles Schlagwort: *Double Dispatch*, dazu später noch mehr.
+
+BILD !!!!!!!!!!!!
+
+From d->visit(new DocumentPrinter), we call visit() method, which will dispatch to the appropriate overridden visit i.e. HTML::visit(DocumentVisitor* dv).
+
+From the overridden HTML::visit(DocumentVisitor*), we call dv->visit(this), which will again dispatch to the appropriate overridden method(considering the type of this pointer) i.e. DocumentPrinter::visit(HTML*).
+
+#### Schritt 4: Ein Besucher mit Modern C++ Sprachmitteln (*using Modern C++*)
+
+XXXXXXXXXXXXXXXXXXXX
+
+Wir setzen nun die *Modern C++* Klasse `std::variant` und die Funktion `std::visit` ein.
+
+Die Zeile
+
+```cpp
+std::variant<Markdown, HTML> XXXX;
+```
+
+besagt, dass wir der Variablen XXXX entweder ein `Markdown`- oder ein `HTML`-Objekt gleichzeitig verwenden/zuweisen/zugreifen können.
+
+Die `std::visit`-Methode wiederum akzeptiert ein *Callable*-Obbjekt,
+d.h. in unserem Beispiel ein `DocumentPrinter`-Objekt,
+dass für alle möglichen Typen einen überladenen Funktionsoperator (`operator()`) &ndash;
+auch als *Funktor* bezeichnet &ndash; besitzt.
+
+
 
 #### Lösung:
 

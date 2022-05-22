@@ -21,6 +21,7 @@ namespace ConceptualExample {
 
     class VisitorBase {
     public:
+        // using "raw" pointers
         virtual void visit(const class ConcreteComponentA* element) const = 0;
         virtual void visit(const class ConcreteComponentB* element) const = 0;
 

@@ -7,8 +7,7 @@ stabiler im Falle von Änderungen.
 
 <img src="Resources/DesignPattern_HeardAbout.png" width="400">
 
-Abbildung 1: Design Patterns &ndash; *Relax*!
-
+*Abbildung* 1: Design Patterns &ndash; *Relax*!
 
 In den Entwurfsmustern manifestiert sich die jahrelange Entwicklungserfahrung vieler Softwareentwickler. 
 Dieses Wissen lässt sich durch die Verwendung von Entwurfsmustern reaktivierbar und nutzbar machen,
