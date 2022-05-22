@@ -62,25 +62,25 @@ und wir müssen diese auf irgendeine Weise durch die gesamte Klassenhierarchie ve
 indem wir im Wesentlichen jede einzelne Dokument-Klasse irgendwie unabhängig um eine Methode `print`
 ergänzen.
 
-Was wir jetzt nicht tun wollen, ist, dass wir jedes Mal eine neues neue Anforderung (*Concern*) haben,
+Was wir jetzt nicht tun wollen, ist, dass wir jedes Mal, wenn wir eine neue Anforderung (*Concern*) haben,
 in den vorhandenen Code zurückkehren und jede Klasse (mit neuer virtueller Funktion)
-in der Hierarchie ändern möchten.
+in der Hierarchie ändern.
 
 Dies würde einen Verstoß des *Open*-*Closed*-Prinzips darstellen!
 Zum Zweiten gibt es da auch noch das *Single*-*Responsibility*-Prinzip, an das wir uns halten wollen.
-Kurz gesagt besagt diese, dass wir für eine neue Anforderung eine separate Klasse erstellen.
+Kurz gesagt besagt dieses, dass wir für eine neue Anforderung eine separate Klasse erstellen.
 
 Wenn wir das jetzt alles außer Acht lassen, könnten wir folgende Realisierung betrachten:
 
 XXXXXXXXXXXXXXXXXXXXX
 
-Wie wir sehen können, ist diese Vorgehensweise für zwei bis drei Klassen machbar,
-auch wenn diese gegen einige SOLID-Prinzipien verstößt.
+Wie wir sehen, ist diese Vorgehensweise für zwei bis drei Klassen mit Schmerzen machbar,
+auch wenn wir dabei gegen einige SOLID-Prinzipien verstoßen.
 Aber stellen Sie sich vor, Sie haben 20 Klassen als Teil einer Hierarchie,
 dann versagt diese Strategie.
 
 Darüber hinaus wird dieser Ansatz umständlich, wenn es mehr als ein *Concern* wie
-Speichern (`save`), Verarbeiten (`process`) usw. gibt.
+Speichern (`save`), Verarbeiten (`process`) usw. geht.
 Jedes *Concern* sollte in einer separaten Klasse abgehandelt werden,
 um vor allem in Richtung des *Single*-*Responsibility*-Prinzips zu gehen.
 
@@ -94,7 +94,8 @@ für die gesamte Klassenhierarchie erstellt,
 vor allem um das *Single*-*Responsibility*-Prinzip einzuhalten.
 
 Aber bei diesem Ansatz müssen wir Typen für eine bestimmte Klasse identifizieren
-(unter Verwendung von `dynamic_cast<>()`), da wir unabhängig voneinander mit einzelnen Objekten der Hierarchie arbeiten müssen.
+(unter Verwendung von `dynamic_cast<>()`),
+da wir unabhängig voneinander mit einzelnen Objekten in der Hierarchie arbeiten müssen.
 
 Dies ist kein Ansatz, der sich effizient skalieren lässt.
 Wenn Sie vor allem den Satz von Klassen erweitern wollen,
@@ -130,17 +131,16 @@ Wir setzen nun die *Modern C++* Klasse `std::variant` und die Funktion `std::vis
 Die Zeile
 
 ```cpp
-std::variant<Markdown, HTML> XXXX;
+std::variant<Markdown, HTML> doc;
 ```
 
-besagt, dass wir der Variablen XXXX entweder ein `Markdown`- oder ein `HTML`-Objekt gleichzeitig verwenden/zuweisen/zugreifen können.
+besagt, dass wir der Variablen `doc` entweder ein `Markdown`- oder ein `HTML`-Objekt
+gleichzeitig verwenden (zuweisen/zugreifen) können.
 
-Die `std::visit`-Methode wiederum akzeptiert ein *Callable*-Obbjekt,
+Die `std::visit`-Methode wiederum akzeptiert ein *Callable*-Objekt,
 d.h. in unserem Beispiel ein `DocumentPrinter`-Objekt,
-dass für alle möglichen Typen einen überladenen Funktionsoperator (`operator()`) &ndash;
+das für alle möglichen Typen einen überladenen Funktionsoperator (`operator()`) &ndash;
 auch als *Funktor* bezeichnet &ndash; besitzt.
-
-
 
 #### Lösung:
 

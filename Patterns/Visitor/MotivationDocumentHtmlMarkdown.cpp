@@ -321,14 +321,14 @@ namespace MotivationVisitor05
     void clientCode05() {
         HTML hd;
         hd.addToList("This is line");
-        std::variant<Markdown, HTML> d = hd;
+        std::variant<Markdown, HTML> doc = hd;
         DocumentPrinter dp;
-        std::visit(dp, d);
+        std::visit(dp, doc);
 
         Markdown md;
         md.addToList("This is another line");
         d = md;
-        std::visit(dp, d);
+        std::visit(dp, doc);
     }
 }
 
