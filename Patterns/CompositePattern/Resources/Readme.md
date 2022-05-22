@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Um einzelne Objekte und Gruppen von Objekten einheitlich zu behandeln.&rdquo;
+
 Das *Composite Entwurfsmuster* ist ein strukturelles Entwurfsmuster,
 mit dem Sie Objekte zu Baumstrukturen zusammensetzen und dann mit diesen Strukturen arbeiten können,
 als würde es sich um einzelne Objekte handeln.

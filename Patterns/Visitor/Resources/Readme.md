@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Hinzufügen einer neuen Operation für eine Gruppe ähnlicher Objekte oder Hierarchien.&rdquo;
+
 Das *Visitor Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 das eine Menge strukturierter Daten von den Funktionen trennt,
 die auf ihr ausgeführt werden. Dies unterstützt zum einen das Prinzip der "losen Kopplung"

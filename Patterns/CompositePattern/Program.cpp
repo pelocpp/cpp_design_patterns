@@ -21,7 +21,6 @@ void test_filesystem_02();
 
 int main()
 {
-
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
     test_conceptual_example_01();

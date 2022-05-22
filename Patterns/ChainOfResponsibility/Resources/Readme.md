@@ -103,7 +103,7 @@ so wie dies für Benutzername und Passwort im [Quellcode](../Authentication.cpp) 
   * Klasse `UserName` &ndash; Klasse `ConcreteHandler` 
   * Klasse `Password` &ndash; Klasse `ConcreteHandler` 
 
-[Quellcode zum 'Authentication' Beispiel](../Authentication.cpp) &ndash; Anwendungsfall zum *Chain of Responsibility* Pattern.
+[Quellcode zum 'Authentication' Beispiel](../Authentication.cpp) &ndash; Anwendungsfall des *Chain of Responsibility* Patterns.
 
 *Hinweis*: In der Realisierung des Chatraums sind zwei Implementierungsdetails zu beachten:
 

@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="FileSystem">
-      <UniqueIdentifier>{6b5dfcab-926a-4481-b7ce-27dff44e9baf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{aae7269e-c02a-4232-bbdd-2aa3d6740bc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FileSystem">
+      <UniqueIdentifier>{6b5dfcab-926a-4481-b7ce-27dff44e9baf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -25,19 +25,19 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="File.cpp">
-      <Filter>FileSystem</Filter>
+      <Filter>Source Files\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="Directory.cpp">
-      <Filter>FileSystem</Filter>
+      <Filter>Source Files\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="DirectoryEx.cpp">
-      <Filter>FileSystem</Filter>
+      <Filter>Source Files\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="FileSystemBeginners.cpp">
-      <Filter>FileSystem</Filter>
+      <Filter>Source Files\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="FileSystemAdvanced.cpp">
-      <Filter>FileSystem</Filter>
+      <Filter>Source Files\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="ConceptualExample01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
@@ -48,16 +48,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileComponent.h">
-      <Filter>FileSystem</Filter>
+      <Filter>Source Files\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="File.h">
-      <Filter>FileSystem</Filter>
+      <Filter>Source Files\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="Directory.h">
-      <Filter>FileSystem</Filter>
+      <Filter>Source Files\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="DirectoryEx.h">
-      <Filter>FileSystem</Filter>
+      <Filter>Source Files\FileSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

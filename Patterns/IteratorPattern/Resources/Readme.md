@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Um das Durchlaufen (Traversieren) einer Datenstruktur zu erleichtern.&rdquo;
+
 Das *Iterator Pattern* ist ein Entwurfsmuster,
 das es ermöglicht, die Elemente eines Aggregatobjekts ohne Kenntnis seiner Struktur sequentiell
 zu durchlaufen (zu *traversieren*).
