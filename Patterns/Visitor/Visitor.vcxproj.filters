@@ -47,6 +47,9 @@
     <None Include="Resources\dp_visitor_pattern_onlineshop.svg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_visitor_double_dispatch.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_visitorpattern_intro.png">

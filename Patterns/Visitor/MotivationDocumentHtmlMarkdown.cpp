@@ -105,6 +105,9 @@ namespace MotivationVisitor02
         Document* d2 = new Markdown;
         d2->addToList("This is another line");
         d2->print();
+
+        delete d1;
+        delete d2;
     }
 }
 
@@ -175,28 +178,26 @@ namespace MotivationVisitor03
         Document* d2 = new Markdown;
         d2->addToList("This is another line");
         DocumentPrinter::print(d2);
-    }
 
+        delete d1;
+        delete d2;
+    }
 }
 
 namespace MotivationVisitor04
 {
-    /* --------------------------- Added Visitor Classes ----------------------------- */
+    /* --------- Generic Visitor Class ----------- */
+    class Markdown;
+    class HTML;
+
     class DocumentVisitor
     {
     public:
-        virtual void visit(class Markdown*) = 0;
-        virtual void visit(class HTML*) = 0;
+        virtual void visit(Markdown*) = 0;
+        virtual void visit(HTML*) = 0;
     };
 
-    class DocumentPrinter : public DocumentVisitor
-    {
-    public:
-        virtual void visit(class Markdown* md) override;
-        virtual void visit(class HTML* hd) override;
-    };
-
-    /* -------------------------------------------------------------------------------- */
+    /* -------- Document Classes Hierarchy ---------- */
     class Document
     {
     public:
@@ -239,11 +240,20 @@ namespace MotivationVisitor04
         std::list<std::string> m_content;
     };
 
-    /* -------------------------- Added Visitor Methods ------------------------------- */
+    /* ------ Specific Printer Visitor Class -------- */
+
+    class DocumentPrinter : public DocumentVisitor
+    {
+    public:
+        virtual void visit(Markdown* md) override;
+        virtual void visit(HTML* hd) override;
+    };
+
     void DocumentPrinter::visit(Markdown* md) {
         for (const std::string& item : md->m_content)
             std::cout << md->m_start << item << std::endl;
     }
+
     void DocumentPrinter::visit(HTML* hd) {
         std::cout << "<ul>" << std::endl;
         for (const std::string& item : hd->m_content)
@@ -252,13 +262,19 @@ namespace MotivationVisitor04
     }
 
     void clientCode04() {
+        DocumentPrinter* dp = new DocumentPrinter();
+
         Document* d1 = new HTML;
         d1->addToList("This is line");
-        d1->accept(new DocumentPrinter);
+        d1->accept(dp);
 
         Document* d2 = new HTML;
         d2->addToList("This is another line");
-        d2->accept(new DocumentPrinter);
+        d2->accept(dp);
+
+        delete d1;
+        delete d2;
+        delete dp;
     }
 }
 
@@ -297,7 +313,7 @@ namespace MotivationVisitor05
         std::list<std::string>  m_content;
     };
 
-    /* ------------------------------------ Visitor ------------------------------------- */
+    /* ------ Specific Printer Visitor Class -------- */
     class DocumentPrinter
     {
     public:
@@ -316,8 +332,7 @@ namespace MotivationVisitor05
         }
     };
 
-    /* ---------------------------------------------------------------------------------- */
-
+    /* ------ std::variant & std::visit -------- */
     void clientCode05() {
         HTML hd;
         hd.addToList("This is line");
@@ -327,7 +342,7 @@ namespace MotivationVisitor05
 
         Markdown md;
         md.addToList("This is another line");
-        d = md;
+        doc = md;
         std::visit(dp, doc);
     }
 }

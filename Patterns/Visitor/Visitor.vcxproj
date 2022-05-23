@@ -147,6 +147,7 @@
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\dp_visitor_double_dispatch.svg" />
     <None Include="Resources\dp_visitor_pattern.svg" />
     <None Include="Resources\dp_visitor_pattern_onlineshop.svg" />
     <None Include="Resources\Readme.md" />
