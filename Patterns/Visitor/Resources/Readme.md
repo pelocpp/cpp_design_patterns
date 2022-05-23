@@ -380,8 +380,8 @@ Hierfür gibt es ein spezielles Schlagwort: *Double Dispatch*, siehe dazu *Abbild
 
 *Abbildung* 1: Schematische Darstellung von *Double Dispatch*.
 
-Über das Objekt `doc` rufen wir die Methode `visit()` auf,
-die auf Grund des virtuellen Methodenaufrufmechanismus den Aufruf an die Methode `HTML::visit`
+Über das Objekt `doc` rufen wir die Methode `accept()` auf,
+die auf Grund des virtuellen Methodenaufrufmechanismus den Aufruf an die Methode `HTML::accept`
 delegiert.
 
 Im Kontext dieser Methode wiederum finden wir einen Aufruf
@@ -391,8 +391,8 @@ dv->visit(this);
 ```
 
 vor. Dieses Mal wird &ndash; wiederum auf Grund des virtuellen Methodenaufrufmechanismus &ndash; 
-der Aufruf an die Methode `DocumentPrinter::visit(HTML*)` delegiert, unter Berücksichtigung
-des Zeigertyps `HTML*`.
+der Aufruf an die Methode `DocumentPrinter::visit(HTML*)` delegiert (unter Berücksichtigung
+des Zeigertyps `HTML*`).
 
 ##### Schritt 4: Alternativer Ansatz für *Double Dispatch* in Modern C++ mit `std::variant` und `std::visit`
 
