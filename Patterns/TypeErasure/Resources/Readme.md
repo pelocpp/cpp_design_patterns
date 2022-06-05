@@ -438,8 +438,8 @@ In der C++-Standardklassenbibliothek (STL) finden wir zwei Anwendungen des *Type
   * Realisierung von `std::any<T>` &ndash; Typsicherer Container für einzelne Werte.
 
 Eine Realisierung von `std::any<T>` kann
-man [hier](https://blog.devgenius.io/7-advanced-c-concepts-you-should-know-78a5f9134be5) 
-und auch [hier](https://towardsdatascience.com/c-type-erasure-wrapping-any-type-7f8511634849) 
+man bei [Vishal Chovatiya](https://blog.devgenius.io/7-advanced-c-concepts-you-should-know-78a5f9134be5) 
+und auch bei [Debby Nirwan](https://towardsdatascience.com/c-type-erasure-wrapping-any-type-7f8511634849) 
 nachlesen.
 
 ---
