@@ -13,7 +13,6 @@
 &ldquo;Um einen generischen Container zu erstellen, der eine Vielzahl von konkreten Typen aufnehmen kann.&rdquo;
 
 *Type Erasure* ermöglicht es, verschiedene Datentypen mit einem generischen Interface zu verwenden.
-
 Das Idiom *Type Erasure* ist auch unter dem Namen &ldquo;*Duck Typing*&rdquo; bekannt.
 Der Begriff geht auf ein Gedicht von [James Whitcomb Riley](https://de.wikipedia.org/wiki/James_Whitcomb_Riley) zurück:
 
@@ -27,26 +26,24 @@ void acceptsOnlyDucks(Duck& duck);
 </pre>
 
 vor, die nur Objekt des Types `Duck` akzeptiert.
-In statisch typisierten Sprachen wie C++ kann diese Funktion mit Objekten aufgerufen werden,
+In statisch typisierten Sprachen wie C++ kann diese Funktion nur mit Objekten aufgerufen werden,
 deren Typ sich von `Duck`  abgeleitet.
 
-Es gibt aber auch andere Programmiersprachen wir beispielsweise Python.
-Hier könnten hingegen alle Datentypen verwendet werden, die sich wie ein Objekt des Typs `Duck` &ldquo;*verhalten*&rdquo;.
-
-Dies soll heißen: Wenn ein Vogel sich wie eine Ente verhält, dann ist es eine Ente.
+Es gibt aber auch andere Programmiersprachen wie beispielsweise Python.
+Hier könnten alle Datentypen verwendet werden, die sich wie ein Objekt des Typs `Duck` &ldquo;*verhalten*&rdquo;.
+Damit ist jetzt gemeint:  &ldquo;Wenn ein Vogel sich wie eine Ente verhält, dann ist es eine Ente&rdquo;.
 Ein Sprichwort in Python bringt das verschärft auf den Punkt: &ldquo;*Don't ask for permission, ask for forgiveness.*&rdquo;.
 
 Etwas mehr vor einem programmiersprachlichen Hintergrund formuliert bedeutet das:
-Wir rufen eine Funktion `acceptsOnlyDucks` mit einem Vogel auf und hoffen auf das Beste :)
-
-Geht irgendetwas schief, dann gibt es immer noch die Möglichkeiten des Exception Handlings.
+Wir rufen eine Funktion `acceptsOnlyDucks` mit einem Vogel auf und hoffen auf das Beste :).
+Geht irgend etwas schief, dann gibt es immer noch die Möglichkeiten des Exception Handlings.
 Sprachlich gibt es diese Vorgehensweise in Python &ndash; und mit etwas Aufwand auch in C++,
 wie wir in den folgenden Beispielen sehen werden:
 
 #### Motivation: *Polymorphismus mit Schnittstellen*
  
 Wir betrachten zunächst den klassischen Weg des *Polymorphismus mit Schnittstellen*.
-Zunächst definieren wir eine Schnittstelle, die ausschließlich aus rein virtuellen Methoden besteht.
+Zunächst definieren wir eine Schnittstelle (hier: `Animal`), die ausschließlich aus rein virtuellen Methoden besteht.
 
 Anschließend erstellen wir für jede Implementierung, die diese Schnittstelle verwenden möchte,
 eine Unterklasse, die von der Basisklasse (Schnittstellenklasse) erbt und ihre Methoden implementiert.
@@ -109,8 +106,8 @@ Nicht immer haben wir diese Situation vorliegen.
 Möglicherweise haben wir keine Kontrolle über die konkreten Typen (zum Beispiel Klassen wie `std::string`),
 oder es ist nicht einmal der Fall gegeben, dass der konkrete Typ eine Basisklasse besitzt (zum Beispiel Datentyp `int`).
 
-Dies ist noch kein Hinderungsgrund, nicht auf eine andere Weise das Ziel zu erreichen.
-Mit Templates lassen sich Datentypen *polymorph machen*:
+Dies ist aber noch kein Hinderungsgrund, nicht doch auf eine andere Weise das Ziel erreichen zu können.
+Mit Templates lassen sich Datentypen *polymorph* machen:
 
 ```cpp
 01: template <typename T>
@@ -154,21 +151,19 @@ std::shared_ptr<Animal> aDog = std::make_shared<Dog>();
 ??? animals[] = { aCow, aPig, aDog };
 ```
 
-Mit dem Ansatz des *Polymorphismus mit Templates* lässt ein solches Array nicht erstellen,
+Mit dem Ansatz des *Polymorphismus mit Templates* lässt sich ein solches Array nicht erstellen,
 da es keinen gemeinsamen Basisklassentyp für das Array gibt.
 
-#### Skizzierung eines Lösungsansatzes:
+#### Erste Skizzierung eines Lösungsansatzes:
 
-Wenn wir für die vorliegenden Objekt nicht die gewünschte Vererbungshierarchie haben
+Wenn wir für die vorliegenden Objekte nicht die gewünschte Vererbungshierarchie haben
 und wenn wir die Datentypen der Objekte nicht ändern können,
 dann könnten wir zumindest eine eigene Vererbungshierarchie
-bestehend aus Wrapper-Objekten (Hüllenobjekte) aufbauen.
-
+(bestehend aus Wrapper-Objekten/Hüllen-Objekten) aufbauen.
 Das heißt, wir definieren unsere eigene Schnittstelle (hier: `MyAnimal`) und implementieren sie mehrfach.
 
 Jede Implementierung der Schnittstelle umschließt eine Klasse `Cow`, eine Klasse `Pig` oder eine Klasse `Dog`
-und ruft diese für alle virtuellen Methoden auf.
-
+und ruft diese für ihre virtuellen Methoden auf.
 Dann erstellen wir Wrapper-Objekte, die von `MyAnimal` erben.
 Jeder Wrapper tut nichts weiter als das &ldquo;echte&rdquo; zugrunde liegende Objekt aufzurufen:
 
@@ -205,54 +200,58 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 28: 
 29: class MyCow : public MyAnimal
 30: {
-31:     Cow m_cow;
-32: 
-33: public:
-34:     std::string see() const { return m_cow.see(); }
-35:     std::string say() const { return m_cow.say(); }
-36: };
-37: 
-38: class MyPig : public MyAnimal
-39: {
-40:     Pig m_pig;
-41: 
-42: public:
-43:     std::string see() const { return m_pig.see(); }
-44:     std::string say() const { return m_pig.say(); }
-45: };
-46: 
-47: class MyDog : public MyAnimal
-48: {
-49:     Dog m_dog;
-50: 
-51: public:
-52:     std::string see() const { return m_dog.see(); }
-53:     std::string say() const { return m_dog.say(); }
-54: };
-55: 
-56: void seeAndSay(const std::shared_ptr<MyAnimal> animal)
-57: {
-58:     std::cout
-59:         << "The " << animal->see() << " says '"
-60:         << animal->say() << "' :)." << std::endl;
-61: }
-62: 
-63: void clientCode()
-64: {
-65:     std::shared_ptr<MyAnimal> aCow = std::make_shared<MyCow>();
-66:     std::shared_ptr<MyAnimal> aPig = std::make_shared<MyPig>();
-67:     std::shared_ptr<MyAnimal> aDog = std::make_shared<MyDog>();
-68: 
-69:     std::vector<std::shared_ptr<MyAnimal>> animals = { aCow , aPig , aDog };
-70: 
-71:     for (const auto& animal : animals) {
-72:         seeAndSay(animal);
-73:     }
-74: }
+31: private:
+32:     Cow m_cow;
+33: 
+34: public:
+35:     std::string see() const { return m_cow.see(); }
+36:     std::string say() const { return m_cow.say(); }
+37: };
+38: 
+39: class MyPig : public MyAnimal
+40: {
+41: private:
+42:     Pig m_pig;
+43: 
+44: public:
+45:     std::string see() const { return m_pig.see(); }
+46:     std::string say() const { return m_pig.say(); }
+47: };
+48: 
+49: class MyDog : public MyAnimal
+50: {
+51: private:
+52:     Dog m_dog;
+53: 
+54: public:
+55:     std::string see() const { return m_dog.see(); }
+56:     std::string say() const { return m_dog.say(); }
+57: };
+58: 
+59: void seeAndSay(const std::shared_ptr<MyAnimal> animal)
+60: {
+61:     std::cout
+62:         << "The " << animal->see() << " says '"
+63:         << animal->say() << "' :)." << std::endl;
+64: }
+65: 
+66: void clientCode()
+67: {
+68:     std::shared_ptr<MyAnimal> aCow = std::make_shared<MyCow>();
+69:     std::shared_ptr<MyAnimal> aPig = std::make_shared<MyPig>();
+70:     std::shared_ptr<MyAnimal> aDog = std::make_shared<MyDog>();
+71: 
+72:     std::vector<std::shared_ptr<MyAnimal>> animals = { aCow , aPig , aDog };
+73: 
+74:     for (const auto& animal : animals) {
+75:         seeAndSay(animal);
+76:     }
+77: }
 ```
 
-Das funktioniert, aber es gibt einen eklatanten Nachteil: Wir müssen eine Wrapper-Klasse (wie Klasse `MyCow`)
-für jeden konkreten Typ definieren, den wir verpacken möchten (zum Beispiel Klasse `Cow`).
+Das funktioniert, aber es gibt einen eklatanten Nachteil:
+Wir müssen für jeden konkreten Typ, den wir verpacken möchten (zum Beispiel Klasse `Cow`),
+eine Wrapper-Klasse (wie Klasse `MyCow`) definieren.
 
 Wir haben jedoch bereits eine einfache Möglichkeit gesehen, den Compiler diese Arbeit für uns erledigen zu lassen:
 Durch die Verwendung von Templates:
@@ -275,8 +274,8 @@ Durch die Verwendung von Templates:
 #### Das *Type Erasure* Idiom
 
 Das, was wir im letzten Abschnitt gebaut haben, ist die Grundlage des &ldquo;*Type Erasure*&rdquo; Idioms.
-Alles, was noch zu erledigen ist, ist, all diese Maschinerie hinter einer anderen Klasse zu verstecken,
-damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und Vorlagen befassen muss:
+Alles, was noch zu erledigen ist, ist, all diese Maschinerie hinter einer weiteren Klasse zu verstecken,
+damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und Templates befassen muss:
 
 ```cpp
 01: class SeeAndSay
@@ -344,15 +343,16 @@ damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und 
 
 #### *Type Erasure* Nomenklatur
 
-Die im letzten Abschnitt verwendeten Bezeichner `MyAnimal` und `AnimalWrapper` haben Standardnamen:
+Die im letzten Abschnitt verwendeten Bezeichner `MyAnimal` und `AnimalWrapper` treten im &ldquo;echten Leben&rdquo;
+so natürlich nicht auf, sie haben standardisierte Bezeichner:
 
-  * `MyAnimal` ist ein Beispiel eines *Type Erasure* **Konzepts**: Klasse `Concept`
-  * `AnimalWrapper` ist ein Beispiel eines *Type Erasure* **Modells**: Klasse `Model`
+  * `MyAnimal` ist ein Beispiel eines *Type Erasure* **Konzepts**: Klasse `Concept`.
+  * `AnimalWrapper` ist ein Beispiel eines *Type Erasure* **Modells**: Klasse `Model`.
 
 Ein **Konzept** beschreibt die Schnittstelle, gegen die wir in der Hüllenklasse programmieren müssen.
 
 Ein **Modell** ist ein auf Templates basierendes Wrapper-Objekt, das die **Konzept**-Schnittstelle implementiert
-und alle Konzept-Methoden an den zugrunde liegenden konkreten Typ weiterleitet.
+und alle Konzept-Methoden an den zugrunde liegenden, konkreten Typ weiterleitet.
 
 Wir formulieren das letzte Beispiel entsprechend der *Type Erasure* Namensgebung um:
 
@@ -420,11 +420,27 @@ Wir formulieren das letzte Beispiel entsprechend der *Type Erasure* Namensgebung
 61: }
 ```
 
+Damit wären wir am Ende unserer Betrachtungen des *Type Erasure* Idioms.
+
 ---
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample.cpp) &ndash; Sehr einfaches Beispiel
+[Quellcode](../ConceptualExample.cpp) &ndash; Zusammenfassung aller Quellcode-Beispiel aus dem Text.
+
+---
+
+#### 'Real-World' Beispiel:
+
+In der C++-Standardklassenbibliothek (STL) finden wir zwei Anwendungen des *Type Erasure* Idioms vor:
+
+  * Realisierung von `std::function<>` &ndash; Polymorphe Hülle für unterschiedliche Funktionen.
+  * Realisierung von `std::any<T>` &ndash; Typsicherer Container für einzelne Werte.
+
+Eine Realisierung von `std::any<T>` kann
+man [hier](https://blog.devgenius.io/7-advanced-c-concepts-you-should-know-78a5f9134be5) 
+und auch [hier](https://towardsdatascience.com/c-type-erasure-wrapping-any-type-7f8511634849) 
+nachlesen.
 
 ---
 
@@ -439,7 +455,3 @@ vor.
 [Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---
-
-
-
-

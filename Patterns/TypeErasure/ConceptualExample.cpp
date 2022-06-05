@@ -114,6 +114,7 @@ namespace ConceptualExample
 
         class MyCow : public MyAnimal
         {
+        private:
             Cow m_cow;
 
         public:
@@ -123,6 +124,7 @@ namespace ConceptualExample
 
         class MyPig : public MyAnimal
         {
+        private:
             Pig m_pig;
 
         public:
@@ -132,6 +134,7 @@ namespace ConceptualExample
 
         class MyDog : public MyAnimal
         {
+        private:
             Dog m_dog;
 
         public:
