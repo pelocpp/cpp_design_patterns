@@ -108,7 +108,10 @@ namespace DynamicDecoration {
 void test_dynamic_decoration_00() {
     using namespace DynamicDecoration;
 
-    std::shared_ptr<Shape> circle{ std::make_shared<Circle>(0.5) };
+    std::shared_ptr<Shape> circle{
+        std::make_shared<Circle>(0.5) 
+    };
+
     std::cout << circle->draw() << std::endl;
     // "A circle of radius 0.5"
 }
@@ -119,9 +122,11 @@ void test_dynamic_decoration_01() {
     std::shared_ptr<Shape> circle{
         std::make_shared<Circle>(0.5)
     };
+
     std::shared_ptr<Shape> redCircle{
         std::make_shared<ColoredShapeDecorator>(circle, "red") 
     };
+
     std::cout << redCircle->draw() << std::endl;
     // "A circle of radius 0.500000 has color red"
 }
@@ -155,6 +160,7 @@ void test_dynamic_decoration_03() {
     std::shared_ptr<Shape> greenTransparentCircle{
         std::make_shared<TransparentShapeDecorator>(greenCircle, static_cast<uint8_t>(50)) 
     };
+
     std::cout << greenTransparentCircle->draw() << std::endl;
     // "A circle of radius 15.000000 has color green has 19.6078% transparency"
 }

@@ -126,7 +126,7 @@ void test_conceptual_example_01() {
 void test_conceptual_example_02() {
 
     /**
-     * ...as well as decorated ones.
+     * ...as well as decorated ones ...
      *
      * Note how decorators can wrap not only simple components
      * but the other decorators as well.
@@ -164,7 +164,7 @@ void test_conceptual_example_02() {
 void test_conceptual_example_03() {
 
     /**
-     * ... and at least: changing decorators at runtime
+     * ... and at the very end: changing decorators at runtime
      */
 
     // component which is going to be decorated
