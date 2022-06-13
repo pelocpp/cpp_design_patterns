@@ -59,31 +59,32 @@ Nehmen wir an, wir haben eine Hierarchie von Dokumentenobjekten der folgenden Ge
 06: 
 07: class Markdown : public Document
 08: {
-09: public:
-10:     Markdown() : m_start{ "* " } {}
-11: 
-12:     void add_to_list(const std::string& line) {
-13:         m_content.push_back(line);
-14:     }
+09: private:
+10:     std::string m_start;
+11:     std::list<std::string> m_content;
+12: 
+13: public:
+14:     Markdown() : m_start{ "* " } {}
 15: 
-16:     std::string            m_start;
-17:     std::list<std::string> m_content;
-18: };
-19: 
-20: class HTML : public Document
-21: {
-22: public:
-23:     HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
-24: 
-25:     virtual void addToList(const std::string& line) override {
-26:         m_content.push_back(line);
-27:     }
-28: 
-29: private:
-30:     std::string             m_start;
-31:     std::string             m_end;
-32:     std::list<std::string>  m_content;
-33: };
+16:     void addToList(const std::string& line) override {
+17:         m_content.push_back(line);
+18:     }
+19: };
+20: 
+21: class HTML : public Document
+22: {
+23: private:
+24:     std::string m_start;
+25:     std::string m_end;
+26:     std::list<std::string> m_content;
+27: 
+28: public:
+29:     HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
+30: 
+31:     virtual void addToList(const std::string& line) override {
+32:         m_content.push_back(line);
+33:     }
+34: };
 ```
 
 Und nehmen wir nun ferner an,
@@ -94,17 +95,17 @@ also eine Methode `print` bekommen.
 
 Es gibt also eine neue Anforderung (*Concern*) 
 und wir müssen diese auf irgendeine Weise durch die gesamte Klassenhierarchie propagieren,
-indem wir im Wesentlichen jede einzelne Dokument-Klasse irgendwie unabhängig um eine `print`-Methode
+indem wir jede einzelne `Document`-Klasse irgendwie unabhängig um eine `print`-Methode
 ergänzen.
 
 Was wir jetzt nicht tun wollen, ist, dass wir jedes Mal, wenn wir eine neue Anforderung (*Concern*) erhalten,
 in den vorhandenen Code zurückkehren und jede Klasse in der Hierarchie (mit zusätzlichen virtuellen Funktionen) ändern.
 
-Dies würde einen Verstoß des *Open*-*Closed*-Prinzips darstellen!
+Dies würde einen Verstoß gegen das *Open*-*Closed*-Prinzip darstellen!
 Zum Zweiten gibt es auch noch das *Single*-*Responsibility*-Prinzip, an das wir uns halten wollen.
 Kurz gesagt besagt dieses, dass wir für eine neue Anforderung eine separate Klasse zu erstellen haben.
 
-Würden wir das jetzt alles für einen kurzen Moment außer Acht lassen,
+Würden wir das jetzt alles Mal für einen kurzen Moment außer Acht lassen,
 könnten wir folgende Realisierung betrachten:
 
 ```cpp
@@ -259,7 +260,7 @@ um vor allem das *Single*-*Responsibility*-Prinzips zu beachten.
 ```
 
 Wie bereits erwähnt, haben wir nun eine separate Klasse `DocumentPrinter` mit Druckfunktionalität
-für die gesamte Klassenhierarchie erstell.
+für die gesamte Klassenhierarchie erstellt.
 Das *Single*-*Responsibility*-Prinzip wird so berücksichtigt.
 
 Aber bei diesem Ansatz müssen wir Typen bestimmter Klassen identifizieren
@@ -268,7 +269,7 @@ da wir unabhängig voneinander mit einzelnen Objekten in der Hierarchie arbeiten 
 
 Dies ist kein Ansatz, der sich effizient skalieren lässt.
 Wenn Sie vor allem den Satz von Klassen erweitern wollen,
-um deren Verarbeitung es geht, werden Sie am Ende eine lange Liste von `if`/`else`-`if`-Konstrukten
+um deren Verarbeitung es geht, werden Sie am Ende eine lange Kaskade von `if`/`else`-`if`-Konstrukten
 und unnötige Performanceaufwendungen für *RTTI* haben.
 
 
@@ -310,8 +311,8 @@ Diese wird weiter unten noch näher erläutert (begleitender Text und UML-Diagramm
 30:         dv->visit(this);
 31:     } 
 32: 
-33:     std::string             m_start;
-34:     std::list<std::string>  m_content;
+33:     std::string m_start;
+34:     std::list<std::string> m_content;
 35: };
 36: 
 37: class HTML : public Document
@@ -327,8 +328,8 @@ Diese wird weiter unten noch näher erläutert (begleitender Text und UML-Diagramm
 47:         dv->visit(this);
 48:     } 
 49: 
-50:     std::string            m_start;
-51:     std::string            m_end;
+50:     std::string m_start;
+51:     std::string m_end;
 52:     std::list<std::string> m_content;
 53: };
 54: 
@@ -374,27 +375,30 @@ Wie Sie sehen können, haben wir es nun mit zwei Ebenen der Indirektion zu tun.
 Damit wurden vor allem vermieden, die zwei Prinzipien
 *Open*-*Closed*-Prinzip und *Single*-*Responsibility*-Prinzip zu verletzen.
 
-Hierfür gibt es ein spezielles Schlagwort: *Double Dispatch*, siehe dazu *Abbildung* 1:
+Hierfür gibt es ein spezielles Schlagwort: *Double Dispatch*, siehe dazu auch *Abbildung* 1:
 
 <img src="dp_visitor_double_dispatch.svg" width="700">
 
-*Abbildung* 1: Schematische Darstellung von *Double Dispatch*.
+*Abbildung* 1: Schematische Darstellung des *Double Dispatch*&ndash;Idioms.
 
-Über das Objekt `doc` rufen wir die Methode `accept()` auf,
-die auf Grund des virtuellen Methodenaufrufmechanismus den Aufruf an die Methode `HTML::accept`
-delegiert.
+Über das Objekt `doc` rufen wir die Methode `accept()` auf:
 
-Im Kontext dieser Methode wiederum finden wir einen Aufruf
+```cpp
+doc -> accept (new DocumentPrinter());
+```
+
+Diese delegiert auf Grund des virtuellen Methodenaufrufmechanismus den Aufruf an die Methode `HTML::accept`.
+Im Kontext dieser Methode finden wir wiederum einen Aufruf
 
 ```cpp
 dv->visit(this);
 ```
 
-vor. Dieses Mal wird &ndash; wiederum auf Grund des virtuellen Methodenaufrufmechanismus &ndash; 
+vor. Dieses Mal wird &ndash; auf Grund des virtuellen Methodenaufrufmechanismus &ndash; 
 der Aufruf an die Methode `DocumentPrinter::visit(HTML*)` delegiert (unter Berücksichtigung
 des Zeigertyps `HTML*`).
 
-##### Schritt 4: Alternativer Ansatz für *Double Dispatch* in Modern C++ mit `std::variant` und `std::visit`
+##### Schritt 4: Alternativer Ansatz für *Double Dispatch* in Modern C++ (`std::variant` und `std::visit`)
 
 ```cpp
 01: class Document
@@ -480,7 +484,7 @@ d.h. in unserem Beispiel ein `DocumentPrinter`-Objekt,
 das für alle möglichen Typen einen überladenen Funktionsoperator `operator()` &ndash;
 auch als *Funktor* bezeichnet &ndash; bereitstellt.
 
-#### Lösung:
+#### Zusammenfassung:
 
 Die Traver­sierung wird durch die erwähnte Infra­struktur aus Methoden übernommen.
 Die durch den Visitor transpor­tierte Operation wird in einer Kindklasse der Visitor­schnitt­stelle implementiert.

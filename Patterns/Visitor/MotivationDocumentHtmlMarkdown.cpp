@@ -17,30 +17,31 @@ namespace MotivationVisitor01
 
     class Markdown : public Document
     {
+    private:
+        std::string m_start;
+        std::list<std::string> m_content;
+
     public:
         Markdown() : m_start{ "* " } {}
 
-        void add_to_list(const std::string& line) {
+        void addToList(const std::string& line) override {
             m_content.push_back(line);
         }
-
-        std::string            m_start;
-        std::list<std::string> m_content;
     };
 
     class HTML : public Document
     {
+    private:
+        std::string m_start;
+        std::string m_end;
+        std::list<std::string> m_content;
+
     public:
         HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 
         virtual void addToList(const std::string& line) override {
             m_content.push_back(line);
         }
-
-    private:
-        std::string             m_start;
-        std::string             m_end;
-        std::list<std::string>  m_content;
     };
 }
 
@@ -69,7 +70,7 @@ namespace MotivationVisitor02
         }
 
     private:
-        std::string            m_start;
+        std::string m_start;
         std::list<std::string> m_content;
     };
 
@@ -91,9 +92,9 @@ namespace MotivationVisitor02
         }
 
     private:
-        std::string             m_start;
-        std::string             m_end;
-        std::list<std::string>  m_content;
+        std::string m_start;
+        std::string m_end;
+        std::list<std::string> m_content;
     };
 
     void clientCode02()
@@ -131,7 +132,7 @@ namespace MotivationVisitor03
         }
 
     private:
-        std::string            m_start;
+        std::string m_start;
         std::list<std::string> m_content;
     };
 
@@ -147,9 +148,9 @@ namespace MotivationVisitor03
         }
 
     private:
-        std::string             m_start;
-        std::string             m_end;
-        std::list<std::string>  m_content;
+        std::string m_start;
+        std::string m_end;
+        std::list<std::string> m_content;
     };
 
     class DocumentPrinter
@@ -218,8 +219,8 @@ namespace MotivationVisitor04
             dv->visit(this);
         } 
 
-        std::string             m_start;
-        std::list<std::string>  m_content;
+        std::string m_start;
+        std::list<std::string> m_content;
     };
 
     class HTML : public Document
@@ -235,8 +236,8 @@ namespace MotivationVisitor04
             dv->visit(this);
         } 
 
-        std::string            m_start;
-        std::string            m_end;
+        std::string m_start;
+        std::string m_end;
         std::list<std::string> m_content;
     };
 
@@ -261,7 +262,8 @@ namespace MotivationVisitor04
         std::cout << "</ul>" << std::endl;
     }
 
-    void clientCode04() {
+    void clientCode04()
+    {
         DocumentPrinter* dp = new DocumentPrinter();
 
         Document* d1 = new HTML;
@@ -288,6 +290,10 @@ namespace MotivationVisitor05
 
     class Markdown : public Document
     {
+    private:
+        std::string m_start;
+        std::list<std::string> m_content;
+
     public:
         Markdown() : m_start{ "* " } {}
 
@@ -295,12 +301,17 @@ namespace MotivationVisitor05
             m_content.push_back(line); 
         }
 
-        std::string             m_start;
-        std::list<std::string>  m_content;
+        std::string getStart() const { return m_start; }
+        std::list<std::string> getContent() const { return m_content; }
     };
 
     class HTML : public Document
     {
+    private:
+        std::string m_start;
+        std::string m_end;
+        std::list<std::string> m_content;
+
     public:
         HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 
@@ -308,9 +319,9 @@ namespace MotivationVisitor05
             m_content.push_back(line); 
         }
 
-        std::string             m_start;
-        std::string             m_end;
-        std::list<std::string>  m_content;
+        std::string getStart() const { return m_start; }
+        std::string getEnd() const { return m_end; }
+        std::list<std::string> getContent() const { return m_content; }
     };
 
     /* ------ Specific Printer Visitor Class -------- */
@@ -318,15 +329,15 @@ namespace MotivationVisitor05
     {
     public:
         void operator()(const Markdown& md) {
-            for (const std::string& item : md.m_content) {
-                std::cout << md.m_start << item << std::endl;
+            for (const std::string& item : md.getContent()) {
+                std::cout << md.getStart() << item << std::endl;
             }
         }
 
         void operator()(const HTML& hd) {
             std::cout << "<ul>" << std::endl;
-            for (const std::string& item : hd.m_content) {
-                std::cout << "    " << hd.m_start << item << hd.m_end << std::endl;
+            for (const std::string& item : hd.getContent()) {
+                std::cout << "    " << hd.getStart() << item << hd.getEnd() << std::endl;
             }
             std::cout << "</ul>" << std::endl;
         }
