@@ -148,7 +148,7 @@ sind die am meisten verbreitete Vorgehensweise:
 029:     Color m_color;
 030:     ColorSpecification(Color color) : m_color(color) {}
 031: 
-032:     bool isSatisfied(const std::shared_ptr<T>& product) const {
+032:     bool isSatisfied(const std::shared_ptr<T>& product) const override {
 033:         return product->m_color == m_color; 
 034:     }
 035: };
@@ -159,7 +159,7 @@ sind die am meisten verbreitete Vorgehensweise:
 040:     Size m_size;
 041:     SizeSpecification(Size size) : m_size(size) {}
 042:         
-043:     bool isSatisfied(const std::shared_ptr<T>& product) const {
+043:     bool isSatisfied(const std::shared_ptr<T>& product) const override {
 044:         return product->m_size == m_size;
 045:     }
 046: };
@@ -193,7 +193,7 @@ sind die am meisten verbreitete Vorgehensweise:
 074:     AndSpecification(const Specification<T>& first, const Specification<T>& second)
 075:         : m_first{ first }, m_second{ second } {}
 076: 
-077:     bool isSatisfied(const std::shared_ptr<Product>& product) const {
+077:     bool isSatisfied(const std::shared_ptr<Product>& product) const override {
 078:         return m_first.isSatisfied(product) && m_second.isSatisfied(product);
 079:     }
 080: };

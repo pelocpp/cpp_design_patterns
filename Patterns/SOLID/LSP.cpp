@@ -120,7 +120,6 @@ void test_anti_conceptual_example_lsp()
 void test_conceptual_example_lsp()
 {
     using namespace LiskovSubstitutionPrinciple02;
-
 }
 
 // ===========================================================================

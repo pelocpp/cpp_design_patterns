@@ -74,7 +74,7 @@ namespace ConceptualExampleOCP {
         Color m_color;
         ColorSpecification(Color color) : m_color(color) {}
 
-        bool isSatisfied(const std::shared_ptr<T>& product) const {
+        bool isSatisfied(const std::shared_ptr<T>& product) const override {
             return product->m_color == m_color; 
         }
     };
@@ -85,7 +85,7 @@ namespace ConceptualExampleOCP {
         Size m_size;
         SizeSpecification(Size size) : m_size(size) {}
         
-        bool isSatisfied(const std::shared_ptr<T>& product) const {
+        bool isSatisfied(const std::shared_ptr<T>& product) const override {
             return product->m_size == m_size;
         }
     };
@@ -119,7 +119,7 @@ namespace ConceptualExampleOCP {
         AndSpecification(const Specification<T>& first, const Specification<T>& second)
             : m_first{ first }, m_second{ second } {}
 
-        bool isSatisfied(const std::shared_ptr<Product>& product) const {
+        bool isSatisfied(const std::shared_ptr<Product>& product) const override {
             return m_first.isSatisfied(product) && m_second.isSatisfied(product);
         }
     };
@@ -174,7 +174,7 @@ namespace ConceptualExampleOCP {
         double m_price;
         PriceSpecification(double price) : m_price(price) {}
 
-        bool isSatisfied(const std::shared_ptr<ProductEx>& product) const {
+        bool isSatisfied(const std::shared_ptr<ProductEx>& product) const override {
             return product->m_price == m_price;
         }
     };
