@@ -65,7 +65,6 @@ namespace ConceptualExampleOCP {
 
     template <typename T>
     struct Specification {
-        virtual ~Specification() = default;
         virtual bool isSatisfied(const std::shared_ptr<T>& product) const = 0;
     };
 
@@ -92,12 +91,9 @@ namespace ConceptualExampleOCP {
     };
 
     template <typename T>
-    using Items = std::vector<std::shared_ptr<T>>;
-
-    template <typename T>
     struct Filter 
     {
-        virtual Items<T> filter(Items<T> products, const Specification<T>& spec) = 0;
+        virtual Products<T> filter(Products<T> products, const Specification<T>& spec) = 0;
     };
 
     struct ProductFilter : public Filter<Product>
@@ -146,7 +142,7 @@ namespace ConceptualExampleOCP {
         template <typename ... TARGS>
         GenericSpecification(const TARGS& ... args)
         {
-           m_vec = { args  ... };;
+           m_vec = { args  ... };
         }
 
         bool isSatisfied(const std::shared_ptr<T>& product) const {
@@ -209,7 +205,7 @@ void test_conceptual_example_ocp_01()
     Products<Product> products
     {
         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
-        std::make_shared<Product>("Chair", Color::Black, Size::Large),
+        std::make_shared<Product>("Chair", Color::Green, Size::Large),
         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
     };
 
@@ -245,13 +241,6 @@ void test_conceptual_example_ocp_03()
 {
     using namespace ConceptualExampleOCP;
 
-    Products<Product> products
-    {
-        std::make_shared<Product>("Computer", Color::Gray, Size::Small),
-        std::make_shared<Product>("Chair", Color::Black, Size::Large),
-        std::make_shared<Product>("Headset", Color::Red, Size::Medium)
-    };
-
     // combined specification
     AndSpecification<Product> specification = {
         SizeSpecification<Product>{ Size::Small },
@@ -269,6 +258,8 @@ void test_conceptual_example_ocp_03()
     bool result{};
     result = specification.isSatisfied(computer);
     std::cout << "Result: " << std::boolalpha << result << std::endl;
+
+    return;
 
     result = specification.isSatisfied(chair);
     std::cout << "Result: " << std::boolalpha << result << std::endl;

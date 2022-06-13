@@ -13,7 +13,7 @@
 
 In anderen Worten:
 Das *Single-Responsibility-Prinzip* besagt, dass Klassen bis zu dem Punkt &ldquo;kohärent&rdquo; (semantisch zusammenhängend) sein sollten,
-wie sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &ldquo;für eine Änderung&rdquo; definiert wird.
+indem sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &ldquo;für eine Änderung&rdquo; definiert wird.
 
 #### Beispiel: Violating the Single Responsibility Principle
 
@@ -54,14 +54,14 @@ wie sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &ld
     was natürlich sinnlos ist.
   * Der Verstoß gegen das *Single-Responsibility-Prinzip* in diesem Beispiel ist offensichtlich:
     Die Klasse `Journal` besitzt zwei Gründe, um geändert zu werden:
-    * Änderungen im Zusammenhang mit der `Journal` Klasse selbst.
-    * Änderungen im Zusammenhang mit der Persistenz (Datenablage) der `Journal` Klasse.
+    * Änderungen im Zusammenhang mit der `Journal`-Klasse selbst.
+    * Änderungen im Zusammenhang mit der Persistenz (Datenablage) der `Journal`-Klasse.
 
 
 #### Beispiel: Respecting the Single Responsibility Principle
 
-Wir betrachten eine Überarbeitung des letzten Beispiels,
-Die man auch unter der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; einordnen könnte:
+Wir betrachten eine Überarbeitung des letzten Beispiels.
+Man könnte sie auch unter der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; einordnen:
 
 ```cpp
 01: class Journal 
@@ -98,7 +98,7 @@ Die man auch unter der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; eino
     Klasse `SavingManager`.
   * Wenn Änderungen an der Klasse `SavingManager` notwendig sind, ist ihr gesamter Code an einer Stelle vorhanden.
 
-#### Vorteile des Single-Responsibility-Prinzips
+#### Vorteile des Single-Responsibility-Prinzips:
 
   * Expressiveness &ndash; Ausdruckskraft
   * Maintainability &ndash; Wartbarkeit

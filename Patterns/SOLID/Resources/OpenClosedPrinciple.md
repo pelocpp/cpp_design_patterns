@@ -21,7 +21,7 @@ Es gibt darauf im objektorientierten Design mehrere Antworten wie beispielsweise
 
   * dynamischer Polymorphismus,
   * statischer Polymorphismus und/oder
-  * C++-Templates
+  * C++-Templates.
 
 Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
 
@@ -117,115 +117,136 @@ Das Design von Schnittstellen und das Hinzufügen einer Abstraktionsebene für Erw
 sind die am meisten verbreitete Vorgehensweise:
 
 ```cpp
-001: enum class Color { Red, Green, Black, Gray };
-002: enum class Size { Small, Medium, Large };
-003: 
-004: struct Product
-005: {
-006:     std::string m_name;
-007:     Color       m_color;
-008:     Size        m_size;
-009: };
+001: #include <iostream>
+002: #include <string>
+003: #include <vector>
+004: #include <memory>
+005: #include <initializer_list>
+006: #include <numeric>
+007: 
+008: enum class Color { Red, Green, Black, Gray };
+009: enum class Size { Small, Medium, Large };
 010: 
-011: template <typename T>
-012: using Products = std::vector<std::shared_ptr<T>>;
-013: 
-014: template <typename T>
-015: struct Specification {
-016:     virtual ~Specification() = default;
-017:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const = 0;
-018: };
-019: 
-020: template <typename T>
-021: struct ColorSpecification : public Specification<T> 
-022: {
-023:     Color m_color;
-024:     ColorSpecification(Color color) : m_color(color) {}
+011: struct Product
+012: {
+013:     std::string m_name;
+014:     Color       m_color;
+015:     Size        m_size;
+016: };
+017: 
+018: template <typename T>
+019: using Products = std::vector<std::shared_ptr<T>>;
+020: 
+021: template <typename T>
+022: struct Specification {
+023:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const = 0;
+024: };
 025: 
-026:     bool isSatisfied(const std::shared_ptr<T>& product) const {
-027:         return product->m_color == m_color; 
-028:     }
-029: };
-030: 
-031: template <typename T>
-032: struct SizeSpecification : public Specification<T>
-033: {
-034:     Size m_size;
-035:     SizeSpecification(Size size) : m_size(size) {}
-036:         
-037:     bool isSatisfied(const std::shared_ptr<T>& product) const {
-038:         return product->m_size == m_size;
-039:     }
-040: };
-041: 
-042: template <typename T>
-043: using Items = std::vector<std::shared_ptr<T>>;
-044: 
-045: template <typename T>
-046: struct Filter 
-047: {
-048:     virtual Items<T> filter(Items<T> products, const Specification<T>& spec) = 0;
-049: };
-050: 
-051: struct ProductFilter : public Filter<Product>
-052: {
-053:     Products<Product> filter(Products<Product> products, const Specification<Product>& spec)
-054:     {
-055:         Products<Product> result;
-056:         for (auto& product : products) {
-057:             if (spec.isSatisfied(product))
-058:                 result.push_back(product);
-059:         }
-060:         return result;
-061:     }
-062: };
-063: 
-064: // combining logical specifications - with logical 'and'
-065: template <typename T>
-066: struct AndSpecification : public Specification<T>
-067: {
-068:     const Specification<T>& m_first;
-069:     const Specification<T>& m_second;
-070: 
-071:     AndSpecification(const Specification<T>& first, const Specification<T>& second)
-072:         : m_first{ first }, m_second{ second } {}
+026: template <typename T>
+027: struct ColorSpecification : public Specification<T> 
+028: {
+029:     Color m_color;
+030:     ColorSpecification(Color color) : m_color(color) {}
+031: 
+032:     bool isSatisfied(const std::shared_ptr<T>& product) const {
+033:         return product->m_color == m_color; 
+034:     }
+035: };
+036: 
+037: template <typename T>
+038: struct SizeSpecification : public Specification<T>
+039: {
+040:     Size m_size;
+041:     SizeSpecification(Size size) : m_size(size) {}
+042:         
+043:     bool isSatisfied(const std::shared_ptr<T>& product) const {
+044:         return product->m_size == m_size;
+045:     }
+046: };
+047: 
+048: template <typename T>
+049: struct Filter 
+050: {
+051:     virtual Products<T> filter(Products<T> products, const Specification<T>& spec) = 0;
+052: };
+053: 
+054: struct ProductFilter : public Filter<Product>
+055: {
+056:     Products<Product> filter(Products<Product> products, const Specification<Product>& spec)
+057:     {
+058:         Products<Product> result;
+059:         for (auto& product : products) {
+060:             if (spec.isSatisfied(product))
+061:                 result.push_back(product);
+062:         }
+063:         return result;
+064:     }
+065: };
+066: 
+067: // combining logical specifications - with logical 'and'
+068: template <typename T>
+069: struct AndSpecification : public Specification<T>
+070: {
+071:     const Specification<T>& m_first;
+072:     const Specification<T>& m_second;
 073: 
-074:     bool isSatisfied(const std::shared_ptr<Product>& product) const {
-075:         return m_first.isSatisfied(product) && m_second.isSatisfied(product);
-076:     }
-077: };
-078: 
-079: // logical 'And' specification using operator notation
-080: template <typename T>
-081: AndSpecification<T> operator&&(const Specification<T>& first, const Specification<T>& second) {
-082:     return { first, second };
-083: }
-084: 
-085: void main ()
-086: {
-087:     Products<Product> products
-088:     {
-089:         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
-090:         std::make_shared<Product>("Chair", Color::Black, Size::Large),
-091:         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
-092:     };
-093: 
-094:     // combined specification
-095:     AndSpecification<Product> specification = {
-096:         SizeSpecification<Product>{ Size::Small },
-097:         ColorSpecification<Product>{ Color::Gray }
-098:     };
+074:     AndSpecification(const Specification<T>& first, const Specification<T>& second)
+075:         : m_first{ first }, m_second{ second } {}
+076: 
+077:     bool isSatisfied(const std::shared_ptr<Product>& product) const {
+078:         return m_first.isSatisfied(product) && m_second.isSatisfied(product);
+079:     }
+080: };
+081: 
+082: // combining logical specifications - with logical 'and' using operator notation
+083: template <typename T>
+084: AndSpecification<T> operator&&(const Specification<T>& first, const Specification<T>& second) {
+085:     return { first, second };
+086: }
+087: 
+088: void test_01()
+089: {
+090:     Products<Product> products
+091:     {
+092:         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
+093:         std::make_shared<Product>("Chair", Color::Green, Size::Large),
+094:         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
+095:     };
+096: 
+097:     ProductFilter productFilter;
+098:     ColorSpecification<Product> greenProducts = ColorSpecification<Product>{ Color::Green };
 099: 
-100:     auto computer = std::make_shared<Product>("Computer", Color::Gray, Size::Small);
-101:     auto chair = std::make_shared<Product>("Chair", Color::Black, Size::Large);
-102: 
-103:     bool result{};
-104:     result = specification.isSatisfied(computer);
-105:     std::cout << "Result: " << std::boolalpha << result << std::endl;
-106: 
-107:     result = specification.isSatisfied(chair);
-108:     std::cout << "Result: " << std::boolalpha << result << std::endl;
-109: }
+100:     for (const auto& product : productFilter.filter(products, greenProducts)) {
+101:         std::cout << product->m_name << " is green" << std::endl;
+102:     }
+103: }
+104: 
+105: void test_02()
+106: {
+107:     // combined specification
+108:     AndSpecification<Product> specification = {
+109:         SizeSpecification<Product>{ Size::Small },
+110:         ColorSpecification<Product>{ Color::Gray }
+111:     };
+112: 
+113:     // another combined specification - using overloaded operator &&
+114:     AndSpecification<Product> anotherSpecification =
+115:         SizeSpecification<Product>{ Size::Medium } && ColorSpecification<Product>{ Color::Red };
+116: 
+117:     auto computer = std::make_shared<Product>("Computer", Color::Gray, Size::Small);
+118:     auto chair = std::make_shared<Product>("Chair", Color::Black, Size::Large);
+119:     auto headset = std::make_shared<Product>("Headset", Color::Red, Size::Medium);
+120: 
+121:     bool result{};
+122:     result = specification.isSatisfied(computer);
+123:     std::cout << "Result: " << std::boolalpha << result << std::endl;
+124: 
+125:     result = specification.isSatisfied(chair);
+126:     std::cout << "Result: " << std::boolalpha << result << std::endl;
+127: 
+128:     result = anotherSpecification.isSatisfied(headset);
+129:     std::cout << "Result: " << std::boolalpha << result << std::endl;
+130: }
 ```
 
 ###### Beachten Sie an dem Quellcode:
@@ -238,7 +259,7 @@ Mit variadischen Templates lassen sich in C++ beliebig viele Spezifikationen in 
 Sehen Sie hierzu eine Realisierung im Quellcode der Klasse `GenericSpecification`!
 
 
-#### Vorteile des *Open-Closed-Prinzips*
+#### Vorteile des *Open-Closed-Prinzips*:
 
   * Expressiveness &ndash; Ausdruckskraft
   * Maintainability &ndash; Wartbarkeit
