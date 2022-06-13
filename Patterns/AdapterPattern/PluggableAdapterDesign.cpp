@@ -13,12 +13,14 @@ namespace PluggableAdapterDesignApproach {
     // =======================================================================
     // Legacy code
 
-    class Beverage {
+    class Beverage
+    {
     public:
         virtual void getBeverage() = 0;
     };
 
-    class CoffeeMaker : public Beverage {
+    class CoffeeMaker : public Beverage
+    {
     public:
         void brew() { 
             std::cout << "brewing coffee" << std::endl;
@@ -30,7 +32,7 @@ namespace PluggableAdapterDesignApproach {
     };
 
     // Interface already shipped & known to client
-    void make_drink(Beverage& drink) {
+    void makeDrink(Beverage& drink) {
         drink.getBeverage();             
     }
 
@@ -80,11 +82,11 @@ void test_pluggable_adapter_design()
 
     std::unique_ptr<CoffeeMaker> cmp = std::make_unique<CoffeeMaker>();
     Adapter adp1(cmp);
-    make_drink(adp1);
+    makeDrink(adp1);
 
     std::unique_ptr<JuiceMaker> jmp = std::make_unique<JuiceMaker>();
     Adapter adp2(jmp);
-    make_drink(adp2);
+    makeDrink(adp2);
 }
 
 // ===========================================================================

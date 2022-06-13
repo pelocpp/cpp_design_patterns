@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;... um die gewünschte Schnittstelle von der Schnittstelle zu erhalten, die Sie haben ...&rdquo;
+&ldquo;Ermöglicht die Interaktion von Objekten mit inkompatiblen Schnittstellen.&rdquo;
 
 Das *Adapter Pattern* ist ein strukturelles Entwurfsmuster, das es Objekten mit
 inkompatiblen Schnittstellen ermöglicht, zusammenarbeiten zu können.

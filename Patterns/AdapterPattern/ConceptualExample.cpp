@@ -9,7 +9,8 @@
 /**
  * The Target defines the domain-specific interface used by the client code.
  */
-class Target {
+class Target
+{
 public:
     Target() = default;
 
@@ -26,7 +27,8 @@ public:
  * with the existing client code. The Adaptee needs some adaptation before the
  * client code can use it.
  */
-class Adaptee {
+class Adaptee
+{
 public:
     Adaptee() = default;
 

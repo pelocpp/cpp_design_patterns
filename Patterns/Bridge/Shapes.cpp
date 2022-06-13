@@ -11,7 +11,8 @@ namespace ShapesExample {
     /**
      *  Bridge implementor interface.
      */
-    class IDrawAPI {
+    class IDrawAPI
+    {
     public:
         virtual void drawCircle(int radius, int x, int y) = 0;
     };
@@ -20,7 +21,8 @@ namespace ShapesExample {
      *  Concrete bridge implementor classes 'RedCircleDrawer' and 'GreenCircleDrawer'
      *  implementing the 'IDrawAPI' interface
      */
-    class RedCircleDrawer : public IDrawAPI {
+    class RedCircleDrawer : public IDrawAPI
+    {
     public:
         virtual void drawCircle(int radius, int x, int y) override
         {
@@ -30,7 +32,8 @@ namespace ShapesExample {
         }
     };
     
-    class GreenCircleDrawer : public IDrawAPI {
+    class GreenCircleDrawer : public IDrawAPI
+    {
     public:
         virtual void drawCircle(int radius, int x, int y) override
         {
@@ -46,17 +49,17 @@ namespace ShapesExample {
     class Shape
     {
     protected:
-        std::shared_ptr<IDrawAPI> m_api;
+        std::unique_ptr<IDrawAPI> m_api;
 
-        Shape(std::shared_ptr<IDrawAPI> api)
+        Shape(std::unique_ptr<IDrawAPI> api)
         {
-            m_api = api;
+            m_api = std::move(api);
         }
 
     public:
-        void setImplementor(std::shared_ptr<IDrawAPI> api)
+        void setImplementor(std::unique_ptr<IDrawAPI> api)
         {
-            m_api = api;
+            m_api = std::move(api);
         }
 
         virtual void draw() = 0;
@@ -72,8 +75,8 @@ namespace ShapesExample {
         int m_radius;
 
     public:
-        Circle(int x, int y, int radius, std::shared_ptr<IDrawAPI> api)
-            : Shape{ api }, m_x{ x }, m_y{ y }, m_radius{ radius } { }
+        Circle(int x, int y, int radius, std::unique_ptr<IDrawAPI> api)
+            : Shape{ std::move(api) }, m_x{ x }, m_y{ y }, m_radius{ radius } { }
 
         virtual void draw() override
         {
@@ -87,36 +90,36 @@ namespace ShapesExample {
     void clientCode01()
     {
         // two different bridge implementor classes
-        std::shared_ptr<RedCircleDrawer> redCircleDrawer = 
-            std::make_shared<RedCircleDrawer>();
+        std::unique_ptr<IDrawAPI> redCircleDrawer =
+            std::make_unique<RedCircleDrawer>();
 
-        std::shared_ptr<GreenCircleDrawer> greenCircleDrawer = 
-            std::make_shared<GreenCircleDrawer>();
+        std::unique_ptr<IDrawAPI> greenCircleDrawer =
+            std::make_unique<GreenCircleDrawer>();
 
         // single Circle object
         std::shared_ptr<Shape> circle = 
-            std::make_shared<Circle>(100, 10, 20, redCircleDrawer);
+            std::make_shared<Circle>(100, 10, 20, std::move(redCircleDrawer));
 
         circle->draw();
-        circle->setImplementor(greenCircleDrawer);
+        circle->setImplementor(std::move(greenCircleDrawer));
         circle->draw();
     }
 
     void clientCode02()
     {
         // two different bridge implementor classes
-        std::shared_ptr<IDrawAPI> redCircleDrawer = 
-            std::make_shared<RedCircleDrawer>();
+        std::unique_ptr<IDrawAPI> redCircleDrawer =
+            std::make_unique<RedCircleDrawer>();
 
-        std::shared_ptr<IDrawAPI> greenCircleDrawer =
-            std::make_shared<GreenCircleDrawer>();
+        std::unique_ptr<IDrawAPI> greenCircleDrawer =
+            std::make_unique<GreenCircleDrawer>();
 
         // two 'Shape' objects
         std::shared_ptr<Shape> redCircle = 
-            std::make_shared<Circle>(100, 10, 20, redCircleDrawer);
+            std::make_shared<Circle>(100, 10, 20, std::move(redCircleDrawer));
 
         std::shared_ptr<Shape> greenCircle = 
-            std::make_shared<Circle>(200, 30, 40, greenCircleDrawer);
+            std::make_shared<Circle>(200, 30, 40, std::move(greenCircleDrawer));
 
         redCircle->draw();
         greenCircle->draw();
