@@ -16,7 +16,7 @@
 Das Idiom *Type Erasure* ist auch unter dem Namen &ldquo;*Duck Typing*&rdquo; bekannt.
 Der Begriff geht auf ein Gedicht von [James Whitcomb Riley](https://de.wikipedia.org/wiki/James_Whitcomb_Riley) zurück:
 
-  * &ldquo;*When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.*&rdquo;
+&ldquo;*When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.*&rdquo;
 
 Was ist damit gemeint bzw. welchen Zusammenhang gibt es zur objekt-orientierten Programmierung?
 Wir stellen uns eine Funktion
@@ -165,7 +165,7 @@ Das heißt, wir definieren unsere eigene Schnittstelle (hier: `MyAnimal`) und imp
 Jede Implementierung der Schnittstelle umschließt eine Klasse `Cow`, eine Klasse `Pig` oder eine Klasse `Dog`
 und ruft diese für ihre virtuellen Methoden auf.
 Dann erstellen wir Wrapper-Objekte, die von `MyAnimal` erben.
-Jeder Wrapper tut nichts weiter als das &ldquo;echte&rdquo; zugrunde liegende Objekt aufzurufen:
+Jeder Wrapper tut nichts weiter als das &ldquo;echte&rdquo; zu Grunde liegende Objekt aufzurufen:
 
 Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, `Pig`- oder `Dog`-Objekt umschließen:
 
