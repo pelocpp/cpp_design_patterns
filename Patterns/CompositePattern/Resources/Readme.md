@@ -93,6 +93,69 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
+#### 'Beginners Example':
+
+Das Beispiel demonstriert das klassische *Composite Pattern* mit Kreisen und Gruppen von Kreisen:
+
+```cpp
+01: struct Shape
+02: {
+03:     virtual void draw() const = 0;
+04: };
+05: 
+06: class Circle : public Shape
+07: {
+08: private:
+09:     std::string m_name;
+10: 
+11: public:
+12:     ...
+13:     virtual void draw() const override {
+14:         std::cout << "Circle: " << m_name;
+15:     }
+16: };
+17: 
+18: class Group : public Shape
+19: {
+20: private:
+21:     std::string m_name;
+22:     std::vector<std::shared_ptr<Shape>> m_objects;
+23: 
+24: public:
+25:     ...
+26:     virtual void draw() const override {
+27:         std::cout << "Group " << m_name << " contains:" << std::endl;
+28:         for (const std::shared_ptr<Shape> shape : m_objects) {
+29:             shape->draw();
+30:         }
+31:     }
+32:     ...
+33: };
+34: 
+35: void test_shapes()
+36: {
+37:     Group root("Root");
+38: 
+39:     std::shared_ptr<Shape> circle = std::make_shared<Circle>("Top Level Circle");
+40:     root.push(circle);
+41: 
+42:     std::shared_ptr<Group> subgroup = std::make_shared<Group>("Subgroup");
+43:     subgroup->push(std::make_shared<Circle>("First Second Level Circle"));
+44:     subgroup->push(std::make_shared<Circle>("Another Second Level Circle"));
+45:     root.push(subgroup);
+46: 
+47:     root.draw();
+48: }
+```
+
+Betrachten Sie die Schlüsselstellen in dem Code-Fragment:
+
+  * Zeile 18: Klasse `Group` leitet sich von Klasse `Shape` ab.
+  * Zeile 45: Auch `Group`-Objekte können mit `push` einer Gruppe hinzugefügt werden, also nicht nur `Circle`-Objekte.
+  * Zeilen 26 und 29: Die `draw`-Methode agiert für Kreise und Kreisgruppen unterschiedlich.
+ 
+---
+
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/composite/cpp/example#example-0)
@@ -155,7 +218,7 @@ Lösungsmöglichkeiten im Netz angeboten (Stichwort *Custom Deleter*), die ich aus
 in diesem Beispiel nicht umsetzen wollte.
 
 
-#### Beginners Example:
+#### Ein zweites 'Beginners Example':
 
 Ein typisches Beispiel für das *Composite Entwurfsmuster* ist ein Dateisystem mit Ordnern und Dateien:
 Ordner können Dateien oder andere Ordner enthalten oder leer sein. Andererseits enthalten Dateien keine Ordner oder andere Dateien!
@@ -302,6 +365,8 @@ Anregungen zum Beispiel und zum C++17 Filesystem findet man zum Beispiel unter
 [www.codingame.com](https://www.codingame.com/playgrounds/5659/c17-filesystem)<br>(abgerufen am 11.05.2020).
 
 [github.com/achimoraites/DesignPatterns](https://github.com/achimoraites/DesignPatterns/blob/master/CompositePattern/FileSystem/src/ui/FileSystem.java)<br>(abgerufen am 11.05.2020).
+
+Das &ldquo;*Beginners Example*&rdquo;-Beispiel kann [hier](http://www.vishalchovatiya.com/composite-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
 
 
 ## Weitere Beispiele

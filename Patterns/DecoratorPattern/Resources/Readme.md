@@ -128,7 +128,7 @@ vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge
 [Quellcode](../ConceptualExample.cpp)
 
 *Hinweis*: Man beachte in dem konzeptionellen Beispiel auch die Demonstration
-der Dekaration zur Laufzeit:
+der Deklaration zur Laufzeit:
 
 ```cpp
 01: // component which is going to be decorated

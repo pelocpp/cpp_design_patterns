@@ -150,6 +150,7 @@
     <ClCompile Include="File.cpp" />
     <ClCompile Include="FileSystemAdvanced.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Shapes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Directory.h" />

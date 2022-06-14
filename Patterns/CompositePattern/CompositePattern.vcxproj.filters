@@ -19,6 +19,9 @@
     <Filter Include="Source Files\FileSystem">
       <UniqueIdentifier>{6b5dfcab-926a-4481-b7ce-27dff44e9baf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Shapes">
+      <UniqueIdentifier>{5ecd5af9-7091-4552-abcf-d91b243707f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -44,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes.cpp">
+      <Filter>Source Files\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

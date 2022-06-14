@@ -16,6 +16,7 @@
 // function prototypes
 void test_conceptual_example_01();
 void test_conceptual_example_02();
+void test_shapes();
 void test_filesystem_01();
 void test_filesystem_02();
 
@@ -25,6 +26,7 @@ int main()
 
     test_conceptual_example_01();
     test_conceptual_example_02();
+    test_shapes();
     test_filesystem_01();
     test_filesystem_02();
     return 0;
