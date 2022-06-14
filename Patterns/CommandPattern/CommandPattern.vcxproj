@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BankAccount.cpp" />
     <ClCompile Include="Chess.cpp" />
     <ClCompile Include="ConceptualExample_01.cpp" />
     <ClCompile Include="ConceptualExample_02.cpp" />

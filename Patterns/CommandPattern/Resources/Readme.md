@@ -60,6 +60,36 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 ---
 
+#### 'Beginners Example':
+
+Ein Beispiel mit Bankkonten demonstriert in einer minimalistischen Implementierung 
+eine Klasse `BankAccount` mit einem gewissen Startguthaben.
+
+Es gibt auch die Methoden `deposit()` und `withdraw()`,
+aber anstatt diese Methoden direkt zu verwenden, gibt es eine separate Klasse `BankAccountCommand`,
+die sich wiederum von einer abstrakten Klasse `Command` ableitet.
+
+Im Hauptprogramm wird die Überweisung von 200€ von einem Bankkonto auf ein anderes durchgeführt.
+Jedes &ldquo;Kommando&rdquo; bezieht sich auf ein bestimmtes Bankkonto,
+sodass es weiß, auf welches Konto es sich bezieht:
+
+```cpp
+01: struct Command
+02: {
+03:     virtual void execute() = 0;
+04: };
+05: 
+06: struct BankAccountCommand : public Command
+07: {
+08: public:
+09:     enum class Action : bool { deposit, withdraw };
+10:     ...
+11: }
+```
+
+---
+
+
 #### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample_01.cpp) &ndash; Sehr einfaches Beispiel

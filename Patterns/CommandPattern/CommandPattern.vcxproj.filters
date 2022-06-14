@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Chess">
       <UniqueIdentifier>{4b0a700b-1177-45dd-9c0c-7c77014db2c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\BankAccount">
+      <UniqueIdentifier>{3ea73044-9e91-41fb-b1c5-fba517581cfa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -32,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="Chess.cpp">
       <Filter>Source Files\Chess</Filter>
+    </ClCompile>
+    <ClCompile Include="BankAccount.cpp">
+      <Filter>Source Files\BankAccount</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
