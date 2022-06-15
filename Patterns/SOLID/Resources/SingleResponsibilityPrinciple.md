@@ -24,7 +24,7 @@ indem sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &
 04:     std::vector<std::string>  m_entries;
 05: 
 06: public:
-07:     explicit Journal(const std::string& title) : m_title{ title } {}
+07:     Journal(const std::string& title) : m_title{ title } {}
 08: 
 09:     void addEntries(const std::string& entry) {
 10:         static uint32_t count = 0;
@@ -70,7 +70,7 @@ Man könnte sie auch unter der Begrifflichkeit &ldquo;Separation of Concerns&rdqu
 04:     std::vector<std::string>  m_entries;
 05: 
 06: public:
-07:     explicit Journal(const std::string& title) : m_title{ title } {}
+07:     Journal(const std::string& title) : m_title{ title } {}
 08: 
 09:     void addEntries(const std::string& entry) {
 10:         static uint32_t count = 0;
