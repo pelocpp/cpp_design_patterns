@@ -7,6 +7,8 @@
 #include <iostream>
 #include <string>
 
+class PersonBuilder;
+
 class Person
 {
 friend class PersonBuilder;
@@ -27,7 +29,7 @@ private:
     Person(std::string name) : m_name{ name } {}
 
 public:
-    static PersonBuilder create(std::string name);
+    static PersonBuilder create(const std::string& name);
 };
 
 // ===========================================================================

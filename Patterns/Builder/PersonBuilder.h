@@ -15,7 +15,7 @@ private:
     Person person;
 
 public:
-    PersonBuilder(std::string name) : person{ name } {}
+    PersonBuilder(const std::string& name) : person{ name } {}
 
     operator Person() { return std::move(person); }
 

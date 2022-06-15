@@ -6,18 +6,19 @@
 
 void test_person_builder_example()
 {
-    Person p = Person::create("John")
+    Person p = Person::create("Hans")
         .lives()
-        .at("123 London Road")
-        .with_postcode("SW1 1GB")
-        .in("London")
+        .at("Kurfuerstendamm")
+        .with_postcode("10709")
+        .in("Berlin")
         .works()
-        .with("PragmaSoft")
+        .with("Software Manufactur")
         .as_a("Consultant")
-        .earning("10e6");
+        .earning("100000");
 
     std::cout << p << std::endl;
 }
+
 
 // ===========================================================================
 // End-of-File

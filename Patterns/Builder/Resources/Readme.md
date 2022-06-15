@@ -69,7 +69,7 @@ Product parts: Part A1, Part C1
 
 ---
 
-#### 'Real-World' Beispiel:
+#### Ein erstes 'Real-World' Beispiel:
 
 Das 'Real-World' Beispiel zu diesem Entwurfsmuster orientiert sich an den UI-Bibliotheken von Java.
 Wir implementieren - natürlich stark vereinfacht - einen Layoutmanager.
@@ -130,6 +130,48 @@ HTML: HTML-Code for BorderLayoutManager
 HTML: HTML-Code for BoxLayoutManager
 HTML: HTML-Code for FlowLayout
 ```
+
+---
+
+#### Ein zweites 'Real-World' Beispiel: Fluent Builder
+
+Wir betrachten nun ein Beispiel, in dem eine Klasse (Klasse `Person`)
+viele Daten (hier: zur Person und zum Beruf) haben kann.
+
+Natürlich könnte man dies alles mit einer einzigen Klasse (hier: `Person`)
+über unterschiedliche Konstruktoren und *setter*-Methoden abhandeln.
+Bei einer Klasse mit 7 Instanzvariablen kann dies bisweilen etwas 
+unübersichtlich werden:
+
+```cpp
+01: class Person
+02: {
+03: private:
+04:     // personal details
+05:     std::string m_name;     
+06:     std::string m_street_address;
+07:     std::string m_post_code;
+08:     std::string m_city;
+09: 
+10:     // employment details
+11:     std::string m_company_name;
+12:     std::string m_position;
+13:     std::string m_annual_income;
+14: 
+15:     Person(std::string name) : m_name{ name } {}
+16: };
+```
+
+Anstatt all diese konstruktionsbezogenen Methoden (Konstruktoren, *setter*-Methoden)
+der Klasse `Person` hinzuzufügen,
+delegieren wir diese Aufgabe an eine separate Klasse &ndash; wir nennen sie `PersonBuilder`.
+
+Studieren Sie den Quellcode der Klasse `PersonBuilder` genau:
+Indem der Konstruktor der Klasse `Person` privat deklariert ist,
+zwingen wir Benutzer der Klasse `Person` die
+`PersonBuilder`-Klasse zu verwenden.
+Es ist nur die `create(std::string name)`-Schnittstellenmethode an der Klasse
+`Person` verfügbar.
 
 ---
 

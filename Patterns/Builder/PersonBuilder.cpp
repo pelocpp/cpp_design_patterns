@@ -4,7 +4,9 @@
 
 #include "PersonBuilder.h"
 
-PersonBuilder Person::create(std::string name) { return PersonBuilder{ name }; }
+PersonBuilder Person::create(const std::string& name) {
+    return PersonBuilder{ name }; 
+}
 
 PersonBuilder& PersonBuilder::lives() { return *this; }
 
@@ -39,7 +41,6 @@ PersonBuilder& PersonBuilder::in(std::string city) {
     person.m_city = city;
     return *this;
 }
-
 
 // ===========================================================================
 // End-of-File
