@@ -140,7 +140,7 @@ viele Daten (hier: zur Person und zum Beruf) haben kann.
 
 Natürlich könnte man dies alles mit einer einzigen Klasse (hier: `Person`)
 über unterschiedliche Konstruktoren und *setter*-Methoden abhandeln.
-Bei einer Klasse mit 7 Instanzvariablen kann dies bisweilen etwas 
+Bei einer Klasse mit sehr vielen Instanzvariablen kann dies bisweilen 
 unübersichtlich werden:
 
 ```cpp
@@ -168,10 +168,25 @@ delegieren wir diese Aufgabe an eine separate Klasse &ndash; wir nennen sie `Per
 
 Studieren Sie den Quellcode der Klasse `PersonBuilder` genau:
 Indem der Konstruktor der Klasse `Person` privat deklariert ist,
-zwingen wir Benutzer der Klasse `Person` die
+zwingen wir Benutzer der Klasse `Person`, die
 `PersonBuilder`-Klasse zu verwenden.
 Es ist nur die `create(std::string name)`-Schnittstellenmethode an der Klasse
 `Person` verfügbar.
+
+Betrachten Sie den folgenden Quellcode:
+Es wird der so genannten &ldquo;*Fluent Builder*&rdquo; Programmierstil demonstriert:
+
+```cpp
+Person p = Person::create("Hans")
+    .lives()
+    .at("Kurfuerstendamm")
+    .with_postcode("10709")
+    .in("Berlin")
+    .works()
+    .with("Software Manufactur")
+    .as_a("Consultant")
+    .earning("100000");
+```
 
 ---
 
