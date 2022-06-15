@@ -53,6 +53,8 @@ public:
     virtual void createProducePartA() const = 0;
     virtual void createProducePartB() const = 0;
     virtual void createProducePartC() const = 0;
+
+    virtual std::unique_ptr<Product> getProduct() = 0;
 };
 
 /**
@@ -73,9 +75,7 @@ public:
         this->reset();
     }
 
-    void reset() {
-        m_product = std::make_unique<Product>();
-    }
+    void reset() { m_product = std::make_unique<Product>(); }
 
     /**
      * All production steps work with the same product instance.
@@ -115,7 +115,7 @@ public:
     std::unique_ptr<Product> getProduct() {
         std::unique_ptr<Product> result = std::move(m_product);
         reset();
-        return std::move(result);
+        return result;
     }
 };
 

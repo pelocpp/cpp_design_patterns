@@ -147,7 +147,14 @@
     <ClCompile Include="ConceptualExample01.cpp" />
     <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="LayoutManagerExample.cpp" />
+    <ClCompile Include="Person.cpp" />
+    <ClCompile Include="PersonBuilder.cpp" />
+    <ClCompile Include="PersonBuilderExample.cpp" />
     <ClCompile Include="Program.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Person.h" />
+    <ClInclude Include="PersonBuilder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

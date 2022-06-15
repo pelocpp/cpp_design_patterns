@@ -19,6 +19,9 @@
     <Filter Include="Source Files\LayoutManager">
       <UniqueIdentifier>{8b99f8a4-12d3-489e-a493-ef15c8477ff4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Person">
+      <UniqueIdentifier>{04618f48-5b0d-46c3-b132-8ff3c5621536}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -47,5 +50,22 @@
     <ClCompile Include="ConceptualExample01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files\Person</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonBuilder.cpp">
+      <Filter>Source Files\Person</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonBuilderExample.cpp">
+      <Filter>Source Files\Person</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Person.h">
+      <Filter>Source Files\Person</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonBuilder.h">
+      <Filter>Source Files\Person</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
