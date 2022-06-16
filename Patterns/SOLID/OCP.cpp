@@ -96,11 +96,12 @@ namespace ConceptualExampleOCP {
         virtual Products<T> filter(Products<T> products, const Specification<T>& spec) = 0;
     };
 
-    struct ProductFilter : public Filter<Product>
+    template <typename T>
+    struct ProductFilter : public Filter<T>
     {
-        Products<Product> filter(Products<Product> products, const Specification<Product>& spec)
+        virtual Products<T> filter(Products<T> products, const Specification<T>& spec) override
         {
-            Products<Product> result;
+            Products<T> result;
             for (auto& product : products) {
                 if (spec.isSatisfied(product))
                     result.push_back(product);
@@ -119,7 +120,7 @@ namespace ConceptualExampleOCP {
         AndSpecification(const Specification<T>& first, const Specification<T>& second)
             : m_first{ first }, m_second{ second } {}
 
-        bool isSatisfied(const std::shared_ptr<Product>& product) const override {
+        virtual bool isSatisfied(const std::shared_ptr<Product>& product) const override {
             return m_first.isSatisfied(product) && m_second.isSatisfied(product);
         }
     };
@@ -147,11 +148,11 @@ namespace ConceptualExampleOCP {
 
         bool isSatisfied(const std::shared_ptr<T>& product) const {
 
-            bool result = std::accumulate(
+            bool result = std::accumulate (
                 std::begin(m_vec),
                 std::end(m_vec),
                 true,
-                [this, product](bool last, const auto& next) {
+                [this, product] (bool last, const auto& next) {
                     bool tmp = next->isSatisfied(product);
                     return last && tmp;
                 }
@@ -209,7 +210,7 @@ void test_conceptual_example_ocp_01()
         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
     };
 
-    ProductFilter productFilter;
+    ProductFilter<Product> productFilter;
     ColorSpecification<Product> greenProducts = ColorSpecification<Product>{ Color::Green };
 
     for (const auto& product : productFilter.filter(products, greenProducts)) {
@@ -228,7 +229,7 @@ void test_conceptual_example_ocp_02()
         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
     };
 
-    ProductFilter productFilter;
+    ProductFilter<Product> productFilter;
     ColorSpecification<Product> greenProducts = ColorSpecification<Product>{ Color::Green };
     SizeSpecification largeProducts = SizeSpecification<Product>{ Size::Large };
 

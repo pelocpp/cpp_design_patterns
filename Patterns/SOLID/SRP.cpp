@@ -35,8 +35,8 @@ namespace AntiConceptualExampleSRP {
     };
 }
 
-namespace ConceptualExampleSRP {
-
+namespace ConceptualExampleSRP
+{
     class Journal 
     {
         std::string  m_title;
