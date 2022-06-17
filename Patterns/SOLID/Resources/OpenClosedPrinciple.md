@@ -141,7 +141,7 @@ sind die am meisten verbreitete Vorgehensweise:
 022:     Color m_color;
 023:     ColorSpecification(Color color) : m_color(color) {}
 024: 
-025:     bool isSatisfied(const std::shared_ptr<T>& product) const override {
+025:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
 026:         return product->m_color == m_color; 
 027:     }
 028: };
@@ -152,7 +152,7 @@ sind die am meisten verbreitete Vorgehensweise:
 033:     Size m_size;
 034:     SizeSpecification(Size size) : m_size(size) {}
 035:         
-036:     bool isSatisfied(const std::shared_ptr<T>& product) const override {
+036:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
 037:         return product->m_size == m_size;
 038:     }
 039: };

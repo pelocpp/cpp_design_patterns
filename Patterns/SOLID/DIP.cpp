@@ -92,10 +92,12 @@ void test_anti_conceptual_example_dip()
     Person parent{ "John" };
     Person child1{ "Carina" };
     Person child2{ "Mary" };
+
     Relationships relationships;
+
     relationships.add_parent_and_child(parent, child1);
     relationships.add_parent_and_child(parent, child2);
-    FamilyTree tree(relationships);
+    FamilyTree tree{ relationships };
 }
 
 void test_conceptual_example_dip()
@@ -105,10 +107,12 @@ void test_conceptual_example_dip()
     Person parent{ "John" };
     Person child1{ "Carina" };
     Person child2{ "Mary" };
+
     Relationships relationships;
+
     relationships.add_parent_and_child(parent, child1);
     relationships.add_parent_and_child(parent, child2);
-    FamilyTree tree(relationships);
+    FamilyTree tree{ relationships };
 }
 
 // ===========================================================================

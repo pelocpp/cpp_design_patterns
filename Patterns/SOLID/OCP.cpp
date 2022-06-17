@@ -74,7 +74,7 @@ namespace ConceptualExampleOCP {
         Color m_color;
         ColorSpecification(Color color) : m_color(color) {}
 
-        bool isSatisfied(const std::shared_ptr<T>& product) const override {
+        virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
             return product->m_color == m_color; 
         }
     };
@@ -85,7 +85,7 @@ namespace ConceptualExampleOCP {
         Size m_size;
         SizeSpecification(Size size) : m_size(size) {}
         
-        bool isSatisfied(const std::shared_ptr<T>& product) const override {
+        virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
             return product->m_size == m_size;
         }
     };
@@ -133,10 +133,7 @@ namespace ConceptualExampleOCP {
 
     // combining multiple logical specifications - with variadic templates
     template <typename T>
-    using ProductSpecification = Specification<T>;
-
-    template <typename T>
-    struct GenericSpecification 
+    struct GenericSpecification : public Specification<T>
     {
         std::vector<std::shared_ptr<Specification<T>>> m_vec;
 
@@ -146,7 +143,7 @@ namespace ConceptualExampleOCP {
            m_vec = { args  ... };
         }
 
-        bool isSatisfied(const std::shared_ptr<T>& product) const {
+        virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
 
             bool result = std::accumulate (
                 std::begin(m_vec),
@@ -175,7 +172,7 @@ namespace ConceptualExampleOCP {
         double m_price;
         PriceSpecification(double price) : m_price(price) {}
 
-        bool isSatisfied(const std::shared_ptr<ProductEx>& product) const override {
+        virtual bool isSatisfied(const std::shared_ptr<ProductEx>& product) const override {
             return product->m_price == m_price;
         }
     };
@@ -211,7 +208,9 @@ void test_conceptual_example_ocp_01()
     };
 
     ProductFilter<Product> productFilter;
-    ColorSpecification<Product> greenProducts = ColorSpecification<Product>{ Color::Green };
+
+    ColorSpecification<Product> greenProducts 
+        = ColorSpecification<Product>{ Color::Green };
 
     for (const auto& product : productFilter.filter(products, greenProducts)) {
         std::cout << product->m_name << " is green" << std::endl;
@@ -230,8 +229,12 @@ void test_conceptual_example_ocp_02()
     };
 
     ProductFilter<Product> productFilter;
-    ColorSpecification<Product> greenProducts = ColorSpecification<Product>{ Color::Green };
-    SizeSpecification largeProducts = SizeSpecification<Product>{ Size::Large };
+
+    ColorSpecification<Product> greenProducts 
+        = ColorSpecification<Product>{ Color::Green };
+
+    SizeSpecification largeProducts 
+        = SizeSpecification<Product>{ Size::Large };
 
     for (const auto& product : productFilter.filter(products, greenProducts && largeProducts)) {
         std::cout << product->m_name << " is green and large" << std::endl;
@@ -259,8 +262,6 @@ void test_conceptual_example_ocp_03()
     bool result{};
     result = specification.isSatisfied(computer);
     std::cout << "Result: " << std::boolalpha << result << std::endl;
-
-    return;
 
     result = specification.isSatisfied(chair);
     std::cout << "Result: " << std::boolalpha << result << std::endl;

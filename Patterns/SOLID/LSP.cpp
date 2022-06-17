@@ -82,7 +82,7 @@ namespace LiskovSubstitutionPrinciple02
         virtual void setHeight(size_t height) { m_height = height; }
 
         // public interface
-        size_t area() const override { return m_width * m_height; }
+        virtual size_t area() const override { return m_width * m_height; }
     };
 
     struct Square : public Shape
