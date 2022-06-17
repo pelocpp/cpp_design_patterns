@@ -25,13 +25,13 @@ Wir stellen uns eine Funktion
 void acceptsOnlyDucks(Duck& duck);
 </pre>
 
-vor, die nur Objekt des Types `Duck` akzeptiert.
+vor, die nur Objekte des Typs `Duck` akzeptiert.
 In statisch typisierten Sprachen wie C++ kann diese Funktion nur mit Objekten aufgerufen werden,
 deren Typ sich von `Duck`  abgeleitet.
 
 Es gibt aber auch andere Programmiersprachen wie beispielsweise Python.
 Hier könnten alle Datentypen verwendet werden, die sich wie ein Objekt des Typs `Duck` &ldquo;*verhalten*&rdquo;.
-Damit ist jetzt gemeint:  &ldquo;Wenn ein Vogel sich wie eine Ente verhält, dann ist es eine Ente&rdquo;.
+Damit ist gemeint:  &ldquo;Wenn ein Vogel sich wie eine Ente verhält, dann ist es eine Ente&rdquo;.
 Ein Sprichwort in Python bringt das verschärft auf den Punkt: &ldquo;*Don't ask for permission, ask for forgiveness.*&rdquo;.
 
 Etwas mehr vor einem programmiersprachlichen Hintergrund formuliert bedeutet das:
@@ -86,9 +86,9 @@ eine Unterklasse, die von der Basisklasse (Schnittstellenklasse) erbt und ihre M
 35: 
 36: void clientCode()
 37: {
-38:     std::shared_ptr<Animal> aCow = std::make_shared<Cow>();
-39:     std::shared_ptr<Animal> aPig = std::make_shared<Pig>();
-40:     std::shared_ptr<Animal> aDog = std::make_shared<Dog>();
+38:     std::shared_ptr<Animal> aCow { std::make_shared<Cow>() };
+39:     std::shared_ptr<Animal> aPig { std::make_shared<Pig>() };
+40:     std::shared_ptr<Animal> aDog { std::make_shared<Dog>() };
 41: 
 42:     seeAndSay(aCow);
 43:     seeAndSay(aPig);
@@ -204,8 +204,8 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 32:     Cow m_cow;
 33: 
 34: public:
-35:     std::string see() const { return m_cow.see(); }
-36:     std::string say() const { return m_cow.say(); }
+35:     virtual std::string see() const override { return m_cow.see(); }
+36:     virtual std::string say() const override { return m_cow.say(); }
 37: };
 38: 
 39: class MyPig : public MyAnimal
@@ -214,8 +214,8 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 42:     Pig m_pig;
 43: 
 44: public:
-45:     std::string see() const { return m_pig.see(); }
-46:     std::string say() const { return m_pig.say(); }
+45:     virtual std::string see() const override { return m_pig.see(); }
+46:     virtual std::string say() const override { return m_pig.say(); }
 47: };
 48: 
 49: class MyDog : public MyAnimal
@@ -224,8 +224,8 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 52:     Dog m_dog;
 53: 
 54: public:
-55:     std::string see() const { return m_dog.see(); }
-56:     std::string say() const { return m_dog.say(); }
+55:     virtual std::string see() const override { return m_dog.see(); }
+56:     virtual std::string say() const override { return m_dog.say(); }
 57: };
 58: 
 59: void seeAndSay(const std::shared_ptr<MyAnimal> animal)
@@ -266,15 +266,15 @@ Durch die Verwendung von Templates:
 07: public:
 08:     AnimalWrapper(const T& animal) : m_animal{ animal } {}
 09: 
-10:     std::string see() const { return m_animal.see(); }
-11:     std::string say() const { return m_animal.say(); }
+10:     virtual std::string see() const override { return m_animal.see(); }
+11:     virtual std::string say() const override { return m_animal.say(); }
 12: };
 ```
 
 #### Das *Type Erasure* Idiom
 
 Das, was wir im letzten Abschnitt gebaut haben, ist die Grundlage des &ldquo;*Type Erasure*&rdquo; Idioms.
-Alles, was noch zu erledigen ist, ist, all diese Maschinerie hinter einer weiteren Klasse zu verstecken,
+Was wir noch erledigen sollten, ist, all diese Maschinerie hinter einer weiteren Klasse zu verstecken,
 damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und Templates befassen muss:
 
 ```cpp
@@ -298,8 +298,8 @@ damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und 
 18:     public:
 19:         AnimalWrapper(const T& animal) : m_animal{ animal } {}
 20: 
-21:         std::string see() const { return m_animal->see(); }
-22:         std::string say() const { return m_animal->say(); }
+21:         virtual std::string see() const override { return m_animal->see(); }
+22:         virtual std::string say() const override { return m_animal->say(); }
 23:     };
 24: 
 25:     // registered animals
@@ -377,8 +377,8 @@ Wir formulieren das letzte Beispiel entsprechend der *Type Erasure* Namensgebung
 18:     public:
 19:         AnimalModel (const T& animal) : m_animal{ animal } {}
 20: 
-21:         std::string see() const { return m_animal->see(); }
-22:         std::string say() const { return m_animal->say(); }
+21:         virtual std::string see() const override { return m_animal->see(); }
+22:         virtual std::string say() const override { return m_animal->say(); }
 23:     };
 24: 
 25:     // registered animals

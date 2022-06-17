@@ -10,8 +10,10 @@ namespace ConceptualExample02 {
     {
     public:
         virtual ~StateBase() {};
+
         virtual void handle(std::shared_ptr<Context> context) = 0;
-        virtual std::string getDescription() = 0;
+
+        virtual std::string getDescription() const = 0;
     };
 
     class Context : public std::enable_shared_from_this<Context>
@@ -34,11 +36,12 @@ namespace ConceptualExample02 {
 
     public:
         ConcreteStateA() : m_description{ "State A" } {}
+
         void handle(std::shared_ptr<Context> context) override;
-        virtual std::string getDescription() override {
+
+        virtual std::string getDescription()  const override {
             return m_description;
         }
-
     };
 
     class ConcreteStateB : public StateBase {
@@ -47,8 +50,10 @@ namespace ConceptualExample02 {
 
     public:
         ConcreteStateB() : m_description{ "State B" } {}
+
         void handle(std::shared_ptr<Context> context) override;
-        virtual std::string getDescription() override {
+
+        virtual std::string getDescription() const override {
             return m_description;
         }
     };

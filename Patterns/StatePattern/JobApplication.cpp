@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <type_traits>
+#include <memory>
 
 namespace JobApplicationExample {
 
@@ -11,9 +12,9 @@ namespace JobApplicationExample {
     {
     public:
         virtual ~State() {};
-        virtual void inform() = 0;   // inform applicant
-        virtual void process() = 0;  // process job application
-        virtual std::string to_string() = 0;  // print current state
+        virtual void inform() = 0;             // inform applicant
+        virtual void process() = 0;            // process job application
+        virtual std::string to_string() = 0;   // print current state
     };
 
     // =======================================================================
@@ -86,20 +87,20 @@ namespace JobApplicationExample {
     class JobApplication
     {
     private:
-        State* m_state;
+        std::shared_ptr<State> m_state;
 
     public:
         JobApplication()
         {
-            m_state = new Received();
+            m_state = std::make_shared<Received>();
         }
 
-        State* getState()
+        std::shared_ptr<State> getState()
         {
             return m_state;
         }
 
-        void setState(State* nextState)
+        void setState(std::shared_ptr<State> nextState)
         {
             if (nextState != m_state)
             {
@@ -128,7 +129,7 @@ namespace JobApplicationExample {
         }
 
     private:
-        bool isStateAccepted(State* nextState)
+        bool isStateAccepted(std::shared_ptr<State> nextState)
         {
             if (typeid(*m_state) == typeid(Received)) {
                 return
@@ -176,20 +177,20 @@ namespace JobApplicationExample {
         JobApplication b;
         b.print();
 
-        b.setState(new Hired());         // state not allowed here
-        b.setState(new Interviewed());   // state allowed
+        b.setState(std::make_shared<Hired>());         // state not allowed here
+        b.setState(std::make_shared<Interviewed>());   // state allowed
         b.print();
         b.inform();
         b.process();
 
-        b.setState(new Talentpool()); // state not allowed here
+        b.setState(std::make_shared<Talentpool>());    // state not allowed here
 
-        b.setState(new Invited());    // state allowed
+        b.setState(std::make_shared<Invited>());       // state allowed
         b.print();
 
-        b.setState(new Received());   // state not allowed here
+        b.setState(std::make_shared<Received>());      // state not allowed here
 
-        b.setState(new Hired());      // state allowed
+        b.setState(std::make_shared<Hired>());         // state allowed
         b.print();
     }
 }
