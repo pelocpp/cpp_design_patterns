@@ -144,9 +144,9 @@ Beispiel:
 Objekte unterschiedlichen Typs lassen sich nicht &ndash; ohne Weiteres &ndash; in einem Container / Array ablegen:
 
 ```cpp
-std::shared_ptr<Animal> aCow = std::make_shared<Cow>();
-std::shared_ptr<Animal> aPig = std::make_shared<Pig>();
-std::shared_ptr<Animal> aDog = std::make_shared<Dog>();
+std::shared_ptr<Cow> aCow = std::make_shared<Cow>();
+std::shared_ptr<Pig> aPig = std::make_shared<Pig>();
+std::shared_ptr<Dog> aDog = std::make_shared<Dog>();
 
 ??? animals[] = { aCow, aPig, aDog };
 ```
