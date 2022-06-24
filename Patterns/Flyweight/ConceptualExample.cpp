@@ -193,16 +193,16 @@ void test_conceptual_example() {
 
     addCarToDatabase(
         factory,
-        "CL234IR",
         "James Doe",
+        "CL234IR",
         "BMW",          
         "M5",       // <== this car variant always exists
         "red");
 
     addCarToDatabase(
         factory,
-        "CL234IR",
         "James Doe",
+        "CL234IR",
         "BMW",
         "X1",       // <== this car variant doesn't exist
         "red");
