@@ -14,12 +14,12 @@ namespace BankAccountMemento
         friend std::ostream& operator<<(std::ostream& os, const BankAccount& ac);
 
     private:
-        int     m_balance;
-        size_t  m_current;
+        int m_balance;
+        size_t m_current;
 
         struct Memento
         {
-            Memento(int balance) : m_balance(balance) {}
+            Memento(int balance) : m_balance{ balance } {}
             int m_balance;
         };
 
@@ -31,11 +31,11 @@ namespace BankAccountMemento
         BankAccount(int balance);
 
         // public interface
-        std::shared_ptr<Memento> deposit(int amount);
-        std::shared_ptr<Memento> withdraw(int amount);
+        void deposit(int amount);
+        void withdraw(int amount);
 
-        std::shared_ptr<Memento> undo();
-        std::shared_ptr<Memento> redo();
+        void undo();
+        void redo();
 
         void restore(const std::shared_ptr<Memento>& memento);
     };
@@ -46,16 +46,16 @@ namespace BankAccountMemento
         m_changes.push_back(std::make_shared<Memento>(m_balance));
     }
 
-    std::shared_ptr<BankAccount::Memento> BankAccount::deposit(int amount) {
+    void BankAccount::deposit(int amount) {
         m_balance += amount;
         m_changes.push_back(std::make_shared<Memento>(m_balance));
-        return m_changes[m_current++];
+        m_current++;
     }
 
-    std::shared_ptr<BankAccount::Memento> BankAccount::withdraw(int amount) {
+    void BankAccount::withdraw(int amount) {
         m_balance -= amount;
         m_changes.push_back(std::make_shared<Memento>(m_balance));
-        return m_changes[m_current++];
+        m_current++;
     }
 
     void BankAccount::restore(const std::shared_ptr<BankAccount::Memento>& memento) {
@@ -66,22 +66,18 @@ namespace BankAccountMemento
         }
     }
 
-    std::shared_ptr<BankAccount::Memento> BankAccount::undo() {
+    void BankAccount::undo() {
         if (m_current > 0) {
             --m_current;
             m_balance = m_changes[m_current]->m_balance;
-            return m_changes[m_current];
         }
-        return {};
     }
 
-    std::shared_ptr<BankAccount::Memento> BankAccount::redo() {
+    void BankAccount::redo() {
         if ((m_current + 1) < m_changes.size()) {
             ++m_current;
             m_balance = m_changes[m_current]->m_balance;
-            return m_changes[m_current];
         }
-        return {};
     }
 
     std::ostream& operator<<(std::ostream& os, const BankAccount& ac) {
