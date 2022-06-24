@@ -26,7 +26,7 @@ namespace AntiConceptualExampleOCP {
 
     struct ProductFilter 
     {
-        static Products<Product> byColor(Products<Product> products, Color color)
+        static Products<Product> byColor(const Products<Product>& products, Color color)
         {
             Products<Product> result{};
             for (const auto& product : products) {
@@ -37,7 +37,7 @@ namespace AntiConceptualExampleOCP {
             return result;
         }
 
-        static Products<Product> bySize(Products<Product> products, Size size)
+        static Products<Product> bySize(const Products<Product>& products, Size size)
         {
             Products<Product> result{};
             for (const auto& product : products) {
@@ -48,7 +48,7 @@ namespace AntiConceptualExampleOCP {
             return result;
         }
 
-        static Products<Product> bySizeAndColor(Products<Product> products, Size size, Color color)
+        static Products<Product> bySizeAndColor(const Products<Product>& products, Size size, Color color)
         {
             Products<Product> result{};
             for (const auto& product : products) {
@@ -93,13 +93,13 @@ namespace ConceptualExampleOCP {
     template <typename T>
     struct Filter 
     {
-        virtual Products<T> filter(Products<T> products, const Specification<T>& spec) = 0;
+        virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) = 0;
     };
 
     template <typename T>
     struct ProductFilter : public Filter<T>
     {
-        virtual Products<T> filter(Products<T> products, const Specification<T>& spec) override
+        virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) override
         {
             Products<T> result;
             for (auto& product : products) {

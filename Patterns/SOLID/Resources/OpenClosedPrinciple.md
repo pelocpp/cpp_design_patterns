@@ -43,7 +43,7 @@ Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
 13: 
 14: struct ProductFilter 
 15: {
-16:     static Products<Product> byColor(Products<Product> products, Color color)
+16:     static Products<Product> byColor(const Products<Product>& products, Color color)
 17:     {
 18:         Products<Product> result{};
 19:         for (const auto& product : products) {
@@ -54,7 +54,7 @@ Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
 24:         return result;
 25:     }
 26: 
-27:     static Products<Product> bySize(Products<Product> products, Size size)
+27:     static Products<Product> bySize(const Products<Product>& products, Size size)
 28:     {
 29:         Products<Product> result{};
 30:         for (const auto& product : products) {
@@ -65,7 +65,7 @@ Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
 35:         return result;
 36:     }
 37: 
-38:     static Products<Product> bySizeAndColor(Products<Product> products, Size size, Color color)
+38:     static Products<Product> bySizeAndColor(const Products<Product>& products, Size size, Color color)
 39:     {
 40:         Products<Product> result{};
 41:         for (const auto& product : products) {
@@ -160,13 +160,13 @@ sind die am meisten verbreitete Vorgehensweise:
 041: template <typename T>
 042: struct Filter 
 043: {
-044:     virtual Products<T> filter(Products<T> products, const Specification<T>& spec) = 0;
+044:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) = 0;
 045: };
 046: 
 047: template <typename T>
 048: struct ProductFilter : public Filter<T>
 049: {
-050:     virtual Products<T> filter(Products<T> products, const Specification<T>& spec) override
+050:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) override
 051:     {
 052:         Products<T> result;
 053:         for (auto& product : products) {
