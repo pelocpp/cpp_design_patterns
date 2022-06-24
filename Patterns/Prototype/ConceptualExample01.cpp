@@ -46,7 +46,7 @@ void test_conceptual_example_01()
     };
 
     std::shared_ptr<ConcretePrototype> clone {
-        std::static_pointer_cast<ConcretePrototype> (prototype->clone()) 
+        std::static_pointer_cast<ConcretePrototype> (prototype->clone())  // <== note: std::static_pointer_cast
     };
 
     clone->setId(2);

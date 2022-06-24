@@ -174,7 +174,7 @@ Es ist nur die `create(std::string name)`-Schnittstellenmethode an der Klasse
 `Person` verfügbar.
 
 Betrachten Sie den folgenden Quellcode:
-Es wird der so genannten &ldquo;*Fluent Builder*&rdquo; Programmierstil demonstriert:
+Es wird der so genannte &ldquo;*Fluent Builder*&rdquo; Programmierstil demonstriert:
 
 ```cpp
 Person p = Person::create("Hans")

@@ -74,7 +74,7 @@ weitere Entwurfsprinzipien aus:
 |:-------|----|
 | **KISS** | „Keep it simple and stupid“ - Strebe zu einem Problem immer eine möglichst einfache Lösung an. |
 | **DRY** | „Don't repeat yourself“ - Redundant vorhandener Quellcode ist nur aufwändig einheitlich zu pflegen. Bei Systemen, die dem DRY-Prinzip treu sind, brauchen Änderungen nur an einer Stelle vorgenommen zu werden. |
-| **YAGNI** | „You aren't gonna need it“ - „Implementieren Dinge immer dann, wenn Du sie tatsächlich brauchst, niemals, wenn Du nur der Meinung bist, dass Du sie brauchst!“ |
+| **YAGNI** | „You aren't gonna need it“ - „Implementiere Dinge immer dann, wenn Du sie tatsächlich brauchst, niemals, wenn Du nur der Meinung bist, dass Du sie brauchst!“ |
 | Separation of Concerns | Das „Separation of Concerns“ (**SoC**) Prinzip ist eines der grundlegendsten Prinzipien in der Softwareentwicklung. Es ist so wichtig, dass zwei der fünf SOLID-Prinzipien (*Single Responsibility* und *Interface Segregation*) direkte Ableitungen von diesem Konzept sind. Die Aussage des Prinzips ist einfach: Schreiben Sie Ihr Programm nicht als einen festen Block, sondern teilen Sie den Code in Blöcke auf, die winzige Teile des Systems sind, die jeweils einen einfachen, unterschiedlichen Auftrag ausführen. |
 
 Tabelle 1. Weitere Entwurfsprinzipien.

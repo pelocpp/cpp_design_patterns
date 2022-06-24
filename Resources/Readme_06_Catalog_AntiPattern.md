@@ -110,7 +110,7 @@ $('form').on('submit', function(event) {
 ```
 
 
-Weitere bekannte Vertreter für mögliche *Input Kludge* ´Schwachstellen:
+Weitere bekannte Vertreter für mögliche *Input Kludge* Schwachstellen:
 
   * CRT (C-Runtime-Library)
 
