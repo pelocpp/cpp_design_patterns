@@ -46,7 +46,7 @@ void test_ecommerce_app()
             int count;
             std::cin >> count;
 
-            order.setTotalCost(cost * count);
+            order.addToTotalCost(cost * count);
 
             std::cout << "Do you wish to continue selecting products? Y/N: ";
             std::cin >> continueChoice;

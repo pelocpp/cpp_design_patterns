@@ -9,7 +9,7 @@ public:
 
     void processOrder(std::shared_ptr<PaymentStrategy> strategy);
 
-    void setTotalCost(int cost);
+    void addToTotalCost(int cost);
     int getTotalCost();
     bool isClosed();
     void setClosed();

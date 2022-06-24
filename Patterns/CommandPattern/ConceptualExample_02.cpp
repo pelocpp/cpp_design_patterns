@@ -132,9 +132,7 @@ void test_conceptual_example_02() {
 
     using namespace ConceptualExample02;
 
-    std::shared_ptr<Invoker> invoker{
-        std::make_shared<Invoker>() 
-    };
+    Invoker invoker;
 
     std::shared_ptr<SimpleCommand> simpleCmd{
         std::make_shared<SimpleCommand>("Say Hi!") 
@@ -152,11 +150,11 @@ void test_conceptual_example_02() {
         ) 
     };
 
-    invoker->setOnStart(simpleCmd);
+    invoker.setOnStart(simpleCmd);
 
-    invoker->setOnFinish(complexCmd);
+    invoker.setOnFinish(complexCmd);
 
-    invoker->doSomethingImportant();
+    invoker.doSomethingImportant();
 }
 
 // ===========================================================================

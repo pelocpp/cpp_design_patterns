@@ -71,9 +71,7 @@ void test_conceptual_example_01() {
 
     using namespace ConceptualExample01;
 
-    std::shared_ptr<Invoker> invoker{ 
-        std::make_shared<Invoker>()
-    };
+    Invoker invoker;
 
     std::shared_ptr<Receiver> receiver{
         std::make_shared<Receiver>() 
@@ -84,8 +82,9 @@ void test_conceptual_example_01() {
     };
 
     command->setData("Hello, world!");
-    invoker->setCommand(command);
-    invoker->executeCommand();
+
+    invoker.setCommand(command);
+    invoker.executeCommand();
 }
 
 // ===========================================================================

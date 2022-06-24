@@ -28,7 +28,7 @@ void Order::processOrder(std::shared_ptr<PaymentStrategy> strategy) {
     strategy->collectPaymentDetails();
 }
 
-void Order::setTotalCost(int cost) {
+void Order::addToTotalCost(int cost) {
     m_totalCost += cost;
 }
 
