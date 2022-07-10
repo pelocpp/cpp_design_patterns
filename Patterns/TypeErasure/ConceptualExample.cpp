@@ -41,16 +41,16 @@ namespace ConceptualExample
 
         void seeAndSay(const std::shared_ptr<Animal> animal)
         {
-            std::cout 
+            std::cout
                 << "The " << animal->see() << " says '"
                 << animal->say() << "' :)." << std::endl;
         }
 
         void clientCode()
         {
-            std::shared_ptr<Animal> aCow { std::make_shared<Cow>() };
-            std::shared_ptr<Animal> aPig { std::make_shared<Pig>() };
-            std::shared_ptr<Animal> aDog { std::make_shared<Dog>() };
+            std::shared_ptr<Animal> aCow{ std::make_shared<Cow>() };
+            std::shared_ptr<Animal> aPig{ std::make_shared<Pig>() };
+            std::shared_ptr<Animal> aDog{ std::make_shared<Dog>() };
 
             seeAndSay(aCow);
             seeAndSay(aPig);
@@ -77,7 +77,7 @@ namespace ConceptualExample
 
         void clientCode()
         {
-            std::shared_ptr<Dog> aDog = std::make_shared<Dog>();
+            std::shared_ptr<Dog> aDog{ std::make_shared<Dog>() };
             seeAndSay<Dog>(aDog);
         }
     }
@@ -151,9 +151,9 @@ namespace ConceptualExample
 
         void clientCode()
         {
-            std::shared_ptr<MyAnimal> aCow = std::make_shared<MyCow>();
-            std::shared_ptr<MyAnimal> aPig = std::make_shared<MyPig>();
-            std::shared_ptr<MyAnimal> aDog = std::make_shared<MyDog>();
+            std::shared_ptr<MyAnimal> aCow{ std::make_shared<MyCow>() };
+            std::shared_ptr<MyAnimal> aPig{ std::make_shared<MyPig>() };
+            std::shared_ptr<MyAnimal> aDog{ std::make_shared<MyDog>() };
 
             std::vector<std::shared_ptr<MyAnimal>> animals = { aCow , aPig , aDog };
 
@@ -215,9 +215,9 @@ namespace ConceptualExample
 
         void clientCode()
         {
-            std::shared_ptr<MyAnimal> spCow = std::make_shared<AnimalWrapper<Cow>>(Cow{});
-            std::shared_ptr<MyAnimal> spPig = std::make_shared<AnimalWrapper<Pig>>(Pig{});
-            std::shared_ptr<MyAnimal> spDog = std::make_shared<AnimalWrapper<Dog>>(Dog{});
+            std::shared_ptr<MyAnimal> spCow{ std::make_shared<AnimalWrapper<Cow>>(Cow{}) };
+            std::shared_ptr<MyAnimal> spPig{ std::make_shared<AnimalWrapper<Pig>>(Pig{}) };
+            std::shared_ptr<MyAnimal> spDog{ std::make_shared<AnimalWrapper<Dog>>(Dog{}) };
 
             std::vector<std::shared_ptr<MyAnimal>> animals = { spCow , spPig , spDog };
 
@@ -278,7 +278,7 @@ namespace ConceptualExample
             std::vector<std::shared_ptr<MyAnimal>> m_animals;
 
         public:
-            template <typename T>    
+            template <typename T>
             void addAnimal(const T& animal)
             {
                 m_animals.push_back(std::make_shared<AnimalWrapper<T>>(animal));
@@ -301,9 +301,9 @@ namespace ConceptualExample
         {
             SeeAndSay animals;
 
-            std::shared_ptr<Cow> aCow = std::make_shared<Cow>();
-            std::shared_ptr<Pig> aPig = std::make_shared<Pig>();
-            std::shared_ptr<Dog> aDog = std::make_shared<Dog>();
+            std::shared_ptr<Cow> aCow{ std::make_shared<Cow>() };
+            std::shared_ptr<Pig> aPig{ std::make_shared<Pig>() };
+            std::shared_ptr<Dog> aDog{ std::make_shared<Dog>() };
 
             animals.addAnimal(aCow);
             animals.addAnimal(aPig);
@@ -354,7 +354,7 @@ namespace ConceptualExample
                 const T& m_animal;
 
             public:
-                AnimalModel (const T& animal) : m_animal{ animal } {}
+                AnimalModel(const T& animal) : m_animal{ animal } {}
 
                 virtual std::string see() const override { return m_animal->see(); }
                 virtual std::string say() const override { return m_animal->say(); }
@@ -387,9 +387,9 @@ namespace ConceptualExample
         {
             SeeAndSay animals;
 
-            std::shared_ptr<Cow> aCow = std::make_shared<Cow>();
-            std::shared_ptr<Pig> aPig = std::make_shared<Pig>();
-            std::shared_ptr<Dog> aDog = std::make_shared<Dog>();
+            std::shared_ptr<Cow> aCow{ std::make_shared<Cow>() };
+            std::shared_ptr<Pig> aPig{ std::make_shared<Pig>() };
+            std::shared_ptr<Dog> aDog{ std::make_shared<Dog>() };
 
             animals.addAnimal(aCow);
             animals.addAnimal(aPig);
@@ -398,10 +398,9 @@ namespace ConceptualExample
             animals.print();
         }
     }
-
 }
 
-void test_conceptual_example ()
+void test_conceptual_example()
 {
     ConceptualExample::Motivation01::clientCode();
     ConceptualExample::Motivation02::clientCode();
