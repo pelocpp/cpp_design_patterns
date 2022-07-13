@@ -420,7 +420,68 @@ Wir formulieren das letzte Beispiel entsprechend der *Type Erasure* Namensgebung
 61: }
 ```
 
-Damit wären wir am Ende unserer Betrachtungen des *Type Erasure* Idioms.
+Damit wären wir fast Ende unserer Betrachtungen des *Type Erasure* Idioms.
+Wer die letzte Variation gut betrachtet hat, wird feststellen,
+dass wir pro beteiligtem Objekt zwei `std::shared_ptr`-Objekte verwendet haben:
+
+  * `std::shared_ptr<AnyAnmimal>` &ndash; Einen Shared-Pointer für das Objekt selbst
+  * `std::shared_ptr<AnimalConcept>` &ndash; Einen Shared-Pointer für das Hüllenobjekt
+
+Dies muss so natürlich nicht der Fall sein, 
+die betroffenen Objekt können auch *per-value* vorhanden sein.
+
+Die Referenz dieser Objekte wird dann im Hüllenobjekt abgelegt.
+Die Hüllenobjekte selbst werden nach wie vor dynamisch erzeugt, in
+den Instanzvariablen verwalten sie eine Referenz des umhüllten Objekts:
+
+```cpp
+01: class SeeAndSay
+02: {
+03:     // 'interface'
+04:     class AnimalConcept
+05:     {
+06:     public:
+07:         virtual std::string see() const = 0;
+08:         virtual std::string say() const = 0;
+09:     };
+10: 
+11:     // derived type(s)
+12:     template <typename T>
+13:     class AnimalModel : public AnimalConcept
+14:     {
+15:     private:
+16:         const T& m_animal;
+17: 
+18:     public:
+19:         AnimalModel(const T& animal) : m_animal{ animal } {}
+20: 
+21:         virtual std::string see() const override { return m_animal.see(); }
+22:         virtual std::string say() const override { return m_animal.say(); }
+23:     };
+24: 
+25:     // registered animals
+26:     std::vector<std::shared_ptr<AnimalConcept>> m_animals;
+27: 
+28: public:
+29:     template <typename T>
+30:     void addAnimal(const T& animal)
+31:     {
+32:         m_animals.push_back(std::make_shared<AnimalModel<T>>(animal));
+33:     }
+34: 
+35:     void seeAndSay(const std::shared_ptr<AnimalConcept> animal) {
+36:         std::cout
+37:             << "The " << animal->see() << " says '"
+38:             << animal->say() << "' :)." << std::endl;
+39:     }
+40: 
+41:     void print() {
+42:         for (const auto& animal : m_animals) {
+43:             seeAndSay(animal);
+44:         }
+45:     }
+46: };
+```
 
 ---
 
