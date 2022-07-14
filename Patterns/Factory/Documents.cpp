@@ -62,7 +62,7 @@ namespace DocumentsExample {
         return nullptr;
     }
 
-    class DocumentOpener
+    class DocumentFactory
     {
     public:
         using DocumentType = std::unique_ptr<IDocument>;
@@ -95,25 +95,25 @@ void test_documents()
 {
     using namespace DocumentsExample;
 
-    auto document_opener = DocumentOpener{};
+    auto document_opener = DocumentFactory{};
 
     document_opener.Register(
         "pdf",
-        [](auto path) -> DocumentOpener::DocumentType {
+        [](auto path) -> DocumentFactory::DocumentType {
             return std::make_unique<PdfDocument>(path);
         }
     );
 
     document_opener.Register(
         "html",
-        [](auto path) -> DocumentOpener::DocumentType {
+        [](auto path) -> DocumentFactory::DocumentType {
             return std::make_unique<HtmlDocument>(path);
         }
     );
 
     document_opener.Register(
         "odt",
-        [](auto path) -> DocumentOpener::DocumentType {
+        [](auto path) -> DocumentFactory::DocumentType {
             return std::make_unique<OdtDocument>(path);
         }
     );

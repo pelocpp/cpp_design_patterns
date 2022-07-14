@@ -120,7 +120,7 @@ Dokumenttypen ist eine Registrierungsfunktionen, die es gestattet, eigene Typen 
 21: class OdtDocument : public IDocument 
 22: ...
 23: 
-24: class DocumentOpener
+24: class DocumentFactory
 25: {
 26: public:
 27:     using DocumentType = std::unique_ptr<IDocument>;
@@ -150,7 +150,7 @@ Dokumenttypen ist eine Registrierungsfunktionen, die es gestattet, eigene Typen 
 ```
 
 *Bemerkung*:
-In dem Beispiel sind einige Modern C++ Sprachkonstrukte enthalten:
+In dem Beispiel sind einige Modern C++&ndash;Sprachkonstrukte enthalten:
 
   * `std::map`-Objekt mit *Callables* (hier: `std::function`-Objekte)
   * Lambdas mit *Trailing Return Types*
@@ -168,9 +168,7 @@ und
 vor.
 
 Das zweite Real-World Beispiel stammt aus dem Buch 
-
 [Software Architecture with C++](https://www.amazon.de/Software-Architecture-effective-architecture-techniques/dp/1838554599)
-
 von Adrian Ostrowski und Piotr Gaczkowski.
 
 ---
