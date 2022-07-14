@@ -14,18 +14,17 @@
 
 ##### Kategorie: Erzeugungsmuster / *Creational Pattern*
 
+
+###### In einem Satz:
+
+&ldquo;Um komplexe und komplizierte Objekte stückweise und intuitiver zu erstellen/instanziieren.&rdquo;
+
+
 #### Ziel / Absicht:
 
 Das *Builder Pattern* ist ein Entwurfsmuster, mit dem schrittweise komplexe Objekte mit der richtigen Reihenfolge von Aktionen erstellt werden können.
 Die Konstruktion wird von einem *Director*-Objekt gesteuert,
 das nur den Objekttyp kennen muss, den es erstellen soll.
-
-#### Ziel / Absicht:
-
-Das *Builder Pattern* ist ein Entwurfsmuster aus der Kategorie der *Creational Pattern*. 
-Mit diesem Entwurfsmuster soll die Konstruktion eines komplexen Objekts von seiner Repräsentation getrennt werden.
-Dieses Muster wird verwendet, wenn komplexe Objekte, die zu erstellen sind, aus Bestandteilen bestehen,
-die in einer bestimmten Reihenfolge oder unter Verwendung eines bestimmten Algorithmus erstellt werden müssen.
 
 #### Lösung:
 
