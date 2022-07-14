@@ -19,6 +19,9 @@
     <Filter Include="Source Files\MobilePhones">
       <UniqueIdentifier>{ca191107-8f54-44a3-be13-b43b46d6c066}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Documents">
+      <UniqueIdentifier>{d865b7a9-2a14-4929-a902-bd7a8db86d94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -37,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="MobilePhones.cpp">
       <Filter>Source Files\MobilePhones</Filter>
+    </ClCompile>
+    <ClCompile Include="Documents.cpp">
+      <Filter>Source Files\Documents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
