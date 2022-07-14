@@ -73,7 +73,7 @@ namespace RealWorldFactoryMethod {
             std::cout << "Shipping charge: " << charge << " Euro" << std::endl;
         }
 
-        virtual ITelevision* orderTVExtended() final {       // <= final method (!)
+        virtual std::unique_ptr<ITelevision> orderTVExtended() final {       // <= final method (!)
             // Note: client receives 'ITelevision' pointer
             return assembleTelevision();                     // <= abstract method (!)
         }
@@ -89,7 +89,7 @@ namespace RealWorldFactoryMethod {
 
     protected:
         virtual void manufactureTelevision() = 0;
-        virtual ITelevision* assembleTelevision() = 0;
+        virtual std::unique_ptr<ITelevision> assembleTelevision() = 0;
         virtual float shippingCharge() const = 0;
         virtual float productionCharge() const = 0;
     };
@@ -98,13 +98,13 @@ namespace RealWorldFactoryMethod {
     class LEDTVFactory : public AbstractTVFactory {
     protected:
         virtual void manufactureTelevision() override  {
-            ITelevision* newTV = assembleTelevision();
+            std::unique_ptr<ITelevision> newTV = assembleTelevision();
             std::cout << "Manufacturing LED tv" << std::endl;
         }
 
-        virtual ITelevision* assembleTelevision() override {
+        virtual std::unique_ptr<ITelevision> assembleTelevision() override {
             std::cout << "Assembling LED tv" << std::endl;
-            return new LEDTelevision();
+            return std::make_unique<LEDTelevision>();
         }
 
         virtual float shippingCharge() const override {
@@ -122,9 +122,9 @@ namespace RealWorldFactoryMethod {
             std::cout << "Manufacturing Oled tv" << std::endl;
         }
 
-        virtual ITelevision* assembleTelevision() override {
+        virtual std::unique_ptr<ITelevision> assembleTelevision() override {
             std::cout << "Assembling Oled tv" << std::endl;
-            return new OledTelevision();
+            return std::make_unique<OledTelevision>();
         }
 
         virtual float shippingCharge() const override {
@@ -146,7 +146,7 @@ namespace RealWorldFactoryMethod {
             << factory->totalCharge()
             << std::endl;
 
-        ITelevision* tvPtr = factory->orderTVExtended();
+        std::unique_ptr<ITelevision> tvPtr = factory->orderTVExtended();
         tvPtr->switchOn();
 
         std::cout 
@@ -157,7 +157,7 @@ namespace RealWorldFactoryMethod {
     }
 }
 
-void test_real_world_example() {
+void test_real_world_example_televisions() {
 
     using namespace RealWorldFactoryMethod;
 

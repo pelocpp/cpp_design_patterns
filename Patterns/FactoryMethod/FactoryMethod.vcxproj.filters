@@ -22,6 +22,9 @@
     <Filter Include="Source Files\VirtualConstructorIdiom">
       <UniqueIdentifier>{e4a299be-8046-4fa9-856b-00eead4f0b33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Points">
+      <UniqueIdentifier>{55b41eff-b968-4c58-a566-8eb04631f212}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -49,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="VirtualConstructorIdiom.cpp">
       <Filter>Source Files\VirtualConstructorIdiom</Filter>
+    </ClCompile>
+    <ClCompile Include="Points.cpp">
+      <Filter>Source Files\Points</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

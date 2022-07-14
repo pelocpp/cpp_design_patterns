@@ -80,6 +80,68 @@ Beschreiben Sie, wie diese Methoden zur Namensgebung des *Factory Method Pattern
 
 ---
 
+#### Ein weiterer Anwendungsfall des Factory Method Patterns:
+
+Das Factory Method Pattern kommt auch dann zum Zuge, wenn es viele unterschiedene Möglichkeiten gibt,
+ein Objekt zu konstruieren, dies aber die Ursache von Fehlerquellen sein kann:
+
+*Beispiel*:
+
+```cpp
+01:     struct Point {
+02:         Point(double x, double y) { /*...*/ }        // Cartesian coordinates
+03:         // ... Implementation
+04: 
+05:         // Not OK: Cannot overload with same type of arguments
+06:         // 
+07:         // Point(double a, double b){ /*...*/ }      // Polar coordinates
+08:         // ... Implementation
+09:     };
+```
+
+Zwei Konstruktoren in einer Klasse mit identischer Signatur, aber unterschiedlich Bedeutung ist nicht möglich.
+Eine mögliche Abhilfe könnte so aussehen:
+
+```cpp
+01: enum class PointType { cartesian, polar };
+02: 
+03: class Point
+04: {
+05: public:
+06:     Point(double a, double b, PointType type = PointType::cartesian)
+07:     {
+08:         if (type == PointType::cartesian) {
+09:             m_x = a;
+10:             m_y = b;
+11:         }
+12:         else {
+13:             m_x = a * cos(b);
+14:             m_y = a * sin(b);
+15:         }
+16:     }
+17: 
+18: private:
+19:     double m_x;
+20:     double m_y;
+21: };
+```
+
+Dies ist jedoch keine sehr einfallsreiche Vorgehensweise, das Problem auf diese Weise zu lösen.
+Wir sollten vielmehr die jeweilige Instanziierung an separate Methoden delegieren:
+
+```cpp
+```
+
+Wie man an der Implementierung beobachten kann, wird der explizite Gebrauch des Konstruktors
+untersagt. Der Benutzer wird stattdessen gezungen, statische Methoden (Klassenmethoden) zu verwenden.
+
+Auch das ist eine Essenz des *Factory Method* Patterns:
+
+  * Umstellung auf private Konstruktor und Bereitstellung von Klassenmethoden.
+
+
+---
+
 #### *Virtual Constructor Idiom*:
 
 Das *Factory Method* Muster wird auch als *Virtual Constructor* Pattern bezeichnet.
