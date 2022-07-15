@@ -10,6 +10,8 @@
 
 namespace Factory01 {
 
+    // 1.) bad or impossible usage
+
     struct Point {
         Point(double x, double y) { /*...*/ }        // Cartesian coordinates
         // ... Implementation
@@ -24,6 +26,8 @@ namespace Factory01 {
 enum class PointType { cartesian, polar };
 
 namespace Factory02 {
+
+    // 2.) solution of 1.), but not recommendable
 
     class Point
     {
@@ -47,6 +51,8 @@ namespace Factory02 {
 }
 
 namespace Factory03 {
+
+    // 3.) factory approach (within a single class)
 
     class Point
     {
@@ -83,6 +89,8 @@ namespace Factory03 {
 }
 
 namespace Factory04 {
+
+    // 4.) factory approach with distinct classes (using undesired friendships)
 
     class Point
     {
@@ -126,6 +134,8 @@ namespace Factory04 {
 
 namespace Factory05 {
 
+    // 5.) factory approach, so called 'inner factory'
+
     class Point
     {
     private:
@@ -151,7 +161,6 @@ namespace Factory05 {
         auto p = Point::Factory::NewCartesian(2, 3);
     }
 }
-
 
 void test_real_world_example_points()
 {

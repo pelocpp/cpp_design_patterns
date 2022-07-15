@@ -84,8 +84,8 @@ Beschreiben Sie, wie diese Methoden zur Namensgebung des *Factory Method Pattern
 
 Das *Factory Method* Pattern kommt auch dann zum Zuge, wenn es
 
-  * viele unterschiedliche Möglichkeiten gibt, ein Objekt zu konstruieren,
-  * dies aber die Ursache von Fehlerquellen sein kann
+  * viele unterschiedliche Möglichkeiten gibt, ein Objekt zu konstruieren und
+  * dies aber die Ursache von Fehlerquellen sein kann.
 
 *Beispiel*:
 
@@ -103,7 +103,7 @@ Das *Factory Method* Pattern kommt auch dann zum Zuge, wenn es
 
 Zwei Konstruktoren in einer Klasse `Point` mit identischer Signatur,
 aber unterschiedlicher Bedeutung:
-Dies ist nicht möglich, eine mögliche Abhilfe könnte so aussehen:
+Dies ist nicht möglich, eine Abhilfe könnte so aussehen:
 
 ```cpp
 01: enum class PointType { cartesian, polar };
@@ -166,7 +166,7 @@ untersagt. Der Benutzer wird stattdessen gezwungen, statische Methoden (Klassenm
 auto p = Point::NewPolar(5.0, M_PI / 4);
 ```
 
-Jetzt haben die Funktionalitäten zweier *Concerns* in eine Klasse gepackt:
+Jetzt haben wir die Funktionalitäten zweier *Concerns* in eine Klasse gepackt:
 Die von der Klasse `Point` als auch die ihrer Fabrik. Wir sollten den Codeanteil der Fabrik
 in eine dedizierte Klasse verlagern. So fühlen wir uns auch besser, 
 was unsere Bedenken bzgl. des *Single Responsibility Principles* der SOLID-Designprinzipien anbelangt:
@@ -196,8 +196,10 @@ was unsere Bedenken bzgl. des *Single Responsibility Principles* der SOLID-Desig
 22: };
 ```
 
+Auch hier gibt es noch die Möglichkeit einer Verfeinerung bzw. einer Stolperfalle:
+Der Gebrauch des `friend`-Schlüsselworts ist häufig ein Indikator,
+dass gegen das *Open-Closed-Prinzip* verstoßen wird.
 
-Auch hier gibt es noch die Möglichkeit einer Verfeinerung:
 
 ###### *Inner Factory*:
 
@@ -205,8 +207,8 @@ Wir machen eine kritische Beobachtung, die wir in unserer Factory-Klasse überseh
 Es gibt keine wirkliche Verbindung zwischen den beiden Klassen `PointFactory` und `Point`!
 
 Warum müssen wir eine Fabrik überhaupt außerhalb der betroffenen Klasse zu entwerfen?
-Wir könnten diese in die `Point`-Klasse integrieren und den Benutzer auf diese Weise ermutigen,
-die Fabrik zu verwenden.
+Wir könnten diese in die `Point`-Klasse integrieren (in einer so genannten *nested class*)
+und den Benutzer auf diese Weise ermutigen, die Fabrik (sog. *Inner Factory*) zu verwenden.
 
 ```cpp
 01: class Point
