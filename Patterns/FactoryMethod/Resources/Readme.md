@@ -82,8 +82,10 @@ Beschreiben Sie, wie diese Methoden zur Namensgebung des *Factory Method Pattern
 
 #### Ein weiterer Anwendungsfall des Factory Method Patterns:
 
-Das Factory Method Pattern kommt auch dann zum Zuge, wenn es viele unterschiedene Möglichkeiten gibt,
-ein Objekt zu konstruieren, dies aber die Ursache von Fehlerquellen sein kann:
+Das *Factory Method* Pattern kommt auch dann zum Zuge, wenn es
+
+  * viele unterschiedliche Möglichkeiten gibt, ein Objekt zu konstruieren,
+  * dies aber die Ursache von Fehlerquellen sein kann
 
 *Beispiel*:
 
@@ -99,8 +101,9 @@ ein Objekt zu konstruieren, dies aber die Ursache von Fehlerquellen sein kann:
 09:     };
 ```
 
-Zwei Konstruktoren in einer Klasse mit identischer Signatur, aber unterschiedlich Bedeutung ist nicht möglich.
-Eine mögliche Abhilfe könnte so aussehen:
+Zwei Konstruktoren in einer Klasse `Point` mit identischer Signatur,
+aber unterschiedlicher Bedeutung:
+Dies ist nicht möglich, eine mögliche Abhilfe könnte so aussehen:
 
 ```cpp
 01: enum class PointType { cartesian, polar };
@@ -130,14 +133,114 @@ Dies ist jedoch keine sehr einfallsreiche Vorgehensweise, das Problem auf diese 
 Wir sollten vielmehr die jeweilige Instanziierung an separate Methoden delegieren:
 
 ```cpp
+01: class Point
+02: {
+03: private:
+04:     double     m_x;
+05:     double     m_y;
+06:     PointType  m_type;
+07: 
+08:     // private constructor, so that object can't be created directly
+09:     Point(const double x, const double y, PointType t) 
+10:         : m_x{ x }, m_y{ y }, m_type{ t } {}
+11: 
+12: public:
+13:     friend std::ostream& operator<<(std::ostream& os, const Point& obj) {
+14:         return os << "x: " << obj.m_x << " y: " << obj.m_y;
+15:     }
+16: 
+17:     static Point NewCartesian(double x, double y) {
+18:         return { x, y, PointType::cartesian };
+19:     }
+20: 
+21:     static Point NewPolar(double a, double b) {
+22:         return { a * cos(b), a * sin(b), PointType::polar };
+23:     }
+24: };
 ```
 
 Wie man an der Implementierung beobachten kann, wird der explizite Gebrauch des Konstruktors
-untersagt. Der Benutzer wird stattdessen gezungen, statische Methoden (Klassenmethoden) zu verwenden.
+untersagt. Der Benutzer wird stattdessen gezwungen, statische Methoden (Klassenmethoden) zu verwenden:
 
-Auch das ist eine Essenz des *Factory Method* Patterns:
+```cpp
+auto p = Point::NewPolar(5.0, M_PI / 4);
+```
 
-  * Umstellung auf private Konstruktor und Bereitstellung von Klassenmethoden.
+Jetzt haben die Funktionalitäten zweier *Concerns* in eine Klasse gepackt:
+Die von der Klasse `Point` als auch die ihrer Fabrik. Wir sollten den Codeanteil der Fabrik
+in eine dedizierte Klasse verlagern. So fühlen wir uns auch besser, 
+was unsere Bedenken bzgl. des *Single Responsibility Principles* der SOLID-Designprinzipien anbelangt:
+
+```cpp
+01: class Point
+02: {
+03:     friend class PointFactory;
+04: 
+05: private:
+06:     double    m_x;
+07:     double    m_y;
+08: 
+09:     ...
+10: };
+11: 
+12: class PointFactory
+13: {
+14: public:
+15:     static Point NewCartesian(double x, double y) {
+16:         return { x, y, PointType::cartesian };
+17:     }
+18: 
+19:     static Point NewPolar(double a, double b) {
+20:         return { a * cos(b), a * sin(b), PointType::polar };
+21:     }
+22: };
+```
+
+
+Auch hier gibt es noch die Möglichkeit einer Verfeinerung:
+
+###### *Inner Factory*:
+
+Wir machen eine kritische Beobachtung, die wir in unserer Factory-Klasse übersehen haben:
+Es gibt keine wirkliche Verbindung zwischen den beiden Klassen `PointFactory` und `Point`!
+
+Warum müssen wir eine Fabrik überhaupt außerhalb der betroffenen Klasse zu entwerfen?
+Wir könnten diese in die `Point`-Klasse integrieren und den Benutzer auf diese Weise ermutigen,
+die Fabrik zu verwenden.
+
+```cpp
+01: class Point
+02: {
+03: private:
+04:     double m_x;
+05:     double m_y;
+06: 
+07:     Point(double x, double y) : m_x(x), m_y(y) {}
+08: 
+09: public:
+10:     struct Factory
+11:     {
+12:         static Point NewCartesian(double x, double y) { 
+13:             return { x,y };
+14:         }
+15: 
+16:         static Point NewPolar(double r, double theta) { 
+17:             return{ r * cos(theta), r * sin(theta) };
+18:         }
+19:     };
+20: };
+```
+
+Anwendung:
+
+```cpp
+auto p = Point::Factory::NewCartesian(2, 3);
+```
+
+
+###### Die Essenz des *Factory Method* Patterns:
+
+  * Umstellung auf private Konstruktoren und Bereitstellung von Klassenmethoden.
 
 
 ---

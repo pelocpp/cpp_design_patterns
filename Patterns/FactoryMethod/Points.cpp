@@ -51,19 +51,61 @@ namespace Factory03 {
     class Point
     {
     private:
-        double     m_x;
-        double     m_y;
-        PointType  m_type;
+        double    m_x;
+        double    m_y;
+        PointType m_type;
 
         // private constructor, so that object can't be created directly
         Point(const double x, const double y, PointType t) 
             : m_x{ x }, m_y{ y }, m_type{ t } {}
 
     public:
+        static Point NewCartesian(double x, double y) {
+            return { x, y, PointType::cartesian };
+        }
+
+        static Point NewPolar(double a, double b) {
+            return { a * cos(b), a * sin(b), PointType::polar };
+        }
+
         friend std::ostream& operator<<(std::ostream& os, const Point& obj) {
             return os << "x: " << obj.m_x << " y: " << obj.m_y;
         }
+    };
 
+    void test()
+    {
+        // Point p{ 1, 2 };  // doesn't compile
+
+        auto p = Point::NewPolar(5.0, M_PI / 4);
+        std::cout << p << std::endl;  // x: 3.53553 y: 3.53553
+    }
+}
+
+namespace Factory04 {
+
+    class Point
+    {
+        friend class PointFactory;
+
+    private:
+        double    m_x;
+        double    m_y;
+        PointType m_type;
+
+        // private constructor, so that object can't be created directly
+        Point(const double x, const double y, PointType t)
+            : m_x{ x }, m_y{ y }, m_type{ t } {}
+
+    public:
+        friend std::ostream& operator<<(std::ostream& os, const Point& obj) {
+            return os << "x: " << obj.m_x << " y: " << obj.m_y;
+        }
+    };
+
+    class PointFactory
+    {
+    public:
         static Point NewCartesian(double x, double y) {
             return { x, y, PointType::cartesian };
         }
@@ -77,24 +119,31 @@ namespace Factory03 {
     {
         // Point p{ 1, 2 };  // doesn't compile
 
-        auto p = Point::NewPolar(5, M_PI / 4);
+        auto p = PointFactory::NewPolar(5.0, M_PI / 4);
         std::cout << p << std::endl;  // x: 3.53553 y: 3.53553
     }
 }
 
-namespace Factory04 {
+namespace Factory05 {
 
-    class Point {
+    class Point
+    {
     private:
-        double   m_x;
-        double   m_y;
+        double m_x;
+        double m_y;
 
-        Point(float x, float y) : m_x(x), m_y(y) {}
+        Point(double x, double y) : m_x(x), m_y(y) {}
+
     public:
         struct Factory
         {
-            static Point NewCartesian(float x, float y) { return { x,y }; }
-            static Point NewPolar(float r, float theta) { return{ r * cos(theta), r * sin(theta) }; }
+            static Point NewCartesian(double x, double y) { 
+                return { x,y };
+            }
+
+            static Point NewPolar(double r, double theta) { 
+                return{ r * cos(theta), r * sin(theta) };
+            }
         };
     };
 
@@ -108,6 +157,7 @@ void test_real_world_example_points()
 {
     Factory03::test();
     Factory04::test();
+    Factory05::test();
 }
 
 // ===========================================================================
