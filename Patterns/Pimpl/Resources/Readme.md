@@ -277,6 +277,13 @@ wenn gleich sehr knapp gehalten:
 
 [Pimpl For Compile-Time Encapsulation (Modern C++)](https://docs.microsoft.com/en-us/cpp/cpp/pimpl-for-compile-time-encapsulation-modern-cpp?view=vs-2019) (Abruf: 16.07.2020)
 
+---
+
+## Weiterarbeit:
+
+Stellen Sie einen Vergleich *Pimpl-Idiom* versus *Interface Inheritance* an.
+
+---
 
 ## Literaturhinweise
 
@@ -293,11 +300,6 @@ Weitere intessante Artikel und Aufsätze zum *Pimpl-Idiom* finden Sie unter
 [Pimp My Pimpl - Reloaded](https://marcmutz.wordpress.com/translated-articles/pimp-my-pimpl-reloaded/) (Abruf: 16.07.2020)
 
 [How to implement the pimpl idiom by using unique_ptr](https://www.fluentcpp.com/2017/09/22/make-pimpl-using-unique_ptr/) (Abruf: 16.07.2020)
-
-
-## Weiterarbeit:
-
-Stellen Sie einen Vergleich *Pimpl-Idiom* versus *Interface Inheritance* an.
 
 ---
 

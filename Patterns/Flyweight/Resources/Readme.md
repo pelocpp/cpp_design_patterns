@@ -104,7 +104,7 @@ Es besteht im Wesentlichen aus vier Teilen:
 #### 'Real-World' Beispiel:
 
 
-Wir betrachten als Beispiel eine Paint Brush Anwendung.
+Wir betrachten als Beispiel eine *Paint-Brush*-Anwendung.
 
 Der Anwender kann Pinsel-Objekte in drei Stärken benutzen: THICK, THIN and MEDIUM.
 Alle dicken (dünnen oder mittleren) Pinsel zeichnen den Inhalt auf genau ähnliche Weise &ndash; nur
@@ -117,10 +117,9 @@ Im Wesentlichen erstellen wir also nur dann einen Stift mit einer bestimmten Grö
 Sobald ein anderer Client diese Stiftgröße und -farbe benötigt, werden wir sie wiederverwenden.
 
 Wir testen die Flyweight-Pen-Objekte in einem Beispielprogramm.
-
 Der Client erstellt hier zwei THICK-Stifte und einen THIN-Stift,
-aber zur Laufzeit sind es nur zwei Stiftobjekte vom THICK-Typ,
-das mit den Aufrufen geteilt wird:
+aber zur Laufzeit sind es nur zwei Stiftobjekte,
+das in Aktion treten:
 
 *Ausgabe*:
 
@@ -139,6 +138,19 @@ Drawing THICK content in color : BLUE
 
 ---
 
+## FAQs
+
+*Frage*: Unterschied zwischen Singleton- und Flyweight Pattern?
+
+Das Singleton-Pattern hilft uns, nur ein Objekt im System zu verwalten.
+Mit anderen Worten, sobald das erforderliche Objekt erstellt ist, können wir keine weiteren erstellen.
+Wir müssen das vorhandene Objekt in allen Teilen der Anwendung wiederverwenden.
+
+Das Flyweight-Pattern wird verwendet, wenn wir eine große Anzahl ähnlicher Objekte erstellen müssen,
+die sich basierend auf dem vom Client bereitgestellten extrinsischen Attribut unterscheiden.
+
+---
+
 ## Literaturhinweise
 
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
@@ -151,7 +163,7 @@ und
 
 vor.
 
-Das *PaintBrush*-Beispiel ist an [Flyweight Design Pattern](https://howtodoinjava.com/design-patterns/structural/flyweight-design-pattern/) angelehnt.
+Das *PaintBrush*-Beispiel ist an [Flyweight Design Pattern](https://howtodoinjava.com/design-patterns/structural/flyweight-design-pattern/) angelehnt (Abruf: 15.07.2022).
 
 ---
 

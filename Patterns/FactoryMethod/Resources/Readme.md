@@ -364,6 +364,8 @@ miteinander zu verwechseln.
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/factory-method/cpp/example#example-0)

@@ -98,6 +98,8 @@ Man spricht dabei auch von der so genannten &ldquo;*Prototypischen Vererbung*&rd
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/prototype/cpp/example#example-0)

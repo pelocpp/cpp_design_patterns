@@ -137,6 +137,8 @@ Betrachten Sie den folgenden Vorschlag:
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zu diesem Beispiel finden Sie in
 
 [Dependency Inversion Principle in C++](http://www.vishalchovatiya.com/dependency-inversion-principle-in-cpp-solid-as-a-rock/)

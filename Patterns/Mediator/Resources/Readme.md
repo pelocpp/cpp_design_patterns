@@ -142,6 +142,18 @@ Der Chatraum ist der eigentliche Vermittler, er kümmert sich um die Details der 
 
 ---
 
+## FAQs
+
+*Frage*: *Mediator*- versus *Observer*-Pattern?
+
+  * *Mediator*-Pattern &ndash; Many-to-many Relationship.
+
+  * *Observer*-Pattern &ndash; One-to-many Relationship.
+
+---
+
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/mediator/cpp/example#lang-features)

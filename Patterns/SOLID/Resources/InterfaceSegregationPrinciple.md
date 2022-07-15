@@ -147,6 +147,8 @@ ein Design zu korrigieren:
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zu diesem Beispiel finden Sie in
 
 [Interface Segregation Principle in C++](http://www.vishalchovatiya.com/interface-segregation-principle-in-cpp-solid-as-a-rock/)

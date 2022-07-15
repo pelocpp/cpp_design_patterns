@@ -505,6 +505,8 @@ nachlesen.
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [C++ 'Type Erasure' Explained](https://davekilian.com/cpp-type-erasure.html)

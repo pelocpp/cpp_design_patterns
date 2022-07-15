@@ -183,6 +183,18 @@ drawing image image_1.png
 
 ---
 
+## FAQs
+
+*Frage*: Unterschied zwischen *Proxy*- und *Decorator*-Pattern?
+
+  * Das *Proxy*-Pattern stellt im Wesentlichen dieselbe oder sogar eine verfeinfachte Schnittstelle dar.
+
+  * Das *Decorator*-Pattern bewirkt eine Verfeinerung in der Ausgestaltung einer Schnittstelle.
+
+---
+
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/proxy/cpp/example#example-0)

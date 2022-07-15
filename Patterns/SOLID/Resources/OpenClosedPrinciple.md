@@ -263,6 +263,8 @@ Sehen Sie hierzu eine Realisierung im Quellcode der Klasse `GenericSpecification
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zu diesem Beispiel finden Sie in
 
 [Open Closed Principle in C++](http://www.vishalchovatiya.com/open-closed-principle-in-cpp-solid-as-a-rock/)

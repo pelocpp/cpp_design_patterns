@@ -541,16 +541,6 @@ mit abgehandelt.
 
 ---
 
-Die Anregungen zum konzeptionellen Beispiel finden Sie unter
-
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/visitor/cpp/example#example-0)
-
-und 
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Visitor)
-
-vor.
-
 #### 'Real-World' Beispiel:
 
 Im Buch [Entwurfsmuster: Das umfassende Handbuch](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
@@ -585,6 +575,7 @@ zur Darstellung des Inhalts des Warenkorbs in HTML.
 Implementieren Sie zwei weitere *Visitor*-Klassen: Eine namens `CountVisitor`, die einfach die Anzahl aller Artikel im Warenkorb bestimmt.
 Und eine zweite Klasse `TextVisitor`, die den Inhalt des Warenkorbs in textueller Form für eine Versandbestätigung zusammenstellt.
 
+---
 
 ## Weiterarbeit:
 
@@ -595,6 +586,20 @@ Eng verwandt mit dem  *Visitor Pattern* ist das  *Double Dispatch* Pattern. Sieh
 und 
 
 [Double Dispatch in C++](http://www.vishalchovatiya.com/double-dispatch-in-cpp/)
+
+---
+
+## Literaturhinweise
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
+
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/visitor/cpp/example#example-0)
+
+und 
+
+[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Visitor)
+
+vor.
 
 ---
 

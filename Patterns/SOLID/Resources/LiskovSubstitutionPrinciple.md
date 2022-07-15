@@ -172,6 +172,8 @@ eine so genannte &ldquo;*is-substitutable-for*&rdquo;-Beziehung zum geerbten Obj
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zu diesem Beispiel finden Sie in
 
 [Liskov’s Substitution Principle in C++](http://www.vishalchovatiya.com/liskovs-substitution-principle-in-cpp-solid-as-a-rock/)

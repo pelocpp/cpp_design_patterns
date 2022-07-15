@@ -76,18 +76,6 @@ ein praxisnahes Beispiuel vor.
 
 ---
 
-Die Anregungen zum konzeptionellen Beispiel finden Sie unter
-
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/command/cpp/example#example-0)
-
-und 
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command)
-
-vor.
-
----
-
 #### 'Real-World' Beispiel:
 
 Für das *Command Pattern* wird in
@@ -113,6 +101,20 @@ Für die konkrete Ausführung eines Spielzugs ist die Klasse `ChessPiece` verantwo
   * Bringen Sie das Beispiel auf Ihrem Rechner zum Laufen.
   * Überlegen Sie, welche Beteiligten des allgemeinen Musters (*Receiver*, *CommandBase*, etc.) welchen Klassen des Schachspiels zuzuordnen sind. 
   * Ergänzen Sie eine Klasse `PromotePawn` und integrieren Sie das Kommando "Umwandlung des Bauern" in das Spiel.
+
+---
+
+## Literaturhinweise
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
+
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/command/cpp/example#example-0)
+
+und 
+
+[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Command)
+
+vor.
 
 ---
 

@@ -86,18 +86,6 @@ also nicht zu verändern.
 
 ---
 
-Die Anregungen zum konzeptionellen Beispiel finden Sie unter
-
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/template-method/cpp/example#example-0)
-
-und
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Template)
-
-vor.
-
----
-
 #### 'Real-World' Beispiel:
 
 Im 'Real-World' Beispiel zu diesem Entwurfsmuster 
@@ -122,6 +110,36 @@ zu überschreiben, siehe dazu auch *Abbildung* 2:
 <img src="dp_template_method_pattern_social_media.svg" width="800">
 
 *Abbildung* 2: Das *Template Method Pattern* am Beispiel sozialer Netzwerke.
+
+---
+
+## FAQs
+
+*Frage*: Was ist der Unterschied zwischen dem *Strategy*- und *Template Method*-Pattern?
+
+  * Das *Template Method*-Pattern basiert auf Vererbung: Es werden Teile eines Algorithmus verändert, indem diese Teile in abgeleiteten Klassen erweitert werden.
+
+  * *Strategy*-Pattern basiert auf der Komposition: Es werden Teile des Verhaltens eines Objekts verändert, indem es verschiedene Strategien erhält, die unterschiedlichem Verhalten entsprechen.
+
+oder auch:
+
+  * *Template Method*-Pattern: Funktioniert auf Klassenebene, es ist also statisch.
+
+  * *Strategy*-Pattern: Funktioniert auf Objektebene, das Verhalten wird zur Laufzeit geändert.
+
+---
+
+## Literaturhinweise
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
+
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/template-method/cpp/example#example-0)
+
+und
+
+[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Template)
+
+vor.
 
 ---
 

@@ -109,6 +109,8 @@ Weitere Details hierzu finden sich [hier](https://github.com/pelocpp/cpp_design_
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/bridge/cpp/example#example-0)

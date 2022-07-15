@@ -96,16 +96,6 @@ Das *Conceptual Example* liegt in drei Versionen vor:
 
 [Quellcode 3 / .cpp](../ConceptualExample03.cpp)
 
-Die Anregungen zum konzeptionellen Beispiel finden Sie unter
-
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/state/cpp/example#example-0)
-
-und 
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#State)
-
-vor.
-
 ---
 
 #### 'Real-World' Beispiel:
@@ -128,6 +118,20 @@ Erstellen Sie eine Testmethode, die exemplarisch eine Bewerbung vom Status *Rece
 Ergänzen Sie das Programm um einen weiteren Status `Assessment`. 
 Im Zustandsdiagramm des Beispiels ist dieser Zustand zwischen die beiden Zustände *Eingeladen* (*Invited*) und *Eingestellt* (*Hired*) einzufügen.
 Eine Einstellung erfolgt somit erst, wenn der Bewerber das Assessment Center erfolgreich durchlaufen hat.
+
+---
+
+## Literaturhinweise
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
+
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/state/cpp/example#example-0)
+
+und 
+
+[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#State)
+
+vor.
 
 ---
 

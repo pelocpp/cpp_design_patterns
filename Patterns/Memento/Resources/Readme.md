@@ -95,6 +95,8 @@ Zu einem späteren Zeitpunkt kann der Benutzer das `BankAccount`-Objekt auf diese
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/memento/cpp/example#example-0)

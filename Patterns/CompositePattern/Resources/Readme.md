@@ -354,6 +354,27 @@ C:\Development\GitRepositoryCPlusPlus\Cpp_DesignPatterns\CompositePattern
         Readme.md - data: 6441
 ```
 
+---
+
+## Weitere Beispiele
+
+Ein weiterer Anwendungsfall für das *Composite Entwurfsmuster* sind arithmetische Ausdrücke.
+Anregungen finden sich zum Beispiel unter
+
+[https://stackoverflow.com/questions](https://stackoverflow.com/questions/57942934/composite-design-pattern-how-to-create-calculator)<br>(abgerufen am 11.05.2020).
+
+---
+
+## FAQs
+
+*Frage*: Unterschied zwischen *Decorator*- und *Composite*-Pattern?
+
+  * Das *Decorator*-Pattern bewirkt eine Verfeinerung in der Ausgestaltung einer Schnittstelle.
+
+  * Das *Composite*-Pattern zieht eine Vereinheitlichung von Schnittstellen für einzelne und Gruppen von Objekten nach sich.
+
+---
+
 ## Literaturhinweise
 
 *Hinweise*:
@@ -367,14 +388,6 @@ Anregungen zum Beispiel und zum C++17 Filesystem findet man zum Beispiel unter
 [github.com/achimoraites/DesignPatterns](https://github.com/achimoraites/DesignPatterns/blob/master/CompositePattern/FileSystem/src/ui/FileSystem.java)<br>(abgerufen am 11.05.2020).
 
 Das &ldquo;*Beginners Example*&rdquo;-Beispiel kann [hier](http://www.vishalchovatiya.com/composite-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
-
-
-## Weitere Beispiele
-
-Ein weiterer Anwendungsfall für das *Composite Entwurfsmuster* sind arithmetische Ausdrücke.
-Anregungen finden sich zum Beispiel unter
-
-[https://stackoverflow.com/questions](https://stackoverflow.com/questions/57942934/composite-design-pattern-how-to-create-calculator)<br>(abgerufen am 11.05.2020).
 
 ---
 

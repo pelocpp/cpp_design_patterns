@@ -123,6 +123,19 @@ Singleton* Singleton::getInstance()
 
 ---
 
+## Weiterarbeit:
+
+Ein seht guter Aufsatz, wie `std::shared_ptr`-, `std::weak_ptr`- und Singleton-Objekte zusammenarbeiten,
+kann unter
+
+[Shared Singleton's](http://btorpey.github.io/blog/2014/02/12/shared-singletons/)
+
+nachgelesen werden.
+
+---
+
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/singleton/cpp/example#example-0)
@@ -132,15 +145,6 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#Singleton)
 
 vor.
-
-## Weiterarbeit:
-
-Ein seht guter Aufsatz, wie `std::shared_ptr`-, `std::weak_ptr`- und Singleton-Objekte zusammenarbeiten,
-kann unter
-
-[Shared Singleton's](http://btorpey.github.io/blog/2014/02/12/shared-singletons/)
-
-nachgelesen werden.
 
 ---
 

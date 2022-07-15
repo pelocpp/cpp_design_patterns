@@ -157,6 +157,8 @@ In dem Beispiel sind einige Modern C++&ndash;Sprachkonstrukte enthalten:
 
 ---
 
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [Factory Method vs. Simple Factory](https://dzone.com/articles/factory-method-vs-simple-factory-1)

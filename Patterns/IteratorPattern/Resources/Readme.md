@@ -183,6 +183,8 @@ In der Regel dürfte dies aus Gründen der Performance und des benötigten Arbeitss
  
 ---
 
+## Literaturhinweise
+
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/iterator/cpp/example#example-0)

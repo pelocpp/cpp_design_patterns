@@ -244,14 +244,6 @@ In *Abbildung* 2 können Sie erkennen, dass der Destruktor des RAII-Objekts den a
 
 ---
 
-#### Conceptual Example:
-
-Die Anregungen zum konzeptionellen Beispiel sind teilweise entnommen aus
-
-[Design Patterns with C++](https://www.amazon.de/-/en/Fedor-G-Pikus/dp/1788832566).
-
----
-
 #### 'Real-World' Beispiel zu Windows Clipboard:
 
 In der Datei *Clipboard.cpp* finden Sie mehrere Klassen und Methoden vor,
@@ -307,6 +299,14 @@ dass Fehlersituationen oder unerwartete Situationen eintreten.
 RAIIFile file("example.txt");
 file.write("123\n");
 ```
+
+---
+
+## Literaturhinweise
+
+Die Anregungen zum konzeptionellen Beispiel sind teilweise entnommen aus
+
+[Design Patterns with C++](https://www.amazon.de/-/en/Fedor-G-Pikus/dp/1788832566).
 
 ---
 
