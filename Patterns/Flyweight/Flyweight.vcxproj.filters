@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{3e7838e3-cd15-4d64-ad40-83d369c65926}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PaintBrush">
+      <UniqueIdentifier>{dd091119-98b2-4532-8ecf-aa4f59f9d516}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -31,6 +34,9 @@
     </ClCompile>
     <ClCompile Include="ConceptualExample.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="PaintBrush.cpp">
+      <Filter>Source Files\PaintBrush</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

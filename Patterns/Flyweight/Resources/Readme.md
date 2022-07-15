@@ -101,6 +101,44 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 ---
 
+#### 'Real-World' Beispiel:
+
+
+Wir betrachten als Beispiel eine Paint Brush Anwendung.
+
+Der Anwender kann Pinsel-Objekte in drei Stärken benutzen: THICK, THIN and MEDIUM.
+Alle dicken (dünnen oder mittleren) Pinsel zeichnen den Inhalt auf genau ähnliche Weise &ndash; nur
+die Inhaltsfarbe ist anders.
+
+Worauf kommt es an:
+Die Pinselfarbe ein extrinsisches Attribut, das vom Aufrufer bereitgestellt wird,
+ansonsten bleibt für den Pinsel alles gleich.
+Im Wesentlichen erstellen wir also nur dann einen Stift mit einer bestimmten Größe, wenn die Farbe anders ist.
+Sobald ein anderer Client diese Stiftgröße und -farbe benötigt, werden wir sie wiederverwenden.
+
+Wir testen die Flyweight-Pen-Objekte in einem Beispielprogramm.
+
+Der Client erstellt hier zwei THICK-Stifte und einen THIN-Stift,
+aber zur Laufzeit sind es nur zwei Stiftobjekte vom THICK-Typ,
+das mit den Aufrufen geteilt wird:
+
+*Ausgabe*:
+
+```
+Drawing THICK content in color : YELLOW
+Drawing THICK content in color : YELLOW
+Drawing THICK content in color : BLUE
+
+00000238DF950180      //same object
+00000238DF950180      //same object
+00000238DF950BA0
+```
+
+[Quellcode](../PaintBrush.cpp)
+
+
+---
+
 ## Literaturhinweise
 
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
@@ -112,6 +150,8 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/438922/Design-Patterns-2-of-3-Structural-Design-Patterns#Flyweight)
 
 vor.
+
+Das *PaintBrush*-Beispiel ist an [Flyweight Design Pattern](https://howtodoinjava.com/design-patterns/structural/flyweight-design-pattern/) angelehnt.
 
 ---
 
