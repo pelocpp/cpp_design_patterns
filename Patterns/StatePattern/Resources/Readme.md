@@ -98,7 +98,7 @@ Das *Conceptual Example* liegt in drei Versionen vor:
 
 ---
 
-#### 'Real-World' Beispiel:
+#### Erstes 'Real-World' Beispiel:
 
 Im Buch [Entwurfsmuster: Das umfassende Handbuch](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
 von Matthias Geirhos findet sich zu diesem Entwurfsmuster als Beispiel die Modellierung eines Bewerbungsprozesses vor.
@@ -121,6 +121,61 @@ Eine Einstellung erfolgt somit erst, wenn der Bewerber das Assessment Center erf
 
 ---
 
+#### Zweites 'Real-World' Beispiel mit modernen C++ Sprachelementen:
+
+Das *State Pattern* ist ein Entwurfsmuster, das dabei helfen soll, das Verhalten eines Objekts zu ändern, 
+wenn es intern seinen Zustand verändert.
+
+Das Verhalten verschiedener Zustände sollte unabhängig voneinander sein,
+so dass das Hinzufügen neuer Zustände sich auf die aktuellen Zustände nicht auswirkt!
+
+Durch Anwendung des *State Patterns* kann neues Verhalten hinzugefügt werden,
+indem neue Zustandsklassen eingeführt werden und die Zustandsübergänge zwischen ihnen definiert werden.
+
+In diesem Abschnitt zeigen wir eine Möglichkeit, Zustände und eine Zustandsmachine zu implementieren,
+die `std::variant` und `std::visit` verwendet.
+
+In anderen Worten, wir bauen einen endlichen Zustandsautomaten, indem wir das *State*- und *Visitor Pattern*
+in einem Ansatz verbinden.
+
+Ein Ausschnitt aus der Umsetzung:
+
+```cpp
+01: class DepartmentStoreStateMachine {
+02: public:
+03:     template <typename Event>
+04:     void processEvent(Event&& event) {
+05:         m_state = std::visit(
+06:             Overload{
+07:                 [&] (const auto& state) requires std::is_same<
+08:                 decltype(onEvent(state, std::forward<Event>(event))), State>::value {
+09:                     return onEvent(state, std::forward<Event>(event));
+10:                 },
+11:                 [](const auto& unsupported_state) -> State {
+12:                     throw std::logic_error{"Unsupported state transition"};
+13:                 }
+14:             },
+15:             m_state);
+16:     }
+17: 
+18: private:
+19:     State m_state;
+20: };
+```
+
+Ausgabe des Programms:
+
+```
+Item is temporarily out of stock
+3 items available
+1 items available
+3 items available
+Item is temporarily out of stock
+Item is no more produced
+```
+
+---
+
 ## Literaturhinweise
 
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
@@ -132,6 +187,11 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#State)
 
 vor.
+
+Das zweite Real-World Beispiel stammt aus dem Buch 
+[Software Architecture with C++](https://www.amazon.de/Software-Architecture-effective-architecture-techniques/dp/1838554599)
+von Adrian Ostrowski und Piotr Gaczkowski.
+
 
 ---
 
