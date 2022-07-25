@@ -206,7 +206,7 @@ dass gegen das *Open-Closed-Prinzip* verstoßen wird.
 Wir machen eine kritische Beobachtung, die wir in unserer Factory-Klasse übersehen haben:
 Es gibt keine wirkliche Verbindung zwischen den beiden Klassen `PointFactory` und `Point`!
 
-Warum müssen wir eine Fabrik überhaupt außerhalb der betroffenen Klasse zu entwerfen?
+Warum müssen wir eine Fabrik überhaupt außerhalb der betroffenen Klasse entwerfen?
 Wir könnten diese in die `Point`-Klasse integrieren (in einer so genannten *nested class*)
 und den Benutzer auf diese Weise ermutigen, die Fabrik (sog. *Inner Factory*) zu verwenden.
 
