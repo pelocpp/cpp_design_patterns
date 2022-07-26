@@ -102,7 +102,7 @@ namespace ConceptualExampleOCP {
         virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) override
         {
             Products<T> result;
-            for (auto& product : products) {
+            for (const auto& product : products) {
                 if (spec.isSatisfied(product))
                     result.push_back(product);
             }
@@ -149,7 +149,7 @@ namespace ConceptualExampleOCP {
                 std::begin(m_vec),
                 std::end(m_vec),
                 true,
-                [this, product] (bool last, const auto& next) {
+                [this, product] (bool last, const auto& next) -> bool {
                     bool tmp = next->isSatisfied(product);
                     return last && tmp;
                 }

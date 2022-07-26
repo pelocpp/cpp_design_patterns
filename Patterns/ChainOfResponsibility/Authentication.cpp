@@ -31,7 +31,7 @@ namespace ChainofResponsibilityExample
 
     public:
         // c'tor(s)
-        UserName(std::string name) : m_name(name) {}
+        UserName(std::string name) : m_name{ name } {}
 
         virtual bool authenticate() override {
             if (!is_valid_user_name()) {
@@ -57,7 +57,7 @@ namespace ChainofResponsibilityExample
 
     public:
         // c'tor(s)
-        Password(std::string password) : m_password(password) {}
+        Password(std::string password) : m_password{ password } {}
 
         virtual bool authenticate() override {
             if (!is_valid_password()) {
@@ -82,11 +82,12 @@ void test_authentication_example()
     using namespace ChainofResponsibilityExample;
 
     std::unique_ptr<Authentication> auth1{ new UserName("John") };
+
     std::unique_ptr<Authentication> auth2{ new Password("password") };
 
     auth1->nextAuthentication(auth2);
 
-    bool result = auth1->authenticate();
+    bool result{ auth1->authenticate() };
 
     if (result) {
         std::cout << "Authentication succeeded!" << std::endl;

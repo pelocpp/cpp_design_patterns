@@ -17,7 +17,7 @@ bool SocialNetwork::post(const std::string& message)
     if (logIn()) {
         
         // send data
-        bool result = sendData(message);
+        bool result{ sendData(message) };
         logOut();
         return result;
     }

@@ -40,8 +40,8 @@ namespace ChatRoomMediatorPattern
     class Person : public PersonBase
     {
     private:
-        std::string               m_name;
-        std::vector<std::string>  m_log;
+        std::string m_name;
+        std::vector<std::string> m_log;
 
     public:
         // c'tors
@@ -72,9 +72,11 @@ namespace ChatRoomMediatorPattern
     // ===========================================================================
     // implementation class Person
 
-    Person::Person(std::string name) : PersonBase{}, m_name(name) {}
+    Person::Person(std::string name) : PersonBase{}, m_name{ name } {}
 
-    void Person::setRoom(const std::shared_ptr<ChatRoom>& sp) { m_room = sp; }
+    void Person::setRoom(const std::shared_ptr<ChatRoom>& sp) {
+        m_room = sp;
+    }
 
     const std::string& Person::getName() const { return m_name; }
 
@@ -102,14 +104,14 @@ namespace ChatRoomMediatorPattern
     // implementation class GoogleChat
 
     void GoogleChat::join(const std::shared_ptr<Person>& person) {
-        std::string join_msg = person->getName() + " joins the chat";
+        std::string join_msg{ person->getName() + " joins the chat" };
         broadcast("room", join_msg);
         person->setRoom(shared_from_this());
         m_people.push_back(person);
     }
 
     void GoogleChat::broadcast(std::string from, std::string msg) {
-        for (auto& person : m_people) {
+        for (const auto& person : m_people) {
             if (person->getName() != from)
                 person->receive(from, msg);
         }
@@ -136,7 +138,6 @@ void test_chatroom_example()
 
     using namespace ChatRoomMediatorPattern;
 
-
     // colleagues
     std::shared_ptr<Person> john{ std::make_shared<Person>("John") };
     std::shared_ptr<Person> jane{ std::make_shared<Person>("Jane") };
@@ -154,6 +155,7 @@ void test_chatroom_example()
 
     // join one more colleague
     std::shared_ptr<Person> simon{ std::make_shared<Person>("Simon") };
+
     room->join(simon);
 
     simon->say("Hi everyone!");

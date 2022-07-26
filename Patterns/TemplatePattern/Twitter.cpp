@@ -18,7 +18,7 @@ bool Twitter::logIn()
     std::cout << "Checking user's parameters" << std::endl;
     std::cout << "Name: " << m_username << std::endl;
     std::cout << "Password: ";
-    for (unsigned int i = 0; i < m_password.length(); i++) {
+    for (size_t i{}; i != m_password.length(); i++) {
         std::cout << "*";
     }
 
@@ -29,7 +29,8 @@ bool Twitter::logIn()
 
 bool Twitter::sendData(const std::string& data)
 {
-    bool messagePosted = true;
+    bool messagePosted{ true };
+
     if (messagePosted) {
         std::cout << "Message: '" << data << "' was posted on Twitter" << std::endl;
         return true;
@@ -46,7 +47,7 @@ void Twitter::logOut()
 
 void Twitter::simulateNetworkLatency()
 {
-    int i = 0;
+    int i{};
     std::cout << std::endl;
     while (i < 5) {
         std::cout << '.';

@@ -70,7 +70,7 @@ public:
             << "'"
             << std::endl;
         
-        std::string result = m_strategy->doAlgorithm(someStrings);
+        std::string result{ m_strategy->doAlgorithm(someStrings) };
         std::cout << result << std::endl;
     }
 };

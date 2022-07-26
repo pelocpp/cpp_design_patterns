@@ -169,7 +169,7 @@ sind die am meisten verbreitete Vorgehensweise:
 050:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) override
 051:     {
 052:         Products<T> result;
-053:         for (auto& product : products) {
+053:         for (const auto& product : products) {
 054:             if (spec.isSatisfied(product))
 055:                 result.push_back(product);
 056:         }

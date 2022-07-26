@@ -29,7 +29,8 @@ bool Facebook::logIn()
 
 bool Facebook::sendData(const std::string& data)
 {
-    bool messagePosted = true;
+    bool messagePosted{ true };
+
     if (messagePosted) {
         std::cout << "Message: '" << data << "' was posted on Facebook" << std::endl;
         return true;
@@ -46,7 +47,7 @@ void Facebook::logOut()
 
 void Facebook::simulateNetworkLatency()
 {
-    int i = 0;
+    int i{};
     std::cout << std::endl;
     while (i < 5) {
         std::cout << '.';

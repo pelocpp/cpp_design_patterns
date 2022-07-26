@@ -15,8 +15,8 @@ public:
     void setClosed();
 
 private:
-    int m_totalCost = 0;
-    bool m_isClosed = false;
+    int m_totalCost;
+    bool m_isClosed;
 };
 
 // ===========================================================================
