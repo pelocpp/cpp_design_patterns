@@ -371,7 +371,7 @@ Anregungen finden sich zum Beispiel unter
 
   * Das *Decorator*-Pattern bewirkt eine Verfeinerung in der Ausgestaltung einer Schnittstelle.
 
-  * Das *Composite*-Pattern zieht eine Vereinheitlichung von Schnittstellen für einzelne und Gruppen von Objekten nach sich.
+  * Das *Composite*-Pattern zieht eine Vereinheitlichung von Schnittstellen für einzelne Objekte und Gruppen von Objekten nach sich.
 
 ---
 

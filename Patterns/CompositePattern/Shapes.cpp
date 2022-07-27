@@ -18,7 +18,7 @@ private:
     std::string m_name;
 
 public:
-    Circle(const std::string name) : m_name { name } {}
+    Circle(const std::string& name) : m_name { name } {}
 
     virtual void draw() const override {
         std::cout << "Circle: " << m_name;
