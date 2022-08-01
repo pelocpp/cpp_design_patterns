@@ -23,24 +23,28 @@ Order::Order() : m_totalCost{ }, m_isClosed{ false } {}
 /**
  * public interface
  */
-void Order::processOrder(std::shared_ptr<PaymentStrategy> strategy) {
-
+void Order::processOrder(std::shared_ptr<PaymentStrategy> strategy)
+{
     strategy->collectPaymentDetails();
 }
 
-void Order::addToTotalCost(int cost) {
+void Order::addToTotalCost(int cost)
+{
     m_totalCost += cost;
 }
 
-int Order::getTotalCost() {
+int Order::getTotalCost()
+{
     return m_totalCost;
 }
 
-bool Order::isClosed() {
+bool Order::isClosed()
+{
     return m_isClosed;
 }
 
-void Order::setClosed() {
+void Order::setClosed()
+{
     m_isClosed = true;
 }
 

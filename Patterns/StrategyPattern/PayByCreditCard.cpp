@@ -13,14 +13,16 @@
 /**
  * c'tor(s) / d'tor
  */
-PayByCreditCard::PayByCreditCard() {
+PayByCreditCard::PayByCreditCard()
+{
     m_card = nullptr;
 }
 
 /**
  * collect customer's data
  */
-void PayByCreditCard::collectPaymentDetails() {
+void PayByCreditCard::collectPaymentDetails()
+{
 
     std::cout << "Enter the card number: ";
     std::string number;
@@ -44,7 +46,8 @@ void PayByCreditCard::collectPaymentDetails() {
  * handle payment process:
  * after card validation we can charge customer's credit card
  */
-bool PayByCreditCard::pay(int paymentAmount) {
+bool PayByCreditCard::pay(int paymentAmount)
+{
 
     if (cardIsPresent()) {
         std::cout << "Paying " << paymentAmount << " using Credit Card" << std::endl;
@@ -56,7 +59,8 @@ bool PayByCreditCard::pay(int paymentAmount) {
     }
 }
 
-bool PayByCreditCard::cardIsPresent() {
+bool PayByCreditCard::cardIsPresent()
+{
     return m_card->isValid();
 }
 

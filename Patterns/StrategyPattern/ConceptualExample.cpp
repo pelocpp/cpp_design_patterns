@@ -32,7 +32,7 @@ class Context
     /**
      * The Context maintains a reference to one of the Strategy objects.
      * The Context does not know the concrete class of a strategy.
-     * It should work with all strategies via the Strategy interface.
+     * It should work with all strategies via the 'Strategy' interface.
      */
 private:
     std::unique_ptr<Strategy> m_strategy;
@@ -43,7 +43,7 @@ private:
      */
 public:
     Context(std::unique_ptr<Strategy> strategy)
-        : m_strategy(std::move(strategy)) {}
+        : m_strategy{ std::move(strategy) } {}
 
     ~Context() {}
 
@@ -71,13 +71,15 @@ public:
             << std::endl;
         
         std::string result{ m_strategy->doAlgorithm(someStrings) };
+
         std::cout << result << std::endl;
     }
 };
 
 /**
- * Concrete Strategies implement the algorithm while following the base Strategy
- * interface. The interface makes them interchangeable in the Context.
+ * Concrete strategies implement the algorithm
+ * while following the base Strategy interface.
+ * The interface makes them interchangeable in the Context.
  */
 class ConcreteStrategyA : public Strategy
 {
@@ -93,7 +95,7 @@ public:
         std::for_each(
             std::begin(data), 
             std::end(data), 
-            [&result](const std::string& letter) {
+            [&](const std::string& letter) {
                 result += letter;
             }
         );
@@ -114,15 +116,17 @@ public:
     virtual std::string doAlgorithm(const std::vector<std::string>& data) const override
     {
         std::string result;
+
         std::for_each(
             std::begin(data), 
             std::end(data),
-            [&result](const std::string& letter) {
+            [&](const std::string& letter) {
                 result += letter;
             }
         );
 
         std::sort(std::begin(result), std::end(result));
+
         std::reverse(std::begin(result), std::end(result));
 
         return result;

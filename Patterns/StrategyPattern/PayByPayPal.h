@@ -17,7 +17,7 @@ private:
 
 public:
     PayByPayPal();
-    ~PayByPayPal() = default;
+    ~PayByPayPal();
 
     virtual bool pay(int paymentAmount) override;
     virtual void collectPaymentDetails() override;

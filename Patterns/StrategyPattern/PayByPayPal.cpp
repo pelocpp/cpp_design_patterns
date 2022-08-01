@@ -14,7 +14,8 @@
  */
 PayByPayPal::PayByPayPal()
 {
-    m_paypalDataBase = {
+    m_paypalDataBase = 
+    {
         { "secret", "hans@web.de" },
         { "peter", "peter@web.de" },
         { "geheim", "sepp@web.de" },
@@ -22,11 +23,13 @@ PayByPayPal::PayByPayPal()
     };
 }
 
+PayByPayPal::~PayByPayPal() {}
+
 /**
  * collect customer's data
  */
-void PayByPayPal::collectPaymentDetails() {
-
+void PayByPayPal::collectPaymentDetails()
+{
     while (!m_isSignedIn) {
         std::cout << "Enter the user's email address: ";
         std::cin >> m_email;
@@ -44,7 +47,8 @@ void PayByPayPal::collectPaymentDetails() {
 /**
  * handle payment process
  */
-bool PayByPayPal::pay(int paymentAmount) {
+bool PayByPayPal::pay(int paymentAmount)
+{
 
     if (m_isSignedIn) {
         std::cout << "Paying " << paymentAmount << " using PayPal.";
@@ -58,7 +62,8 @@ bool PayByPayPal::pay(int paymentAmount) {
 /**
  * private helper methods
  */
-bool PayByPayPal::verify() {
+bool PayByPayPal::verify()
+{
 
     m_isSignedIn = (m_email == m_paypalDataBase[m_password]);
     return m_isSignedIn;
