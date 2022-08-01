@@ -7,13 +7,21 @@
 #include <memory>
 
 /**
- * The Target defines the domain-specific interface used by the client code.
+ * ITarget defines the domain-specific interface used by the client code
  */
-class Target
+class ITarget
+{
+public:
+    virtual std::string getRequest() const = 0;
+};
+
+/**
+ * Target implements ITarget - implementation usable by the client code
+ */
+class Target : public ITarget
 {
 public:
     Target() = default;
-
     virtual ~Target() = default;
 
     virtual std::string getRequest() const
@@ -23,9 +31,9 @@ public:
 };
 
 /**
- * The Adaptee contains some useful behavior, but its interface is incompatible
- * with the existing client code. The Adaptee needs some adaptation before the
- * client code can use it.
+ * The Adaptee contains some useful behavior,
+ * but its interface is incompatible with the existing client code.
+ * The Adaptee needs some adaptation before the client code can use it.
  */
 class Adaptee
 {
@@ -34,51 +42,53 @@ public:
 
     std::string getSpecificRequest() const
     {
-        return { ".eetpadA eht fo roivaheb laicepS" };
+        return std::string{ ".eetpadA eht fo roivaheb laicepS" };
     }
 };
 
 /**
- * The Adapter makes the Adaptee's interface compatible with the Target's interface.
+ * The Adapter makes the Adaptee's interface
+ * compatible with the ITarget's interface.
  */
-class Adapter : public Target {
+class Adapter : public ITarget
+{
 private:
     std::shared_ptr<Adaptee> m_adaptee;
 
 public:
-    Adapter(std::shared_ptr<Adaptee> adaptee) : m_adaptee(adaptee) {}
+    Adapter(std::shared_ptr<Adaptee> adaptee) : m_adaptee{ adaptee } {}
 
     std::string getRequest() const override {
 
         std::string toReverse{ m_adaptee->getSpecificRequest() };
 
-        std::reverse(toReverse.begin(), toReverse.end());
+        std::reverse(std::begin(toReverse), std::end(toReverse));
 
-        return { "Adapter: (TRANSLATED) " + toReverse };
+        return std::string{ "Adapter: (TRANSLATED) " + toReverse };
     }
 };
 
 /**
  * The client code supports all classes that follow the Target interface
  */
-static void clientCode(std::shared_ptr<Target> target) {
-    std::string request = target->getRequest();
+static void clientCode(std::shared_ptr<ITarget> target) {
+    std::string request{ target->getRequest() };
     std::cout << request << std::endl << std::endl;
 }
 
 void test_conceptual_example() {
 
-    std::cout << "Client: I can work just fine with the Target object" << std::endl;
-    std::shared_ptr<Target> target = std::shared_ptr<Target>(new Target{});
+    std::cout << "Client: I can work fine with the Target object" << std::endl;
+    std::shared_ptr<ITarget> target{ new Target{} };
     clientCode(target);
 
-    std::shared_ptr<Adaptee> adaptee = std::shared_ptr<Adaptee>(new Adaptee{ });
+    std::shared_ptr<Adaptee> adaptee{ new Adaptee{ } };
     std::cout << "Client: The Adaptee class has an incompatible interface:" << std::endl;
     std::string specificRequest = adaptee->getSpecificRequest();
     std::cout << "Adaptee: " << specificRequest << std::endl << std::endl;
 
     std::cout << "Client: But I can work with the Adaptee via the Adapter:" << std::endl;
-    std::shared_ptr<Adapter> adapter = std::shared_ptr<Adapter>(new Adapter{ adaptee });
+    std::shared_ptr<Adapter> adapter{ new Adapter{ adaptee } };
     clientCode(adapter);
 }
 

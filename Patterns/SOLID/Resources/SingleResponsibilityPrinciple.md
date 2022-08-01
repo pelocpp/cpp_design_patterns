@@ -49,7 +49,7 @@ indem sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &
   * Wenn wir beginnen, weitere Domänenklassen wie `Book`, `File` usw. hinzuzufügen,
     ist die Speichermethode `save` für alle Domänenklassen separat zu implementieren.
   * Das eigentliche Problem entsteht, wenn die Funktionalität für die Datenablage geändert werden soll.
-    Zum Beispiel wäre es denbkbar, dass die Daten an Stelle in Dateien in einer Datenbank abgelegt werden sollen.
+    Zum Beispiel wäre es denkbar, dass die Daten an Stelle in Dateien in einer Datenbank abgelegt werden sollen.
     In diesem Fall müsste man jede Domänenklassenimplementierung durchlaufen und den gesamten Code ändern,
     was natürlich sinnlos ist.
   * Der Verstoß gegen das *Single-Responsibility-Prinzip* in diesem Beispiel ist offensichtlich:

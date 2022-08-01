@@ -235,14 +235,12 @@ sind die am meisten verbreitete Vorgehensweise:
 116:     result = specification.isSatisfied(computer);
 117:     std::cout << "Result: " << std::boolalpha << result << std::endl;
 118: 
-119:     return;
-120: 
-121:     result = specification.isSatisfied(chair);
-122:     std::cout << "Result: " << std::boolalpha << result << std::endl;
-123: 
-124:     result = anotherSpecification.isSatisfied(headset);
-125:     std::cout << "Result: " << std::boolalpha << result << std::endl;
-126: }
+119:     result = specification.isSatisfied(chair);
+120:     std::cout << "Result: " << std::boolalpha << result << std::endl;
+121: 
+122:     result = anotherSpecification.isSatisfied(headset);
+123:     std::cout << "Result: " << std::boolalpha << result << std::endl;
+124: }
 ```
 
 ###### Beachten Sie an dem Quellcode:

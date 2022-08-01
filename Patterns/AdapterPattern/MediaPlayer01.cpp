@@ -9,14 +9,16 @@
 namespace ApdaterPatternClassicalApproach {
 
     // interface MediaPlayer
-    class MediaPlayer {
+    class MediaPlayer 
+    {
     public:
         virtual ~MediaPlayer() {};
         virtual void play(std::string audioType, std::string fileName) = 0;
     };
 
     // interface AdvancedMediaPlayer
-    class AdvancedMediaPlayer {
+    class AdvancedMediaPlayer 
+    {
     public:
         virtual ~AdvancedMediaPlayer() {};
         virtual void playVlc(std::string fileName) = 0;
@@ -26,7 +28,8 @@ namespace ApdaterPatternClassicalApproach {
     // ===========================================================================
 
     // concrete class VlcPlayer, implementing interface AdvancedMediaPlayer
-    class VlcPlayer : public AdvancedMediaPlayer {
+    class VlcPlayer : public AdvancedMediaPlayer 
+    {
     public:
         virtual void playVlc(std::string fileName) override
         {
@@ -38,7 +41,8 @@ namespace ApdaterPatternClassicalApproach {
     };
 
     // concrete class Mp4Player, implementing interface AdvancedMediaPlayer
-    class Mp4Player : public AdvancedMediaPlayer {
+    class Mp4Player : public AdvancedMediaPlayer 
+    {
     public:
         // do nothing
         virtual void playVlc(std::string fileName) override {}
@@ -52,7 +56,8 @@ namespace ApdaterPatternClassicalApproach {
     // ===========================================================================
 
     // create adapter class implementing the MediaPlayer interface
-    class MediaAdapter : public MediaPlayer {
+    class MediaAdapter : public MediaPlayer 
+    {
     private:
         std::shared_ptr<AdvancedMediaPlayer> m_advancedMusicPlayer;
 
@@ -63,8 +68,8 @@ namespace ApdaterPatternClassicalApproach {
         void play(std::string audioType, std::string fileName) override;
     };
 
-    MediaAdapter::MediaAdapter(std::string audioType) {
-
+    MediaAdapter::MediaAdapter(std::string audioType) 
+    {
         if (audioType == std::string("vlc")) {
             m_advancedMusicPlayer = std::make_shared<VlcPlayer>();
         }
@@ -73,8 +78,8 @@ namespace ApdaterPatternClassicalApproach {
         }
     }
 
-    void MediaAdapter::play(std::string audioType, std::string fileName) {
-
+    void MediaAdapter::play(std::string audioType, std::string fileName)
+    {
         if (audioType == std::string("vlc")) {
             m_advancedMusicPlayer->playVlc(fileName);
         }
@@ -88,7 +93,8 @@ namespace ApdaterPatternClassicalApproach {
     // create class 'AudioPlayer'
     // implementing 'MediaPlayer' interface
     // without adapter addition
-    class AudioPlayer : public MediaPlayer {
+    class AudioPlayer : public MediaPlayer
+    {
     public:
         void play(std::string audioType, std::string fileName) override;
     };
@@ -109,7 +115,8 @@ namespace ApdaterPatternClassicalApproach {
     // create class 'AudioPlayerExtended'
     // implementing 'MediaPlayer' interface
     // with adapter addition
-    class AudioPlayerExtended : public MediaPlayer {
+    class AudioPlayerExtended : public MediaPlayer 
+    {
     private:
         std::shared_ptr<MediaAdapter> m_mediaAdapter;
 
@@ -138,7 +145,8 @@ namespace ApdaterPatternClassicalApproach {
     /**
      * The client code supports all classes that follow the MediaPlayer interface.
      */
-    static void clientCode(std::shared_ptr<MediaPlayer>& player) {
+    static void clientCode(std::shared_ptr<MediaPlayer>& player) 
+    {
         player->play("mp3", "beyond the horizon.mp3");
         player->play("mp4", "alone again.mp4");
         player->play("vlc", "far far away.vlc");
@@ -151,11 +159,15 @@ namespace ApdaterPatternClassicalApproach {
 void test_media_player_01()
 {
     using namespace ApdaterPatternClassicalApproach;
-    std::shared_ptr <MediaPlayer> audioPlayer1 = std::make_shared<AudioPlayer>();
+    std::shared_ptr <MediaPlayer> audioPlayer1{
+        std::make_shared<AudioPlayer>()
+    };
     clientCode(audioPlayer1);
     std::cout << std::endl;
 
-    std::shared_ptr <MediaPlayer> audioPlayer2 = std::make_shared<AudioPlayerExtended>();
+    std::shared_ptr <MediaPlayer> audioPlayer2{ 
+        std::make_shared<AudioPlayerExtended>()
+    };
     clientCode(audioPlayer2);
     std::cout << std::endl;
 }

@@ -132,7 +132,7 @@ Betrachten Sie den folgenden Vorschlag:
   * Effektiv gesehen reduziert das *Dependency Inversion Prinzip* (DIP) die Kopplung zwischen verschiedenen Codeteilen.
   Wir erhalten auf diese Weise wiederverwendbaren Code.
 
-  * Das *Dependency Inversion Prinzip* (DIP) legt nahe, dass die flexibelsten Systeme diejenigen sind, in denen sich Quellecodeabhängigkeiten
+  * Das *Dependency Inversion Prinzip* (DIP) legt nahe, dass die flexibelsten Systeme diejenigen sind, in denen sich Quellcodeabhängigkeiten
   nur auf Abstraktionen, nicht auf Konkretisierungen beziehen!
 
 ---
