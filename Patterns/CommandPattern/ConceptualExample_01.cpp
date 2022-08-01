@@ -9,8 +9,9 @@
 namespace ConceptualExample01 {
 
     /**
-     * Receiver classes contain business logic. They know how to
-     * perform all kinds of operations, associated with carrying out a command.
+     * Receiver classes contain business logic.
+     * They know how to perform all kinds of operations,
+     * associated with carrying out a command.
      * In fact, any class may serve as a Receiver.
      */
     class Receiver
@@ -25,43 +26,58 @@ namespace ConceptualExample01 {
     /**
      * The CommandBase interface declares a method for executing a command.
      */
-    class CommandBase {
+    class CommandBase
+    {
     protected:
         std::shared_ptr<Receiver> m_receiver;
 
     public:
-        CommandBase(std::shared_ptr<Receiver> receiver) : m_receiver{ receiver } {}
+        CommandBase(std::shared_ptr<Receiver> receiver) 
+            : m_receiver{ receiver } {}
+
         virtual ~CommandBase() {}
         virtual void execute() const = 0;
     };
 
+    /**
+     * Concrete implementation of CommandBase interface.
+     */
     class ConcreteCommand : public CommandBase
     {
     private:
         std::string m_data;
-    public:
-        ConcreteCommand(std::shared_ptr<Receiver> receiver) : CommandBase{ receiver } {}
 
-        void setData(std::string data) { 
+    public:
+        ConcreteCommand(std::shared_ptr<Receiver> receiver) 
+            : CommandBase{ receiver } {}
+
+        void setData(std::string data)
+        { 
             m_data = data;
         }
 
-        void execute() const override {
+        virtual void execute() const override
+        {
             m_receiver->action(m_data);
         }
     };
 
+    /**
+     * Invoker executes Command
+     */
     class Invoker
     {
     private:
         std::shared_ptr<CommandBase> m_command;
 
     public:
-        void setCommand(std::shared_ptr<CommandBase> command) {
+        void setCommand(std::shared_ptr<CommandBase> command)
+        {
             m_command = command;
         }
 
-        void executeCommand() {
+        void executeCommand()
+        {
             m_command->execute();
         }
     };
@@ -71,13 +87,13 @@ void test_conceptual_example_01() {
 
     using namespace ConceptualExample01;
 
-    Invoker invoker;
+    Invoker invoker{};
 
-    std::shared_ptr<Receiver> receiver{
+    std::shared_ptr<Receiver> receiver {
         std::make_shared<Receiver>() 
     };
 
-    std::shared_ptr<ConcreteCommand> command{ 
+    std::shared_ptr<ConcreteCommand> command { 
         std::make_shared<ConcreteCommand>(receiver)
     };
 

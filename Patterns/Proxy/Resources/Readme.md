@@ -45,7 +45,7 @@ Es besteht im Wesentlichen aus drei Teilen:
   * **RealSubject**: Repräsentiert eine aus welchen Gründen auch schwer zugängliche oder ressourcensensitive Klasse,
     die man einfacher oder effektiver verwenden möchte.
   * **Proxy**: Dreh- und Angelpunkt dieses Entwurfsmusters: Es kapselt eine Referenz (Zeiger) auf das `RealSubject`-Objekt.
-    Die Client-Anwendung ruft Methoden an der `Proxy`-Klasse aus,
+    Die Client-Anwendung ruft Methoden an der `Proxy`-Klasse auf,
     die an entsprechende Methoden des `RealSubject`-Objekts transferiert werden.
 
 <img src="dp_proxy_pattern.svg" width="500">

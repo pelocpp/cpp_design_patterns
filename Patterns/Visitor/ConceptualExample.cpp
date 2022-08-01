@@ -10,8 +10,9 @@
 namespace ConceptualExample {
 
     /**
-     * The Visitor Interface declares a set of visiting methods that correspond to
-     * component classes. The signature of a visiting method allows the visitor to
+     * The Visitor Interface declares a set of visiting methods
+     * that correspond to component classes.
+     * The signature of a visiting method allows the visitor to
      * identify the exact class of the component that it's dealing with.
      */
 
@@ -44,7 +45,8 @@ namespace ConceptualExample {
      * The ElementBase interface declares an `accept` method that should take
      * the base visitor interface as an argument.
      */
-    class ElementBase {
+    class ElementBase
+    {
     public:
         virtual ~ElementBase() {}
         virtual void accept(std::shared_ptr<VisitorBase> visitor) const = 0;
@@ -54,7 +56,8 @@ namespace ConceptualExample {
      * Each Concrete Component must implement the `accept` method in such a way that
      * it calls the visitor's method corresponding to the component's class.
      */
-    class ConcreteComponentA : public ElementBase {
+    class ConcreteComponentA : public ElementBase
+    {
     public:
         /**
          * Note that we're calling `visit (ConcreteComponentA)`, which matches the
@@ -73,7 +76,8 @@ namespace ConceptualExample {
         std::string ExclusiveMethodOfConcreteComponentA() const { return "A"; }
     };
 
-    class ConcreteComponentB : public ElementBase {
+    class ConcreteComponentB : public ElementBase
+    {
     public:
         /**
          * Same here: visitConcreteComponentB => ConcreteComponentB
@@ -86,7 +90,8 @@ namespace ConceptualExample {
     };
 
     // demonstrating use of 'enable_shared_from_this' and 'shared_from_this'
-    class ConcreteComponentC : public ElementBase, public std::enable_shared_from_this<ConcreteComponentC> {
+    class ConcreteComponentC : public ElementBase, public std::enable_shared_from_this<ConcreteComponentC> 
+    {
     public:
         virtual void accept(std::shared_ptr<VisitorBase> visitor) const override {
             const std::shared_ptr<const ConcreteComponentC> me = shared_from_this();
@@ -109,7 +114,8 @@ namespace ConceptualExample {
      * might be helpful to store some intermediate state of the algorithm while
      * executing visitor's methods over various objects of the structure.
      */
-    class ConcreteVisitor1 : public VisitorBase {
+    class ConcreteVisitor1 : public VisitorBase
+    {
     public:
         virtual void visit(const ConcreteComponentA* element) const override {
             std::cout
@@ -146,7 +152,8 @@ namespace ConceptualExample {
         }
     };
 
-    class ConcreteVisitor2 : public VisitorBase {
+    class ConcreteVisitor2 : public VisitorBase
+    {
     public:
         virtual void visit(const ConcreteComponentA* element) const override {
             std::cout 
