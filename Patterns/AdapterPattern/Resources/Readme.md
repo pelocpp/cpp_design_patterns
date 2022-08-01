@@ -70,14 +70,6 @@ Der Klassenname `Adaptee` steht stellvertretend für Service-Klassen, die es gilt
 
 ---
 
-Die Anregung zum konzeptionellen Beispiel finden Sie unter
-
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/adapter/cpp/example#example-0)
-
-vor.
-
----
-
 **Hinweis**: Prinzipiell gibt es für das Adapter Pattern zwei Vorgehensweisen in der Umsetzung mit einer realen Programmiersprache:
 
   * **Objekt Adapter Ansatz**:
@@ -161,6 +153,16 @@ diese an die Adapterklasse weiter, so dass die Anforderung doch unterstützt werd
 sondern er darf nur über die vorhandene Client-Schnittstelle mit dem Adapter zusammenarbeiten
 (im vorliegenden Beispiel: Schnittstelle `MediaPlayer`). Auf diese Weise lassen sich neue Adapterklassen
 in das Programm einführen, ohne inkompatibel zum vorhandenen Client-Code zu sein!
+
+---
+
+## Literaturhinweise
+
+Die Anregungen zum konzeptionellen Beispiel finden Sie unter
+
+[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/adapter/cpp/example#example-0)
+
+vor.
 
 ---
 

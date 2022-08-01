@@ -6,11 +6,12 @@
 #include <memory>
 
 /**
- * The Subject interface declares common operations for both 'RealSubject' and the
+ * The SubjectBase interface declares common operations for both 'RealSubject' and the
  * 'Proxy'. As long as the client works with 'RealSubject' using this interface,
  * you'll be able to pass it a proxy instead of a real subject.
  */
-class Subject {
+class SubjectBase 
+{
 public:
     virtual void request() const = 0;
 };
@@ -21,7 +22,8 @@ public:
  * e.g. correcting input data. A Proxy can solve these issues without any
  * changes to the RealSubject's code.
  */
-class RealSubject : public Subject {
+class RealSubject : public SubjectBase
+{
 public:
     virtual void request() const override {
         std::cout << "RealSubject: Handling request." << std::endl;
@@ -31,7 +33,8 @@ public:
 /**
  * The Proxy has an interface identical to the RealSubject.
  */
-class Proxy : public Subject {
+class Proxy : public SubjectBase
+{
 private:
     std::shared_ptr<RealSubject> m_realSubject;
 
@@ -50,7 +53,8 @@ private:
      * can be either lazy-loaded or passed to the Proxy by the client.
      */
 public:
-    Proxy(std::shared_ptr<RealSubject> realSubject) : m_realSubject(realSubject) {}
+    Proxy(std::shared_ptr<RealSubject> realSubject) 
+        : m_realSubject{ realSubject } {}
 
     /**
      * The most common applications of the Proxy pattern are lazy loading,
@@ -73,19 +77,29 @@ public:
  * directly. In this case, to implement the pattern more easily, you can extend
  * your proxy from the real subject's class.
  */
-void clientCode(std::shared_ptr<Subject> subject) {
+void clientCode(std::shared_ptr<SubjectBase> subject) {
 
     subject->request();
 }
 
 void test_conceptual_example() {
     std::cout << "Client: Executing the client code with a real subject:" << std::endl;
-    std::shared_ptr<RealSubject> realSubject{ std::make_shared<RealSubject>() };
+    std::shared_ptr<SubjectBase> realSubject{ 
+        std::make_shared<RealSubject>() 
+    };
+
     clientCode(realSubject);
     std::cout << std::endl;
 
     std::cout << "Client: Executing the same client code with a proxy:" << std::endl;
-    std::shared_ptr<Proxy> proxy{ std::make_shared<Proxy>(realSubject) };
+    std::shared_ptr<SubjectBase> proxy{ 
+        std::static_pointer_cast<RealSubject>(realSubject)
+    };
+
+    /*  Note: std::static_pointer_cast is necessary, because I defined
+    *         realSubject from type SubjectBase - not RealSubject
+    */
+
     clientCode(proxy);
 }
 
