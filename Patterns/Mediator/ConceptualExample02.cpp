@@ -33,7 +33,8 @@ namespace ConceptualExample02 {
     public:
         ColleagueBase() = default;
 
-        ColleagueBase(std::shared_ptr<MediatorBase> mediator) : m_mediator{ mediator } {}
+        ColleagueBase(std::shared_ptr<MediatorBase> mediator) 
+            : m_mediator{ mediator } {}
 
         void setMediator(std::shared_ptr<MediatorBase> mediator) 
         {
@@ -45,7 +46,9 @@ namespace ConceptualExample02 {
      * Concrete Components implement various functionality. They don't depend on
      * other components. They also don't depend on any concrete mediator classes.
      */
-    class ConcreteColleagueA : public ColleagueBase, public std::enable_shared_from_this<ConcreteColleagueA> 
+    class ConcreteColleagueA 
+        : public ColleagueBase,
+          public std::enable_shared_from_this<ConcreteColleagueA> 
     {
     public:
         void operationA()
@@ -84,7 +87,10 @@ namespace ConceptualExample02 {
      * Concrete Mediators implement cooperative behavior
      * by coordinating several components.
      */
-    class ConcreteMediator : public MediatorBase, public std::enable_shared_from_this<ConcreteMediator> {
+    class ConcreteMediator 
+        : public MediatorBase,
+          public std::enable_shared_from_this<ConcreteMediator> 
+    {
     private:
         std::shared_ptr<ConcreteColleagueA> m_componentA;
         std::shared_ptr<ConcreteColleagueB> m_componentB;
@@ -131,11 +137,11 @@ namespace ConceptualExample02 {
     void clientCode()
     {
         std::shared_ptr<ConcreteColleagueA> c1{ 
-            std::shared_ptr<ConcreteColleagueA>(new ConcreteColleagueA())
+            new ConcreteColleagueA()
         };
 
         std::shared_ptr<ConcreteColleagueB> c2{ 
-            std::shared_ptr<ConcreteColleagueB>(new ConcreteColleagueB())
+            new ConcreteColleagueB()
         };
 
         std::shared_ptr<ConcreteMediator> mediator{ 

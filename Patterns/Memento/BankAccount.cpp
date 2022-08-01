@@ -42,7 +42,9 @@ namespace BankAccountMemento
 
     BankAccount::BankAccount() : BankAccount{ 0 } {}
 
-    BankAccount::BankAccount(int balance) : m_balance{ balance }, m_current{ 0 }  {
+    BankAccount::BankAccount(int balance)
+        : m_balance{ balance }, m_current{ 0 } 
+    {
         m_changes.push_back(std::make_shared<Memento>(m_balance));
     }
 

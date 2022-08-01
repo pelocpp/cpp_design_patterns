@@ -135,11 +135,11 @@ namespace ConceptualExample03 {
     void clientCode()
     {
         std::shared_ptr<ConcreteColleagueA> c1{ 
-            std::shared_ptr<ConcreteColleagueA>(new ConcreteColleagueA()) 
+            new ConcreteColleagueA()
         };
         
         std::shared_ptr<ConcreteColleagueB> c2{ 
-            std::shared_ptr<ConcreteColleagueB>(new ConcreteColleagueB())
+            new ConcreteColleagueB()
         };
 
         std::shared_ptr<ConcreteMediator> mediator{ 

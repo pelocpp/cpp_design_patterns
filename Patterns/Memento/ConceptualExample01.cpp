@@ -15,9 +15,7 @@ namespace ConceptualExample01 {
         std::string m_state;
 
     public:
-        Memento(const std::string& state) {
-            m_state = state;
-        }
+        Memento(const std::string& state) : m_state{ state } {}
 
         std::string getState() {
             return m_state;
@@ -76,7 +74,8 @@ void test_conceptual_example_01() {
     Originator originator{ "State A" };
     std::cout << originator.getState() << std::endl;
 
-    // save state of originator using a Memento object with the help of a CareTaker
+    // save state of originator using a Memento object
+    // with the help of a CareTaker
     CareTaker caretaker{ };
     std::shared_ptr<Memento> memento{ originator.createMemento() };
     caretaker.setMemento(memento);

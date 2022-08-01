@@ -34,7 +34,6 @@ namespace ConceptualExample02 {
 
     public:
         ConcreteMemento(std::string state) : m_state{ state } {
-            m_state = state;
             m_date = currentTimeToString();
         }
 
@@ -45,18 +44,18 @@ namespace ConceptualExample02 {
         /**
          * The Originator uses this method when restoring its state.
          */
-        std::string state() const override {
+        virtual std::string state() const override {
             return m_state;
         }
 
         /**
          * The rest of the methods are used by the CareTaker to display metadata.
          */
-        std::string getName() const override {
+        virtual std::string getName() const override {
             return m_date + " / [" + m_state.substr(0, 9) + " ...]";
         }
 
-        std::string date() const override {
+        virtual std::string date() const override {
             return m_date;
         }
 
