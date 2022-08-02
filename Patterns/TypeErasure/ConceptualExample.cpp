@@ -21,22 +21,22 @@ namespace ConceptualExample
         class Cow : public Animal
         {
         public:
-            std::string see() const { return "cow"; }
-            std::string say() const { return "moo"; }
+            virtual std::string see() const override { return "cow"; }
+            virtual std::string say() const override { return "moo"; }
         };
 
         class Pig : public Animal
         {
         public:
-            std::string see() const { return "pig"; }
-            std::string say() const { return "oink"; }
+            virtual std::string see() const override { return "pig"; }
+            virtual std::string say() const override { return "oink"; }
         };
 
         class Dog : public Animal
         {
         public:
-            std::string see() const { return "dog"; }
-            std::string say() const { return "woof"; }
+            virtual std::string see() const override { return "dog"; }
+            virtual std::string say() const override { return "woof"; }
         };
 
         void seeAndSay(const std::shared_ptr<Animal> animal)

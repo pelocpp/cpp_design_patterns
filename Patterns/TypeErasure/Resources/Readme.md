@@ -59,8 +59,8 @@ eine Unterklasse, die von der Basisklasse (Schnittstellenklasse) erbt und ihre M
 08: class Cow : public Animal
 09: {
 10: public:
-11:     std::string see() const { return "cow"; }
-12:     std::string say() const { return "moo"; }
+11:     virtual std::string see() const override { return "cow"; }
+12:     virtual std::string say() const override { return "moo"; }
 13: };
 14: 
 15: class Pig : public Animal
@@ -481,6 +481,21 @@ den Instanzvariablen verwalten sie eine Referenz des umhüllten Objekts:
 44:         }
 45:     }
 46: };
+47: 
+48: void clientCode()
+49: {
+50:     SeeAndSay animals;
+51: 
+52:     Cow aCow{};
+53:     Pig aPig{};
+54:     Dog aDog{};
+55: 
+56:     animals.addAnimal(aCow);
+57:     animals.addAnimal(aPig);
+58:     animals.addAnimal(aDog);
+59: 
+60:     animals.print();
+61: }
 ```
 
 ---
