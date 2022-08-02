@@ -42,6 +42,125 @@ ob sie bei Anforderung ein neues Objekt oder ein vorhandenes Objekt aus dem Pool
 Damit lässt sich Speicherplatz einsparen (siehe dazu auch das [Flyweight Pattern](https://github.com/pelocpp/cpp_design_patterns/blob/master/Patterns/Flyweight/Resources/Readme.md)).
 Im Regelfall setzt dies aber voraus, dass die Objekte unveränderbar (*immutable*) sind.
 
+##### Vorbemerkung: &ldquo;What's wrong with `new`?&rdquo;
+  
+Technisch betrachtet ist mit `new` nichts falsch &ndash;
+in keinster Weise. Das Problem ist eher, dass im Falle
+einer Hierarchie von Klassen und Schnittstellen der 
+Anwender möglicherweise mehr Kenntnisse der Schnittstellen hat &ndash;
+und damit weniger von den realen Klassen, die diese
+Schnittstellen implementieren.
+
+Ein Beispiel hierzu:
+
+```cpp
+01: class IPizza
+02: {
+03: public:
+04:     virtual void prepare() = 0;
+05:     virtual void bake() = 0;
+06:     virtual void cut() = 0;
+07:     virtual void box() = 0;
+08: };
+09: 
+10: std::shared_ptr<IPizza> orderPizza()
+11: {
+12:     std::shared_ptr<IPizza> pizza{ std::make_shared<Pizza>()};
+13: 
+14:     pizza->prepare();
+15:     pizza->bake();
+16:     pizza->cut();
+17:     pizza->box();
+18: 
+19:     return pizza;
+20: }
+```
+
+Das liest sich nicht schlecht, nur es gibt doch
+mehrere Arten von Pizzas:
+
+```cpp
+01: std::shared_ptr<IPizza> orderPizza(std::string type)
+02: {
+03:     std::shared_ptr<IPizza> pizza{ nullptr };
+04: 
+05:     if (type == std::string{ "cheese" }) {
+06:         pizza = std::make_shared<CheesePizza>();
+07:     }
+08:     else if (type == std::string{ "greek" }) {
+09:         pizza = std::make_shared<GreekPizza>();
+10:     }
+11:     else if (type == std::string{ "pepperoni" }) {
+12:         pizza = std::make_shared<PepperoniPizza>();
+13:     }
+14: 
+15:     pizza->prepare();
+16:     pizza->bake();
+17:     pizza->cut();
+18:     pizza->box();
+19: 
+20:     return pizza;
+21: }
+```
+
+Das ist jetzt schon besser. Nur wie entwickelt sich die Funktion
+`orderPizza` weiter, wenn es neue Pizzavarianten gibt und 
+andere, weniger erfolgreiche Pizzavarianten aus dem Sortiment
+genommen werden. Dann wird die Wartung und Pflege dieser Methode
+ `orderPizza` unangenehm.
+
+Wie wäre es, wenn wir die Objekterzeugung des `Pizza`-Objekts
+aus der Methode `orderPizza` herausnehmen?
+
+Moment! *Objekterzeugung*. Da sind wir doch beim `new`-Operator angekommen!
+Also machen wir die Beobachtung, dass es Sinn ergeben kann,
+den Aufruf des `new`-Operators für eine Pizza an &ldquo;anderer&rdquo; Stelle
+zu platzieren:
+
+```cpp
+01: class PizzaFactory
+02: {
+03: public:
+04:     static std::shared_ptr<IPizza> createPizza(std::string type) {
+05:         std::shared_ptr<IPizza> pizza{ nullptr };
+06: 
+07:         if (type == std::string{ "cheese" }) {
+08:             pizza = std::make_shared<CheesePizza>();
+09:         }
+10:         else if (type == std::string{ "pepperoni" }) {
+11:             pizza = std::make_shared<PepperoniPizza>();
+12:         }
+13:         else if (type == std::string{ "clam" }) {
+14:             pizza = std::make_shared<ClamPizza>();
+15:         }
+16:         else if (type == std::string{ "veggie" }) {
+17:             pizza = std::make_shared<VeggiePizza>();
+18:         }
+19: 
+20:         return pizza;
+21:     }
+22: };
+```
+
+Damit sieht unsere `orderPizza`-Methode nun so aus:
+
+```cpp
+std::shared_ptr<IPizza> orderPizzaEx(std::string type)
+{
+    std::shared_ptr<IPizza> pizza = PizzaFactory::createPizza(type);
+
+    pizza->prepare();
+    pizza->bake();
+    pizza->cut();
+    pizza->box();
+
+    return pizza;
+}
+```
+
+Diese Überlegungen sollen die Einführung eines
+&ldquo;Fabrik&rdquo;-Gedankens motivieren.
+
 
 #### Struktur (UML):
 

@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Documents">
       <UniqueIdentifier>{d865b7a9-2a14-4929-a902-bd7a8db86d94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Pizza">
+      <UniqueIdentifier>{53f81c12-3bf9-4883-8eda-de110b8a600e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -43,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="Documents.cpp">
       <Filter>Source Files\Documents</Filter>
+    </ClCompile>
+    <ClCompile Include="Pizza.cpp">
+      <Filter>Source Files\Pizza</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

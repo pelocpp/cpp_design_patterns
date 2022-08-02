@@ -147,6 +147,7 @@
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Documents.cpp" />
     <ClCompile Include="MobilePhones.cpp" />
+    <ClCompile Include="Pizza.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>

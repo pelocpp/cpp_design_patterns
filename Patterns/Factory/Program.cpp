@@ -10,9 +10,9 @@ void test_documents();
 
 int main()
 {
-    //test_conceptual_example();
-    //test_mobile_phones_01();
-    //test_mobile_phones_02();
+    test_conceptual_example();
+    test_mobile_phones_01();
+    test_mobile_phones_02();
     test_documents();
     return 0;
 }
