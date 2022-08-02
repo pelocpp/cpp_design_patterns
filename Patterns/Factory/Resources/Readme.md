@@ -50,7 +50,6 @@ einer Hierarchie von Klassen und Schnittstellen der
 Anwender möglicherweise mehr Kenntnisse der Schnittstellen hat &ndash;
 und damit weniger von den realen Klassen, die diese
 Schnittstellen implementieren.
-
 Ein Beispiel hierzu:
 
 ```cpp
