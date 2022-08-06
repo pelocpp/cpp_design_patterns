@@ -106,6 +106,12 @@ void test_conceptual_example_isp()
     using namespace InterfaceSegregationPrinciple02;
 }
 
+void test_isp()
+{
+    test_anti_conceptual_example_isp();
+    test_conceptual_example_isp();
+}
+
 // ===========================================================================
 // End-of-File
 // ===========================================================================

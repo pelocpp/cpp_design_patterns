@@ -31,7 +31,9 @@ namespace ConceptualExample01 {
 
         virtual std::shared_ptr<Prototype> clone() override
         {
-            std::shared_ptr<Prototype> copy = std::make_shared<ConcretePrototype>(getId());
+            std::shared_ptr<Prototype> copy = 
+                std::make_shared<ConcretePrototype>(getId());
+
             return copy;
         }
     };
@@ -41,13 +43,14 @@ void test_conceptual_example_01()
 {
     using namespace ConceptualExample01;
 
-    std::shared_ptr<ConcretePrototype> prototype {
+    std::shared_ptr<Prototype> prototype {
         std::make_shared<ConcretePrototype>(1) 
     };
 
-    std::shared_ptr<ConcretePrototype> clone {
-        std::static_pointer_cast<ConcretePrototype> (prototype->clone())  // <== note: std::static_pointer_cast
-    };
+    std::shared_ptr<Prototype> clone { prototype->clone() };
+
+    std::cout << "Prototype: " << prototype->getId() << std::endl;
+    std::cout << "Clone:     " << clone->getId() << std::endl;
 
     clone->setId(2);
 

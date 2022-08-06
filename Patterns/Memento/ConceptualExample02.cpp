@@ -116,10 +116,10 @@ namespace ConceptualExample02 {
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 "abcdefghijklmnopqrstuvwxyz" };
 
-            int stringLength{ sizeof(alphanum) - 1 };
+            size_t stringLength{ sizeof(alphanum) - 1 };
 
             std::string random_string;
-            for (int i = 0; i < length; i++) {
+            for (size_t i = 0; i != length; ++i) {
                 random_string += alphanum[std::rand() % stringLength];
             }
 
@@ -139,9 +139,8 @@ namespace ConceptualExample02 {
         std::shared_ptr<Originator> m_originator;
 
     public:
-        CareTaker(std::shared_ptr<Originator> originator) : m_originator{ originator } {
-            m_originator = originator;
-        }
+        CareTaker(std::shared_ptr<Originator> originator) 
+            : m_originator{ originator } {}
 
         void backup() {
             std::cout << "\nCareTaker: Saving Originator's state..." << std::endl;

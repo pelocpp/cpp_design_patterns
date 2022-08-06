@@ -12,12 +12,12 @@
 class PersonBuilder
 {
 private:
-    Person person;
+    Person m_person;
 
 public:
-    PersonBuilder(const std::string& name) : person{ name } {}
+    PersonBuilder(const std::string& name) : m_person{ name } {}
 
-    operator Person() { return std::move(person); }
+    operator Person&& () { return std::move(m_person); }
 
     PersonBuilder& lives();
     PersonBuilder& at(std::string street_address);

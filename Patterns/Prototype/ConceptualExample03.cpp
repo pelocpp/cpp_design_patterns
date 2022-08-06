@@ -79,16 +79,6 @@ namespace ConceptualExample03 {
         float m_concretePrototypeField1;
 
     public:
-
-        //ConcretePrototype1(const ConcretePrototype1& p) {
-        //    m_concretePrototypeField1 = p.m_concretePrototypeField1;
-        //    Prototype::m_prototypeField = p.m_concretePrototypeField1;
-        //}
-
-        //ConcretePrototype1(ConcretePrototype1&& p) noexcept {
-        //    m_concretePrototypeField1 = p.m_concretePrototypeField1;
-        //}
-
         ConcretePrototype1(std::string prototype_name, float concrete_prototype_field)
             : Prototype{ prototype_name }, m_concretePrototypeField1{ concrete_prototype_field } {}
 

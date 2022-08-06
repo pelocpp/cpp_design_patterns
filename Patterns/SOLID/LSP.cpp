@@ -122,6 +122,12 @@ void test_conceptual_example_lsp()
     using namespace LiskovSubstitutionPrinciple02;
 }
 
+void test_lsp()
+{
+    test_anti_conceptual_example_lsp();
+    test_conceptual_example_lsp();
+}
+
 // ===========================================================================
 // End-of-File
 // ===========================================================================

@@ -11,6 +11,7 @@ namespace AntiConceptualExampleSRP {
 
     class Journal
     {
+    private:
         std::string m_title;
         std::vector<std::string> m_entries;
 
@@ -28,7 +29,7 @@ namespace AntiConceptualExampleSRP {
 
         void save(const std::string& filename, std::ostream& os) {
 
-            for (auto& entry : m_entries) {
+            for (const auto& entry : m_entries) {
                 os << entry << std::endl;
             }
         }
@@ -39,7 +40,8 @@ namespace ConceptualExampleSRP
 {
     class Journal 
     {
-        std::string  m_title;
+    private:
+        std::string m_title;
         std::vector<std::string> m_entries;
 
     public:
@@ -59,7 +61,7 @@ namespace ConceptualExampleSRP
     {
         static void save(const Journal& journal, const std::string& filename, std::ostream& os) {
 
-            for (auto& entry : journal.get_entries()) {
+            for (const auto& entry : journal.get_entries()) {
                 os << entry << std::endl;
             }
         }
@@ -84,6 +86,12 @@ void test_conceptual_example_srp()
     journal.addEntries("In the morning I went to school");
     journal.addEntries("In the afternoon I did my homework");
     SavingManager::save(journal, "diary.txt", std::cout);
+}
+
+void test_srp()
+{
+    test_anti_conceptual_example_srp();
+    test_conceptual_example_srp();
 }
 
 // ===========================================================================

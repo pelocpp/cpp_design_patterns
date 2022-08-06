@@ -115,6 +115,12 @@ void test_conceptual_example_dip()
     FamilyTree tree{ relationships };
 }
 
+void test_dip()
+{
+    test_anti_conceptual_example_dip();
+    test_conceptual_example_dip();
+}
+
 // ===========================================================================
 // End-of-File
 // ===========================================================================

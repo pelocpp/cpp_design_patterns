@@ -17,9 +17,8 @@ namespace ConceptualExample01 {
     public:
         Memento(const std::string& state) : m_state{ state } {}
 
-        std::string getState() {
-            return m_state;
-        }
+        // getter
+        auto getState() { return m_state; }
     };
 
     class Originator
@@ -31,13 +30,8 @@ namespace ConceptualExample01 {
         Originator(const std::string& state) : m_state{ state } {}
 
         // getter / setter
-        void setState(const std::string& state) {
-            m_state = state;
-        }
-
-        std::string getState() {
-            return m_state;
-        }
+        void setState(const std::string& state) { m_state = state; }
+        std::string getState() { return m_state; }
 
         // public interface
         std::shared_ptr<Memento> createMemento() {

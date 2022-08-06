@@ -88,7 +88,7 @@ namespace ConceptualExample02 {
          * use unique_pointer here.
          */
         virtual Prototype* clone() const override {
-            return new ConcretePrototype1(*this);
+            return new ConcretePrototype1{ *this };
         }
     };
 
@@ -102,7 +102,7 @@ namespace ConceptualExample02 {
             : Prototype{ prototype_name }, m_concretePrototypeField2{ concrete_prototype_field } {}
 
         virtual Prototype* clone() const override {
-            return new ConcretePrototype2(*this);
+            return new ConcretePrototype2{ *this };
         }
     };
 
@@ -118,7 +118,8 @@ namespace ConceptualExample02 {
         std::unordered_map<Type, Prototype*> m_originals;
 
     public:
-        PrototypeFactory() {
+        PrototypeFactory()
+        {
             m_originals[Type::PROTOTYPE_1] = new ConcretePrototype1("PROTOTYPE_1 ", 50.f);
             m_originals[Type::PROTOTYPE_2] = new ConcretePrototype2("PROTOTYPE_2 ", 60.f);
         }

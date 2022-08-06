@@ -10,6 +10,7 @@
 #include <numeric>
 
 enum class Color { Red, Green, Black, Gray };
+
 enum class Size { Small, Medium, Large };
 
 struct Product
@@ -72,7 +73,7 @@ namespace ConceptualExampleOCP {
     struct ColorSpecification : public Specification<T> 
     {
         Color m_color;
-        ColorSpecification(Color color) : m_color(color) {}
+        ColorSpecification(Color color) : m_color{ color } {}
 
         virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
             return product->m_color == m_color; 
@@ -128,7 +129,7 @@ namespace ConceptualExampleOCP {
     // combining logical specifications - with logical 'and' using operator notation
     template <typename T>
     AndSpecification<T> operator&&(const Specification<T>& first, const Specification<T>& second) {
-        return { first, second };
+        return AndSpecification<T>{ first, second };
     }
 
     // combining multiple logical specifications - with variadic templates
@@ -170,7 +171,7 @@ namespace ConceptualExampleOCP {
     struct PriceSpecification : public Specification<ProductEx>
     {
         double m_price;
-        PriceSpecification(double price) : m_price(price) {}
+        PriceSpecification(double price) : m_price{ price } {}
 
         virtual bool isSatisfied(const std::shared_ptr<ProductEx>& product) const override {
             return product->m_price == m_price;
@@ -185,7 +186,7 @@ void test_anti_conceptual_example_ocp ()
     Products<Product> products
     {
         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
-        std::make_shared<Product>("Chair", Color::Black, Size::Large),
+        std::make_shared<Product>("Chair", Color::Green, Size::Large),
         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
     };
 
@@ -224,7 +225,7 @@ void test_conceptual_example_ocp_02()
     Products<Product> products
     {
         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
-        std::make_shared<Product>("Chair", Color::Black, Size::Large),
+        std::make_shared<Product>("Chair", Color::Green, Size::Large),
         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
     };
 
@@ -253,14 +254,14 @@ void test_conceptual_example_ocp_03()
 
     // another combined specification - using overloaded operator &&
     AndSpecification<Product> anotherSpecification =
-        SizeSpecification<Product>{ Size::Medium } && ColorSpecification<Product>{ Color::Red };
+        SizeSpecification<Product>{ Size::Medium } && 
+        ColorSpecification<Product>{ Color::Red };
 
     auto computer = std::make_shared<Product>("Computer", Color::Gray, Size::Small);
-    auto chair = std::make_shared<Product>("Chair", Color::Black, Size::Large);
+    auto chair = std::make_shared<Product>("Chair", Color::Green, Size::Large);
     auto headset = std::make_shared<Product>("Headset", Color::Red, Size::Medium);
 
-    bool result{};
-    result = specification.isSatisfied(computer);
+    bool result{ specification.isSatisfied(computer) };
     std::cout << "Result: " << std::boolalpha << result << std::endl;
 
     result = specification.isSatisfied(chair);
@@ -277,7 +278,7 @@ void test_conceptual_example_ocp_04()
     Products<Product> products
     {
         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
-        std::make_shared<Product>("Chair", Color::Black, Size::Large),
+        std::make_shared<Product>("Chair", Color::Green, Size::Large),
         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
     };
 
@@ -294,11 +295,10 @@ void test_conceptual_example_ocp_04()
     };
 
     auto computer = std::make_shared<Product>("Computer", Color::Gray, Size::Small);
-    auto chair = std::make_shared<Product>("Chair", Color::Black, Size::Large);
+    auto chair = std::make_shared<Product>("Chair", Color::Green, Size::Large);
     auto headset = std::make_shared<Product>("Headset", Color::Red, Size::Medium);
 
-    bool result{};
-    result = specification.isSatisfied(computer);
+    bool result{ specification.isSatisfied(computer) };
     std::cout << "Result: " << std::boolalpha << result << std::endl;
 
     result = specification.isSatisfied(chair);
@@ -337,8 +337,7 @@ void test_conceptual_example_ocp_05()
     auto chair = std::make_shared<ProductEx>("Chair", Color::Black, Size::Large, 79.00);
     auto headset = std::make_shared<ProductEx>("Headset", Color::Red, Size::Medium, 19.99);
 
-    bool result{};
-    result = specification.isSatisfied(computer);
+    bool result{ specification.isSatisfied(computer) };
     std::cout << "Result: " << std::boolalpha << result << std::endl;
 
     result = specification.isSatisfied(chair);
@@ -346,6 +345,16 @@ void test_conceptual_example_ocp_05()
 
     result = anotherSpecification.isSatisfied(headset);
     std::cout << "Result: " << std::boolalpha << result << std::endl;
+}
+
+void test_ocp()
+{
+    test_anti_conceptual_example_ocp();
+    test_conceptual_example_ocp_01();
+    test_conceptual_example_ocp_02();
+    test_conceptual_example_ocp_03();
+    test_conceptual_example_ocp_04();
+    test_conceptual_example_ocp_05();
 }
 
 // ===========================================================================

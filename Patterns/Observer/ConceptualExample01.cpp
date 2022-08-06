@@ -63,11 +63,9 @@ namespace ObserverDesignPatternClassic {
         }
 
         void notify() override {
-            std::list<IObserver*>::iterator iterator{ m_list_observers.begin() };
-            howManyObserver();
-            while (iterator != m_list_observers.end()) {
-                (*iterator)->update(m_message);
-                ++iterator;
+            howManyObservers();
+            for (const auto& observer : m_list_observers) {
+                observer->update(m_message);
             }
         }
 
@@ -76,7 +74,7 @@ namespace ObserverDesignPatternClassic {
             notify();
         }
 
-        void howManyObserver() {
+        void howManyObservers() {
             std::cout << "There are " << m_list_observers.size() << " observers in the list.\n";
         }
 

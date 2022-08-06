@@ -82,7 +82,7 @@ Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
 52:     Products<Product> products
 53:     {
 54:         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
-55:         std::make_shared<Product>("Chair", Color::Black, Size::Large),
+55:         std::make_shared<Product>("Chair", Color::Green, Size::Large),
 56:         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
 57:     };
 58: 
@@ -139,7 +139,7 @@ sind die am meisten verbreitete Vorgehensweise:
 020: struct ColorSpecification : public Specification<T> 
 021: {
 022:     Color m_color;
-023:     ColorSpecification(Color color) : m_color(color) {}
+023:     ColorSpecification(Color color) : { color } {}
 024: 
 025:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
 026:         return product->m_color == m_color; 
@@ -195,7 +195,7 @@ sind die am meisten verbreitete Vorgehensweise:
 076: // combining logical specifications - with logical 'and' using operator notation
 077: template <typename T>
 078: AndSpecification<T> operator&&(const Specification<T>& first, const Specification<T>& second) {
-079:     return { first, second };
+079:     return AndSpecification<T>{ first, second };
 080: }
 081: 
 082: void test_01()
@@ -228,7 +228,7 @@ sind die am meisten verbreitete Vorgehensweise:
 109:         SizeSpecification<Product>{ Size::Medium } && ColorSpecification<Product>{ Color::Red };
 110: 
 111:     auto computer = std::make_shared<Product>("Computer", Color::Gray, Size::Small);
-112:     auto chair = std::make_shared<Product>("Chair", Color::Black, Size::Large);
+112:     auto chair = std::make_shared<Product>("Chair", Color::Green, Size::Large);
 113:     auto headset = std::make_shared<Product>("Headset", Color::Red, Size::Medium);
 114: 
 115:     bool result{};

@@ -167,7 +167,7 @@ Das folgende UML-Diagramm beschreibt eine Implementierung des *Factory Patterns*
 Es besteht im Wesentlichen aus drei Teilen:
 
   * **ProductBase**: Basisklasse (oder Schnittstelle) für alle Produkte,
-    die von der *Factory*-Klassen hergestellt werden sollen. Die Schnittstelle beschreibt eine oder mehrere Methoden,
+    die von der *Factory*-Klasse hergestellt werden sollen. Die Schnittstelle beschreibt eine oder mehrere Methoden,
     die von den konkreten Ableitungen der Klasse implementiert werden.
   * **ConcreteProduct**: Konkrete Implementierung der Klasse `ProductBase`.
     Objekte des Typs `ConcreteProduct` werden von der Klasse *Factory* erzeugt.
