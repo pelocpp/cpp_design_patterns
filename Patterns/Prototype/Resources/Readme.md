@@ -62,7 +62,31 @@ In manchen Programmiersprachen wird die `clone`-Methode automatisch bereitgestel
     ```
 
 Dies ist in C++ so nicht der Fall. Eine `clone`-Methode (gleichwertig: Kopierkonstruktor) ist am Ursprungsobjekt bei Anwendung des
-*Prototype Patterns* explizit bereitzustellen
+*Prototype Patterns* explizit bereitzustellen.
+
+#### Eine anschauliche Beschreibung:
+
+Wir betrachten das Entwurfsmuster *Prototyp* an Hand der Fragestellung
+&ldquo;Was ist der Unterschied zwischen dem Entwurfsmuster *Prototyp* und dem Kopierkonstruktor in C++&rdquo;?
+
+  * Der Kopierkonstruktor ist ein programmiersprachliches Konstrukt der Sprache C++.
+
+  * Das Entwurfsmuster *Prototyp* ist ein Entwurfsmuster, das verwendet wird, um (polymorphe) Objekte basierend auf einer vorhandenen Instanz zu erzeugen.
+
+  * Es wäre schwierig, Ersteres zu verwenden, um Letzteres zu implementieren, da der Kopierkonstruktor verwendet wird, wenn die genaue Instanz des Objekts bekannt ist,
+    während das *Prototyp*-Entwurfsmuster verwendet wird, wenn es irgendeine Implementierung einer Schnittstelle gibt
+    und Sie nur ein neues Objekt von genau der gleichen Implementierung erhalten möchten,
+    ohne dabei auf mühselige Casting- oder Typumwandlungsmethoden zurückzugreifen.
+
+  * Nehmen wir an, Sie haben Schnittstelle `I` und die Implementierungen `A` und `B`. Irgendwann erhalten Sie das Objekt `i`, das `I` implementiert.
+    Vielleicht möchten Sie es nicht ändern, sondern lieber eine neue Instanz erhalten und dann einige Änderungen daran vornehmen.
+    Wie könnte das erreicht werden, wenn Sie die genaue Klasse von `i` nicht kennen?
+    Sie wissen also nicht, ob `i`  ein Objekt der Klasse `A` oder `B` referenziert!
+    Das Entwurfsmuster *Prototyp* ist eine Lösung dieses Problems: 
+
+```cpp
+   I* i2 = i.clone();
+```
 
 #### Struktur (UML):
 
