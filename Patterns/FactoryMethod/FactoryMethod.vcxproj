@@ -148,7 +148,8 @@
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="ConceptualExample01.cpp" />
     <ClCompile Include="RealWorldFactoryMethod.cpp" />
-    <ClCompile Include="VirtualConstructorIdiom.cpp" />
+    <ClCompile Include="VirtualConstructorIdiom_01.cpp" />
+    <ClCompile Include="VirtualConstructorIdiom_02.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_factory_pattern_intro.png" />

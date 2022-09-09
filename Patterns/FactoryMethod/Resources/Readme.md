@@ -21,6 +21,24 @@ ohne den Objekttyp anzugeben, der hierzu verwendet werden soll.
 Das Entwurfsmuster definiert zuallererst eine Methode, die ein Objekt erzeugt.
 Welche Klasse hierbei herangezogen wird, entscheidet die konkrete Klasse, die diese Methode implementiert.
 
+
+#### *Virtual Constructor*:
+
+Dieses Entwurfsmuster ist auch unter dem Namen *Virtual Constructor* bekannt, dazu später noch mehr.
+
+#### Beispiele:
+
+
+Jeder Container der Standard Template Library verfügt über acht Factory-Funktionen zum Generieren verschiedener Iteratoren.
+
+  * `begin`, `cbegin`: Gibt einen Iterator bzgl. des Anfangs des Containers zurück.
+  * `end`, `cend`: Gibt einen Iterator bzgl. des Endes des Containers zurück.
+  * `rbegin`, `crbegin`: Gibt einen Reverse-Iterator bzgl. des Anfangs des Containers zurück.
+  * `rend`, `crend`: Gibt einen Reverse-Iterator bzgl. des Endes des Containers zurück.
+
+Die mit `c` beginnenden Fabrikfunktionen geben konstante Iteratoren zurück.
+
+
 #### Lösung:
 
 Das *Factory*-Entwurfsmuster definiert eine Schnittstelle zum Erstellen eines Objekts
@@ -255,91 +273,69 @@ Der gesamte Zweck dieser Redewendung besteht darin, das Klonen eines Objekts übe
 Hier ist ein Beispiel:
 
 ```cpp
-class Base
-{
-public:
-    Base() {}
-    virtual ~Base() {}
-
-    // the "Virtual Constructor"
-    static Base* Create(int id);
-
-    // the "Virtual Copy Constructor"
-    virtual Base* Clone() = 0;
-
-    virtual void printMe() = 0;
-};
-
-class Derived1 : public Base
-{
-public:
-    Derived1()
-    {
-        std::cout << "default c'tor Derived1" << std::endl;
-    }
-
-    Derived1(const Derived1& rhs)
-    {
-        std::cout << "copy c'tor Derived1" << std::endl;
-    }
-
-    ~Derived1()
-    {
-        std::cout << "c'tor Derived1" << std::endl;
-    }
-
-    virtual Base* Clone() override
-    {
-        return new Derived1(*this);
-    }
-
-    virtual void printMe() override
-    {
-        std::cout << "I'm a Derived1" << std::endl;
-    }
-};
-
-// dto. Derived2
-
-// static method
-Base* Base::Create(int id)
-{
-    if (id == 1)
-    {
-        return new Derived1();
-    }
-    else
-    {
-        return new Derived2();
-    }
-}
-
-// global function
-Base* CreateCopy(Base* pBase)
-{
-    return pBase->Clone();
-}
-
-void test_virtual_constructor_idiom()
-{
-    using namespace VirtualConstructorIdiom;
-
-    std::cout << "Enter Id (1 or 2): ";
-    int input;
-    std::cin >> input;
-    Base* pBase = Base::Create(input);
-    Base* pCopy = CreateCopy(pBase);
-
-    // dont know what object is created but still access functions through base pointer
-    pBase->printMe();
-    pCopy->printMe();
-
-    delete pBase;
-    delete pCopy;
-}
+01: // Product
+02: class Window {
+03: public:
+04:     virtual Window* create() = 0;
+05:     virtual Window* clone() = 0;
+06:     virtual ~Window() {};
+07: };
+08: 
+09: // Concrete Products 
+10: class DefaultWindow : public Window {
+11:     DefaultWindow* create() override {
+12:         std::cout << "Create DefaultWindow" << std::endl;
+13:         return new DefaultWindow();
+14:     }
+15:     DefaultWindow* clone() override {
+16:         std::cout << "Clone DefaultWindow" << std::endl;
+17:         return new DefaultWindow(*this);
+18:     }
+19: };
+20: 
+21: class FancyWindow : public Window {
+22:     FancyWindow* create() override {
+23:         std::cout << "Create FancyWindow" << std::endl;
+24:         return new FancyWindow();
+25:     }
+26:     FancyWindow* clone() override {
+27:         std::cout << "Clone FancyWindow" << std::endl;
+28:         return new FancyWindow(*this);
+29:     }
+30: };
+31: 
+32: // Concrete Creator or Client                             
+33: Window* createWindow(Window& oldWindow) {
+34:     return oldWindow.create();
+35: }
+36: 
+37: Window* cloneWindow(Window& oldWindow) {
+38:     return oldWindow.clone();
+39: }
+40: 
+41: void test_virtual_constructor_idiom()
+42: {
+43:     DefaultWindow defaultWindow;
+44:     FancyWindow fancyWindow;
+45: 
+46:     Window* defaultWindow1 = createWindow(defaultWindow);
+47:     Window* fancyWindow1 = createWindow(fancyWindow);
+48: 
+49:     Window* defaultWindow2 = cloneWindow(defaultWindow);
+50:     Window* fancyWindow2 = cloneWindow(fancyWindow);
+51: 
+52:     delete defaultWindow1;
+53:     delete fancyWindow1;
+54:     delete defaultWindow2;
+55:     delete fancyWindow2;
+56: }
 ```
 
-*Beachte*: Der Client kennt den von `Base` geerbten Klassentyp nicht, ruft aber Methoden an diesem Objekt auf!
+*Beachte*: Die Klasse `Window` unterstützt jetzt zwei Möglichkeiten, neue `Window`-Objekte zu erstellen:
+ein standardmäßig konstruiertes Fensterobjekt mit der Member-Funktion `create` (Zeile 34)
+und ein kopiert konstruiertes Fensterobjekt mit der Member-Funktion `clone` (Zeile 37).
+
+Ein subtiler Unterschied besteht darin, dass die `clone`-Methode den `this`-Zeiger verwendet (Zeile 28). 
 
 ---
 
@@ -379,6 +375,14 @@ vor.
 Das Beispiel zum *Virtual Constructor Idiom* stammt aus
 
 [Stackoverflow: Virtual constructor idiom and factory design](https://stackoverflow.com/questions/11574075/virtual-constructor-idiom-and-factory-design)
+
+
+Ein zweites Beispiel zum *Virtual Constructor Idiom* ist
+
+[Factory Method](https://www.modernescpp.com/index.php?option=com_content&view=article&id=657&catid=58)
+
+entnommen.
+
 
 ---
 

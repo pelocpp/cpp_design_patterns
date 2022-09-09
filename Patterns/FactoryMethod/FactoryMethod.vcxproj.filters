@@ -50,11 +50,14 @@
     <ClCompile Include="RealWorldFactoryMethod.cpp">
       <Filter>Source Files\RealWorldFactoryMethod</Filter>
     </ClCompile>
-    <ClCompile Include="VirtualConstructorIdiom.cpp">
+    <ClCompile Include="VirtualConstructorIdiom_01.cpp">
       <Filter>Source Files\VirtualConstructorIdiom</Filter>
     </ClCompile>
     <ClCompile Include="Points.cpp">
       <Filter>Source Files\Points</Filter>
+    </ClCompile>
+    <ClCompile Include="VirtualConstructorIdiom_02.cpp">
+      <Filter>Source Files\VirtualConstructorIdiom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

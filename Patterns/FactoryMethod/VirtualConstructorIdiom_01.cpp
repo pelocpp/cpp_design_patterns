@@ -1,11 +1,11 @@
 // ===========================================================================
-// VirtualConstructor.cpp // Factory Method // Virtual Constructor Idiom
+// VirtualConstructor_01.cpp // Factory Method // Virtual Constructor Idiom
 // ===========================================================================
 
 #include <iostream>
 #include <string>
 
-namespace VirtualConstructorIdiom {
+namespace VirtualConstructorIdiom_01 {
 
     class Base
     {
@@ -100,9 +100,9 @@ namespace VirtualConstructorIdiom {
     }
 }
 
-void test_virtual_constructor_idiom()
+void test_virtual_constructor_idiom_01()
 {
-    using namespace VirtualConstructorIdiom;
+    using namespace VirtualConstructorIdiom_01;
 
     std::cout << "Enter Id (1 or 2): ";
     int input;
