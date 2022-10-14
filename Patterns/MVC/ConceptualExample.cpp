@@ -10,16 +10,15 @@
 namespace ConceptualExample {
 
     // interface observer
-    class IValveObserver {
-    public:
+    struct IValveObserver
+    {
         virtual ~IValveObserver() {};
         virtual void valveValueChanged(int) = 0;
     };
 
     // interface valve model
-    class IValveModel
+    struct IValveModel
     {
-    public:
         // getter/setter
         virtual int getMinimum() = 0;
         virtual int getMaximum() = 0;
@@ -161,14 +160,20 @@ namespace ConceptualExample {
         std::shared_ptr<IValveModel> model{ std::make_shared<ValveModelImpl>() };
 
         // create view (being connected to the model)
-        std::shared_ptr<ValveViewLabel> labelView{ std::make_shared<ValveViewLabel>() };
+        std::shared_ptr<ValveViewLabel> labelView{
+            std::make_shared<ValveViewLabel>() 
+        };
         labelView->attach(model);
 
         // create controller (being connected to the model)
-        std::shared_ptr<OpenValveController> openController{ std::make_shared<OpenValveController>(model) };
+        std::shared_ptr<OpenValveController> openController{ 
+            std::make_shared<OpenValveController>(model) 
+        };
 
         // create second controller (being connected to the model)
-        std::shared_ptr<CloseValveController> closeController{ std::make_shared<CloseValveController>(model) };
+        std::shared_ptr<CloseValveController> closeController{
+            std::make_shared<CloseValveController>(model) 
+        };
 
         // wait for input - message loop
         char ch{ '?' };
