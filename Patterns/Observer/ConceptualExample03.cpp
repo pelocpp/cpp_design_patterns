@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Observer // Variant 3
+// ConceptualExample03.cpp // Observer // Variant 3
 // ===========================================================================
 
 /**
@@ -105,9 +105,9 @@ namespace ObserverDesignPatternSmartPointerEx {
             std::cout << "Goodbye, I was the Observer \"" << m_number << "\".\n";
         }
 
-        void update(const std::string& m_messagefrom_subject) override
+        void update(const std::string& messageFromSubject) override
         {
-            m_messageFromSubject = m_messagefrom_subject;
+            m_messageFromSubject = messageFromSubject;
             printInfo();
         }
 
@@ -117,7 +117,9 @@ namespace ObserverDesignPatternSmartPointerEx {
             {
                 std::shared_ptr<Observer> me{ shared_from_this() };
                 m_subject->detach(me);
-                std::cout << "Observer \"" << m_number << "\" removed from the list.\n";
+                std::cout 
+                    << "Observer \"" << m_number 
+                    << "\" removed from the list.\n";
             }
             catch (const std::exception& ex) {
                 std::cout << "exception: " << ex.what() << "\".\n";
@@ -125,7 +127,10 @@ namespace ObserverDesignPatternSmartPointerEx {
         }
 
         void printInfo() {
-            std::cout << "Observer \"" << m_number << "\": a new message is available --> " << m_messageFromSubject << "\n";
+            std::cout 
+                << "Observer \"" << m_number 
+                << "\": a new message is available --> " 
+                << m_messageFromSubject << "\n";
         }
     };
 

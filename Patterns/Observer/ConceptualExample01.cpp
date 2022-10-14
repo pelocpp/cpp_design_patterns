@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Observer // Variant 1
+// ConceptualExample01.cpp // Observer // Variant 1
 // ===========================================================================
 
 /**
@@ -23,7 +23,7 @@ namespace ObserverDesignPatternClassic {
     class IObserver {
     public:
         virtual ~IObserver() {};
-        virtual void update(const std::string& m_messagefrom_subject) = 0;
+        virtual void update(const std::string& messageFromSubject) = 0;
     };
 
     class ISubject {
@@ -113,42 +113,47 @@ namespace ObserverDesignPatternClassic {
             std::cout << "Goodbye, I was the Observer \"" << m_number << "\".\n";
         }
 
-        void update(const std::string& m_messagefrom_subject) override
+        void update(const std::string& messageFromSubject) override
         {
-            m_messageFromSubject = m_messagefrom_subject;
+            m_messageFromSubject = messageFromSubject;
             printInfo();
         }
 
         void removeMeFromTheList() 
         {
             m_subject.detach(this);
-            std::cout << "Observer \"" << m_number << "\" removed from the list.\n";
+            std::cout 
+                << "Observer \"" << m_number 
+                << "\" removed from the list.\n";
         }
 
         void printInfo() 
         {
-            std::cout << "Observer \"" << m_number << "\": a new message is available --> " << m_messageFromSubject << "\n";
+            std::cout 
+                << "Observer \"" << m_number 
+                << "\": a new message is available --> " 
+                << m_messageFromSubject << "\n";
         }
     };
 
     int Observer::m_static_number = 0;
 
-    void clientCode() {
+    void clientCode()
+    {
         Subject* subject{ new Subject };
-        Observer* observer1 { new Observer(*subject) };
-        Observer* observer2 { new Observer(*subject) };
-        Observer* observer3 { new Observer(*subject) };
-        Observer* observer4;
-        Observer* observer5;
+
+        Observer* observer1 { new Observer{ *subject } };
+        Observer* observer2 { new Observer{ *subject } };
+        Observer* observer3 { new Observer{ *subject } };
 
         subject->createMessage("Hello World! :D");
         observer3->removeMeFromTheList();
 
         subject->createMessage("The weather is hot today! :p");
-        observer4 = new Observer(*subject);
+        Observer* observer4 = new Observer{ *subject };
 
         observer2->removeMeFromTheList();
-        observer5 = new Observer(*subject);
+        Observer* observer5 = new Observer{ *subject };
 
         subject->createMessage("My new car is great! ;)");
         observer5->removeMeFromTheList();
