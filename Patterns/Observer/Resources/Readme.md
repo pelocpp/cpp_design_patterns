@@ -94,8 +94,8 @@ Das *Conceptual Example* liegt in drei Varianten vor:
 
 #### Realisierung mit Smart-Pointern
 
-Im &ldquo;*Subject*&rdquo; ist wie beschrieben eine Liste mit
-den Beobachtern zu verwalten. Hier sollte man beachten,
+Im &ldquo;*Subject*&rdquo; ist &ndash; wie beschrieben &ndash; eine Liste mit
+den *Beobachtern* zu verwalten. Hier sollte man beachten,
 dass eine Liste mit `std::weak_ptr`-Zeigern die bessere Wahl
 im Vergleich zu `std::shared_ptr`-Objekten ist.
 
@@ -104,12 +104,18 @@ im Vergleich zu `std::shared_ptr`-Objekten ist.
 #### `std::weak_ptr`-Objekte in einem `std::list`-Container
 
 Verwaltet man `std::weak_ptr`-Objekte in einem `std::list`-Container,
-kann es zu extrem unverstänflichen Übersetzungsfehlern kommen,
+kann es zu extrem unverständlichen Übersetzungsfehlern kommen,
 zum Beispiel, wenn man ein `std::weak_ptr`-Objekt aus der Liste entfernen möchte
-(Aufruf von `remove`). Die Ursache des Fehlers liegt darin begründet,
+(Aufruf von `remove`):
+
+```
+binary '==': 'const _Ty' does not define this operator or a conversion to a type acceptable to the predefined operator
+```
+
+Die Ursache des Fehlers liegt darin begründet,
 dass der `==`-Operator für `std::weak_ptr`-Objekte nicht vorhanden ist.
 
-Eine Lösung des Problems besteht darin, von der `remove` zur  `remove_if`-Funktion
+Eine Lösung des Problems besteht darin, von der `remove`- zur  `remove_if`-Methode
 zu wechseln und eine geeignete Lambda-Funktion zu realisieren,
 zum Beispiel so:
 
@@ -126,7 +132,7 @@ Die Klasse `std::weak_ptr` besitzt eine `owner_before` Methode,
 die eine Eigentümer-basierte Reihenfolge von `std::weak_ptr`-Zeigern implementiert.
 
 Eine detailliertere Beschreibung kann man unter
-[removing item from list of weak_ptrs](https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs) 
+&ldquo;[Removing item from list of weak_ptrs](https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs) &rdquo;
 nachlesen.
 
 ---
@@ -139,7 +145,7 @@ vor.
 
 ---
 
-**Hinweis**:
+**Hinweis** zu `shared_from_this`:
 
 In Variante 2 wird prinzipiell ohne &ldquo;raw&rdquo;-Zeiger gearbeitet, also so,
 wie man es der &ldquo;reinen Lehre&rdquo; nach machen sollte. Dabei stellt sich aber eine Frage:

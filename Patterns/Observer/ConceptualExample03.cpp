@@ -22,8 +22,8 @@ namespace ObserverDesignPatternSmartPointerEx {
     class ISubject {
     public:
         virtual ~ISubject() {};
-        virtual void attach(std::shared_ptr<IObserver>) = 0;
-        virtual void detach(std::shared_ptr<IObserver>) = 0;
+        virtual void attach(std::weak_ptr<IObserver>) = 0;
+        virtual void detach(std::weak_ptr<IObserver>) = 0;
         virtual void notify() = 0;
     };
 
@@ -36,7 +36,7 @@ namespace ObserverDesignPatternSmartPointerEx {
 
     class Subject : public ISubject {
     private:
-        std::list<std::shared_ptr<IObserver>> m_list_observers;
+        std::list<std::weak_ptr<IObserver>> m_list_observers;
         std::string m_message;
 
     public:
@@ -47,18 +47,24 @@ namespace ObserverDesignPatternSmartPointerEx {
         /**
          * subscription management methods.
          */
-        void attach(std::shared_ptr<IObserver> observer) override {
+        void attach(std::weak_ptr<IObserver> observer) override {
             m_list_observers.push_back(observer);
         }
 
-        void detach(std::shared_ptr<IObserver> observer) override {
-            m_list_observers.remove(observer);
+        void detach(std::weak_ptr<IObserver> observer) override {
+            m_list_observers.remove_if([&](std::weak_ptr<IObserver> wp) {
+                return !observer.owner_before(wp) && !wp.owner_before(observer);
+                }
+            );
         }
 
         void notify() override {
             howManyObservers();
-            for (const auto& o : m_list_observers) {
-                o->update(m_message);
+            for (std::weak_ptr<IObserver>& weakPtr : m_list_observers) {
+                std::shared_ptr<IObserver> sharedPtr{ weakPtr.lock() };
+                if (sharedPtr != nullptr) {
+                    sharedPtr->update(m_message);
+                }
             }
         }
 
