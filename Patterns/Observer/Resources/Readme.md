@@ -78,7 +78,7 @@ um *Subscriber* zu dieser Liste hinzuzufügen und aus dieser wieder zu entfernen.
 Das *Conceptual Example* liegt in drei Varianten vor:
 
   * Variante 1: klassisch - d.h. mit &ldquo;raw&rdquo;-Zeigern.
-  * Variante 2: Mit `std::shared_ptr` Objekten.
+  * Variante 2: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
   * Variante 3: Wie Variante 2, aber mit `std::enable_shared_from_this<>` Mechanismus.
   * Variante 4: Wie Variante 1, aber mit Template-Technik.
 
@@ -92,11 +92,52 @@ Das *Conceptual Example* liegt in drei Varianten vor:
 
 ---
 
+#### Realisierung mit Smart-Pointern
+
+Im &ldquo;*Subject*&rdquo; ist wie beschrieben eine Liste mit
+den Beobachtern zu verwalten. Hier sollte man beachten,
+dass eine Liste mit `std::weak_ptr`-Zeigern die bessere Wahl
+im Vergleich zu `std::shared_ptr`-Objekten ist.
+
+---
+
+#### `std::weak_ptr`-Objekte in einem `std::list`-Container
+
+Verwaltet man `std::weak_ptr`-Objekte in einem `std::list`-Container,
+kann es zu extrem unverstänflichen Übersetzungsfehlern kommen,
+zum Beispiel, wenn man ein `std::weak_ptr`-Objekt aus der Liste entfernen möchte
+(Aufruf von `remove`). Die Ursache des Fehlers liegt darin begründet,
+dass der `==`-Operator für `std::weak_ptr`-Objekte nicht vorhanden ist.
+
+Eine Lösung des Problems besteht darin, von der `remove` zur  `remove_if`-Funktion
+zu wechseln und eine geeignete Lambda-Funktion zu realisieren,
+zum Beispiel so:
+
+```cpp
+void detach(std::weak_ptr<IObserver> observer) override {
+    m_list_observers.remove_if([&](std::weak_ptr<IObserver> wp) {
+        return !observer.owner_before(wp) && !wp.owner_before(observer);
+        }
+    );
+}
+```
+
+Die Klasse `std::weak_ptr` besitzt eine `owner_before` Methode,
+die eine Eigentümer-basierte Reihenfolge von `std::weak_ptr`-Zeigern implementiert.
+
+Eine detailliertere Beschreibung kann man unter
+[removing item from list of weak_ptrs](https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs) 
+nachlesen.
+
+---
+
 Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/observer/cpp/example#example-0)
 
 vor.
+
+---
 
 **Hinweis**:
 
