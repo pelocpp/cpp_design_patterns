@@ -70,6 +70,49 @@ Der Klassenname `Adaptee` steht stellvertretend für Service-Klassen, die es gilt
 
 ---
 
+#### Beispiele zum Adapter Pattern in der STL:
+
+Die STL Container `std::stack`, `std::queue` und `std::priority_queue` bieten eine andere Schnittstelle
+für STL Sequenzcontainer an. Aus diesem Grund spricht man diesen drei Klassen auch von so genannten
+*Container Adaptern*.
+
+Das folgende Code-Snippet zeigt die Template-Signatur der drei Container-Adapter:
+
+```cpp
+template<typename T, typename Container = std::deque<T>> 
+class stack;
+
+template<typename T, typename Container = std::deque<T>> 
+class queue;
+
+template<typename T, typename Container = std::vector<T>, 
+         typename Compare = std::less<typename Container::value_type>> 
+class priority_queue;
+```
+
+Man kann erkennen, das standardmäßig `std::stack` und `std::queue` den Container `std::deque`
+als Sequenzcontainer verwenden, hingegen wird `std::vector` von `std::priority_queue` verwendet.
+
+Darüber hinaus erfordert `std::priority_queue` auch ein Vergleichsobjekt,
+das standardmäßig auf `std::less` voreingestellt ist.
+
+---
+
+#### Weitere Beispiele zum Adapter Pattern in der STL:
+
+Neben den *Container Adaptern* in der STL gibt es auch die *Iteratoren Adapter*,
+beispielsweise die &ldquo;Einfüge Iteratoren&rdquo;:
+
+  * `std::front_inserter`
+  * `std::back_inserter`
+  * `std::inserter`
+
+Mit diesen *Iteratoren Adaptern* lassen sich Elemente am Anfang, am Ende oder an einer beliebigen Stelle
+in einen Container einfügen.
+
+---
+
+
 **Hinweis**: Prinzipiell gibt es für das Adapter Pattern zwei Vorgehensweisen in der Umsetzung mit einer realen Programmiersprache:
 
   * **Objekt Adapter Ansatz**:
@@ -96,6 +139,23 @@ das Muster auf Basis des *Klassen Adapter* Ansatzes vor:
 *Abbildung* 2: Schematische Darstellung des *Adapter Patterns* (*Klassen Adapter Ansatzes*).
 
 Im *Real-World* Beispiel zu diesem Entwurfsmuster finden Sie beide Varianten umgesetzt vor.
+
+---
+
+#### Abgrenzung zu anderen Entwurfsmustern:
+
+  * Das *Adapter Pattern* implementiert als Objektadapter ähnelt dem *Bridge Pattern*,
+  hat jedoch eine andere Absicht.
+  Der Zweck des *Bridge Patterns* besteht darin, die Schnittstelle von der Implementierung zu trennen.
+  Der Zweck des *Adapter Patterns* besteht darin, eine vorhandene Schnittstelle zu modifizieren.
+
+  * Das *Decorator Pattern* erweitert ein Objekt, ohne seine Schnittstelle zu ändern.
+  Decoratoren-Objekte sind in diesem Sinne *pluggable*, im Gegensatz zum *Bridge-* oder *Adapter Pattern*.
+
+  * Das *Proxy Pattern* erweitert die Implementierung für das Objekt, für das es steht,
+  ändert jedoch nicht seine Schnittstelle.
+
+
 
 ---
 
@@ -153,6 +213,10 @@ diese an die Adapterklasse weiter, so dass die Anforderung doch unterstützt werd
 sondern er darf nur über die vorhandene Client-Schnittstelle mit dem Adapter zusammenarbeiten
 (im vorliegenden Beispiel: Schnittstelle `MediaPlayer`). Auf diese Weise lassen sich neue Adapterklassen
 in das Programm einführen, ohne inkompatibel zum vorhandenen Client-Code zu sein!
+
+---
+
+#### Abgrenzung zu anderen Entwurfsmustern:
 
 ---
 

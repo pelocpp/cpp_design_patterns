@@ -123,6 +123,23 @@ vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge
 
 ---
 
+#### Abgrenzung zu anderen Entwurfsmustern:
+
+  * Das *Composite Pattern* ist ein strukturelles Muster ähnlich dem Decorator.
+  Der Hauptunterschied besteht darin, dass das *Decorator Muster* nur ein Kindobjekt hat.
+
+  * Darüber hinaus fügt das Decorator-Muster einem Objekt neue Verantwortlichkeiten hinzu,
+  während das *Composite Pattern* die Ergebnisse seiner Kinder zusammenfasst.
+
+  * Das *Adapter Pattern* ändert die Schnittstelle eines Objekts,
+  durch das *Decorator Muster* werden die Verantwortlichkeiten / wird die Funktionalität
+  eines Objekts erweitert.
+
+  * Das *Strategy Design Pattern* verwendet Objekte, um eine Implementierung zu ändern.
+  Der *Dekorateur* verwendet Objekte, um die Funktionalität eines Objekts zu erweitern.
+
+---
+
 #### Conceptual Example:
 
 [Quellcode](../ConceptualExample.cpp)

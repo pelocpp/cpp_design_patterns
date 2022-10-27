@@ -67,6 +67,17 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 ---
 
+#### Abgrenzung zu anderen Entwurfsmustern:
+
+
+  * Das *Adapter Pattern* implementiert als Objektadapter ähnelt dem *Bridge Pattern*,
+  hat jedoch eine andere Absicht.
+  Der Zweck des *Bridge Patterns* besteht darin, die Schnittstelle von der Implementierung zu trennen.
+  Der Zweck des *Adapter Patterns* besteht darin, eine vorhandene Schnittstelle zu modifizieren.
+
+---
+
+
 #### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version
