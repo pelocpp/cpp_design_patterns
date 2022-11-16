@@ -155,8 +155,6 @@ Im *Real-World* Beispiel zu diesem Entwurfsmuster finden Sie beide Varianten umg
   * Das *Proxy Pattern* erweitert die Implementierung für das Objekt, für das es steht,
   ändert jedoch nicht seine Schnittstelle.
 
-
-
 ---
 
 #### Pluggable Adapter Design Pattern mit Modern C++:
@@ -213,10 +211,6 @@ diese an die Adapterklasse weiter, so dass die Anforderung doch unterstützt werd
 sondern er darf nur über die vorhandene Client-Schnittstelle mit dem Adapter zusammenarbeiten
 (im vorliegenden Beispiel: Schnittstelle `MediaPlayer`). Auf diese Weise lassen sich neue Adapterklassen
 in das Programm einführen, ohne inkompatibel zum vorhandenen Client-Code zu sein!
-
----
-
-#### Abgrenzung zu anderen Entwurfsmustern:
 
 ---
 

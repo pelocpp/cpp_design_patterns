@@ -365,6 +365,20 @@ Anregungen finden sich zum Beispiel unter
 
 ---
 
+#### Pro / Kontra:
+
+###### Pros:
+
+  * Auf Basis von Polymorphismus und Rekursion lassen sich komplexe Baumstrukturen einheitlich behandeln.
+  * Es ist ziemlich einfach, die Baumstruktur um neue Komponenten zu erweitern.
+
+###### Kontras:
+
+  * Jede neue Operation der Komponente muss auf dem Blattknoten und dem zusammengesetzten Knoten implementiert werden.
+
+---
+
+
 ## FAQs
 
 *Frage*: Unterschied zwischen *Decorator*- und *Composite*-Pattern?

@@ -80,6 +80,20 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
+#### Pro / Kontra:
+
+###### Pros:
+
+  * Die Komplexität eines existierenden Quellcodes kann vor dem Client verborgen werden.
+  * &ldquo;Macht Schnittstellen einfach richtig zu bedienen und schwer falsch zu verwenden.&rdquo; (Scott Meyers).
+  * Kann behilflich sein, komplexe Systeme auf eine andere Plattform zu portieren, weil der Client nur auf die Fassade angewiesen ist.
+
+###### Kontras:
+
+  * Eine Fassade hat möglicherweise zu viele Verantwortlichkeiten und endet im Antimuster &ldquo;God Object&rdquo;.
+
+---
+
 ## Literaturhinweise
 
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter

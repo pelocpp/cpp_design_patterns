@@ -105,6 +105,8 @@ als auch die neuen Methoden besitzt, die der Klasse hinzugefügt werden sollen.
 Platzieren Sie in den Dekoratoren die neuen Methoden-Anrufe
 vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge zu erhalten.
 
+---
+
 #### Pro / Kontra:
 
 ###### Pros:

@@ -183,6 +183,21 @@ drawing image image_1.png
 
 ---
 
+#### Pro / Kontra:
+
+###### Pros:
+
+  * Das zugrunde liegende Objekt ist für den Client vollständig transparent.
+  * Der Proxy kann Anfragen direkt beantworten, ohne sich an den Client zu wenden.
+  * Der Proxy kann transparent erweitert oder durch einen anderen Proxy ersetzt werden.
+
+###### Kontras:
+
+  * Die Trennung von Proxy-Objekt und Ziel-Objekt trägt nicht zur Vereinfachung des Quellcodes bei.
+  * Die weitergeleiteten Proxy-Aufrufe können leistungskritisch sein (Performanz).
+
+---
+
 ## FAQs
 
 *Frage*: Unterschied zwischen *Proxy*- und *Decorator*-Pattern?
