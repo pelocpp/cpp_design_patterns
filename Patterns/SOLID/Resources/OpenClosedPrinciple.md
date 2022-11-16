@@ -102,7 +102,7 @@ Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
     In diesem Fall sind die Klassen `Product` und `ProductFilter` zu ändern
     und neue Filtermethoden hinzufügen.
   * Dieser Ansatz ist problematisch, da wir zwei Attribute (`Color` und `Size`) 
-    und drei Filterfunktionen (bzgl. `Color`, `Size` und ihre Kombination) haben.
+    und drei Filterfunktionen (bzgl. `Color`, `Size` und ihre Kombinationen) haben.
     Ein weiteres Attribut hätte zur Folge, dass acht neue Funktionen zu implementieren sind.
     Dieser Ansatz ist nicht nur nicht zielführend,
     der bereits existierende, realisierte Quellcode ist zu modifizieren.
@@ -160,13 +160,13 @@ sind die am meisten verbreitete Vorgehensweise:
 041: template <typename T>
 042: struct Filter 
 043: {
-044:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) = 0;
+044:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const = 0;
 045: };
 046: 
 047: template <typename T>
 048: struct ProductFilter : public Filter<T>
 049: {
-050:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) override
+050:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const override
 051:     {
 052:         Products<T> result;
 053:         for (const auto& product : products) {

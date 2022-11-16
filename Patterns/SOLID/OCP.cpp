@@ -94,13 +94,13 @@ namespace ConceptualExampleOCP {
     template <typename T>
     struct Filter 
     {
-        virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) = 0;
+        virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const = 0;
     };
 
     template <typename T>
     struct ProductFilter : public Filter<T>
     {
-        virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) override
+        virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const override
         {
             Products<T> result;
             for (const auto& product : products) {

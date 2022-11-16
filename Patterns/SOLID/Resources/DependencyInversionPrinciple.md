@@ -98,7 +98,7 @@ Betrachten Sie den folgenden Vorschlag:
 21:         m_relations.push_back({ child, Relationship::Child, parent });
 22:     }
 23: 
-24:     virtual std::vector<Person> findAllChildrenOf(const std::string& name) const override {
+24:     std::vector<Person> findAllChildrenOf(const std::string& name) const override {
 25: 
 26:         std::vector<Person> result;
 27:         for (const auto& [first, rel, second] : m_relations) {

@@ -61,7 +61,7 @@ namespace DependencyInversionPrinciple02
             m_relations.push_back({ child, Relationship::Child, parent });
         }
 
-        virtual std::vector<Person> findAllChildrenOf(const std::string& name) const override {
+        std::vector<Person> findAllChildrenOf(const std::string& name) const override {
 
             std::vector<Person> result;
             for (const auto& [first, rel, second] : m_relations) {
