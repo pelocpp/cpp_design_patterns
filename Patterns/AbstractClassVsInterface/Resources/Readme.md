@@ -47,14 +47,14 @@ definieren wollen, betrachten wir *virtuelle* und *rein virtuelle* Methoden in C
   Syntaktisch wird der Methodendeklaration die Kennung `= 0` am Ende hinzugefügt.
 
 Eine abstrakte Klasse in C++
-  a) muss mindestens eine rein virtuelle Methode haben,
-  b) kann implementierte Methoden haben und
-  c) kann Variablendeklaration haben.
+  1. muss mindestens eine rein virtuelle Methode haben,
+  2. kann implementierte Methoden haben und
+  3. kann Variablendeklaration haben.
 
 
 Eine Schnittstelle (*interface*) in C++
-  a) hat alle Methoden als rein virtuelle Methoden deklariert,
-  b) hat keine Variablendeklaration.
+  1. hat alle Methoden als rein virtuelle Methoden deklariert,
+  2. hat keine Variablendeklaration.
 
 Siehe Beispiele im Quelltext hierzu.
 
