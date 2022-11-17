@@ -78,7 +78,7 @@ Wir betrachten das Entwurfsmuster *Prototyp* an Hand der Fragestellung
     und Sie nur ein neues Objekt von genau der gleichen Implementierung erhalten möchten,
     ohne dabei auf mühselige Casting- oder Typumwandlungsmethoden zurückzugreifen.
 
-  * Nehmen wir an, Sie haben Schnittstelle `I` und die Implementierungen `A` und `B`. Irgendwann erhalten Sie das Objekt `i`, das `I` implementiert.
+  * Nehmen wir an, Sie haben Schnittstelle `I` und die Implementierungen `A` und `B`. Irgendwann erhalten Sie ein Objekt `i`, das `I` implementiert.
     Vielleicht möchten Sie es nicht ändern, sondern lieber eine neue Instanz erhalten und dann einige Änderungen daran vornehmen.
     Wie könnte das erreicht werden, wenn Sie die genaue Klasse von `i` nicht kennen?
     Sie wissen also nicht, ob `i`  ein Objekt der Klasse `A` oder `B` referenziert!

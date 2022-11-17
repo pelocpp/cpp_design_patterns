@@ -44,7 +44,7 @@ void test_conceptual_example_01()
     using namespace ConceptualExample01;
 
     std::shared_ptr<Prototype> prototype {
-        std::make_shared<ConcretePrototype>(1) 
+        std::make_shared<ConcretePrototype>(123) 
     };
 
     std::shared_ptr<Prototype> clone { prototype->clone() };
@@ -52,7 +52,7 @@ void test_conceptual_example_01()
     std::cout << "Prototype: " << prototype->getId() << std::endl;
     std::cout << "Clone:     " << clone->getId() << std::endl;
 
-    clone->setId(2);
+    clone->setId(456);
 
     std::cout << "Prototype: " << prototype->getId() << std::endl;
     std::cout << "Clone:     " << clone->getId() << std::endl;

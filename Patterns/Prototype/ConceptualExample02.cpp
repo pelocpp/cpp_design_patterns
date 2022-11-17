@@ -34,33 +34,33 @@ namespace ConceptualExample02 {
     };
 
     /**
-     * The example class that has cloning ability. 
+     * The example class that has cloning ability.
      * We'll see how the values of fields with different types will be cloned.
      */
 
-    class Prototype 
+    class Prototype
     {
     protected:
-        std::string m_prototypeName;
-        float m_prototypeField;
+        std::string m_name;
+        float m_field;
 
     public:
-        Prototype() : m_prototypeName{}, m_prototypeField{} {}
+        Prototype() : m_name{}, m_field{} {}
 
         Prototype(std::string prototype_name)
-            : m_prototypeName{ prototype_name }, m_prototypeField{} {}
+            : m_name{ prototype_name }, m_field{} {}
 
         virtual ~Prototype() {}
 
         virtual Prototype* clone() const = 0;
 
         virtual void print() {
-            std::cout << "print:  " << m_prototypeName << " with field : " << m_prototypeField << std::endl;
+            std::cout << "print:  " << m_name << " with field : " << m_field << std::endl;
         }
 
-        virtual void update(float prototype_field) {
-            this->m_prototypeField = prototype_field;
-            std::cout << "Call update from " << m_prototypeName << " with field : " << prototype_field << std::endl;
+        virtual void update(float field) {
+            m_field = field;
+            std::cout << "Call update from " << m_name << " with field : " << m_field << std::endl;
         }
     };
 
@@ -72,14 +72,14 @@ namespace ConceptualExample02 {
      * clone method
      */
 
-    class ConcretePrototype1 : public Prototype 
+    class ConcretePrototype1 : public Prototype
     {
     private:
-        float m_concretePrototypeField1;
+        float m_concreteField1;
 
     public:
-        ConcretePrototype1(std::string prototype_name, float concrete_prototype_field)
-            : Prototype{ prototype_name }, m_concretePrototypeField1{ concrete_prototype_field } {}
+        ConcretePrototype1(std::string name, float concrete_field)
+            : Prototype{ name }, m_concreteField1{ concrete_field } {}
 
         /**
          * Notice that the clone method returns a pointer to a new ConcretePrototype1
@@ -92,14 +92,14 @@ namespace ConceptualExample02 {
         }
     };
 
-    class ConcretePrototype2 : public Prototype 
+    class ConcretePrototype2 : public Prototype
     {
     private:
-        float m_concretePrototypeField2;
+        float m_concreteField2;
 
     public:
-        ConcretePrototype2(std::string prototype_name, float concrete_prototype_field)
-            : Prototype{ prototype_name }, m_concretePrototypeField2{ concrete_prototype_field } {}
+        ConcretePrototype2(std::string name, float concrete_field)
+            : Prototype{ name }, m_concreteField2{ concrete_field } {}
 
         virtual Prototype* clone() const override {
             return new ConcretePrototype2{ *this };
@@ -112,7 +112,7 @@ namespace ConceptualExample02 {
      * existing ones and clone those.
      */
 
-    class PrototypeFactory 
+    class PrototypeFactory
     {
     private:
         std::unordered_map<Type, Prototype*> m_originals;
@@ -120,8 +120,8 @@ namespace ConceptualExample02 {
     public:
         PrototypeFactory()
         {
-            m_originals[Type::PROTOTYPE_1] = new ConcretePrototype1("PROTOTYPE_1 ", 50.f);
-            m_originals[Type::PROTOTYPE_2] = new ConcretePrototype2("PROTOTYPE_2 ", 60.f);
+            m_originals[Type::PROTOTYPE_1] = new ConcretePrototype1("Prototype_1 ", 50.f);
+            m_originals[Type::PROTOTYPE_2] = new ConcretePrototype2("Prototype_2 ", 60.f);
         }
 
         /**
@@ -143,7 +143,7 @@ namespace ConceptualExample02 {
         }
     };
 
-    void client(PrototypeFactory& factory) 
+    void client(PrototypeFactory& factory)
     {
         std::cout << "Let's create a Prototype 1" << std::endl;
 
@@ -171,6 +171,8 @@ void test_conceptual_example_02()
     delete prototype_factory;
 }
 
+
 // ===========================================================================
 // End-of-File
 // ===========================================================================
+
