@@ -4,6 +4,22 @@
 
 ---
 
+
+#### Grundlagen 
+
+*Abstrakte Klassen* und *Schnittstellen* werden beide verwendet,
+um Abstraktion zu erreichen.
+
+In beiden Konstrukten lassen sich abstrakte Methoden deklarieren.
+
+Weder abstrakte Klassen noch Schnittstellen sind instanziierbar.
+
+Einen Überblick zu abstrakten Klassen und Schnittstellen
+finden Sie [hier](../Patterns/AbstractClassVsInterface/Resources/Readme.md).
+
+---
+
+
 Neben *Entwurfsmustern* gibt es in der Softwareentwicklung auch *Entwurfsprinzipien*.
 Hierunter versteht man Prinzipien, die die Erzeugung wartbarer und erweiterbarer Software ermöglichen.
 
@@ -40,6 +56,8 @@ Diese kann man folgendermaßen unterteilen:
   * Prinzipien zum Entwurf einzelner Klassen
   * Prinzipien zum Entwurf miteinander kooperierender Klassen
 
+---
+
 #### SOLID
 
 Robert C. Martin - auch unter den Spitznamen „*Uncle Bob*“ bzw. „*that guy from ObjectMentor*“ bekannt - 
@@ -62,6 +80,8 @@ Im Überblick betrachtet lassen sich diese Prinzipien wie folgt zusammenfassen:
   * *Liskovsches Substitutionsprinzip*:<br/>Dass sich eine abgeleitete Klasse stets so zu verhalten habe, wie die zugrunde liegende Basisklasse, fordert das LSP. Das Ziel ist, jederzeit an Stelle der Superklasse eine Subklasse ohne semantische Änderungen verwenden zu können.
   * *Interface Segregation Prinzip*:<br/>Große Interfaces sind auf mehrere kleine aufzuteilen, sodass ein Verwender nur genau jene Interfaces implementieren muss, die tatsächlich notwendig sind.
   * *Dependency Inversion Prinzip*:<br/>Abhängigkeiten sollten stets von konkreten zu abstrakten Modulen verlaufen, sodass konkrete Implementierungen leichter auszutauschen sind und sich voneinander entkoppeln lassen.
+
+---
 
 #### Weitere Entwurfsprinzipien
 

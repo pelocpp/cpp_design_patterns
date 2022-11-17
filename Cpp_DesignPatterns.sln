@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29911.84
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{60AD0A9A-5241-4A56-9619-C260AE166D44}"
 	ProjectSection(SolutionItems) = preProject
@@ -82,6 +82,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InterpreterPattern", "Patterns\InterpreterPattern\InterpreterPattern.vcxproj", "{ECF95415-81E6-4722-AE72-96D9CC9BE5BB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TypeErasure", "Patterns\TypeErasure\TypeErasure.vcxproj", "{447E2D49-CFE9-4EE6-8224-6096453054AA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AbstractClassVsInterface", "Patterns\AbstractClassVsInterface\AbstractClassVsInterface.vcxproj", "{4C018379-CD5D-45E5-B441-0FDB0822BEA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -339,6 +341,14 @@ Global
 		{447E2D49-CFE9-4EE6-8224-6096453054AA}.Release|x64.Build.0 = Release|x64
 		{447E2D49-CFE9-4EE6-8224-6096453054AA}.Release|x86.ActiveCfg = Release|Win32
 		{447E2D49-CFE9-4EE6-8224-6096453054AA}.Release|x86.Build.0 = Release|Win32
+		{4C018379-CD5D-45E5-B441-0FDB0822BEA7}.Debug|x64.ActiveCfg = Debug|x64
+		{4C018379-CD5D-45E5-B441-0FDB0822BEA7}.Debug|x64.Build.0 = Debug|x64
+		{4C018379-CD5D-45E5-B441-0FDB0822BEA7}.Debug|x86.ActiveCfg = Debug|Win32
+		{4C018379-CD5D-45E5-B441-0FDB0822BEA7}.Debug|x86.Build.0 = Debug|Win32
+		{4C018379-CD5D-45E5-B441-0FDB0822BEA7}.Release|x64.ActiveCfg = Release|x64
+		{4C018379-CD5D-45E5-B441-0FDB0822BEA7}.Release|x64.Build.0 = Release|x64
+		{4C018379-CD5D-45E5-B441-0FDB0822BEA7}.Release|x86.ActiveCfg = Release|Win32
+		{4C018379-CD5D-45E5-B441-0FDB0822BEA7}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
