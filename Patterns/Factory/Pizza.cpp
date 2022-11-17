@@ -69,13 +69,14 @@ namespace PizzasExample {
 
     /*
     *   What if we have some new pizzas:  ClamPizza and VeggiePizza
-    *   and dont's suoort anymore GreekPizza?
+    *   and dont's support anymore GreekPizza?
     */
 
     class PizzaFactory
     {
     public:
         static std::shared_ptr<IPizza> createPizza(std::string type) {
+
             std::shared_ptr<IPizza> pizza{ nullptr };
 
             if (type == std::string{ "cheese" }) {

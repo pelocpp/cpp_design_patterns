@@ -51,8 +51,7 @@ namespace MobilePhonesExample {
         // according to the parameter passsed
         std::shared_ptr<IMobile> getType(std::string str) {
 
-            if (str == std::string("Samsung"))
-            {
+            if (str == std::string("Samsung")) {
                 m_mobile = std::make_shared<Samsung>();
             }
             else if (str == std::string("iPhone")) {

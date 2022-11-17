@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Für die Erstellung von Objekten im Gegensatz zur *Builder*-Vorgehensweise, die stückweise erstellt.&rdquo;
+&ldquo;Erstellung von Objekten, ohne dem Client die Erstellungslogik zur Verfügung zu stellen.&rdquo;
 
 Das *Factory Pattern* ist ein Entwurfsmuster, mit dem Objekte erstellt werden können,
 ohne die Erstellungslogik dem Client zur Verfügung zu stellen.
@@ -121,24 +121,25 @@ zu platzieren:
 02: {
 03: public:
 04:     static std::shared_ptr<IPizza> createPizza(std::string type) {
-05:         std::shared_ptr<IPizza> pizza{ nullptr };
-06: 
-07:         if (type == std::string{ "cheese" }) {
-08:             pizza = std::make_shared<CheesePizza>();
-09:         }
-10:         else if (type == std::string{ "pepperoni" }) {
-11:             pizza = std::make_shared<PepperoniPizza>();
-12:         }
-13:         else if (type == std::string{ "clam" }) {
-14:             pizza = std::make_shared<ClamPizza>();
-15:         }
-16:         else if (type == std::string{ "veggie" }) {
-17:             pizza = std::make_shared<VeggiePizza>();
-18:         }
-19: 
-20:         return pizza;
-21:     }
-22: };
+05: 
+06:         std::shared_ptr<IPizza> pizza{ nullptr };
+07: 
+08:         if (type == std::string{ "cheese" }) {
+09:             pizza = std::make_shared<CheesePizza>();
+10:         }
+11:         else if (type == std::string{ "pepperoni" }) {
+12:             pizza = std::make_shared<PepperoniPizza>();
+13:         }
+14:         else if (type == std::string{ "clam" }) {
+15:             pizza = std::make_shared<ClamPizza>();
+16:         }
+17:         else if (type == std::string{ "veggie" }) {
+18:             pizza = std::make_shared<VeggiePizza>();
+19:         }
+20: 
+21:         return pizza;
+22:     }
+23: };
 ```
 
 Damit sieht unsere `orderPizza`-Methode nun so aus:
@@ -160,6 +161,7 @@ std::shared_ptr<IPizza> orderPizzaEx(std::string type)
 Diese Überlegungen sollen die Einführung eines
 &ldquo;Fabrik&rdquo;-Gedankens motivieren.
 
+---
 
 #### Struktur (UML):
 
@@ -181,6 +183,13 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
+#### Abgrenzung zu anderen Entwurfsmustern:
+
+  * Das *Factory Pattern* erstellt seine Objekte im Ganzen im Gegensatz zur *Builder*-Vorgehensweise.
+    Hier werden die Objekte stückweise erstellt.  
+
+---
+
 #### Conceptual Example:
 
 [Quellcode](../ConceptualExample.cpp)
@@ -199,15 +208,21 @@ Wir betrachten ein zweites, konkretes Beispiel,
 in dem es um Dokumente unterschiedlichen Formats geht:
 
 ```cpp
-std::unique_ptr<IDocument> awkwardOpen(std::string path) {
-    if (path.ends_with(".pdf")) return std::make_unique<PdfDocument>();
-    if (path.ends_with(".html")) return std::make_unique<HtmlDocument>();
+// non recommendable implementation
+std::unique_ptr<IDocument> open(std::string path) 
+{
+    if (path.ends_with(".pdf"))
+        return std::make_unique<PdfDocument>(path);
+
+    if (path.ends_with(".html")) 
+        return std::make_unique<HtmlDocument>(path);
+
     return nullptr;
 }
 ```
 
-Wie gehen wir vor, wenn wir die `open`&ndash;Funktion um weitere Dokumentarten wie zum Beispiel
-*OpenDocument* erweitern wollen?
+Wie gehen wir vor, wenn wir die `open`-Funktion um weitere Dokumentarten wie zum Beispiel
+*OdtDocument* erweitern wollen?
 
 Dabei sollten wir das *Open-Closed-Prinzip* nicht außer Acht lassen!
 
@@ -223,48 +238,53 @@ Dokumenttypen ist eine Registrierungsfunktionen, die es gestattet, eigene Typen 
 06: 
 07: class PdfDocument : public IDocument 
 08: {
-09: public:
-10:     explicit PdfDocument() {}
-11:     explicit PdfDocument(std::string path) {}
-12: 
-13:     std::vector<std::string> getText() override {
-14:         return { "Text from PDF" };
-15:     }
-16: };
-17: 
-18: class HtmlDocument : public IDocument 
-19: ...
-20: 
-21: class OdtDocument : public IDocument 
-22: ...
-23: 
-24: class DocumentFactory
-25: {
-26: public:
-27:     using DocumentType = std::unique_ptr<IDocument>;
+09: private:
+10:     std::string m_path;
+11: 
+12: public:
+13:     PdfDocument(std::string path) : m_path{ path } {}
+14: 
+15:     std::vector<std::string> getText() override {
+16:         return { "Text from PDF" };
+17:     }
+18: };
+19: 
+20: class HtmlDocument : public IDocument 
+21: ...
+22: 
+23: class OdtDocument : public IDocument 
+24: ...
+25: 
+26: template <typename T>
+27: using DocumentType = std::unique_ptr<T>;
 28: 
-29:     using ConcreteOpener = std::function<DocumentType(std::string)>;
+29: using Document = DocumentType<IDocument>;
 30: 
-31:     void Register(const std::string& extension, const ConcreteOpener& opener) {
-32:         openerByExtension.emplace(extension, opener);
-33:     }
-34: 
-35:     DocumentType open(std::string path) {
-36:         auto last_dot = path.find_last_of('.');
-37:         if (last_dot != std::string::npos) {
-38:             auto extension = path.substr(last_dot + 1);
-39:             auto& opener = openerByExtension.at(extension);
-40:             auto document = opener(path);
-41:             return document;
-42:         }
-43:         else {
-44:             throw std::invalid_argument{ "Trying to open a file with no extension" };
-45:         }
-46:     }
-47: 
-48: private:
-49:     std::unordered_map<std::string, ConcreteOpener> openerByExtension;
-50: };
+31: using DocumentReader = std::function<Document(std::string)>;
+32: 
+33: class DocumentFactory
+34: {
+35: private:
+36:     std::unordered_map<std::string, DocumentReader> m_readers;
+37: 
+38: public:
+39:     void add(const std::string& extension, const DocumentReader& reader) {
+40:         m_readers.emplace(extension, reader);
+41:     }
+42: 
+43:     Document open(std::string path) {
+44:         auto lastDot = path.find_last_of('.');
+45:         if (lastDot != std::string::npos) {
+46:             std::string extension = path.substr(lastDot + 1);
+47:             DocumentReader& reader = m_readers.at(extension);
+48:             Document document = reader(path);
+49:             return document;
+50:         }
+51:         else {
+52:             throw std::invalid_argument{ "Trying to open a file with no extension" };
+53:         }
+54:     }
+55: };
 ```
 
 *Bemerkung*:

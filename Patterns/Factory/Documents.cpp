@@ -19,9 +19,11 @@ namespace DocumentsExample {
 
     class PdfDocument : public IDocument 
     {
+    private:
+        std::string m_path;
+
     public:
-        explicit PdfDocument() {}
-        explicit PdfDocument(std::string path) {}
+        PdfDocument(std::string path) : m_path{ path } {}
 
         std::vector<std::string> getText() override {
             return { "Text from PDF" };
@@ -30,9 +32,11 @@ namespace DocumentsExample {
 
     class HtmlDocument : public IDocument 
     {
+    private:
+        std::string m_path;
+
     public:
-        explicit HtmlDocument() {}
-        explicit HtmlDocument(std::string path) {}
+        HtmlDocument(std::string path) : m_path{ path } {}
 
         std::vector<std::string> getText() override {
             return { "Text from HTML" };
@@ -41,9 +45,11 @@ namespace DocumentsExample {
 
     class OdtDocument : public IDocument 
     {
+    private:
+        std::string m_path;
+
     public:
-        explicit OdtDocument() {}
-        explicit OdtDocument(std::string path) {}
+        OdtDocument(std::string path) : m_path{ path } {}
 
         std::vector<std::string> getText() override { 
             return { "Text from ODT" }; 
@@ -62,32 +68,35 @@ namespace DocumentsExample {
         return nullptr;
     }
 
+    template <typename T>
+    using DocumentType = std::unique_ptr<T>;
+
+    using Document = DocumentType<IDocument>;
+
+    using DocumentReader = std::function<Document(std::string)>;
+
     class DocumentFactory
     {
+    private:
+        std::unordered_map<std::string, DocumentReader> m_readers;
+
     public:
-        using DocumentType = std::unique_ptr<IDocument>;
-
-        using ConcreteOpener = std::function<DocumentType(std::string)>;
-
-        void Register(const std::string& extension, const ConcreteOpener& opener) {
-            openerByExtension.emplace(extension, opener);
+        void add(const std::string& extension, const DocumentReader& reader) {
+            m_readers.emplace(extension, reader);
         }
 
-        DocumentType open(std::string path) {
-            auto last_dot = path.find_last_of('.');
-            if (last_dot != std::string::npos) {
-                auto extension = path.substr(last_dot + 1);
-                auto& opener = openerByExtension.at(extension);
-                auto document = opener(path);
+        Document open(std::string path) {
+            auto lastDot = path.find_last_of('.');
+            if (lastDot != std::string::npos) {
+                std::string extension = path.substr(lastDot + 1);
+                DocumentReader& reader = m_readers.at(extension);
+                Document document = reader(path);
                 return document;
             }
             else {
                 throw std::invalid_argument{ "Trying to open a file with no extension" };
             }
         }
-
-    private:
-        std::unordered_map<std::string, ConcreteOpener> openerByExtension;
     };
 }
 
@@ -95,30 +104,30 @@ void test_documents()
 {
     using namespace DocumentsExample;
 
-    auto document_opener = DocumentFactory{};
+    auto factory = DocumentFactory{};
 
-    document_opener.Register(
+    factory.add(
         "pdf",
-        [](auto path) -> DocumentFactory::DocumentType {
+        [](auto path) -> Document {
             return std::make_unique<PdfDocument>(path);
         }
     );
 
-    document_opener.Register(
+    factory.add(
         "html",
-        [](auto path) -> DocumentFactory::DocumentType {
+        [](auto path) -> Document {
             return std::make_unique<HtmlDocument>(path);
         }
     );
 
-    document_opener.Register(
+    factory.add(
         "odt",
-        [](auto path) -> DocumentFactory::DocumentType {
+        [](auto path) -> Document {
             return std::make_unique<OdtDocument>(path);
         }
     );
 
-    auto document = document_opener.open("file.odt");
+    Document document = factory.open("file.odt");
 
     std::cout << document->getText().front();
 }
