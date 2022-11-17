@@ -10,7 +10,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Um einen generischen Container zu erstellen, der eine Vielzahl von konkreten Typen aufnehmen kann.&rdquo;
+&ldquo;Um einen generischen Container zu erstellen, der eine Vielzahl unterschiedlicher, konkreter Typen aufnehmen kann.&rdquo;
 
 *Type Erasure* ermöglicht es, verschiedene Datentypen mit einem generischen Interface zu verwenden.
 Das Idiom *Type Erasure* ist auch unter dem Namen &ldquo;*Duck Typing*&rdquo; bekannt.
@@ -38,46 +38,46 @@ Etwas mehr vor einem programmiersprachlichen Hintergrund formuliert bedeutet das
 Wir rufen eine Funktion `acceptsOnlyDucks` mit einem Vogel auf und hoffen auf das Beste :).
 Geht irgend etwas schief, dann gibt es immer noch die Möglichkeiten des Exception Handlings.
 Sprachlich gibt es diese Vorgehensweise in Python &ndash; und mit etwas Aufwand auch in C++,
-wie wir in den folgenden Beispielen sehen werden:
+wie wir im folgenden Beispiel sehen werden:
 
 #### Motivation: *Polymorphismus mit Schnittstellen*
  
 Wir betrachten zunächst den klassischen Weg des *Polymorphismus mit Schnittstellen*.
-Zunächst definieren wir eine Schnittstelle (hier: `Animal`), die ausschließlich aus rein virtuellen Methoden besteht.
+Zunächst definieren wir eine Schnittstelle (hier: `IAnimal`), die ausschließlich aus rein virtuellen Methoden besteht.
 
 Anschließend erstellen wir für jede Implementierung, die diese Schnittstelle verwenden möchte,
 eine Unterklasse, die von der Basisklasse (Schnittstellenklasse) erbt und ihre Methoden implementiert.
 
 ```cpp
-01: class Animal
+01: class IAnimal
 02: {
 03: public:
 04:     virtual std::string see() const = 0;
 05:     virtual std::string say() const = 0;
 06: };
 07: 
-08: class Cow : public Animal
+08: class Cow : public IAnimal
 09: {
 10: public:
 11:     virtual std::string see() const override { return "cow"; }
 12:     virtual std::string say() const override { return "moo"; }
 13: };
 14: 
-15: class Pig : public Animal
+15: class Pig : public IAnimal
 16: {
 17: public:
 18:     std::string see() const { return "pig"; }
 19:     std::string say() const { return "oink"; }
 20: };
 21: 
-22: class Dog : public Animal
+22: class Dog : public IAnimal
 23: {
 24: public:
 25:     std::string see() const { return "dog"; }
 26:     std::string say() const { return "woof"; }
 27: };
 28: 
-29: void seeAndSay(const std::shared_ptr<Animal> animal)
+29: void seeAndSay(const std::shared_ptr<IAnimal> animal)
 30: {
 31:     std::cout 
 32:         << "The " << animal->see() << " says '"
@@ -86,9 +86,9 @@ eine Unterklasse, die von der Basisklasse (Schnittstellenklasse) erbt und ihre M
 35: 
 36: void clientCode()
 37: {
-38:     std::shared_ptr<Animal> aCow { std::make_shared<Cow>() };
-39:     std::shared_ptr<Animal> aPig { std::make_shared<Pig>() };
-40:     std::shared_ptr<Animal> aDog { std::make_shared<Dog>() };
+38:     std::shared_ptr<IAnimal> aCow { std::make_shared<Cow>() };
+39:     std::shared_ptr<IAnimal> aPig { std::make_shared<Pig>() };
+40:     std::shared_ptr<IAnimal> aDog { std::make_shared<Dog>() };
 41: 
 42:     seeAndSay(aCow);
 43:     seeAndSay(aPig);
@@ -134,7 +134,7 @@ Beispiel:
 07: 
 08: void clientCode()
 09: {
-10:     std::shared_ptr<Dog> aDog = std::make_shared<Dog>();
+10:     std::shared_ptr<Dog> aDog{ std::make_shared<Dog>() };
 11:     seeAndSay<Dog>(aDog);
 12: }
 ```
@@ -144,9 +144,9 @@ Beispiel:
 Objekte unterschiedlichen Typs lassen sich nicht &ndash; ohne Weiteres &ndash; in einem Container / Array ablegen:
 
 ```cpp
-std::shared_ptr<Cow> aCow = std::make_shared<Cow>();
-std::shared_ptr<Pig> aPig = std::make_shared<Pig>();
-std::shared_ptr<Dog> aDog = std::make_shared<Dog>();
+std::shared_ptr<Cow> aCow { std::make_shared<Cow>() };
+std::shared_ptr<Pig> aPig { std::make_shared<Pig>() };
+std::shared_ptr<Dog> aDog { std::make_shared<Dog>() };
 
 ??? animals[] = { aCow, aPig, aDog };
 ```
@@ -237,9 +237,9 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 65: 
 66: void clientCode()
 67: {
-68:     std::shared_ptr<MyAnimal> aCow = std::make_shared<MyCow>();
-69:     std::shared_ptr<MyAnimal> aPig = std::make_shared<MyPig>();
-70:     std::shared_ptr<MyAnimal> aDog = std::make_shared<MyDog>();
+68:     std::shared_ptr<MyAnimal> aCow{ std::make_shared<MyCow>() };
+69:     std::shared_ptr<MyAnimal> aPig{ std::make_shared<MyPig>() };
+70:     std::shared_ptr<MyAnimal> aDog{ std::make_shared<MyDog>() };
 71: 
 72:     std::vector<std::shared_ptr<MyAnimal>> animals = { aCow , aPig , aDog };
 73: 
@@ -251,7 +251,7 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 
 Das funktioniert, aber es gibt einen eklatanten Nachteil:
 Wir müssen für jeden konkreten Typ, den wir verpacken möchten (zum Beispiel Klasse `Cow`),
-eine Wrapper-Klasse (wie Klasse `MyCow`) definieren.
+eine Wrapper-Klasse (hier: Klasse `MyCow`) definieren.
 
 Wir haben jedoch bereits eine einfache Möglichkeit gesehen, den Compiler diese Arbeit für uns erledigen zu lassen:
 Durch die Verwendung von Templates:
@@ -329,9 +329,9 @@ damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und 
 49: {
 50:     SeeAndSay animals;
 51: 
-52:     std::shared_ptr<Cow> aCow = std::make_shared<Cow>();
-53:     std::shared_ptr<Pig> aPig = std::make_shared<Pig>();
-54:     std::shared_ptr<Dog> aDog = std::make_shared<Dog>();
+52:     std::shared_ptr<Cow> aCow{ std::make_shared<Cow>() };
+53:     std::shared_ptr<Pig> aPig{ std::make_shared<Pig>() };
+54:     std::shared_ptr<Dog> aDog{ std::make_shared<Dog>() };
 55: 
 56:     animals.addAnimal(aCow);
 57:     animals.addAnimal(aPig);

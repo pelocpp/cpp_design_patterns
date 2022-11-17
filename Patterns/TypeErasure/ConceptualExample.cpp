@@ -11,35 +11,35 @@ namespace ConceptualExample
 {
     namespace Motivation01
     {
-        class Animal
+        class IAnimal
         {
         public:
             virtual std::string see() const = 0;
             virtual std::string say() const = 0;
         };
 
-        class Cow : public Animal
+        class Cow : public IAnimal
         {
         public:
             virtual std::string see() const override { return "cow"; }
             virtual std::string say() const override { return "moo"; }
         };
 
-        class Pig : public Animal
+        class Pig : public IAnimal
         {
         public:
             virtual std::string see() const override { return "pig"; }
             virtual std::string say() const override { return "oink"; }
         };
 
-        class Dog : public Animal
+        class Dog : public IAnimal
         {
         public:
             virtual std::string see() const override { return "dog"; }
             virtual std::string say() const override { return "woof"; }
         };
 
-        void seeAndSay(const std::shared_ptr<Animal> animal)
+        void seeAndSay(const std::shared_ptr<IAnimal> animal)
         {
             std::cout
                 << "The " << animal->see() << " says '"
@@ -48,9 +48,9 @@ namespace ConceptualExample
 
         void clientCode()
         {
-            std::shared_ptr<Animal> aCow{ std::make_shared<Cow>() };
-            std::shared_ptr<Animal> aPig{ std::make_shared<Pig>() };
-            std::shared_ptr<Animal> aDog{ std::make_shared<Dog>() };
+            std::shared_ptr<IAnimal> aCow{ std::make_shared<Cow>() };
+            std::shared_ptr<IAnimal> aPig{ std::make_shared<Pig>() };
+            std::shared_ptr<IAnimal> aDog{ std::make_shared<Dog>() };
 
             seeAndSay(aCow);
             seeAndSay(aPig);
