@@ -8,11 +8,7 @@
 #### Grundlagen 
 
 *Abstrakte Klassen* und *Schnittstellen* werden beide verwendet,
-um Abstraktion zu erreichen.
-
-In beiden Konstrukten lassen sich abstrakte Methoden deklarieren.
-
-Weder abstrakte Klassen noch Schnittstellen sind instanziierbar.
+um Abstraktionen zu erreichen.
 
 Einen Überblick zu abstrakten Klassen und Schnittstellen
 finden Sie [hier](../Patterns/AbstractClassVsInterface/Resources/Readme.md).
