@@ -48,7 +48,7 @@ In seiner Grundform sieht das Muster wie folgt aus:
   * Im Umkehrschluss bedeutet dies natürlich, dass Änderungen an der Schnittstelle tabu sind.
 
 
-#### Pro / Kontra:
+## Pro / Kontra:
 
 ###### Pros:
 

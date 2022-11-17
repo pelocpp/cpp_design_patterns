@@ -11,8 +11,8 @@ class PersonBuilder;
 
 class Person
 {
-friend class PersonBuilder;
-friend std::ostream& operator<<(std::ostream& os, const Person& obj);
+    friend class PersonBuilder;
+    friend std::ostream& operator<<(std::ostream& os, const Person& obj);
 
 private:
     // personal details

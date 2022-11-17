@@ -365,7 +365,7 @@ Anregungen finden sich zum Beispiel unter
 
 ---
 
-#### Pro / Kontra:
+## Pro / Kontra:
 
 ###### Pros:
 

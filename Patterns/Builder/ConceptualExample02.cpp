@@ -17,7 +17,8 @@
  * always follow the same interface.
  */
 
-class Product {
+class Product 
+{
 private:
     std::vector<std::string> m_parts;
 
@@ -72,10 +73,12 @@ public:
      * which is used in further assembly.
      */
     ConcreteBuilder() {
-        this->reset();
+        reset();
     }
 
-    void reset() { m_product = std::make_unique<Product>(); }
+    void reset() { 
+        m_product = std::make_unique<Product>(); 
+    }
 
     /**
      * All production steps work with the same product instance.
@@ -83,9 +86,11 @@ public:
     virtual void createProducePartA() const override {
         m_product->addPart(std::string("Part A1"));
     }
+
     virtual void createProducePartB() const override {
         m_product->addPart(std::string("Part B1"));
     }
+
     virtual void createProducePartC() const override {
         m_product->addPart(std::string("Part C1"));
     }
@@ -160,7 +165,7 @@ public:
  * initiates the construction process. The end result is retrieved from the
  * builder object.
  */
-void clientCode(Director& director)
+static void clientCode(Director& director)
 {
     std::shared_ptr<ConcreteBuilder> builder = std::make_shared<ConcreteBuilder>();
     director.setBuilder(builder);

@@ -40,7 +40,8 @@ namespace ConceptualExampleBuilder01 {
     class Director
     {
     public:
-        void construct(std::shared_ptr<Builder> builder) {
+        void construct(std::shared_ptr<Builder> builder) 
+        {
             builder->buildPartA();
             builder->buildPartB();
         }

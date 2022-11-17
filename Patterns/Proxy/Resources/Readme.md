@@ -86,7 +86,7 @@ ob `ptr` ein Raw-Zeiger oder ein Smart Pointer ist.
 
 In anderen Programmiersprachen wie C# gibt es das sprachliche Konstrukt der *Properties*:
 Hierunter versteht man &ndash; in C# &ndash; eine private Instanzvariable
-inklusive *getter*- und *setter*-Methoden für diese Variable. 
+inklusive *getter*- und *setter*-Methode für diese Variable. 
 
 ```cpp
 01: template<typename T>
@@ -183,7 +183,7 @@ drawing image image_1.png
 
 ---
 
-#### Pro / Kontra:
+## Pro / Kontra:
 
 ###### Pros:
 

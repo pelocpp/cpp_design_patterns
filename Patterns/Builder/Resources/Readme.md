@@ -17,7 +17,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Um komplexe und komplizierte Objekte stückweise und intuitiver zu erstellen/instanziieren.&rdquo;
+&ldquo;Um komplexe und komplizierte Objekte stückweise und intuitiver zu erstellen / zu instanziieren.&rdquo;
 
 
 #### Ziel / Absicht:

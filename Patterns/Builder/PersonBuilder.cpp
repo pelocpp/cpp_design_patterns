@@ -8,6 +8,10 @@ PersonBuilder Person::create(const std::string& name) {
     return PersonBuilder{ name }; 
 }
 
+PersonBuilder::operator Person && () {
+    return std::move(m_person);
+}
+
 PersonBuilder& PersonBuilder::lives() { return *this; }
 
 PersonBuilder& PersonBuilder::works() { return *this; }

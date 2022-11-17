@@ -80,7 +80,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
-#### Pro / Kontra:
+## Pro / Kontra:
 
 ###### Pros:
 
