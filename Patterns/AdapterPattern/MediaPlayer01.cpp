@@ -9,26 +9,26 @@
 namespace ApdaterPatternClassicalApproach {
 
     // interface MediaPlayer
-    class MediaPlayer 
+    class IMediaPlayer 
     {
     public:
-        virtual ~MediaPlayer() {};
+        virtual ~IMediaPlayer() {};
         virtual void play(std::string audioType, std::string fileName) = 0;
     };
 
     // interface AdvancedMediaPlayer
-    class AdvancedMediaPlayer 
+    class IAdvancedMediaPlayer
     {
     public:
-        virtual ~AdvancedMediaPlayer() {};
+        virtual ~IAdvancedMediaPlayer() {};
         virtual void playVlc(std::string fileName) = 0;
         virtual void playMp4(std::string fileName) = 0;
     };
 
     // ===========================================================================
 
-    // concrete class VlcPlayer, implementing interface AdvancedMediaPlayer
-    class VlcPlayer : public AdvancedMediaPlayer 
+    // concrete class VlcPlayer, implementing interface IAdvancedMediaPlayer
+    class VlcPlayer : public IAdvancedMediaPlayer
     {
     public:
         virtual void playVlc(std::string fileName) override
@@ -41,7 +41,7 @@ namespace ApdaterPatternClassicalApproach {
     };
 
     // concrete class Mp4Player, implementing interface AdvancedMediaPlayer
-    class Mp4Player : public AdvancedMediaPlayer 
+    class Mp4Player : public IAdvancedMediaPlayer
     {
     public:
         // do nothing
@@ -56,10 +56,10 @@ namespace ApdaterPatternClassicalApproach {
     // ===========================================================================
 
     // create adapter class implementing the MediaPlayer interface
-    class MediaAdapter : public MediaPlayer 
+    class MediaAdapter : public IMediaPlayer
     {
     private:
-        std::shared_ptr<AdvancedMediaPlayer> m_advancedMusicPlayer;
+        std::shared_ptr<IAdvancedMediaPlayer> m_advancedMusicPlayer;
 
     public:
         // c'tor
@@ -93,7 +93,7 @@ namespace ApdaterPatternClassicalApproach {
     // create class 'AudioPlayer'
     // implementing 'MediaPlayer' interface
     // without adapter addition
-    class AudioPlayer : public MediaPlayer
+    class AudioPlayer : public IMediaPlayer
     {
     public:
         void play(std::string audioType, std::string fileName) override;
@@ -115,7 +115,7 @@ namespace ApdaterPatternClassicalApproach {
     // create class 'AudioPlayerExtended'
     // implementing 'MediaPlayer' interface
     // with adapter addition
-    class AudioPlayerExtended : public MediaPlayer 
+    class AudioPlayerExtended : public IMediaPlayer
     {
     private:
         std::shared_ptr<MediaAdapter> m_mediaAdapter;
@@ -141,31 +141,31 @@ namespace ApdaterPatternClassicalApproach {
             std::cout << "Invalid media: " << audioType << " format not supported!" << std::endl;
         }
     }
-
-    /**
-     * The client code supports all classes that follow the MediaPlayer interface.
-     */
-    static void clientCode(std::shared_ptr<MediaPlayer>& player) 
-    {
-        player->play("mp3", "beyond the horizon.mp3");
-        player->play("mp4", "alone again.mp4");
-        player->play("vlc", "far far away.vlc");
-        player->play("avi", "mind me.avi");
-    }
 }
 
 // ===========================================================================
 
+/**
+* The client code supports all classes that follow the MediaPlayer interface.
+*/
+static void clientCode(std::shared_ptr<ApdaterPatternClassicalApproach::IMediaPlayer>& player)
+{
+    player->play("mp3", "beyond the horizon.mp3");
+    player->play("mp4", "alone again.mp4");
+    player->play("vlc", "far far away.vlc");
+    player->play("avi", "mind me.avi");
+}
+
 void test_media_player_01()
 {
     using namespace ApdaterPatternClassicalApproach;
-    std::shared_ptr <MediaPlayer> audioPlayer1{
+    std::shared_ptr <IMediaPlayer> audioPlayer1{
         std::make_shared<AudioPlayer>()
     };
     clientCode(audioPlayer1);
     std::cout << std::endl;
 
-    std::shared_ptr <MediaPlayer> audioPlayer2{ 
+    std::shared_ptr <IMediaPlayer> audioPlayer2{
         std::make_shared<AudioPlayerExtended>()
     };
     clientCode(audioPlayer2);

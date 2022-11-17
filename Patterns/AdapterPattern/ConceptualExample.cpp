@@ -24,7 +24,7 @@ public:
     Target() = default;
     virtual ~Target() = default;
 
-    virtual std::string getRequest() const
+    virtual std::string getRequest() const override
     {
         return std::string{ "Target: The target's default behavior." };
     }

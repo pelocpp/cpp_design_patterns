@@ -73,7 +73,7 @@ Der Klassenname `Adaptee` steht stellvertretend für Service-Klassen, die es gilt
 #### Beispiele zum Adapter Pattern in der STL:
 
 Die STL Container `std::stack`, `std::queue` und `std::priority_queue` bieten eine andere Schnittstelle
-für STL Sequenzcontainer an. Aus diesem Grund spricht man diesen drei Klassen auch von so genannten
+für STL Sequenzcontainer an. Aus diesem Grund spricht man bei diesen drei Klassen auch von so genannten
 *Container Adaptern*.
 
 Das folgende Code-Snippet zeigt die Template-Signatur der drei Container-Adapter:
@@ -85,12 +85,15 @@ class stack;
 template<typename T, typename Container = std::deque<T>> 
 class queue;
 
-template<typename T, typename Container = std::vector<T>, 
-         typename Compare = std::less<typename Container::value_type>> 
+template<
+    typename T,
+    typename Container = std::vector<T>, 
+    typename Compare = std::less<typename Container::value_type>
+> 
 class priority_queue;
 ```
 
-Man kann erkennen, das standardmäßig `std::stack` und `std::queue` den Container `std::deque`
+Man kann erkennen, das `std::stack` und `std::queue` standardmäßig den Container `std::deque`
 als Sequenzcontainer verwenden, hingegen wird `std::vector` von `std::priority_queue` verwendet.
 
 Darüber hinaus erfordert `std::priority_queue` auch ein Vergleichsobjekt,
@@ -100,7 +103,7 @@ das standardmäßig auf `std::less` voreingestellt ist.
 
 #### Weitere Beispiele zum Adapter Pattern in der STL:
 
-Neben den *Container Adaptern* in der STL gibt es auch die *Iteratoren Adapter*,
+Neben den *Container Adaptern* in der STL gibt es auch *Iteratoren Adapter*,
 beispielsweise die &ldquo;Einfüge Iteratoren&rdquo;:
 
   * `std::front_inserter`

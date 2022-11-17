@@ -13,13 +13,13 @@ namespace PluggableAdapterDesignApproach {
     // =======================================================================
     // Legacy code
 
-    class Beverage
+    class IBeverage
     {
     public:
         virtual void getBeverage() = 0;
     };
 
-    class CoffeeMaker : public Beverage
+    class CoffeeMaker : public IBeverage
     {
     public:
         void brew() { 
@@ -32,7 +32,7 @@ namespace PluggableAdapterDesignApproach {
     };
 
     // Interface already shipped & known to client
-    void makeDrink(Beverage& drink) {
+    void makeDrink(IBeverage& drink) {
         drink.getBeverage();             
     }
 
@@ -48,30 +48,23 @@ namespace PluggableAdapterDesignApproach {
     };
 
     // making things compatible - using 'class adapter' strategy
-    class Adapter : public Beverage
+    class Adapter : public IBeverage
     {   
     private:
         std::function<void()> m_request;
 
     public:
         // c'tors
-        Adapter(std::unique_ptr<CoffeeMaker>& cm);
-        Adapter(std::unique_ptr<JuiceMaker>& jm);
+        Adapter(std::unique_ptr<CoffeeMaker>& cm) 
+            : m_request{ [&]() { cm->brew(); } } {}
+
+        Adapter(std::unique_ptr<JuiceMaker>& jm) 
+            : m_request{ [&]() { jm->squeeze(); } } {}
 
         virtual void getBeverage() override { 
             m_request();
         }
     };
-
-    Adapter::Adapter(std::unique_ptr<CoffeeMaker>& cm)
-    {
-        m_request = [&]() { cm->brew(); };
-    }
-
-    Adapter::Adapter(std::unique_ptr<JuiceMaker>& jm)
-    {
-        m_request = [&]() { jm->squeeze(); };
-    }
 }
 
 // ===========================================================================
@@ -80,13 +73,13 @@ void test_pluggable_adapter_design()
 {
     using namespace PluggableAdapterDesignApproach;
 
-    std::unique_ptr<CoffeeMaker> cmp = std::make_unique<CoffeeMaker>();
-    Adapter adp1(cmp);
-    makeDrink(adp1);
+    std::unique_ptr<CoffeeMaker> cm = std::make_unique<CoffeeMaker>();
+    Adapter adapter1(cm);
+    makeDrink(adapter1);
 
-    std::unique_ptr<JuiceMaker> jmp = std::make_unique<JuiceMaker>();
-    Adapter adp2(jmp);
-    makeDrink(adp2);
+    std::unique_ptr<JuiceMaker> jm = std::make_unique<JuiceMaker>();
+    Adapter adapter2(jm);
+    makeDrink(adapter2);
 }
 
 // ===========================================================================
