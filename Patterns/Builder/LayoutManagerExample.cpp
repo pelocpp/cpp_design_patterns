@@ -99,7 +99,8 @@ public:
 
     virtual void render() override
     {
-        getHtmlPage().setHtmlCode(renderHtmlFromWidgets());
+        std::string html = renderHtmlFromWidgets();
+        getHtmlPage().setHtmlCode(html);
     }
 
 private:
@@ -119,7 +120,8 @@ public:
 
     virtual void render() override
     {
-        getHtmlPage().setHtmlCode(renderHtmlFromWidgets());
+        std::string html = renderHtmlFromWidgets();
+        getHtmlPage().setHtmlCode(html);
     }
 
 private:
@@ -139,7 +141,8 @@ public:
 
     virtual void render() override
     {
-        getHtmlPage().setHtmlCode(renderHtmlFromWidgets());
+        std::string html = renderHtmlFromWidgets();
+        getHtmlPage().setHtmlCode(html);
     }
 
 private:
