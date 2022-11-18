@@ -24,22 +24,26 @@ namespace ChainofResponsibilityExample
         }
     };
 
-    class UserName : public Authentication
+    class AuthenticateUserName : public Authentication
     {
     private:
         std::string m_name;
 
     public:
         // c'tor(s)
-        UserName(std::string name) : m_name{ name } {}
+        AuthenticateUserName(std::string name) : m_name{ name } {}
 
         virtual bool authenticate() override {
+
             if (!is_valid_user_name()) {
                 std::cout << "Invalid user name" << std::endl;
                 return false;
             }
-            else if (m_next) return m_next->authenticate();
-            return true;
+            else if (m_next) {
+                return m_next->authenticate();
+            } 
+            else 
+                return true;
         }
 
     private:
@@ -50,22 +54,26 @@ namespace ChainofResponsibilityExample
         }
     };
 
-    class Password : public Authentication
+    class AuthenticatePassword : public Authentication
     {
     private:
         std::string m_password;
 
     public:
         // c'tor(s)
-        Password(std::string password) : m_password{ password } {}
+        AuthenticatePassword(std::string password) : m_password{ password } {}
 
         virtual bool authenticate() override {
+
             if (!is_valid_password()) {
                 std::cout << "Invalid password" << std::endl;
                 return false;
             }
-            else if (m_next) return m_next->authenticate();
-            return true;
+            else if (m_next) {
+                return m_next->authenticate();
+            }
+            else 
+                return true;
         }
 
     private:
@@ -81,9 +89,13 @@ void test_authentication_example()
 {
     using namespace ChainofResponsibilityExample;
 
-    std::unique_ptr<Authentication> auth1{ new UserName("John") };
+    std::unique_ptr<Authentication> auth1{ 
+        new AuthenticateUserName{"John"} 
+    };
 
-    std::unique_ptr<Authentication> auth2{ new Password("password") };
+    std::unique_ptr<Authentication> auth2{
+        new AuthenticatePassword{"12345678"} 
+    };
 
     auth1->nextAuthentication(auth2);
 

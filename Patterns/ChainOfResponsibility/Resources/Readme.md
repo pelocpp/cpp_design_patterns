@@ -32,8 +32,9 @@ diese an den nächsten Handler in der Liste weiterzuleiten.
 
 Im Prinzip betrachten wir das Problem, dass ein bestimmtes Ereignis von einem anderen Objekt zu verarbeiten ist.
 Das *Chain of Responsibility Pattern* ist eine formale Beschreibung dieses Problems.
-Wir haben in diesem Muster eine *Quelle* (*Ereignis*, *Event*) und mehrere Objekte, die auf dieses Ereignis reagieren wollen.
-Das Ereignis wird bei Eintreten an das erste Verarbeitungsobjekt übergeben.
+Wir haben in diesem Muster eine *Quelle* (*Ereignis*, *Event*) und mehrere Objekte,
+die auf dieses Ereignis reagieren könnten.
+Das Ereignis wird bei Eintreten dem ersten Verarbeitungsobjekt übergeben.
 Dieses kann den Befehl verarbeiten (oder auch nicht) und/oder an seinen Nachfolger senden.
 Dies wird solange fortgesetzt, bis der Befehl verarbeitet wurde oder das Ende der Kette erreicht ist.
 Das Objekt, das den Befehl sendet (das Ereignis ausgelöst hat), weiß nicht, welches Objekt in der Kette aller Verarbeitungsobjekte
@@ -100,12 +101,12 @@ so wie dies für Benutzername und Passwort im [Quellcode](../Authentication.cpp) 
   * Klasse `Authentication` &ndash; Klasse `HandlerBase` 
   * Methode `authenticate` &ndash; Methode `handleRequest`
   * Methode `nextAuthentication` &ndash; Methode `setSuccessor` 
-  * Klasse `UserName` &ndash; Klasse `ConcreteHandler` 
-  * Klasse `Password` &ndash; Klasse `ConcreteHandler` 
+  * Klasse `AuthenticateUserName` &ndash; Klasse `ConcreteHandler` 
+  * Klasse `AuthenticatePassword` &ndash; Klasse `ConcreteHandler` 
 
 [Quellcode zum 'Authentication' Beispiel](../Authentication.cpp) &ndash; Anwendungsfall des *Chain of Responsibility* Patterns.
 
-*Hinweis*: In der Realisierung des Chatraums sind zwei Implementierungsdetails zu beachten:
+*Hinweis*: In der Realisierung des Beispiels sind zwei Implementierungsdetails zu beachten:
 
   * Einsatz von Klasse `std::unique_ptr<>`.
   * `std::move`: `std::unique_ptr<>`-Objekte unterstützen nur die Verschiebe-Semantik.

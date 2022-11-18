@@ -30,6 +30,7 @@ namespace ConceptualExampleChainOfResponsibility {
 
     public:
         HandlerBase() : m_successor{ nullptr } {}
+
         virtual ~HandlerBase() {}
 
         virtual void handleRequest(const Request&) const = 0;
@@ -117,6 +118,7 @@ void test_conceptual_example_01() {
     std::shared_ptr<HandlerBase> h1 { std::make_shared<ConcreteHandlerA>() };
     std::shared_ptr<HandlerBase> h2 { std::make_shared<ConcreteHandlerB>() };
     std::shared_ptr<HandlerBase> h3 { std::make_shared<ConcreteHandlerC>() };
+
     h1->setSuccessor(h2);
     h2->setSuccessor(h3);
 
@@ -143,6 +145,7 @@ void test_conceptual_example_02() {
     std::shared_ptr<HandlerBase> h1 { std::make_shared<ConcreteHandlerA>() };
     std::shared_ptr<HandlerBase> h2 { std::make_shared<ConcreteHandlerB>() };
     std::shared_ptr<HandlerBase> h3 { std::make_shared<ConcreteHandlerC>() };
+
     h1->setSuccessor(h2);
     h2->setSuccessor(h3);
 

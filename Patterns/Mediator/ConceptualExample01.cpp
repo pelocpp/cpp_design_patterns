@@ -31,7 +31,8 @@ namespace ConceptualExample01 {
         MediatorBase* m_mediator;
 
     public:
-        ColleagueBase(MediatorBase* mediator = nullptr) : m_mediator{ mediator } {}
+        ColleagueBase(MediatorBase* mediator = nullptr) 
+            : m_mediator{ mediator } {}
 
         void setMediator(MediatorBase* mediator) 
         {

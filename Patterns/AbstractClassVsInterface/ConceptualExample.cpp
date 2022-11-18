@@ -14,7 +14,7 @@ namespace AbstractClassVsInterface {
     class Interface
     {
     public:
-        virtual void method_first() = 0;  
+        virtual void method_first() = 0;             // only 'abstract' methods
         virtual void method_second() = 0;
     };
 
@@ -22,7 +22,7 @@ namespace AbstractClassVsInterface {
     class AbstractClass 
     {
     public:
-        AbstractClass(std::string message) : m_message(message) {}
+        AbstractClass(std::string message) : m_message{ message } {}
 
         virtual void method_third() = 0;             // 'abstract' method
 
@@ -32,14 +32,14 @@ namespace AbstractClassVsInterface {
         }
 
     private:
-        std::string m_message;
+        std::string m_message;                       // data
     };
 
     /* abstract class inheriting from an interface */
     class AnotherAbstractClass : public Interface
     {
     public:
-        AnotherAbstractClass(double value) : m_value(value) {}
+        AnotherAbstractClass(double value) : m_value { value } {}
 
         virtual void method_first() override
         {
@@ -50,17 +50,17 @@ namespace AbstractClassVsInterface {
         double m_value;
     };
 
-    /* abstract class implementing an interface */
+    /* concrete class inheriting from an abstract class */
     class ConcreteClass : public AnotherAbstractClass
     {
     public:
-        ConcreteClass() : ConcreteClass(0.0) {}
+        ConcreteClass() : ConcreteClass{ 0.0 } {}
 
         ConcreteClass(double value) 
-            : AnotherAbstractClass(value), m_anotherValue{} {}
+            : AnotherAbstractClass{ value }, m_anotherValue{} {}
 
         ConcreteClass(double value1, double value2)
-            : AnotherAbstractClass(value1), m_anotherValue{ value2 } {}
+            : AnotherAbstractClass{ value1 }, m_anotherValue{ value2 } {}
 
         virtual void method_second() override
         {
@@ -69,6 +69,28 @@ namespace AbstractClassVsInterface {
 
     private:
         double m_anotherValue;
+    };
+
+    /* concrete class inheriting from an interface */
+    class AnotherConcreteClass : public Interface
+    {
+    public:
+        AnotherConcreteClass() : m_oneMoreValue{ 0.0 } {}
+
+        AnotherConcreteClass(double value) : m_oneMoreValue{ value } {}
+
+        virtual void method_first() override
+        {
+            std::cout << m_oneMoreValue << std::endl;
+        }
+
+        virtual void method_second() override
+        {
+            method_first();
+        }
+
+    private:
+        double m_oneMoreValue;
     };
 }
 
@@ -82,6 +104,9 @@ void test_conceptual_example()
     ConcreteClass obj4{ 1.5, 2.5 };
     obj4.method_first();
     obj4.method_second();
+    AnotherConcreteClass obj5{ 3.5 };
+    obj5.method_first();
+    obj5.method_second();
 
     Interface& obj01{ obj4 };
     obj01.method_first();
@@ -90,6 +115,12 @@ void test_conceptual_example()
     AnotherAbstractClass& obj03{ obj4 };
     obj03.method_first();
     obj03.method_second();
+    ConcreteClass obj04{ obj4 };
+    obj04.method_first();
+    obj04.method_second();
+    AnotherConcreteClass obj05{ obj5 };
+    obj05.method_first();
+    obj05.method_second();
 
     Interface* obj001{ &obj4 };
     obj001->method_first();
@@ -98,6 +129,12 @@ void test_conceptual_example()
     AnotherAbstractClass* obj003{ &obj4 };
     obj003->method_first();
     obj003->method_second();
+    ConcreteClass* obj004{ &obj4 };
+    obj004->method_first();
+    obj004->method_second();
+    AnotherConcreteClass* obj005{ &obj5 };
+    obj005->method_first();
+    obj005->method_second();
 }
 
 // ===========================================================================

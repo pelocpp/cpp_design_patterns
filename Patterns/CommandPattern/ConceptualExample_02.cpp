@@ -26,7 +26,8 @@ namespace ConceptualExample02 {
         std::string m_payLoad;
 
     public:
-        explicit SimpleCommand(std::string pay_load) : m_payLoad(pay_load) {}
+        explicit SimpleCommand(std::string pay_load) 
+            : m_payLoad(pay_load) {}
 
         ~SimpleCommand() {}
 
@@ -42,12 +43,12 @@ namespace ConceptualExample02 {
     public:
         ~Receiver() {}
 
-        void doSomething(const std::string& s) {
-            std::cout << "Receiver: Working on (" << s << ".)" << std::endl;
+        void doSomething(const std::string& data) {
+            std::cout << "Receiver: Working on (" << data << ".)" << std::endl;
         }
 
-        void doSomethingElse(const std::string& s) {
-            std::cout << "Receiver: Also working on (" << s << ".)" << std::endl;
+        void doSomethingElse(const std::string& data) {
+            std::cout << "Receiver: Also working on (" << data << ".)" << std::endl;
         }
     };
 
@@ -134,15 +135,15 @@ void test_conceptual_example_02() {
 
     Invoker invoker;
 
-    std::shared_ptr<SimpleCommand> simpleCmd{
+    std::shared_ptr<SimpleCommand> simpleCmd {
         std::make_shared<SimpleCommand>("Say Hi!") 
     };
 
-    std::shared_ptr<Receiver> receiver{
+    std::shared_ptr<Receiver> receiver {
         std::make_shared<Receiver>()
     };
 
-    std::shared_ptr<ComplexCommand> complexCmd{
+    std::shared_ptr<ComplexCommand> complexCmd {
         std::make_shared<ComplexCommand>(
             receiver,
             std::string("Send email"),

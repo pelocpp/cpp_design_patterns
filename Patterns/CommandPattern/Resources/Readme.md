@@ -63,7 +63,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
 #### 'Beginners Example':
 
 Bei den Fallstudien zu diesem Seminar finden Sie unter dem Stichwort &ldquo;Bankkonten&rdquo;
-ein praxisnahes Beispiuel vor.
+ein praxisnahes Beispiel vor.
 
 ---
 

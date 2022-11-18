@@ -34,7 +34,8 @@ namespace ConceptualExample03 {
     public:
         ColleagueBase() = default;
 
-        ColleagueBase(std::shared_ptr<MediatorBaseAlternate> mediator) : m_mediator{ mediator } {}
+        ColleagueBase(std::shared_ptr<MediatorBaseAlternate> mediator) 
+            : m_mediator{ mediator } {}
 
         void setMediator(std::shared_ptr<MediatorBaseAlternate> mediator)
         {

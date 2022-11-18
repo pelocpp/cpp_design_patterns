@@ -36,6 +36,7 @@ namespace ConceptualExample01 {
             : m_receiver{ receiver } {}
 
         virtual ~CommandBase() {}
+
         virtual void execute() const = 0;
     };
 
@@ -100,6 +101,7 @@ void test_conceptual_example_01() {
     command->setData("Hello, world!");
 
     invoker.setCommand(command);
+
     invoker.executeCommand();
 }
 

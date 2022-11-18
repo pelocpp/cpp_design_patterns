@@ -6,21 +6,11 @@
 #include <string>
 #include <vector>
 #include <memory>
-
-#define _CRTDBG_MAP_ALLOC
-#include <cstdlib>
-#include <crtdbg.h>
-
-#ifdef _DEBUG
-#ifndef DBG_NEW
-#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-#define new DBG_NEW
-#endif
-#endif  // _DEBUG
+#include <algorithm>
 
 namespace ChatRoomMediatorPattern
 {
-    // abstract Mediator // MediatorBase
+    // MediatorBase
     class ChatRoom 
     {
     public:
@@ -28,15 +18,16 @@ namespace ChatRoomMediatorPattern
         virtual void message(std::string from, std::string to, std::string msg) = 0;   // reactOn
     };
 
+    // ColleagueBase
     class PersonBase {
     protected:
-        std::weak_ptr<ChatRoom> m_room;  // mediator
+        std::weak_ptr<ChatRoom> m_room;
 
     public:
         PersonBase() = default;
     };
 
-    // concrete Collegue
+    // Concrete Colleague
     class Person : public PersonBase
     {
     private:
@@ -56,7 +47,7 @@ namespace ChatRoomMediatorPattern
         void receive(const std::string& from, const std::string& msg);
     };
 
-    // concrete Mediator
+    // Concrete Mediator
     class GoogleChat : public ChatRoom, public std::enable_shared_from_this<GoogleChat>
     {
     private:
@@ -134,8 +125,6 @@ namespace ChatRoomMediatorPattern
 
 void test_chatroom_example()
 {
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
     using namespace ChatRoomMediatorPattern;
 
     // colleagues
