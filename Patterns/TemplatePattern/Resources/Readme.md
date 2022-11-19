@@ -58,18 +58,6 @@ Das *Template Method Pattern* ermöglicht die Realisierung von variierenden Teils
 *Abbildung* 1: Schematische Darstellung des *Template Method Patterns*.
 
 
-#### Hinweis: Was ist der Unterschied zwischen dem *Template Method Pattern* und dem *Strategy Pattern*? 
-
-*Template Method Pattern* und *Strategy Pattern* besitzen viele Gemeinsamkeiten:
-
-  * Ein Unterschied zwischen den beiden Mustern ist,
-  dass das *Template Method Pattern* auf Vererbung beruht, das *Strategy Pattern* hingehen auf Komposition.
-
-  * Das *Template Method Pattern* funktioniert auf Klassenebene, ist also statisch.
-
-  * Das *Strategy Pattern* funktioniert auf Objektebene, so dass Sie das Verhalten zur Laufzeit ändern können.
-
-
 ## Anwendungsbeispiel:
 
 In Spezialisierungen der Oberklasse können bzw. sollten ein oder mehrere Teilmethoden überschrieben werden,
@@ -117,15 +105,15 @@ zu überschreiben, siehe dazu auch *Abbildung* 2:
 
 *Frage*: Was ist der Unterschied zwischen dem *Strategy*- und *Template Method*-Pattern?
 
-  * Das *Template Method*-Pattern basiert auf Vererbung: Es werden Teile eines Algorithmus verändert, indem diese Teile in abgeleiteten Klassen erweitert werden.
+  * Das *Template Method*-Pattern basiert auf **Vererbung**: Es werden Teile eines Algorithmus verändert, indem diese Teile in abgeleiteten Klassen erweitert werden.
 
-  * *Strategy*-Pattern basiert auf der Komposition: Es werden Teile des Verhaltens eines Objekts verändert, indem es verschiedene Strategien erhält, die unterschiedlichem Verhalten entsprechen.
+  * *Strategy*-Pattern basiert auf der **Komposition**: Es werden Teile des Verhaltens eines Objekts verändert, indem es verschiedene Strategien erhält, die unterschiedlichem Verhalten entsprechen.
 
 oder auch:
 
-  * *Template Method*-Pattern: Funktioniert auf Klassenebene, es ist also statisch.
+  * *Template Method*-Pattern: Funktioniert auf **Klassenebene**, es ist also ein statisches Konzept.
 
-  * *Strategy*-Pattern: Funktioniert auf Objektebene, das Verhalten wird zur Laufzeit geändert.
+  * *Strategy*-Pattern: Funktioniert auf **Objektebene**, das Verhalten wird zur Laufzeit geändert.
 
 ---
 

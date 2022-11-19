@@ -365,10 +365,10 @@ void test_motivation_example()
     clientCode02();
     using namespace MotivationVisitor03;
     clientCode03();
-    //using namespace MotivationVisitor04;
-    //clientCode04();
-    //using namespace MotivationVisitor05;
-    //clientCode05();
+    using namespace MotivationVisitor04;
+    clientCode04();
+    using namespace MotivationVisitor05;
+    clientCode05();
 }
 
 // ===========================================================================

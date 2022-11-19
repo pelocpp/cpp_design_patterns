@@ -145,6 +145,7 @@
     <ClCompile Include="PayByCreditCard.cpp" />
     <ClCompile Include="PayByPayPal.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="StaticStrategyExample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CreditCard.h" />

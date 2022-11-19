@@ -14,15 +14,15 @@ void test_social_networking()
 {
     std::cout << "Input user name: ";
     std::string userName;
-    std::cin >> userName;
+    std::getline(std::cin, userName);
 
     std::cout << "Input password: ";
     std::string password;
-    std::cin >> password;
+    std::getline(std::cin, password);
 
     std::cout << "Input message: ";
     std::string message;
-    std::cin >> message;
+    std::getline(std::cin, message);
 
     std::cout << "Choose social network for posting message:" << std::endl;
     std::cout << "1 - Facebook" << std::endl;

@@ -81,6 +81,22 @@ die zur Laufzeit austauschbar sind.
 
 ---
 
+#### Statisches Strategy Design Pattern mit Template Klassen
+
+[Quellcode &ldquo;Statische Shapes&rdquo;](../StaticStrategyExample.cpp)
+
+Das *Decorator Design Pattern* konnte man sowohl dynamisch als auch statisch implementieren,
+und dies kann man beim *Strategy Design Pattern* genauso umsetzen.
+
+Im Prinzip  gibt es nichts Besonderes an dieser Umsetzung zu beobachten,
+außer dass man den Algorithmus (hier: Methode `add_list_item`)
+nicht über die *vtable* ansprechen (indirekter Methodenaufruf),
+sondern als C++&ndash;Template-Parameter übergeben, was bedeutet,
+dass der Algorithmus/die Strategie zur Laufzeit nicht änderbar ist.
+Der Methodenaufruf selbst ist dann direkt, was eine verbesserte Laufzeit zur Folge hat!
+
+---
+
 ## Literaturhinweise
 
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter

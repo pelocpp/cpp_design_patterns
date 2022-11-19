@@ -284,7 +284,7 @@ A circle of radius 15.000000 has color green has 19.6078% transparency
 
 ---
 
-#### 'Real-World' Beispiel zum Zweiten:
+#### 'Real-World' Beispiel zum Zweiten: Statisches Dekorieren mit Templates
 
 [Quellcode &ldquo;Statische Shapes&rdquo;](../StaticShapes.cpp)
 

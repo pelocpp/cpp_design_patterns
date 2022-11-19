@@ -19,6 +19,9 @@
     <Filter Include="Source Files\ECommerceApp">
       <UniqueIdentifier>{425126ef-a763-4635-a176-f5dccdf5fb9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\StaticStrategy">
+      <UniqueIdentifier>{bd140613-cfd0-4ac0-92d6-d401e92766a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -41,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="ECommerceApp.cpp">
       <Filter>Source Files\ECommerceApp</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticStrategyExample.cpp">
+      <Filter>Source Files\StaticStrategy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
