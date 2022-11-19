@@ -99,11 +99,11 @@ namespace MotivationVisitor02
 
     void clientCode02()
     {
-        Document* d1 = new HTML;
+        Document * d1 = new HTML;
         d1->addToList("This is line");
         d1->print();
 
-        Document* d2 = new Markdown;
+        Document * d2 = new Markdown;
         d2->addToList("This is another line");
         d2->print();
 
@@ -172,14 +172,15 @@ namespace MotivationVisitor03
     };
 
     void clientCode03() {
-        Document* d1 = new HTML;
+
+        Document * d1 = new HTML;
         d1->addToList("This is line");
         DocumentPrinter::print(d1);
-
-        Document* d2 = new Markdown;
+   
+        Document * d2 = new Markdown;
         d2->addToList("This is another line");
         DocumentPrinter::print(d2);
-
+   
         delete d1;
         delete d2;
     }
@@ -328,13 +329,13 @@ namespace MotivationVisitor05
     class DocumentPrinter
     {
     public:
-        void operator()(const Markdown& md) {
+        void operator() (const Markdown& md) {
             for (const std::string& item : md.getContent()) {
                 std::cout << md.getStart() << item << std::endl;
             }
         }
 
-        void operator()(const HTML& hd) {
+        void operator() (const HTML& hd) {
             std::cout << "<ul>" << std::endl;
             for (const std::string& item : hd.getContent()) {
                 std::cout << "    " << hd.getStart() << item << hd.getEnd() << std::endl;
@@ -364,10 +365,10 @@ void test_motivation_example()
     clientCode02();
     using namespace MotivationVisitor03;
     clientCode03();
-    using namespace MotivationVisitor04;
-    clientCode04();
-    using namespace MotivationVisitor05;
-    clientCode05();
+    //using namespace MotivationVisitor04;
+    //clientCode04();
+    //using namespace MotivationVisitor05;
+    //clientCode05();
 }
 
 // ===========================================================================

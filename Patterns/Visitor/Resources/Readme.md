@@ -22,7 +22,7 @@
 
 Das *Visitor Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 das eine Menge strukturierter Daten von den Funktionen trennt,
-die auf ihr ausgeführt werden. Dies unterstützt zum einen das Prinzip der "losen Kopplung"
+die auf den Daten ausgeführt werden. Dies unterstützt zum einen das Prinzip der "losen Kopplung"
 und es ermöglicht zum anderen das Hinzufügen zusätzlicher Operationen, ohne an den Datenklassen Änderungen vornehmen zu müssen.
 
 Im Kern geht es darum, eine Hierarchie von Klassen und Operationen auf diesen Klassen voneinander zu trennen.
@@ -276,7 +276,7 @@ und unnötige Performanceaufwendungen für *RTTI* haben.
 ##### Schritt 3: Ein &ldquo;klassischer&rdquo; Besucher (*classic Visitor*)
 
 Damit kommen wir nun auf die klassische Umsetzung des *Visitor* Patterns zu sprechen.
-Diese wird weiter unten noch näher erläutert (begleitender Text und UML-Diagramm):
+Diese wird weiter unten noch näher erläutert werden (begleitender Text und UML-Diagramm):
 
 ```cpp
 01: /* --------- Generic Visitor Class ----------- */
@@ -373,7 +373,7 @@ Diese wird weiter unten noch näher erläutert (begleitender Text und UML-Diagramm
 
 Wie Sie sehen können, haben wir es nun mit zwei Ebenen der Indirektion zu tun.
 Damit wurden vor allem vermieden, die zwei Prinzipien
-*Open*-*Closed*-Prinzip und *Single*-*Responsibility*-Prinzip zu verletzen.
+*Open*-*Closed-Principle* und *Single*-*Responsibility-Principle* zu verletzen.
 
 Hierfür gibt es ein spezielles Schlagwort: *Double Dispatch*, siehe dazu auch *Abbildung* 1:
 
@@ -438,13 +438,13 @@ des Zeigertyps `HTML*`).
 35: class DocumentPrinter
 36: {
 37: public:
-38:     void operator()(const Markdown& md) {
+38:     void operator() (const Markdown& md) {
 39:         for (const std::string& item : md.m_content) {
 40:             std::cout << md.m_start << item << std::endl;
 41:         }
 42:     }
 43: 
-44:     void operator()(const HTML& hd) {
+44:     void operator() (const HTML& hd) {
 45:         std::cout << "<ul>" << std::endl;
 46:         for (const std::string& item : hd.m_content) {
 47:             std::cout << "    " << hd.m_start << item << hd.m_end << std::endl;
