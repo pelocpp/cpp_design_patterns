@@ -21,7 +21,7 @@ namespace DepartmentStoreExample {
         struct OutOfStock {};
 
         struct Available {
-            int count;
+            int m_count;
         };
 
         struct NoMoreProduced {};
@@ -36,29 +36,30 @@ namespace DepartmentStoreExample {
     namespace Events {
 
         struct DeliveryArrived {
-            int count;
+            int m_count;
         };
 
         struct Purchased {
-            int count;
+            int m_count;
         };
 
         struct Discontinued {};
     }
 
     State onEvent(States::Available available, Events::DeliveryArrived delivered) {
-        available.count += delivered.count;
+        available.m_count += delivered.m_count;
         return available;
     }
 
     State onEvent(States::Available available, Events::Purchased purchased) {
-        available.count -= purchased.count;
-        if (available.count > 0) return available;
+        available.m_count -= purchased.m_count;
+        if (available.m_count > 0)
+            return available;
         return States::OutOfStock{};
     }
 
     State onEvent(States::OutOfStock depleted, Events::DeliveryArrived delivered) {
-        return States::Available{ delivered.count };
+        return States::Available{ delivered.m_count };
     }
 
     template <typename S>
@@ -95,7 +96,7 @@ namespace DepartmentStoreExample {
             return std::visit(
                 Overload{
                     [](const States::Available& state) -> std::string {
-                        return std::to_string(state.count) + " items available";
+                        return std::to_string(state.m_count) + " items available";
                     },
                     [](const States::OutOfStock) -> std::string {
                         return "Item is temporarily out of stock";

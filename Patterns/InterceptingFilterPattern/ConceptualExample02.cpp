@@ -148,8 +148,8 @@ namespace ConceptualExample02 {
     };
 }
 
-void test_conceptual_example_03() {
-
+void test_conceptual_example_03()
+{
     using namespace ConceptualExample02;
 
     std::shared_ptr<Target> target = std::make_shared<Target>();

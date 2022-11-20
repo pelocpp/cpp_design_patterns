@@ -43,7 +43,7 @@ namespace ConceptualExampleBridge01 {
     class ConcreteImplementor : public Implementor
     {
     public:
-        void concreteOperation() override
+        virtual void concreteOperation() override
         {
             std::cout << "Concrete Implementor's Operation" << std::endl;
         }
@@ -60,8 +60,12 @@ void test_conceptual_example_01()
 {
     using namespace ConceptualExampleBridge01;
 
-    std::shared_ptr<Abstraction> abstraction = std::make_shared<RefinedAbstraction>();
+    std::shared_ptr<Abstraction> abstraction{
+        std::make_shared<RefinedAbstraction>()
+    };
+    
     abstraction->setImplementor(std::make_shared<ConcreteImplementor>());
+    
     clientCode(abstraction);
 }
 

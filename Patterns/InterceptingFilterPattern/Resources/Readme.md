@@ -67,7 +67,7 @@ Es bestehen gewisse Ähnlichkeiten zum *Chain of Responsibility* Pattern.
 
 Wenn Sie das konzeptionelle Beispiel genau betrachten, werden Sie feststellen,
 dass die Filter-Methoden nur *vor* der Zielmethode ausführbar sind.
-Ergänzen Sie das Beispiel so, dass Filter-Methoden sowohl vor als auch nach der eigentlichen
+Ergänzen Sie das Beispiel so, dass Filter-Methoden sowohl *vor* als auch *nach* der eigentlichen
 Zielmethode ausführbar sind.
 
 ---

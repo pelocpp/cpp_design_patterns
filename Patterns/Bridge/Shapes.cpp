@@ -51,10 +51,7 @@ namespace ShapesExample {
     protected:
         std::unique_ptr<IDrawAPI> m_api;
 
-        Shape(std::unique_ptr<IDrawAPI> api)
-        {
-            m_api = std::move(api);
-        }
+        Shape(std::unique_ptr<IDrawAPI> api) : m_api { std::move(api) } {}
 
     public:
         void setImplementor(std::unique_ptr<IDrawAPI> api)

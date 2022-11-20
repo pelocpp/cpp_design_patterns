@@ -42,7 +42,7 @@ namespace ConceptualExample01 {
     class FilterChain
     {
     private:
-        std::list<std::shared_ptr<IFilter>> m_filters;
+        std::list<std::weak_ptr<IFilter>> m_filters;
         std::shared_ptr<Target> m_target;
 
     public:
@@ -58,7 +58,12 @@ namespace ConceptualExample01 {
 
         void removeFilter(const std::shared_ptr<IFilter>& filter)
         {
-            m_filters.remove(filter);
+            // https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs
+
+            m_filters.remove_if([&](std::weak_ptr<IFilter> wp) {
+                return !filter.owner_before(wp) && !wp.owner_before(filter);
+                }
+            );
         }
 
         void setTarget(const std::shared_ptr<Target>& target)
@@ -68,8 +73,11 @@ namespace ConceptualExample01 {
 
         void executeRequest(std::string request)
         {
-            for (const std::shared_ptr<IFilter>& filter : m_filters) {
-                filter->execute(request);
+            for (const std::weak_ptr<IFilter>& filter : m_filters) {
+                std::shared_ptr<IFilter> tmp{ filter.lock() };
+                if (tmp != nullptr) {
+                    tmp->execute(request);
+                }
             }
 
             m_target->operation(request);
@@ -115,8 +123,8 @@ namespace ConceptualExample01 {
     };
 }
 
-void test_conceptual_example_01() {
-
+void test_conceptual_example_01()
+{
     using namespace ConceptualExample01;
 
     std::shared_ptr<Target> target = std::make_shared<Target>();
@@ -136,7 +144,8 @@ void test_conceptual_example_01() {
     client.sendRequest("Starting Downloads");
 }
 
-void test_conceptual_example_02() {
+void test_conceptual_example_02()
+{
 
     using namespace ConceptualExample01;
 
