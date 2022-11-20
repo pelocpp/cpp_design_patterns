@@ -66,9 +66,6 @@ In manchen Programmiersprachen wird die `clone`-Methode automatisch bereitgestel
     }
     ```
 
-Dies ist in C++ so nicht der Fall. Eine `clone`-Methode (gleichwertig: Kopierkonstruktor) ist am Ursprungsobjekt bei Anwendung des
-*Prototype Patterns* explizit bereitzustellen.
-
 #### Eine anschauliche Beschreibung:
 
 Wir betrachten das Entwurfsmuster *Prototyp* an Hand der Fragestellung
@@ -81,7 +78,7 @@ Wir betrachten das Entwurfsmuster *Prototyp* an Hand der Fragestellung
   * Es wäre schwierig, Ersteres zu verwenden, um Letzteres zu implementieren, da der Kopierkonstruktor verwendet wird, wenn die genaue Instanz des Objekts bekannt ist,
     während das *Prototyp*-Entwurfsmuster verwendet wird, wenn es irgendeine Implementierung einer Schnittstelle gibt
     und Sie nur ein neues Objekt von genau der gleichen Implementierung erhalten möchten,
-    ohne dabei auf mühselige Casting- oder Typumwandlungsmethoden zurückzugreifen.
+    ohne dabei auf mühselige Casting- oder Typumwandlungsmethoden zurückgreifen zu müssen.
 
   * Nehmen wir an, Sie haben Schnittstelle `I` und die Implementierungen `A` und `B`. Irgendwann erhalten Sie ein Objekt `i`, das `I` implementiert.
     Vielleicht möchten Sie es nicht ändern, sondern lieber eine neue Instanz erhalten und dann einige Änderungen daran vornehmen.
@@ -99,8 +96,8 @@ Wir betrachten das Entwurfsmuster *Prototyp* an Hand der Fragestellung
     Daher kann man ein Objekt des abgeleiteten Typs nicht direkt über einen Zeiger
     auf seine Basis kopieren.
 
-  * Der *Virtuelle Konstruktor* ist eine Technik zum Delegieren des Vorgangs des Kopierens
-    des Objekts an die abgeleitete Klasse durch die Verwendung virtueller Funktionen.
+  * Der *Virtuelle Konstruktor* ist eine Technik zum Delegieren des Kopiervorgangs
+    eines Objekts an die abgeleitete Klasse durch Verwendung virtueller Funktionen.
 
 
 #### Struktur (UML):
@@ -120,7 +117,7 @@ Es besteht im Wesentlichen aus zwei Teilen:
 #### Hinweis:
 
 Es ist **nicht** möglich, das *Virtueller Konstruktor*-Idiom unverändert &ndash; so wie im
-ersten konzeptionellen Beispiel gezeigt &ndash; zu implementieren.
+ersten konzeptionellen Beispiel gezeigt &ndash; für Smart POinter zu implementieren.
 Der Grund ist, das abgeleitete virtuelle Methoden kovariante Rückgabetypen haben müssen.
 Bei den beiden Datentypen `std::shared_ptr<Prototype>` und `std::shared_ptr<ConcretePrototype>` ist dies **nicht** der Fall.
 
@@ -148,6 +145,77 @@ Man spricht dabei auch von der so genannten &ldquo;*Prototypischen Vererbung*&rd
 [Quellcode 4](../ConceptualExample04.cpp) &ndash; Wie letztes Beispiel, nur mit Smart Pointern
 
 ---
+
+#### Real-World Example:
+
+Wir betrachten ein Schachbrett mit Schachfiguren.
+Diese Figuren sind unterschiedlichen Typs (König, Dame, Bauern, etc.).
+In einem Schachprogramm sind Sie bisweilen gezwungen, Kopien eines Schachbretts zu erzeugen,
+um auf dem kopierten Brett &ldquo;Testzüge&rdquo; vornehmen zu können.
+
+Für das Kopieren des Schachbretts bzw. der Schachfiguren ist das *Virtueller Konstruktor*-Idiom
+in nahezu idealerweise geeignet:
+
+```cpp
+01: class IChessPiece
+02: {
+03: public:
+04:     virtual std::unique_ptr<IChessPiece> clone() const = 0;
+05:     virtual std::string str() const = 0;
+06: };
+07: 
+08: class ChessPiece : public IChessPiece
+09: {
+10: private:
+11:     std::string m_name;
+12: 
+13: protected:
+14:     ChessPiece(std::string name) : m_name{ name } {}
+15: 
+16: public:
+17:     std::string str() const override final {
+18:         return m_name;
+19:     }
+20: };
+21: 
+22: class King : public ChessPiece
+23: {
+24: public:
+25:     King() : ChessPiece{ "King" } {}
+26: 
+27:     std::unique_ptr<IChessPiece> clone() const override {
+28:         return std::make_unique<King>(*this);
+29:     }
+30: };
+31: 
+32: 
+33: class Pawn : public ChessPiece { ... };
+34: class Rook : public ChessPiece { ... };
+35: 
+36: class GameBoard
+37: {
+38:     friend std::ostream& operator<< (std::ostream&, const GameBoard&);
+39: 
+40: public:
+41:     GameBoard();                       // default c'tor
+42:     GameBoard(const GameBoard&);       // copy c'tor
+43:     virtual ~GameBoard() = default;    // virtual defaulted d'tor
+44: 
+45:     GameBoard& operator=(const GameBoard&);   // assignment operator
+46: 
+47:     std::unique_ptr<IChessPiece>& at(size_t, size_t);
+48:     const std::unique_ptr<IChessPiece>& at(size_t, size_t) const;
+49: 
+50:     static constexpr size_t DefaultWidth = 8;
+51:     static constexpr size_t DefaultHeight = 8;
+52: 
+53: private:
+54:     std::vector<std::vector<std::unique_ptr<IChessPiece>>> m_cells;
+55: };
+```
+
+---
+
 
 ## Literaturhinweise
 
