@@ -1,178 +1,215 @@
 // ===========================================================================
-// ConceptualExample02.cpp // Prototype Pattern
+// ConceptualExample02.cpp // Prototype Pattern am Beispiel eines Schachbretts
 // ===========================================================================
 
 #include <iostream>
+#include <iomanip>
 #include <string>
-#include <unordered_map>
+#include <type_traits>
+#include <vector>
 #include <memory>
 
-#define _CRTDBG_MAP_ALLOC
-#include <cstdlib>
-#include <crtdbg.h>
+// König -    King
+// Dame -     Queen
+// Turm -     Rook
+// Läufer -   Bishop
+// Springer - Knight
+// Bauer -    Pawn
 
-#ifdef _DEBUG
-#ifndef DBG_NEW
-#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-#define new DBG_NEW
-#endif
-#endif  // _DEBUG
+namespace ExamplesPrototypePattern {
 
-/**
-* Prototype Design Pattern
-*
-* Intent:
-* Lets you copy existing objects without making your code dependent on
-* their classes.
-*/
+	class IChessPiece
+	{
+	public:
+		virtual std::unique_ptr<IChessPiece> clone() const = 0;
+		virtual std::string str() const = 0;
+	};
 
-namespace ConceptualExample02 {
+	// -----------------------------------------------------------------------
 
-    enum class Type {
-        PROTOTYPE_1,
-        PROTOTYPE_2
-    };
+	class ChessPiece : public IChessPiece
+	{
+	private:
+		std::string m_name;
 
-    /**
-     * The example class that has cloning ability.
-     * We'll see how the values of fields with different types will be cloned.
-     */
+	protected:
+		ChessPiece(std::string name) : m_name{ name } {}
 
-    class Prototype
-    {
-    protected:
-        std::string m_name;
-        float m_field;
+	public:
+		std::string str() const override final {
+			return m_name;
+		}
+	};
 
-    public:
-        Prototype() : m_name{}, m_field{} {}
+	// -----------------------------------------------------------------------
 
-        Prototype(std::string prototype_name)
-            : m_name{ prototype_name }, m_field{} {}
+	class King : public ChessPiece
+	{
+	public:
+		King() : ChessPiece{ "King" } {}
 
-        virtual ~Prototype() {}
+		std::unique_ptr<IChessPiece> clone() const override {
+			return std::make_unique<King>(*this);
+		}
+	};
 
-        virtual Prototype* clone() const = 0;
+	// -----------------------------------------------------------------------
 
-        virtual void print() {
-            std::cout << "print:  " << m_name << " with field : " << m_field << std::endl;
-        }
+	class Pawn : public ChessPiece
+	{
+	public:
+		Pawn() : ChessPiece{ "Pawn" } {}
 
-        virtual void update(float field) {
-            m_field = field;
-            std::cout << "Call update from " << m_name << " with field : " << m_field << std::endl;
-        }
-    };
+		std::unique_ptr<IChessPiece> clone() const override {
+			return std::make_unique<Pawn>(*this);
+		}
+	};
 
-    /**
-     * ConcretePrototype1 is a Sub-Class of Prototype and implements the clone method.
-     * In this example all data members of Prototype Class are on the Stack. If you
-     * have pointers in your properties, for example: String* m_name, you will need to
-     * implement the Copy-Constructor to make sure you have a deep copy from the
-     * clone method
-     */
+	// -----------------------------------------------------------------------
 
-    class ConcretePrototype1 : public Prototype
-    {
-    private:
-        float m_concreteField1;
+	class Rook : public ChessPiece
+	{
+	public:
+		Rook() : ChessPiece{ "Rook" } {}
 
-    public:
-        ConcretePrototype1(std::string name, float concrete_field)
-            : Prototype{ name }, m_concreteField1{ concrete_field } {}
+		std::unique_ptr<IChessPiece> clone() const override {
+			return std::make_unique<Rook>(*this);
+		}
+	};
 
-        /**
-         * Notice that the clone method returns a pointer to a new ConcretePrototype1
-         * replica. so, the client (who calls the clone method) has the responsability
-         * to free that memory. I you have smart pointer knowledge you may prefer to
-         * use unique_pointer here.
-         */
-        virtual Prototype* clone() const override {
-            return new ConcretePrototype1{ *this };
-        }
-    };
+	// -----------------------------------------------------------------------
 
-    class ConcretePrototype2 : public Prototype
-    {
-    private:
-        float m_concreteField2;
+	class GameBoard
+	{
+		friend std::ostream& operator<< (std::ostream&, const GameBoard&);
 
-    public:
-        ConcretePrototype2(std::string name, float concrete_field)
-            : Prototype{ name }, m_concreteField2{ concrete_field } {}
+	public:
+		GameBoard();                       // default c'tor
+		GameBoard(const GameBoard&);       // copy c'tor
+		virtual ~GameBoard() = default;    // virtual defaulted d'tor
 
-        virtual Prototype* clone() const override {
-            return new ConcretePrototype2{ *this };
-        }
-    };
+		GameBoard& operator=(const GameBoard&);   // assignment operator
 
-    /**
-     * In PrototypeFactory you have two concrete prototypes, one for each concrete
-     * prototype class, so each time you want to create a bullet, you can use the
-     * existing ones and clone those.
-     */
+		std::unique_ptr<IChessPiece>& at(size_t, size_t);
+		const std::unique_ptr<IChessPiece>& at(size_t, size_t) const;
 
-    class PrototypeFactory
-    {
-    private:
-        std::unordered_map<Type, Prototype*> m_originals;
+		static constexpr size_t DefaultWidth = 8;
+		static constexpr size_t DefaultHeight = 8;
 
-    public:
-        PrototypeFactory()
-        {
-            m_originals[Type::PROTOTYPE_1] = new ConcretePrototype1("Prototype_1 ", 50.f);
-            m_originals[Type::PROTOTYPE_2] = new ConcretePrototype2("Prototype_2 ", 60.f);
-        }
+	private:
+		std::vector<std::vector<std::unique_ptr<IChessPiece>>> m_cells;
+	};
 
-        /**
-         * Be carefull of free all memory allocated. Again, if you have smart pointers
-         * knowelege will be better to use it here.
-         */
+	GameBoard::GameBoard()
+	{
+		m_cells.resize(DefaultWidth);
+		for (auto& row : m_cells) {
+			row.resize(DefaultHeight);
+		}
+	}
 
-        ~PrototypeFactory() {
-            delete m_originals[Type::PROTOTYPE_1];
-            delete m_originals[Type::PROTOTYPE_2];
-        }
+	GameBoard::GameBoard(const GameBoard& other) : GameBoard()
+	{
+		// need to redirect to default c'tor at first 
+		// to allocate the proper amount of memory
 
-        /**
-         * Notice here that you just need to specify the type of the prototype you
-         * want and the method will create from the object with this type.
-         */
-        Prototype* createPrototype(Type type) {
-            return m_originals[type]->clone();
-        }
-    };
+		// now copy the data
+		for (size_t i = 0; i != m_cells.size(); ++i) {
+			for (size_t j = 0; j != m_cells[i].size(); ++j) {
+				if (other.m_cells[i][j]) {
 
-    void client(PrototypeFactory& factory)
-    {
-        std::cout << "Let's create a Prototype 1" << std::endl;
+					// compiler error
+					// m_cells[i][j] = other.m_cells[i][j];
+					// m_cells[i][j] = std::make_unique<ChessPiece>(*other.m_cells[i][j]);
 
-        Prototype* prototype = factory.createPrototype(Type::PROTOTYPE_1);
-        prototype->print();
-        prototype->update(10);
-        delete prototype;
-        std::cout << std::endl;
+					m_cells[i][j] = other.m_cells[i][j]->clone();
+				}
+			}
+		}
+	}
 
-        std::cout << "Let's create a Prototype 2" << std::endl;
-        prototype = factory.createPrototype(Type::PROTOTYPE_2);
-        prototype->print();
-        prototype->update(20);
-        delete prototype;
-        std::cout << std::endl;
-    }
+	GameBoard& GameBoard::operator=(const GameBoard& other) {
+
+		// check for self-assignment
+		if (this == &other) {
+			return *this;
+		}
+
+		for (size_t i = 0; i != m_cells.size(); ++i) {
+			for (size_t j = 0; j != m_cells[i].size(); ++j) {
+				if (other.m_cells[i][j] != nullptr) {
+					m_cells[i][j] = other.m_cells[i][j]->clone();
+
+					// compiler error
+					// m_cells[i][j] = other.m_cells[i][j];
+					// m_cells[i][j] = std::make_unique<ChessPiece>(*other.m_cells[i][j]);
+				}
+			}
+		}
+
+		return *this;
+	}
+
+	std::unique_ptr<IChessPiece>& GameBoard::at(size_t x, size_t y)
+	{
+		return m_cells[x][y];
+	}
+
+	const std::unique_ptr<IChessPiece>& GameBoard::at(size_t x, size_t y) const
+	{
+		return m_cells[x][y];
+	}
+
+	std::ostream& operator<< (std::ostream& os, const GameBoard& board) {
+
+		for (const auto& row : board.m_cells) {
+			for (const auto& cell : row) {
+				if (cell != nullptr) {
+					std::cout << std::setw(8) << std::left << cell->str();
+				}
+				else {
+					std::cout << std::setw(8) << std::left << "<empty>";
+				}
+
+			}
+			std::cout << std::endl;
+		}
+
+		return os;
+	}
+
+	// ========================================================================
 }
 
-void test_conceptual_example_02()
+void test_prototype_pattern_chess_01()
 {
-    using namespace ConceptualExample02;
+	using namespace ExamplesPrototypePattern;
 
-    PrototypeFactory* prototype_factory = new PrototypeFactory();
-    client(*prototype_factory);
-    delete prototype_factory;
+	King king;
+	std::cout << king.str() << std::endl;
 }
 
+void test_prototype_pattern_chess_02()
+{
+	using namespace ExamplesPrototypePattern;
+
+	GameBoard board;
+
+	board.at(0, 0) = std::make_unique<King>();
+	board.at(0, 1) = std::make_unique<Pawn>();
+	//board.at(1, 0) = std::make_unique<Pawn>();
+	board.at(1, 1) = std::make_unique<Rook>();
+
+	std::cout << board << std::endl;
+
+	GameBoard boardCopy;
+	boardCopy = board;
+	std::cout << boardCopy << std::endl;
+
+	GameBoard secondBoardCopy{ board };
+	std::cout << secondBoardCopy << std::endl;
+}
 
 // ===========================================================================
 // End-of-File
 // ===========================================================================
-

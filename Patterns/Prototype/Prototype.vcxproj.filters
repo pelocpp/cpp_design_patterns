@@ -32,10 +32,13 @@
     <ClCompile Include="ConceptualExample01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample02.cpp">
+    <ClCompile Include="ConceptualExample03.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample03.cpp">
+    <ClCompile Include="ConceptualExample04.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>

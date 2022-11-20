@@ -6,8 +6,45 @@
 #include <string>
 #include <memory>
 
-namespace ConceptualExample01 {
+namespace ConceptualExample01
+{
+    class Prototype
+    {
+    private:
+        int m_id;
 
+    public:
+        Prototype(int id) : m_id{ id } {}
+        virtual ~Prototype() {}
+        
+        virtual Prototype* clone() const = 0;
+
+    public:
+        int getId() const { return m_id; }
+        void setId(int id) { m_id = id; }
+    };
+
+    class ConcretePrototype : public Prototype
+    {
+    public:
+        ConcretePrototype(int id) : Prototype{ id } {}
+
+        // Note: Return Type = Type of derived class
+        ConcretePrototype* clone() const override
+        {
+            return new ConcretePrototype(*this);
+        }
+    };
+
+    void clientCode (std::unique_ptr<Prototype> original)
+    {
+        std::unique_ptr<Prototype> copy{ original->clone() };
+    }
+}
+
+
+namespace ConceptualExample02
+{
     class Prototype
     {
     private:
@@ -17,11 +54,11 @@ namespace ConceptualExample01 {
         Prototype(int id) : m_id{ id } {}
 
     public:
-        int getId() { return m_id; }
+        int getId() const { return m_id; }
         void setId(int id) { m_id = id; }
 
     public:
-        virtual std::shared_ptr<Prototype> clone() = 0;
+        virtual std::shared_ptr<Prototype> clone() const = 0;
     };
 
     class ConcretePrototype : public Prototype
@@ -29,9 +66,10 @@ namespace ConceptualExample01 {
     public:
         ConcretePrototype(int id) : Prototype{ id } {}
 
-        virtual std::shared_ptr<Prototype> clone() override
+        // Note: Return Type = Type of base class
+        std::shared_ptr<Prototype> clone() const override
         {
-            std::shared_ptr<Prototype> copy = 
+            std::shared_ptr<Prototype> copy =
                 std::make_shared<ConcretePrototype>(getId());
 
             return copy;
@@ -43,11 +81,9 @@ void test_conceptual_example_01()
 {
     using namespace ConceptualExample01;
 
-    std::shared_ptr<Prototype> prototype {
-        std::make_shared<ConcretePrototype>(123) 
-    };
-
-    std::shared_ptr<Prototype> clone { prototype->clone() };
+    Prototype* prototype = new ConcretePrototype(123);
+        
+    Prototype* clone = prototype->clone();
 
     std::cout << "Prototype: " << prototype->getId() << std::endl;
     std::cout << "Clone:     " << clone->getId() << std::endl;
@@ -57,6 +93,28 @@ void test_conceptual_example_01()
     std::cout << "Prototype: " << prototype->getId() << std::endl;
     std::cout << "Clone:     " << clone->getId() << std::endl;
 }
+
+void test_conceptual_example_02()
+{
+    using namespace ConceptualExample02;
+
+    std::shared_ptr<Prototype> prototype {
+        std::make_shared<ConcretePrototype>(123) 
+    };
+
+    std::shared_ptr<Prototype> clone { 
+        prototype->clone() 
+    };
+
+    std::cout << "Prototype: " << prototype->getId() << std::endl;
+    std::cout << "Clone:     " << clone->getId() << std::endl;
+
+    clone->setId(456);
+
+    std::cout << "Prototype: " << prototype->getId() << std::endl;
+    std::cout << "Clone:     " << clone->getId() << std::endl;
+}
+
 
 // ===========================================================================
 // End-of-File

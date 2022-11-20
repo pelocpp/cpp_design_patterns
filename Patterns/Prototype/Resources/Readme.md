@@ -1,4 +1,4 @@
-# Prototype Pattern
+# Prototype Pattern &ndash; auch als *Virtueller Konstruktor* bezeichnet
 
 [Zurück](../../../Resources/Readme_05_Catalog.md)
 
@@ -15,6 +15,11 @@
 ##### Kategorie: Erzeugungsmuster / *Creational Pattern*
 
 #### Ziel / Absicht:
+
+###### In einem Satz:
+
+&ldquo;Erstelle eine Kopie eines Objekts durch einen Zeiger auf seinen Basistyp.&rdquo;
+
 
 Das *Prototype Pattern* ist ein Entwurfsmuster,
 das zum Instanziieren einer Klasse auf das Kopieren oder Klonen der Eigenschaften eines anderen, vorhandenen Objekts zurückgreift.
@@ -88,6 +93,16 @@ Wir betrachten das Entwurfsmuster *Prototyp* an Hand der Fragestellung
    I* i2 = i.clone();
 ```
 
+  * In einer statisch typisierten Programmiersprache kann man ein Objekt nur dann kopieren,
+    wenn man seinen statischen Typ kennt, da der Compiler wissen muss,
+    wie viel Speicherplatz er zuweisen muss.
+    Daher kann man ein Objekt des abgeleiteten Typs nicht direkt über einen Zeiger
+    auf seine Basis kopieren.
+
+  * Der *Virtuelle Konstruktor* ist eine Technik zum Delegieren des Vorgangs des Kopierens
+    des Objekts an die abgeleitete Klasse durch die Verwendung virtueller Funktionen.
+
+
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Prototype Patterns*.
@@ -104,6 +119,16 @@ Es besteht im Wesentlichen aus zwei Teilen:
 
 #### Hinweis:
 
+Es ist **nicht** möglich, das *Virtueller Konstruktor*-Idiom unverändert &ndash; so wie im
+ersten konzeptionellen Beispiel gezeigt &ndash; zu implementieren.
+Der Grund ist, das abgeleitete virtuelle Methoden kovariante Rückgabetypen haben müssen.
+Bei den beiden Datentypen `std::shared_ptr<Prototype>` und `std::shared_ptr<ConcretePrototype>` ist dies **nicht** der Fall.
+
+Eine einfache Umgehung dieses Problems besteht darin,
+dass die Methode `ConcretePrototype::clone` stattdessen einen `Prototype`-Zeiger zurückgibt.
+
+#### Hinweis:
+
 In JavaScript ist das *Prototype Pattern* quasi nativ enthalten.
 
 Die Erstellung von Objekten erfolgt hier &ndash; unter anderem &ndash; auf der Basis von so genannten
@@ -114,11 +139,13 @@ Man spricht dabei auch von der so genannten &ldquo;*Prototypischen Vererbung*&rd
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version &ndash; mit *raw*-Zeigern und Smart Pointern 
 
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Ein Beispiel mit einer Factory für Prototypen
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; Beispiel eines Schachbretts mit Spielfiguren unterschiedlichen Typs
 
-[Quellcode 3](../ConceptualExample03.cpp) &ndash; Wie Variante 2, nur mit Smart Pointer
+[Quellcode 3](../ConceptualExample03.cpp) &ndash; Ein Beispiel mit einer Factory für Prototypen
+
+[Quellcode 4](../ConceptualExample04.cpp) &ndash; Wie letztes Beispiel, nur mit Smart Pointern
 
 ---
 
@@ -133,6 +160,12 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#Prototype)
 
 vor.
+
+Eine Beschreibung des *Virtueller Konstruktor*-Idioms findet man [hier](https://cpppatterns.com/patterns/virtual-constructor.html).
+
+Die Problematik des kovarianten Rückgabetyps ist in StackOverflow beschrieben:
+
+[Return Type Covariance with Smart Pointers](https://stackoverflow.com/questions/6924754/return-type-covariance-with-smart-pointers/6925201)    
 
 ---
 
