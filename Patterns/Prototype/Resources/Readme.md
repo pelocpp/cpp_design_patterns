@@ -20,7 +20,6 @@
 
 &ldquo;Erstelle eine Kopie eines Objekts durch einen Zeiger auf seinen Basistyp.&rdquo;
 
-
 Das *Prototype Pattern* ist ein Entwurfsmuster,
 das zum Instanziieren einer Klasse auf das Kopieren oder Klonen der Eigenschaften eines anderen, vorhandenen Objekts zurückgreift.
 Das neue Objekt ist eine exakte Kopie des Prototyps, ermöglicht jedoch Änderungen an diesem, ohne das Original zu verändern.
@@ -69,16 +68,16 @@ In manchen Programmiersprachen wird die `clone`-Methode automatisch bereitgestel
 #### Eine anschauliche Beschreibung:
 
 Wir betrachten das Entwurfsmuster *Prototyp* an Hand der Fragestellung
-&ldquo;Was ist der Unterschied zwischen dem Entwurfsmuster *Prototyp* und dem Kopierkonstruktor in C++&rdquo;?
+&ldquo;Was ist der Unterschied zwischen dem *Prototyp*-Entwurfsmuster und dem Kopierkonstruktor in C++&rdquo;?
 
   * Der Kopierkonstruktor ist ein programmiersprachliches Konstrukt der Sprache C++.
 
-  * Das Entwurfsmuster *Prototyp* ist ein Entwurfsmuster, das verwendet wird, um (polymorphe) Objekte basierend auf einer vorhandenen Instanz zu erzeugen.
+  * Das *Prototyp*-Entwurfsmuster wird verwendet, um (polymorphe) Objekte &ndash; basierend auf einer vorhandenen Instanz &ndash; zu erzeugen.
 
-  * Es wäre schwierig, Ersteres zu verwenden, um Letzteres zu implementieren, da der Kopierkonstruktor verwendet wird, wenn die genaue Instanz des Objekts bekannt ist,
-    während das *Prototyp*-Entwurfsmuster verwendet wird, wenn es irgendeine Implementierung einer Schnittstelle gibt
-    und Sie nur ein neues Objekt von genau der gleichen Implementierung erhalten möchten,
-    ohne dabei auf mühselige Casting- oder Typumwandlungsmethoden zurückgreifen zu müssen.
+  * Der Kopierkonstruktor verwendet wird, wenn die genaue Instanz des Objekts bekannt ist.
+    Das *Prototyp*-Entwurfsmuster wird verwendet, wenn es irgendeine Implementierung einer Schnittstelle gibt
+    und Sie nur ein neues Objekt von genau der gleichen Implementierung erhalten wollen,
+    ohne dabei auf mühselige Cast- oder Typumwandlungsmethoden zurückgreifen zu müssen.
 
   * Nehmen wir an, Sie haben Schnittstelle `I` und die Implementierungen `A` und `B`. Irgendwann erhalten Sie ein Objekt `i`, das `I` implementiert.
     Vielleicht möchten Sie es nicht ändern, sondern lieber eine neue Instanz erhalten und dann einige Änderungen daran vornehmen.
@@ -92,7 +91,7 @@ Wir betrachten das Entwurfsmuster *Prototyp* an Hand der Fragestellung
 
   * In einer statisch typisierten Programmiersprache kann man ein Objekt nur dann kopieren,
     wenn man seinen statischen Typ kennt, da der Compiler wissen muss,
-    wie viel Speicherplatz er zuweisen muss.
+    wieviel Speicherplatz er zuweisen muss.
     Daher kann man ein Objekt des abgeleiteten Typs nicht direkt über einen Zeiger
     auf seine Basis kopieren.
 
@@ -117,11 +116,11 @@ Es besteht im Wesentlichen aus zwei Teilen:
 #### Hinweis:
 
 Es ist **nicht** möglich, das *Virtueller Konstruktor*-Idiom unverändert &ndash; so wie im
-ersten konzeptionellen Beispiel gezeigt &ndash; für Smart POinter zu implementieren.
-Der Grund ist, das abgeleitete virtuelle Methoden kovariante Rückgabetypen haben müssen.
+ersten konzeptionellen Beispiel gezeigt &ndash; für *Smart Pointer* (`std::shared_ptr`, `std::unique_ptr`) zu implementieren.
+Der Grund besteht darin, dass abgeleitete, virtuelle Methoden kovariante Rückgabetypen haben müssen.
 Bei den beiden Datentypen `std::shared_ptr<Prototype>` und `std::shared_ptr<ConcretePrototype>` ist dies **nicht** der Fall.
 
-Eine einfache Umgehung dieses Problems besteht darin,
+Eine pragmatische Umgehung dieses Problems besteht darin,
 dass die Methode `ConcretePrototype::clone` stattdessen einen `Prototype`-Zeiger zurückgibt.
 
 #### Hinweis:
@@ -152,7 +151,6 @@ Wir betrachten ein Schachbrett mit Schachfiguren.
 Diese Figuren sind unterschiedlichen Typs (König, Dame, Bauern, etc.).
 In einem Schachprogramm sind Sie bisweilen gezwungen, Kopien eines Schachbretts zu erzeugen,
 um auf dem kopierten Brett &ldquo;Testzüge&rdquo; vornehmen zu können.
-
 Für das Kopieren des Schachbretts bzw. der Schachfiguren ist das *Virtueller Konstruktor*-Idiom
 in nahezu idealerweise geeignet:
 
