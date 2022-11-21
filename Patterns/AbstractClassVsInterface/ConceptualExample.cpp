@@ -92,6 +92,22 @@ namespace AbstractClassVsInterface {
     private:
         double m_oneMoreValue;
     };
+
+    Interface* getInterface()
+    {
+        AnotherConcreteClass* obj = new AnotherConcreteClass();
+        // or
+        // Interface* obj = new AnotherConcreteClass();
+
+        return obj;
+    }
+
+    void client()
+    {
+        Interface* ip;
+        ip = getInterface();
+        ip->method_first();
+    }
 }
 
 void test_conceptual_example()

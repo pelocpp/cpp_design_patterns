@@ -22,21 +22,18 @@ struct IListStrategy
     virtual void end(std::ostringstream& oss) = 0;
 };
 
-struct ListStrategy : public IListStrategy
+struct MarkdownListStrategy : public IListStrategy
 {
-    virtual void add_list_item(std::ostringstream& oss, const std::string& item) {};
     virtual void start(std::ostringstream& oss) {};
-    virtual void end(std::ostringstream& oss) {};
-};
 
-struct MarkdownListStrategy : public ListStrategy
-{
+    virtual void end(std::ostringstream& oss) {};
+
     void add_list_item(std::ostringstream& oss, const std::string& item) override {
         oss << " - " << item << std::endl; 
     }
 };
 
-struct HtmlListStrategy : public ListStrategy
+struct HtmlListStrategy : public IListStrategy
 {
     void start(std::ostringstream& oss) override {
         oss << "<ul>" << std::endl; 

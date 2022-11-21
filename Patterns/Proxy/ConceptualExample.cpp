@@ -6,9 +6,10 @@
 #include <memory>
 
 /**
- * The SubjectBase interface declares common operations for both 'RealSubject' and the
- * 'Proxy'. As long as the client works with 'RealSubject' using this interface,
- * you'll be able to pass it a proxy instead of a real subject.
+ * The SubjectBase interface declares common operations for both 'RealSubject'
+ *    and the 'Proxy'. As long as the client works with 'RealSubject'
+ *    using this interface,you'll be able to pass it a proxy
+ *    instead of a real subject.
  */
 class SubjectBase 
 {
@@ -40,7 +41,10 @@ private:
 
     bool checkAccess() const {
         // some real checks should go here.
-        std::cout << "Proxy: Checking access prior to executing a real request." << std::endl;
+        std::cout 
+            << "Proxy: Checking access prior to executing a real request." 
+            << std::endl;
+
         return true;
     }
 
@@ -82,25 +86,61 @@ void clientCode(std::shared_ptr<SubjectBase> subject) {
     subject->request();
 }
 
-void test_conceptual_example() {
-    std::cout << "Client: Executing the client code with a real subject:" << std::endl;
-    std::shared_ptr<SubjectBase> realSubject{ 
+void test_conceptual_example_01() 
+{
+    std::cout 
+        << "Client: Executing the client code with a real subject:" 
+        << std::endl;
+    
+    std::shared_ptr<RealSubject> realSubject{ 
         std::make_shared<RealSubject>() 
     };
 
     clientCode(realSubject);
     std::cout << std::endl;
 
-    std::cout << "Client: Executing the same client code with a proxy:" << std::endl;
-    std::shared_ptr<SubjectBase> proxy{ 
-        std::static_pointer_cast<RealSubject>(realSubject)
+    std::cout 
+        << "Client: Executing the same client code with a proxy:" 
+        << std::endl;
+
+    std::shared_ptr<Proxy> proxy{
+        std::make_shared<Proxy>(realSubject)
     };
 
-    /*  Note: std::static_pointer_cast is necessary, because I defined
-    *         realSubject from type SubjectBase - not RealSubject
-    */
-
     clientCode(proxy);
+}
+
+void test_conceptual_example_02()
+{
+    std::cout 
+        << "Client: Executing the client code with a real subject:" 
+        << std::endl;
+
+    /*  Note: realSubject is defined of type SubjectBase - not RealSubject
+     */
+    std::shared_ptr<SubjectBase> realSubject {
+        std::make_shared<RealSubject>()
+    };
+
+    clientCode(realSubject);
+    std::cout << std::endl;
+
+    std::cout << "Client: Executing the same client code with a proxy:" << std::endl;
+
+    /*  Note: std::static_pointer_cast is necessary, because I defined
+     *        realSubject from type SubjectBase - not RealSubject
+     */
+    std::shared_ptr<Proxy> secondProxy{
+        std::make_shared<Proxy>(std::static_pointer_cast<RealSubject>(realSubject))
+    };
+
+    clientCode(secondProxy);
+}
+
+void test_conceptual_example()
+{
+    test_conceptual_example_01();
+    test_conceptual_example_02();
 }
 
 // ===========================================================================
