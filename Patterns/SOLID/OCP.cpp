@@ -84,7 +84,7 @@ namespace ConceptualExampleOCP {
     struct SizeSpecification : public Specification<T>
     {
         Size m_size;
-        SizeSpecification(Size size) : m_size(size) {}
+        SizeSpecification(Size size) : m_size{ size } {}
         
         virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
             return product->m_size == m_size;

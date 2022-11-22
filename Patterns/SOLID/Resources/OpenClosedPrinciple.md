@@ -139,7 +139,7 @@ sind die am meisten verbreitete Vorgehensweise:
 020: struct ColorSpecification : public Specification<T> 
 021: {
 022:     Color m_color;
-023:     ColorSpecification(Color color) : { color } {}
+023:     ColorSpecification(Color color) : m_color{ color } {}
 024: 
 025:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
 026:         return product->m_color == m_color; 
@@ -150,7 +150,7 @@ sind die am meisten verbreitete Vorgehensweise:
 031: struct SizeSpecification : public Specification<T>
 032: {
 033:     Size m_size;
-034:     SizeSpecification(Size size) : m_size(size) {}
+034:     SizeSpecification(Size size) : m_size{ size } {}
 035:         
 036:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
 037:         return product->m_size == m_size;
