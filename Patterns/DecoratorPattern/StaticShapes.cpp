@@ -6,14 +6,14 @@
 
 namespace StaticDecoration {
 
-    class Shape
+    class IShape
     {
     public:
-        virtual ~Shape() {}
+        virtual ~IShape() {}
         virtual std::string draw() const = 0;
     };
 
-    class Circle : public Shape
+    class Circle : public IShape
     {
     private:
         double m_radius;
@@ -32,7 +32,7 @@ namespace StaticDecoration {
         }
     };
 
-    struct Square : public Shape
+    struct Square : public IShape
     {
     private:
         double m_side;
@@ -51,7 +51,7 @@ namespace StaticDecoration {
         }
     };
 
-    struct Rectangle : public Shape
+    struct Rectangle : public IShape
     {
     private:
         double m_width;
@@ -78,7 +78,7 @@ namespace StaticDecoration {
     {
         // formally 'static_assert' is a declaration
         static_assert (
-            std::is_base_of<Shape, T>::value,
+            std::is_base_of<IShape, T>::value,
             "Template argument must be a Shape"
         );
 
@@ -104,7 +104,7 @@ namespace StaticDecoration {
     struct TransparentShape : public T
     {
         static_assert (
-            std::is_base_of<Shape, T>::value,
+            std::is_base_of<IShape, T>::value,
             "Template argument must be a Shape"
         );
 

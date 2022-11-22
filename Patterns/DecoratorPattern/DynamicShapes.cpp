@@ -7,15 +7,15 @@
 namespace DynamicDecoration {
 
     // corresponds to 'component'
-    class Shape
+    class IShape
     {
     public:
-        virtual ~Shape() {}
+        virtual ~IShape() {}
         virtual std::string draw() const = 0;
     };
 
     // corresponds to 'concrete component'
-    class Circle : public Shape {
+    class Circle : public IShape {
     private:
         double m_radius;
 
@@ -33,7 +33,7 @@ namespace DynamicDecoration {
     };
 
     // corresponds to 'concrete component'
-    class Square : public Shape
+    class Square : public IShape
     {
     private:
         double m_side;
@@ -52,12 +52,12 @@ namespace DynamicDecoration {
     };
 
     // corresponds to 'base decorator class'
-    class ShapeDecorator : public Shape {
+    class ShapeDecorator : public IShape {
     protected:
-        std::shared_ptr<Shape> m_component;
+        std::shared_ptr<IShape> m_component;
 
     public:
-        ShapeDecorator(const std::shared_ptr<Shape>& component)
+        ShapeDecorator(const std::shared_ptr<IShape>& component)
             : m_component{ component } {}
 
         // base decorator class delegates all work to the wrapped component
@@ -73,7 +73,7 @@ namespace DynamicDecoration {
         std::string m_color;
 
     public:
-        ColoredShapeDecorator(const std::shared_ptr<Shape>& shape, const std::string& color)
+        ColoredShapeDecorator(const std::shared_ptr<IShape>& shape, const std::string& color)
             : ShapeDecorator{ shape }, m_color{ color } {}
 
         virtual std::string draw() const override
@@ -91,7 +91,7 @@ namespace DynamicDecoration {
         uint8_t m_transparency;
 
     public:
-        TransparentShapeDecorator(const std::shared_ptr<Shape>& shape, uint8_t transparency)
+        TransparentShapeDecorator(const std::shared_ptr<IShape>& shape, uint8_t transparency)
             : ShapeDecorator{ shape }, m_transparency{ transparency } {}
 
         virtual std::string draw() const override
@@ -108,7 +108,7 @@ namespace DynamicDecoration {
 void test_dynamic_decoration_00() {
     using namespace DynamicDecoration;
 
-    std::shared_ptr<Shape> circle{
+    std::shared_ptr<IShape> circle{
         std::make_shared<Circle>(0.5) 
     };
 
@@ -119,11 +119,11 @@ void test_dynamic_decoration_00() {
 void test_dynamic_decoration_01() {
     using namespace DynamicDecoration;
 
-    std::shared_ptr<Shape> circle{
+    std::shared_ptr<IShape> circle{
         std::make_shared<Circle>(0.5)
     };
 
-    std::shared_ptr<Shape> redCircle{
+    std::shared_ptr<IShape> redCircle{
         std::make_shared<ColoredShapeDecorator>(circle, "red") 
     };
 
@@ -134,11 +134,11 @@ void test_dynamic_decoration_01() {
 void test_dynamic_decoration_02() {
     using namespace DynamicDecoration;
 
-    std::shared_ptr<Shape> square{
+    std::shared_ptr<IShape> square{
         std::make_shared<Square>(3.0) 
     };
 
-    std::shared_ptr<Shape> transparentSquare{
+    std::shared_ptr<IShape> transparentSquare{
         std::make_shared<TransparentShapeDecorator>(square, static_cast<uint8_t>(85)) 
     };
 
@@ -149,15 +149,15 @@ void test_dynamic_decoration_02() {
 void test_dynamic_decoration_03() {
     using namespace DynamicDecoration;
 
-    std::shared_ptr<Shape> circle{
+    std::shared_ptr<IShape> circle{
         std::make_shared<Circle>(15.0) 
     };
 
-    std::shared_ptr<Shape> greenCircle{ 
+    std::shared_ptr<IShape> greenCircle{
         std::make_shared<ColoredShapeDecorator>(circle, "green")
     };
 
-    std::shared_ptr<Shape> greenTransparentCircle{
+    std::shared_ptr<IShape> greenTransparentCircle{
         std::make_shared<TransparentShapeDecorator>(greenCircle, static_cast<uint8_t>(50)) 
     };
 

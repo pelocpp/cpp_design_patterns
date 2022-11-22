@@ -205,7 +205,7 @@ verdeutlichen sollen.
 *Code*:
 
 ```cpp
-std::shared_ptr<Shape> circle = std::make_shared<Circle>(0.5f);
+std::shared_ptr<IShape> circle = std::make_shared<Circle>(0.5f);
 std::cout << circle->draw() << std::endl;
 ```
 
@@ -220,10 +220,10 @@ A circle of radius 0.500000
 *Code*:
 
 ```cpp
-std::shared_ptr<Shape> circle{
+std::shared_ptr<IShape> circle{
     std::make_shared<Circle>(0.5)
 };
-std::shared_ptr<Shape> redCircle{
+std::shared_ptr<IShape> redCircle{
     std::make_shared<ColoredShapeDecorator>(circle, "red") 
 };
 std::cout << redCircle->draw() << std::endl;
@@ -240,11 +240,11 @@ A circle of radius 0.500000 has color red
 *Code*:
 
 ```cpp
-std::shared_ptr<Shape> square{
+std::shared_ptr<IShape> square{
     std::make_shared<Square>(3.0) 
 };
 
-std::shared_ptr<Shape> transparentSquare{
+std::shared_ptr<IShape> transparentSquare{
     std::make_shared<TransparentShapeDecorator>(square, static_cast<uint8_t>(85)) 
 };
 
@@ -262,15 +262,15 @@ A square with side 3 has 33.3333% transparency
 *Code*:
 
 ```cpp
-std::shared_ptr<Shape> circle{
+std::shared_ptr<IShape> circle{
     std::make_shared<Circle>(15.0) 
 };
 
-std::shared_ptr<Shape> greenCircle{ 
+std::shared_ptr<IShape> greenCircle{ 
     std::make_shared<ColoredShapeDecorator>(circle, "green")
 };
 
-std::shared_ptr<Shape> greenTransparentCircle{
+std::shared_ptr<IShape> greenTransparentCircle{
     std::make_shared<TransparentShapeDecorator>(greenCircle, static_cast<uint8_t>(50)) 
 };
 std::cout << greenTransparentCircle->draw() << std::endl;

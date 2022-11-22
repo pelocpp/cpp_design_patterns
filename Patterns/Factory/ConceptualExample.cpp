@@ -8,14 +8,14 @@
 
 namespace ConceptualExample {
 
-    class Shape
+    class IShape
     {
     public:
-        virtual ~Shape() {};
+        virtual ~IShape() {};
         virtual void draw() = 0;
     };
 
-    class Rectangle : public Shape {
+    class Rectangle : public IShape {
     public:
         Rectangle() = default;
         void draw() override
@@ -24,7 +24,7 @@ namespace ConceptualExample {
         }
     };
 
-    class Square : public Shape {
+    class Square : public IShape {
     public:
         Square() = default;
         void draw() override
@@ -33,7 +33,7 @@ namespace ConceptualExample {
         }
     };
 
-    class Circle : public Shape {
+    class Circle : public IShape {
     public:
         Circle() = default;
         void draw() override
@@ -52,7 +52,7 @@ namespace ConceptualExample {
         };
 
     public:
-        std::shared_ptr<Shape> getShape(std::string shapeType)
+        std::shared_ptr<IShape> getShape(std::string shapeType)
         {
             enum class StringCode shape = stringToEnum(shapeType);
 
@@ -65,7 +65,7 @@ namespace ConceptualExample {
             case StringCode::Circle:
                 return std::make_shared<ConceptualExample::Circle>();
             case StringCode::None:
-                return std::shared_ptr<Shape>();
+                return std::shared_ptr<IShape>();
             default:
                 std::string msg = "Invalid type: " + shapeType;
                 throw std::runtime_error{ msg };
@@ -106,7 +106,7 @@ namespace ConceptualExample {
         // (knowledge about explicit classes not necessary)
         ShapeFactory shapeFactory;
 
-        std::shared_ptr<Shape> shape{};
+        std::shared_ptr<IShape> shape{};
         shape = shapeFactory.getShape("Circle");
         shape->draw();
         shape = shapeFactory.getShape("Rectangle");
