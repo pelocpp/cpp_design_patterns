@@ -265,13 +265,13 @@ namespace MotivationVisitor04
 
     void clientCode04()
     {
-        DocumentPrinter* dp = new DocumentPrinter();
+        DocumentVisitor* dp = new DocumentPrinter();
 
         Document* d1 = new HTML;
         d1->addToList("This is line");
         d1->accept(dp);
 
-        Document* d2 = new HTML;
+        Document* d2 = new Markdown;
         d2->addToList("This is another line");
         d2->accept(dp);
 

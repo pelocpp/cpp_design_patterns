@@ -355,13 +355,13 @@ Diese wird weiter unten noch näher erläutert werden (begleitender Text und UML-D
 74: }
 75: 
 76: void clientCode04() {
-77:     DocumentPrinter* dp = new DocumentPrinter();
+77:     DocumentVisitor* dp = new DocumentPrinter();
 78: 
 79:     Document* d1 = new HTML;
 80:     d1->addToList("This is line");
 81:     d1->accept(dp);
 82: 
-83:     Document* d2 = new HTML;
+83:     Document* d2 = new Markdown;
 84:     d2->addToList("This is another line");
 85:     d2->accept(dp);
 86: 
