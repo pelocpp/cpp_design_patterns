@@ -77,7 +77,7 @@ eine Unterklasse, die von der Basisklasse (Schnittstellenklasse) erbt und ihre M
 26:     std::string say() const { return "woof"; }
 27: };
 28: 
-29: void seeAndSay(const std::shared_ptr<IAnimal> animal)
+29: void seeAndSay(const std::shared_ptr<IAnimal>& animal)
 30: {
 31:     std::cout 
 32:         << "The " << animal->see() << " says '"
@@ -111,7 +111,7 @@ Mit Templates lassen sich Datentypen *polymorph* machen:
 
 ```cpp
 01: template <typename T>
-02: void seeAndSay(const std::shared_ptr<T> animal)
+02: void seeAndSay(const std::shared_ptr<T>& animal)
 03: {
 04:     std::cout
 05:         << "The " << animal->see() << " says '"
@@ -228,7 +228,7 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 56:     virtual std::string say() const override { return m_dog.say(); }
 57: };
 58: 
-59: void seeAndSay(const std::shared_ptr<MyAnimal> animal)
+59: void seeAndSay(const std::shared_ptr<MyAnimal>& animal)
 60: {
 61:     std::cout
 62:         << "The " << animal->see() << " says '"
@@ -312,7 +312,7 @@ damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und 
 32:         m_animals.push_back(std::make_shared<AnimalWrapper<T>>(animal));
 33:     }
 34: 
-35:     void seeAndSay(const std::shared_ptr<MyAnimal> animal) {
+35:     void seeAndSay(const std::shared_ptr<MyAnimal>& animal) {
 36:         std::cout
 37:             << "The " << animal->see() << " says '"
 38:             << animal->say() << "' :)." << std::endl;
@@ -391,7 +391,7 @@ Wir formulieren das letzte Beispiel entsprechend der *Type Erasure* Namensgebung
 32:         m_animals.push_back(std::make_shared<AnimalModel<T>>(animal));
 33:     }
 34: 
-35:     void seeAndSay(const std::shared_ptr<AnimalConcept> animal) {
+35:     void seeAndSay(const std::shared_ptr<AnimalConcept>& animal) {
 36:         std::cout
 37:             << "The " << animal->see() << " says '"
 38:             << animal->say() << "' :)." << std::endl;
@@ -469,7 +469,7 @@ den Instanzvariablen verwalten sie eine Referenz des umhüllten Objekts:
 32:         m_animals.push_back(std::make_shared<AnimalModel<T>>(animal));
 33:     }
 34: 
-35:     void seeAndSay(const std::shared_ptr<AnimalConcept> animal) {
+35:     void seeAndSay(const std::shared_ptr<AnimalConcept>& animal) {
 36:         std::cout
 37:             << "The " << animal->see() << " says '"
 38:             << animal->say() << "' :)." << std::endl;

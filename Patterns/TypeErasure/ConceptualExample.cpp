@@ -39,7 +39,7 @@ namespace ConceptualExample
             virtual std::string say() const override { return "woof"; }
         };
 
-        void seeAndSay(const std::shared_ptr<IAnimal> animal)
+        void seeAndSay(const std::shared_ptr<IAnimal>& animal)
         {
             std::cout
                 << "The " << animal->see() << " says '"
@@ -61,7 +61,7 @@ namespace ConceptualExample
     namespace Motivation02
     {
         template <typename T>
-        void seeAndSay(const std::shared_ptr<T> animal)
+        void seeAndSay(const std::shared_ptr<T>& animal)
         {
             std::cout
                 << "The " << animal->see() << " says '"
@@ -142,7 +142,7 @@ namespace ConceptualExample
             virtual std::string say() const override { return m_dog.say(); }
         };
 
-        void seeAndSay(const std::shared_ptr<MyAnimal> animal)
+        void seeAndSay(const std::shared_ptr<MyAnimal>& animal)
         {
             std::cout
                 << "The " << animal->see() << " says '"
@@ -206,7 +206,7 @@ namespace ConceptualExample
             virtual std::string say() const override { return m_animal.say(); }
         };
 
-        void seeAndSay(const std::shared_ptr<MyAnimal> animal)
+        void seeAndSay(const std::shared_ptr<MyAnimal>& animal)
         {
             std::cout
                 << "The " << animal->see() << " says '"
@@ -284,7 +284,7 @@ namespace ConceptualExample
                 m_animals.push_back(std::make_shared<AnimalWrapper<T>>(animal));
             }
 
-            void seeAndSay(const std::shared_ptr<MyAnimal> animal) {
+            void seeAndSay(const std::shared_ptr<MyAnimal>& animal) {
                 std::cout
                     << "The " << animal->see() << " says '"
                     << animal->say() << "' :)." << std::endl;
@@ -370,7 +370,7 @@ namespace ConceptualExample
                 m_animals.push_back(std::make_shared<AnimalModel<T>>(animal));
             }
 
-            void seeAndSay(const std::shared_ptr<AnimalConcept> animal) {
+            void seeAndSay(const std::shared_ptr<AnimalConcept>& animal) {
                 std::cout
                     << "The " << animal->see() << " says '"
                     << animal->say() << "' :)." << std::endl;
