@@ -129,7 +129,7 @@ in einen Container einfügen.
     Diese Implementierung verwendet die Vererbung: Der Adapter erbt Schnittstellen von allen Objekten gleichzeitig
    (vorhandenes Objekt, neue Service-Objekte mit inkompatiblen Service-Funktionen).
     Beachten Sie, dass dieser Ansatz nur in Programmiersprachen implementiert werden kann,
-    die Mehrfachvererbung unterstützen, z.B. C ++.
+    die Mehrfachvererbung unterstützen, z.B. C++.
     Wie beim *Objekt Adapter Ansatz* besteht auch hier die eigentliche Aufgabe der Adapter Klasse darin,
     die geerbten Funktionalitäten über die vorhandene Schnittstelle verfügbar zu machen.
 

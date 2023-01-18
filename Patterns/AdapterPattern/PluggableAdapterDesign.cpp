@@ -56,10 +56,10 @@ namespace PluggableAdapterDesignApproach {
     public:
         // c'tors
         Adapter(std::unique_ptr<CoffeeMaker>& cm) 
-            : m_request{ [&]() { cm->brew(); } } {}
+            : m_request{ [&] () { cm->brew(); } } {}
 
         Adapter(std::unique_ptr<JuiceMaker>& jm) 
-            : m_request{ [&]() { jm->squeeze(); } } {}
+            : m_request{ [&] () { jm->squeeze(); } } {}
 
         virtual void getBeverage() override { 
             m_request();
@@ -73,11 +73,11 @@ void test_pluggable_adapter_design()
 {
     using namespace PluggableAdapterDesignApproach;
 
-    std::unique_ptr<CoffeeMaker> cm = std::make_unique<CoffeeMaker>();
+    std::unique_ptr<CoffeeMaker> cm{ std::make_unique<CoffeeMaker>() };
     Adapter adapter1(cm);
     makeDrink(adapter1);
 
-    std::unique_ptr<JuiceMaker> jm = std::make_unique<JuiceMaker>();
+    std::unique_ptr<JuiceMaker> jm{ std::make_unique<JuiceMaker>() };
     Adapter adapter2(jm);
     makeDrink(adapter2);
 }

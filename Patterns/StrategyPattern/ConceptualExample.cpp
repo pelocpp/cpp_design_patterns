@@ -85,7 +85,7 @@ class ConcreteStrategyA : public Strategy
 {
 public:
     virtual std::string getName() const override {
-        return "Normal Sorting";
+        return { "Normal Sorting" };
     }
 
     virtual std::string doAlgorithm(const std::vector<std::string>& data) const override
@@ -110,7 +110,7 @@ class ConcreteStrategyB : public Strategy
 {
 public:
     virtual std::string getName() const override {
-        return "Reverse Sorting";
+        return { "Reverse Sorting" };
     }
 
     virtual std::string doAlgorithm(const std::vector<std::string>& data) const override

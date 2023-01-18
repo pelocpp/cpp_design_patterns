@@ -26,8 +26,7 @@ namespace ConceptualExample02 {
         std::string m_payLoad;
 
     public:
-        explicit SimpleCommand(std::string pay_load) 
-            : m_payLoad(pay_load) {}
+        SimpleCommand(std::string pay_load) : m_payLoad{ pay_load } {}
 
         ~SimpleCommand() {}
 
@@ -117,8 +116,10 @@ namespace ConceptualExample02 {
             if (m_onStart) {
                 m_onStart->execute();
             }
+
             std::cout << "Invoker: ... doing something really important ..." << std::endl;
             std::cout << "Invoker: Does anybody want something done after I finish?" << std::endl;
+
             if (m_onFinish) {
                 m_onFinish->execute();
             }
@@ -146,8 +147,8 @@ void test_conceptual_example_02() {
     std::shared_ptr<ComplexCommand> complexCmd {
         std::make_shared<ComplexCommand>(
             receiver,
-            std::string("Send email"),
-            std::string("Save report")
+            std::string{ "Send email" },
+            std::string{ "Save report" }
         ) 
     };
 

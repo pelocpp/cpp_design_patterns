@@ -96,9 +96,9 @@ namespace ObserverDesignPatternClassic {
     class Observer : public IObserver {
     private:
         std::string m_messageFromSubject;
-        Subject& m_subject;
-        static int m_static_number;
-        int m_number;
+        Subject&    m_subject;
+        int         m_number;
+        static int  m_static_number;
 
     public:
         Observer(Subject& subject) : m_subject{ subject } 

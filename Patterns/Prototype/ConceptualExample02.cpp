@@ -21,6 +21,8 @@ namespace ExamplesPrototypePattern {
     class IChessPiece
     {
     public:
+        virtual ~IChessPiece() = default;
+
         virtual std::unique_ptr<IChessPiece> clone() const = 0;
         virtual std::string str() const = 0;
     };
@@ -93,8 +95,8 @@ namespace ExamplesPrototypePattern {
         std::unique_ptr<IChessPiece>& at(size_t, size_t);
         const std::unique_ptr<IChessPiece>& at(size_t, size_t) const;
 
-        static constexpr size_t DefaultWidth = 8;
-        static constexpr size_t DefaultHeight = 8;
+        static constexpr size_t DefaultWidth = 4;
+        static constexpr size_t DefaultHeight = 4;
 
     private:
         std::vector<std::vector<std::unique_ptr<IChessPiece>>> m_cells;
@@ -138,11 +140,12 @@ namespace ExamplesPrototypePattern {
         for (size_t i = 0; i != m_cells.size(); ++i) {
             for (size_t j = 0; j != m_cells[i].size(); ++j) {
                 if (other.m_cells[i][j] != nullptr) {
-                    m_cells[i][j] = other.m_cells[i][j]->clone();
 
                     // compiler error
                     // m_cells[i][j] = other.m_cells[i][j];
                     // m_cells[i][j] = std::make_unique<ChessPiece>(*other.m_cells[i][j]);
+
+                    m_cells[i][j] = other.m_cells[i][j]->clone();
                 }
             }
         }
@@ -197,7 +200,7 @@ void test_prototype_pattern_chess_02()
 
     board.at(0, 0) = std::make_unique<King>();
     board.at(0, 1) = std::make_unique<Pawn>();
-    //board.at(1, 0) = std::make_unique<Pawn>();
+    board.at(1, 0) = std::make_unique<Pawn>();
     board.at(1, 1) = std::make_unique<Rook>();
 
     std::cout << board << std::endl;

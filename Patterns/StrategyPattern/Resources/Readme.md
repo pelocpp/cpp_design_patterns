@@ -91,9 +91,10 @@ und dies kann man beim *Strategy Design Pattern* genauso umsetzen.
 Im Prinzip  gibt es nichts Besonderes an dieser Umsetzung zu beobachten,
 außer dass man den Algorithmus (hier im Beispiel: Methode `add_list_item`)
 nicht über die *vtable* anspricht (indirekter Methodenaufruf),
-sondern als C++&ndash;Template-Parameter übergibt, was bedeutet,
+sondern als C++&ndash;Template-Parameter übergibt.
+Dies bedeutet,
 dass der Algorithmus/die Strategie zur Laufzeit nicht änderbar ist.
-Der Methodenaufruf selbst ist dann direkt, was eine verbesserte Laufzeit zur Folge hat!
+Der Methodenaufruf selbst erfolgt dann direkt, was eine verbesserte Laufzeit zur Folge hat!
 
 ---
 

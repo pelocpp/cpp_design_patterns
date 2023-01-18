@@ -32,10 +32,10 @@ namespace ConceptualExample01 {
         std::shared_ptr<Receiver> m_receiver;
 
     public:
-        CommandBase(std::shared_ptr<Receiver> receiver) 
-            : m_receiver{ receiver } {}
-
         virtual ~CommandBase() {}
+
+        CommandBase(std::shared_ptr<Receiver> receiver)
+            : m_receiver{ receiver } {}
 
         virtual void execute() const = 0;
     };

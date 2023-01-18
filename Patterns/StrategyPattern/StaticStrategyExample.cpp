@@ -17,16 +17,17 @@ enum class Format { Markdown, Html };
 struct IListStrategy
 {
     virtual ~IListStrategy() = default;
-    virtual void add_list_item(std::ostringstream& oss, const std::string& item) = 0;
+
     virtual void start(std::ostringstream& oss) = 0;
     virtual void end(std::ostringstream& oss) = 0;
+    virtual void add_list_item(std::ostringstream& oss, const std::string& item) = 0;
 };
 
 struct MarkdownListStrategy : public IListStrategy
 {
-    virtual void start(std::ostringstream& oss) {};
+    virtual void start(std::ostringstream& oss) override {};
 
-    virtual void end(std::ostringstream& oss) {};
+    virtual void end(std::ostringstream& oss) override {};
 
     void add_list_item(std::ostringstream& oss, const std::string& item) override {
         oss << " - " << item << std::endl; 
@@ -51,8 +52,8 @@ struct HtmlListStrategy : public IListStrategy
 class TextProcessor
 {
 private:
-    std::ostringstream              m_oss;
-    std::unique_ptr<IListStrategy>  m_list_strategy;
+    std::unique_ptr<IListStrategy> m_list_strategy;
+    std::ostringstream m_oss;
 
 public:
     void clear() {
@@ -106,11 +107,12 @@ template<typename TListStrategy>
 class TextProcessorEx
 {
 private:
-    std::ostringstream  m_oss;
-    TListStrategy       m_list_strategy;
+    TListStrategy m_list_strategy;
+    std::ostringstream m_oss;
 
 public:
-    void append_list(std::initializer_list<std::string> items) {
+    void append_list(std::initializer_list<std::string> items) 
+    {
         m_list_strategy.start(m_oss);
         for (auto& item : items)
             m_list_strategy.add_list_item(m_oss, item);
@@ -120,15 +122,41 @@ public:
     std::string str() const { return m_oss.str(); }
 };
 
+struct MarkdownListStrategyEx
+{
+    virtual void start(std::ostringstream& oss) {};
+
+    virtual void end(std::ostringstream& oss) {};
+
+    void add_list_item(std::ostringstream& oss, const std::string& item) {
+        oss << " - " << item << std::endl;
+    }
+};
+
+struct HtmlListStrategyEx
+{
+    void start(std::ostringstream& oss) {
+        oss << "<ul>" << std::endl;
+    }
+
+    void end(std::ostringstream& oss) {
+        oss << "</ul>" << std::endl;
+    }
+
+    void add_list_item(std::ostringstream& oss, const std::string& item) {
+        oss << "\t<li>" << item << "</li>" << std::endl;
+    }
+};
+
 void test_dynamic_strategy_example()
 {
     // markdown
-    TextProcessorEx<MarkdownListStrategy> tp1;
+    TextProcessorEx<MarkdownListStrategyEx> tp1;
     tp1.append_list({ "foo", "bar", "baz" });
     std::cout << tp1.str() << std::endl;
 
     // html
-    TextProcessorEx<HtmlListStrategy> tp2;
+    TextProcessorEx<HtmlListStrategyEx> tp2;
     tp2.append_list({ "foo", "bar", "baz" });
     std::cout << tp2.str() << std::endl;
 }

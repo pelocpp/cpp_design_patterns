@@ -15,6 +15,7 @@ namespace ConceptualExample01
 
     public:
         Prototype(int id) : m_id{ id } {}
+
         virtual ~Prototype() {}
         
         virtual Prototype* clone() const = 0;
@@ -36,12 +37,11 @@ namespace ConceptualExample01
         }
     };
 
-    void clientCode (std::unique_ptr<Prototype> original)
+    void clientCode (std::unique_ptr<Prototype>& original)
     {
         std::unique_ptr<Prototype> copy{ original->clone() };
     }
 }
-
 
 namespace ConceptualExample02
 {
@@ -81,6 +81,15 @@ void test_conceptual_example_01()
 {
     using namespace ConceptualExample01;
 
+    std::unique_ptr<Prototype> prototype{ std::make_unique<ConcretePrototype>(123) };
+
+    clientCode(prototype);
+}
+
+void test_conceptual_example_02()
+{
+    using namespace ConceptualExample01;
+
     Prototype* prototype = new ConcretePrototype(123);
         
     Prototype* clone = prototype->clone();
@@ -94,7 +103,7 @@ void test_conceptual_example_01()
     std::cout << "Clone:     " << clone->getId() << std::endl;
 }
 
-void test_conceptual_example_02()
+void test_conceptual_example_03()
 {
     using namespace ConceptualExample02;
 
@@ -114,7 +123,6 @@ void test_conceptual_example_02()
     std::cout << "Prototype: " << prototype->getId() << std::endl;
     std::cout << "Clone:     " << clone->getId() << std::endl;
 }
-
 
 // ===========================================================================
 // End-of-File

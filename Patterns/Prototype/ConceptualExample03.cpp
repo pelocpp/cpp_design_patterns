@@ -162,7 +162,7 @@ namespace ConceptualExample03 {
     }
 }
 
-void test_conceptual_example_03()
+void test_conceptual_example_04()
 {
     using namespace ConceptualExample03;
 

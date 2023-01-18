@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <algorithm>
 
 /**
  * ITarget defines the domain-specific interface used by the client code
@@ -12,6 +13,8 @@
 class ITarget
 {
 public:
+    virtual ~ITarget() = default;
+
     virtual std::string getRequest() const = 0;
 };
 
@@ -22,7 +25,6 @@ class Target : public ITarget
 {
 public:
     Target() = default;
-    virtual ~Target() = default;
 
     virtual std::string getRequest() const override
     {
@@ -72,6 +74,7 @@ public:
  * The client code supports all classes that follow the Target interface
  */
 static void clientCode(std::shared_ptr<ITarget> target) {
+
     std::string request{ target->getRequest() };
     std::cout << request << std::endl << std::endl;
 }
