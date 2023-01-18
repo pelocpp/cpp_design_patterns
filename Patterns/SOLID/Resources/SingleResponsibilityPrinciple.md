@@ -45,13 +45,13 @@ indem sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &
 ```
 
   * Das obige C++-Beispiel könnte in Ordnung zu sein, solange es nur eine einzige Domänenklasse gibt, hier die Klasse `Journal`.
-    Dies ist jedoch in einer realen Anwendung normalerweise nicht der Fall.
+    Dies ist jedoch in einer realen Anwendung normalerweise eher selten der Fall.
   * Wenn wir beginnen, weitere Domänenklassen wie `Book`, `File` usw. hinzuzufügen,
     ist die Speichermethode `save` für alle Domänenklassen separat zu implementieren.
   * Das eigentliche Problem entsteht, wenn die Funktionalität für die Datenablage geändert werden soll.
     Zum Beispiel wäre es denkbar, dass die Daten an Stelle in Dateien in einer Datenbank abgelegt werden sollen.
-    In diesem Fall müsste man jede Domänenklassenimplementierung durchlaufen und den gesamten Code ändern,
-    was natürlich sinnlos ist.
+    In diesem Fall müsste man jede Domänenklassenimplementierung durchlaufen und den gesamten Code ändern.
+    Eine derartige Vorgehensweise ist nicht empehlenswert!
   * Der Verstoß gegen das *Single-Responsibility-Prinzip* in diesem Beispiel ist offensichtlich:
     Die Klasse `Journal` besitzt zwei Gründe, um geändert zu werden:
     * Änderungen im Zusammenhang mit der `Journal`-Klasse selbst.

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <memory>
+#include <tuple>
 
 enum class Relationship { Parent, Child, Sibling };
 
@@ -33,6 +33,7 @@ namespace DependencyInversionPrinciple01
     {
         FamilyTree(const Relationships& relationships)
         {
+            // using structured binding (C++ 17) and range-based for loop (C++ 11)
             for (const auto& [first, relation, second] : relationships.m_relations)
             {
                 if (first.m_name == "John" && relation == Relationship::Parent) {

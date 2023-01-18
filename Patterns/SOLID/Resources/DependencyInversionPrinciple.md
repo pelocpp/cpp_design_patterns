@@ -16,7 +16,7 @@ Die obigen Zeilen mögen zunächst kryptisch erscheinen, wir versuchen sie anhand 
 
 Was versteht man eigentlich unter &ldquo;High-Level&rdquo;- und &ldquo;Low-Level&rdquo;-Modulen?
 
-  * &ldquo;High-Level&rdquo;-Module &ndash; Beschreiben Operationen, die abstrakter Natur sind und komplexere Logik enthalten. Diese
+  * &ldquo;High-Level&rdquo;-Module &ndash; Beschreiben Operationen, die abstrakterer Natur sind und komplexere Logik enthalten. Diese
     Module orchestrieren typischerweise die &ldquo;Low-Level&rdquo;-Module in einer Anwendung.
 
   * &ldquo;Low-Level&rdquo;-Module &ndash; Beschreiben Implementierungen in einer spezifischeren und individuelleren
@@ -63,7 +63,7 @@ Was versteht man eigentlich unter &ldquo;High-Level&rdquo;- und &ldquo;Low-Level
 Erkennen Sie die Nachteile dieser Implementierung?
 
   * Wenn zu einem späteren Zeitpunkt in der Klasse `Relationships` der Container der Beziehungen von `std::vector`
-    zu `std::set` oder einem anderen Container geändert wird, kann dies Auswirkungen auf die Klasse `FamilyTree` haben:
+    zu `std::set` oder einen anderen Container geändert wird, kann dies Auswirkungen auf die Klasse `FamilyTree` haben:
     Dies stellt definitiv kein gutes Design dar!
 
   * &ldquo;Low-Level&rdquo;-Module, z.B. Klasse `Relationships` hängen direkt vom &ldquo;High-Level&rdquo;-Modul ab (hier: Klasse `FamilyTree`).
@@ -124,7 +124,7 @@ Betrachten Sie den folgenden Vorschlag:
 
 ##### Beachten Sie an dem Quellcode:
 
-  * Egal, ob der Name des &ldquo;Low-Level&rdquo;-Moduls oder eines in diesem Modul enthaltenen Sub-Containers selbst sich ändert,
+  * Egal, ob sich nun innerhalb des &ldquo;Low-Level&rdquo;-Moduls eine Änderung ergibt (z.B. Austausch eines verwendeten STL-Containers),
   das &ldquo;High-Level&rdquo;-Modul oder andere Quellcode-Anteile, die dem *Dependency Inversion Prinzip* folgen, bleiben intakt!
 
 #### Vorteile des *Dependency-Inversion-Prinzips*

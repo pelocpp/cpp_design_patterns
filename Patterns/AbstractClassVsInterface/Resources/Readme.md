@@ -10,8 +10,8 @@
 
 Vergleichen wir zunächst die beiden Konzepte von *abstrakten Klassen* und *Schnittstellen*:
 
-  * Ein *Interface* (*Schnittstelle*) besitzt keine Implementierung von Methoden,
-  sie besteht ausschließlich Methodendeklarationen.
+  * Eine *Schnittstelle* (*Interface*) besitzt keine Implementierung von Methoden,
+  sie besteht ausschließlich aus Methodendeklarationen.
   Natürlich benötigt es Klassen, die eine Schnittstelle implementieren, was wiederum bedeutet,
   das die Methoden der Schnittstelle dann eine Realisierung erhalten.
 
@@ -37,7 +37,7 @@ Vergleichen wir zunächst die beiden Konzepte von *abstrakten Klassen* und *Schni
 ##### Umsetzung in C++
 
 Bevor wir uns ansehen, wie wir die Features *abstract* und *interface* in C++
-definieren könnten, betrachten wir *virtuelle* und *rein virtuelle* Methoden in C++:
+definieren können, betrachten wir *virtuelle* und *rein virtuelle* Methoden in C++:
 
   * Eine *virtuelle* Methode in C++ ist eine Methode,
   die in der abgeleiteten Klasse neu definiert werden kann (Vorgang des *Überschreibens*),
@@ -48,13 +48,15 @@ definieren könnten, betrachten wir *virtuelle* und *rein virtuelle* Methoden in 
   die nicht definiert, sondern nur deklariert wird, also keine Realisierung besitzt.
   Syntaktisch wird der Methodendeklaration am Ende `= 0`  hinzugefügt.
 
-Eine abstrakte Klasse in C++
+---
+
+Eine **abstrakte Klasse** in C++
   1. muss mindestens eine rein virtuelle Methode haben,
   2. kann implementierte Methoden haben und
   3. kann Variablendeklaration haben.
 
 
-Eine Schnittstelle (*interface*) in C++
+Eine **Schnittstelle** (*interface*) in C++
   1. hat alle Methoden als rein virtuelle Methoden deklariert,
   2. hat keine Variablendeklarationen.
 

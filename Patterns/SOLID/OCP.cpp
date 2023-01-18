@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include <initializer_list>
 #include <numeric>
 
 enum class Color { Red, Green, Black, Gray };

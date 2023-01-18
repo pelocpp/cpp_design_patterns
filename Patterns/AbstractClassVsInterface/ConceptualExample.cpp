@@ -3,10 +3,10 @@
 // ===========================================================================
 
 #include <iostream>
-#include <iomanip>
+//#include <iomanip>
 #include <string>
-#include <list>
-#include <memory>
+//#include <list>
+//#include <memory>
 
 namespace AbstractClassVsInterface {
 
@@ -18,7 +18,7 @@ namespace AbstractClassVsInterface {
         virtual void method_second() = 0;
     };
 
-    /* abstract class declaration*/
+    /* abstract class declaration */
     class AbstractClass 
     {
     public:
@@ -54,7 +54,7 @@ namespace AbstractClassVsInterface {
     class ConcreteClass : public AnotherAbstractClass
     {
     public:
-        ConcreteClass() : ConcreteClass{ 0.0 } {}
+        ConcreteClass() : ConcreteClass{ 1.0 } {}
 
         ConcreteClass(double value) 
             : AnotherAbstractClass{ value }, m_anotherValue{} {}
@@ -75,7 +75,7 @@ namespace AbstractClassVsInterface {
     class AnotherConcreteClass : public Interface
     {
     public:
-        AnotherConcreteClass() : m_oneMoreValue{ 0.0 } {}
+        AnotherConcreteClass() : m_oneMoreValue{ 1.0 } {}
 
         AnotherConcreteClass(double value) : m_oneMoreValue{ value } {}
 
@@ -124,6 +124,8 @@ void test_conceptual_example()
     obj5.method_first();
     obj5.method_second();
 
+    // ---------------------------------------------
+
     Interface& obj01{ obj4 };
     obj01.method_first();
     obj01.method_second();
@@ -137,6 +139,8 @@ void test_conceptual_example()
     AnotherConcreteClass obj05{ obj5 };
     obj05.method_first();
     obj05.method_second();
+
+    // ---------------------------------------------
 
     Interface* obj001{ &obj4 };
     obj001->method_first();
