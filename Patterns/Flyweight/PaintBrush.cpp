@@ -11,6 +11,8 @@ namespace PaintBrushFlyweight {
     class Pen
     {
     public:
+        ~Pen() = default;
+
         virtual void setColor(std::string color) = 0;
         virtual void draw(std::string content) = 0;
         virtual void print() = 0;
@@ -21,16 +23,20 @@ namespace PaintBrushFlyweight {
     class ThickPen : public Pen
     {
     private:
-        const BrushSize m_brushSize = BrushSize::Thick;  // intrinsic state - shareable
-        std::string m_color = "";                        // extrinsic state - supplied by client
+        const BrushSize m_brushSize;  // intrinsic state - shareable
+        std::string m_color;          // extrinsic state - supplied by client
 
     public:
+        ThickPen() : m_brushSize{ BrushSize::Thick } {}
+
         virtual void setColor(std::string color) override {
             m_color = color;
         }
 
         virtual void draw(std::string content) override {
-            std::cout << "Drawing THICK content in color : " << m_color << std::endl;
+            std::cout 
+                << "Drawing THICK content in color : " << m_color 
+                << " - " << content << std::endl;
         }
 
         virtual void print() override {
@@ -41,16 +47,20 @@ namespace PaintBrushFlyweight {
     class ThinPen : public Pen
     {
     private:
-        const BrushSize m_brushSize = BrushSize::Thin;  // intrinsic state - shareable
-        std::string m_color = "";                       // extrinsic state - supplied by client
+        const BrushSize m_brushSize;  // intrinsic state - shareable
+        std::string m_color;          // extrinsic state - supplied by client
 
     public:
+        ThinPen() : m_brushSize{ BrushSize::Thin } {}
+
         virtual void setColor(std::string color) override {
             m_color = color;
         }
 
         virtual void draw(std::string content) override {
-            std::cout << "Drawing THIN content in color : " << m_color << std::endl;
+            std::cout 
+                << "Drawing THIN content in color : " << m_color 
+                << " - " << content << std::endl;
         }
 
         virtual void print() override {
@@ -66,9 +76,9 @@ namespace PaintBrushFlyweight {
     public:
         static std::shared_ptr<Pen> getThickPen(std::string color)
         {
-            std::string key = color + "-THICK";
+            std::string key{ color + "-THICK" };
 
-            std::shared_ptr<Pen> pen = pensMap[key];
+            std::shared_ptr<Pen> pen{ pensMap[key] };
 
             if (pen != nullptr) {
                 return pen;
@@ -84,9 +94,9 @@ namespace PaintBrushFlyweight {
 
         static std::shared_ptr<Pen> getThinPen(std::string color)
         {
-            std::string key = color + "-THIN";
+            std::string key{ color + "-THIN" };
 
-            std::shared_ptr<Pen> pen = pensMap[key];
+            std::shared_ptr<Pen> pen{ pensMap[key] };
 
             if (pen != nullptr) {
                 return pen;
@@ -109,13 +119,13 @@ void test_paint_brush()
 {
     using namespace PaintBrushFlyweight;
 
-    std::shared_ptr<Pen> yellowThinPen1 = PenFactory::getThickPen("YELLOW");  // creating new pen
+    std::shared_ptr<Pen> yellowThinPen1{ PenFactory::getThickPen("YELLOW") };  // creating new pen
     yellowThinPen1->draw("Hello World !!");
 
-    std::shared_ptr<Pen> yellowThinPen2 = PenFactory::getThickPen("YELLOW");  // pen is shared
+    std::shared_ptr<Pen> yellowThinPen2{ PenFactory::getThickPen("YELLOW") };  // pen is shared
     yellowThinPen2->draw("Hello World !!");
 
-    std::shared_ptr<Pen> blueThinPen = PenFactory::getThickPen("BLUE");       // creating new pen
+    std::shared_ptr<Pen> blueThinPen{ PenFactory::getThickPen("BLUE") };       // creating new pen
     blueThinPen->draw("Hello World !!");
 
     yellowThinPen1->print();

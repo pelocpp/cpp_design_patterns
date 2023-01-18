@@ -13,15 +13,15 @@
 void test_social_networking()
 {
     std::cout << "Input user name: ";
-    std::string userName;
+    std::string userName{};
     std::getline(std::cin, userName);
 
     std::cout << "Input password: ";
-    std::string password;
+    std::string password{};
     std::getline(std::cin, password);
 
     std::cout << "Input message: ";
-    std::string message;
+    std::string message{};
     std::getline(std::cin, message);
 
     std::cout << "Choose social network for posting message:" << std::endl;
@@ -29,11 +29,11 @@ void test_social_networking()
     std::cout << "2 - Twitter" << std::endl;
     std::cout << std::endl;
 
-    int choice;
+    int choice{};
     std::cin >> choice;
 
     // create proper network object
-    std::unique_ptr<SocialNetwork> socialNetwork;
+    std::unique_ptr<SocialNetwork> socialNetwork{};
     if (choice == 1) {
         socialNetwork = std::make_unique<Facebook>(userName, password);
     }

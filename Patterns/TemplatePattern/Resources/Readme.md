@@ -107,7 +107,7 @@ zu überschreiben, siehe dazu auch *Abbildung* 2:
 
   * Das *Template Method*-Pattern basiert auf **Vererbung**: Es werden Teile eines Algorithmus verändert, indem diese Teile in abgeleiteten Klassen erweitert werden.
 
-  * *Strategy*-Pattern basiert auf der **Komposition**: Es werden Teile des Verhaltens eines Objekts verändert, indem es verschiedene Strategien erhält, die unterschiedlichem Verhalten entsprechen.
+  * *Strategy*-Pattern basiert auf der **Komposition**: Es werden Teile des Verhaltens eines Objekts verändert, indem es verschiedene Strategien haben kann, die unterschiedlichem Verhalten entsprechen.
 
 oder auch:
 

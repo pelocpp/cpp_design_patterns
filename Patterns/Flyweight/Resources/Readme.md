@@ -106,20 +106,21 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 Wir betrachten als Beispiel eine *Paint-Brush*-Anwendung.
 
-Der Anwender kann Pinsel-Objekte in drei Stärken benutzen: THICK, THIN and MEDIUM.
-Alle dicken (dünnen oder mittleren) Pinsel zeichnen den Inhalt auf genau ähnliche Weise &ndash; nur
-die Inhaltsfarbe ist anders.
+Der Anwender kann Pinsel-Objekte in drei Stärken benutzen: *THICK*, *THIN* and *MEDIUM*.
+Alle dicken (dünnen oder mittleren) Pinsel zeichnen den Inhalt auf genau dieselbe Weise &ndash; nur ist
+eben die Inhaltsfarbe anders.
 
 Worauf kommt es an:
-Die Pinselfarbe ein extrinsisches Attribut, das vom Aufrufer bereitgestellt wird,
-ansonsten bleibt für den Pinsel alles gleich.
-Im Wesentlichen erstellen wir also nur dann einen Stift mit einer bestimmten Größe, wenn die Farbe anders ist.
-Sobald ein anderer Client diese Stiftgröße und -farbe benötigt, werden wir sie wiederverwenden.
+  * Die Pinselfarbe ist ein extrinsisches Attribut, das vom Aufrufer bereitgestellt wird,
+  ansonsten bleibt für den Pinsel alles gleich.
+  * Im Wesentlichen erstellen wir also nur dann einen Stift mit einer bestimmten Größe, wenn die Farbe anders ist.
+  Sobald ein anderer Client diese Stiftgröße und -farbe benötigt,
+  verwenden wir sie wieder.
 
 Wir testen die Flyweight-Pen-Objekte in einem Beispielprogramm.
-Der Client erstellt hier zwei THICK-Stifte und einen THIN-Stift,
+Der Client erstellt hier zwei *THICK*-Stifte und einen *THIN*-Stift,
 aber zur Laufzeit sind es nur zwei Stiftobjekte,
-das in Aktion treten:
+die in Aktion treten:
 
 *Ausgabe*:
 
