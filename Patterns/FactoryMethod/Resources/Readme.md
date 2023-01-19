@@ -21,6 +21,10 @@ ohne den Objekttyp anzugeben, der hierzu verwendet werden soll.
 Das Entwurfsmuster definiert zuallererst eine Methode, die ein Objekt erzeugt.
 Welche Klasse hierbei herangezogen wird, entscheidet die konkrete Klasse, die diese Methode implementiert.
 
+Zum Erstellen des Objekts wird eine Schnittstelle benötigt.
+Die Unterklassen entscheiden, welche Klasse instanziiert werden soll.
+Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterklassen verschieben.
+
 
 #### *Virtual Constructor*:
 

@@ -12,12 +12,13 @@ namespace ConceptualExample01 {
     {
     public:
         virtual ~ProductBase() {}
-        virtual void showInfo() = 0;
+
+        virtual void showInfo() const = 0;
     };
 
     class ConcreteProduct1 : public ProductBase {
     public:
-        void showInfo() override
+        void showInfo() const override
         {
             std::cout << "{ Product1 }" << std::endl;
         }
@@ -25,7 +26,7 @@ namespace ConceptualExample01 {
 
     class ConcreteProduct2 : public ProductBase {
     public:
-        void showInfo() override
+        void showInfo() const override
         {
             std::cout << "{ Product2 }" << std::endl;
         }
@@ -56,12 +57,15 @@ namespace ConceptualExample01 {
     };
 }
 
-void test_conceptual_example_01 () {
+void test_conceptual_example_01 ()
+{
     using namespace ConceptualExample01;
 
-    std::shared_ptr<FactoryBase> factory = std::make_shared<ConcreteFactory>();
-    std::shared_ptr<ProductBase> product = factory->FactoryMethod(1);
+    std::shared_ptr<FactoryBase> factory{ std::make_shared<ConcreteFactory>() };
+
+    std::shared_ptr<ProductBase> product{ factory->FactoryMethod(1) };
     product->showInfo();
+
     product = factory->FactoryMethod(2);
     product->showInfo();
 }

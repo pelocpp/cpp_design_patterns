@@ -16,6 +16,7 @@ namespace ConceptualExample02 {
     {
     public:
         virtual ~ProductBase() {}
+
         virtual std::string operation() const = 0;
     };
 
@@ -35,35 +36,39 @@ namespace ConceptualExample02 {
     {
     public:
         std::string operation() const override {
-            return "{ Result of the ConcreteProduct2 }";
+            return "[ Result of the ConcreteProduct2 ]";
         }
     };
 
     /**
-     * The FactoryBase class declares the factory method that is supposed to return an
-     * object of a Product class.
+     * The FactoryBase class declares the factory method
+     * that is supposed to return an object of a Product class.
      * The FactoryBase's subclasses usually provide the implementation of this method.
      */
     class FactoryBase {
     public:
         virtual ~FactoryBase() {};
+
         virtual std::shared_ptr<ProductBase> factoryMethod() const = 0;
 
         /**
-         * Note that the FactoryBase's class primary responsibility is
-         * *not* creating products. Usually, it contains some core business logic that
-         * relies on Product objects, returned by the factory method.
-         * Subclasses can indirectly change that business logic
-         * by overriding the factory method
-         * and returning a different type of product from it.
+         * Note:
+         * The FactoryBase's class primary responsibility is *not* creating products.
+         * Usually, it contains some core business logic that relies on Product objects,
+         * returned by the factory method.
+         * Subclasses can indirectly change that business logic by overriding 
+         * the factory method and returning a different type of product from it.
          */
         std::string someOperation() const {
+
             // call the factory method to create a Product object.
             std::shared_ptr<ProductBase> product = this->factoryMethod();  // <= abstract method (!)
 
             // now, *use* the product:
-            std::string result1 = product->operation();
-            std::string result2 = "FactoryBase: This factory's code has just created a " + result1;
+            std::string result1{ product->operation() };
+
+            std::string result2{ "FactoryBase: This factory's code has just created a " + result1 };
+
             return result2;
         }
     };
@@ -81,7 +86,8 @@ namespace ConceptualExample02 {
          */
     public:
         std::shared_ptr<ProductBase> factoryMethod() const override {
-            std::shared_ptr<ProductBase> product = std::make_shared<ConcreteProduct1>();
+
+            std::shared_ptr<ProductBase> product{ std::make_shared<ConcreteProduct1>() };
             return product;
         }
     };
@@ -90,7 +96,8 @@ namespace ConceptualExample02 {
     {
     public:
         std::shared_ptr<ProductBase> factoryMethod() const override {
-            std::shared_ptr<ProductBase> product = std::make_shared<ConcreteProduct2>();
+
+            std::shared_ptr<ProductBase> product{ std::make_shared<ConcreteProduct2>() };
             return product;
         }
     };
@@ -117,12 +124,14 @@ void test_conceptual_example_02() {
     using namespace ConceptualExample02;
 
     std::cout << "Example launched with ConcreteFactory1:" << std::endl;
-    std::shared_ptr<FactoryBase> factory1 = std::make_shared<ConcreteFactory1>();
+    std::shared_ptr<FactoryBase> factory1{ std::make_shared<ConcreteFactory1>() };
+
     clientCode(factory1);
     std::cout << std::endl;
 
     std::cout << "Example launched with ConcreteFactory2:" << std::endl;
-    std::shared_ptr<FactoryBase> factory2 = std::make_shared<ConcreteFactory2>();
+    std::shared_ptr<FactoryBase> factory2 {std::make_shared<ConcreteFactory2>() };
+
     clientCode(factory2);
 }
 

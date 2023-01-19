@@ -43,8 +43,8 @@ oder die Komplexität des Codes erhöhen.
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| [(Simple) Factory](../Patterns/SimpleFactory/Resources/Readme.md) | Ein **Simple Factory** Objekt wird typischerweise vom Client über eine statische Methode aufgerufen und gibt eines von mehreren Objekten zurück, die alle dasselbe übergeordnete Objekt erben bzw. im Falle einer Schnittstelle implementieren. |
-| [Factory Method](../Patterns/FactoryMethod/Resources/Readme.md) | Das **Factory Method** Entwurfsmuster dient der Entkopplung des Clients von der konkreten Instanziierung einer Klasse. Die Klasse des erstellten Objekts kann elegant ausgetauscht werden. |
+| [(Simple) Factory](../Patterns/SimpleFactory/Resources/Readme.md) | Ein **Simple Factory** Objekt wird typischerweise vom Client über eine statische Methode aufgerufen. |
+| [Factory Method](../Patterns/FactoryMethod/Resources/Readme.md) | Das **Factory Method** Entwurfsmuster dient dem Zweck, alle Schritte zur Erzeugung eines Objekts kontrollieren zu wollen. Die Klasse des erstellten Objekts kann elegant ausgetauscht werden. |
 | [Abstract Factory](../Patterns/AbstractFactory/Resources/Readme.md) | Das **Abstract Factory** Design Pattern dient der Definition einer zusammenhängenden Familie aus Produkten. Die Familien können elegant ausgetauscht werden. |
 | [Builder](../Patterns/Builder/Resources/Readme.md) | Ermöglicht schrittweises Erstellen komplexer Objekte. |
 | [Prototype](../Patterns/Prototype/Resources/Readme.md) | Prototype Pattern &ndash; auch als *Virtueller Konstruktor* bezeichnet. |
@@ -61,7 +61,7 @@ ohne dabei einen Verlust an Flexibilität und Effizient einzugehen.
 |:-------------- |----|
 | [Adapter](../Patterns/AdapterPattern/Resources/Readme.md) | Ermöglicht die Interaktion von Objekten mit inkompatiblen Schnittstellen. |
 | [Bridge](../Patterns/Bridge/Resources/Readme.md) | Aufteilung einer größeren Klasse oder einer Reihe eng verwandter Klassen in zwei separate Hierarchien - Abstraktion und Implementierung. |
-| [Composite Pattern](../Patterns/CompositePattern/Resources/Readme.md) | Das **Composite** Entwurfsmuster ermöglicht es, einzelne Objekte und Gruppen von Objekten einheitlich zu behandeln. |
+| [Composite Pattern](../Patterns/CompositePattern/Resources/Readme.md) | Ermöglicht es, einzelne Objekte und Gruppen von Objekten einheitlich zu behandeln. |
 | [Decorator](../Patterns/DecoratorPattern/Resources/Readme.md) | Hinzufügen neuen Verhaltens zu Objekten, indem diese Objekte in speziellen Hüllen-Objekten platziert werden, die dieses Verhalten besitzen. |
 | [Facade](../Patterns/Facade/Resources/Readme.md) | Bereitstellung einer vereinfachten Schnittstelle zu einer Bibliothek, einem Framework oder einer Menge von Objekten. |
 | [Flyweight](../Patterns/Flyweight/Resources/Readme.md) | Ermöglicht es, Objekte ressourcenschonend anzulegen, indem diese gemeinsame Zustandsdaten zwischen mehreren Objekten teilen, anstatt derartige Zustandsdaten in jedem Objekt zu duplizieren. |
