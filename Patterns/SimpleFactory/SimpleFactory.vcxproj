@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{6e2e598b-f301-4a6a-9306-215ad93a53f5}</ProjectGuid>
-    <RootNamespace>Factory</RootNamespace>
+    <ProjectGuid>{1b1fd20d-228c-4171-b256-8e4751fd9cb8}</ProjectGuid>
+    <RootNamespace>SimpleFactory</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,18 +70,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -116,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,15 +128,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Resources\dp_factory_pattern.svg" />
-    <None Include="Resources\Readme.md" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Documents.cpp" />
     <ClCompile Include="MobilePhones.cpp" />
     <ClCompile Include="Pizza.cpp" />
+    <ClCompile Include="Points.cpp" />
     <ClCompile Include="Program.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dp_factory_pattern.svg" />
+    <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_factory_pattern_intro.png" />
