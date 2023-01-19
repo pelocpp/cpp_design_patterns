@@ -43,7 +43,7 @@ oder die Komplexität des Codes erhöhen.
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| [(Simple) Factory](../Patterns/SimpleFactory/Resources/Readme.md) | Ein **Simple Factory** Objekt wird typischerweise vom Client über eine statische Methode aufgerufen. |
+| [Simple Factory](../Patterns/SimpleFactory/Resources/Readme.md) | Ein **Simple Factory** Objekt wird typischerweise vom Client über eine statische Methode aufgerufen. |
 | [Factory Method](../Patterns/FactoryMethod/Resources/Readme.md) | Das **Factory Method** Entwurfsmuster dient dem Zweck, alle Schritte zur Erzeugung eines Objekts kontrollieren zu wollen. Die Klasse des erstellten Objekts kann elegant ausgetauscht werden. |
 | [Abstract Factory](../Patterns/AbstractFactory/Resources/Readme.md) | Das **Abstract Factory** Design Pattern dient der Definition einer zusammenhängenden Familie aus Produkten. Die Familien können elegant ausgetauscht werden. |
 | [Builder](../Patterns/Builder/Resources/Readme.md) | Ermöglicht schrittweises Erstellen komplexer Objekte. |

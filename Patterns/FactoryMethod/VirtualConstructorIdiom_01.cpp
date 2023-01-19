@@ -11,6 +11,7 @@ namespace VirtualConstructorIdiom_01 {
     {
     public:
         Base() {}
+
         virtual ~Base() {}
 
         // the "Virtual Constructor"
@@ -107,8 +108,8 @@ void test_virtual_constructor_idiom_01()
     std::cout << "Enter Id (1 or 2): ";
     int input;
     std::cin >> input;
-    Base* pBase = Base::Create(input);
-    Base* pCopy = CreateCopy(pBase);
+    Base* pBase{ Base::Create(input) };
+    Base* pCopy{ CreateCopy(pBase) };
 
     // dont know what object is created but still access functions through base pointer
     pBase->printMe();

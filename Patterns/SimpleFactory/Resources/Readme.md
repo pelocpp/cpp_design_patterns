@@ -22,11 +22,31 @@
 
 Das *Simple Factory Pattern* ist eine Vorgehensweise, Objekte zu erstellen,
 ohne die Erstellungslogik dem Client zur Verfügung zu stellen.
-
 Das *Simple Factory Pattern* wird im eigentlichen Sinne *nicht* als Entwurfsmuster bezeichnet.
 
+---
 
-#### Ein Anwendungsfall des *Simple Factory* Patterns:
+#### Struktur (UML):
+
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Factory Patterns*.
+Es besteht im Wesentlichen aus drei Teilen:
+
+  * **ProductBase**: Basisklasse (oder Schnittstelle) für alle Produkte,
+    die von der *Factory*-Klasse hergestellt werden sollen. Die Schnittstelle beschreibt eine oder mehrere Methoden,
+    die von den konkreten Ableitungen der Klasse implementiert werden.
+  * **ConcreteProduct**: Konkrete Implementierung der Klasse `ProductBase`.
+    Objekte des Typs `ConcreteProduct` werden von der Klasse *Factory* erzeugt.
+  * **Factory**: Diese Klasse besitzt eine Methode `getProduct`,
+    die Objekte zurückliefert, die die `ProductBase`-Schnittstelle implementieren.
+    Über einen Parameter der `getProduct`-Methode wird typischerweise gesteuert, welches `ConcreteProduct` Objekt zu erzeugen ist.
+
+<img src="dp_factory_pattern.svg" width="700">
+
+*Abbildung* 1: Schematische Darstellung des *Factory Patterns*.
+
+---
+
+#### Erster Anwendungsfall des *Simple Factory* Patterns:
 
 Das *Simple Factory* Pattern kommt beispielsweise zum Zuge, wenn es
 
@@ -109,7 +129,7 @@ Wie man an der Implementierung beobachten kann, wird der explizite Gebrauch des 
 untersagt. Der Benutzer wird stattdessen gezwungen, statische Methoden (Klassenmethoden) zu verwenden:
 
 ```cpp
-auto p = Point::NewPolar(5.0, M_PI / 4);
+Point p{ Point::NewPolar(5.0, M_PI / 4) };
 ```
 
 Jetzt haben wir die Funktionalitäten zweier *Concerns* in eine Klasse gepackt:
@@ -123,8 +143,8 @@ was unsere Bedenken bzgl. des *Single Responsibility Principles* der SOLID-Desig
 03:     friend class PointFactory;
 04: 
 05: private:
-06:     double    m_x;
-07:     double    m_y;
+06:     double m_x;
+07:     double m_y;
 08: 
 09:     ...
 10: };
@@ -163,7 +183,7 @@ und den Benutzer auf diese Weise ermutigen, die Fabrik (sog. *Inner Factory*) zu
 04:     double m_x;
 05:     double m_y;
 06: 
-07:     Point(double x, double y) : m_x(x), m_y(y) {}
+07:     Point(double x, double y) : m_x{ x }, m_y{ y } {}
 08: 
 09: public:
 10:     struct Factory
@@ -182,7 +202,7 @@ und den Benutzer auf diese Weise ermutigen, die Fabrik (sog. *Inner Factory*) zu
 Anwendung:
 
 ```cpp
-auto p = Point::Factory::NewCartesian(2, 3);
+Point p{ Point::Factory::NewCartesian(2, 3) };
 ```
 
 ---
@@ -194,7 +214,7 @@ auto p = Point::Factory::NewCartesian(2, 3);
 ---
 
 
-##### Vorbemerkung: &ldquo;What's wrong with `new`?&rdquo;
+##### Zweiter Anwendungsfall des *Simple Factory* Patterns: &ldquo;What's wrong with `new`?&rdquo;
   
 Technisch betrachtet ist mit `new` nichts falsch &ndash;
 in keinster Weise. Das Problem ist eher, dass im Falle
@@ -294,6 +314,10 @@ zu platzieren:
 23: };
 ```
 
+Here we are: Die `createPizza`-Methode samt zugehöriger `PizzaFactory`-Klasse
+fällt in die Rubrik *Simple Factory*.
+
+
 Damit sieht unsere `orderPizza`-Methode nun so aus:
 
 ```cpp
@@ -313,25 +337,6 @@ std::shared_ptr<IPizza> orderPizzaEx(std::string type)
 Diese Überlegungen sollen die Einführung eines
 &ldquo;Fabrik&rdquo;-Gedankens motivieren.
 
----
-
-#### Struktur (UML):
-
-Das folgende UML-Diagramm beschreibt eine Implementierung des *Factory Patterns*.
-Es besteht im Wesentlichen aus drei Teilen:
-
-  * **ProductBase**: Basisklasse (oder Schnittstelle) für alle Produkte,
-    die von der *Factory*-Klasse hergestellt werden sollen. Die Schnittstelle beschreibt eine oder mehrere Methoden,
-    die von den konkreten Ableitungen der Klasse implementiert werden.
-  * **ConcreteProduct**: Konkrete Implementierung der Klasse `ProductBase`.
-    Objekte des Typs `ConcreteProduct` werden von der Klasse *Factory* erzeugt.
-  * **Factory**: Diese Klasse besitzt eine Methode `getProduct`,
-    die Objekte zurückliefert, die die `ProductBase`-Schnittstelle implementieren.
-    Über einen Parameter der `getProduct`-Methode wird typischerweise gesteuert, welches `ConcreteProduct` Objekt zu erzeugen ist.
-
-<img src="dp_factory_pattern.svg" width="700">
-
-*Abbildung* 1: Schematische Darstellung des *Factory Patterns*.
 
 ---
 

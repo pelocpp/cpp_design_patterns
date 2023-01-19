@@ -14,6 +14,7 @@ namespace DocumentsExample {
     struct IDocument 
     {
         virtual ~IDocument() = default;
+
         virtual std::vector<std::string> getText() = 0;
     };
 
@@ -86,11 +87,14 @@ namespace DocumentsExample {
         }
 
         Document open(std::string path) {
+
             auto lastDot = path.find_last_of('.');
+
             if (lastDot != std::string::npos) {
-                std::string extension = path.substr(lastDot + 1);
-                DocumentReader& reader = m_readers.at(extension);
-                Document document = reader(path);
+
+                std::string extension{ path.substr(lastDot + 1) };
+                DocumentReader& reader{ m_readers.at(extension) };
+                Document document{ reader(path) };
                 return document;
             }
             else {
@@ -104,30 +108,30 @@ void test_documents()
 {
     using namespace DocumentsExample;
 
-    auto factory = DocumentFactory{};
+    DocumentFactory factory{ DocumentFactory{} };
 
     factory.add(
         "pdf",
-        [](auto path) -> Document {
+        [] (auto path) -> Document {
             return std::make_unique<PdfDocument>(path);
         }
     );
 
     factory.add(
         "html",
-        [](auto path) -> Document {
+        [] (auto path) -> Document {
             return std::make_unique<HtmlDocument>(path);
         }
     );
 
     factory.add(
         "odt",
-        [](auto path) -> Document {
+        [] (auto path) -> Document {
             return std::make_unique<OdtDocument>(path);
         }
     );
 
-    Document document = factory.open("file.odt");
+    Document document{ factory.open("file.odt") };
 
     std::cout << document->getText().front();
 }

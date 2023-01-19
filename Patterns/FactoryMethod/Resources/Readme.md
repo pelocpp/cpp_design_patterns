@@ -30,18 +30,6 @@ Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterkl
 
 Dieses Entwurfsmuster ist auch unter dem Namen *Virtual Constructor* bekannt, dazu später noch mehr.
 
-#### Beispiele:
-
-
-Jeder Container der Standard Template Library verfügt über acht Factory-Funktionen zum Generieren verschiedener Iteratoren.
-
-  * `begin`, `cbegin`: Gibt einen Iterator bzgl. des Anfangs des Containers zurück.
-  * `end`, `cend`: Gibt einen Iterator bzgl. des Endes des Containers zurück.
-  * `rbegin`, `crbegin`: Gibt einen Reverse-Iterator bzgl. des Anfangs des Containers zurück.
-  * `rend`, `crend`: Gibt einen Reverse-Iterator bzgl. des Endes des Containers zurück.
-
-Die mit `c` beginnenden Fabrikfunktionen geben konstante Iteratoren zurück.
-
 
 #### Lösung:
 
@@ -85,6 +73,21 @@ Es besteht im Wesentlichen aus vier Teilen:
 [Quellcode 2](../ConceptualExample02.cpp) &ndash; Beispiel, das "konzeptionell" den Einsatz von *Factory Methods* aufzeigt.
 
 ---
+
+#### Beispiele:
+
+
+Jeder Container der Standard Template Library verfügt über acht Factory-Funktionen zum Generieren verschiedener Iteratoren.
+
+  * `begin`, `cbegin`: Gibt einen Iterator bzgl. des Anfangs des Containers zurück.
+  * `end`, `cend`: Gibt einen Iterator bzgl. des Endes des Containers zurück.
+  * `rbegin`, `crbegin`: Gibt einen Reverse-Iterator bzgl. des Anfangs des Containers zurück.
+  * `rend`, `crend`: Gibt einen Reverse-Iterator bzgl. des Endes des Containers zurück.
+
+Die mit `c` beginnenden Fabrikfunktionen geben konstante Iteratoren zurück.
+
+---
+
 
 #### 'Real-World' Beispiel:
 

@@ -83,7 +83,8 @@ namespace Factory03 {
     {
         // Point p{ 1, 2 };  // doesn't compile
 
-        auto p = Point::NewPolar(5.0, M_PI / 4);
+        Point p{ Point::NewPolar(5.0, M_PI / 4) };
+
         std::cout << p << std::endl;  // x: 3.53553 y: 3.53553
     }
 }
@@ -97,8 +98,8 @@ namespace Factory04 {
         friend class PointFactory;
 
     private:
-        double    m_x;
-        double    m_y;
+        double m_x;
+        double m_y;
         PointType m_type;
 
         // private constructor, so that object can't be created directly
@@ -127,7 +128,8 @@ namespace Factory04 {
     {
         // Point p{ 1, 2 };  // doesn't compile
 
-        auto p = PointFactory::NewPolar(5.0, M_PI / 4);
+        Point p{ PointFactory::NewPolar(5.0, M_PI / 4) };
+
         std::cout << p << std::endl;  // x: 3.53553 y: 3.53553
     }
 }
@@ -142,7 +144,7 @@ namespace Factory05 {
         double m_x;
         double m_y;
 
-        Point(double x, double y) : m_x(x), m_y(y) {}
+        Point(double x, double y) : m_x{ x }, m_y{ y } {}
 
     public:
         struct Factory
@@ -158,7 +160,7 @@ namespace Factory05 {
     };
 
     void test() {
-        auto p = Point::Factory::NewCartesian(2, 3);
+        Point p{ Point::Factory::NewCartesian(2, 3) };
     }
 }
 
