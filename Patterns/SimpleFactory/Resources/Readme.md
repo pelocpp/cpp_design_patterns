@@ -46,6 +46,21 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
+*Hinweis*:
+
+Das UML-Diagramm aus *Abbildung* 1 kann in Sprachen wie C++ nicht immer auf genau diese Weise umgesetzt werden.
+C++ ist &ndash; im Gegensatz zu vielen anderen Sprachen &ndash; konzeptionell
+
+  * *Wert*- und
+  * *Referenz*-basiert.
+
+Objekte in C++ können sowohl am Stack (direkt erreichbar / als *Wert*) als auch auf der Halde (erreichbar über eine *Referenz*) liegen.
+Was bedeutet das: Möchte eine Fabrik-Methode ein Objekt per *Value* zurückgeben, ist dies nicht
+mit einer Umsetzung des Schnittstellenkonzepts möglich. Siehe hierzu den folgenden Anwendungsfall.
+
+---
+
+
 #### Erster Anwendungsfall des *Simple Factory* Patterns:
 
 Das *Simple Factory* Pattern kommt beispielsweise zum Zuge, wenn es
@@ -209,7 +224,7 @@ Point p{ Point::Factory::NewCartesian(2, 3) };
 
 ###### Die Essenz des *Simple Factory Method* Patterns:
 
-  * Umstellung auf private Konstruktoren und Bereitstellung von Klassenmethoden.
+> Umstellung auf private Konstruktoren und Bereitstellung von Klassenmethoden.
 
 ---
 
@@ -334,16 +349,14 @@ std::shared_ptr<IPizza> orderPizzaEx(std::string type)
 }
 ```
 
-Diese Überlegungen sollen die Einführung eines
-&ldquo;Fabrik&rdquo;-Gedankens motivieren.
-
+Diese Überlegungen sollen die Einführung eines &ldquo;Fabrik&rdquo;-Gedankens motivieren.
 
 ---
 
 #### Abgrenzung zu anderen Entwurfsmustern:
 
-  * Das *Factory Pattern* erstellt seine Objekte im Ganzen im Gegensatz zur *Builder*-Vorgehensweise.
-    Hier werden die Objekte stückweise erstellt.  
+> Das *Factory Pattern* erstellt seine Objekte im Ganzen im Gegensatz zur *Builder*-Vorgehensweise.
+  Hier werden die Objekte stückweise erstellt.  
 
 ---
 
@@ -383,7 +396,7 @@ Wie gehen wir vor, wenn wir die `open`-Funktion um weitere Dokumentarten wie zum
 
 Dabei sollten wir das *Open-Closed-Prinzip* nicht außer Acht lassen!
 
-Eine Factory-Klasse ist hier angesagt. Eine weitere Option vor dem Hintergrund sich ständig variierender
+Eine Simple Factory-Klasse ist hier angesagt. Eine weitere Option vor dem Hintergrund sich ständig variierender
 Dokumenttypen ist eine Registrierungsfunktionen, die es gestattet, eigene Typen zu registrieren:
 
 ```cpp

@@ -25,6 +25,9 @@ Zum Erstellen des Objekts wird eine Schnittstelle benötigt.
 Die Unterklassen entscheiden, welche Klasse instanziiert werden soll.
 Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterklassen verschieben.
 
+*Konsequenz*: *Factory Methoden* verhindern, dass anwendungsspezifische Klassen
+in der Anwendung in Erscheinung treten. 
+
 
 #### *Virtual Constructor*:
 
