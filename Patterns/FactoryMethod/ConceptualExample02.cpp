@@ -28,7 +28,7 @@ namespace ConceptualExample02 {
     public:
         std::string operation() const override 
         {
-            return "{ Result of the ConcreteProduct1 }";
+            return std::string{ "Result of the ConcreteProduct1" };
         }
     };
 
@@ -36,7 +36,7 @@ namespace ConceptualExample02 {
     {
     public:
         std::string operation() const override {
-            return "[ Result of the ConcreteProduct2 ]";
+            return std::string{ "[ Result of the ConcreteProduct2 ]" };
         }
     };
 
@@ -65,11 +65,11 @@ namespace ConceptualExample02 {
             std::shared_ptr<ProductBase> product = this->factoryMethod();  // <= abstract method (!)
 
             // now, *use* the product:
-            std::string result1{ product->operation() };
+            std::string tmp{ product->operation() };
 
-            std::string result2{ "FactoryBase: This factory's code has just created a " + result1 };
+            std::string result{ "FactoryBase: This factory's code has just created a " + tmp };
 
-            return result2;
+            return result;
         }
     };
 
@@ -87,7 +87,10 @@ namespace ConceptualExample02 {
     public:
         std::shared_ptr<ProductBase> factoryMethod() const override {
 
-            std::shared_ptr<ProductBase> product{ std::make_shared<ConcreteProduct1>() };
+            std::shared_ptr<ProductBase> product{ 
+                std::make_shared<ConcreteProduct1>()
+            };
+
             return product;
         }
     };
@@ -97,22 +100,27 @@ namespace ConceptualExample02 {
     public:
         std::shared_ptr<ProductBase> factoryMethod() const override {
 
-            std::shared_ptr<ProductBase> product{ std::make_shared<ConcreteProduct2>() };
+            std::shared_ptr<ProductBase> product{
+                std::make_shared<ConcreteProduct2>() 
+            };
+
             return product;
         }
     };
 
     /**
-     * The client code works with an instance of a concrete FactoryBase, albeit through
-     * its base interface. As long as the client keeps working with the FactoryBase
+     * The client code works with an instance of a concrete FactoryBase,
+     * albeit through its base interface. 
+     * As long as the client keeps working with the FactoryBase
      * via the base interface, you can pass it any FactoryBase's subclass.
      */
     void clientCode(const std::shared_ptr<FactoryBase> factory) {
 
         std::cout
             << "Client (doesn't know the factory's concrete class type)" 
-            << std::endl 
-            << factory->someOperation() << std::endl;
+            << std::endl;
+
+        std::cout << factory->someOperation() << std::endl;
     }
 }
 

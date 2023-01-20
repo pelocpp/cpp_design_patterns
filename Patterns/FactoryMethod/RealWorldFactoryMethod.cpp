@@ -13,6 +13,7 @@ namespace RealWorldFactoryMethod {
     {
     public:
         virtual ~ITelevision() {}
+
         virtual std::string getManufacturer() const = 0;
         virtual void switchOn() = 0;
         virtual void switchOff() = 0;
@@ -54,6 +55,12 @@ namespace RealWorldFactoryMethod {
 
     class AbstractTVFactory 
     {
+    protected:
+        virtual void manufactureTelevision() = 0;
+        virtual std::unique_ptr<ITelevision> assembleTelevision() = 0;
+        virtual float shippingCharge() const = 0;
+        virtual float productionCharge() const = 0;
+
     public:
         virtual ~AbstractTVFactory() {};
 
@@ -74,8 +81,11 @@ namespace RealWorldFactoryMethod {
         }
 
         virtual std::unique_ptr<ITelevision> orderTVExtended() final {       // <= final method (!)
+            
             // Note: client receives 'ITelevision' pointer
-            return assembleTelevision();                     // <= abstract method (!)
+            std::unique_ptr<ITelevision> up = assembleTelevision();          // <= abstract method (!)
+            
+            return up;                     
         }
 
         virtual float totalCharge() final {       // <= final method (!)
@@ -86,12 +96,6 @@ namespace RealWorldFactoryMethod {
 
             return charge;
         }
-
-    protected:
-        virtual void manufactureTelevision() = 0;
-        virtual std::unique_ptr<ITelevision> assembleTelevision() = 0;
-        virtual float shippingCharge() const = 0;
-        virtual float productionCharge() const = 0;
     };
 
 
@@ -99,40 +103,40 @@ namespace RealWorldFactoryMethod {
     protected:
         virtual void manufactureTelevision() override  {
             std::unique_ptr<ITelevision> newTV = assembleTelevision();
-            std::cout << "Manufacturing LED tv" << std::endl;
+            std::cout << "Manufacturing LED TV" << std::endl;
         }
 
         virtual std::unique_ptr<ITelevision> assembleTelevision() override {
-            std::cout << "Assembling LED tv" << std::endl;
+            std::cout << "Assembling LED TV" << std::endl;
             return std::make_unique<LEDTelevision>();
         }
 
         virtual float shippingCharge() const override {
-            return 1000;
+            return 1000.0F;
         }
 
         virtual float productionCharge() const override {
-            return 1500;
+            return 1500.0F;
         }
     };
 
     class OledTVFactory : public AbstractTVFactory {
     protected:
         virtual void manufactureTelevision() override {
-            std::cout << "Manufacturing Oled tv" << std::endl;
+            std::cout << "Manufacturing Oled TV" << std::endl;
         }
 
         virtual std::unique_ptr<ITelevision> assembleTelevision() override {
-            std::cout << "Assembling Oled tv" << std::endl;
+            std::cout << "Assembling Oled TV" << std::endl;
             return std::make_unique<OledTelevision>();
         }
 
         virtual float shippingCharge() const override {
-            return 2000;
+            return 2000.0F;
         }
 
         virtual float productionCharge() const override {
-            return 2500;
+            return 2500.0F;
         }
     };
 

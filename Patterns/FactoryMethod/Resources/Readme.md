@@ -16,6 +16,11 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&ldquo;Erstellung von Objekten auf Basis einer Schnittstelle in einer Oberklasse,
+die es den Unterklassen aber erlaubt, den Typ der zu erstellenden Objekte zu ändern.&rdquo;
+
 Das *Factory Method Pattern* ist ein Entwurfsmuster, mit dem Objekte erstellt werden können,
 ohne den Objekttyp anzugeben, der hierzu verwendet werden soll.
 Das Entwurfsmuster definiert zuallererst eine Methode, die ein Objekt erzeugt.
@@ -25,7 +30,7 @@ Zum Erstellen des Objekts wird eine Schnittstelle benötigt.
 Die Unterklassen entscheiden, welche Klasse instanziiert werden soll.
 Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterklassen verschieben.
 
-*Konsequenz*: *Factory Methoden* verhindern, dass anwendungsspezifische Klassen
+**Konsequenz**: *Factory Methoden* verhindern, dass anwendungsspezifische Klassen
 in der Anwendung in Erscheinung treten. 
 
 
