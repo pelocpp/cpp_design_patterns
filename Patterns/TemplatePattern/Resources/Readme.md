@@ -101,6 +101,23 @@ zu überschreiben, siehe dazu auch *Abbildung* 2:
 
 ---
 
+Die Anwendungsfälle des *Template Method*-Pattern und des *Strategy*-Pattern sind ziemlich ähnlich.
+Beide Muster ermöglichen es, Variationen eines Algorithmus bereitzustellen.
+Das *Template Method*-Pattern basiert auf der Ebene von Klassen und der Bildung von Unterklassen,
+das Strategiemuster auf der Ebene von Objekten und deren Komposition.
+
+Das *Strategy*-Pattern erhält unterschiedliche Strategien in der Gestalt von Objekten
+und kann somit zur Laufzeit seine Strategien austauschen.
+
+Die *Template*-Methode kehrt den Kontrollfluss nach dem Hollywood-Prinzip um:
+&ldquo;Don't call us, we call you&rdquo;.
+
+Das *Strategy*-Pattern gleicht mehr einer Black Box.
+Es ermöglicht, eine Strategie durch eine andere zu ersetzen, ohne deren Details zu kennen.
+
+---
+
+
 ## FAQs
 
 *Frage*: Was ist der Unterschied zwischen dem *Strategy*- und *Template Method*-Pattern?
