@@ -60,7 +60,7 @@ void test_conceptual_example_01()
 {
     using namespace ConceptualExampleBridge01;
 
-    std::shared_ptr<Abstraction> abstraction{
+    std::shared_ptr<Abstraction> abstraction {
         std::make_shared<RefinedAbstraction>()
     };
     

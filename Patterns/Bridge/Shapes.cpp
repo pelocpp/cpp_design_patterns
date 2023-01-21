@@ -87,15 +87,18 @@ namespace ShapesExample {
     void clientCode01()
     {
         // two different bridge implementor classes
-        std::unique_ptr<IDrawAPI> redCircleDrawer =
-            std::make_unique<RedCircleDrawer>();
+        std::unique_ptr<IDrawAPI> redCircleDrawer {
+            std::make_unique<RedCircleDrawer>() 
+        };
 
-        std::unique_ptr<IDrawAPI> greenCircleDrawer =
-            std::make_unique<GreenCircleDrawer>();
+        std::unique_ptr<IDrawAPI> greenCircleDrawer {
+            std::make_unique<GreenCircleDrawer>() 
+        };
 
         // single Circle object
-        std::shared_ptr<Shape> circle = 
-            std::make_shared<Circle>(100, 10, 20, std::move(redCircleDrawer));
+        std::shared_ptr<Shape> circle {
+            std::make_shared<Circle>(100, 10, 20, std::move(redCircleDrawer)) 
+        };
 
         circle->draw();
         circle->setImplementor(std::move(greenCircleDrawer));
@@ -105,18 +108,22 @@ namespace ShapesExample {
     void clientCode02()
     {
         // two different bridge implementor classes
-        std::unique_ptr<IDrawAPI> redCircleDrawer =
-            std::make_unique<RedCircleDrawer>();
+        std::unique_ptr<IDrawAPI> redCircleDrawer {
+            std::make_unique<RedCircleDrawer>()
+        };
 
-        std::unique_ptr<IDrawAPI> greenCircleDrawer =
-            std::make_unique<GreenCircleDrawer>();
+        std::unique_ptr<IDrawAPI> greenCircleDrawer {
+            std::make_unique<GreenCircleDrawer>() 
+        };
 
         // two 'Shape' objects
-        std::shared_ptr<Shape> redCircle = 
-            std::make_shared<Circle>(100, 10, 20, std::move(redCircleDrawer));
+        std::shared_ptr<Shape> redCircle {
+            std::make_shared<Circle>(100, 10, 20, std::move(redCircleDrawer)) 
+        };
 
-        std::shared_ptr<Shape> greenCircle = 
-            std::make_shared<Circle>(200, 30, 40, std::move(greenCircleDrawer));
+        std::shared_ptr<Shape> greenCircle {
+            std::make_shared<Circle>(200, 30, 40, std::move(greenCircleDrawer)) 
+        };
 
         redCircle->draw();
         greenCircle->draw();

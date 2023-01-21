@@ -101,7 +101,51 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 ---
 
-#### 'Real-World' Beispiel:
+#### Erstes 'Real-World' Beispiel:
+
+Wir betrachten als Anwendung eine Spiele-Applikation, in der viele Bäume zu dekorativen Zwecken platziert sind.
+Einen Baum (Klasse `Tree`) gibt es  stilistisch in den drei Varianten &ldquo;XXX&rdquo;, &ldquo;XXX&rdquo; oder &ldquo;XXX&rdquo;
+mit jeweils eine Höhe von 30 Pixel.
+
+Ein `Tree`-Objekt hat die folgenden Attribute:
+
+  * *Style* - Stil des Baums. In unserem Beispiel entweder
+  &ldquo;palm&rdquo;, &ldquo;cypress&rdquo; oder &ldquo;garden&rdquo;.
+  * *Height* - Die Höhe des Baums ist immer 30 Pixel.
+  * *Position* - Die Koordinate (*x,y*) des Baums in der Spielebene.
+
+
+<img src="dp_flyweight_pattern_trees.svg" width="550">
+
+*Abbildung* 2: Schematische Darstellung des *Flyweight Patterns*.
+
+Nehmen wir nun an, wir wollen 12.000 Bäume
+(jeweils &ldquo;palm&rdquo; &ndash;, &ldquo;cypress&rdquo; &ndash; und &ldquo;garden&rdquo; &ndash; zu 4000) im Spiel platzieren
+und den Bedarf des Speicherverbrauchs ermitteln,
+der erforderlich ist, um diese Baumobjekte im Speicher abzulegen.
+
+| Attribut | Größe | Beschreibung |
+| :---- | :---- |
+| *Style* | 40 Bytes | `std::string`-Objekt, bei den drei Zeichenketten `"palm"`, `"cypress"` und `"garden"` kommt SSO zum Einsatz, folglich 40 Bytes pro Objekt |
+| *Height* | 4  Bytes | 4 Bytes zum Speichern einer `int`-Zahl |
+| *Position* | 8 Bytes | 4 Bytes pro `x`- und `y`-Koordinate zum Speichern einer `int`-Zahl |
+| **Total** | 52 Bytes | |
+
+*Tabelle* 1: Speicherbedarf eines `Tree`-Objekts.
+
+Wir benötigen insgesamt 17 Bytes, um ein Tree-Objekt im Speicher zu speichern. Also brauchen wir
+
+170.000 Byte (170 KB) zum Speichern von 10.000 Baumobjekten im Speicher.
+
+Aber wenn wir genau hinsehen, speichern wir in allen Objekten die gleiche Farbe und Höhe;
+
+Wir verschwenden insgesamt 90 KB (Farbe - 50 KB und Höhe - 40 KB), um doppelte Werte zu speichern.
+
+Die einzigen Daten variieren über die Position der Baumobjekte hinweg.
+
+---
+
+#### Zweites 'Real-World' Beispiel:
 
 
 Wir betrachten als Beispiel eine *Paint-Brush*-Anwendung.
@@ -164,7 +208,9 @@ und
 
 vor.
 
-Das *PaintBrush*-Beispiel ist an [Flyweight Design Pattern](https://howtodoinjava.com/design-patterns/structural/flyweight-design-pattern/) angelehnt (Abruf: 15.07.2022).
+Das *PaintBrush*-Beispiel ist an [Flyweight Design Pattern](https://howtodoinjava.com/design-patterns/structural/flyweight-design-pattern) angelehnt (Abruf: 15.07.2022).
+
+Die Simulation eines Spiels mit vielen Bäumen wieder an [Flyweight Design Pattern](https://www.scaler.com/topics/design-patterns/flyweight-design-pattern) (Abruf: 21.01.2023).
 
 ---
 

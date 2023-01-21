@@ -81,11 +81,18 @@
 
 ---
 
-  * Blog von Vishal Chovatiya:<br/>[What Is Design Pattern?](http://www.vishalchovatiya.com/what-is-design-pattern/)
+  * Video Tutorials von Microsoft:<br/>[Visual Studio Toolbox zu Design Pattern](https://learn.microsoft.com/de-de/shows/visual-studio-toolbox/design-patterns-strategy)
+    (abgerufen am 20.01.2023)
+
+---
+
+  * Blog von Vishal Chovatiya:<br/>[What Is Design Pattern?](http://www.vishalchovatiya.com/what-is-design-pattern)
+    (abgerufen am 20.01.2023)
 
 ---
 
   * EBook:<br/>[Refactoring.Guru](https://refactoring.guru/design-patterns/book)
+    (abgerufen am 20.01.2023)
 
 ---
 
@@ -93,6 +100,7 @@
     [Design Patterns 1 of 3 - Creational Design Patterns](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns)<br/>
     [Design Patterns 2 of 3 - Structural Design Patterns](https://www.codeproject.com/Articles/438922/Design-Patterns-2-of-3-Structural-Design-Patterns)<br/>
     [Design Patterns 3 of 3 - Behavioral Design Patterns](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns)<br/>
+    (abgerufen am 20.01.2023)
 
 ---
 

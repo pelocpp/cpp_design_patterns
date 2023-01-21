@@ -19,12 +19,18 @@
     <Filter Include="Source Files\PaintBrush">
       <UniqueIdentifier>{dd091119-98b2-4532-8ecf-aa4f59f9d516}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Trees">
+      <UniqueIdentifier>{090f0295-63db-441a-a499-e8c177a863f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\dp_flyweight_pattern.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_flyweight_pattern_trees.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -37,6 +43,9 @@
     </ClCompile>
     <ClCompile Include="PaintBrush.cpp">
       <Filter>Source Files\PaintBrush</Filter>
+    </ClCompile>
+    <ClCompile Include="Trees.cpp">
+      <Filter>Source Files\Trees</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

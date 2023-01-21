@@ -140,12 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Resources\dp_flyweight_pattern.svg" />
+    <None Include="Resources\dp_flyweight_pattern_trees.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="PaintBrush.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Trees.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_flyweight_pattern_intro.png" />

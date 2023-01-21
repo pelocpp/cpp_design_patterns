@@ -19,7 +19,8 @@ namespace ConceptualExampleBridge02 {
     {
     public:
         virtual ~Implementor() {}
-        virtual std::string OperationImplementation() const = 0;
+
+        virtual std::string operationImplementation() const = 0;
     };
 
     /**
@@ -29,7 +30,7 @@ namespace ConceptualExampleBridge02 {
     class ConcreteImplementationA : public Implementor
     {
     public:
-        virtual std::string OperationImplementation() const override
+        virtual std::string operationImplementation() const override
         {
             return "ConcreteImplementationA: Here's the result on the platform A.";
         }
@@ -38,7 +39,7 @@ namespace ConceptualExampleBridge02 {
     class ConcreteImplementationB : public Implementor
     {
     public:
-        virtual std::string OperationImplementation() const override
+        virtual std::string operationImplementation() const override
         {
             return "ConcreteImplementationB: Here's the result on the platform B.";
         }
@@ -63,7 +64,7 @@ namespace ConceptualExampleBridge02 {
         virtual std::string Operation() const
         {
             return "Abstraction: Base operation with:\n" +
-                m_implementor->OperationImplementation();
+                m_implementor->operationImplementation();
         }
     };
 
@@ -79,7 +80,7 @@ namespace ConceptualExampleBridge02 {
         virtual std::string Operation() const override
         {
             return "ExtendedAbstraction: Extended operation with:\n" +
-                m_implementor->OperationImplementation();
+                m_implementor->operationImplementation();
         }
     };
 
@@ -105,13 +106,13 @@ void test_conceptual_example_02()
      * The client code should be able to work with any pre-configured
      * abstraction-implementation combination.
      */
-    std::shared_ptr<Implementor> implementor1 = std::make_shared<ConcreteImplementationA>();
-    std::shared_ptr<Abstraction> abstraction1 = std::make_shared<Abstraction>(implementor1);
+    std::shared_ptr<Implementor> implementor1{ std::make_shared<ConcreteImplementationA>() };
+    std::shared_ptr<Abstraction> abstraction1{ std::make_shared<Abstraction>(implementor1) };
     clientCode(abstraction1);
     std::cout << std::endl;
 
-    std::shared_ptr<Implementor> implementor2 = std::make_shared<ConcreteImplementationB>();
-    std::shared_ptr<Abstraction> abstraction2 = std::make_shared<ExtendedAbstraction>(implementor2);
+    std::shared_ptr<Implementor> implementor2{ std::make_shared<ConcreteImplementationB>() };
+    std::shared_ptr<Abstraction> abstraction2{ std::make_shared<ExtendedAbstraction>(implementor2) };
     clientCode(abstraction2);
 }
 
