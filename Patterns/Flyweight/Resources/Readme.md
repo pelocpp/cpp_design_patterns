@@ -104,20 +104,19 @@ Es besteht im Wesentlichen aus vier Teilen:
 #### Erstes 'Real-World' Beispiel:
 
 Wir betrachten als Anwendung eine Spiele-Applikation, in der viele Bäume zu dekorativen Zwecken platziert sind.
-Einen Baum (Klasse `Tree`) gibt es  stilistisch in den drei Varianten &ldquo;XXX&rdquo;, &ldquo;XXX&rdquo; oder &ldquo;XXX&rdquo;
+Einen solchen Baum (Klasse `Tree`) gibt es  stilistisch in den drei Varianten &ldquo;Palme&rdquo;, &ldquo;Zypresse&rdquo; oder &ldquo;Gartenbaum&rdquo;
 mit jeweils eine Höhe von 30 Pixel.
 
 Ein `Tree`-Objekt hat die folgenden Attribute:
 
-  * *Style* - Stil des Baums. In unserem Beispiel entweder
-  &ldquo;palm&rdquo;, &ldquo;cypress&rdquo; oder &ldquo;garden&rdquo;.
+  * *Style* - Stil des Baums. In unserem Beispiel entweder &ldquo;palm&rdquo;, &ldquo;cypress&rdquo; oder &ldquo;garden&rdquo;.
   * *Height* - Die Höhe des Baums ist immer 30 Pixel.
   * *Position* - Die Koordinate (*x,y*) des Baums in der Spielebene.
 
 
 <img src="dp_flyweight_pattern_trees.svg" width="550">
 
-*Abbildung* 2: Schematische Darstellung des *Flyweight Patterns*.
+*Abbildung* 2: Viele identische `Tree`-Objekte werden in einer Anwendung verwendet.
 
 Nehmen wir nun an, wir wollen 12.000 Bäume
 (jeweils &ldquo;palm&rdquo; &ndash;, &ldquo;cypress&rdquo; &ndash; und &ldquo;garden&rdquo; &ndash; zu 4000) im Spiel platzieren
@@ -125,7 +124,7 @@ und den Bedarf des Speicherverbrauchs ermitteln,
 der erforderlich ist, um diese Baumobjekte im Speicher abzulegen.
 
 | Attribut | Größe | Beschreibung |
-| :---- | :---- |
+| :---- | :---------- | :---- |
 | *Style* | 40 Bytes | `std::string`-Objekt, bei den drei Zeichenketten `"palm"`, `"cypress"` und `"garden"` kommt SSO zum Einsatz, folglich 40 Bytes pro Objekt |
 | *Height* | 4  Bytes | 4 Bytes zum Speichern einer `int`-Zahl |
 | *Position* | 8 Bytes | 4 Bytes pro `x`- und `y`-Koordinate zum Speichern einer `int`-Zahl |
