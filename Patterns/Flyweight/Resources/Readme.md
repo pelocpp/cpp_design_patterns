@@ -119,20 +119,20 @@ Ein `Tree`-Objekt hat die folgenden Attribute:
 *Abbildung* 2: Viele identische `Tree`-Objekte werden in einer Anwendung verwendet.
 
 Nehmen wir nun an, wir wollen 12.000 Bäume
-(jeweils &ldquo;palm&rdquo; &ndash;, &ldquo;cypress&rdquo; &ndash; und &ldquo;garden&rdquo; &ndash; zu 4000) im Spiel platzieren
+(jeweils die Stile &ldquo;palm&rdquo; &ndash;, &ldquo;cypress&rdquo; &ndash; und &ldquo;garden&rdquo; &ndash; zu 4000 Stück) im Spiel platzieren
 und den Bedarf des Speicherverbrauchs ermitteln,
 der erforderlich ist, um diese Baumobjekte im Speicher abzulegen.
 
 | Attribut | Größe | Beschreibung |
 | :---- | :---------- | :---- |
-| *Style* | 40 Bytes | `std::string`-Objekt, bei den drei Zeichenketten `"palm"`, `"cypress"` und `"garden"` kommt SSO zum Einsatz, folglich 40 Bytes pro Objekt |
-| *Height* | 4  Bytes | 4 Bytes zum Speichern einer `int`-Zahl |
-| *Position* | 8 Bytes | 4 Bytes pro `x`- und `y`-Koordinate zum Speichern einer `int`-Zahl |
+| *Style* | 40 Bytes | `std::string`-Objekt, bei den drei Zeichenketten `"palm"`, `"cypress"` und `"garden"` kommt SSO zum Einsatz, folglich 40 Bytes pro Objekt (Visual C++). |
+| *Height* | 4  Bytes | 4 Bytes zum Speichern einer `int`-Zahl. |
+| *Position* | 8 Bytes | 4 Bytes pro `x`- und `y`-Koordinate zum Speichern einer `int`-Zahl. |
 | **Total** | 52 Bytes | |
 
 *Tabelle* 1: Speicherbedarf eines `Tree`-Objekts.
 
-Wir benötigen insgesamt 52 Bytes, um ein `Tree`-Objekt im Speicher zu speichern. Also brauchen wir
+Wir benötigen insgesamt 52 Bytes, um ein `Tree`-Objekt im Speicher abzulegen. Also brauchen wir
 624.000 Byte (624 KB) zum Speichern von 12.000 Baumobjekten im Speicher.
 Aber wenn wir genau hinsehen, speichern wir in allen Objekten denselben Stil und dieselbe Höhe.
 
@@ -150,7 +150,7 @@ Nun identifizieren wir die intrinsischen und extrinsischen Zustände in diesem Be
 Damit legen wir folgende Realisierung im Beispiel zu Grunde:
 
   * *Flyweight*-Klasse `Tree` mit den intrinsischen Zuständen *Stil* und *Höhe*.
-  * Klasse `TreePosition`, um en extrinsischen Zustand *Position* eines *Flyweight*-Objekts zu speichern.
+  * Klasse `TreePosition`, um den extrinsischen Zustand *Position* eines *Flyweight*-Objekts zu speichern.
   * Klasse `TreeFactory` mit einer einzigen Methode `getTree(std::string style)`, die das `Tree`-Objekt
     mit dem angegebenen Stil erstellt. Die `TreeFactory`-Klasse verwaltet intern einen Cache,
     um die erstellten *Flyweight*-Objekte zu speichern.
