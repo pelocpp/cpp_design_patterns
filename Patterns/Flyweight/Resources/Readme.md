@@ -132,15 +132,32 @@ der erforderlich ist, um diese Baumobjekte im Speicher abzulegen.
 
 *Tabelle* 1: Speicherbedarf eines `Tree`-Objekts.
 
-Wir benötigen insgesamt 17 Bytes, um ein Tree-Objekt im Speicher zu speichern. Also brauchen wir
+Wir benötigen insgesamt 52 Bytes, um ein `Tree`-Objekt im Speicher zu speichern. Also brauchen wir
+624.000 Byte (624 KB) zum Speichern von 12.000 Baumobjekten im Speicher.
+Aber wenn wir genau hinsehen, speichern wir in allen Objekten denselben Stil und dieselbe Höhe.
 
-170.000 Byte (170 KB) zum Speichern von 10.000 Baumobjekten im Speicher.
+Wir verschwenden insgesamt 480.000 Bytes (480 KB) für den Stil und 48.000 Bytes (48 KB) für die Höhe,
+um doppelte Werte zu speichern.
+Die einzigen Daten, die variieren, sind die Position der Baumobjekte.
 
-Aber wenn wir genau hinsehen, speichern wir in allen Objekten die gleiche Farbe und Höhe;
+Nun identifizieren wir die intrinsischen und extrinsischen Zustände in diesem Beispiel:
 
-Wir verschwenden insgesamt 90 KB (Farbe - 50 KB und Höhe - 40 KB), um doppelte Werte zu speichern.
+  * Der *intrinsische* Zustand bezieht sich auf den Zustand, der zum *Flyweight*-Objekt gehört.
+    Der intrinsische Zustand ist unveränderlich, in unserem Beispiel sind dies Stil und Höhe eines Baums.
+  * Der *extrinsische* Zustand variiert für jedes Objekt und wird außerhalb des Objekts gespeichert.
+    Der extrinsische Zustand ist veränderlich, wie zum Beispiel die Position eines Baums.
 
-Die einzigen Daten variieren über die Position der Baumobjekte hinweg.
+Damit legen wir folgende Realisierung im Beispiel zu Grunde:
+
+  * *Flyweight*-Klasse `Tree` mit den intrinsischen Zuständen *Stil* und *Höhe*.
+  * Klasse `TreePosition`, um en extrinsischen Zustand *Position* eines *Flyweight*-Objekts zu speichern.
+  * Klasse `TreeFactory` mit einer einzigen Methode `getTree(std::string style)`, die das `Tree`-Objekt
+    mit dem angegebenen Stil erstellt. Die `TreeFactory`-Klasse verwaltet intern einen Cache,
+    um die erstellten *Flyweight*-Objekte zu speichern.
+  * Kontextklasse `Game`, die die *Flyweight*-Objekte und ihren extrinsischen Zustand verwaltet.
+  * Klasse `Client`, die für die Erstellung der `Tree`-Objekte verantwortlich ist,
+    indem Sie die extrinsische Zustände (hier: Position) an das `Game`-Objekt übergibt.
+
 
 ---
 
