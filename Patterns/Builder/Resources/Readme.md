@@ -151,14 +151,15 @@ unübersichtlich werden:
 06:     std::string m_street_address;
 07:     std::string m_post_code;
 08:     std::string m_city;
-09: 
-10:     // employment details
-11:     std::string m_company_name;
-12:     std::string m_position;
-13:     std::string m_annual_income;
-14: 
-15:     Person(std::string name) : m_name{ name } {}
-16: };
+09:     std::string m_country;
+10: 
+11:     // employment details
+12:     std::string m_sector;
+13:     std::string m_company_name;
+14:     std::string m_position;
+15: 
+16:     Person(std::string name) : m_name{ name } {}
+17: };
 ```
 
 Anstatt all diese konstruktionsbezogenen Methoden (Konstruktoren, *setter*-Methoden)
@@ -176,15 +177,15 @@ Betrachten Sie den folgenden Quellcode:
 Es wird der so genannte &ldquo;*Fluent Builder*&rdquo; Programmierstil demonstriert:
 
 ```cpp
-Person p = Person::create("Hans")
-    .lives()
-    .at("Kurfuerstendamm")
-    .with_postcode("10709")
-    .in("Berlin")
-    .works()
+Person p{ Person::create("Jack")
+    .lives("Great Britain")
+    .at("17 Sloane Street")
+    .with_postcode("SW1X 9NU")
+    .in("London")
+    .works("Information Technology")
     .with("Software Manufactur")
     .as_a("Consultant")
-    .earning("100000");
+};
 ```
 
 ---

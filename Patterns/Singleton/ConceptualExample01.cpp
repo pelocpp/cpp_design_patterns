@@ -37,6 +37,15 @@ namespace ConceptualExample01 {
 
             return m_instance;
         }
+
+        static Singleton* getInstanceThreadSafe_Cpp17()
+        {
+            if (std::scoped_lock<std::mutex> lock{ m_mutex }; m_instance == nullptr) {
+                m_instance = new Singleton();
+            }
+
+            return m_instance;
+        }
     };
 
     Singleton* Singleton::m_instance{ nullptr };
