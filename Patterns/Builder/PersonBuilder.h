@@ -17,16 +17,15 @@ private:
 public:
     PersonBuilder(const std::string& name) : m_person{ name } {}
 
-    operator Person && (); // type conversion operator
+    operator Person&& (); // type conversion operator
 
-    PersonBuilder& lives();
-    PersonBuilder& at(std::string street_address);
-    PersonBuilder& with_postcode(std::string post_code);
-    PersonBuilder& in(std::string city);
-    PersonBuilder& works();
-    PersonBuilder& with(std::string company_name);
-    PersonBuilder& as_a(std::string position);
-    PersonBuilder& earning(std::string annual_income);
+    PersonBuilder& lives(const std::string& country);
+    PersonBuilder& at(const std::string& street_address);
+    PersonBuilder& with_postcode(const std::string& postal_code);
+    PersonBuilder& in(const std::string& city);
+    PersonBuilder& works(const std::string& sector);
+    PersonBuilder& with(const std::string& company_name);
+    PersonBuilder& as_a(const std::string& position);
 };
 
 // ===========================================================================

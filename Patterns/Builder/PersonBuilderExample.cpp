@@ -6,30 +6,29 @@
 
 void test_person_builder_example_01()
 {
-    Person p = Person::create("Hans")
-        .lives()
-        .at("Kurfuerstendamm")
-        .with_postcode("10709")
-        .in("Berlin")
-        .works()
+    Person p{ Person::create("Jack")
+        .lives("Great Britain")
+        .at("17 Sloane Street")
+        .with_postcode("SW1X 9NU")
+        .in("London")
+        .works("Information Technology")
         .with("Software Manufactur")
         .as_a("Consultant")
-        .earning("100000");
+    };
 
     std::cout << p << std::endl;
 }
 
 void test_person_builder_example_02()
 {
-    PersonBuilder builder{ Person::create("Sepp")
-        .lives()
-        .at("Kurfuerstendamm")
-        .with_postcode("10709")
-        .in("Berlin")
-        .works()
+    PersonBuilder builder{ Person::create("Jack")
+        .lives("Great Britain")
+        .at("17 Sloane Street")
+        .with_postcode("SW1X 9NU")
+        .in("London")
+        .works("Information Technology")
         .with("Software Manufactur")
         .as_a("Consultant")
-        .earning("100000") 
     };
 
     Person p{ builder };

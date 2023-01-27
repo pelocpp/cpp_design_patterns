@@ -4,19 +4,17 @@
 
 #include "Person.h"
 
-std::ostream& operator<<(std::ostream& os, const Person& obj)
+std::ostream& operator<<(std::ostream& os, const Person& person)
 {
-    os << obj.m_name
-        << std::endl
-        << "lives:" << std::endl
-        << "at " << obj.m_street_address
-        << " with postcode " << obj.m_post_code
-        << " in " << obj.m_city
-        << std::endl
-        << "Works:" << std::endl
-        << "with " << obj.m_company_name
-        << " as a " << obj.m_position
-        << " earning " << obj.m_annual_income;
+    os 
+        << person.m_name << std::endl
+        << "  Lives at " << person.m_street_address
+        << " with postcode " << person.m_post_code
+        << " in " << person.m_city
+        << " (" << person.m_country << ")" << std::endl
+        << "  Work Area: Sector of " << person.m_sector
+        << "  as a " << person.m_position
+        << " for " << person.m_company_name;
 
     return os;
 }

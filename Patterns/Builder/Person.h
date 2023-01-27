@@ -12,6 +12,7 @@ class PersonBuilder;
 class Person
 {
     friend class PersonBuilder;
+
     friend std::ostream& operator<<(std::ostream& os, const Person& obj);
 
 private:
@@ -20,11 +21,12 @@ private:
     std::string m_street_address;
     std::string m_post_code;
     std::string m_city;
+    std::string m_country;
 
     // employment details
+    std::string m_sector;
     std::string m_company_name;
     std::string m_position;
-    std::string m_annual_income;
 
     Person(std::string name) : m_name{ name } {}
 
