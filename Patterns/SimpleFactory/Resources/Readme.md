@@ -222,7 +222,7 @@ Point p{ Point::Factory::NewCartesian(2, 3) };
 
 ---
 
-###### Die Essenz des *Simple Factory Method* Patterns:
+###### Die Essenz des *Simple Factory* Patterns:
 
 > Umstellung auf private Konstruktoren und Bereitstellung von Klassenmethoden.
 

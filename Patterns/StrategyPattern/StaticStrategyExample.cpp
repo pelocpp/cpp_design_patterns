@@ -29,22 +29,22 @@ struct MarkdownListStrategy : public IListStrategy
 
     virtual void end(std::ostringstream& oss) override {};
 
-    void add_list_item(std::ostringstream& oss, const std::string& item) override {
+    virtual void add_list_item(std::ostringstream& oss, const std::string& item) override {
         oss << " - " << item << std::endl; 
     }
 };
 
 struct HtmlListStrategy : public IListStrategy
 {
-    void start(std::ostringstream& oss) override {
+    virtual void start(std::ostringstream& oss) override {
         oss << "<ul>" << std::endl; 
     }
 
-    void end(std::ostringstream& oss) override {
+    virtual void end(std::ostringstream& oss) override {
         oss << "</ul>" << std::endl; 
     }
 
-    void add_list_item(std::ostringstream& oss, const std::string& item) override {
+    virtual void add_list_item(std::ostringstream& oss, const std::string& item) override {
         oss << "\t<li>" << item << "</li>" << std::endl;
     }
 };
@@ -124,9 +124,9 @@ public:
 
 struct MarkdownListStrategyEx
 {
-    virtual void start(std::ostringstream& oss) {};
+    void start(std::ostringstream& oss) {};
 
-    virtual void end(std::ostringstream& oss) {};
+    void end(std::ostringstream& oss) {};
 
     void add_list_item(std::ostringstream& oss, const std::string& item) {
         oss << " - " << item << std::endl;
