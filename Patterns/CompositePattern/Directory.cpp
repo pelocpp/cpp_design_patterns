@@ -16,7 +16,7 @@ Directory::Directory(const std::string& name) : m_name(name) {}
 std::string Directory::getName() { return m_name; }
 
 // public interface
-void Directory::addFileComponent(FileComponent* fc) {
+void Directory::addFileComponent(IFileComponent* fc) {
     m_contents.push_back(fc);
 }
 
@@ -25,7 +25,7 @@ void Directory::display(const std::string& indent) const {
     std::string s{ indent + indent };
     std::cout << s << m_name << std::endl;
 
-    for (FileComponent* fileComponent : m_contents) {
+    for (IFileComponent* fileComponent : m_contents) {
         fileComponent->display(s);
     }
 }

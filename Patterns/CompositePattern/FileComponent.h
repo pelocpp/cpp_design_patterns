@@ -2,9 +2,9 @@
 // FileComponent.h
 // ===========================================================================
 
-class FileComponent {
+class IFileComponent {
 public:
-    virtual ~FileComponent() = default;
+    virtual ~IFileComponent() = default;
     virtual void display(const std::string&) const = 0;
 };
 

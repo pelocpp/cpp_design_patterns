@@ -17,7 +17,7 @@ DirectoryEx::DirectoryEx(const std::string& name) : m_name(name) {}
 std::string DirectoryEx::getName() { return m_name; }
 
 // public interface
-void DirectoryEx::addFileComponent(std::shared_ptr<FileComponent> fc) {
+void DirectoryEx::addFileComponent(std::shared_ptr<IFileComponent> fc) {
     m_contents.push_back(std::move(fc));
 }
 

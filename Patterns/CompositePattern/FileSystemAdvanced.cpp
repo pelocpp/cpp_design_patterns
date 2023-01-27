@@ -18,7 +18,7 @@ void exploreDirectory(const std::filesystem::path& p, const std::shared_ptr<Dire
 
             if (std::filesystem::is_directory(entry.status())) {
 
-                const std::shared_ptr<FileComponent> subDir =
+                const std::shared_ptr<IFileComponent> subDir =
                     std::make_shared<DirectoryEx>(filename.string());
                 
                 dir->addFileComponent(subDir); 
@@ -30,7 +30,7 @@ void exploreDirectory(const std::filesystem::path& p, const std::shared_ptr<Dire
                 std::error_code err = std::error_code{};
                 uintmax_t filesize = std::filesystem::file_size(entry, err);
                 
-                std::shared_ptr<FileComponent> file = 
+                std::shared_ptr<IFileComponent> file =
                     std::make_shared<File>(filename.string(), std::to_string(filesize));
                 
                 dir->addFileComponent(file);

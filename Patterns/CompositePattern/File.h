@@ -2,7 +2,7 @@
 // File.h
 // ===========================================================================
 
-class File : public FileComponent {
+class File : public IFileComponent {
 public:
     File() = default;
     File(const std::string& name, const std::string& data);

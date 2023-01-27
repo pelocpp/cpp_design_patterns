@@ -2,7 +2,7 @@
 // DirectoryEx.h
 // ===========================================================================
 
-class DirectoryEx : public FileComponent {
+class DirectoryEx : public IFileComponent {
 public:
     // c'tor(s), d'tor
     DirectoryEx() = default;
@@ -13,12 +13,12 @@ public:
     std::string getName();
 
     // public interface
-    void addFileComponent(std::shared_ptr<FileComponent>);
+    void addFileComponent(std::shared_ptr<IFileComponent>);
     void display(const std::string&) const override;
 
 private:
     std::string m_name;
-    std::vector<std::shared_ptr<FileComponent>> m_contents;
+    std::vector<std::shared_ptr<IFileComponent>> m_contents;
 };
 
 // ===========================================================================

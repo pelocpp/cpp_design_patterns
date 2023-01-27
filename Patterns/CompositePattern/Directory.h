@@ -2,7 +2,7 @@
 // Directory.h
 // ===========================================================================
 
-class Directory : public FileComponent {
+class Directory : public IFileComponent {
 public:
     // c'tor(s)
     Directory() = default;
@@ -12,12 +12,12 @@ public:
     std::string getName();
 
     // public interface
-    void addFileComponent(FileComponent*);
+    void addFileComponent(IFileComponent*);
     void display(const std::string&) const override;
 
 private:
     std::string m_name;
-    std::vector<FileComponent*> m_contents;
+    std::vector<IFileComponent*> m_contents;
 };
 
 // ===========================================================================
