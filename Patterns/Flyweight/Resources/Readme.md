@@ -156,7 +156,7 @@ Damit legen wir folgende Realisierung im Beispiel zu Grunde:
     um die erstellten *Flyweight*-Objekte zu speichern.
   * Kontextklasse `Game`, die die *Flyweight*-Objekte und ihren extrinsischen Zustand verwaltet.
   * Klasse `Client`, die für die Erstellung der `Tree`-Objekte verantwortlich ist,
-    indem Sie die extrinsische Zustände (hier: Position) an das `Game`-Objekt übergibt.
+    indem Sie die extrinsische Zustände (hier: `Position`) an das `Game`-Objekt übergibt.
 
 
 ---

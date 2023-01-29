@@ -81,8 +81,6 @@ namespace TreesFlyweight {
     class Game
     {
     private:
-        std::vector<std::shared_ptr<Tree>> m_trees;
-        std::vector<std::shared_ptr<TreePosition>> m_treePositions;
         TreeFactory m_treeFactory;
 
     public:
@@ -91,27 +89,26 @@ namespace TreesFlyweight {
         void addTree(int x, int y, std::string style)
         {
             std::shared_ptr<Tree> tree{ m_treeFactory.getTree(style) };
-            if (tree == nullptr)
-            {
+            if (tree == nullptr) {
                 return;
             }
-            m_trees.push_back(tree);
 
-            std::shared_ptr<TreePosition> position{ std::make_shared<TreePosition>(x, y) };
-            m_treePositions.push_back(position);
-            size_t treeId{ m_trees.size() - 1 };
-            renderTree(treeId);
+            std::shared_ptr<TreePosition> position { 
+                std::make_shared<TreePosition>(x, y) 
+            };
+
+            renderTree(tree, position);
         }
 
     private:
-        void renderTree(size_t id)
+        void renderTree(std::shared_ptr<Tree>& tree, std::shared_ptr<TreePosition>& position)
         {
-            int x{ m_treePositions[id]->getX() };
-            int y{ m_treePositions[id]->getY() };
-            std::string style{ m_trees[id]->getStyle() };
+            int x{ position->getX() };
+            int y{ position->getY() };
+            std::string style{ tree->getStyle() };
 
             std::cout
-                << "Tree " << id << " with " << style << " style"
+                << "Tree with " << style << " style"
                 << " rendered at " << x + ", " + y << std::endl;
         }
     };
