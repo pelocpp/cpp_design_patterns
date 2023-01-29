@@ -37,7 +37,7 @@ namespace PluggableAdapterDesignApproach {
     }
 
     // =======================================================================
-    // New code (developed later)
+    // New source code (developed later)
 
     class JuiceMaker 
     {
@@ -48,20 +48,43 @@ namespace PluggableAdapterDesignApproach {
     };
 
     // making things compatible - using 'class adapter' strategy
-    class Adapter : public IBeverage
+    class BeverageAdapter : public IBeverage
     {   
     private:
         std::function<void()> m_request;
 
     public:
         // c'tors
-        Adapter(std::unique_ptr<CoffeeMaker>& cm) 
-            : m_request{ [&] () { cm->brew(); } } {}
+        BeverageAdapter(std::unique_ptr<CoffeeMaker>& cm)
+            : m_request{ [&] { cm->brew(); } } {}
 
-        Adapter(std::unique_ptr<JuiceMaker>& jm) 
-            : m_request{ [&] () { jm->squeeze(); } } {}
+        BeverageAdapter(std::unique_ptr<JuiceMaker>& jm)
+            : m_request{ [&] { jm->squeeze(); } } {}
 
         virtual void getBeverage() override { 
+            m_request();
+        }
+    };
+
+    // =======================================================================
+    // Another new source code, also developed later
+
+    template <typename T>
+    class JuiceAdapter : public IBeverage
+    {
+    private:
+        std::function<void()> m_request;
+        std::unique_ptr<T> m_juiceMaker;
+
+    public:
+        // c'tors
+        JuiceAdapter(std::unique_ptr<T> juiceMaker) 
+            : m_juiceMaker{ std::move(juiceMaker) }
+        {
+            m_request = [this] { m_juiceMaker->squeeze(); };
+        }
+
+        virtual void getBeverage() override {
             m_request();
         }
     };
@@ -69,17 +92,32 @@ namespace PluggableAdapterDesignApproach {
 
 // ===========================================================================
 
-void test_pluggable_adapter_design()
+void test_pluggable_adapter_design_01()
 {
     using namespace PluggableAdapterDesignApproach;
 
-    std::unique_ptr<CoffeeMaker> cm{ std::make_unique<CoffeeMaker>() };
-    Adapter adapter1(cm);
+    std::unique_ptr<CoffeeMaker> coffeeMaker{ std::make_unique<CoffeeMaker>() };
+    BeverageAdapter adapter1{ coffeeMaker };
     makeDrink(adapter1);
 
-    std::unique_ptr<JuiceMaker> jm{ std::make_unique<JuiceMaker>() };
-    Adapter adapter2(jm);
+    std::unique_ptr<JuiceMaker> juiceMaker{ std::make_unique<JuiceMaker>() };
+    BeverageAdapter adapter2{ juiceMaker };
     makeDrink(adapter2);
+}
+
+void test_pluggable_adapter_design_02()
+{
+    using namespace PluggableAdapterDesignApproach;
+
+    std::unique_ptr<JuiceMaker> juiceMaker{ std::make_unique<JuiceMaker>() };
+    JuiceAdapter<JuiceMaker> adapter{ std::move(juiceMaker) };
+    makeDrink(adapter);
+}
+
+void test_pluggable_adapter_design()
+{
+    test_pluggable_adapter_design_01();
+    test_pluggable_adapter_design_02();
 }
 
 // ===========================================================================
