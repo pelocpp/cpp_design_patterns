@@ -71,7 +71,7 @@ ist kein guter Ansatz.
 #### Beispiel: Respecting the Interface Segregation Principle
 
 ```cpp
-01: class Document;
+01: class Document {};
 02: 
 03: /* ---------------------- Interfaces ------------------- */
 04: class IPrinter {
@@ -84,34 +84,49 @@ ist kein guter Ansatz.
 11:     virtual void scan(Document& doc) = 0;
 12: };
 13: 
-14: class IMachine : public IPrinter, public IScanner {};
-15: 
-16: /*  ---------------------- Implementation ------------------- */
-17: class Printer : public IPrinter {
-18: public:
-19:     void print(Document& doc) override { };
-20: };
-21: 
-22: class Scanner : public IScanner {
+14: class IFaxMachine {
+15: public:
+16:     virtual void fax(Document& doc) = 0;
+17: };
+18: 
+19: class IMachine : public IPrinter, public IScanner, public IFaxMachine {};
+20: 
+21: /*  ---------------------- Implementation ------------------- */
+22: class Printer : public IPrinter {
 23: public:
-24:     void scan(Document& doc) override { };
+24:     virtual void print(Document& doc) override { };
 25: };
 26: 
-27: class Machine : public IMachine {
+27: class Scanner : public IScanner {
 28: public:
-29:     IPrinter& m_printer;
-30:     IScanner& m_scanner;
+29:     virtual void scan(Document& doc) override { };
+30: };
 31: 
-32:     Machine(IPrinter& printer, IScanner& scanner)
-33:         : m_printer{ printer }, m_scanner{ scanner } {}
-34: 
-35:     void print(Document& doc) override {
-36:         m_printer.print(doc);
-37:     }
-38:     void scan(Document& doc) override {
-39:         m_scanner.scan(doc);
-40:     }
-41: };
+32: class FaxMachine : public IFaxMachine {
+33: public:
+34:     virtual void fax(Document& doc) override { };
+35: };
+36: 
+37: class Machine : public IMachine {
+38: public:
+39:     IPrinter&    m_printer;
+40:     IScanner&    m_scanner;
+41:     IFaxMachine& m_faxmachine;
+42: 
+43:     Machine(IPrinter& printer, IScanner& scanner, IFaxMachine& faxmachine)
+44:         : m_printer{ printer }, m_scanner{ scanner }, m_faxmachine{ faxmachine } {}
+45: 
+46:     virtual void print(Document& doc) override {
+47:         m_printer.print(doc);
+48:     }
+49: 
+50:     virtual void scan(Document& doc) override {
+51:         m_scanner.scan(doc);
+52:     }
+53: 
+54:     virtual void fax(Document& doc) override {
+55:         m_faxmachine.fax(doc);
+56:     
 ```
 
 Jetzt haben wir eine Flexibilität erzielt,
@@ -135,7 +150,7 @@ class MyMachine : public IMachine
 mit
 
 <pre>
-class MyMachine : public IPrinter, public IScanner, public IFaxer
+class MyMachine : public IPrinter, public IScanner, public IFaxMachine
 </pre>
 
 Die zweite Variante sagt viel aus, die erste Variante stößt bestenfalls zum Raten an.

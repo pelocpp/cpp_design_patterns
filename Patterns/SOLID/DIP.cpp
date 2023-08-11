@@ -21,7 +21,7 @@ namespace DependencyInversionPrinciple01
     {
         std::vector<std::tuple<Person, Relationship, Person>> m_relations;
 
-        void add_parent_and_child(const Person& parent, const Person& child)
+        void addParentAndChild(const Person& parent, const Person& child)
         {
             m_relations.push_back({ parent, Relationship::Parent, child });
             m_relations.push_back({ child, Relationship::Child, parent });
@@ -57,7 +57,7 @@ namespace DependencyInversionPrinciple02
     {
         std::vector<std::tuple<Person, Relationship, Person>> m_relations;
 
-        void add_parent_and_child(const Person& parent, const Person& child) {
+        void addParentAndChild(const Person& parent, const Person& child) {
             m_relations.push_back({ parent, Relationship::Parent, child });
             m_relations.push_back({ child, Relationship::Child, parent });
         }
@@ -96,8 +96,9 @@ void test_anti_conceptual_example_dip()
 
     Relationships relationships;
 
-    relationships.add_parent_and_child(parent, child1);
-    relationships.add_parent_and_child(parent, child2);
+    relationships.addParentAndChild(parent, child1);
+    relationships.addParentAndChild(parent, child2);
+
     FamilyTree tree{ relationships };
 }
 
@@ -111,8 +112,9 @@ void test_conceptual_example_dip()
 
     Relationships relationships;
 
-    relationships.add_parent_and_child(parent, child1);
-    relationships.add_parent_and_child(parent, child2);
+    relationships.addParentAndChild(parent, child1);
+    relationships.addParentAndChild(parent, child2);
+
     FamilyTree tree{ relationships };
 }
 

@@ -136,111 +136,119 @@ sind die am meisten verbreitete Vorgehensweise:
 017: };
 018: 
 019: template <typename T>
-020: struct ColorSpecification : public Specification<T> 
+020: class ColorSpecification : public Specification<T> 
 021: {
-022:     Color m_color;
-023:     ColorSpecification(Color color) : m_color{ color } {}
-024: 
-025:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
-026:         return product->m_color == m_color; 
-027:     }
-028: };
-029: 
-030: template <typename T>
-031: struct SizeSpecification : public Specification<T>
-032: {
-033:     Size m_size;
-034:     SizeSpecification(Size size) : m_size{ size } {}
-035:         
-036:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
-037:         return product->m_size == m_size;
-038:     }
-039: };
-040: 
-041: template <typename T>
-042: struct Filter 
-043: {
-044:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const = 0;
+022: private:
+023:     Color m_color;
+024:         
+025: public:
+026:     ColorSpecification(Color color) : m_color{ color } {}
+027: 
+028:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
+029:         return product->m_color == m_color; 
+030:     }
+031: };
+032: 
+033: template <typename T>
+034: class SizeSpecification : public Specification<T>
+035: {
+036: private:
+037:     Size m_size;
+038:         
+039: public:
+040:     SizeSpecification(Size size) : m_size{ size } {}
+041:         
+042:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
+043:         return product->m_size == m_size;
+044:     }
 045: };
 046: 
 047: template <typename T>
-048: struct ProductFilter : public Filter<T>
+048: struct Filter 
 049: {
-050:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const override
-051:     {
-052:         Products<T> result;
-053:         for (const auto& product : products) {
-054:             if (spec.isSatisfied(product))
-055:                 result.push_back(product);
-056:         }
-057:         return result;
-058:     }
-059: };
-060: 
-061: // combining logical specifications - with logical 'and'
-062: template <typename T>
-063: struct AndSpecification : public Specification<T>
-064: {
-065:     const Specification<T>& m_first;
-066:     const Specification<T>& m_second;
-067: 
-068:     AndSpecification(const Specification<T>& first, const Specification<T>& second)
-069:         : m_first{ first }, m_second{ second } {}
-070: 
-071:     virtual bool isSatisfied(const std::shared_ptr<Product>& product) const override {
-072:         return m_first.isSatisfied(product) && m_second.isSatisfied(product);
-073:     }
-074: };
-075: 
-076: // combining logical specifications - with logical 'and' using operator notation
-077: template <typename T>
-078: AndSpecification<T> operator&&(const Specification<T>& first, const Specification<T>& second) {
-079:     return AndSpecification<T>{ first, second };
-080: }
-081: 
-082: void test_01()
-083: {
-084:     Products<Product> products
-085:     {
-086:         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
-087:         std::make_shared<Product>("Chair", Color::Green, Size::Large),
-088:         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
-089:     };
-090: 
-091:     ProductFilter<Product> productFilter;
-092:     ColorSpecification<Product> greenProducts = ColorSpecification<Product>{ Color::Green };
-093: 
-094:     for (const auto& product : productFilter.filter(products, greenProducts)) {
-095:         std::cout << product->m_name << " is green" << std::endl;
-096:     }
-097: }
+050:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const = 0;
+051: };
+052: 
+053: template <typename T>
+054: struct ProductFilter : public Filter<T>
+055: {
+056:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const override
+057:     {
+058:         Products<T> result;
+059:         for (const auto& product : products) {
+060:             if (spec.isSatisfied(product))
+061:                 result.push_back(product);
+062:         }
+063:         return result;
+064:     }
+065: };
+066: 
+067: // combining logical specifications - with logical 'and'
+068: template <typename T>
+069: class AndSpecification : public Specification<T>
+070: {
+071: private:
+072:     const Specification<T>& m_first;
+073:     const Specification<T>& m_second;
+074: 
+075: public:
+076:     AndSpecification(const Specification<T>& first, const Specification<T>& second)
+077:         : m_first{ first }, m_second{ second } {}
+078: 
+079:     virtual bool isSatisfied(const std::shared_ptr<Product>& product) const override {
+080:         return m_first.isSatisfied(product) && m_second.isSatisfied(product);
+081:     }
+082: };
+083: 
+084: // combining logical specifications - with logical 'and' using operator notation
+085: template <typename T>
+086: AndSpecification<T> operator&& (const Specification<T>& first, const Specification<T>& second) {
+087:     return AndSpecification<T>{ first, second };
+088: }
+089: 
+090: void test_01()
+091: {
+092:     Products<Product> products
+093:     {
+094:         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
+095:         std::make_shared<Product>("Chair", Color::Green, Size::Large),
+096:         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
+097:     };
 098: 
-099: void test_02()
-100: {
-101:     // combined specification
-102:     AndSpecification<Product> specification = {
-103:         SizeSpecification<Product>{ Size::Small },
-104:         ColorSpecification<Product>{ Color::Gray }
-105:     };
-106: 
-107:     // another combined specification - using overloaded operator &&
-108:     AndSpecification<Product> anotherSpecification =
-109:         SizeSpecification<Product>{ Size::Medium } && ColorSpecification<Product>{ Color::Red };
-110: 
-111:     auto computer = std::make_shared<Product>("Computer", Color::Gray, Size::Small);
-112:     auto chair = std::make_shared<Product>("Chair", Color::Green, Size::Large);
-113:     auto headset = std::make_shared<Product>("Headset", Color::Red, Size::Medium);
-114: 
-115:     bool result{};
-116:     result = specification.isSatisfied(computer);
-117:     std::cout << "Result: " << std::boolalpha << result << std::endl;
+099:     ProductFilter<Product> productFilter;
+100: 
+101:     ColorSpecification<Product> greenProducts {
+102:         ColorSpecification<Product>{ Color::Green }
+103:     };
+104: 
+105:     for (const auto& product : productFilter.filter(products, greenProducts)) {
+106:         std::cout << product->m_name << " is green" << std::endl;
+107:     }
+108: }
+109: 
+110: void test_02()
+111: {
+112:     Products<Product> products
+113:     {
+114:         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
+115:         std::make_shared<Product>("Chair", Color::Green, Size::Large),
+116:         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
+117:     };
 118: 
-119:     result = specification.isSatisfied(chair);
-120:     std::cout << "Result: " << std::boolalpha << result << std::endl;
-121: 
-122:     result = anotherSpecification.isSatisfied(headset);
-123:     std::cout << "Result: " << std::boolalpha << result << std::endl;
-124: }
+119:     ProductFilter<Product> productFilter;
+120: 
+121:     ColorSpecification<Product> greenProducts {
+122:         ColorSpecification<Product>{ Color::Green }
+123:     };
+124: 
+125:     SizeSpecification largeProducts{
+126:         SizeSpecification<Product>{ Size::Large }
+127:     };
+128: 
+129:     for (const auto& product : productFilter.filter(products, greenProducts && largeProducts)) {
+130:         std::cout << product->m_name << " is green and large" << std::endl;
+131:     }
+132: }
 ```
 
 ###### Beachten Sie an dem Quellcode:

@@ -38,7 +38,7 @@ Was versteht man eigentlich unter &ldquo;High-Level&rdquo;- und &ldquo;Low-Level
 10: {
 11:     std::vector<std::tuple<Person, Relationship, Person>> m_relations;
 12: 
-13:     void add_parent_and_child(const Person& parent, const Person& child)
+13:     void addParentAndChild(const Person& parent, const Person& child)
 14:     {
 15:         m_relations.push_back({ parent, Relationship::Parent, child });
 16:         m_relations.push_back({ child, Relationship::Child, parent });
@@ -93,7 +93,7 @@ Betrachten Sie den folgenden Vorschlag:
 16: {
 17:     std::vector<std::tuple<Person, Relationship, Person>> m_relations;
 18: 
-19:     void add_parent_and_child(const Person& parent, const Person& child) {
+19:     void addParentAndChild(const Person& parent, const Person& child) {
 20:         m_relations.push_back({ parent, Relationship::Parent, child });
 21:         m_relations.push_back({ child, Relationship::Child, parent });
 22:     }

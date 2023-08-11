@@ -8,7 +8,7 @@
 
 namespace InterfaceSegregationPrinciple01
 {
-    class Document;
+    class Document {};
 
     class IMachine {
     public:
@@ -52,7 +52,7 @@ namespace InterfaceSegregationPrinciple01
 
 namespace InterfaceSegregationPrinciple02
 {
-    class Document;
+    class Document {};
 
     /* ---------------------- Interfaces ------------------- */
     class IPrinter {
@@ -65,7 +65,12 @@ namespace InterfaceSegregationPrinciple02
         virtual void scan(Document& doc) = 0;
     };
 
-    class IMachine : public IPrinter, public IScanner {};
+    class IFaxMachine {
+    public:
+        virtual void fax(Document& doc) = 0;
+    };
+
+    class IMachine : public IPrinter, public IScanner, public IFaxMachine {};
 
     /*  ---------------------- Implementation ------------------- */
     class Printer : public IPrinter {
@@ -78,13 +83,19 @@ namespace InterfaceSegregationPrinciple02
         virtual void scan(Document& doc) override { };
     };
 
+    class FaxMachine : public IFaxMachine {
+    public:
+        virtual void fax(Document& doc) override { };
+    };
+
     class Machine : public IMachine {
     public:
-        IPrinter& m_printer;
-        IScanner& m_scanner;
+        IPrinter&    m_printer;
+        IScanner&    m_scanner;
+        IFaxMachine& m_faxmachine;
 
-        Machine(IPrinter& printer, IScanner& scanner)
-            : m_printer{ printer }, m_scanner{ scanner } {}
+        Machine(IPrinter& printer, IScanner& scanner, IFaxMachine& faxmachine)
+            : m_printer{ printer }, m_scanner{ scanner }, m_faxmachine{ faxmachine } {}
 
         virtual void print(Document& doc) override {
             m_printer.print(doc);
@@ -93,17 +104,41 @@ namespace InterfaceSegregationPrinciple02
         virtual void scan(Document& doc) override {
             m_scanner.scan(doc);
         }
+
+        virtual void fax(Document& doc) override {
+            m_faxmachine.fax(doc);
+        }
     };
 }
 
 void test_anti_conceptual_example_isp()
 {
     using namespace InterfaceSegregationPrinciple01;
+
+    Document doc{};
+
+    MultiFunctionPrinter printer;
+    printer.fax(doc);    // works
+
+    Scanner scanner;
+    scanner.fax(doc);    // does not work !!!
 }
 
 void test_conceptual_example_isp()
 {
     using namespace InterfaceSegregationPrinciple02;
+
+    Document doc;
+
+    Printer printer;
+    Scanner scanner;
+    FaxMachine faxmachine;
+
+    Machine machine{ printer , scanner , faxmachine };
+
+    machine.scan(doc);   // works
+
+    machine.fax(doc);    // works too
 }
 
 void test_isp()

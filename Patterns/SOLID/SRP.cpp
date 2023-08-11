@@ -17,10 +17,10 @@ namespace AntiConceptualExampleSRP {
     public:
         Journal(const std::string& title) : m_title{ title } {}
 
-        void addEntries(const std::string& entry) {
-            static uint32_t count = 0;
+        void addEntry(const std::string& entry) {
+            static uint32_t count {};
             count++;
-            std::string text = std::to_string(count) + ": " + entry;
+            std::string text { std::to_string(count) + ": " + entry };
             m_entries.push_back(text);
         }
 
@@ -46,10 +46,10 @@ namespace ConceptualExampleSRP
     public:
         Journal(const std::string& title) : m_title{ title } {}
 
-        void addEntries(const std::string& entry) {
-            static uint32_t count = 0;
+        void addEntry(const std::string& entry) {
+            static uint32_t count {};
             count++;
-            std::string text = std::to_string(count) + ": " + entry;
+            std::string text { std::to_string(count) + ": " + entry };
             m_entries.push_back(text);
         }
 
@@ -72,8 +72,8 @@ void test_anti_conceptual_example_srp ()
     using namespace AntiConceptualExampleSRP;
 
     Journal journal{ "Peter" };
-    journal.addEntries("In the morning I went to school");
-    journal.addEntries("In the afternoon I did my homework");
+    journal.addEntry("In the morning I went to school");
+    journal.addEntry("In the afternoon I did my homework");
     journal.save("diary.txt", std::cout);
 }
 
@@ -82,8 +82,8 @@ void test_conceptual_example_srp()
     using namespace ConceptualExampleSRP;
 
     Journal journal{ "Peter" };
-    journal.addEntries("In the morning I went to school");
-    journal.addEntries("In the afternoon I did my homework");
+    journal.addEntry("In the morning I went to school");
+    journal.addEntry("In the afternoon I did my homework");
     SavingManager::save(journal, "diary.txt", std::cout);
 }
 
