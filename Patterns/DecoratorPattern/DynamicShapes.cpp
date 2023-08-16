@@ -106,6 +106,7 @@ namespace DynamicDecoration {
 }
 
 void test_dynamic_decoration_00() {
+
     using namespace DynamicDecoration;
 
     std::shared_ptr<IShape> circle{
@@ -117,6 +118,7 @@ void test_dynamic_decoration_00() {
 }
 
 void test_dynamic_decoration_01() {
+
     using namespace DynamicDecoration;
 
     std::shared_ptr<IShape> circle{
@@ -132,6 +134,7 @@ void test_dynamic_decoration_01() {
 }
 
 void test_dynamic_decoration_02() {
+
     using namespace DynamicDecoration;
 
     std::shared_ptr<IShape> square{
@@ -147,6 +150,7 @@ void test_dynamic_decoration_02() {
 }
 
 void test_dynamic_decoration_03() {
+
     using namespace DynamicDecoration;
 
     std::shared_ptr<IShape> circle{
