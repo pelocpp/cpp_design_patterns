@@ -4,7 +4,7 @@
 
 ---
 
-  * Matthias Geirhos: "Entwurfsmuster: Das umfassende Handbuch".</br>
+  * Matthias Geirhos: &ldquo;Entwurfsmuster: Das umfassende Handbuch&rdquo;.</br>
     Rheinwerk Verlag GmbH (1. Juni 2015), 643 Seiten. Sprache: Deutsch. ISBN-10: 3836227622, ISBN-13: 978-3836227629.
 
     Hier werden die wichtigsten Entwurfsmuster für die verschiedensten Anwendungsfälle aufgelistet
@@ -12,7 +12,7 @@
 
 ---
 
-  * Fedor G. Pikus: "Hands-On Design Patterns with C++".</br>
+  * Fedor G. Pikus: &ldquo;Hands-On Design Patterns with C++&rdquo;.</br>
     Packt Publishing (30. Januar 2019), 512 Seiten. Sprache: Englisch. ISBN-10: 1788832566, ISBN-13: 978-1788832564.
 
     Ein vergleichsweise anspruchsvolles Buch zu Entwurfsmustern in C++. Neben Klassikern wir *Singleton*, *Factory* und *Adapter*
@@ -21,15 +21,15 @@
 
 ---
 
-  * Dmitri Nesteruk: "Design Patterns in Modern C++: Reusable Approaches for Object-Oriented Software Design".</br>
+  * Dmitri Nesteruk: &ldquo;Design Patterns in Modern C++: Reusable Approaches for Object-Oriented Software Design&rdquo;.</br>
     Apress (19. April 2018), 332 Seiten. Sprache: Englisch. ISBN-10: 9781484236024, ISBN-13: 978-1484236024.
 
-    Einfach zu lesendes Buch zum Thema "Design Patterns". An vielen Stellen wird versucht,
+    Einfach zu lesendes Buch zum Thema &ldquo;Design Patterns&rdquo;. An vielen Stellen wird versucht,
     die neuen Sprachelemente von C++ in den Beispielen zur Anwendung zu bringen.
 
 ---
 
-  * Erich Gamma, John Vlissides, Ralph Johnson, Richard Helm: "Design Patterns: Elements of Reusable Object-Oriented Software".</br>
+  * Erich Gamma, John Vlissides, Ralph Johnson, Richard Helm: &ldquo;Design Patterns: Elements of Reusable Object-Oriented Software&rdquo;.</br>
     Addison-Wesley Professional (10. November 1994), 416 Seiten. Sprache: Englisch. ISBN-13: 978-0201633610, ISBN-10: 0201633612.
 
     Der Bestseller von Gamma und Co. in englischer Originalfassung. Der Klassiker für alle Programmierer.
@@ -39,14 +39,14 @@
 
 ---
 
-  * Erich Gamma, John Vlissides, Ralph Johnson, Richard Helm: "Design Patterns: Entwurfsmuster als Elemente wiederverwendbarer objektorientierter Software".</br>
+  * Erich Gamma, John Vlissides, Ralph Johnson, Richard Helm: &ldquo;Design Patterns: Entwurfsmuster als Elemente wiederverwendbarer objektorientierter Software&rdquo;.</br>
     MITP Verlag (1. Februar 2015), 480 Seiten. Sprache: Deutsch. ISBN-13: 978-3826697005, ISBN-10: 3826697006.
 
     Deutsche Version des Bestsellers von Gamma und Co., siehe Abschitt zuvor.
 
 ---
 
-  * Alan Shalloway, James Trott: "Design Patterns Explained: A New Perspective on Object-Oriented Design".</br>
+  * Alan Shalloway, James Trott: &ldquo;Design Patterns Explained: A New Perspective on Object-Oriented Design&rdquo;.</br>
     Addison-Wesley Professional (9. Juli 2001), 368 Seiten. Sprache: Englisch. ISBN-13: 978-0201715941, ISBN-10: 0201715945.
 
     Meines Erachtens eines der besten Bücher zu diesem Thema. Alle Muster sind einfach verständlich beschrieben,
@@ -55,28 +55,28 @@
 
 ---
 
-  * Allen Holub: "Holub on Patterns: Learning Design Patterns by Looking at Code".</br>
+  * Allen Holub: &ldquo;Holub on Patterns: Learning Design Patterns by Looking at Code&rdquo;.</br>
     Apress (30. September 2004), 432 Seiten. Sprache: Englisch. ISBN-10: 1850158479, ISBN-13: 978-1850158479.
 
     Was kann über Allen Holub noch sagen? Meiner Meinung nach der beste Fachbuchautor weltweit! Werke wie
     *Compiler design in C*, *C+ C++: Programming With Objects in C and C++*, *C Companion* sprechen für sich.
-    "Holub on Patterns" zählt möglicherweise nicht zu seinen besten Werken, aber für Holub-Fans ein Muss.
+    &ldquo;Holub on Patterns&rdquo; zählt möglicherweise nicht zu seinen besten Werken, aber für Holub-Fans ein Muss.
     In seinem Buch sind mehrere *Real-World*-Beispiele implementiert, so zum Beispiel der 
-    Klassiker "Game of Life", leider - für diesen Kontext - ebenfalls nur in Java implementiert.
+    Klassiker &ldquo;Game of Life&rdquo;, leider - für diesen Kontext - ebenfalls nur in Java implementiert.
 
 ---
 
-  * Christopher Alexander: "A Pattern Language".</br>
+  * Christopher Alexander: &ldquo;A Pattern Language&rdquo;.</br>
     Oxford University Press (1977), 1171 Seiten. Sprache: Englisch. ISBN-10: 0195019199, ISBN-13: 978-0195019193.
 
 ---
 
-  * Christopher Alexander: "The Timeless Way of Building".</br>
+  * Christopher Alexander: &ldquo;The Timeless Way of Building&rdquo;.</br>
     Oxford University Press (1979), 552 Seiten. Sprache: Englisch. ISBN-10: 0195024028, ISBN-13: 978-0195024029.
 
 ---
 
-  * Martin Fowler: "Patterns of Enterprise Application Architecture".</br>
+  * Martin Fowler: &ldquo;Patterns of Enterprise Application Architecture&rdquo;.</br>
     Addison-Wesley Professional (15. November 2002), 560 Seiten. Sprache: Englisch. ISBN-10: 0321127420, ISBN-13: 978-0321127426.
 
 ---

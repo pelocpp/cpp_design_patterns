@@ -23,9 +23,6 @@ Wir bewegen uns im Problemfeld &ldquo;*Entwurfsentscheidungen*&rdquo;:
   * Eine Strategie kann sein: Entscheidungen sollte nicht beim Entwickler einer Klasse liegen, sondern beim Anwender.
 
 
-
-
-
 #### Lösung:
 
   * Ziel: Klassen konfigurierbar gestalten
@@ -70,93 +67,273 @@ Es besteht im Wesentlichen aus vier Teilen:
 Der Klassenname `Adaptee` steht stellvertretend für Service-Klassen, die es gilt,
 über Adapter-Klassen verfügbar zu machen.
 
+---
+
+#### Beispiel: Violating the &ldquo;Deleting Destructor&rdquo; Issue
+
+Dynamisch allokierte Speicherbereiche können in C++ mit den beiden Anweisungen
+`new` oder `new[]` reserviert werden. Hieraus leitet sich für die Freigabe des allokierten Speichers
+ein kleines Problem bzw. angenehmer formuliert, eine Anforderung an das Programm ab:
+
+&Rightarrow;
+
+  * Speicher wurde mit `new` allokiert &Rightarrow; Der Speicherbereich ist einem Aufruf von `delete`, dem so genannten &ldquo;Scalar Deleting Destructor&ldquo; freizugeben.
+  * Speicher wurde mit `new[]` allokiert &Rightarrow; Der Speicherbereich ist einem Aufruf von `delete[]`, dem so genannten &ldquo;Vector Deleting Destructor&ldquo; freizugeben.
+
+Das hört sich einfacher an als in der Praxis getan. Nicht immer lässt sich aus dem Programmcode ableiten,
+welcher der beiden `delete`-Aufrufe abzusetzen ist, da man an Hand der Zeigervariablen nicht erkennen kann,
+mit welchem `new`-Aufruf der dynamische Speicher angelegt worden ist.
+
+Die Konsequenz bei falschem Aufruf ist UB, also *Undefined Behaviour*!
+
+Wir demonstrieren dies an einer ersten, trivialen und folglich auch fehlerbehafteten Realisierung
+einer *Smart-Pointer* Klasse:
+
+```cpp
+01: template <typename T>
+02: class SmartPtr
+03: {
+04: private:
+05:     T* m_ptr;
+06: 
+07: public:
+08:     // c'tor / d'tor
+09:     explicit SmartPtr (T* ptr = nullptr) : m_ptr{ ptr } {}
+10: 
+11:     ~SmartPtr() {
+12:         delete m_ptr;
+13:     }
+14: 
+15:     // operators
+16:     T* operator-> () { return m_ptr; }
+17:     const T* operator-> () const { return m_ptr; }
+18: 
+19:     T& operator* () { return *m_ptr; }
+20:     const T& operator* () const { return *m_ptr; }
+21: 
+22: private:
+23:     // prevent copy semantics
+24:     SmartPtr(const SmartPtr&) = delete;
+25:     SmartPtr& operator=(const SmartPtr&) = delete;
+26: };
+```
+
+Studieren Sie nun folgendes Anwendungsbeispiel: Erkennen Sie den Fehler im Programm?
+
+```cpp
+01: void test_02() {
+02: 
+03:     SmartPtr<int> sp1{ new int{ 123 } };
+04:     SmartPtr<int> sp2{ new int[5] { 1, 2, 3, 4, 5 } };
+08: }
+```
+
+Es wird der `new`-Operator zweimal aufgerufen: In der Variante `new` als auch `new[]`.
+Welche Variante oder Varianten des `delete`-Operators kommen zur Ausführung?
 
 ---
 
+#### Beispiel: Respecting the &ldquo;Deleting Destructor&rdquo; Issue
 
+Wir erweitern die `SmartPtr`-Klasse aus dem letzen Beispiel um ein *Policy*-Objekt:
 
-## Typische Realisierung von *Policy*-Klassen
+```cpp
+01: template <typename T, typename DeletionPolicy>
+02: class SmartPtr
+03: {
+04: private:
+05:     T* m_ptr;
+06:     DeletionPolicy m_deletionPolicy;
+07: 
+08: public:
+09:     // c'tor / d'tor
+10:     explicit SmartPtr(T* ptr = nullptr, const DeletionPolicy& policy = DeletionPolicy{})
+11:         : m_ptr{ ptr }, m_deletionPolicy{ policy } {}
+12: 
+13:     ~SmartPtr() {
+14:         m_deletionPolicy(m_ptr);
+15:     }
+16: 
+17:     // operators
+18:     T* operator->() { return m_ptr; }
+19:     const T* operator->() const { return m_ptr; }
+20: 
+21:     T& operator*() { return *m_ptr; }
+22:     const T& operator*() const { return *m_ptr; }
+23: 
+24: private:
+25:     // prevent copy semantics
+26:     SmartPtr(const SmartPtr&) = delete;
+27:     SmartPtr& operator=(const SmartPtr&) = delete;
+28: };
+```
+
+Wir finden einen zweiten Template-Parameter `DeletionPolicy` vor:
+Zu diesem Klassentyp wird in Zeile 6 ein Objekt angelegt; in Zeile 14 wiederum
+erfolgt im Aufruf des Destruktors kein direkter Aufruf des `delete`-Operators!
+Wie denn auch, es ist ja nicht klar, welche der beiden Varianten aufgerufen werden soll!
+
+Stattdessen wird der überladene Aufrufoperator `operator()` des 
+*Policy*-Objekts mit der Zeigervariablen als Parameter aufgerufen.
+
+Damit benötigen wir nun geeignete *Policy*-Klassen:
+
+```cpp
+01: template <typename T>
+02: struct ScalarDeletePolicy {
+03:     void operator()(T* ptr) const {
+04:         delete ptr;
+05:     }
+06: };
+07: 
+08: template <typename T>
+09: struct VectorDeletePolicy {
+10:     void operator()(T* ptr) const {
+11:         delete[] ptr;
+12:     }
+13: };
+```
+
+Schließlich betrachten wir das Hauptprogramm:
+
+```cpp
+01: void test()
+02: {
+03:     SmartPtr<int, ScalarDeletePolicy<int>> sp1{ new int{ 123 } };
+04:     SmartPtr<int, VectorDeletePolicy<int>> sp2{ new int[5] { 1, 2, 3, 4, 5 } };
+05: }
+```
+
+---
+
+#### Typische Realisierung von *Policy*-Klassen
 
 Es gibt zwei typische Vorgehensweisen zur Implementierung von *Policy*-Klassen: Komposition und Vererbung.
 
-#### Komposition
+##### Komposition
 
 Wir stellen eine Klasse `Logger` vor, deren Ausgaben mit Hilfe einer *Policy*-Klasse in eine Datei oder auf die Konsole
 gelenkt werden können:
 
-XXXX
-
-Die Methode `log` der `Logger`-Klasse greift für Ausgaben auf das *Policy*-Objekt zurück. Hierin
+Die `log`-Methode der `Logger`-Klasse greift für Ausgaben auf das *Policy*-Objekt zurück. Hierin
 drückt sich die Konfigurierbarkeit der `Logger`-Klasse aus.
 
+```cpp
+01: class LogToConsole {
+02: public:
+03:     void write(const std::string& message) const {
+04:         std::cout << message << std::endl;
+05:     }
+06: };
+07: 
+08: class LogToFile {
+09: public:
+10:     void write(const std::string& message) const {
+11:         std::ofstream file;
+12:         file.open("trace.txt");
+13:         file << message << std::endl;
+14:         file.close();
+15:     }
+16: };
+17: 
+18: template <typename OutputPolicy>
+19: class Logger {
+20: public:
+21:     void log(const std::string& message) const {
+22:         m_policy.write(message);
+23:     }
+24: 
+25: private:
+26:     OutputPolicy m_policy;
+27: };
+```
 
-#### Vererbung
+*Beispiel*:
 
+```cpp
+01: void test() {
+02:     Logger<LogToConsole> consoleLogger{};
+03:     consoleLogger.log("Important information");
+04: 
+05:     Logger<LogToFile> fileLogger{};
+06:     fileLogger.log("Important information");
+07: }
+```
 
+##### Vererbung
 
+```cpp
+01: template <typename OutputPolicy>
+02: class Logger {
+03: public:
+04:     void log(const std::string& message) const {
+05:         m_policy.write(message);
+06:     }
+07: 
+08: private:
+09:     OutputPolicy m_policy;
+10: };
+```
 
-#### Komposition und Vererbung im Vergleich
+*Beispiel*:
+
+```cpp
+01: void test_02() {
+02:     std::cout << sizeof(LogToConsole) << std::endl;
+03:     std::cout << sizeof(LogToFile) << std::endl;
+04:
+05:     std::cout << sizeof(Logger<LogToConsole>) << std::endl;
+06:     std::cout << sizeof(Logger<LogToFile>) << std::endl;
+07: }
+```
+
+##### Komposition und Vererbung im Vergleich
 
 Welchen Weg sollten wir einschlagen, wenn wir eine *Policy*-Klasse realisieren wollen?
-
 Dazu machen wir zunächst eine möglicherweise überraschende Aussage:
 Die beiden Varianten unterscheiden sich in der Größe ihrer Objekte (Anzahl Bytes im Speicher)!
 Woran liegt das?
 
-
 Die beiden soeben betrachteten *Policy*-Objekte hatten keine Instanzvariablen.
-Die Anzahl Bytes dieses Objekte ist jedoch nicht 0, sondern 1!
+Die Anzahl Bytes dieser Objekte ist jedoch nicht 0, wie man erwarten könnte, sondern 1!
 
 Überprüfen können wir das mit Ausgaben der Gestalt
 
+```cpp
 std::cout << sizeof(LogToConsole) << std::endl;
+```
 
-Diese Festlegung ist notwendig, da jedes Objekt in einem C++ ;ndash& Programm eine eindeutige Adresse haben muss:
+Diese Festlegung ist notwendig, da jedes Objekt in einem C++&ndash;Programm eine eindeutige Adresse haben muss:
 
+```cpp
 LogToConsole p1;      // & p1 = ...
 LogToFile p2;         // & p2 may not be & p1 !!!!
+```
 
-Wenn zwei Objekte nacheinander im Speicher angeordnet sind, beträgt der Unterschied der beiden Adressen zwischen ihnen
-die Größe des ersten Objekts (plus Padding, falls erforderlich). 
+Wenn zwei Objekte nacheinander im Speicher liegen, beträgt der Unterschied der beiden Adressen zwischen ihnen
+die Größe des ersten Objekts (plus *Padding*, falls erforderlich). 
 
-Um folglich zu verhindern, dass sich die beiden Objekte p1 und p2 an derselben Adresse befinden,
-erfordert der C++ Standard, dass ihre Größe mindestens gleich ein Byte ist.
+Um folglich zu verhindern, dass sich die beiden Objekte `p1` und `p2` an derselben Adresse befinden,
+verlangt der C++ Standard, dass ihre Größe mindestens gleich ein Byte ist.
 
 Im Umfeld der Vererbung kommt hier eine interessante Beobachtung ins Spiel:
-
-Wenn beispielsweise die Policy `LogToConsole` keine Instanzvariablen besitzt, 
+Wenn beispielsweise die *Policy* `LogToConsole` keine Instanzvariablen besitzt, 
 können wir von der sogenannten &ldquo;Empty Base Class Optimization&rdquo; profitieren.
 
-Sie besagt, dass in diesem Fall eine Policy-Klasse 
-*nicht* die Größe des `Logger`-Objekts erhöht.
+Sie besagt, dass in diesem Fall eine *Policy*-Klasse *nicht* die Größe (Anzahl Bytes) des `Logger`-Objekts erhöht!
 
-Bei der Komposition von Klassen ist dies eben nicht der Fall, da  `LogToConsole` mindestens ein Byte zur Größe des `Logger`-Objekts hinzufügt.
-Berücksichtigt man noch Padding und Ausrichtung im Speicher, können hier gleich eine stattliche Anzahl von Bytes hinzugelangen.
+Bei der Komposition von Klassen ist dies eben nicht der Fall,
+da `LogToConsole` mindestens ein Byte zur Größe des `Logger`-Objekts hinzufügt.
+Berücksichtigt man noch *Padding* und Ausrichtung (*Alignment*) im Speicher,
+können hier gleich eine stattliche Anzahl von Bytes hinzugelangen.
+
+Folglich ist bei vielen *Policy*-Objekten der Footprint einer Anwendung in der Variante mit Vererbung günstiger:
 
 
-Folglich ist bei vielen Policy-Objekt das Footprint ihrer Anwendung in der Variabte der Vererbung günstiger.
-
-
+```cpp
 template <typename OutputPolicy>
 class Logger : private OutputPolicy
-
-
-
-
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp)
-
----
-
-#### Beispiele zum Adapter Pattern in der STL:
-
-XXX
-
-
+```
 ---
 
 #### Abgrenzung zu anderen Entwurfsmustern / Programmier-Idiomen:
@@ -165,49 +342,13 @@ XXX
   * Das *Policy-Based Design* ist ein Programmier-Paradigma, das auf einem C++&ndash;Idiom basiert, das unter der Bezeichnung &ldquo;*Policies*&rdquo; bekannt ist.
     Es wird häufig als Compile-Time-Variante des *Strategy Patterns* angesehen.
 
-
----
-
-#### Real-World Example:
-
-Wir demonstrieren den Einsatz des Adapter Patterns anhand des folgenden Beispiels,
-in dem wir ein Audio-Player-Gerät betrachten, das nur *MP3*-Dateien abspielen kann,
-aber einen erweiterten Audio-Player verwenden möchte, um *VLC*- und *MP4*-Dateien abspielen zu können.
-
-Ausgangspunkt ist eine Schnittstelle `MediaPlayer` und eine konkrete Klasse `AudioPlayer`,
-die die `MediaPlayer`-Schnittstelle implementiert.
-`AudioPlayer` Objekte spielen nur Audiodateien im MP3-Format ab.
-
-Wir haben ferner eine zusätzliche Schnittstelle `AdvancedMediaPlayer` und konkrete Klassen zur Verfügung,
-die die `AdvancedMediaPlayer`-Schnittstelle implementieren.
-Diese Klassen können Dateien im *VLC*- und *MP4*-Format abspielen.
-
-Wir wollen nun erreichen, dass die `AudioPlayer` Klasse auch die Formate *VLC* und *MP4* wiedergibt.
-Um dies zu erreichen, erstellen wir eine Adapterklasse `MediaAdapter`.
-Diese Klasse `MediaAdapter` implementiert einerseits die `MediaPlayer`-Schnittstelle,
-um damit die Kompatibilität zu dieser Schnittstelle aufrecht zu erhalten. 
-Zum Anderen benutzt sie (*hat-sie*) eine Instanz der Klasse `AdvancedMediaPlayer`,
-um auch die weiteren Formate *VLC* und *MP4* abspielen zu können.
-
-Ein Redesign der Klasse `AudioPlayer` verwendet nun die Adapterklasse `MediaAdapter`.
-Die Klasse `AudioPlayer` kennt nach wie vor nicht die tatsächlichen Klassen, die das gewünschte Format wiedergeben können.
-Sie reicht allerdings bei Benutzung der Klasse `AudioPlayer` und bei Anforderung entsprechender Audiotypen
-diese an die Adapterklasse weiter, so dass die Anforderung doch unterstützt werden kann.
-
-*Hinweis*: Der Client-Code wird bei Einhaltung des Patterns nicht an die konkrete Adapterklasse gekoppelt,
-sondern er darf nur über die vorhandene Client-Schnittstelle mit dem Adapter zusammenarbeiten
-(im vorliegenden Beispiel: Schnittstelle `MediaPlayer`). Auf diese Weise lassen sich neue Adapterklassen
-in das Programm einführen, ohne inkompatibel zum vorhandenen Client-Code zu sein!
-
 ---
 
 ## Literaturhinweise
 
-Die Anregungen zum konzeptionellen Beispiel finden Sie unter
-
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/adapter/cpp/example#example-0)
-
-vor.
+Die Anregungen zum Beispiel mit der *SmartPointer*-Klasse sind dem Buch
+&ldquo;Hands-On Design Patterns with C++&rdquo; von Fedor G. Pikus entnommen, 
+siehe dazu auch das Literaturverzeichnis.
 
 ---
 
@@ -215,9 +356,4 @@ vor.
 
 ---
 
-===========================================================================================================
-===========================================================================================================
-===========================================================================================================
-
-
-
+## [Literaturverzeichnis](../../Readme_07_Literature.md)
