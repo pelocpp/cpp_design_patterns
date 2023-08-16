@@ -187,26 +187,19 @@ Schließlich betrachten wir das Hauptprogramm:
 
 Ein sehr populäres Beispiel für das Policy-Based Design in der STL sind die Speicherallokatoren
 der Container-Klassen wie z.B. `std::vector`. Ein `std::vector`-Objekt benötigt dynamisch allokierten Speicher.
-
 Es gibt jedoch viele Strategien zur Speicherallokation, von denen jede für eine bestimmte Situation am besten geeignet ist.
 Wenn die Speicherallokation fest codiert wäre, wäre `std::vector` für eine Vielzahl leistungskritischer Anwendungen unbrauchbar.
 
 In der Tat ist die Speicherallokation nicht fest codiert.
 Stattdessen gibt es eine *Policy* &ndash; eine Klasse `std::allocator` &ndash; die steuert, wie der Speicher zugewiesen wird:
-
-
 [`std::allocator`](https://en.cppreference.com/w/cpp/memory/allocator)
 
-Die Klasse `std::vector` verfügt neben dem Elementtyp über einen zweiten Template-Parameter. 
+Die Klasse `std::vector` (wie auch andere C++ Containerklassen) verfügt neben dem Elementtyp über einen zweiten Template-Parameter. 
 Dies ist die *Policy* für die Speicherallokation.
-
-`std::vector` verfügt neben dem Elementtyp über einen zweiten Template-Parameter. Dies ist die Zuteilungsrichtlinie.
 
 Sie können Ihre eigene Klasse(n) mit bestimmten Member-Funktionen definieren,
 so dass diese die Anforderungen an einen C++ Speicherallokator erfüllt.
-
 Die C++ Standardklasse `std::vector` verwendet dann Ihre Art der Speicherallokation.
-
 
 ---
 

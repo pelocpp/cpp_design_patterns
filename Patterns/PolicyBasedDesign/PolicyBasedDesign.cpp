@@ -3,9 +3,8 @@
 // ===========================================================================
 
 #include <iostream>
-#include <memory>
-#include <fstream>
 #include <string>
+#include <fstream>
 
 namespace PolicyBasedDesign_01 {
 
