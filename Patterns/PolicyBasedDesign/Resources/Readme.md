@@ -183,34 +183,30 @@ Schließlich betrachten wir das Hauptprogramm:
 
 ---
 
-#### Beispiele zum Adapter Pattern in der STL:
+#### Beispiele zum Policy-Based Design in der STL:
 
-Die STL Container `std::stack`, `std::queue` und `std::priority_queue` bieten eine andere Schnittstelle
-für STL Sequenzcontainer an. Aus diesem Grund spricht man bei diesen drei Klassen auch von so genannten
-*Container Adaptern*.
+Ein sehr populäres Beispiel für das Policy-Based Design in der STL sind die Speicherallokatoren
+der Container-Klassen wie z.B. `std::vector`. Ein `std::vector`-Objekt benötigt dynamisch allokierten Speicher.
 
-Das folgende Code-Snippet zeigt die Template-Signatur der drei Container-Adapter:
+Es gibt jedoch viele Strategien zur Speicherallokation, von denen jede für eine bestimmte Situation am besten geeignet ist.
+Wenn die Speicherallokation fest codiert wäre, wäre `std::vector` für eine Vielzahl leistungskritischer Anwendungen unbrauchbar.
 
-```cpp
-template<typename T, typename Container = std::deque<T>> 
-class stack;
+In der Tat ist die Speicherallokation nicht fest codiert.
+Stattdessen gibt es eine *Policy* &ndash; eine Klasse `std::allocator` &ndash; die steuert, wie der Speicher zugewiesen wird:
 
-template<typename T, typename Container = std::deque<T>> 
-class queue;
 
-template<
-    typename T,
-    typename Container = std::vector<T>, 
-    typename Compare = std::less<typename Container::value_type>
-> 
-class priority_queue;
-```
+[`std::allocator`](https://en.cppreference.com/w/cpp/memory/allocator)
 
-Man kann erkennen, das `std::stack` und `std::queue` standardmäßig den Container `std::deque`
-als Sequenzcontainer verwenden, hingegen wird `std::vector` von `std::priority_queue` verwendet.
+Die Klasse `std::vector` verfügt neben dem Elementtyp über einen zweiten Template-Parameter. 
+Dies ist die *Policy* für die Speicherallokation.
 
-Darüber hinaus erfordert `std::priority_queue` auch ein Vergleichsobjekt,
-das standardmäßig auf `std::less` voreingestellt ist.
+`std::vector` verfügt neben dem Elementtyp über einen zweiten Template-Parameter. Dies ist die Zuteilungsrichtlinie.
+
+Sie können Ihre eigene Klasse(n) mit bestimmten Member-Funktionen definieren,
+so dass diese die Anforderungen an einen C++ Speicherallokator erfüllt.
+
+Die C++ Standardklasse `std::vector` verwendet dann Ihre Art der Speicherallokation.
+
 
 ---
 
@@ -386,5 +382,3 @@ siehe dazu auch das [Literaturverzeichnis](../../../Resources/Readme_07_Literatu
 [Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---
-
-## [Literaturverzeichnis](../../../Resources/Readme_07_Literature.md)
