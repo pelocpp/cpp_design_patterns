@@ -2,19 +2,6 @@
 // PolicyBasedDesign.cpp
 // ===========================================================================
 
-
-// https://github.com/PacktPublishing/Hands-On-Design-Patterns-with-CPP
-
-
-
-// Literatur:
-
-// https://www4.cs.fau.de/Lehre/SS07/V_OSE/Skript/12-PolicyBased-2x2.pdf
-
-// https://www.modernescpp.com/index.php/policy-and-traits/
-
-// https://wiki.scc.kit.edu/gridkaschool/upload/8/87/5MorePatterns.pdf
-
 #include <iostream>
 #include <memory>
 #include <fstream>
@@ -200,7 +187,7 @@ namespace PolicyBasedDesign_11 {
             write(mess);
         }
     private:
-        using OutputPolicy::write;
+       using OutputPolicy::write;
     };
 
     void test() {

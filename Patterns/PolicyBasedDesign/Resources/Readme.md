@@ -6,7 +6,7 @@
 
 ## Wesentliche Merkmale
 
-#### Kategorie: *Structural Pattern*
+#### Kategorie: Programmier-Idiom
 
 #### Ziel / Absicht:
 
@@ -18,14 +18,14 @@
 
 Wir bewegen uns im Problemfeld &ldquo;*Entwurfsentscheidungen*&rdquo;:
 
-  * Stichwort:  &ldquo;*Wie man es macht, macht man es falsch&rdquo;.
+  * Stichwort:  &ldquo;*Wie man es macht, macht man es falsch*&rdquo; :).
 
-  * Eine Strategie kann sein: Entscheidungen sollte nicht beim Entwickler einer Klasse liegen, sondern beim Anwender.
+  * Eine Strategie kann sein: Entscheidungen sollten nicht beim Entwickler einer Klasse liegen, sondern beim Anwender.
 
 
 #### Lösung:
 
-  * Ziel: Klassen konfigurierbar gestalten
+  * Ziel: Klassen konfigurierbar gestalten.
 
   * Schaffung einer Auswahlmöglichkeit für verschiedene Verhaltensweisen durch den Anwender.
    
@@ -34,38 +34,19 @@ Damit sind wir beim Begriff der &ldquo;Policy&rdquo; angekommen:
 
   * *Policies* sind Schnittstellen für konfigurierbare Belange einer Klasse.
   * Genauer: Eine *Policy* ist eine Klasse oder ein Klassentemplate, die eine Schnittstelle als Dienstleistung zu anderen Klassen definiert. 
-  * Eine *Policiy*-Klasse implementiert die von der *Polici* vorgegebene Schnittstelle.
-  * Policies sind vom Benutzer der Klasse auswählbar: der Benutzer kann das Verhalten der Host-Klasse durch geeignete Auswahl von Policy-Klassen anpassen
+  * Eine *Policy*-Klasse implementiert die von der *Policy* vorgegebene Schnittstelle.
+  * Policies sind vom Benutzer der Klasse auswählbar: der Benutzer kann das Verhalten der Host-Klasse durch geeignete Auswahl von *Policy*-Klassen/*Policy*-Objekten anpassen.
 
-Die Idee des Policy-based Designs kann nun so formuliert werden:
+Die Idee des *Policy-based* Designs kann nun so formuliert werden:
 
   * Klassen mit komplexem Verhalten werden in eine *Host*-Klasse und mehrere kleinere *Policy*-Klassen zerlegt.
   * Jede *Policy*-Klasse kapselt einen Belang der *Host*-Klasse.
-  * Verbindung der komplexen Klasse mit den Policy-Klassen über C++ Templates möglich.
+  * Verbindung der komplexen Klasse mit den *Policy*-Klassen über C++ Templates möglich.
 
   
 Policies sind vom Benutzer der Klasse auswählbar:
 
-  * Der Benutzer kann also das Verhalten der Host-Klasse durch geeignete Auswahl von Policy-Klassen anpassen
-
-
-#### Struktur (UML):
-
-Das folgende UML-Diagramm beschreibt eine Implementierung des *Adapter Patterns*.
-Es besteht im Wesentlichen aus vier Teilen:
-
-  * **Client**: Stellt die Klasse dar, die eine inkompatible Schnittstelle verwenden muss.
-    Diese inkompatible Schnittstelle wird von der Klasse `Adaptee` implementiert.
-  * **Target**: Definiert die Schnittstelle, die der Client kennt und verwendet.
-  * **Adaptee**: Stellt eine Klasse dar, die eine vom Client benötigte Funktionalität bietet. Typischerweise unterstützt die `Adaptee`-Klasse die `Target`-Schnittstelle nicht.
-  * **Adapter**: Konkrete Implementierung des Adapters. Diese Klasse übersetzt die inkompatible Schnittstelle von `Adaptee` in die Schnittstelle, die der Client verwendet.
-
-<img src="dp_adapter_01.svg" width="700">
-
-*Abbildung* 1: Schematische Darstellung des *Adapter Patterns*.
-
-Der Klassenname `Adaptee` steht stellvertretend für Service-Klassen, die es gilt,
-über Adapter-Klassen verfügbar zu machen.
+  * Der Benutzer kann also das Verhalten der Host-Klasse durch geeignete Auswahl von *Policy*-Klassen anpassen
 
 ---
 
@@ -75,15 +56,12 @@ Dynamisch allokierte Speicherbereiche können in C++ mit den beiden Anweisungen
 `new` oder `new[]` reserviert werden. Hieraus leitet sich für die Freigabe des allokierten Speichers
 ein kleines Problem bzw. angenehmer formuliert, eine Anforderung an das Programm ab:
 
-&Rightarrow;
-
-  * Speicher wurde mit `new` allokiert &Rightarrow; Der Speicherbereich ist einem Aufruf von `delete`, dem so genannten &ldquo;Scalar Deleting Destructor&ldquo; freizugeben.
-  * Speicher wurde mit `new[]` allokiert &Rightarrow; Der Speicherbereich ist einem Aufruf von `delete[]`, dem so genannten &ldquo;Vector Deleting Destructor&ldquo; freizugeben.
+  * Speicher wurde mit `new` allokiert &Rightarrow; Der Speicherbereich ist mit einem Aufruf von `delete`, dem so genannten &ldquo;*Scalar Deleting Destructor*&ldquo; freizugeben.
+  * Speicher wurde mit `new[]` allokiert &Rightarrow; Der Speicherbereich ist mit einem Aufruf von `delete[]`, dem so genannten &ldquo;*Vector Deleting Destructor*&ldquo; freizugeben.
 
 Das hört sich einfacher an als in der Praxis getan. Nicht immer lässt sich aus dem Programmcode ableiten,
 welcher der beiden `delete`-Aufrufe abzusetzen ist, da man an Hand der Zeigervariablen nicht erkennen kann,
 mit welchem `new`-Aufruf der dynamische Speicher angelegt worden ist.
-
 Die Konsequenz bei falschem Aufruf ist UB, also *Undefined Behaviour*!
 
 Wir demonstrieren dies an einer ersten, trivialen und folglich auch fehlerbehafteten Realisierung
@@ -118,7 +96,7 @@ einer *Smart-Pointer* Klasse:
 26: };
 ```
 
-Studieren Sie nun folgendes Anwendungsbeispiel: Erkennen Sie den Fehler im Programm?
+Studieren Sie folgendes Anwendungsbeispiel: Erkennen Sie den Fehler im Programm?
 
 ```cpp
 01: void test_02() {
@@ -171,12 +149,11 @@ Wir erweitern die `SmartPtr`-Klasse aus dem letzen Beispiel um ein *Policy*-Obje
 Wir finden einen zweiten Template-Parameter `DeletionPolicy` vor:
 Zu diesem Klassentyp wird in Zeile 6 ein Objekt angelegt; in Zeile 14 wiederum
 erfolgt im Aufruf des Destruktors kein direkter Aufruf des `delete`-Operators!
-Wie denn auch, es ist ja nicht klar, welche der beiden Varianten aufgerufen werden soll!
+Wie denn auch, es ist ja nicht klar, welche der beiden Varianten aufzurufen ist!
 
 Stattdessen wird der überladene Aufrufoperator `operator()` des 
 *Policy*-Objekts mit der Zeigervariablen als Parameter aufgerufen.
-
-Damit benötigen wir nun geeignete *Policy*-Klassen:
+Stattdessen benötigen wir nun geeignete *Policy*-Klassen:
 
 ```cpp
 01: template <typename T>
@@ -206,17 +183,47 @@ Schließlich betrachten wir das Hauptprogramm:
 
 ---
 
+#### Beispiele zum Adapter Pattern in der STL:
+
+Die STL Container `std::stack`, `std::queue` und `std::priority_queue` bieten eine andere Schnittstelle
+für STL Sequenzcontainer an. Aus diesem Grund spricht man bei diesen drei Klassen auch von so genannten
+*Container Adaptern*.
+
+Das folgende Code-Snippet zeigt die Template-Signatur der drei Container-Adapter:
+
+```cpp
+template<typename T, typename Container = std::deque<T>> 
+class stack;
+
+template<typename T, typename Container = std::deque<T>> 
+class queue;
+
+template<
+    typename T,
+    typename Container = std::vector<T>, 
+    typename Compare = std::less<typename Container::value_type>
+> 
+class priority_queue;
+```
+
+Man kann erkennen, das `std::stack` und `std::queue` standardmäßig den Container `std::deque`
+als Sequenzcontainer verwenden, hingegen wird `std::vector` von `std::priority_queue` verwendet.
+
+Darüber hinaus erfordert `std::priority_queue` auch ein Vergleichsobjekt,
+das standardmäßig auf `std::less` voreingestellt ist.
+
+---
+
 #### Typische Realisierung von *Policy*-Klassen
 
 Es gibt zwei typische Vorgehensweisen zur Implementierung von *Policy*-Klassen: Komposition und Vererbung.
 
-##### Komposition
+#### Komposition
 
 Wir stellen eine Klasse `Logger` vor, deren Ausgaben mit Hilfe einer *Policy*-Klasse in eine Datei oder auf die Konsole
-gelenkt werden können:
-
+gelenkt werden können.
 Die `log`-Methode der `Logger`-Klasse greift für Ausgaben auf das *Policy*-Objekt zurück. Hierin
-drückt sich die Konfigurierbarkeit der `Logger`-Klasse aus.
+drückt sich die Konfigurierbarkeit der `Logger`-Klasse aus:
 
 ```cpp
 01: class LogToConsole {
@@ -260,20 +267,41 @@ drückt sich die Konfigurierbarkeit der `Logger`-Klasse aus.
 07: }
 ```
 
-##### Vererbung
+#### Vererbung
+
+Wir müssen nur die Host-Klasse betrachten. Die beiden *Policy*-Klassen
+sind identisch zum letzten Beispiel:
+
 
 ```cpp
 01: template <typename OutputPolicy>
-02: class Logger {
+02: class Logger : private OutputPolicy {
 03: public:
-04:     void log(const std::string& message) const {
-05:         m_policy.write(message);
+04:     void log(const std::string& mess) const {
+05:         write(mess);
 06:     }
-07: 
-08: private:
-09:     OutputPolicy m_policy;
-10: };
+07: private:
+08:     using OutputPolicy::write;
+09: };
 ```
+
+*Hinweis*: Die Zeile 8 aus dem letzten Code-Fragment ist wichtig, sie kann nicht weggelassen werden!
+
+Klasse `Logger` ist ein Klassentemplate. Der Aufruf von `write` in Zeile 5
+wird nicht mit der Vaterklasse `OutputPolicy` in Verbindung gebracht!
+Der Compiler unterscheidet beim &ndash; ersten  &ndash; Übersetzungsvorgang 
+zwischen Bezeichnern, die von den Template Parametern abhängen oder nicht: 
+
+```
+'write': function declaration must be available as none of the arguments depend on a template parameter.
+```
+
+Dieses Problem muss man dadurch lösen, dass man dem Compiler explizit angibt,
+in welcher Klasse die Methode `write` anzufinden ist. Oder in anderen Worten:
+Der Name der `write`-Methode wird in den aktuellen Block importiert!
+
+Nun zu einem Beispiel dieser *Policy*-Klasse: Es ist offensichtlich identisch 
+mit dem letzten Beispiel:
 
 *Beispiel*:
 
@@ -289,18 +317,23 @@ drückt sich die Konfigurierbarkeit der `Logger`-Klasse aus.
 
 ##### Komposition und Vererbung im Vergleich
 
-Welchen Weg sollten wir einschlagen, wenn wir eine *Policy*-Klasse realisieren wollen?
+Welchen Weg sollen wir einschlagen, wenn wir eine *Policy*-Klasse realisieren?
 Dazu machen wir zunächst eine möglicherweise überraschende Aussage:
 Die beiden Varianten unterscheiden sich in der Größe ihrer Objekte (Anzahl Bytes im Speicher)!
 Woran liegt das?
 
-Die beiden soeben betrachteten *Policy*-Objekte hatten keine Instanzvariablen.
+Die beiden soeben betrachteten *Policy*-Objekte haben keine Instanzvariablen.
 Die Anzahl Bytes dieser Objekte ist jedoch nicht 0, wie man erwarten könnte, sondern 1!
-
-Überprüfen können wir das mit Ausgaben der Gestalt
+Überprüfen können wir das mit Testbeispielen der Gestalt
 
 ```cpp
 std::cout << sizeof(LogToConsole) << std::endl;
+```
+
+*Ausgabe*:
+
+```
+1
 ```
 
 Diese Festlegung ist notwendig, da jedes Objekt in einem C++&ndash;Programm eine eindeutige Adresse haben muss:
@@ -312,14 +345,12 @@ LogToFile p2;         // & p2 may not be & p1 !!!!
 
 Wenn zwei Objekte nacheinander im Speicher liegen, beträgt der Unterschied der beiden Adressen zwischen ihnen
 die Größe des ersten Objekts (plus *Padding*, falls erforderlich). 
-
 Um folglich zu verhindern, dass sich die beiden Objekte `p1` und `p2` an derselben Adresse befinden,
 verlangt der C++ Standard, dass ihre Größe mindestens gleich ein Byte ist.
 
 Im Umfeld der Vererbung kommt hier eine interessante Beobachtung ins Spiel:
 Wenn beispielsweise die *Policy* `LogToConsole` keine Instanzvariablen besitzt, 
 können wir von der sogenannten &ldquo;Empty Base Class Optimization&rdquo; profitieren.
-
 Sie besagt, dass in diesem Fall eine *Policy*-Klasse *nicht* die Größe (Anzahl Bytes) des `Logger`-Objekts erhöht!
 
 Bei der Komposition von Klassen ist dies eben nicht der Fall,
@@ -348,7 +379,7 @@ class Logger : private OutputPolicy
 
 Die Anregungen zum Beispiel mit der *SmartPointer*-Klasse sind dem Buch
 &ldquo;Hands-On Design Patterns with C++&rdquo; von Fedor G. Pikus entnommen, 
-siehe dazu auch das Literaturverzeichnis.
+siehe dazu auch das [Literaturverzeichnis](../../../Resources/Readme_07_Literature.md).
 
 ---
 
@@ -356,4 +387,4 @@ siehe dazu auch das Literaturverzeichnis.
 
 ---
 
-## [Literaturverzeichnis](../../Readme_07_Literature.md)
+## [Literaturverzeichnis](../../../Resources/Readme_07_Literature.md)

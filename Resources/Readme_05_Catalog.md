@@ -102,7 +102,7 @@ Gruppierungen von Entwurfsmustern. In Büchern über "Modern C++" stößt man häufig
 | [Null Object](../Patterns/NullObject/Resources/Readme.md) | Null Objekt |
 | [Intercepting Filter Pattern](../Patterns/InterceptingFilterPattern/Resources/Readme.md) | *Intercepting Filter Pattern* |
 | [Type Erasure](../Patterns/TypeErasure/Resources/Readme.md) | *Type Erasure* |
-| [Policy-Based Design](../Patterns/PolicyBasedDesign/Resources/PolicyBasedDesign.md) | *Policy-Based Design* |
+| [Policy-Based Design](../Patterns/PolicyBasedDesign/Resources/Readme.md) | *Policy-Based Design* |
 | SFINAE | *Substitution failure is not an error* |
 | CRTP | *Curiously recurring template pattern* |
 

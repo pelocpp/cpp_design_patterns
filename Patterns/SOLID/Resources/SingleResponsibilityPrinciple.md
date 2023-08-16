@@ -6,6 +6,7 @@
 
 ## Wesentliche Merkmale
 
+#### Kategorie: Programmier-Idiom
 
 #### Ziel / Absicht:
 
