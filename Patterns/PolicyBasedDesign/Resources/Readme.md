@@ -16,7 +16,7 @@
 
 #### Problem / Motivation
 
-Wir bewegen uns im Problemfeld &ldquo;*Entwurfsentscheidungen*&rdquo;:
+Wir bewegen uns im Problemfeld &ldquo;*Entwurfsentscheidungen*&rdquo; bei der Softwareentwicklung:
 
   * Stichwort:  &ldquo;*Wie man es macht, macht man es falsch*&rdquo; :).
 
@@ -35,13 +35,13 @@ Damit sind wir beim Begriff der &ldquo;Policy&rdquo; angekommen:
   * *Policies* sind Schnittstellen für konfigurierbare Belange einer Klasse.
   * Genauer: Eine *Policy* ist eine Klasse oder ein Klassentemplate, die eine Schnittstelle als Dienstleistung zu anderen Klassen definiert. 
   * Eine *Policy*-Klasse implementiert die von der *Policy* vorgegebene Schnittstelle.
-  * Policies sind vom Benutzer der Klasse auswählbar: der Benutzer kann das Verhalten der Host-Klasse durch geeignete Auswahl von *Policy*-Klassen/*Policy*-Objekten anpassen.
+  * *Policies* sind vom Benutzer der Klasse auswählbar: der Benutzer kann das Verhalten der *Host*-Klasse durch geeignete Auswahl von *Policy*-Klassen/*Policy*-Objekten anpassen.
 
 Die Idee des *Policy-based* Designs kann nun so formuliert werden:
 
   * Klassen mit komplexem Verhalten werden in eine *Host*-Klasse und mehrere kleinere *Policy*-Klassen zerlegt.
   * Jede *Policy*-Klasse kapselt einen Belang der *Host*-Klasse.
-  * Verbindung der komplexen Klasse mit den *Policy*-Klassen über C++ Templates möglich.
+  * Verbindung der komplexen Klasse mit den *Policy*-Klassen beispielsweise über C++ Klassen Templates möglich.
 
   
 Policies sind vom Benutzer der Klasse auswählbar:
@@ -56,15 +56,15 @@ Dynamisch allokierte Speicherbereiche können in C++ mit den beiden Anweisungen
 `new` oder `new[]` reserviert werden. Hieraus leitet sich für die Freigabe des allokierten Speichers
 ein kleines Problem bzw. angenehmer formuliert, eine Anforderung an das Programm ab:
 
-  * Speicher wurde mit `new` allokiert &Rightarrow; Der Speicherbereich ist mit einem Aufruf von `delete`, dem so genannten &ldquo;*Scalar Deleting Destructor*&ldquo; freizugeben.
-  * Speicher wurde mit `new[]` allokiert &Rightarrow; Der Speicherbereich ist mit einem Aufruf von `delete[]`, dem so genannten &ldquo;*Vector Deleting Destructor*&ldquo; freizugeben.
+  * Speicher wurde mit `new` allokiert &Rightarrow;<br/>Der Speicherbereich ist mit einem Aufruf von `delete`, dem so genannten &ldquo;*Scalar Deleting Destructor*&ldquo; freizugeben.
+  * Speicher wurde mit `new[]` allokiert &Rightarrow;<br/>Der Speicherbereich ist mit einem Aufruf von `delete[]`, dem so genannten &ldquo;*Vector Deleting Destructor*&ldquo; freizugeben.
 
-Das hört sich einfacher an als in der Praxis getan. Nicht immer lässt sich aus dem Programmcode ableiten,
+Das ist leichter gesagt, als getan! Nicht immer lässt sich aus dem Programmcode ableiten,
 welcher der beiden `delete`-Aufrufe abzusetzen ist, da man an Hand der Zeigervariablen nicht erkennen kann,
 mit welchem `new`-Aufruf der dynamische Speicher angelegt worden ist.
 Die Konsequenz bei falschem Aufruf ist UB, also *Undefined Behaviour*!
 
-Wir demonstrieren dies an einer ersten, trivialen und folglich auch fehlerbehafteten Realisierung
+Wir demonstrieren dies an einer ersten, trivialen und folglich auch fehlerhaften Realisierung
 einer *Smart-Pointer* Klasse:
 
 ```cpp
@@ -99,7 +99,7 @@ einer *Smart-Pointer* Klasse:
 Studieren Sie folgendes Anwendungsbeispiel: Erkennen Sie den Fehler im Programm?
 
 ```cpp
-01: void test_02() {
+01: void test() {
 02: 
 03:     SmartPtr<int> sp1{ new int{ 123 } };
 04:     SmartPtr<int> sp2{ new int[5] { 1, 2, 3, 4, 5 } };
@@ -148,12 +148,12 @@ Wir erweitern die `SmartPtr`-Klasse aus dem letzen Beispiel um ein *Policy*-Obje
 
 Wir finden einen zweiten Template-Parameter `DeletionPolicy` vor:
 Zu diesem Klassentyp wird in Zeile 6 ein Objekt angelegt; in Zeile 14 wiederum
-erfolgt im Aufruf des Destruktors kein direkter Aufruf des `delete`-Operators!
+erfolgt im Aufruf des Destruktors *kein* direkter Aufruf des `delete`-Operators!
 Wie denn auch, es ist ja nicht klar, welche der beiden Varianten aufzurufen ist!
 
 Stattdessen wird der überladene Aufrufoperator `operator()` des 
 *Policy*-Objekts mit der Zeigervariablen als Parameter aufgerufen.
-Stattdessen benötigen wir nun geeignete *Policy*-Klassen:
+Nun benötigen wir geeignete *Policy*-Klassen:
 
 ```cpp
 01: template <typename T>
@@ -191,15 +191,17 @@ Es gibt jedoch viele Strategien zur Speicherallokation, von denen jede für eine 
 Wenn die Speicherallokation fest codiert wäre, wäre `std::vector` für eine Vielzahl leistungskritischer Anwendungen unbrauchbar.
 
 In der Tat ist die Speicherallokation nicht fest codiert.
-Stattdessen gibt es eine *Policy* &ndash; eine Klasse `std::allocator` &ndash; die steuert, wie der Speicher zugewiesen wird:
-[`std::allocator`](https://en.cppreference.com/w/cpp/memory/allocator)
+Stattdessen gibt es eine *Policy* &ndash; Standardklasse `std::allocator` &ndash; die steuert, wie der Speicher zugewiesen wird:
+
+Siehe [cppreference.com](https://en.cppreference.com/w/cpp/memory/allocator)
 
 Die Klasse `std::vector` (wie auch andere C++ Containerklassen) verfügt neben dem Elementtyp über einen zweiten Template-Parameter. 
-Dies ist die *Policy* für die Speicherallokation.
+Dieser beschreibt die *Policy* für die Speicherallokation.
 
 Sie können Ihre eigene Klasse(n) mit bestimmten Member-Funktionen definieren,
-so dass diese die Anforderungen an einen C++ Speicherallokator erfüllt.
-Die C++ Standardklasse `std::vector` verwendet dann Ihre Art der Speicherallokation.
+so dass diese die Anforderungen an einen C++ Speicherallokator erfüllen.
+Die C++ Standardklasse `std::vector` verwendet dann Ihre Vorstellungen
+für die Allokation des Speichers.
 
 ---
 
@@ -275,7 +277,6 @@ sind identisch zum letzten Beispiel:
 ```
 
 *Hinweis*: Die Zeile 8 aus dem letzten Code-Fragment ist wichtig, sie kann nicht weggelassen werden!
-
 Klasse `Logger` ist ein Klassentemplate. Der Aufruf von `write` in Zeile 5
 wird nicht mit der Vaterklasse `OutputPolicy` in Verbindung gebracht!
 Der Compiler unterscheidet beim &ndash; ersten  &ndash; Übersetzungsvorgang 
@@ -287,7 +288,7 @@ zwischen Bezeichnern, die von den Template Parametern abhängen oder nicht:
 
 Dieses Problem muss man dadurch lösen, dass man dem Compiler explizit angibt,
 in welcher Klasse die Methode `write` anzufinden ist. Oder in anderen Worten:
-Der Name der `write`-Methode wird in den aktuellen Block importiert!
+Der Name der `write`-Methode wird in den aktuellen Scope importiert!
 
 Nun zu einem Beispiel dieser *Policy*-Klasse: Es ist offensichtlich identisch 
 mit dem letzten Beispiel:
@@ -295,7 +296,7 @@ mit dem letzten Beispiel:
 *Beispiel*:
 
 ```cpp
-01: void test_02() {
+01: void test() {
 02:     std::cout << sizeof(LogToConsole) << std::endl;
 03:     std::cout << sizeof(LogToFile) << std::endl;
 04:
@@ -308,7 +309,7 @@ mit dem letzten Beispiel:
 
 Welchen Weg sollen wir einschlagen, wenn wir eine *Policy*-Klasse realisieren?
 Dazu machen wir zunächst eine möglicherweise überraschende Aussage:
-Die beiden Varianten unterscheiden sich in der Größe ihrer Objekte (Anzahl Bytes im Speicher)!
+Die beiden Varianten unterscheiden sich in der Größe ihrer beteiligten Objekte (Anzahl Bytes im Speicher)!
 Woran liegt das?
 
 Die beiden soeben betrachteten *Policy*-Objekte haben keine Instanzvariablen.
@@ -335,7 +336,7 @@ LogToFile p2;         // & p2 may not be & p1 !!!!
 Wenn zwei Objekte nacheinander im Speicher liegen, beträgt der Unterschied der beiden Adressen zwischen ihnen
 die Größe des ersten Objekts (plus *Padding*, falls erforderlich). 
 Um folglich zu verhindern, dass sich die beiden Objekte `p1` und `p2` an derselben Adresse befinden,
-verlangt der C++ Standard, dass ihre Größe mindestens gleich ein Byte ist.
+verlangt der C++ Standard, dass die Größe eines Objekts mindestens 1 Byte ist.
 
 Im Umfeld der Vererbung kommt hier eine interessante Beobachtung ins Spiel:
 Wenn beispielsweise die *Policy* `LogToConsole` keine Instanzvariablen besitzt, 
@@ -345,7 +346,7 @@ Sie besagt, dass in diesem Fall eine *Policy*-Klasse *nicht* die Größe (Anzahl B
 Bei der Komposition von Klassen ist dies eben nicht der Fall,
 da `LogToConsole` mindestens ein Byte zur Größe des `Logger`-Objekts hinzufügt.
 Berücksichtigt man noch *Padding* und Ausrichtung (*Alignment*) im Speicher,
-können hier gleich eine stattliche Anzahl von Bytes hinzugelangen.
+könnten hier gleich eine stattliche Anzahl von Bytes hinzugelangen.
 
 Folglich ist bei vielen *Policy*-Objekten der Footprint einer Anwendung in der Variante mit Vererbung günstiger:
 
@@ -358,16 +359,15 @@ class Logger : private OutputPolicy
 
 #### Abgrenzung zu anderen Entwurfsmustern / Programmier-Idiomen:
 
-
-  * Das *Policy-Based Design* ist ein Programmier-Paradigma, das auf einem C++&ndash;Idiom basiert, das unter der Bezeichnung &ldquo;*Policies*&rdquo; bekannt ist.
-    Es wird häufig als Compile-Time-Variante des *Strategy Patterns* angesehen.
+  * Das *Policy-Based Design* ist ein Programmier-Paradigma,
+    das häufig als Compile-Time-Variante des *Strategy Patterns* angesehen wird.
 
 ---
 
 ## Literaturhinweise
 
 Die Anregungen zum Beispiel mit der *SmartPointer*-Klasse sind dem Buch
-&ldquo;Hands-On Design Patterns with C++&rdquo; von Fedor G. Pikus entnommen, 
+&ldquo;*Hands-On Design Patterns with C++*&rdquo; von Fedor G. Pikus entnommen, 
 siehe dazu auch das [Literaturverzeichnis](../../../Resources/Readme_07_Literature.md).
 
 ---
