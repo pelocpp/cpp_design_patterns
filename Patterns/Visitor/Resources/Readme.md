@@ -159,7 +159,7 @@ könnten wir folgende Realisierung betrachten:
 48:     std::list<std::string>  m_content;
 49: };
 50: 
-51: void clientCode02()
+51: void clientCode()
 52: {
 53:     Document* d1 = new HTML;
 54:     d1->addToList("This is line");
@@ -245,7 +245,7 @@ um vor allem das *Single*-*Responsibility*-Prinzips zu beachten.
 55:     }
 56: };
 57: 
-58: void clientCode03() {
+58: void clientCode() {
 59:     Document* d1 = new HTML;
 60:     d1->addToList("This is line");
 61:     DocumentPrinter::print(d1);
@@ -354,7 +354,7 @@ Diese wird weiter unten noch näher erläutert werden (begleitender Text und UML-D
 73:     std::cout << "</ul>" << std::endl;
 74: }
 75: 
-76: void clientCode04() {
+76: void clientCode() {
 77:     DocumentVisitor* dp = new DocumentPrinter();
 78: 
 79:     Document* d1 = new HTML;
@@ -400,72 +400,79 @@ des Zeigertyps `HTML*`).
 
 ##### Schritt 4: Alternativer Ansatz für *Double Dispatch* in Modern C++ (`std::variant` und `std::visit`)
 
+Man beachte vorarb, dass die Dokumente Klassen `Markdown` und `HTML` nicht mehr einer Klassenhierarchie angehören:
+
+
 ```cpp
-01: class Document
-02: {
-03: public:
-04:     virtual void addToList(const std::string& line) = 0;
-05: };
-06: 
-07: class Markdown : public Document
-08: {
-09: public:
-10:     Markdown() : m_start{ "* " } {}
-11: 
-12:     virtual void addToList(const std::string& line) override {
-13:         m_content.push_back(line); 
-14:     }
-15: 
-16:     std::string             m_start;
-17:     std::list<std::string>  m_content;
-18: };
-19: 
-20: class HTML : public Document
-21: {
-22: public:
-23:     HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
-24: 
-25:     virtual void addToList(const std::string& line) override {
-26:         m_content.push_back(line); 
-27:     }
+01: /* ------ Document Classes -------- */
+02: class Markdown
+03: {
+04: private:
+05:     std::string m_start;
+06:     std::list<std::string> m_content;
+07: 
+08: public:
+09:     Markdown() : m_start{ "* " } {}
+10: 
+11:     void addToList(const std::string& line) {
+12:         m_content.push_back(line); 
+13:     }
+14: 
+15:     std::string getStart() const { return m_start; }
+16:     std::list<std::string> getContent() const { return m_content; }
+17: };
+18: 
+19: class HTML
+20: {
+21: private:
+22:     std::string m_start;
+23:     std::string m_end;
+24:     std::list<std::string> m_content;
+25: 
+26: public:
+27:     HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 28: 
-29:     std::string             m_start;
-30:     std::string             m_end;
-31:     std::list<std::string>  m_content;
-32: };
-33: 
-34: /* ------ Specific Printer Visitor Class -------- */
-35: class DocumentPrinter
-36: {
-37: public:
-38:     void operator() (const Markdown& md) {
-39:         for (const std::string& item : md.m_content) {
-40:             std::cout << md.m_start << item << std::endl;
-41:         }
-42:     }
-43: 
-44:     void operator() (const HTML& hd) {
-45:         std::cout << "<ul>" << std::endl;
-46:         for (const std::string& item : hd.m_content) {
-47:             std::cout << "    " << hd.m_start << item << hd.m_end << std::endl;
-48:         }
-49:         std::cout << "</ul>" << std::endl;
-50:     }
-51: };
-52: 
-53: /* ------ std::variant & std::visit -------- */
-54: void clientCode05() {
-55:     HTML hd;
-56:     hd.addToList("This is line");
-57:     std::variant<Markdown, HTML> doc = hd;
-58:     DocumentPrinter dp;
-59:     std::visit(dp, doc);
-60: 
-61:     Markdown md;
-62:     md.addToList("This is another line");
-63:     doc = md;
-64:     std::visit(dp, doc);
-65: }
+29:     void addToList(const std::string& line) {
+30:         m_content.push_back(line); 
+31:     }
+32: 
+33:     std::string getStart() const { return m_start; }
+34:     std::string getEnd() const { return m_end; }
+35:     std::list<std::string> getContent() const { return m_content; }
+36: };
+37: 
+38: /* ------ Specific Printer Visitor Class -------- */
+39: class DocumentPrinter
+40: {
+41: public:
+42:     void operator() (const Markdown& md) {
+43:         for (const std::string& item : md.getContent()) {
+44:             std::cout << md.getStart() << item << std::endl;
+45:         }
+46:     }
+47: 
+48:     void operator() (const HTML& hd) {
+49:         std::cout << "<ul>" << std::endl;
+50:         for (const std::string& item : hd.getContent()) {
+51:             std::cout << "    " << hd.getStart() << item << hd.getEnd() << std::endl;
+52:         }
+53:         std::cout << "</ul>" << std::endl;
+54:     }
+55: };
+56: 
+57: /* ------ std::variant & std::visit -------- */
+58: void clientCode() {
+59:     HTML hd;
+60:     hd.addToList("This is line");
+61:     std::variant<Markdown, HTML> doc = hd;
+62:     DocumentPrinter dp;
+63:     std::visit(dp, doc);
+64: 
+65:     Markdown md;
+66:     md.addToList("This is another line");
+67:     doc = md;
+68:     std::visit(dp, doc);
+69: }
 ```
 
 Wir setzen nun die *Modern C++* Klasse `std::variant` und die Funktion `std::visit` ein.
@@ -541,7 +548,83 @@ mit abgehandelt.
 
 ---
 
-#### 'Real-World' Beispiel:
+#### Erstes 'Real-World' Beispiel:
+
+Das *Visitor*-Entwurfsmuster lässt sich in *Modern C++* mit `std::variant` und `std::visit` sehr einfach umsetzen.
+
+Hierbei gilt es eine Besonderheit zu betrachten:
+Wir können mit der C++-Template-Technik die Realisierung so gestalten,
+dass wir auf den virtuellen Methodenaufrufmechanismus **nicht** angewiesen sind!
+Bei der klassischen Umsetzung des Musters ist dieser vorhanden.
+
+Wir betrachten eine Buchhandlung (Klasse `Bookstore`), die Bücher und DVDs (Klassen `Book` und `Movie`) verkauft. 
+
+```cpp
+class Book
+{
+  ...
+};
+
+class Movie
+{
+  ...
+};
+```
+
+1. *Frage*:
+Wie ist die Schnittstelle eines Konstruktors für die `Bookstore`-Klasse zu definieren,
+wenn dieser `Book`- und `Movie`-Objekte gemischt in einem `std::vector`-Objekt aufnehmen kann?
+
+```cpp
+Book cBook { "C", "Dennis Ritchie", 11.99, 12 };
+Book javaBook{"Java", "James Gosling", 17.99, 21 };
+Book cppBook{"C++", "Bjarne Stroustrup", 16.99, 4 };
+Book csharpBook{"C#", "Anders Hejlsberg", 21.99, 8 };
+
+Movie movieTarantino{ "Once upon a time in Hollywood", "Quentin Tarantino", 6.99, 3 };
+Movie movieBond{ "Spectre", "Sam Mendes", 8.99, 6 };
+
+using MyBookstore = Bookstore<Book, Movie>;
+
+MyBookstore bookstore = MyBookstore {
+    cBook, movieBond, javaBook, cppBook, csharpBook, movieTarantino
+};
+```
+
+Entwerfen Sie drei rudimentäre Klassen `Book`, `Movie` und `Bookstore`,
+um das gezeigte Code-Fragment übersetzen zu können.
+
+
+2. *Frage*:
+Wie ist in der Klasse `Bookstore` eine Methode `totalBalance` zu implementieren, um den Gesamtwert des Warenbestands in
+der Buchhandlung zu berechnen? Hier könnten `std::variant` und `std::visit` zum Einsatz gelangen.
+
+```cpp
+double balance = bookstore.totalBalance();
+std::cout << "Total value of Bookstore: " << balance << std::endl;
+```
+
+Noch ein Hinweis:
+
+Die `std::visit`-Funktion hat als ersten Parameter ein *Callable* (Funktor, generisches Lambda),
+um auf das `std::variant`-Objekt zugreifen zu können. Im `std::variant`-Objekt wiederum kann &ndash; in unserer Betrachtung &ndash;
+ein `Book`- oder ein `Movie`-Objekt enthalten sein. Wenn diese Klassen
+eine Methode desselben Namens (derselben Schnittstelle) enthalten,
+wie zum Beispiel `getPrice` oder `getCount`, dann haben Sie das Ziel fast schon erreicht.
+
+*Zusatzaufgabe*:
+Realisieren Sie eine Methode `addMedia`, die ein beliebiges &ldquo;Media&rdquo;-Objekt einem `Bookstore`-Objekt hinzufügen kann.
+Natürlich muss der Datentyp des &ldquo;Media&rdquo;-Objekts (also z.B. `Book` oder `Movie`) für das `Bookstore`-Objekt
+bereits bekannt sein:
+
+```cpp
+Book csharpBook{ "C#", "Anders Hejlsberg", 21.99, 1 };
+bookstore.addMedia(csharpBook);
+```
+
+---
+
+#### Zweites 'Real-World' Beispiel:
 
 Im Buch [Entwurfsmuster: Das umfassende Handbuch](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
 von Matthias Geirhos findet sich zu diesem Entwurfsmuster ein Beispiel aus der Welt des Onlinehandels vor.

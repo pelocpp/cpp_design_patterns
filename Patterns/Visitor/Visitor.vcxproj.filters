@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Motivation">
       <UniqueIdentifier>{ff745c2f-460f-46d3-862a-ba1ac9e58917}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Bookstore">
+      <UniqueIdentifier>{8d52c3fc-9e5a-491e-a60b-381f04375aa9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp">
@@ -35,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="MotivationDocumentHtmlMarkdown.cpp">
       <Filter>Source Files\Motivation</Filter>
+    </ClCompile>
+    <ClCompile Include="Bookstore.cpp">
+      <Filter>Source Files\Bookstore</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

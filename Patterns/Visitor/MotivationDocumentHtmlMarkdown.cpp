@@ -188,7 +188,9 @@ namespace MotivationVisitor03
 
 namespace MotivationVisitor04
 {
-    /* --------- Generic Visitor Class ----------- */
+    // ---------------------------------------------
+    // Generic Visitor Classes
+
     class Markdown;
     class HTML;
 
@@ -199,7 +201,9 @@ namespace MotivationVisitor04
         virtual void visit(HTML*) = 0;
     };
 
-    /* -------- Document Classes Hierarchy ---------- */
+    // ---------------------------------------------
+    // Document Classes Hierarchy
+    
     class Document
     {
     public:
@@ -242,7 +246,8 @@ namespace MotivationVisitor04
         std::list<std::string> m_content;
     };
 
-    /* ------ Specific Printer Visitor Class -------- */
+    // ---------------------------------------------
+    // Specific Printer Visitor Class
 
     class DocumentPrinter : public DocumentVisitor
     {
@@ -281,15 +286,12 @@ namespace MotivationVisitor04
     }
 }
 
+// ===========================================================================
+
 namespace MotivationVisitor05
 {
-    class Document
-    {
-    public:
-        virtual void addToList(const std::string& line) = 0;
-    };
-
-    class Markdown : public Document
+    /* ------ Document Classes -------- */
+    class Markdown
     {
     private:
         std::string m_start;
@@ -298,7 +300,7 @@ namespace MotivationVisitor05
     public:
         Markdown() : m_start{ "* " } {}
 
-        virtual void addToList(const std::string& line) override {
+        void addToList(const std::string& line) {
             m_content.push_back(line); 
         }
 
@@ -306,7 +308,7 @@ namespace MotivationVisitor05
         std::list<std::string> getContent() const { return m_content; }
     };
 
-    class HTML : public Document
+    class HTML
     {
     private:
         std::string m_start;
@@ -316,7 +318,7 @@ namespace MotivationVisitor05
     public:
         HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 
-        virtual void addToList(const std::string& line) override {
+        void addToList(const std::string& line) {
             m_content.push_back(line); 
         }
 
