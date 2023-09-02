@@ -13,6 +13,7 @@ namespace ConceptualExample {
     struct IValveObserver
     {
         virtual ~IValveObserver() {};
+
         virtual void valveValueChanged(int) = 0;
     };
 

@@ -12,6 +12,7 @@ namespace JobApplicationExample {
     {
     public:
         virtual ~State() {};
+
         virtual void inform() = 0;             // inform applicant
         virtual void process() = 0;            // process job application
         virtual std::string to_string() = 0;   // print current state

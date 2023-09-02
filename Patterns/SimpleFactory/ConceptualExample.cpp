@@ -12,6 +12,7 @@ namespace ConceptualExample {
     {
     public:
         virtual ~IShape() {};
+
         virtual void draw() = 0;
     };
 

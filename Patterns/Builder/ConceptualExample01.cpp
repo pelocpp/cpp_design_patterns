@@ -32,6 +32,7 @@ namespace ConceptualExampleBuilder01 {
     {
     public:
         virtual ~Builder() {}
+
         virtual void buildPartA() = 0;
         virtual void buildPartB() = 0;
         virtual std::shared_ptr<Product> getResult() = 0;

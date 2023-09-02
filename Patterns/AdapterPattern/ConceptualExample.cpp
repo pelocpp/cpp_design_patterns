@@ -13,7 +13,7 @@
 class ITarget
 {
 public:
-    virtual ~ITarget() = default;
+    virtual ~ITarget() {};
 
     virtual std::string getRequest() const = 0;
 };

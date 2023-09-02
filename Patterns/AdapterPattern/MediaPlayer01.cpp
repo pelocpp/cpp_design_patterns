@@ -13,6 +13,7 @@ namespace ApdaterPatternClassicalApproach {
     {
     public:
         virtual ~IMediaPlayer() {};
+
         virtual void play(std::string audioType, std::string fileName) = 0;
     };
 
@@ -21,6 +22,7 @@ namespace ApdaterPatternClassicalApproach {
     {
     public:
         virtual ~IAdvancedMediaPlayer() {};
+
         virtual void playVlc(std::string fileName) = 0;
         virtual void playMp4(std::string fileName) = 0;
     };

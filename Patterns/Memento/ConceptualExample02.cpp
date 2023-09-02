@@ -17,7 +17,8 @@ namespace ConceptualExample02 {
      */
     class Memento {
     public:
-        virtual ~Memento() = default;
+        virtual ~Memento() {};
+
         virtual std::string getName() const = 0;
         virtual std::string date() const = 0;
         virtual std::string state() const = 0;

@@ -9,6 +9,8 @@
 
 struct IShape
 {
+    virtual ~IShape() {};
+
     virtual void draw() const = 0;
 };
 

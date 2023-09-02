@@ -16,6 +16,7 @@ namespace ObserverDesignPatternClassicWithTemplates {
     class IObserver {
     public:
         virtual ~IObserver() {};
+
         virtual void update(const T& data) = 0;
     };
 
@@ -23,6 +24,7 @@ namespace ObserverDesignPatternClassicWithTemplates {
     class ISubject {
     public:
         virtual ~ISubject() {};
+
         virtual void attach(IObserver<T>* observer) = 0;
         virtual void detach(IObserver<T>* observer) = 0;
         virtual void notify() = 0;

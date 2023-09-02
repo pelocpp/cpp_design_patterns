@@ -10,6 +10,7 @@ namespace ConceptualExample01 {
     {
     public:
         virtual ~StateBase() {};
+
         virtual void handle(Context* context) = 0;
         virtual std::string getDescription() = 0;
     };

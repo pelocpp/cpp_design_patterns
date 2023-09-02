@@ -74,7 +74,7 @@ Wir betrachten das Entwurfsmuster *Prototyp* an Hand der Fragestellung
 
   * Das *Prototyp*-Entwurfsmuster wird verwendet, um (polymorphe) Objekte &ndash; basierend auf einer vorhandenen Instanz &ndash; zu erzeugen.
 
-  * Der Kopierkonstruktor verwendet wird, wenn die genaue Instanz des Objekts bekannt ist.
+  * Der Kopierkonstruktor wird verwendet, wenn die genaue Instanz des Objekts bekannt ist.
     Das *Prototyp*-Entwurfsmuster wird verwendet, wenn es irgendeine Implementierung einer Schnittstelle gibt
     und Sie nur ein neues Objekt von genau der gleichen Implementierung erhalten wollen,
     ohne dabei auf mühselige Cast- oder Typumwandlungsmethoden zurückgreifen zu müssen.

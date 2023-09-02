@@ -30,8 +30,9 @@ namespace ConceptualExample01
     public:
         ConcretePrototype(int id) : Prototype{ id } {}
 
-        // Note: Return Type = Type of derived class
-        ConcretePrototype* clone() const override
+        // Note: Return Type = Type of base class - 
+        // but 'virtual Prototype* clone()' compiles too
+        virtual ConcretePrototype* clone() const override
         {
             return new ConcretePrototype(*this);
         }
@@ -66,11 +67,13 @@ namespace ConceptualExample02
     public:
         ConcretePrototype(int id) : Prototype{ id } {}
 
-        // Note: Return Type = Type of base class
+        // Note: Return Type = Type of base class - 
+        // but 'std::shared_ptr<ConcretePrototype> clone()' doesn't compile
         std::shared_ptr<Prototype> clone() const override
         {
-            std::shared_ptr<Prototype> copy =
-                std::make_shared<ConcretePrototype>(getId());
+            std::shared_ptr<Prototype> copy {
+                std::make_shared<ConcretePrototype>(getId()) 
+            };
 
             return copy;
         }
@@ -81,7 +84,9 @@ void test_conceptual_example_01()
 {
     using namespace ConceptualExample01;
 
-    std::unique_ptr<Prototype> prototype{ std::make_unique<ConcretePrototype>(123) };
+    std::unique_ptr<Prototype> prototype{
+        std::make_unique<ConcretePrototype>(123)
+    };
 
     clientCode(prototype);
 }
@@ -90,9 +95,13 @@ void test_conceptual_example_02()
 {
     using namespace ConceptualExample01;
 
-    Prototype* prototype = new ConcretePrototype(123);
+    Prototype* prototype{
+        new ConcretePrototype(123)
+    };
         
-    Prototype* clone = prototype->clone();
+    Prototype* clone{ 
+        prototype->clone() 
+    };
 
     std::cout << "Prototype: " << prototype->getId() << std::endl;
     std::cout << "Clone:     " << clone->getId() << std::endl;

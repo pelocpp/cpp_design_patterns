@@ -13,6 +13,7 @@
 class AbstractProductA {
 public:
     virtual ~AbstractProductA() {};
+
     virtual std::string usefulFunctionA() const = 0;
 };
 
@@ -43,6 +44,7 @@ class AbstractProductB {
      */
 public:
     virtual ~AbstractProductB() {};
+
     virtual std::string usefulFunctionB() const = 0;
 
     /**

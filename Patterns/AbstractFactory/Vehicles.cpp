@@ -63,6 +63,7 @@ class IVehicleFactory
 {
 public:
     virtual ~IVehicleFactory() {};
+
     virtual std::shared_ptr<Vehicle> createEconomyCar() = 0;
     virtual std::shared_ptr<Vehicle> createRacingCar() = 0;
     virtual std::shared_ptr<Vehicle> createSUV() = 0;

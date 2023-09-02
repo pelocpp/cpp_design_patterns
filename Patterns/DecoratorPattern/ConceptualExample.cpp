@@ -15,6 +15,7 @@
 class Component {
 public:
     virtual ~Component() {}
+
     virtual std::string operation() const = 0;
 };
 

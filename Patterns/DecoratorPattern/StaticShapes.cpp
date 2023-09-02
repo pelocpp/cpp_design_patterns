@@ -10,6 +10,7 @@ namespace StaticDecoration {
     {
     public:
         virtual ~IShape() {}
+
         virtual std::string draw() const = 0;
     };
 
@@ -90,7 +91,7 @@ namespace StaticDecoration {
 
         template <typename ... TARGS>
         ColoredShape(const std::string& color, TARGS&& ...args)
-            : T{ std::forward<TARGS>(args)... }, m_color{ color } {}
+            : T{ std::forward<TARGS>(args) ... }, m_color{ color } {}
 
         virtual std::string draw() const override {
             std::ostringstream oss;
@@ -151,26 +152,26 @@ void test_static_decoration_01()
     std::cout << transparentSquare.draw() << std::endl;
 
     ColoredShape<Rectangle> yellowRectangle{ 
-        "yellow", 50.0, 60.0
+        std::string{ "yellow" }, 50.0, 60.0
     };
     std::cout << yellowRectangle.draw() << std::endl;
 
     TransparentShape<ColoredShape<Square>> blueTransparentSquare{
-        0, "blue", 0.0 
+        0, std::string{ "blue" }, 0.0
     };
     blueTransparentSquare.setColor("yellow");
     blueTransparentSquare.setSide(100);
     std::cout << blueTransparentSquare.draw() << std::endl;
 
     ColoredShape<TransparentShape<Square>> redOpaqueSquare{
-        "red", 0, 255.0 
+        std::string{ "red" }, static_cast<uint8_t>(0), 255.0
     };
     redOpaqueSquare.setColor("red");
     redOpaqueSquare.setSide(300);
     std::cout << redOpaqueSquare.draw() << std::endl;
 
     TransparentShape<ColoredShape<Rectangle>> whiteNonTransparentRectangle{
-        127, "white", 70.0, 80.0, 
+        127, std::string{ "white" }, 70.0, 80.0,
     };
     std::cout << whiteNonTransparentRectangle.draw() << std::endl;
 }

@@ -21,7 +21,7 @@ namespace ExamplesPrototypePattern {
     class IChessPiece
     {
     public:
-        virtual ~IChessPiece() = default;
+        virtual ~IChessPiece() {};
 
         virtual std::unique_ptr<IChessPiece> clone() const = 0;
         virtual std::string str() const = 0;
@@ -88,7 +88,8 @@ namespace ExamplesPrototypePattern {
     public:
         GameBoard();                       // default c'tor
         GameBoard(const GameBoard&);       // copy c'tor
-        virtual ~GameBoard() = default;    // virtual defaulted d'tor
+
+        virtual ~GameBoard() {};           // virtual defaulted d'tor
 
         GameBoard& operator=(const GameBoard&);   // assignment operator
 

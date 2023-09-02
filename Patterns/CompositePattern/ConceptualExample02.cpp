@@ -19,6 +19,7 @@ namespace CompositePatternSmartPointer {
 
     public:
         Component() : m_parent(nullptr) {}
+
         virtual ~Component() {}
 
         /**

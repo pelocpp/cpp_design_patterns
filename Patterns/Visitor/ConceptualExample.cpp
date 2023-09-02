@@ -49,6 +49,7 @@ namespace ConceptualExample {
     {
     public:
         virtual ~ElementBase() {}
+
         virtual void accept(std::shared_ptr<VisitorBase> visitor) const = 0;
     };
 

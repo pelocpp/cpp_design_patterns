@@ -12,6 +12,7 @@ namespace VirtualConstructorIdiom_02 {
     public:
         virtual Window* create() = 0;
         virtual Window* clone() = 0;
+
         virtual ~Window() {};
     };
 
