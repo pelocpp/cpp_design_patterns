@@ -190,7 +190,7 @@ namespace OnlineShopExample {
         std::list<std::shared_ptr<Element>> m_products;
 
     public:
-        ShoppingBasket() = default;
+        ShoppingBasket() {};
 
         std::list<std::shared_ptr<Element>> GetProducts()
         {

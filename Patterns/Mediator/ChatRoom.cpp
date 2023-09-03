@@ -24,7 +24,7 @@ namespace ChatRoomMediatorPattern
         std::weak_ptr<ChatRoom> m_room;
 
     public:
-        PersonBase() = default;
+        PersonBase() {};
     };
 
     // Concrete Colleague

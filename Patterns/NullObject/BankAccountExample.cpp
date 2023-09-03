@@ -15,7 +15,7 @@ public:
 class ConsoleLogger : public Logger
 {
 public:
-    ConsoleLogger() = default;
+    ConsoleLogger() {};
 
     void info(const std::string& s) override {
         std::cout << "INFO: " << s << std::endl;
@@ -29,7 +29,7 @@ public:
 class NullLogger : public Logger
 {
 public:
-    NullLogger() = default;
+    NullLogger() {};
     void info(const std::string& s) override {}
     void warn(const std::string& s) override {}
 };

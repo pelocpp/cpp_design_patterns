@@ -158,7 +158,7 @@ namespace ChessExample {
         std::stack<std::shared_ptr<Move>> m_undos;
 
     public:
-        Board() = default;
+        Board() {};
 
         void enqueue(std::shared_ptr<Move> spielzug)
         {
@@ -198,7 +198,7 @@ namespace ChessExample {
         Board m_board;
 
     public:
-        ChessGame() = default;
+        ChessGame() {};
 
         void play(std::shared_ptr<ChessPiece> piece, Position position)
         {

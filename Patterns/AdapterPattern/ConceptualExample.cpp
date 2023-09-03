@@ -24,7 +24,7 @@ public:
 class Target : public ITarget
 {
 public:
-    Target() = default;
+    Target() {};
 
     virtual std::string getRequest() const override
     {
@@ -40,7 +40,7 @@ public:
 class Adaptee
 {
 public:
-    Adaptee() = default;
+    Adaptee() {};
 
     std::string getSpecificRequest() const
     {

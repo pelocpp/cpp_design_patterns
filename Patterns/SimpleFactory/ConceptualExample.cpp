@@ -18,7 +18,7 @@ namespace ConceptualExample {
 
     class Rectangle : public IShape {
     public:
-        Rectangle() = default;
+        Rectangle() {};
         void draw() override
         {
             std::cout << "> Rectangle::draw()" << std::endl;
@@ -27,7 +27,7 @@ namespace ConceptualExample {
 
     class Square : public IShape {
     public:
-        Square() = default;
+        Square() {};
         void draw() override
         {
             std::cout << "> Square::draw()" << std::endl;
@@ -36,7 +36,7 @@ namespace ConceptualExample {
 
     class Circle : public IShape {
     public:
-        Circle() = default;
+        Circle() {};
         void draw() override
         {
             std::cout << "> Circle ::draw()" << std::endl;

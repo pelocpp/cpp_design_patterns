@@ -54,7 +54,7 @@ C++ ist &ndash; im Gegensatz zu vielen anderen Sprachen &ndash; konzeptionell
   * *Wert*- und
   * *Referenz*-basiert.
 
-Objekte in C++ können sowohl am Stack (direkt erreichbar / als *Wert*) als auch auf der Halde (erreichbar über eine *Referenz*) liegen.
+Objekte in C++ können sowohl am Stack (direkt erreichbar / als *Wert*) als auch auf der Halde (erreichbar über einen *Zeiger*) liegen.
 Was bedeutet das: Möchte eine Fabrik-Methode ein Objekt per *Value* zurückgeben, ist dies nicht
 mit einer Umsetzung des Schnittstellenkonzepts möglich. Siehe hierzu den folgenden Anwendungsfall.
 
@@ -402,7 +402,7 @@ Dokumenttypen ist eine Registrierungsfunktionen, die es gestattet, eigene Typen 
 ```cpp
 01: struct IDocument 
 02: {
-03:     virtual ~IDocument() = default;
+03:     virtual ~IDocument() {};
 04:     virtual std::vector<std::string> getText() = 0;
 05: };
 06: 

@@ -28,7 +28,7 @@ namespace ConceptualExample02 {
     public:
         std::string operation() const override 
         {
-            return std::string{ "Result of the ConcreteProduct1" };
+            return std::string{ "\"Result of the ConcreteProduct1\"" };
         }
     };
 
@@ -36,7 +36,7 @@ namespace ConceptualExample02 {
     {
     public:
         std::string operation() const override {
-            return std::string{ "[ Result of the ConcreteProduct2 ]" };
+            return std::string{ "\"Result of the ConcreteProduct2\"" };
         }
     };
 
@@ -62,7 +62,7 @@ namespace ConceptualExample02 {
         std::string someOperation() const {
 
             // call the factory method to create a Product object.
-            std::shared_ptr<ProductBase> product = this->factoryMethod();  // <= abstract method (!)
+            std::shared_ptr<ProductBase> product = factoryMethod();  // <= abstract method (!)
 
             // now, *use* the product:
             std::string tmp{ product->operation() };
@@ -114,13 +114,13 @@ namespace ConceptualExample02 {
      * As long as the client keeps working with the FactoryBase
      * via the base interface, you can pass it any FactoryBase's subclass.
      */
-    void clientCode(const std::shared_ptr<FactoryBase> factory) {
+    void clientCode(const FactoryBase& factory) {
 
         std::cout
-            << "Client (doesn't know the factory's concrete class type)" 
+            << "Client (doesn't know the factory's concrete class type)"
             << std::endl;
 
-        std::cout << factory->someOperation() << std::endl;
+        std::cout << factory.someOperation() << std::endl;
     }
 }
 
@@ -132,14 +132,12 @@ void test_conceptual_example_02() {
     using namespace ConceptualExample02;
 
     std::cout << "Example launched with ConcreteFactory1:" << std::endl;
-    std::shared_ptr<FactoryBase> factory1{ std::make_shared<ConcreteFactory1>() };
-
+    ConcreteFactory1 factory1;
     clientCode(factory1);
     std::cout << std::endl;
 
     std::cout << "Example launched with ConcreteFactory2:" << std::endl;
-    std::shared_ptr<FactoryBase> factory2 {std::make_shared<ConcreteFactory2>() };
-
+    ConcreteFactory2 factory2;
     clientCode(factory2);
 }
 

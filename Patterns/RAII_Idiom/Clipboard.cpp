@@ -244,8 +244,8 @@ void transformText()
 {
     using namespace Clipboard;
 
-    //transformText01();
-    //transformText02();
+    transformText01();
+    transformText02();
 }
 
 // =====================================================================================

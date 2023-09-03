@@ -32,7 +32,7 @@ namespace ConceptualExample02 {
         std::weak_ptr<MediatorBase> m_mediator;
 
     public:
-        ColleagueBase() = default;
+        ColleagueBase() {};
 
         ColleagueBase(std::shared_ptr<MediatorBase> mediator) 
             : m_mediator{ mediator } {}

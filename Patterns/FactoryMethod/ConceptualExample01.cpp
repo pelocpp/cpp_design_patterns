@@ -61,11 +61,15 @@ void test_conceptual_example_01 ()
 {
     using namespace ConceptualExample01;
 
-    std::shared_ptr<FactoryBase> factory{ std::make_shared<ConcreteFactory>() };
+    std::shared_ptr<FactoryBase> factory{
+        std::make_shared<ConcreteFactory>()
+    };
 
-    std::shared_ptr<ProductBase> product{ factory->FactoryMethod(1) };
+    std::shared_ptr<ProductBase> product{ 
+        factory->FactoryMethod(1) 
+    };
+
     product->showInfo();
-
     product = factory->FactoryMethod(2);
     product->showInfo();
 }

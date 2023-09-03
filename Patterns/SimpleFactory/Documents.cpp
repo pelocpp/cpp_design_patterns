@@ -88,12 +88,12 @@ namespace DocumentsExample {
 
         Document open(std::string path) {
 
-            auto lastDot = path.find_last_of('.');
+            auto lastDot{ path.find_last_of('.') };
 
             if (lastDot != std::string::npos) {
 
                 std::string extension{ path.substr(lastDot + 1) };
-                DocumentReader& reader{ m_readers.at(extension) };
+                DocumentReader& reader{ m_readers[extension] };
                 Document document{ reader(path) };
                 return document;
             }
@@ -131,7 +131,7 @@ void test_documents()
         }
     );
 
-    Document document{ factory.open("file.odt") };
+    Document document{ factory.open("file.html") };
 
     std::cout << document->getText().front();
 }

@@ -107,7 +107,7 @@ namespace ConceptualExample {
 
     public:
 
-        ValveViewLabel() = default;
+        ValveViewLabel() {};
 
         void attach(std::shared_ptr<IValveModel> model) {
             m_model = model;

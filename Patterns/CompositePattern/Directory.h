@@ -5,7 +5,7 @@
 class Directory : public IFileComponent {
 public:
     // c'tor(s)
-    Directory() = default;
+    Directory() {};
     Directory(const std::string& name);
 
     // getter

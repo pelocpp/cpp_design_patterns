@@ -47,7 +47,7 @@ namespace PolicyBasedDesign_01 {
         SmartPtr<int> sp2{ new int[5] { 1, 2, 3, 4, 5 } };
 
         // which delete is called?
-        // Scalar Deleting Destructor or Vector Deleting Destructor.
+        // Scalar Deleting Destructor or Vector Deleting Destructor?
     }
 
     void test()

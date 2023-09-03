@@ -174,7 +174,6 @@ void test_real_world_example_televisions() {
 
     std::cout << "Example launched with the OledTVFactory." << std::endl;;
     std::shared_ptr<AbstractTVFactory> factory2 = std::make_shared<OledTVFactory>();
-    clientCode01(factory2);
     std::cout << std::endl;
     clientCode02(factory2);
     std::cout << std::endl;

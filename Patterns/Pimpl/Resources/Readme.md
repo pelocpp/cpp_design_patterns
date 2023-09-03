@@ -243,7 +243,7 @@ Es sind zwei Änderungen am aktuellen Programm vorzunehmen:
     `~Car();`
 
   * Hinzufügen einer Destruktor-Definition in der Klasse `CarImpl`:<br/>
-    `Car::~Car() = default;`
+    `Car::~Car() {};`
 
 
 ##### *Hinweis*:

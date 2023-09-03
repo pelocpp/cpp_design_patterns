@@ -43,7 +43,7 @@ namespace ConceptualExampleChainOfResponsibility {
     class ConcreteHandlerA : public HandlerBase
     {
     public:
-        ConcreteHandlerA() = default;
+        ConcreteHandlerA() {};
 
         void handleRequest(const Request& req) const override
         {
@@ -59,7 +59,7 @@ namespace ConceptualExampleChainOfResponsibility {
     class ConcreteHandlerB : public HandlerBase
     {
     public:
-        ConcreteHandlerB() = default;
+        ConcreteHandlerB() {};
 
         void handleRequest(const Request& req) const override
         {
@@ -75,7 +75,7 @@ namespace ConceptualExampleChainOfResponsibility {
     class ConcreteHandlerC : public HandlerBase
     {
     public:
-        ConcreteHandlerC() = default;
+        ConcreteHandlerC() {};
 
         void handleRequest(const Request& req) const override
         {

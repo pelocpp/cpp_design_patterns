@@ -50,7 +50,7 @@ namespace TreesFlyweight {
         std::unordered_map<std::string, std::weak_ptr<Tree>> m_treeMap;
 
     public:
-        TreeFactory() = default;
+        TreeFactory() {};
 
         std::shared_ptr<Tree> getTree(std::string style)
         {
@@ -84,7 +84,7 @@ namespace TreesFlyweight {
         TreeFactory m_treeFactory;
 
     public:
-        Game() = default;
+        Game() {};
 
         void addTree(int x, int y, std::string style)
         {

@@ -49,7 +49,7 @@ private:
     HtmlPage m_htmlPage;
 
 public:
-    LayoutManager() = default;
+    LayoutManager() {};
 
     virtual void addWidget(std::shared_ptr<Widget>) = 0;
     virtual void render() = 0;

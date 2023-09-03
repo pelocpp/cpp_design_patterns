@@ -64,8 +64,9 @@ public:
     void append_list(std::initializer_list<std::string> items) {
 
         m_list_strategy->start(m_oss);
-        for (const auto& item : items)
+        for (const auto& item : items) {
             m_list_strategy->add_list_item(m_oss, item);
+        }
         m_list_strategy->end(m_oss);
     }
 
@@ -114,8 +115,9 @@ public:
     void append_list(std::initializer_list<std::string> items) 
     {
         m_list_strategy.start(m_oss);
-        for (auto& item : items)
+        for (auto& item : items) {
             m_list_strategy.add_list_item(m_oss, item);
+        }
         m_list_strategy.end(m_oss);
     }
 

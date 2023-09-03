@@ -5,9 +5,9 @@
 class DirectoryEx : public IFileComponent {
 public:
     // c'tor(s), d'tor
-    DirectoryEx() = default;
+    DirectoryEx() {};
     DirectoryEx(const std::string& name);
-    ~DirectoryEx() = default;
+    ~DirectoryEx() {};
 
     // getter
     std::string getName();

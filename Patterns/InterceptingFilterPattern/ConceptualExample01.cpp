@@ -90,7 +90,7 @@ namespace ConceptualExample01 {
         std::shared_ptr<FilterChain> m_filterChain;
 
     public:
-        FilterManager() = default;
+        FilterManager() {};
 
         void setFilterChain(std::shared_ptr<FilterChain>& chain)
         {
@@ -109,7 +109,7 @@ namespace ConceptualExample01 {
         FilterManager m_filterManager;
 
     public:
-        Client() = default;
+        Client() {};
 
         void setFilterManager(const FilterManager& filterManager)
         {

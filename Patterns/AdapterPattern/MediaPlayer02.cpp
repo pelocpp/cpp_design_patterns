@@ -67,7 +67,7 @@ namespace ApdaterPatternClassAdapterApproach {
     class MediaAdapter : public IMediaPlayer, private VlcPlayer, private Mp4Player {
     public:
         // c'tor
-        MediaAdapter() = default;
+        MediaAdapter() {};
         void play(std::string audioType, std::string fileName) override;
     };
 

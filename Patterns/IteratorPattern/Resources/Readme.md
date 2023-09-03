@@ -112,7 +112,7 @@ template <typename T>
 class IteratorBase
 {
 public:
-    virtual ~IteratorBase() = default;
+    virtual ~IteratorBase() {};
     virtual void reset() = 0;
     virtual const T& getCurrent() const = 0;
     virtual bool hasNext() = 0;
