@@ -79,7 +79,7 @@ namespace ConceptualExample02 {
     Singleton* Singleton::getInstance(const std::string& value)
     {
         if (m_instance == nullptr) {
-            m_instance = new Singleton(value);
+            m_instance = new Singleton{ value };
         }
 
         return m_instance;
@@ -97,7 +97,7 @@ namespace ConceptualExample02 {
             std::scoped_lock<std::mutex> lock{ m_mutex };
             if (m_instance == nullptr)  // <=== NOTE: double-check of m_instance being nullptr
             {
-                m_instance = new Singleton(value);
+                m_instance = new Singleton{ value };
             }
         }
 

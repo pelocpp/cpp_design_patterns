@@ -58,7 +58,7 @@ roten eine blaue Farbe werden, was so sicherlich nicht erwünscht ist.
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Singleton Patterns*.
 Es besteht nur aus einer einzigen Klasse:
 
-  * **Singleton**: Dieser Klasse besitzt eine statische Methode `getSingleton`,
+  * **Singleton**: Diese Klasse besitzt eine statische Methode `getSingleton`,
     die pro Aufruf eine einzelne Instanz zurückgibt (Referenz, Zeiger),
     die in einer privaten Variablen residiert.
 

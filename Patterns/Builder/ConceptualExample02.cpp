@@ -167,11 +167,17 @@ public:
  */
 static void clientCode(Director& director)
 {
-    std::shared_ptr<ConcreteBuilder> builder = std::make_shared<ConcreteBuilder>();
+    std::shared_ptr<ConcreteBuilder> builder{ 
+        std::make_shared<ConcreteBuilder>()
+    };
+    
     director.setBuilder(builder);
     std::cout << "Standard basic product:" << std::endl;
     director.buildMinimalViableProduct();
-    std::unique_ptr<Product> product = builder->getProduct();
+
+    std::unique_ptr<Product> product{
+        builder->getProduct()
+    };
     std::cout << (*product)() << std::endl;
 
     std::cout << "Standard full featured product:" << std::endl;

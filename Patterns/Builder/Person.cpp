@@ -2,7 +2,11 @@
 // Person.cpp // Builder Pattern
 // ===========================================================================
 
-#include "Person.h"
+#include "PersonBuilder.h"
+
+PersonBuilder Person::create(const std::string& name) {
+    return PersonBuilder{ name };
+}
 
 std::ostream& operator<<(std::ostream& os, const Person& person)
 {

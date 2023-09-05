@@ -2,6 +2,17 @@
 // ConceptualExample01.cpp // Prototype Pattern
 // ===========================================================================
 
+#define _CRTDBG_MAP_ALLOC
+#include <cstdlib>
+#include <crtdbg.h>
+
+#ifdef _DEBUG
+#ifndef DBG_NEW
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#define new DBG_NEW
+#endif
+#endif  // _DEBUG
+
 #include <iostream>
 #include <string>
 #include <memory>
@@ -31,16 +42,20 @@ namespace ConceptualExample01
         ConcretePrototype(int id) : Prototype{ id } {}
 
         // Note: Return Type = Type of base class - 
-        // but 'virtual Prototype* clone()' compiles too
-        virtual ConcretePrototype* clone() const override
+        // but 'virtual ConcretePrototype* clone()' compiles too
+        virtual Prototype* clone() const override
         {
             return new ConcretePrototype(*this);
         }
     };
 
-    void clientCode (std::unique_ptr<Prototype>& original)
+    void clientCode(Prototype* original)
     {
-        std::unique_ptr<Prototype> copy{ original->clone() };
+        Prototype* copy{ original->clone() };
+
+        std::cout << "Copy: " << copy->getId() << std::endl;
+
+        delete copy;
     }
 }
 
@@ -68,7 +83,7 @@ namespace ConceptualExample02
         ConcretePrototype(int id) : Prototype{ id } {}
 
         // Note: Return Type = Type of base class - 
-        // but 'std::shared_ptr<ConcretePrototype> clone()' doesn't compile
+        // 'std::shared_ptr<ConcretePrototype> clone()' doesn't compile !!!
         std::shared_ptr<Prototype> clone() const override
         {
             std::shared_ptr<Prototype> copy {
@@ -84,11 +99,13 @@ void test_conceptual_example_01()
 {
     using namespace ConceptualExample01;
 
-    std::unique_ptr<Prototype> prototype{
-        std::make_unique<ConcretePrototype>(123)
+    Prototype* prototype{ 
+        new ConcretePrototype { 123 }
     };
 
     clientCode(prototype);
+
+    delete prototype;
 }
 
 void test_conceptual_example_02()
@@ -110,6 +127,9 @@ void test_conceptual_example_02()
 
     std::cout << "Prototype: " << prototype->getId() << std::endl;
     std::cout << "Clone:     " << clone->getId() << std::endl;
+
+    delete prototype;
+    delete clone;
 }
 
 void test_conceptual_example_03()

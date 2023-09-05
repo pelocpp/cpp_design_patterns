@@ -35,7 +35,7 @@ namespace ConceptualExampleBuilder01 {
 
         virtual void buildPartA() = 0;
         virtual void buildPartB() = 0;
-        virtual std::shared_ptr<Product> getResult() = 0;
+        virtual std::shared_ptr<Product> getProduct() = 0;
     };
 
     class Director
@@ -66,16 +66,23 @@ namespace ConceptualExampleBuilder01 {
             m_product->add("Part B");
         }
 
-        virtual std::shared_ptr<Product> getResult() override {
+        virtual std::shared_ptr<Product> getProduct() override {
             return m_product;
         }
     };
 
     void clientCode(Director& director)
     {
-        std::shared_ptr<Builder> builder = std::make_shared<ConcreteBuilder>();
+        std::shared_ptr<Builder> builder{ 
+            std::make_shared<ConcreteBuilder>()
+        };
+
         director.construct(builder);
-        std::shared_ptr<Product> product = builder->getResult();
+        
+        std::shared_ptr<Product> product{ 
+            builder->getProduct() 
+        };
+        
         product->show();
     }
 }

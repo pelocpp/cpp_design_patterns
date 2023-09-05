@@ -20,7 +20,7 @@ namespace ConceptualExample01 {
         static Singleton* getInstance()
         {
             if (m_instance == nullptr) {
-                m_instance = new Singleton();
+                m_instance = new Singleton{};
             }
 
             return m_instance;
@@ -31,7 +31,7 @@ namespace ConceptualExample01 {
             {
                 std::scoped_lock<std::mutex> lock{ m_mutex };
                 if (m_instance == nullptr) {
-                    m_instance = new Singleton();
+                    m_instance = new Singleton{};
                 }
             }
 
@@ -41,7 +41,7 @@ namespace ConceptualExample01 {
         static Singleton* getInstanceThreadSafe_Cpp17()
         {
             if (std::scoped_lock<std::mutex> lock{ m_mutex }; m_instance == nullptr) {
-                m_instance = new Singleton();
+                m_instance = new Singleton{};
             }
 
             return m_instance;
