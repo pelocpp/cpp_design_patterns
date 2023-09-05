@@ -3,10 +3,7 @@
 // ===========================================================================
 
 #include <iostream>
-//#include <iomanip>
 #include <string>
-//#include <list>
-//#include <memory>
 
 namespace AbstractClassVsInterface {
 

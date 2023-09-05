@@ -9,16 +9,16 @@
 #include <memory>
 
 /**
- * The Strategy interface declares operations
+ * The StrategyBase interface declares operations
  * common to all supported versions of some algorithm.
  *
  * The Context uses this interface to call the algorithm
  * defined by Concrete Strategies.
  */
-class Strategy
+class StrategyBase
 {
 public:
-    virtual ~Strategy() {}
+    virtual ~StrategyBase() {}
 
     virtual std::string doAlgorithm(const std::vector<std::string>& data) const = 0;
     virtual std::string getName() const = 0;
@@ -35,14 +35,14 @@ class Context
      * It should work with all strategies via the 'Strategy' interface.
      */
 private:
-    std::unique_ptr<Strategy> m_strategy;
+    std::unique_ptr<StrategyBase> m_strategy;
 
     /**
      * Usually, the Context accepts a strategy through the constructor,
      * but also provides a setter to change it at runtime.
      */
 public:
-    Context(std::unique_ptr<Strategy> strategy)
+    Context(std::unique_ptr<StrategyBase> strategy)
         : m_strategy{ std::move(strategy) } {}
 
     ~Context() {}
@@ -50,7 +50,7 @@ public:
     /**
      * Usually, the Context allows replacing a Strategy object at runtime.
      */
-    void setStrategy(std::unique_ptr<Strategy> strategy)
+    void setStrategy(std::unique_ptr<StrategyBase> strategy)
     {
         m_strategy = std::move(strategy);
     }
@@ -81,7 +81,7 @@ public:
  * while following the base Strategy interface.
  * The interface makes them interchangeable in the Context.
  */
-class ConcreteStrategyA : public Strategy
+class ConcreteStrategyA : public StrategyBase
 {
 public:
     virtual std::string getName() const override {
@@ -106,7 +106,7 @@ public:
     }
 };
 
-class ConcreteStrategyB : public Strategy
+class ConcreteStrategyB : public StrategyBase
 {
 public:
     virtual std::string getName() const override {

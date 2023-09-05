@@ -55,7 +55,7 @@ Es besteht im Wesentlichen aus drei Teilen:
   * **StrategyBase**: Definiert eine Schnittstelle, die allen unterstützten Algorithmen gemeinsam ist.
     Der Client verwendet diese Schnittstelle, um den über eine `ConcreteStrategy`-Schnittstelle definierten Algorithmus aufzurufen.
   * **ConcreteStrategy**: Konkrete Strategieklasse, die von der `StrategyBase`-Klasse erbt.
-    Jede Instanz implementiert einen anderen Algorithmus, der (über die `ConcreteStrategy`-Schnittstelle)
+    Jede Instanz implementiert einen anderen Algorithmus, der (über die `StrategyBase`-Schnittstelle)
     vom Client verwendet werden kann.
 
 <img src="dp_strategy_pattern.svg" width="700">
