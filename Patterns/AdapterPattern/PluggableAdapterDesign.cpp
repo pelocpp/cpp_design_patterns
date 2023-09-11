@@ -96,12 +96,19 @@ void test_pluggable_adapter_design_01()
 {
     using namespace PluggableAdapterDesignApproach;
 
-    std::unique_ptr<CoffeeMaker> coffeeMaker{ std::make_unique<CoffeeMaker>() };
-    BeverageAdapter adapter1{ coffeeMaker };
+    std::unique_ptr<CoffeeMaker> coffeeMaker{ 
+        std::make_unique<CoffeeMaker>() };
+    BeverageAdapter adapter1{ coffeeMaker
+    };
+
     makeDrink(adapter1);
 
-    std::unique_ptr<JuiceMaker> juiceMaker{ std::make_unique<JuiceMaker>() };
+    std::unique_ptr<JuiceMaker> juiceMaker{ 
+        std::make_unique<JuiceMaker>() 
+    };
+
     BeverageAdapter adapter2{ juiceMaker };
+
     makeDrink(adapter2);
 }
 
@@ -109,8 +116,14 @@ void test_pluggable_adapter_design_02()
 {
     using namespace PluggableAdapterDesignApproach;
 
-    std::unique_ptr<JuiceMaker> juiceMaker{ std::make_unique<JuiceMaker>() };
-    JuiceAdapter<JuiceMaker> adapter{ std::move(juiceMaker) };
+    std::unique_ptr<JuiceMaker> juiceMaker{ 
+        std::make_unique<JuiceMaker>()
+    };
+
+    JuiceAdapter<JuiceMaker> adapter{
+        std::move(juiceMaker) 
+    };
+
     makeDrink(adapter);
 }
 

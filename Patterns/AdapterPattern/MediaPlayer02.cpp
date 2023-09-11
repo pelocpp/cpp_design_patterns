@@ -8,6 +8,8 @@
 
 namespace ApdaterPatternClassAdapterApproach {
 
+    // ===========================================================================
+
     // interface MediaPlayer
     class IMediaPlayer {
     public:
@@ -36,9 +38,8 @@ namespace ApdaterPatternClassAdapterApproach {
 
     // ===========================================================================
 
-    // create concrete class 'AudioPlayer' 
-    // implementing the 'MediaPlayer' interface
-    // without new services additions
+    // create concrete class 'AudioPlayer' implementing the 'MediaPlayer' interface,
+    // no new services additions
     class AudioPlayer : public IMediaPlayer
     {
     public:
@@ -107,11 +108,17 @@ static void clientCode(std::shared_ptr<ApdaterPatternClassAdapterApproach::IMedi
 void test_media_player_02()
 {
     using namespace ApdaterPatternClassAdapterApproach;
-    std::shared_ptr <IMediaPlayer> audioPlayer1 = std::make_shared<AudioPlayer>();
+    std::shared_ptr <IMediaPlayer> audioPlayer1{
+        std::make_shared<AudioPlayer>() 
+    };
+
     clientCode(audioPlayer1);
     std::cout << std::endl;
 
-    std::shared_ptr <IMediaPlayer> audioPlayer2 = std::make_shared<MediaAdapter>();
+    std::shared_ptr <IMediaPlayer> audioPlayer2{ 
+        std::make_shared<MediaAdapter>() 
+    };
+
     clientCode(audioPlayer2);
     std::cout << std::endl;
 }
