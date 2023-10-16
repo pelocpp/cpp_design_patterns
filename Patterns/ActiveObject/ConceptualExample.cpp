@@ -9,23 +9,23 @@
 #include <mutex>
 
 // ---------------------------------------------------------------------------
-// OriginalClass is a standard class
+// OriginalClass is a regular class,
 // that provides two methods that set a double to be a certain value.
 // This class does NOT conform to the active object pattern.
 
 class OriginalClass
 {
 private:
-    double val;
+    double m_val;
 public:
-    OriginalClass() : val(0) {}
+    OriginalClass() : m_val{} {}
 
     void doSomething() {
-        val = 1.0;
+        m_val = 1.0;
     }
 
     void doSomethingElse() {
-        val = 2.0;
+        m_val = 2.0;
     }
 };
 
@@ -37,8 +37,8 @@ using Operation = std::function<void()>;
 class DispatchQueue {
 
     std::mutex m_mutex;
-    std::queue<Operation> m_queue;
     std::condition_variable m_empty;
+    std::queue<Operation> m_queue;
 
 public:
     void put(Operation op) {
@@ -54,6 +54,11 @@ public:
         Operation op = m_queue.front();
         m_queue.pop();
         return op;
+    }
+
+    size_t size() {
+        std::lock_guard<std::mutex> raii_guard(m_mutex);
+        return m_queue.size();
     }
 };
 
@@ -74,13 +79,17 @@ public:
         m_runnable = std::make_unique<std::thread>(&ActiveObject::run, this);
     }
 
-    ~ActiveObject() { m_runnable->join(); }
+    ~ActiveObject() { 
+        m_runnable->join();
+    }
 
     // public interface
     void run() {
         while (! m_done) 
         {
             Operation op = m_dispatchQueue.take();
+
+            m_done = m_dispatchQueue.size() == 0;
 
             op();
         }
@@ -93,10 +102,9 @@ public:
     {
         std::cout << "doSomething" << std::endl;
 
-        // This is the actual code to execute:
-        // Store it in an std::function and push it to the FIFO
-        auto task{ [&]() { m_val = 1.0; } };
-
+        // Actual code to be executed is stored in a lambda
+        // and pushed to the 'activation list' queue
+        auto task{ [&] () { m_val = 1.0; } };
         m_dispatchQueue.put(task);
     }
 
@@ -104,9 +112,7 @@ public:
     {
         std::cout << "doSomethingElse" << std::endl;
 
-        // More compact syntax, but it may also be harder to read ...
-
-        m_dispatchQueue.put( { [&]() { m_val = 2.0; } } );
+        m_dispatchQueue.put( { [&] () { m_val = 2.0; } } );
     }
 };
 

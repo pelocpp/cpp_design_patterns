@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ActiveObject.cpp">
+    <ClCompile Include="ActiveObject_01.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConceptualExample.cpp">
@@ -27,6 +27,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_active_object.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

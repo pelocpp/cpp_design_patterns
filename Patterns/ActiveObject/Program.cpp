@@ -4,9 +4,12 @@
 
 // function prototypes
 void test_conceptual_example();
+void test_active_object_01();
 
 int main()
 {
+    // test_conceptual_example();
+    test_active_object_01();
 
     return 0;
 }

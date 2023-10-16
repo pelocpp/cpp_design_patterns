@@ -108,16 +108,25 @@ Gruppierungen von Entwurfsmustern. In Büchern über "Modern C++" stößt man häufig
 
 *Tabelle* 4: Weitere Softwaremuster (*Modern C++*)
 
+In der Softwareentwicklung beschreiben *Concurrency Pattern* jene Arten von Entwurfsmustern,
+die sich mit dem Multithreading-Programmierparadigma befassen:
+
+| Muster | Kurzbeschreibung |
+|:-------------- |----|
+| [*Active Object*](../Patterns/ActiveObject/Resources/Readme.md) | *Active Object* Entwurfsmuster |
+| Monitor Object | *Monitor Object* Entwurfsmuster |
+
+*Tabelle* 5: *Concurrency Pattern*
+
 Für den Entwurf von Oberflächen gibt es im Prinzip drei "Klassiker"
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| [MVC ](../Patterns/MVC/Resources/Readme.md) | Model-View-Controller |
+| [MVC](../Patterns/MVC/Resources/Readme.md) | Model-View-Controller |
 | MVP | Model-View-Presenter |
 | MVVM | Model View View-Model |
 
-*Tabelle* 5: Entwurfsmuster für Oberflächen
-
+*Tabelle* 6: Entwurfsmuster für Oberflächen
 
 In einem weiteren Buch von [Robert Nystrom](https://gameprogrammingpatterns.com/),
 aktuell bei der Fa. Google in der Entwicklung der Programmiersprache *Dart* beschäftigt,
@@ -129,7 +138,7 @@ finden sich weitere interessante Entwurfsmuster vor:
 | Game Loop | Entkopplung des Spieleverlaufs (Ablauf der Anwendung) von Benutzereingaben und Prozessorgeschwindigkeit. |
 | Update Method | Simulation des Anstoßes einer Aktivität bei einer Anzahl unabhängiger Objekte (Ausführung eines *Frames* in regelmäßigen Abständen). |
 
-*Tabelle* 6: Sequencing Patterns
+*Tabelle* 7: Sequencing Patterns
     
 sowie
 
@@ -139,7 +148,7 @@ sowie
 | Subclass Sandbox | Definieren Sie das Verhalten in einer Unterklasse mithilfe einer Reihe von Operationen, die von der Basisklasse bereitgestellt werden. |
 | Type Object | Ermöglicht die flexible Erstellung neuer *Klassen*, indem Sie eine einzelne Klasse erstellen, von der jede Instanz einen anderen Objekttyp darstellt. |
 
-*Tabelle* 7: Behavioral Patterns
+*Tabelle* 8: Behavioral Patterns
 
 und
 
@@ -149,7 +158,7 @@ und
 | Event Queue | Entkoppelt die Verarbeitung einer Nachricht oder ein Ereignisses vom Zeitpunkt, zu dem sie gesendet (bzw. empfangen) wird. |
 | Service Locator | Stellt einen globalen Zugriffspunkt auf einen Dienst bereit, ohne Benutzer an eine konkrete Klasse zu koppeln, die den Service implementiert. |
 
-*Tabelle* 8: Decoupling Patterns
+*Tabelle* 9: Decoupling Patterns
 
 und
 
@@ -160,7 +169,7 @@ und
 | Object Pool | Verbesserung von Rechenleistung und Speichernutzung, indem Objekte aus einem festen Pool wiederverwendet werden, anstatt sie einzeln anzufordern und freizugeben. |
 | Spatial Partition | Effizienter Zugriff auf Objekte, indem diese in einer nach ihren Positionen geordneten Datenstruktur gespeichert werden. |
 
-*Tabelle* 9: Optimization Patterns
+*Tabelle* 10: Optimization Patterns
 
 ---
 
