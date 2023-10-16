@@ -41,23 +41,25 @@ auf folgende Weise:
 
 #### Struktur:
 
-Proxy (oder auch Client) &ndash; Der Proxy stellt eine Schnittstelle für die öffentlichen Member-Funktionen
-des aktiven Objekts bereit. Der Proxy löst damit die Erstellung eines Request-Objekts
-in der *ActivationList* aus. Der Proxy läuft im Client-Thread.
+Die Schlüsselelemente des *Active Object* Patterns sind:
 
-Dispatch Queue (auch *ActivationList*) &ndash; Die Aktivierungsliste
-verwaltet die ausstehenden Anfragen. Die Aktivierungsliste entkoppelt den Thread des Clients
-vom Thread des aktiven Objekts. Der Proxy fügt das Anforderungsobjekt ein und der Scheduler entfernt es.
-Folglich muss der Zugriff auf die Aktivierungsliste serialisiert werden.
+  * Proxy (oder auch Client) &ndash; Der Proxy stellt eine Schnittstelle für die öffentlichen Member-Funktionen
+  des aktiven Objekts bereit. Der Proxy löst damit die Erstellung eines Request-Objekts
+  in der *ActivationList* aus. Der Proxy läuft im Client-Thread.
 
-Scheduler &ndash; Der Scheduler läuft im Thread des aktiven Objekts und entscheidet, welche Anfrage aus der Aktivierungsliste als nächstes ausgeführt wird.
+  * Dispatch Queue (auch *ActivationList*) &ndash; Die Aktivierungsliste
+  verwaltet die ausstehenden Anfragen. Die Aktivierungsliste entkoppelt den Thread des Clients
+  vom Thread des aktiven Objekts. Der Proxy fügt das Anforderungsobjekt ein und der Scheduler entfernt es.
+  Folglich muss der Zugriff auf die Aktivierungsliste serialisiert werden.
 
-Result Handle (im Regelfall ein `std::future`-Objekt)  &ndash;
-Wenn der Request ein Ergebnis zurückgibt, erhält der Client zu diesem Zweck ein `std::future`-Objekt
-und kann dadurch das Ergebnis des Methodenaufrufs erhalten.
-Dieser Zugriff kann blockierend oder nicht-blockierend sein.
+  * Scheduler &ndash; Der Scheduler läuft im Thread des aktiven Objekts und entscheidet, welche Anfrage aus der Aktivierungsliste als nächstes ausgeführt wird.
 
-<img src="dp_active_object.svg" width="500">
+  * Result Handle (im Regelfall ein `std::future`-Objekt)  &ndash;
+  Wenn der Request ein Ergebnis zurückgibt, erhält der Client zu diesem Zweck ein `std::future`-Objekt
+  und kann dadurch das Ergebnis des Methodenaufrufs erhalten.
+  Dieser Zugriff kann blockierend oder nicht-blockierend sein.
+
+<img src="dp_active_object.svg" width="700">
 
 *Abbildung* 1: Schematische Darstellung des *Active Object* Patterns.
 
@@ -65,21 +67,22 @@ Dieser Zugriff kann blockierend oder nicht-blockierend sein.
 
 #### Conceptual Example:
 
-Zur Vereinfachung des konzeptionellen Beispiels sind Client und Proxy in einem Objekt angesiedelt.
-Des weiteren sind im *Active Object* ein Scheduler und eine so genannte *ActivationList* vorhanden:
+Das konzeptionelle soll in einer vereinfachenden Betrachtung
+die Schlüsselelemente des *Active Object* Patterns vorstellen.
+
+Es treten im *Active Object* ein Scheduler und eine so genannte *ActivationList* auf:
 Unter einer *ActivationList* verstehen wir eine FIFO-Warteschlange,
-die die einzelnen Methodenaufrufe verwaltet.
+die einzelne Methodenaufrufe verwaltet.
 
 Das Beispiel ist mit C++ 11 Sprachmitteln realisiert.
 Es orientiert sich stark an dem Beispiel aus
-[Active Object](https://en.wikipedia.org/wiki/Active_object)
+[Wikipedia](https://en.wikipedia.org/wiki/Active_object),
 das dort in Java realisiert wird.
 
 Das konzeptionelle Beispiel besitzt &ndash; in Folge einer vereinfachenden Darstellung &ndash; folgende Nachteile:
 
-  * Client und Proxy (*Active Object*) sind im selben Objekt angesiedelt.
+  * Client (Proxy) und *Active Object* werden durch dasselbe Objekt dargestellt.
   * Die Methodenaufrufe liefern keinen Ergebniswert zurück.
-  * Der Kontroll-Thread des *Active Objectw* beendet sich nicht.
 
 [Quellcode](../ConceptualExample.cpp)
 
