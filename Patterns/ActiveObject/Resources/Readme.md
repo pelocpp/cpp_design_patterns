@@ -26,7 +26,7 @@ Derartige *Requests* können bei der Ausführung an einen Server weitergeleitet we
 
 Das Pattern wurde maßgeblich von *Douglas C. Schmidt* von der Vanderbilt University entwickelt.
 Er beschreibt es in dem Buch
-[Pattern-Oriented Software Architecture: Volume 2: Patterns for Concurrent and Networked Objects](https://www.amazon.de/Pattern-Oriented-Software-Architecture-Concurrent-Networked/dp/0471606952)
+[Pattern-Oriented Software Architecture: Volume 2](https://www.amazon.de/Pattern-Oriented-Software-Architecture-Concurrent-Networked/dp/0471606952)
 auf folgende Weise:
 
   > Das *Active Object Pattern* entkoppelt die Methodenausführung vom Methodenaufruf,
@@ -55,13 +55,13 @@ Die Schlüsselelemente des *Active Object* Patterns sind:
   und kann dadurch das Ergebnis des Methodenaufrufs erhalten.
   Dieser Zugriff kann blockierend oder nicht-blockierend sein.
 
-<img src="dp_active_object.svg" width="700">
+<img src="dp_active_object_01.svg" width="700">
 
 *Abbildung* 1: Schematische Darstellung des *Active Object* Patterns.
 
 ---
 
-#### Command Pattern
+#### Ein Vergleich
 
 *Bemerkung*: Das *Active Object Pattern* weist Ähnlichkeiten zum *Command Pattern* auf. 
 Im Prinzip beschreibt es eine Variante des *Command Patterns* ausgelegt für Nebenläufigkeit.
@@ -80,7 +80,7 @@ die einzelne Methodenaufrufe verwaltet.
 Das Beispiel ist mit C++ 11 Sprachmitteln realisiert.
 Es orientiert sich stark an dem Beispiel aus
 [Wikipedia](https://en.wikipedia.org/wiki/Active_object),
-das dort in Java realisiert wird.
+das dort allerdings in Java realisiert ist.
 
 Das konzeptionelle Beispiel besitzt &ndash; in Folge seiner vereinfachenden Darstellung &ndash; einige Nachteile:
 
@@ -93,10 +93,10 @@ Das konzeptionelle Beispiel besitzt &ndash; in Folge seiner vereinfachenden Dars
 
 #### Erstes Real-World Example:
 
-Das Beispiel veranschaulicht eine einfache Umsetzung des *Active Object* Patterns mit C++&ndash;Sprachmitteln
-(`std::future`, `std::packaged_task`).
+Das Beispiel veranschaulicht eine einfache Umsetzung des *Active Object* Patterns mit C++&ndash;Sprachmitteln wie
+`std::future`, `std::packaged_task` und `std::jthread`.
 
-Neben vielen Vereinfachungen wird allerdings demonstriert, wie ein berechnetes Ergebnis vom *Active Object* zum Client
+Neben vielen Vereinfachungen wird auch gezeigt, wie ein berechnetes Ergebnis vom *Active Object* zum Client
 transportiert werden kann.
 
 ---
@@ -104,10 +104,11 @@ transportiert werden kann.
 #### Zweites Real-World Example:
 
 Das &ldquo;Real-World&rdquo;-Beispiel berechnet die Summe der natürlichen Zahlen von 1 bis *n*.
-Das könnte man natürlich in einem Thread abhandeln, und mit Hilfe der Gaußsche Summenformel kann man die Berechnung
-nochmals vereinfachen. Dennoch habe ich dieses Beispiel gewählt: Zum Einen, um das Beispiel bzgl. des Anwendungsfalls 
-einfach zu gestalten, zum anderen, weil sich die  Summe der natürlichen Zahlen von 1 bis *n* auch abschnittweise berechnen lässt.
-Und an dieser Stelle kommen viele Teil-Tasks und ein *Active Object* ins Spiel.
+Das könnte man natürlich in einem einzigen Thread abhandeln, und mit Hilfe der Gaußsche Summenformel ließe sich
+die Berechnung nochmals vereinfachen.
+Dennoch habe ich dieses Beispiel gewählt, um zum Einen das Beispiel bzgl. des Anwendungsfalls 
+einfach zu gestalten, und zum anderen, weil sich die  Summe der natürlichen Zahlen von 1 bis *n* auch abschnittweise berechnen lässt.
+An dieser Stelle kommen nun viele Teilaufgaben und ein *Active Object* ins Spiel.
 
 Das Beispiel liegt in 2 Versionen vor:
 
@@ -117,6 +118,11 @@ Das Beispiel liegt in 2 Versionen vor:
 
 Das Beispiel gewinnt dann an Charme, wenn die vielen Tasks (Teilaufgaben) an das *Active Object* von unterschiedlichen
 Threads aus eingestellt werden. Man vergleiche zu diesem Zweck die Ausgaben in der Konsole.
+
+
+<img src="dp_active_object_02.svg" width="700">
+
+*Abbildung* 2: Zusammenspiel der Komponenten des *Active Object* Patterns.
 
 ---
 

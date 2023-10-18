@@ -135,7 +135,8 @@
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\dp_active_object.svg" />
+    <None Include="Resources\dp_active_object_01.svg" />
+    <None Include="Resources\dp_active_object_02.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
