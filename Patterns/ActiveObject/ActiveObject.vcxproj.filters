@@ -27,6 +27,9 @@
     <ClCompile Include="ActiveObject_02.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ActiveObject_03.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">

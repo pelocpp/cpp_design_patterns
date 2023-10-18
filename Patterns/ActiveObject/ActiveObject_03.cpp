@@ -1,8 +1,9 @@
 // ===========================================================================
-// ActiveObject_02.cpp // Active Object Pattern
+// ActiveObject_03.cpp // Active Object Pattern
 // ===========================================================================
 
 #include <iostream>
+#include <string>
 #include <utility>
 #include <thread>
 #include <future>
@@ -19,12 +20,12 @@
 // This Example demonstrates the 'Active Object Pattern'
 // in a "Real-World" example.
 // Result values are returned from the 'Active Object' to the client.
-// But: The Client request are all invoked from a single thread,
+// The Client request are invoked from different threads,
 // see the corresponding output.
 
 // ===========================================================================
 
-namespace ActivatorObject02
+namespace ActivatorObject03
 {
     class SumRange {
 
@@ -64,7 +65,9 @@ namespace ActivatorObject02
 
             auto future = task.get_future();
 
-            std::cout << "   queueing task [" << a << "," << b << "]" << std::endl;
+            // std::cout << "   queueing task [" << a << "," << b << "]" << std::endl;
+            std::string s = "   queueing task [" + std::to_string(a) + "," + std::to_string(b) + "]\n";
+            std::cout << s;
 
             {
                 std::lock_guard<std::mutex> lockGuard{ m_mutex };
@@ -77,7 +80,7 @@ namespace ActivatorObject02
 
         void run() {
 
-            std::jthread jt([this] () {
+            std::jthread jt([this]() {
 
                 while (!runNextTask()) {
                     ;
@@ -106,51 +109,86 @@ namespace ActivatorObject02
         }
     };
 
-    std::vector<std::future<std::tuple<size_t, size_t, size_t>>>
-    enqueueTasksSynchronously(ActiveObject& activeObject, size_t start, size_t length, size_t count) {
+    std::future<std::vector<std::future<std::tuple<size_t, size_t, size_t>>>>
+    enqueueTasksAsynchronously(ActiveObject& activeObject, size_t start, size_t length, size_t count) {
 
-        std::vector<std::future<std::tuple<size_t, size_t, size_t>>> futures{};
+        return std::async([=, &activeObject]() mutable {
 
-        for (size_t i{}; i != count; ++i) {
+            std::vector<std::future<std::tuple<size_t, size_t, size_t>>> futures;
+            futures.reserve(count);
 
-            std::future<std::tuple<size_t, size_t, size_t>> future {
-                activeObject.enqueueTask(start, start + length) 
-            };
+            for (size_t i{}; i != count; ++i) {
 
-            start += length;
+                std::future<std::tuple<size_t, size_t, size_t>> future{
+                    activeObject.enqueueTask(start, start + length)
+                };
 
-            futures.push_back(std::move(future));
-        }
+                start += length;
 
-        return futures;
+                futures.push_back(std::move(future));
+            }
+
+            return futures;
+        });
     }
 }
 
-void test_active_object_02()
+void test_active_object_03()
 {
-    using namespace ActivatorObject02;
+    using namespace ActivatorObject03;
 
-    std::cout << "Active Object Demo (Synchron)" << std::endl;
+    std::cout << "Active Object Demo (Asynchron)" << std::endl;
 
     ActiveObject activeObject{};
 
     // enqueue work concurrently
-    std::cout << "Enqueue tasks synchronously ..." << std::endl;
+    std::cout << "Enqueue tasks asynchronously ..." << std::endl;
 
-    // range from 1 to 3000
-    std::vector<std::future<std::tuple<size_t, size_t, size_t>>> futures {
-        enqueueTasksSynchronously(activeObject, 1, 100, 30)  
-    };
+    auto client1 { enqueueTasksAsynchronously(activeObject,    1, 100, 10) }; // range from 1    to 1000
+    auto client2 { enqueueTasksAsynchronously(activeObject, 1001, 100, 10) }; // range from 1000 to 2000
+    auto client3 { enqueueTasksAsynchronously(activeObject, 2001, 100, 10) }; // range from 2000 to 3000
+
+    // retrieve futures of enqueued tasks
+    auto futures1 { client1.get() };
+    auto futures2 { client2.get() };
+    auto futures3 { client3.get() };
+
+    // copy these futures into a single container
+    std::vector<std::future<std::tuple<size_t, size_t, size_t>>> futures;
+
+    std::for_each(
+        std::begin(futures1),
+        std::end(futures1),
+        [&](auto& future) {
+            futures.push_back(std::move(future));
+        }
+    );
+
+    std::for_each(
+        std::begin(futures2),
+        std::end(futures2),
+        [&](auto& future) {
+            futures.push_back(std::move(future));
+        }
+    );
+
+    std::for_each(
+        std::begin(futures3),
+        std::end(futures3),
+        [&](auto& future) {
+            futures.push_back(std::move(future));
+        }
+    );
 
     // activate the active object
-    std::cout << "Run ..." << std::endl;                     
+    std::cout << "Run ..." << std::endl;
     activeObject.run();
 
     // get the results from the futures
     std::vector<std::tuple<size_t, size_t, size_t>> results;
     results.reserve(futures.size());
 
-    for (auto& future : futures) { 
+    for (auto& future : futures) {
         results.push_back(future.get());
     }
 
@@ -160,8 +198,8 @@ void test_active_object_02()
     std::for_each(
         results.begin(),
         results.end(),
-        [&](const auto& tuple){
-        
+        [&](const auto& tuple) {
+
             auto partialSum = std::get<2>(tuple);
             totalSum += partialSum;
         }

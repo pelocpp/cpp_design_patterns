@@ -91,6 +91,35 @@ Das konzeptionelle Beispiel besitzt &ndash; in Folge seiner vereinfachenden Dars
 
 ---
 
+#### Erstes Real-World Example:
+
+Das Beispiel veranschaulicht eine einfache Umsetzung des *Active Object* Patterns mit C++&ndash;Sprachmitteln
+(`std::future`, `std::packaged_task`).
+
+Neben vielen Vereinfachungen wird allerdings demonstriert, wie ein berechnetes Ergebnis vom *Active Object* zum Client
+transportiert werden kann.
+
+---
+
+#### Zweites Real-World Example:
+
+Das &ldquo;Real-World&rdquo;-Beispiel berechnet die Summe der natürlichen Zahlen von 1 bis *n*.
+Das könnte man natürlich in einem Thread abhandeln, und mit Hilfe der Gaußsche Summenformel kann man die Berechnung
+nochmals vereinfachen. Dennoch habe ich dieses Beispiel gewählt: Zum Einen, um das Beispiel bzgl. des Anwendungsfalls 
+einfach zu gestalten, zum anderen, weil sich die  Summe der natürlichen Zahlen von 1 bis *n* auch abschnittweise berechnen lässt.
+Und an dieser Stelle kommen viele Teil-Tasks und ein *Active Object* ins Spiel.
+
+Das Beispiel liegt in 2 Versionen vor:
+
+[Client in synchroner Ausführung](../ActiveObject_02.cpp)
+
+[Client in asynchroner Ausführung](../ActiveObject_03.cpp)
+
+Das Beispiel gewinnt dann an Charme, wenn die vielen Tasks (Teilaufgaben) an das *Active Object* von unterschiedlichen
+Threads aus eingestellt werden. Man vergleiche zu diesem Zweck die Ausgaben in der Konsole.
+
+---
+
 [Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---

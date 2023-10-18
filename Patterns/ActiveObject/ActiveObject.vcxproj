@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="ActiveObject_01.cpp" />
     <ClCompile Include="ActiveObject_02.cpp" />
+    <ClCompile Include="ActiveObject_03.cpp" />
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
