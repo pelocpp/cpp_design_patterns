@@ -15,45 +15,40 @@ namespace ActivatorObject01
     class Adder
     {
     public:
-        Adder(int summand1, int summand2) 
-            : m_summand1{ summand1 }, m_summand2{ summand2 } {}
+        Adder(int a, int b) : m_a{ a }, m_b{ b } {}
 
         std::tuple<int, int, int> operator() () {
 
-            std::cout << "adding " << m_summand1 << " and " << m_summand2 << " ... " << std::endl;
+            std::cout << "adding " << m_a << " and " << m_b << " ... " << std::endl;
 
-            auto result = std::make_tuple(
-                m_summand1, 
-                m_summand2,
-                m_summand1 + m_summand2
-            );
+            auto result = std::make_tuple(m_a, m_b, m_a + m_b);
 
             return result;
         }
 
     private:
-        int m_summand1;
-        int m_summand2;
+        int m_a;
+        int m_b;
     };
 
     class ActiveObject 
     {
     private:
         std::packaged_task<std::tuple<int, int, int>()> m_activationElement;
-        std::mutex m_activationListMutex;
+        std::mutex m_mutex;
 
     public:
 
-        std::future<std::tuple<int, int, int>> enqueueTask(int summand1, int summand2) {
+        std::future<std::tuple<int, int, int>> enqueueTask(int a, int b) {
 
-            Adder adder{ summand1, summand2 };
+            Adder adder{ a, b };
 
             std::packaged_task<std::tuple<int, int, int>()> task (adder);
 
             auto future = task.get_future();
 
             {
-                std::lock_guard<std::mutex> lockGuard{ m_activationListMutex };
+                std::lock_guard<std::mutex> lockGuard{ m_mutex };
 
                 m_activationElement = std::move(task);
             }
@@ -63,14 +58,14 @@ namespace ActivatorObject01
 
         void run() {
 
-            std::jthread j{ [this] () { runSingleTask(); } };
+            std::jthread jt { [this] () { runSingleTask(); } };
         }
 
     private:
 
         void runSingleTask() {
 
-            std::lock_guard<std::mutex> lockGuard(m_activationListMutex);
+            std::lock_guard<std::mutex> lockGuard(m_mutex);
 
             if (m_activationElement.valid()) {
 

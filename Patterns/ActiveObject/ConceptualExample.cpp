@@ -11,12 +11,14 @@
 // ---------------------------------------------------------------------------
 // OriginalClass is a regular class,
 // that provides two methods that set a double to be a certain value.
-// This class does NOT conform to the active object pattern.
+// The two methods shouldn't be called at the same time in different threads,
+// furthermore does this class NOT conform to the active object pattern.
 
 class OriginalClass
 {
 private:
     double m_val;
+
 public:
     OriginalClass() : m_val{} {}
 
