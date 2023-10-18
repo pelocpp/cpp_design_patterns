@@ -62,12 +62,12 @@ namespace ActivatorObject02
 
         void run() {
 
-            std::jthread jt([this] {
+            std::jthread jt([this] () {
 
-                while (!runNextTask())
+                while (!runNextTask()) {
                     ;
                 }
-            );
+            });
         }
 
     private:
@@ -93,35 +93,14 @@ namespace ActivatorObject02
 
     };
 
-    //std::future<std::vector<std::future<std::tuple<size_t, size_t, size_t>>>>
-
-    //    getFutures(ActiveObject& activeObject, int numberPrimes) {
-
-    //    return std::async([&activeObject, numberPrimes] {
-
-    //        std::vector<std::future<std::tuple<size_t, size_t, size_t>>> futures;
-
-    //        auto randNumbers = getRandNumbers(numberPrimes);        // (3)
-
-    //        for (auto numb : randNumbers) {
-    //            futures.push_back(activeObject.enqueueTask(numb));  // (5)
-    //        }
-
-    //        return futures;
-    //        });
-    //}
-
-
-    // Name ist schlecht .. Singular wäre besser ...
-
     std::future<std::vector<std::future<std::tuple<size_t, size_t, size_t>>>>
 
-        getFutures(ActiveObject& activeObject, size_t start, size_t length, size_t count) {
+        enqueueTasks(ActiveObject& activeObject, size_t start, size_t length, size_t count) {
 
             return std::async([=, &activeObject] () mutable {
 
                 std::vector<std::future<std::tuple<size_t, size_t, size_t>>> futures;
-                // resize
+                futures.reserve(count);
 
                 for (size_t i{}; i != count; ++i) {
 
@@ -137,39 +116,29 @@ namespace ActivatorObject02
             }
         );
     }
-
 }
-
-
 
 void test_active_object_02()
 {
     using namespace ActivatorObject02;
 
-    std::cout << "Active Object  II" << std::endl;
+    std::cout << "Active Object Demo" << std::endl;
 
     ActiveObject activeObject{};
 
-    // enqueue work concurrently 
+    // enqueue work concurrently
+    std::cout << "Enqueue tasks concurrently ..." << std::endl;
 
- //   size_t start{ 1 };
- //   size_t length{ 100 };
- ////   size_t coint;
+    auto client1 = enqueueTasks(activeObject,    1, 100, 10);  // range from 1    to 1000
+    auto client2 = enqueueTasks(activeObject, 1001, 100, 10);  // range from 1000 to 2000
+    auto client3 = enqueueTasks(activeObject, 2001, 100, 10);  // range from 2000 to 3000
 
-    //auto client1 = getFutures(activeObject, 1,    200, 5);  // range from 1 to 1000
-    //auto client2 = getFutures(activeObject, 1000, 200, 5);  // range from 1000 to 2000
-    //auto client3 = getFutures(activeObject, 2000, 200, 5);  // range from 2000 to 3000
-
-    auto client1 = getFutures(activeObject,    1, 100, 10);  // range from 1 to 1000
-    auto client2 = getFutures(activeObject, 1001, 100, 10);  // range from 1000 to 2000
-    auto client3 = getFutures(activeObject, 2001, 100, 10);  // range from 2000 to 3000
-
-    // retrieve futures 
+    // retrieve futures of enqueued tasks
     auto futures1 = client1.get();
     auto futures2 = client2.get();
     auto futures3 = client3.get();
 
-    // copy all futures into a single container
+    // copy these futures into a single container
     std::vector<std::future<std::tuple<size_t, size_t, size_t>>> futures;
 
     std::for_each(
@@ -196,38 +165,24 @@ void test_active_object_02()
         }
     );
 
-    std::cout << "stopper ..." << std::endl;
-
-    //// put all futures together                                 // (10)
-    //futures.insert(futures.end(), std::make_move_iterator(futures2.begin()),
-    //    std::make_move_iterator(futures2.end()));
-
-    //futures.insert(futures.end(), std::make_move_iterator(futures3.begin()),
-    //    std::make_move_iterator(futures3.end()));
-
-    //futures.insert(futures.end(), std::make_move_iterator(futures4.begin()),
-    //    std::make_move_iterator(futures4.end()));
-
-    //futures.insert(futures.end(), std::make_move_iterator(futures5.begin()),
-    //    std::make_move_iterator(futures5.end()));
-
-    // run the promises                        
+    // activate the active object
+    std::cout << "Run ..." << std::endl;                     
     activeObject.run();
 
     // get the results from the futures
-    std::vector<std::tuple<size_t, size_t, size_t>> futureResults;
-    futureResults.reserve(futures.size());
+    std::vector<std::tuple<size_t, size_t, size_t>> results;
+    results.reserve(futures.size());
 
     for (auto& future : futures) { 
-        futureResults.push_back(future.get()); 
+        results.push_back(future.get());
     }
 
     // calculate final sum result
     size_t totalSum{};
 
     std::for_each(
-        futureResults.begin(),
-        futureResults.end(),
+        results.begin(),
+        results.end(),
         [&](const auto& tuple){
         
             auto partialSum = std::get<2>(tuple);
@@ -235,9 +190,7 @@ void test_active_object_02()
         }
     );
 
-    std::cout << "TotalSum: " << totalSum << std::endl;  // expecting 500'500
-
-    std::cout << "Done." << std::endl;
+    std::cout << "TotalSum: " << totalSum << std::endl;  // expecting 4'501'500
 }
 
 // ===========================================================================
