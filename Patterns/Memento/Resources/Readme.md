@@ -60,7 +60,7 @@ sodass er seinen ursprünglichen Zustand nach Belieben wiederherstellen kann.
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Memento Patterns*.
 Es besteht im Wesentlichen aus drei Teilen:
 
-  * **Originator**: Erstellt ein Memento-Objekt, das den internen Status des Urhebers erfasst.
+  * **Originator**: Erstellt ein Memento-Objekt, das den internen Status des Urhebers (*Originator*) erfasst.
     Der Urheber verwendet das Memento-Objekt, um seinen vorherigen Status wiederherzustellen.
   * **Memento**: Speichert den internen Status des Urheber-Objekts. Der Status kann beliebig umfangreich sind. Das Memento-Objekt muss zwei Schnittstellen unterstützen:
     Eine Schnittstelle zum *CareTaker*: Diese Schnittstelle darf keine Operationen oder keinen Zugriff auf den vom Memento-Objekt gespeicherten internen Zustand zulassen und berücksichtigt daher den Zugriffsschutz.

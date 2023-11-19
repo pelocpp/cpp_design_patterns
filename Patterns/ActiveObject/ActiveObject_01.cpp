@@ -13,7 +13,7 @@
 // ===========================================================================
 // 
 // This Example demonstrates the 'Active Object Pattern'
-// pattern a compact as possible.
+// pattern as compact as possible.
 // The 'activation list' queue consist of a single element.
 // The scheduler runs a single task, but:
 // A result value is returned from the 'Active Object' to the client.

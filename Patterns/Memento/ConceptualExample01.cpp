@@ -31,6 +31,7 @@ namespace ConceptualExample01 {
 
         // getter / setter
         void setState(const std::string& state) { m_state = state; }
+
         std::string getState() { return m_state; }
 
         // public interface
