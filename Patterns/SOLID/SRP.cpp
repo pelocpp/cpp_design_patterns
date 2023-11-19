@@ -71,7 +71,7 @@ void test_anti_conceptual_example_srp ()
 {
     using namespace AntiConceptualExampleSRP;
 
-    Journal journal{ "Peter" };
+    Journal journal{ "John" };
     journal.addEntry("In the morning I went to school");
     journal.addEntry("In the afternoon I did my homework");
     journal.save("diary.txt", std::cout);
@@ -81,7 +81,7 @@ void test_conceptual_example_srp()
 {
     using namespace ConceptualExampleSRP;
 
-    Journal journal{ "Peter" };
+    Journal journal{ "John" };
     journal.addEntry("In the morning I went to school");
     journal.addEntry("In the afternoon I did my homework");
     SavingManager::save(journal, "diary.txt", std::cout);

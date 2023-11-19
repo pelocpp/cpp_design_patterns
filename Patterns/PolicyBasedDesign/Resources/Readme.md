@@ -41,7 +41,7 @@ Die Idee des *Policy-based* Designs kann nun so formuliert werden:
 
   * Klassen mit komplexem Verhalten werden in eine *Host*-Klasse und mehrere kleinere *Policy*-Klassen zerlegt.
   * Jede *Policy*-Klasse kapselt einen Belang der *Host*-Klasse.
-  * Verbindung der komplexen Klasse mit den *Policy*-Klassen beispielsweise über C++ Klassen Templates möglich.
+  * Verbindungen der komplexen Klasse mit den *Policy*-Klassen beispielsweise über C++ Klassen Templates möglich.
 
   
 Policies sind vom Benutzer der Klasse auswählbar:
@@ -61,7 +61,7 @@ ein kleines Problem bzw. angenehmer formuliert, eine Anforderung an das Programm
 
 Das ist leichter gesagt, als getan! Nicht immer lässt sich aus dem Programmcode ableiten,
 welcher der beiden `delete`-Aufrufe abzusetzen ist, da man an Hand der Zeigervariablen nicht erkennen kann,
-mit welchem `new`-Aufruf der dynamische Speicher angelegt worden ist.
+mit welchem `new`-Aufruf der dynamische Speicher angelegt wurde.
 Die Konsequenz bei falschem Aufruf ist UB, also *Undefined Behaviour*!
 
 Wir demonstrieren dies an einer ersten, trivialen und folglich auch fehlerhaften Realisierung
@@ -234,7 +234,7 @@ drückt sich die Konfigurierbarkeit der `Logger`-Klasse aus:
 15:     }
 16: };
 17: 
-18: template <typename OutputPolicy>
+18: template <typename TOutputPolicy>
 19: class Logger {
 20: public:
 21:     void log(const std::string& message) const {
@@ -242,7 +242,7 @@ drückt sich die Konfigurierbarkeit der `Logger`-Klasse aus:
 23:     }
 24: 
 25: private:
-26:     OutputPolicy m_policy;
+26:     TOutputPolicy m_policy;
 27: };
 ```
 
@@ -265,20 +265,20 @@ sind identisch zum letzten Beispiel:
 
 
 ```cpp
-01: template <typename OutputPolicy>
-02: class Logger : private OutputPolicy {
+01: template <typename TOutputPolicy>
+02: class Logger : private TOutputPolicy {
 03: public:
 04:     void log(const std::string& mess) const {
 05:         write(mess);
 06:     }
 07: private:
-08:     using OutputPolicy::write;
+08:     using TOutputPolicy::write;
 09: };
 ```
 
 *Hinweis*: Die Zeile 8 aus dem letzten Code-Fragment ist wichtig, sie kann nicht weggelassen werden!
 Klasse `Logger` ist ein Klassentemplate. Der Aufruf von `write` in Zeile 5
-wird nicht mit der Vaterklasse `OutputPolicy` in Verbindung gebracht!
+wird nicht mit der Vaterklasse `TOutputPolicy` in Verbindung gebracht!
 Der Compiler unterscheidet beim &ndash; ersten  &ndash; Übersetzungsvorgang 
 zwischen Bezeichnern, die von den Template Parametern abhängen oder nicht: 
 
@@ -352,8 +352,8 @@ Folglich ist bei vielen *Policy*-Objekten der Footprint einer Anwendung in der V
 
 
 ```cpp
-template <typename OutputPolicy>
-class Logger : private OutputPolicy
+template <typename TOutputPolicy>
+class Logger : private TOutputPolicy
 ```
 ---
 

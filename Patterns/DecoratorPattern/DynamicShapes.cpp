@@ -22,6 +22,7 @@ namespace DynamicDecoration {
 
     public:
         Circle() : m_radius{ 0.0 } {}
+
         explicit Circle(double radius) : m_radius{ radius } {}
 
         void resize(double factor) { m_radius *= factor; }
@@ -59,7 +60,8 @@ namespace DynamicDecoration {
 
     public:
         ShapeDecorator(const std::shared_ptr<IShape>& component)
-            : m_component{ component } {}
+            : m_component{ component }
+        {}
 
         // base decorator class delegates all work to the wrapped component
         virtual std::string draw() const override {
@@ -75,7 +77,8 @@ namespace DynamicDecoration {
 
     public:
         ColoredShapeDecorator(const std::shared_ptr<IShape>& shape, const std::string& color)
-            : ShapeDecorator{ shape }, m_color{ color } {}
+            : ShapeDecorator{ shape }, m_color{ color }
+        {}
 
         virtual std::string draw() const override
         {
@@ -93,7 +96,8 @@ namespace DynamicDecoration {
 
     public:
         TransparentShapeDecorator(const std::shared_ptr<IShape>& shape, uint8_t transparency)
-            : ShapeDecorator{ shape }, m_transparency{ transparency } {}
+            : ShapeDecorator{ shape }, m_transparency{ transparency }
+        {}
 
         virtual std::string draw() const override
         {

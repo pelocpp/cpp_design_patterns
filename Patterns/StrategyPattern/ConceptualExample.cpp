@@ -43,7 +43,8 @@ private:
      */
 public:
     Context(std::unique_ptr<StrategyBase> strategy)
-        : m_strategy{ std::move(strategy) } {}
+        : m_strategy{ std::move(strategy) } 
+    {}
 
     ~Context() {}
 

@@ -132,7 +132,7 @@ namespace PolicyBasedDesign_10 {
         }
     };
 
-    template <typename OutputPolicy>
+    template <typename TOutputPolicy>
     class Logger {
     public:
         void log(const std::string& message) const {
@@ -140,7 +140,7 @@ namespace PolicyBasedDesign_10 {
         }
 
     private:
-        OutputPolicy m_policy;
+        TOutputPolicy m_policy;
     };
 
     void test() {
@@ -179,14 +179,14 @@ namespace PolicyBasedDesign_11 {
         }
     };
 
-    template <typename OutputPolicy>
-    class Logger : private OutputPolicy {
+    template <typename TOutputPolicy>
+    class Logger : private TOutputPolicy {
     public:
         void log(const std::string& mess) const {
             write(mess);
         }
     private:
-       using OutputPolicy::write;
+       using TOutputPolicy::write;
     };
 
     void test() {

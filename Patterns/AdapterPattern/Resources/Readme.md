@@ -188,31 +188,32 @@ von C++ 11 verwendet.
 
 Wir demonstrieren den Einsatz des Adapter Patterns anhand des folgenden Beispiels,
 in dem wir ein Audio-Player-Gerät betrachten, das nur *MP3*-Dateien abspielen kann,
-aber einen erweiterten Audio-Player verwenden möchte, um *VLC*- und *MP4*-Dateien abspielen zu können.
+aber erweitert werden soll, um *VLC*- und *MP4*-Dateien abspielen zu können.
 
-Ausgangspunkt ist eine Schnittstelle `MediaPlayer` und eine konkrete Klasse `AudioPlayer`,
-die die `MediaPlayer`-Schnittstelle implementiert.
+Ausgangspunkt ist eine Schnittstelle `IMediaPlayer` und eine konkrete Klasse `AudioPlayer`,
+die die `IMediaPlayer`-Schnittstelle implementiert.
 `AudioPlayer` Objekte spielen nur Audiodateien im MP3-Format ab.
 
-Wir haben ferner eine zusätzliche Schnittstelle `AdvancedMediaPlayer` und konkrete Klassen zur Verfügung,
-die die `AdvancedMediaPlayer`-Schnittstelle implementieren.
+Wir haben ferner zwei zusätzliche Schnittstellen `IVlcMediaPlayer` und `IMp4MediaPlayer` sowie konkrete Klassen zur Verfügung,
+die die beiden Schnittstellen implementieren.
 Diese Klassen können Dateien im *VLC*- und *MP4*-Format abspielen.
 
 Wir wollen nun erreichen, dass die `AudioPlayer` Klasse auch die Formate *VLC* und *MP4* wiedergibt.
 Um dies zu erreichen, erstellen wir eine Adapterklasse `MediaAdapter`.
-Diese Klasse `MediaAdapter` implementiert einerseits die `MediaPlayer`-Schnittstelle,
+Diese Klasse `MediaAdapter` implementiert einerseits die `IMediaPlayer`-Schnittstelle,
 um damit die Kompatibilität zu dieser Schnittstelle aufrecht zu erhalten. 
-Zum Anderen benutzt sie (*hat-sie*) eine Instanz der Klasse `AdvancedMediaPlayer`,
+Zum Anderen benutzt sie (*hat-sie*) zwei Instanzen der Klassen `VlcPlayer` und `Mp4Player`,
 um auch die weiteren Formate *VLC* und *MP4* abspielen zu können.
 
-Ein Redesign der Klasse `AudioPlayer` verwendet nun die Adapterklasse `MediaAdapter`.
+Ein Redesign der Klasse `AudioPlayer` (im beiliegenden Quellcode hat sie den Namen `AudioPlayerExtended`)
+verwendet nun die Adapterklasse `MediaAdapter`.
 Die Klasse `AudioPlayer` kennt nach wie vor nicht die tatsächlichen Klassen, die das gewünschte Format wiedergeben können.
 Sie reicht allerdings bei Benutzung der Klasse `AudioPlayer` und bei Anforderung entsprechender Audiotypen
 diese an die Adapterklasse weiter, so dass die Anforderung doch unterstützt werden kann.
 
 *Hinweis*: Der Client-Code wird bei Einhaltung des Patterns nicht an die konkrete Adapterklasse gekoppelt,
 sondern er darf nur über die vorhandene Client-Schnittstelle mit dem Adapter zusammenarbeiten
-(im vorliegenden Beispiel: Schnittstelle `MediaPlayer`). Auf diese Weise lassen sich neue Adapterklassen
+(im vorliegenden Beispiel: Schnittstelle `IMediaPlayer`). Auf diese Weise lassen sich neue Adapterklassen
 in das Programm einführen, ohne inkompatibel zum vorhandenen Client-Code zu sein!
 
 ---

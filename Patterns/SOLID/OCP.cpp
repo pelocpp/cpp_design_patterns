@@ -107,7 +107,7 @@ namespace ConceptualExampleOCP {
     {
         virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const override
         {
-            Products<T> result;
+            Products<T> result{};
             for (const auto& product : products) {
                 if (spec.isSatisfied(product))
                     result.push_back(product);
@@ -147,8 +147,8 @@ namespace ConceptualExampleOCP {
         std::vector<std::shared_ptr<Specification<T>>> m_vec;
 
     public:
-        template <typename ... TARGS>
-        GenericSpecification(const TARGS& ... args)
+        template <typename ... TArgs>
+        GenericSpecification(const TArgs& ... args)
         {
            m_vec = { args ... };
         }
@@ -366,7 +366,7 @@ void test_conceptual_example_ocp_05()
     };
 
     auto computer{
-    std::make_shared<ProductEx>("Computer", Color::Gray, Size::Small, 999.00)
+        std::make_shared<ProductEx>("Computer", Color::Gray, Size::Small, 999.00)
     };
 
     auto chair{

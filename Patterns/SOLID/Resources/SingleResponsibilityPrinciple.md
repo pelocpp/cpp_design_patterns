@@ -38,7 +38,7 @@ indem sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &
 17: 
 18:     void save(const std::string& filename, std::ostream& os) {
 19: 
-20:         for (auto& s : m_entries) {
+20:         for (const auto& s : m_entries) {
 21:             os << s << std::endl;
 22:         }
 23:     }

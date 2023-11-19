@@ -75,6 +75,7 @@ namespace ConceptualExample {
 
     private:
         StringCode stringToEnum(const std::string& s) {
+
             if (s == "Rectangle") {
                 return StringCode::Rectangle;
             }

@@ -86,7 +86,7 @@ public:
     std::string str() { return m_oss.str(); }
 };
 
-void test_static_strategy_example()
+void test_dynamic_strategy_example ()
 {
     // markdown
     TextProcessor tp;
@@ -150,7 +150,7 @@ struct HtmlListStrategyEx
     }
 };
 
-void test_dynamic_strategy_example()
+void test_static_strategy_example ()
 {
     // markdown
     TextProcessorEx<MarkdownListStrategyEx> tp1;

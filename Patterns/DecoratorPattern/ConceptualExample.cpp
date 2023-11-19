@@ -42,7 +42,8 @@ protected:
 
 public:
     DecoratorBase(const std::shared_ptr<Component>& component) 
-        : m_component{ component } {}
+        : m_component{ component }
+    {}
 
     /**
      * The Decorator delegates all work to the wrapped component.
@@ -63,7 +64,8 @@ class ConcreteDecoratorA final : public DecoratorBase {
      */
 public:
     ConcreteDecoratorA(const std::shared_ptr<Component>& component)
-        : DecoratorBase{ component } {}
+        : DecoratorBase{ component } 
+    {}
 
     virtual std::string operation() const override {
         std::string parentResult{ DecoratorBase::operation() };
@@ -79,7 +81,8 @@ public:
 class ConcreteDecoratorB final : public DecoratorBase {
 public:
     ConcreteDecoratorB(const std::shared_ptr<Component>& component) 
-        : DecoratorBase{ component } {}
+        : DecoratorBase{ component }
+    {}
 
     virtual std::string operation() const override {
         std::string parentResult{ DecoratorBase::operation() };
@@ -94,7 +97,8 @@ public:
 class ConcreteDecoratorC final : public DecoratorBase {
 public:
     ConcreteDecoratorC(const std::shared_ptr<Component>& component) 
-        : DecoratorBase{ component } {}
+        : DecoratorBase{ component }
+    {}
 
     std::string operation() const override {
         std::string parentResult{ DecoratorBase::operation() };
@@ -118,7 +122,10 @@ void test_conceptual_example_01() {
     /**
      * This way the client code can support both simple components ...
      */
-    std::shared_ptr<Component> component{ std::make_shared<ConcreteComponent>() };
+    std::shared_ptr<Component> component{
+        std::make_shared<ConcreteComponent>()
+    };
+
     std::cout << "Client: I've got a simple component:\n";
     clientCode(component);
     std::cout << std::endl << std::endl;
@@ -132,9 +139,17 @@ void test_conceptual_example_02() {
      * Note how decorators can wrap not only simple components
      * but the other decorators as well.
      */
-    std::shared_ptr<Component> component{ std::make_shared<ConcreteComponent>() };
-    std::shared_ptr<Component> decorator1{ std::make_shared<ConcreteDecoratorA>(component) };
-    std::shared_ptr<Component> decorator2{ std::make_shared<ConcreteDecoratorB>(decorator1) };
+    std::shared_ptr<Component> component{ 
+        std::make_shared<ConcreteComponent>()
+    };
+
+    std::shared_ptr<Component> decorator1{
+        std::make_shared<ConcreteDecoratorA>(component)
+    };
+
+    std::shared_ptr<Component> decorator2{
+        std::make_shared<ConcreteDecoratorB>(decorator1)
+    };
 
     std::cout << "Client: Now I've got a decorated component:" << std::endl;
     clientCode(decorator2);

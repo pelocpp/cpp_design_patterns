@@ -97,9 +97,10 @@ void test_pluggable_adapter_design_01()
     using namespace PluggableAdapterDesignApproach;
 
     std::unique_ptr<CoffeeMaker> coffeeMaker{ 
-        std::make_unique<CoffeeMaker>() };
-    BeverageAdapter adapter1{ coffeeMaker
+        std::make_unique<CoffeeMaker>() 
     };
+    
+    BeverageAdapter adapter1{ coffeeMaker };
 
     makeDrink(adapter1);
 

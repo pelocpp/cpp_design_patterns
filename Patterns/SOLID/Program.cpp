@@ -12,10 +12,10 @@ void test_dip();
 int main()
 {
     test_srp();
-    //test_ocp();
-    //test_lsp();
-    //test_isp();
-    //test_dip();
+    test_ocp();
+    test_lsp();
+    test_isp();
+    test_dip();
 
     return 0;
 }

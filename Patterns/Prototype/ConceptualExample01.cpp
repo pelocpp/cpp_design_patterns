@@ -83,7 +83,7 @@ namespace ConceptualExample02
         ConcretePrototype(int id) : Prototype{ id } {}
 
         // Note: Return Type = Type of base class - 
-        // 'std::shared_ptr<ConcretePrototype> clone()' doesn't compile !!!
+        // 'std::shared_ptr<ConcretePrototype> clone() const override' doesn't compile !!!
         std::shared_ptr<Prototype> clone() const override
         {
             std::shared_ptr<Prototype> copy {

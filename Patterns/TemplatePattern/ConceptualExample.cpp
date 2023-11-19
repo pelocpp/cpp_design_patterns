@@ -118,12 +118,18 @@ void clientCode(std::shared_ptr<AbstractClass> obj) {
 
 void test_conceptual_example() {
     std::cout << "Same client code can work with different subclasses (1):" << std::endl;
-    std::shared_ptr<AbstractClass> concreteClass1{ std::make_shared<ConcreteClass1>() };
+    std::shared_ptr<AbstractClass> concreteClass1
+    { 
+        std::make_shared<ConcreteClass1>()
+    };
     clientCode(concreteClass1);
     std::cout << std::endl;
 
     std::cout << "Same client code can work with different subclasses (2):" << std::endl;
-    std::shared_ptr<AbstractClass> concreteClass2{ std::make_shared<ConcreteClass2>() };
+    std::shared_ptr<AbstractClass> concreteClass2
+    {
+        std::make_shared<ConcreteClass2>() 
+    };
     clientCode(concreteClass2);
     std::cout << std::endl;
 }

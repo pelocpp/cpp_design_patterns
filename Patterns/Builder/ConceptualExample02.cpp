@@ -28,6 +28,7 @@ public:
     }
 
     std::string operator()() {
+
         std::ostringstream oss;
         oss << "Product parts: ";
         for (size_t i = 0; i < m_parts.size(); i++) {

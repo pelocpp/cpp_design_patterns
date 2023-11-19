@@ -17,8 +17,9 @@ struct Person
 namespace DependencyInversionPrinciple01
 {
     // low-level <<<<<<<<< -------------------
-    struct Relationships
+    class Relationships
     {
+    public:
         std::vector<std::tuple<Person, Relationship, Person>> m_relations;
 
         void addParentAndChild(const Person& parent, const Person& child)
@@ -29,8 +30,9 @@ namespace DependencyInversionPrinciple01
     };
 
     // high-level <<<<<<<<< -------------------
-    struct FamilyTree
+    class FamilyTree
     {
+    public:
         FamilyTree(const Relationships& relationships)
         {
             // using structured binding (C++ 17) and range-based for loop (C++ 11)
@@ -53,10 +55,12 @@ namespace DependencyInversionPrinciple02
     };
 
     // low-level <<<<<<<<< -------------------
-    struct Relationships : public RelationshipBrowser
+    class Relationships : public RelationshipBrowser
     {
+    private:
         std::vector<std::tuple<Person, Relationship, Person>> m_relations;
 
+    public:
         void addParentAndChild(const Person& parent, const Person& child) {
             m_relations.push_back({ parent, Relationship::Parent, child });
             m_relations.push_back({ child, Relationship::Child, parent });
@@ -75,8 +79,9 @@ namespace DependencyInversionPrinciple02
     };
 
     // high-level <<<<<<<<< -------------------
-    struct FamilyTree
+    class FamilyTree
     {
+    public:
         FamilyTree(const RelationshipBrowser& browser) {
 
             for (const auto& child : browser.findAllChildrenOf("John")) {
@@ -94,7 +99,7 @@ void test_anti_conceptual_example_dip()
     Person child1{ "Carina" };
     Person child2{ "Mary" };
 
-    Relationships relationships;
+    Relationships relationships{};
 
     relationships.addParentAndChild(parent, child1);
     relationships.addParentAndChild(parent, child2);
@@ -110,7 +115,7 @@ void test_conceptual_example_dip()
     Person child1{ "Carina" };
     Person child2{ "Mary" };
 
-    Relationships relationships;
+    Relationships relationships{};
 
     relationships.addParentAndChild(parent, child1);
     relationships.addParentAndChild(parent, child2);

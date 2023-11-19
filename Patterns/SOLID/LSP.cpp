@@ -43,13 +43,13 @@ namespace LiskovSubstitutionPrinciple01
     };
 
     void process(Rectangle& r) {
-        //size_t w = r.getWidth();
-        //r.setHeight(10);
+        size_t w{ r.getWidth() };
+        r.setHeight(10);
         //assert((w * 10) == r.area());  // fails for Square <-- !!!
     }
 
     void process2(Rectangle& r) {
-        size_t w = r.getWidth();
+        size_t w{ r.getWidth() };
         r.setHeight(10);
         if (dynamic_cast<Square*>(&r) != nullptr)
             assert((r.getWidth() * r.getWidth()) == r.area());

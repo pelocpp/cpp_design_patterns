@@ -54,7 +54,8 @@ C++ ist &ndash; im Gegensatz zu vielen anderen Sprachen &ndash; konzeptionell
   * *Wert*- und
   * *Referenz*-basiert.
 
-Objekte in C++ können sowohl am Stack (direkt erreichbar / als *Wert*) als auch auf der Halde (erreichbar über einen *Zeiger*) liegen.
+Objekte in C++ können sowohl am Stack (direkt erreichbar / als *Wert*) als auch auf der Halde
+(indirekt erreichbar über einen *Zeiger*) liegen.
 Was bedeutet das: Möchte eine Fabrik-Methode ein Objekt per *Value* zurückgeben, ist dies nicht
 mit einer Umsetzung des Schnittstellenkonzepts möglich. Siehe hierzu den folgenden Anwendungsfall.
 

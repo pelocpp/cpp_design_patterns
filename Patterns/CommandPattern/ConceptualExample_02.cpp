@@ -22,6 +22,7 @@ namespace ConceptualExample02 {
      * Not the standard use case: no 'receiver' object used
      */
     class SimpleCommand : public CommandBase {
+
     private:
         std::string m_payLoad;
 
