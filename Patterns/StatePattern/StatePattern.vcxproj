@@ -144,17 +144,25 @@
     <ClCompile Include="ConceptualExample03.cpp" />
     <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="DepartmentStore.cpp" />
+    <ClCompile Include="FiniteStateMachine_LightSwitch\ConcreteLightStates.cpp" />
+    <ClCompile Include="FiniteStateMachine_LightSwitch\Light.cpp" />
+    <ClCompile Include="FiniteStateMachine_LightSwitch\LightSwitchMain.cpp" />
+    <ClCompile Include="FiniteStateMachine_LightSwitch\Source_StateMachine.cpp" />
     <ClCompile Include="JobApplication.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dp_state_pattern.svg" />
     <None Include="Resources\dp_state_pattern_job_application.svg" />
+    <None Include="Resources\dp_state_pattern_light_switch_states.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConceptualExample01.h" />
     <ClInclude Include="ConceptualExample02.h" />
+    <ClInclude Include="FiniteStateMachine_LightSwitch\ConcreteLightStates.h" />
+    <ClInclude Include="FiniteStateMachine_LightSwitch\Light.h" />
+    <ClInclude Include="FiniteStateMachine_LightSwitch\LightState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_state_pattern_intro.png" />

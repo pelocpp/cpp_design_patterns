@@ -22,6 +22,9 @@
     <Filter Include="Source Files\DepartmentStore">
       <UniqueIdentifier>{6ed4863f-b3bf-4dce-a6f0-9d1abd401fc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\FiniteStateMachine_LightSwitch">
+      <UniqueIdentifier>{0aaf57be-a0ea-4156-ac28-7fbf309d8b9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample01.cpp">
@@ -42,6 +45,18 @@
     <ClCompile Include="DepartmentStore.cpp">
       <Filter>Source Files\DepartmentStore</Filter>
     </ClCompile>
+    <ClCompile Include="FiniteStateMachine_LightSwitch\LightSwitchMain.cpp">
+      <Filter>Source Files\FiniteStateMachine_LightSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="FiniteStateMachine_LightSwitch\Source_StateMachine.cpp">
+      <Filter>Source Files\FiniteStateMachine_LightSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="FiniteStateMachine_LightSwitch\ConcreteLightStates.cpp">
+      <Filter>Source Files\FiniteStateMachine_LightSwitch</Filter>
+    </ClCompile>
+    <ClCompile Include="FiniteStateMachine_LightSwitch\Light.cpp">
+      <Filter>Source Files\FiniteStateMachine_LightSwitch</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -53,6 +68,9 @@
     <None Include="Resources\dp_state_pattern_job_application.svg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_state_pattern_light_switch_states.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConceptualExample01.h">
@@ -60,6 +78,15 @@
     </ClInclude>
     <ClInclude Include="ConceptualExample02.h">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClInclude>
+    <ClInclude Include="FiniteStateMachine_LightSwitch\ConcreteLightStates.h">
+      <Filter>Source Files\FiniteStateMachine_LightSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="FiniteStateMachine_LightSwitch\Light.h">
+      <Filter>Source Files\FiniteStateMachine_LightSwitch</Filter>
+    </ClInclude>
+    <ClInclude Include="FiniteStateMachine_LightSwitch\LightState.h">
+      <Filter>Source Files\FiniteStateMachine_LightSwitch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
