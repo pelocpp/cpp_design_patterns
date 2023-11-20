@@ -9,9 +9,9 @@ void test_paint_brush();
 
 int main()
 {
-    test_conceptual_example();
+    //test_conceptual_example();
     test_trees_game();
-    test_paint_brush();
+    //test_paint_brush();
     return 0;
 }
 

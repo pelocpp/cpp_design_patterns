@@ -24,7 +24,7 @@ namespace MotivationVisitor01
     public:
         Markdown() : m_start{ "* " } {}
 
-        void addToList(const std::string& line) override {
+        virtual void addToList(const std::string& line) override {
             m_content.push_back(line);
         }
     };

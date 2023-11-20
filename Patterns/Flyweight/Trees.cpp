@@ -64,7 +64,6 @@ namespace TreesFlyweight {
             {
                 std::cout << "     --> Tree with style " << style << " already in Factory Cache!" << std::endl;
 
-
                 std::shared_ptr<Tree> tp = m_treeMap[style].lock();
 
                 return tp;
@@ -73,7 +72,9 @@ namespace TreesFlyweight {
             std::cout << "     ==> Creating new tree with style " << style << std::endl;
 
             std::shared_ptr<Tree> tree{ std::make_shared<Tree>(style) };
+
             m_treeMap[style] = tree;
+            
             return tree;
         }
     };
@@ -89,6 +90,7 @@ namespace TreesFlyweight {
         void addTree(int x, int y, std::string style)
         {
             std::shared_ptr<Tree> tree{ m_treeFactory.getTree(style) };
+
             if (tree == nullptr) {
                 return;
             }
@@ -105,11 +107,12 @@ namespace TreesFlyweight {
         {
             int x{ position->getX() };
             int y{ position->getY() };
+
             std::string style{ tree->getStyle() };
 
             std::cout
                 << "Tree with " << style << " style"
-                << " rendered at " << x + ", " + y << std::endl;
+                << " rendered at " << x << ", " << y << std::endl;
         }
     };
 }

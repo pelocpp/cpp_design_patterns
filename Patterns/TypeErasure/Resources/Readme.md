@@ -108,7 +108,7 @@ Nicht immer haben wir diese Situation vorliegen.
 Möglicherweise haben wir keine Kontrolle über die konkreten Typen (zum Beispiel Klassen wie `std::string`),
 oder es ist nicht einmal der Fall gegeben, dass der konkrete Typ eine Basisklasse besitzt (zum Beispiel Datentyp `int`).
 
-Dies ist aber noch kein Hinderungsgrund, nicht doch auf eine andere Weise das Ziel erreichen zu können.
+Dies ist aber noch lange kein Hinderungsgrund, nicht doch auf eine andere Weise das Ziel zu erreichen.
 Mit Templates lassen sich Datentypen *polymorph* machen:
 
 ```cpp

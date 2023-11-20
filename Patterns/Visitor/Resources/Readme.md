@@ -66,7 +66,7 @@ Nehmen wir an, wir haben eine Hierarchie von Dokumentenobjekten der folgenden Ge
 13: public:
 14:     Markdown() : m_start{ "* " } {}
 15: 
-16:     void addToList(const std::string& line) override {
+16:     virtual void addToList(const std::string& line) override {
 17:         m_content.push_back(line);
 18:     }
 19: };
@@ -400,7 +400,7 @@ des Zeigertyps `HTML*`).
 
 ##### Schritt 4: Alternativer Ansatz für *Double Dispatch* in Modern C++ (`std::variant` und `std::visit`)
 
-Man beachte vorarb, dass die Dokumente Klassen `Markdown` und `HTML` nicht mehr einer Klassenhierarchie angehören:
+Man beachte vorab, dass die Dokumente Klassen `Markdown` und `HTML` nicht mehr einer Klassenhierarchie angehören:
 
 
 ```cpp

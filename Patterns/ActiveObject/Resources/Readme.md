@@ -110,10 +110,10 @@ transportiert werden kann.
 #### Zweites Real-World Example:
 
 Das zweite &ldquo;Real-World&rdquo;-Beispiel berechnet die Summe der natürlichen Zahlen von 1 bis *n*.
-Das könnte man natürlich in einem einzigen Thread abhandeln, und mit Hilfe der Gaußsche Summenformel ließe sich
+Das könnte man natürlich in einem einzigen Thread abhandeln, und mit Hilfe der Gaußschen Summenformel ließe sich
 die Berechnung nochmals vereinfachen.
-Dennoch habe ich dieses Beispiel gewählt, um zum einen das Beispiel bzgl. des Anwendungsfalls 
-einfach gestalten zu können, und zum anderen, weil sich die  Summe der natürlichen Zahlen von 1 bis *n* auch abschnittweise berechnen lässt.
+Dennoch habe ich dieses Beispiel gewählt, um zum einen den Anwendungsfall
+einfach gestalten zu können, und zum anderen, weil sich die Summe der natürlichen Zahlen von 1 bis *n* auch abschnittweise berechnen lässt.
 An dieser Stelle kommen nun viele Teilaufgaben (*Tasks*) und ein *Active Object* ins Spiel.
 
 Das Beispiel liegt in 2 Versionen vor:

@@ -117,14 +117,14 @@ namespace PolicyBasedDesign_10 {
 
     class LogToConsole {
     public:
-        void write(const std::string& message) const {
+        static void write(const std::string& message) {
             std::cout << message << std::endl;
         }
     };
 
     class LogToFile {
     public:
-        void write(const std::string& message) const {
+        static void write(const std::string& message) {
             std::ofstream file;
             file.open("trace.txt");
             file << message << std::endl;
@@ -165,14 +165,14 @@ namespace PolicyBasedDesign_11 {
 
     class LogToConsole {
     protected:
-        void write(const std::string& message) const {
+        static void write(const std::string& message) {
             std::cout << message << '\n';
         }
     };
 
     class LogToFile {
     protected:
-        void write(const std::string& message) const {
+        static void write(const std::string& message) {
             std::ofstream myFile;
             myFile.open("policyInheritance.txt");
             myFile << message << '\n';

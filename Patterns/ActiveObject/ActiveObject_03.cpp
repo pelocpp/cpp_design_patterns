@@ -115,6 +115,7 @@ namespace ActivatorObject03
         return std::async([=, &activeObject]() mutable {
 
             std::vector<std::future<std::tuple<size_t, size_t, size_t>>> futures;
+
             futures.reserve(count);
 
             for (size_t i{}; i != count; ++i) {

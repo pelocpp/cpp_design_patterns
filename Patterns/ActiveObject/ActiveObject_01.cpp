@@ -45,6 +45,7 @@ namespace ActivatorObject01
     {
     private:
         std::packaged_task<std::tuple<int, int, int>()> m_activationElement;
+
         std::mutex m_mutex;
 
     public:
