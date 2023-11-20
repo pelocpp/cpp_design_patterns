@@ -159,7 +159,7 @@ namespace ConceptualExampleOCP {
                 std::begin(m_vec),
                 std::end(m_vec),
                 true,
-                [this, product] (bool last, const auto& next) -> bool {
+                [product] (bool last, const auto& next) -> bool {
                     bool tmp = next->isSatisfied(product);
                     return last && tmp;
                 }
