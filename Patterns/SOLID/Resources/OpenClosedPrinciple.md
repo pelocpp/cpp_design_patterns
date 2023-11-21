@@ -132,12 +132,12 @@ sind die am meisten verbreitete Vorgehensweise:
 012: using Products = std::vector<std::shared_ptr<T>>;
 013: 
 014: template <typename T>
-015: struct Specification {
+015: struct ISpecification {
 016:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const = 0;
 017: };
 018: 
 019: template <typename T>
-020: class ColorSpecification : public Specification<T> 
+020: class ColorSpecification : public ISpecification<T> 
 021: {
 022: private:
 023:     Color m_color;
@@ -151,7 +151,7 @@ sind die am meisten verbreitete Vorgehensweise:
 031: };
 032: 
 033: template <typename T>
-034: class SizeSpecification : public Specification<T>
+034: class SizeSpecification : public ISpecification<T>
 035: {
 036: private:
 037:     Size m_size;
@@ -165,15 +165,15 @@ sind die am meisten verbreitete Vorgehensweise:
 045: };
 046: 
 047: template <typename T>
-048: struct Filter 
+048: struct IFilter 
 049: {
-050:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const = 0;
+050:     virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const = 0;
 051: };
 052: 
 053: template <typename T>
-054: struct ProductFilter : public Filter<T>
+054: struct ProductFilter : public IFilter<T>
 055: {
-056:     virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const override
+056:     virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const override
 057:     {
 058:         Products<T> result;
 059:         for (const auto& product : products) {
@@ -186,14 +186,14 @@ sind die am meisten verbreitete Vorgehensweise:
 066: 
 067: // combining logical specifications - with logical 'and'
 068: template <typename T>
-069: class AndSpecification : public Specification<T>
+069: class AndSpecification : public ISpecification<T>
 070: {
 071: private:
-072:     const Specification<T>& m_first;
-073:     const Specification<T>& m_second;
+072:     const ISpecification<T>& m_first;
+073:     const ISpecification<T>& m_second;
 074: 
 075: public:
-076:     AndSpecification(const Specification<T>& first, const Specification<T>& second)
+076:     AndSpecification(const ISpecification<T>& first, const ISpecification<T>& second)
 077:         : m_first{ first }, m_second{ second } {}
 078: 
 079:     virtual bool isSatisfied(const std::shared_ptr<Product>& product) const override {
@@ -203,7 +203,7 @@ sind die am meisten verbreitete Vorgehensweise:
 083: 
 084: // combining logical specifications - with logical 'and' using operator notation
 085: template <typename T>
-086: AndSpecification<T> operator&& (const Specification<T>& first, const Specification<T>& second) {
+086: AndSpecification<T> operator&& (const ISpecification<T>& first, const ISpecification<T>& second) {
 087:     return AndSpecification<T>{ first, second };
 088: }
 089: 
@@ -283,5 +283,3 @@ von Vishal Chovatija.
 [Zurück](../../../Resources/Readme_03_Design_Principles.md)
 
 ---
-
-

@@ -64,12 +64,12 @@ namespace AntiConceptualExampleOCP {
 namespace ConceptualExampleOCP {
 
     template <typename T>
-    struct Specification {
+    struct ISpecification {
         virtual bool isSatisfied(const std::shared_ptr<T>& product) const = 0;
     };
 
     template <typename T>
-    class ColorSpecification : public Specification<T> 
+    class ColorSpecification : public ISpecification<T> 
     {
     private:
         Color m_color;
@@ -83,7 +83,7 @@ namespace ConceptualExampleOCP {
     };
 
     template <typename T>
-    class SizeSpecification : public Specification<T>
+    class SizeSpecification : public ISpecification<T>
     {
     private:
         Size m_size;
@@ -97,15 +97,15 @@ namespace ConceptualExampleOCP {
     };
 
     template <typename T>
-    struct Filter 
+    struct IFilter 
     {
-        virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const = 0;
+        virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const = 0;
     };
 
     template <typename T>
-    struct ProductFilter : public Filter<T>
+    struct ProductFilter : public IFilter<T>
     {
-        virtual Products<T> filter(const Products<T>& products, const Specification<T>& spec) const override
+        virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const override
         {
             Products<T> result{};
             for (const auto& product : products) {
@@ -118,14 +118,14 @@ namespace ConceptualExampleOCP {
 
     // combining logical specifications - with logical 'and'
     template <typename T>
-    class AndSpecification : public Specification<T>
+    class AndSpecification : public ISpecification<T>
     {
     private:
-        const Specification<T>& m_first;
-        const Specification<T>& m_second;
+        const ISpecification<T>& m_first;
+        const ISpecification<T>& m_second;
 
     public:
-        AndSpecification(const Specification<T>& first, const Specification<T>& second)
+        AndSpecification(const ISpecification<T>& first, const ISpecification<T>& second)
             : m_first{ first }, m_second{ second } {}
 
         virtual bool isSatisfied(const std::shared_ptr<Product>& product) const override {
@@ -135,16 +135,16 @@ namespace ConceptualExampleOCP {
 
     // combining logical specifications - with logical 'and' using operator notation
     template <typename T>
-    AndSpecification<T> operator&& (const Specification<T>& first, const Specification<T>& second) {
+    AndSpecification<T> operator&& (const ISpecification<T>& first, const ISpecification<T>& second) {
         return AndSpecification<T>{ first, second };
     }
 
     // combining multiple logical specifications - with variadic templates
     template <typename T>
-    class GenericSpecification : public Specification<T>
+    class GenericSpecification : public ISpecification<T>
     {
     private:
-        std::vector<std::shared_ptr<Specification<T>>> m_vec;
+        std::vector<std::shared_ptr<ISpecification<T>>> m_vec;
 
     public:
         template <typename ... TArgs>
@@ -177,7 +177,7 @@ namespace ConceptualExampleOCP {
         double      m_price;
     };
 
-    class PriceSpecification : public Specification<ProductEx>
+    class PriceSpecification : public ISpecification<ProductEx>
     {
     private:
         double m_price;

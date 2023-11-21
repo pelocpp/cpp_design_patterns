@@ -64,17 +64,18 @@ size_t Group::m_indentation = 0;
 
 void test_shapes()
 {
-    Group root("Root");
+    std::shared_ptr<Group> root = std::make_shared<Group>("Root");
 
     std::shared_ptr<IShape> circle = std::make_shared<Circle>("Top Level Circle");
-    root.push(circle);
+    root->push(circle);
 
     std::shared_ptr<Group> subgroup = std::make_shared<Group>("Subgroup");
     subgroup->push(std::make_shared<Circle>("First Second Level Circle"));
     subgroup->push(std::make_shared<Circle>("Another Second Level Circle"));
-    root.push(subgroup);
 
-    root.draw();
+    root->push(subgroup);
+
+    root->draw();
 }
 
 // ===========================================================================

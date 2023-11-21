@@ -35,7 +35,7 @@ namespace ConceptualExample01 {
         virtual ~CommandBase() {}
 
         CommandBase(std::shared_ptr<Receiver> receiver)
-            : m_receiver{ receiver } 
+            : m_receiver{ receiver }
         {}
 
         virtual void execute() const = 0;
@@ -50,12 +50,12 @@ namespace ConceptualExample01 {
         std::string m_data;
 
     public:
-        ConcreteCommand(std::shared_ptr<Receiver> receiver) 
-            : CommandBase{ receiver } 
+        ConcreteCommand(std::shared_ptr<Receiver> receiver)
+            : CommandBase{ receiver }
         {}
 
         void setData(std::string data)
-        { 
+        {
             m_data = data;
         }
 
@@ -93,10 +93,10 @@ void test_conceptual_example_01() {
     Invoker invoker{};
 
     std::shared_ptr<Receiver> receiver {
-        std::make_shared<Receiver>() 
+        std::make_shared<Receiver>()
     };
 
-    std::shared_ptr<ConcreteCommand> command { 
+    std::shared_ptr<ConcreteCommand> command {
         std::make_shared<ConcreteCommand>(receiver)
     };
 

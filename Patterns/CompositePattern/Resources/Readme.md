@@ -98,12 +98,12 @@ Es besteht im Wesentlichen aus drei Teilen:
 Das Beispiel demonstriert das klassische *Composite Pattern* mit Kreisen und Gruppen von Kreisen:
 
 ```cpp
-01: struct Shape
+01: struct IShape
 02: {
 03:     virtual void draw() const = 0;
 04: };
 05: 
-06: class Circle : public Shape
+06: class Circle : public IShape
 07: {
 08: private:
 09:     std::string m_name;
@@ -115,17 +115,17 @@ Das Beispiel demonstriert das klassische *Composite Pattern* mit Kreisen und Gru
 15:     }
 16: };
 17: 
-18: class Group : public Shape
+18: class Group : public IShape
 19: {
 20: private:
 21:     std::string m_name;
-22:     std::vector<std::shared_ptr<Shape>> m_objects;
+22:     std::vector<std::shared_ptr<IShape>> m_objects;
 23: 
 24: public:
 25:     ...
 26:     virtual void draw() const override {
 27:         std::cout << "Group " << m_name << " contains:" << std::endl;
-28:         for (const std::shared_ptr<Shape> shape : m_objects) {
+28:         for (const std::shared_ptr<IShape> shape : m_objects) {
 29:             shape->draw();
 30:         }
 31:     }
@@ -136,7 +136,7 @@ Das Beispiel demonstriert das klassische *Composite Pattern* mit Kreisen und Gru
 36: {
 37:     Group root("Root");
 38: 
-39:     std::shared_ptr<Shape> circle = std::make_shared<Circle>("Top Level Circle");
+39:     std::shared_ptr<IShape> circle = std::make_shared<Circle>("Top Level Circle");
 40:     root.push(circle);
 41: 
 42:     std::shared_ptr<Group> subgroup = std::make_shared<Group>("Subgroup");
@@ -150,7 +150,7 @@ Das Beispiel demonstriert das klassische *Composite Pattern* mit Kreisen und Gru
 
 Betrachten Sie die Schlüsselstellen in dem Code-Fragment:
 
-  * Zeile 18: Klasse `Group` leitet sich von Klasse `Shape` ab.
+  * Zeile 18: Klasse `Group` leitet sich von Klasse `IShape` ab.
   * Zeile 45: Auch `Group`-Objekte können mit `push` einer Gruppe hinzugefügt werden, also nicht nur `Circle`-Objekte.
   * Zeilen 26 und 29: Die `draw`-Methode agiert für Kreise und Kreisgruppen unterschiedlich.
  

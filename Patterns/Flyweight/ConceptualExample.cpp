@@ -43,7 +43,8 @@ namespace ConceptualExample {
         std::string m_plates;
 
         UniqueState(const std::string& owner, const std::string& plates)
-            : m_owner{ owner }, m_plates{ plates } {}
+            : m_owner{ owner }, m_plates{ plates }
+        {}
 
         friend std::ostream& operator<<(std::ostream& os, const UniqueState& us);
     };
@@ -156,9 +157,9 @@ namespace ConceptualExample {
     };
 
     void addCarToDatabase(
-        FlyweightFactory& factory, 
-        const std::string& plates, 
+        FlyweightFactory& factory,
         const std::string& owner,
+        const std::string& plates, 
         const std::string& brand, 
         const std::string& model,
         const std::string& color)
@@ -168,7 +169,7 @@ namespace ConceptualExample {
         
         // client code either stores or calculates extrinsic state
         // and passes it to the flyweight's methods.
-        flyweight->operation({ plates, owner });
+        flyweight->operation({ owner, plates});
     }
 }
 
@@ -182,11 +183,13 @@ void test_conceptual_example() {
      */
 
     FlyweightFactory factory {
-        {"Chevrolet", "Camaro2018", "pink"},
-        {"Mercedes Benz", "C300", "black"},
-        {"Mercedes Benz", "C500", "red"},
-        {"BMW", "M5", "red"},
-        {"BMW", "X6", "white"}
+        {
+            {"Chevrolet", "Camaro2018", "pink"},
+            {"Mercedes Benz", "C300", "black"},
+            {"Mercedes Benz", "C500", "red"},
+            {"BMW", "M5", "red"},
+            {"BMW", "X6", "white"}
+        }
     };
 
     factory.listFlyweights();
