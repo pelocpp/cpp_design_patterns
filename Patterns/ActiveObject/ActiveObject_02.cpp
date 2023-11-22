@@ -87,6 +87,24 @@ namespace ActivatorObject02
 
     private:
 
+        //bool runNextTask() {
+
+        //    std::lock_guard<std::mutex> lockGuard(m_mutex);
+
+        //    auto isEmpty = m_activationList.empty();
+
+        //    if (!isEmpty) {
+
+        //        auto task{ std::move(m_activationList.front()) };
+
+        //        m_activationList.pop_front();
+
+        //        task();
+        //    }
+
+        //    return isEmpty;
+        //}
+
         bool runNextTask() {
 
             std::lock_guard<std::mutex> lockGuard(m_mutex);
@@ -98,6 +116,8 @@ namespace ActivatorObject02
                 auto task{ std::move(m_activationList.front()) };
 
                 m_activationList.pop_front();
+
+                // lockGuard.unlock();  // geht mit Lock_guard oder anderen ?????????????
 
                 task();
             }
