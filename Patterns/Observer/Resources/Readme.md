@@ -80,15 +80,12 @@ Das *Conceptual Example* liegt in drei Varianten vor:
   * Variante 1: klassisch - d.h. mit &ldquo;raw&rdquo;-Zeigern.
   * Variante 2: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
   * Variante 3: Wie Variante 2, aber mit `std::enable_shared_from_this<>` Mechanismus.
-  * Variante 4: Wie Variante 1, aber mit Template-Technik.
 
 [Quellcode 1](../ConceptualExample01.cpp)
 
 [Quellcode 2](../ConceptualExample02.cpp)
 
 [Quellcode 3](../ConceptualExample03.cpp)
-
-[Quellcode 4](../ConceptualExample04.cpp)
 
 ---
 

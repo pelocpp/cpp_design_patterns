@@ -33,7 +33,6 @@ namespace ObserverDesignPatternClassic {
 
         virtual void attach(IObserver* observer) = 0;
         virtual void detach(IObserver* observer) = 0;
-        virtual void notify() = 0;
     };
 
     // =======================================================================
@@ -64,13 +63,6 @@ namespace ObserverDesignPatternClassic {
             m_list_observers.remove(observer);
         }
 
-        void notify() override {
-            howManyObservers();
-            for (const auto& observer : m_list_observers) {
-                observer->update(m_message);
-            }
-        }
-
         void createMessage(std::string message = "<empty>") {
             m_message = message;
             notify();
@@ -91,21 +83,37 @@ namespace ObserverDesignPatternClassic {
             notify();
             std::cout << "I'm about to do some important things" << std::endl;
         }
+
+    private:
+        void notify() {
+            howManyObservers();
+            for (const auto& observer : m_list_observers) {
+                observer->update(m_message);
+            }
+        }
     };
 
     // =======================================================================
 
     class Observer : public IObserver {
     private:
+        Subject*    m_subject;
         std::string m_messageFromSubject;
-        Subject&    m_subject;
         int         m_number;
         static int  m_static_number;
 
     public:
-        Observer(Subject& subject) : m_subject{ subject } 
-        {
-            m_subject.attach(this);
+        Observer() {
+            m_subject = nullptr;
+            std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
+            m_number = Observer::m_static_number;
+        }
+
+        // Information of 'subject' needed
+        // to demonstrate 'removeMeFromTheList' method
+
+        Observer(Subject* subject) : m_subject{ subject } {
+            m_subject->attach(this);
             std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
             m_number = Observer::m_static_number;
         }
@@ -123,10 +131,12 @@ namespace ObserverDesignPatternClassic {
 
         void removeMeFromTheList() 
         {
-            m_subject.detach(this);
-            std::cout 
-                << "Observer \"" << m_number 
-                << "\" removed from the list.\n";
+            if (m_subject != nullptr) {
+                m_subject->detach(this);
+                std::cout
+                    << "Observer \"" << m_number
+                    << "\" removed from the list.\n";
+            }
         }
 
         void printInfo() 
@@ -140,33 +150,46 @@ namespace ObserverDesignPatternClassic {
 
     int Observer::m_static_number = 0;
 
-    void clientCode()
+    static void clientCode_01()
     {
         Subject* subject{ new Subject };
 
-        Observer* observer1 { new Observer{ *subject } };
-        Observer* observer2 { new Observer{ *subject } };
-        Observer* observer3 { new Observer{ *subject } };
+        Observer* observer1{ new Observer{} };
+        Observer* observer2{ new Observer{} };
+        Observer* observer3{ new Observer{} };
 
-        subject->createMessage("Hello World! :D");
+        subject->attach(observer1);
+        subject->attach(observer2);
+        subject->attach(observer3);
+
+        subject->createMessage("Hello World!");
+        subject->createMessage("Hello World Again");
+
+        subject->detach(observer1);
+        subject->detach(observer2);
+        subject->detach(observer3);
+
+        delete observer3;
+        delete observer2;
+        delete observer1;
+        delete subject;
+    }
+
+    static void clientCode_02()
+    {
+        Subject* subject{ new Subject };
+
+        Observer* observer1{ new Observer{subject} };
+        Observer* observer2{ new Observer{subject} };
+        Observer* observer3{ new Observer{subject} };
+
+        subject->createMessage("Hello World!");
+        subject->createMessage("Hello World Again");
+
+        observer1->removeMeFromTheList();
+        observer2->removeMeFromTheList();
         observer3->removeMeFromTheList();
 
-        subject->createMessage("The weather is hot today! :p");
-        Observer* observer4 = new Observer{ *subject };
-
-        observer2->removeMeFromTheList();
-        Observer* observer5 = new Observer{ *subject };
-
-        subject->createMessage("My new car is great! ;)");
-        observer5->removeMeFromTheList();
-
-        subject->someBusinessLogic();
-
-        observer4->removeMeFromTheList();
-        observer1->removeMeFromTheList();
-
-        delete observer5;
-        delete observer4;
         delete observer3;
         delete observer2;
         delete observer1;
@@ -175,8 +198,8 @@ namespace ObserverDesignPatternClassic {
 }
 
 void test_conceptual_example_01() {
-    using namespace ObserverDesignPatternClassic;
-    clientCode();
+    ObserverDesignPatternClassic::clientCode_01();
+    ObserverDesignPatternClassic::clientCode_02();
 }
 
 // ===========================================================================

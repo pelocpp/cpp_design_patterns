@@ -49,7 +49,7 @@ namespace ConceptualExample01 {
     void ConcreteStateB::handle(Context* context)
     {
         StateBase* base = new ConcreteStateA();
-        context->setState (base);
+        context->setState(base);
     }
 }
 
@@ -59,7 +59,7 @@ void test_conceptual_example_01() {
 
     ConcreteStateA* initialState{ new ConcreteStateA };
 
-    Context context (initialState);
+    Context context(initialState);
 
     context.request();
     context.request();
