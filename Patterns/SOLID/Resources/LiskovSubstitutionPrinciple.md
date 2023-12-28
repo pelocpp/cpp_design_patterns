@@ -10,7 +10,7 @@
 
 #### Ziel / Absicht:
 
-&ldquo;Abgeleitete Typen müssen durch ihre Basistypen ersetzbar sein, ohne die Korrektheit des Programms zu verändern&rdquo;.
+&bdquo;Abgeleitete Typen müssen durch ihre Basistypen ersetzbar sein, ohne die Korrektheit des Programms zu verändern&rdquo;.
 
 In anderen Worten:
   * Im Zusammenhang mit C++ bedeutet dies, dass Funktionen/Methoden, die Zeiger/Referenzen auf Basisklassen verwenden,
@@ -23,8 +23,8 @@ In anderen Worten:
 
 Wir betrachten das Liskov-Substitutionsprinzip an einem seiner berühmtesten Beispiele.
 In der Mathematik ist ein Quadrat ein Rechteck.
-Also haben wir es hier mit der &ldquo;ist-ein&rdquo;-Beziehung
-(&ldquo;is-a&rdquo;-Relationship) zu tun.
+Also haben wir es hier mit der &bdquo;ist-ein&rdquo;-Beziehung
+(&bdquo;is-a&rdquo;-Relationship) zu tun.
 
 Dies wollen wir nun mit dem Prinzip der *Vererbung* modellieren.
 Wenn wir im nachfolgenden Beispiel die Klasse `Square` von `Rectangle` ableiten,
@@ -96,7 +96,7 @@ Eine mögliche Verbesserung der Funktion `prozess` könnte so aussehen:
 08: }
 ```
 
-Aber auch diesem Code-Fragment haftet ein gewisser &ldquo;unangenehmer Geruch&rdquo; an,
+Aber auch diesem Code-Fragment haftet ein gewisser &bdquo;unangenehmer Geruch&rdquo; an,
 oder wie es im Fachjargon heißt: *there is a code smell ...*
 
 Wenn in polymorphem Code Anweisungen zur Typprüfung vorhanden sind
@@ -156,13 +156,13 @@ In gutem Quellcode sind derartige Überprüfungen nicht vorhanden!
 ```
 
 In den meisten Einführungen über objektorientierte Programmierung
-wird Vererbung als &ldquo;ist-ein&rdquo;-Beziehung
+wird Vererbung als &bdquo;ist-ein&rdquo;-Beziehung
 mit dem abgeleiteten Objekt diskutiert bzw. angesehen.
 
 Dies ist notwendig, muss aber nicht ausreichend sind.
 Es ist passender zu sagen, dass eine Klasse so entworfen werden sollte,
 dass sie von einer anderen Klasse erbt, wenn beteiligte Objekte
-eine so genannte &ldquo;*is-substitutable-for*&rdquo;-Beziehung zum geerbten Objekt eingehen können.
+eine so genannte &bdquo;*is-substitutable-for*&rdquo;-Beziehung zum geerbten Objekt eingehen können.
 
 
 #### Vorteile des *Liskovschen Substitutionsprinzips*

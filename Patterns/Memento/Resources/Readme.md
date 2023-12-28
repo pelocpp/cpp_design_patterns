@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Zum Speichern und Wiederherstellen des Zustands einer Komponente/eines Objekts.&rdquo;
+&bdquo;Zum Speichern und Wiederherstellen des Zustands einer Komponente/eines Objekts.&rdquo;
 
 Das *Memento Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 mit dem der aktuelle Status eines Objekts gespeichert werden kann,
@@ -30,27 +30,27 @@ jederzeit in den gespeicherten Zustand zurückversetzt werden.
 
 Manchmal ist es erforderlich, den (internen) Status eines Objekts zu einem bestimmten Zeitpunkt zu erfassen
 und diesen Status zu einem späteren Zeitpunkt wieder zu restaurieren.
-Häufig wird dieses Entwurfsmuster verwendet, um eine Anwendung um die &ldquo;*Undo*&rdquo;-Funktionalität zu bereichern.
-Aus diesem Grund wird das Muster auch als &ldquo;*Undo via Rollback*&rdquo; bezeichnet,
+Häufig wird dieses Entwurfsmuster verwendet, um eine Anwendung um die &bdquo;*Undo*&rdquo;-Funktionalität zu bereichern.
+Aus diesem Grund wird das Muster auch als &bdquo;*Undo via Rollback*&rdquo; bezeichnet,
 in anderen Büchern wiederum tritt es als *Snapshot* Entwurfsmuster in Erscheinung.
 
 #### Lösung:
 
 Das Memento-Muster delegiert das Erstellen des Status-Schnappschusses an den tatsächlichen Eigentümer dieses Status,
 also das betrachtete Ursprungsobjekt.
-Dies hat den Vorteil, dass ein Zugriff auf den Status des Objekts &ldquo;von außen&rdquo; nicht notwendig ist,
+Dies hat den Vorteil, dass ein Zugriff auf den Status des Objekts &bdquo;von außen&rdquo; nicht notwendig ist,
 da in den meisten Fällen auf Grund des Zugriffsschutzes der privaten (`private`) und geschützten  (`protected`) Variablen auch gar nicht möglich ist.
 Das Ursprungsobjekt selbst hat den vollen Zugriff auf seinen eigenen Status.
 
-Das Muster sieht vor, die Kopie des Objektstatus in einem speziellen Objekt namens &ldquo;Memento&rdquo; zu speichern.
-Das &ldquo;Memento&rdquo;-Objekt ist keinem anderen Objekt zugänglich als dem, das es erstellt hat.
-Andere Objekte können über eine eingeschränkte Schnittstelle mit &ldquo;Memento&rdquo;-Objekten kommunizieren,
-um so die Metadaten des &ldquo;Memento&rdquo;-Objekt abrufen zu können
+Das Muster sieht vor, die Kopie des Objektstatus in einem speziellen Objekt namens &bdquo;Memento&rdquo; zu speichern.
+Das &bdquo;Memento&rdquo;-Objekt ist keinem anderen Objekt zugänglich als dem, das es erstellt hat.
+Andere Objekte können über eine eingeschränkte Schnittstelle mit &bdquo;Memento&rdquo;-Objekten kommunizieren,
+um so die Metadaten des &bdquo;Memento&rdquo;-Objekt abrufen zu können
 (Erstellungszeit, Name des ausgeführten Vorgangs usw.).
 Es ist nicht der Zugriff auf den im Schnappschuss enthaltene Status des ursprünglichen Objekts möglich.
 
 Mit einer solchen restriktiven Richtlinie lassen sich Memento-Objekte in anderen Objekten speichern,
-die als &ldquo;*CareTaker*&rdquo; bezeichnet werden. Da ein *CareTaker* nur über die eingeschränkte Schnittstelle mit dem Memento-Objekt kommunizieren kann,
+die als &bdquo;*CareTaker*&rdquo; bezeichnet werden. Da ein *CareTaker* nur über die eingeschränkte Schnittstelle mit dem Memento-Objekt kommunizieren kann,
 kann er den im Memento-Objekt gespeicherten Status nicht manipulieren.
 Gleichzeitig hat der Urheber Zugriff auf alle Daten des Memento-Objekts,
 sodass er seinen ursprünglichen Zustand nach Belieben wiederherstellen kann.

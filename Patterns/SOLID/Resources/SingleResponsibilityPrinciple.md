@@ -10,11 +10,11 @@
 
 #### Ziel / Absicht:
 
-&ldquo;Eine Klasse sollte nur einen Grund haben, geändert zu werden&rdquo;.
+&bdquo;Eine Klasse sollte nur einen Grund haben, geändert zu werden&rdquo;.
 
 In anderen Worten:
-Das *Single-Responsibility-Prinzip* besagt, dass Klassen bis zu dem Punkt &ldquo;kohärent&rdquo; (semantisch zusammenhängend) sein sollten,
-indem sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &ldquo;für eine Änderung&rdquo; definiert wird.
+Das *Single-Responsibility-Prinzip* besagt, dass Klassen bis zu dem Punkt &bdquo;kohärent&rdquo; (semantisch zusammenhängend) sein sollten,
+indem sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &bdquo;für eine Änderung&rdquo; definiert wird.
 
 #### Beispiel: Violating the Single Responsibility Principle
 
@@ -62,7 +62,7 @@ indem sie eine einzige Verantwortung tragen, wobei Verantwortung als ein Grund &
 #### Beispiel: Respecting the Single Responsibility Principle
 
 Wir betrachten eine Überarbeitung des letzten Beispiels.
-Man könnte sie auch unter der Begrifflichkeit &ldquo;Separation of Concerns&rdquo; einordnen:
+Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdquo; einordnen:
 
 ```cpp
 01: class Journal 

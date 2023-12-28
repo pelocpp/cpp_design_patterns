@@ -10,19 +10,19 @@
 
 #### Ziel / Absicht:
 
-  * &ldquo;High-Level&rdquo;-Module sollten nicht von &ldquo;Low-Level&rdquo;-Modulen abhängen. Beide sollten von Abstraktionen abhängen.
+  * &bdquo;High-Level&rdquo;-Module sollten nicht von &bdquo;Low-Level&rdquo;-Modulen abhängen. Beide sollten von Abstraktionen abhängen.
   * Abstraktionen sollten nicht von Details abhängen. Details sollten von Abstraktionen abhängen.
 
 Die obigen Zeilen mögen zunächst kryptisch erscheinen, wir versuchen sie anhand eines Beispiels zu erläutern.
 
-Was versteht man eigentlich unter &ldquo;High-Level&rdquo;- und &ldquo;Low-Level&rdquo;-Modulen?
+Was versteht man eigentlich unter &bdquo;High-Level&rdquo;- und &bdquo;Low-Level&rdquo;-Modulen?
 
-  * &ldquo;High-Level&rdquo;-Module &ndash; Beschreiben Operationen, die abstrakterer Natur sind und komplexere Logik enthalten. Diese
-    Module orchestrieren typischerweise die &ldquo;Low-Level&rdquo;-Module in einer Anwendung.
+  * &bdquo;High-Level&rdquo;-Module &ndash; Beschreiben Operationen, die abstrakterer Natur sind und komplexere Logik enthalten. Diese
+    Module orchestrieren typischerweise die &bdquo;Low-Level&rdquo;-Module in einer Anwendung.
 
-  * &ldquo;Low-Level&rdquo;-Module &ndash; Beschreiben Implementierungen in einer spezifischeren und individuelleren
+  * &bdquo;Low-Level&rdquo;-Module &ndash; Beschreiben Implementierungen in einer spezifischeren und individuelleren
     Art und Weise und legen den Fokus mehr auf die Details in einer Anwendung.
-    Diese Module werden von den &ldquo;High-Level&rdquo;-Modulen verwendet.
+    Diese Module werden von den &bdquo;High-Level&rdquo;-Modulen verwendet.
 
 #### Beispiel: Violating the Dependency Inversion Principle
 
@@ -70,10 +70,10 @@ Erkennen Sie die Nachteile dieser Implementierung?
     zu `std::set` oder einen anderen Container geändert wird, kann dies Auswirkungen auf die Klasse `FamilyTree` haben:
     Dies stellt definitiv kein gutes Design dar!
 
-  * &ldquo;Low-Level&rdquo;-Module, z.B. Klasse `Relationships` hängen direkt vom &ldquo;High-Level&rdquo;-Modul ab (hier: Klasse `FamilyTree`).
+  * &bdquo;Low-Level&rdquo;-Module, z.B. Klasse `Relationships` hängen direkt vom &bdquo;High-Level&rdquo;-Modul ab (hier: Klasse `FamilyTree`).
     Dies stellt eine Verletzung des *Dependency Inversion Prinzips* dar.
 
-Stattdessen sollten wir vom &ldquo;Low-Level&rdquo;-Modul eine Abstraktion erstellen und &ldquo;Low-Level&rdquo;- und &ldquo;High-Level&rdquo;-Module an diese Abstraktion binden.
+Stattdessen sollten wir vom &bdquo;Low-Level&rdquo;-Modul eine Abstraktion erstellen und &bdquo;Low-Level&rdquo;- und &bdquo;High-Level&rdquo;-Module an diese Abstraktion binden.
 Betrachten Sie den folgenden Vorschlag:
 
 #### Beispiel: Respecting the Dependency Inversion Principle
@@ -131,8 +131,8 @@ Betrachten Sie den folgenden Vorschlag:
 
 ##### Beachten Sie an dem Quellcode:
 
-  * Egal, ob sich nun innerhalb des &ldquo;Low-Level&rdquo;-Moduls eine Änderung ergibt (z.B. Austausch eines verwendeten STL-Containers),
-  das &ldquo;High-Level&rdquo;-Modul oder andere Quellcode-Anteile, die dem *Dependency Inversion Prinzip* folgen, bleiben intakt!
+  * Egal, ob sich nun innerhalb des &bdquo;Low-Level&rdquo;-Moduls eine Änderung ergibt (z.B. Austausch eines verwendeten STL-Containers),
+  das &bdquo;High-Level&rdquo;-Modul oder andere Quellcode-Anteile, die dem *Dependency Inversion Prinzip* folgen, bleiben intakt!
 
 #### Vorteile des *Dependency-Inversion-Prinzips*
 

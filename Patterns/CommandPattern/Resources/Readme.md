@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Entkoppelt einen Sender und Empfänger, indem ein separates Objekt für ein oder mehrere Operationen erstellt wird.&rdquo;
+&bdquo;Entkoppelt einen Sender und Empfänger, indem ein separates Objekt für ein oder mehrere Operationen erstellt wird.&rdquo;
 
 Das *Command Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 das eine Anforderung (einen *Request*, einen *Befehl*) in ein eigenständiges Objekt umwandelt,
@@ -62,7 +62,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 #### 'Beginners Example':
 
-Bei den Fallstudien zu diesem Seminar finden Sie unter dem Stichwort &ldquo;Bankkonten&rdquo;
+Bei den Fallstudien zu diesem Seminar finden Sie unter dem Stichwort &bdquo;Bankkonten&rdquo;
 ein praxisnahes Beispiel vor.
 
 ---

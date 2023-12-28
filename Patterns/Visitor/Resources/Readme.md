@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Hinzufügen einer neuen Operation für eine Gruppe ähnlicher Objekte oder Hierarchien.&rdquo;
+&bdquo;Hinzufügen einer neuen Operation für eine Gruppe ähnlicher Objekte oder Hierarchien.&rdquo;
 
 Das *Visitor Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 das eine Menge strukturierter Daten von den Funktionen trennt,
@@ -30,11 +30,11 @@ Im Kern geht es darum, eine Hierarchie von Klassen und Operationen auf diesen Kl
 #### Prinzip:
 
 Das Muster definiert eine Art Infrastruktur für den Zugriff auf komplexe dynamische Daten- und Objektstrukturen.
-Dabei wird der dynamischen Struktur eine Methodenschnittstelle gegeben, die ein sogenanntes &ldquo;Besucher&rdquo;-Objekt entgegennimmt
-und über alle Daten der Struktur schleust. Das &ldquo;Besucher&rdquo;-Objekt läuft also an allen Elementen der Struktur entlang
-und wird von den Elementen über eine Methode &ldquo;akzeptiert&rdquo;.
+Dabei wird der dynamischen Struktur eine Methodenschnittstelle gegeben, die ein sogenanntes &bdquo;Besucher&rdquo;-Objekt entgegennimmt
+und über alle Daten der Struktur schleust. Das &bdquo;Besucher&rdquo;-Objekt läuft also an allen Elementen der Struktur entlang
+und wird von den Elementen über eine Methode &bdquo;akzeptiert&rdquo;.
 Die Konvention besteht darin, diese Methode `accept` zu nennen.
-Dabei ruft das Strukturelement eine Methode im &ldquo;Besucher&rdquo;-Objekt auf,
+Dabei ruft das Strukturelement eine Methode im &bdquo;Besucher&rdquo;-Objekt auf,
 die speziell für den Typ des Strukturelements geschrieben wurde und eine Referenz oder einen Zeiger
 auf das Strukturelement in ihrer Parameterliste hat.
 Damit hat der Visitor wiederum die Chance, eine Operation auf dem Strukturelement auszuführen
@@ -46,7 +46,7 @@ Freiheitsgrade für Variationen dieses Entwurfsmusters.
 
 #### Eine didaktische Herleitung in 4 Schritten:
 
-##### Schritt 1: Ein &ldquo;aufdringlicher&rdquo; Besucher (*intrusive Visitor*)
+##### Schritt 1: Ein &bdquo;aufdringlicher&rdquo; Besucher (*intrusive Visitor*)
 
 Nehmen wir an, wir haben eine Hierarchie von Dokumentenobjekten der folgenden Gestalt:
 
@@ -185,7 +185,7 @@ Jedes *Concern* sollte in einer separaten Klasse abgehandelt werden,
 um vor allem das *Single*-*Responsibility*-Prinzips zu beachten.
 
 
-##### Schritt 2: Ein &ldquo;reflektierender&rdquo; Besucher (*reflective Visitor*)
+##### Schritt 2: Ein &bdquo;reflektierender&rdquo; Besucher (*reflective Visitor*)
 
 ```cpp
 01: class Document
@@ -273,7 +273,7 @@ um deren Verarbeitung es geht, werden Sie am Ende eine lange Kaskade von `if`/`e
 und unnötige Performanceaufwendungen für *RTTI* haben.
 
 
-##### Schritt 3: Ein &ldquo;klassischer&rdquo; Besucher (*classic Visitor*)
+##### Schritt 3: Ein &bdquo;klassischer&rdquo; Besucher (*classic Visitor*)
 
 Damit kommen wir nun auf die klassische Umsetzung des *Visitor* Patterns zu sprechen.
 Diese wird weiter unten noch näher erläutert werden (begleitender Text und UML-Diagramm):
@@ -498,16 +498,16 @@ Die durch den Visitor transpor­tierte Operation wird in einer Kindklasse der Vis
 Damit lassen sich beliebige Operationen definieren
 und durch den allgemeinen Traversierungs­mechanismus in die Objekt­struktur tragen.
 Mit dem Namen des Visitors wird das Verhalten des Musters gewürdigt.
-Das Visitor­objekt geht die Objekte in der Objekt­struktur &ldquo;besuchen&rdquo;.
+Das Visitor­objekt geht die Objekte in der Objekt­struktur &bdquo;besuchen&rdquo;.
 
 Das Ergebnis der Trennung von Objektstruktur und Funktionen (Algorithmen) ist ein Datenmodell
-mit eingeschränkter Funktionalität und einer Gruppe von &ldquo;*Besuchern*&rdquo;,
+mit eingeschränkter Funktionalität und einer Gruppe von &bdquo;*Besuchern*&rdquo;,
 die Operationen auf den Daten ausführen.
 Ein weiterer Vorteil ist die Möglichkeit, einen neuen *Besucher* hinzufügen zu können,
 ohne dabei die vorhandene Struktur ändern zu müssen. 
 Die Daten-Klassen sind mit Attributen (Eigenschaften, *getter*/*setter*-Methoden) so zu erstellen,
-dass diese vom &ldquo;Besucher&rdquo;-Objekt geeignet verwendet werden können.
-Typischerweise wird das Datenobjekt als Parameter an eine Methode des &ldquo;Besucher&rdquo;-Objekts übergeben
+dass diese vom &bdquo;Besucher&rdquo;-Objekt geeignet verwendet werden können.
+Typischerweise wird das Datenobjekt als Parameter an eine Methode des &bdquo;Besucher&rdquo;-Objekts übergeben
 (die Konvention besteht darin, diese Methode `visit` zu nennen).
 
 #### Struktur (UML):
@@ -520,7 +520,7 @@ Es besteht im Wesentlichen aus sechs Teilen:
   * **ObjectStructure**: Dies ist eine Klasse, die alle Objekte enthält, die besucht werden können.
     Es bietet einen Mechanismus zum Traversieren aller Elemente.
     Diese Struktur muss nicht zwingend eine *Collection* sein, es kann irgend eine komplexe Struktur sein, beispielsweise ein *Composite Object*.
-  * **ElementBase**: Stellt eine Abstraktionsschnittstelle dar, die die `accept`-Operation deklariert. Dies ist der Einstiegspunkt, an dem ein Objekt vom Besucherobjekt &ldquo;besucht&rdquo; werden kann.
+  * **ElementBase**: Stellt eine Abstraktionsschnittstelle dar, die die `accept`-Operation deklariert. Dies ist der Einstiegspunkt, an dem ein Objekt vom Besucherobjekt &bdquo;besucht&rdquo; werden kann.
     Jedes Objekt aus einer *Collection* sollte diese Abstraktionsschnittstelle implementieren, um besucht werden zu können.
   * **ConcreteElement**: Diese Klassen erben von der abstrakten Basisklasse `ElementBase` oder implementieren eine Schnittstelle
     und definieren eine `accept`-Operation. Das *Visitor*-Objekt wird durch die `accept`-Operation an dieses Objekt übergeben.
@@ -613,8 +613,8 @@ eine Methode desselben Namens (derselben Schnittstelle) enthalten,
 wie zum Beispiel `getPrice` oder `getCount`, dann haben Sie das Ziel fast schon erreicht.
 
 *Zusatzaufgabe*:
-Realisieren Sie eine Methode `addMedia`, die ein beliebiges &ldquo;Media&rdquo;-Objekt einem `Bookstore`-Objekt hinzufügen kann.
-Natürlich muss der Datentyp des &ldquo;Media&rdquo;-Objekts (also z.B. `Book` oder `Movie`) für das `Bookstore`-Objekt
+Realisieren Sie eine Methode `addMedia`, die ein beliebiges &bdquo;Media&rdquo;-Objekt einem `Bookstore`-Objekt hinzufügen kann.
+Natürlich muss der Datentyp des &bdquo;Media&rdquo;-Objekts (also z.B. `Book` oder `Movie`) für das `Bookstore`-Objekt
 bereits bekannt sein:
 
 ```cpp

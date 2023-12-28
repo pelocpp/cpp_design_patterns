@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Um das durch seinen Zustand bestimmte Verhalten des Objekts zu implementieren.&rdquo;
+&bdquo;Um das durch seinen Zustand bestimmte Verhalten des Objekts zu implementieren.&rdquo;
 
 Das Muster beschreibt, wie ein Objekt sein Verhalten in Abhängigkeit
 von seinem aktuellen internen Zustand vollständig ändern kann.
@@ -335,7 +335,7 @@ Das zweite Real-World Beispiel stammt aus dem Buch
 von Adrian Ostrowski und Piotr Gaczkowski.
 
 Das Beispiel zum Lichtschalter und entlichen Automaten kann man in dem Artikel
-[&ldquo;Implementing a Finite State Machine in C++&rdquo;](https://www.aleksandrhovhannisyan.com/blog/implementing-a-finite-state-machine-in-cpp/)
+[&bdquo;Implementing a Finite State Machine in C++&rdquo;](https://www.aleksandrhovhannisyan.com/blog/implementing-a-finite-state-machine-in-cpp/)
 nachlesen.
 
 ---

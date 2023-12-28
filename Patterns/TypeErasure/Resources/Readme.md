@@ -12,13 +12,13 @@
 
 ###### In einem Satz:
 
-&ldquo;Um einen generischen Container zu erstellen, der eine Vielzahl unterschiedlicher, konkreter Typen aufnehmen kann.&rdquo;
+&bdquo;Um einen generischen Container zu erstellen, der eine Vielzahl unterschiedlicher, konkreter Typen aufnehmen kann.&rdquo;
 
 *Type Erasure* ermöglicht es, verschiedene Datentypen mit einem generischen Interface zu verwenden.
-Das Idiom *Type Erasure* ist auch unter dem Namen &ldquo;*Duck Typing*&rdquo; bekannt.
+Das Idiom *Type Erasure* ist auch unter dem Namen &bdquo;*Duck Typing*&rdquo; bekannt.
 Der Begriff geht auf ein Gedicht von [James Whitcomb Riley](https://de.wikipedia.org/wiki/James_Whitcomb_Riley) zurück:
 
-&ldquo;*When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.*&rdquo;
+&bdquo;*When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.*&rdquo;
 
 Was ist damit gemeint bzw. welchen Zusammenhang gibt es zur objekt-orientierten Programmierung?
 Wir stellen uns eine Funktion
@@ -32,9 +32,9 @@ In statisch typisierten Sprachen wie C++ kann diese Funktion nur mit Objekten au
 deren Typ sich von `Duck`  abgeleitet.
 
 Es gibt aber auch andere Programmiersprachen wie beispielsweise Python.
-Hier könnten alle Datentypen verwendet werden, die sich wie ein Objekt des Typs `Duck` &ldquo;*verhalten*&rdquo;.
-Damit ist gemeint:  &ldquo;Wenn ein Vogel sich wie eine Ente verhält, dann ist es eine Ente&rdquo;.
-Ein Sprichwort in Python bringt das verschärft auf den Punkt: &ldquo;*Don't ask for permission, ask for forgiveness.*&rdquo;.
+Hier könnten alle Datentypen verwendet werden, die sich wie ein Objekt des Typs `Duck` &bdquo;*verhalten*&rdquo;.
+Damit ist gemeint:  &bdquo;Wenn ein Vogel sich wie eine Ente verhält, dann ist es eine Ente&rdquo;.
+Ein Sprichwort in Python bringt das verschärft auf den Punkt: &bdquo;*Don't ask for permission, ask for forgiveness.*&rdquo;.
 
 Etwas mehr vor einem programmiersprachlichen Hintergrund formuliert bedeutet das:
 Wir rufen eine Funktion `acceptsOnlyDucks` mit einem Vogel auf und hoffen auf das Beste :).
@@ -167,7 +167,7 @@ Das heißt, wir definieren unsere eigene Schnittstelle (hier: `MyAnimal`) und imp
 Jede Implementierung der Schnittstelle umschließt eine Klasse `Cow`, eine Klasse `Pig` oder eine Klasse `Dog`
 und ruft diese für ihre virtuellen Methoden auf.
 Dann erstellen wir Wrapper-Objekte, die von `MyAnimal` erben.
-Jeder Wrapper tut nichts weiter als das &ldquo;echte&rdquo; zu Grunde liegende Objekt aufzurufen:
+Jeder Wrapper tut nichts weiter als das &bdquo;echte&rdquo; zu Grunde liegende Objekt aufzurufen:
 
 Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, `Pig`- oder `Dog`-Objekt umschließen:
 
@@ -275,7 +275,7 @@ Durch die Verwendung von Templates:
 
 #### Das *Type Erasure* Idiom
 
-Das, was wir im letzten Abschnitt gebaut haben, ist die Grundlage des &ldquo;*Type Erasure*&rdquo; Idioms.
+Das, was wir im letzten Abschnitt gebaut haben, ist die Grundlage des &bdquo;*Type Erasure*&rdquo; Idioms.
 Was wir noch erledigen sollten, ist, all diese Maschinerie hinter einer weiteren Klasse zu verstecken,
 damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und Templates befassen muss:
 
@@ -345,7 +345,7 @@ damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und 
 
 #### *Type Erasure* Nomenklatur
 
-Die im letzten Abschnitt verwendeten Bezeichner `MyAnimal` und `AnimalWrapper` treten im &ldquo;echten Leben&rdquo;
+Die im letzten Abschnitt verwendeten Bezeichner `MyAnimal` und `AnimalWrapper` treten im &bdquo;echten Leben&rdquo;
 so natürlich nicht auf, sie haben standardisierte Bezeichner:
 
   * `MyAnimal` ist ein Beispiel eines *Type Erasure* **Konzepts**: Klasse `Concept`.

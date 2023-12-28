@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Um die Kommunikation zwischen Objekten zu erleichtern.&rdquo;
+&bdquo;Um die Kommunikation zwischen Objekten zu erleichtern.&rdquo;
 
 Das *Mediator Pattern* ist ein Verhaltensentwurfsmuster,
 das die lose Kopplung von Objekten propagiert,

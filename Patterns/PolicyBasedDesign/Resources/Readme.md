@@ -12,13 +12,13 @@
 
 ###### In einem Satz:
 
-&ldquo;*Policies* stellen Schnittstellen für konfigurierbare Belange einer Klasse dar.&rdquo;
+&bdquo;*Policies* stellen Schnittstellen für konfigurierbare Belange einer Klasse dar.&rdquo;
 
 #### Problem / Motivation
 
-Wir bewegen uns im Problemfeld &ldquo;*Entwurfsentscheidungen*&rdquo; bei der Softwareentwicklung:
+Wir bewegen uns im Problemfeld &bdquo;*Entwurfsentscheidungen*&rdquo; bei der Softwareentwicklung:
 
-  * Stichwort:  &ldquo;*Wie man es macht, macht man es falsch*&rdquo; :).
+  * Stichwort:  &bdquo;*Wie man es macht, macht man es falsch*&rdquo; :).
 
   * Eine Strategie kann sein: Entscheidungen sollten nicht beim Entwickler einer Klasse liegen, sondern beim Anwender.
 
@@ -30,7 +30,7 @@ Wir bewegen uns im Problemfeld &ldquo;*Entwurfsentscheidungen*&rdquo; bei der So
   * Schaffung einer Auswahlmöglichkeit für verschiedene Verhaltensweisen durch den Anwender.
    
 
-Damit sind wir beim Begriff der &ldquo;Policy&rdquo; angekommen:
+Damit sind wir beim Begriff der &bdquo;Policy&rdquo; angekommen:
 
   * *Policies* sind Schnittstellen für konfigurierbare Belange einer Klasse.
   * Genauer: Eine *Policy* ist eine Klasse oder ein Klassentemplate, die eine Schnittstelle als Dienstleistung zu anderen Klassen definiert. 
@@ -50,14 +50,14 @@ Policies sind vom Benutzer der Klasse auswählbar:
 
 ---
 
-#### Beispiel: Violating the &ldquo;Deleting Destructor&rdquo; Issue
+#### Beispiel: Violating the &bdquo;Deleting Destructor&rdquo; Issue
 
 Dynamisch allokierte Speicherbereiche können in C++ mit den beiden Anweisungen
 `new` oder `new[]` reserviert werden. Hieraus leitet sich für die Freigabe des allokierten Speichers
 ein kleines Problem bzw. angenehmer formuliert, eine Anforderung an das Programm ab:
 
-  * Speicher wurde mit `new` allokiert &Rightarrow;<br/>Der Speicherbereich ist mit einem Aufruf von `delete`, dem so genannten &ldquo;*Scalar Deleting Destructor*&ldquo; freizugeben.
-  * Speicher wurde mit `new[]` allokiert &Rightarrow;<br/>Der Speicherbereich ist mit einem Aufruf von `delete[]`, dem so genannten &ldquo;*Vector Deleting Destructor*&ldquo; freizugeben.
+  * Speicher wurde mit `new` allokiert &Rightarrow;<br/>Der Speicherbereich ist mit einem Aufruf von `delete`, dem so genannten &bdquo;*Scalar Deleting Destructor*&bdquo; freizugeben.
+  * Speicher wurde mit `new[]` allokiert &Rightarrow;<br/>Der Speicherbereich ist mit einem Aufruf von `delete[]`, dem so genannten &bdquo;*Vector Deleting Destructor*&bdquo; freizugeben.
 
 Das ist leichter gesagt, als getan! Nicht immer lässt sich aus dem Programmcode ableiten,
 welcher der beiden `delete`-Aufrufe abzusetzen ist, da man an Hand der Zeigervariablen nicht erkennen kann,
@@ -111,7 +111,7 @@ Welche Variante oder Varianten des `delete`-Operators kommen zur Ausführung?
 
 ---
 
-#### Beispiel: Respecting the &ldquo;Deleting Destructor&rdquo; Issue
+#### Beispiel: Respecting the &bdquo;Deleting Destructor&rdquo; Issue
 
 Wir erweitern die `SmartPtr`-Klasse aus dem letzen Beispiel um ein *Policy*-Objekt:
 
@@ -340,7 +340,7 @@ verlangt der C++ Standard, dass die Größe eines Objekts mindestens 1 Byte ist.
 
 Im Umfeld der Vererbung kommt hier eine interessante Beobachtung ins Spiel:
 Wenn beispielsweise die *Policy* `LogToConsole` keine Instanzvariablen besitzt, 
-können wir von der sogenannten &ldquo;Empty Base Class Optimization&rdquo; profitieren.
+können wir von der sogenannten &bdquo;Empty Base Class Optimization&rdquo; profitieren.
 Sie besagt, dass in diesem Fall eine *Policy*-Klasse *nicht* die Größe (Anzahl Bytes) des `Logger`-Objekts erhöht!
 
 Bei der Komposition von Klassen ist dies eben nicht der Fall,
@@ -367,7 +367,7 @@ class Logger : private TOutputPolicy
 ## Literaturhinweise
 
 Die Anregungen zum Beispiel mit der *SmartPointer*-Klasse sind dem Buch
-&ldquo;*Hands-On Design Patterns with C++*&rdquo; von Fedor G. Pikus entnommen, 
+&bdquo;*Hands-On Design Patterns with C++*&rdquo; von Fedor G. Pikus entnommen, 
 siehe dazu auch das [Literaturverzeichnis](../../../Resources/Readme_07_Literature.md).
 
 ---

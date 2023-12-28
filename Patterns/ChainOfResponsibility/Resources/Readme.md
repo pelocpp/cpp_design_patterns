@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Bietet die Möglichkeit, eine Anfrage von mehr als einem Objekt/einer Komponente zu bearbeiten.&rdquo;
+&bdquo;Bietet die Möglichkeit, eine Anfrage von mehr als einem Objekt/einer Komponente zu bearbeiten.&rdquo;
 
 Das *Chain of Responsibility Pattern* ist ein Entwurfsmuster,
 das eine verkettete Liste von Methoden (*Handlern*) definiert,
@@ -89,7 +89,7 @@ Ein erster Aufruf von
 login->authenticate();
 ```
 
-löst eine &ldquo;*Chain of Responsibility*&rdquo; Kette aus,
+löst eine &bdquo;*Chain of Responsibility*&rdquo; Kette aus,
 um jeden für die Anmeldung erforderlichen Schritt einzeln in die Wege zu leiten.
 
 Man kann den Anmeldeprozess auch auf einfachste Weise um weitere Schritte ergänzen,

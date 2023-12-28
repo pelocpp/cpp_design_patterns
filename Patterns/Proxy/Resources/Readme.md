@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Eine Schnittstelle für den Zugriff auf eine bestimmte Ressource.&rdquo;
+&bdquo;Eine Schnittstelle für den Zugriff auf eine bestimmte Ressource.&rdquo;
 
 Das *Proxy Pattern* ist ein strukturelles Entwurfsmuster,
 das für ein anderes Objekt (Ressource) einen Art Ersatz oder Platzhalter bereitstellt.
@@ -112,7 +112,7 @@ inklusive *getter*- und *setter*-Methode für diese Variable.
 
 Der Vorteil dieser *Properties* &ndash; samt der vorgestellten Realisierung in C++ &ndash; liegt
 darin begründet, dass man auf diese Weise 
-den (schreibenden und/oder lesenden) Zugriff auf derartige Instanzvariable &ldquo;abfangen&rdquo; bzw. &ldquo;mitloggen&rdquo; kann.
+den (schreibenden und/oder lesenden) Zugriff auf derartige Instanzvariable &bdquo;abfangen&rdquo; bzw. &bdquo;mitloggen&rdquo; kann.
 
 ---
 
@@ -220,7 +220,7 @@ und
 
 vor.
 
-Die beiden Beispiele &ldquo;Property Proxy&ldquo; und &ldquo;Virtual Proxy&ldquo;
+Die beiden Beispiele &bdquo;Property Proxy&bdquo; und &bdquo;Virtual Proxy&bdquo;
 stammen aus dem [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/proxy-design-pattern-in-modern-cpp/).
 
 ---

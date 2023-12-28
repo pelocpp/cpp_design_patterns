@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Je nach Bedarf einen bestimmten Algorithmus aus einer Familie von Algorithmen auswählen.&rdquo;
+&bdquo;Je nach Bedarf einen bestimmten Algorithmus aus einer Familie von Algorithmen auswählen.&rdquo;
 
 Das Strategie-Entwurfsmuster ist ein Entwurfsmuster,
 in dem eine Reihe ähnlicher Algorithmen definiert und jeweils in eigenen Klassen eingekapselt und implementiert werden.
@@ -40,8 +40,8 @@ weitere, neue Algorithmen nahtlos hinzuzufügen.
 
 #### Lösung:
 
-Das &ldquo;Strategie Entwurfsmuster&rdquo; zählt zur Kategorie der &ldquo;Verhaltensmuster&rdquo; / &ldquo;Behavioral Pattern&rdquo;.
-Es injiziert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung (&ldquo;*Object* / *Context*&rdquo;) austauschen lassen.
+Das &bdquo;Strategie Entwurfsmuster&rdquo; zählt zur Kategorie der &bdquo;Verhaltensmuster&rdquo; / &bdquo;Behavioral Pattern&rdquo;.
+Es injiziert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung (&bdquo;*Object* / *Context*&rdquo;) austauschen lassen.
 
 Das Strategie Pattern wird häufig eingesetzt, um das Verhalten einer Klasse zu ändern,
 ohne dies über eine Spezialisierung vorzunehmen.
@@ -83,7 +83,7 @@ die zur Laufzeit austauschbar sind.
 
 ## Statisches Strategy Design Pattern mit Template Klassen
 
-[Quellcode &ldquo;Statische Shapes&rdquo;](../StaticStrategyExample.cpp)
+[Quellcode &bdquo;Statische Shapes&rdquo;](../StaticStrategyExample.cpp)
 
 Das *Decorator Design Pattern* konnte man sowohl dynamisch als auch statisch implementieren,
 und dies kann man beim *Strategy Design Pattern* genauso umsetzen.

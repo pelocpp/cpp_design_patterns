@@ -18,11 +18,11 @@
 
 ###### In einem Satz:
 
-&ldquo;Um Redundanzen beim Speichern von Daten zu vermeiden.&rdquo;
+&bdquo;Um Redundanzen beim Speichern von Daten zu vermeiden.&rdquo;
 
 Das *Flyweight Pattern* ist ein Entwurfsmuster aus der Kategorie der *Structural Pattern*,
 das verwendet wird, um den Ressourcenverbrauch eines Programms mit einer sehr großen Anzahl von Objekten zu minimieren.
-Beim Erzeugen von vielen tausend identischen Objekten können zustandslose &ldquo;Flyweight&rdquo;-Objekte
+Beim Erzeugen von vielen tausend identischen Objekten können zustandslose &bdquo;Flyweight&rdquo;-Objekte
 den in Anspruch genommen Speicher auf ein vertretbares Maß reduzieren.
 
 #### Problem:
@@ -73,9 +73,9 @@ Das folgende UML-Diagramm beschreibt eine Implementierung des *Flyweight Pattern
 Es besteht im Wesentlichen aus vier Teilen:
 
   * **Flyweight**: Beschreibt eine Klasse *Flyweight*, die den Teil des Status des zu betrachtenden Objekts enthält, der von mehreren Objekten gemeinsam genutzt werden kann.
-    Dieses Objekt kann mehrfach verwendet werden. Der im *Flyweight* Objekt gespeicherte Zustand wird als &ldquo;intrinsisch&rdquo; oder &ldquo;repeating&rdquo; bezeichnet.
-    Der Zustand, der an die Methoden des *Flyweight* Objekt übergeben wird, wird als &ldquo;extrinsisch&rdquo; bezeichnet.
-    Ein Flyweight-Objekt muss &ldquo;gemeinsam nutzbar&rdquo; (*sharable*) sein.
+    Dieses Objekt kann mehrfach verwendet werden. Der im *Flyweight* Objekt gespeicherte Zustand wird als &bdquo;intrinsisch&rdquo; oder &bdquo;repeating&rdquo; bezeichnet.
+    Der Zustand, der an die Methoden des *Flyweight* Objekt übergeben wird, wird als &bdquo;extrinsisch&rdquo; bezeichnet.
+    Ein Flyweight-Objekt muss &bdquo;gemeinsam nutzbar&rdquo; (*sharable*) sein.
     Jeder Zustand, den dieses Objekt speichert, muss intrinsisch sein.
   * **FlyweightBase**: Abstraktion der Klasse *Flyweight* zu einem Schnittstellentyp.
   * **UnsharedFlyweight**: Nicht alle *Flyweight* Objekte können gemeinsam genutzt werden.
@@ -104,12 +104,12 @@ Es besteht im Wesentlichen aus vier Teilen:
 #### Erstes 'Real-World' Beispiel:
 
 Wir betrachten als Anwendung eine Spiele-Applikation, in der viele Bäume zu dekorativen Zwecken platziert sind.
-Einen solchen Baum (Klasse `Tree`) gibt es  stilistisch in den drei Varianten &ldquo;Palme&rdquo;, &ldquo;Zypresse&rdquo; oder &ldquo;Gartenbaum&rdquo;
+Einen solchen Baum (Klasse `Tree`) gibt es  stilistisch in den drei Varianten &bdquo;Palme&rdquo;, &bdquo;Zypresse&rdquo; oder &bdquo;Gartenbaum&rdquo;
 mit jeweils eine Höhe von 30 Pixel.
 
 Ein `Tree`-Objekt hat die folgenden Attribute:
 
-  * *Style* - Stil des Baums. In unserem Beispiel entweder &ldquo;palm&rdquo;, &ldquo;cypress&rdquo; oder &ldquo;garden&rdquo;.
+  * *Style* - Stil des Baums. In unserem Beispiel entweder &bdquo;palm&rdquo;, &bdquo;cypress&rdquo; oder &bdquo;garden&rdquo;.
   * *Height* - Die Höhe des Baums ist immer 30 Pixel.
   * *Position* - Die Koordinate (*x,y*) des Baums in der Spielebene.
 
@@ -119,7 +119,7 @@ Ein `Tree`-Objekt hat die folgenden Attribute:
 *Abbildung* 2: Viele identische `Tree`-Objekte werden in einer Anwendung verwendet.
 
 Nehmen wir nun an, wir wollen 12.000 Bäume
-(jeweils die Stile &ldquo;palm&rdquo; &ndash;, &ldquo;cypress&rdquo; &ndash; und &ldquo;garden&rdquo; &ndash; zu 4000 Stück) im Spiel platzieren
+(jeweils die Stile &bdquo;palm&rdquo; &ndash;, &bdquo;cypress&rdquo; &ndash; und &bdquo;garden&rdquo; &ndash; zu 4000 Stück) im Spiel platzieren
 und den Bedarf des Speicherverbrauchs ermitteln,
 der erforderlich ist, um diese Baumobjekte im Speicher abzulegen.
 

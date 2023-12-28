@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Trennung der Schnittstelle von einer Implementierung.&rdquo;
+&bdquo;Trennung der Schnittstelle von einer Implementierung.&rdquo;
 
 Das *Bridge Pattern* ist ein strukturelles Entwurfsmuster,
 mit dem sich eine große Klasse oder eine Reihe eng verwandter Klassen in zwei separate Hierarchien aufteilen
@@ -36,7 +36,7 @@ Betrachten wir ein Beispiel, in dem eine Implementierung auf zwei oder mehreren 
 Zum Beispiel ein Programm, das die Persistenz von Objekten auf verschiedenen Plattformen (Betriebssystemen) realisiert.
 Einige Objekte sollen in einer Datenbank und andere Objekte wiederum im Dateisystem des unterlagerten
 Betriebssystems gespeichert werden. 
-Wird das Programm um diese Funktionalität &ldquo;straight forward&rdquo; erweitert,
+Wird das Programm um diese Funktionalität &bdquo;straight forward&rdquo; erweitert,
 sind Probleme vorprogrammiert, da die Abstraktion mit der Implementierung verknüpft wird.
 In diesem Fall ist es besser, das *Bridge Pattern*  zu verwenden und die Abstraktion von der Implementierung zu trennen.
 Wird dieses Muster nicht verwendet, kann man die Beobachtung machen,

@@ -10,7 +10,7 @@
 
 ###### In einem Satz:
 
-&ldquo;*Active Object* ist ein *Concurrency Pattern*, bei dem man versucht, den Aufruf einer Methode von ihrer Ausführung zu trennen.&rdquo;
+&bdquo;*Active Object* ist ein *Concurrency Pattern*, bei dem man versucht, den Aufruf einer Methode von ihrer Ausführung zu trennen.&rdquo;
 
 #### Ziel / Absicht:
 
@@ -109,7 +109,7 @@ transportiert werden kann.
 
 #### Zweites Real-World Example:
 
-Das zweite &ldquo;Real-World&rdquo;-Beispiel berechnet die Summe der natürlichen Zahlen von 1 bis *n*.
+Das zweite &bdquo;Real-World&rdquo;-Beispiel berechnet die Summe der natürlichen Zahlen von 1 bis *n*.
 Das könnte man natürlich in einem einzigen Thread abhandeln, und mit Hilfe der Gaußschen Summenformel ließe sich
 die Berechnung nochmals vereinfachen.
 Dennoch habe ich dieses Beispiel gewählt, um zum einen den Anwendungsfall

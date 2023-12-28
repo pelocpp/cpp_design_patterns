@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Um einzelne Objekte und Gruppen von Objekten einheitlich zu behandeln.&rdquo;
+&bdquo;Um einzelne Objekte und Gruppen von Objekten einheitlich zu behandeln.&rdquo;
 
 Das *Composite Entwurfsmuster* ist ein strukturelles Entwurfsmuster,
 mit dem Sie Objekte zu Baumstrukturen zusammensetzen und dann mit diesen Strukturen arbeiten können,
@@ -401,7 +401,7 @@ Anregungen zum Beispiel und zum C++17 Filesystem findet man zum Beispiel unter
 
 [github.com/achimoraites/DesignPatterns](https://github.com/achimoraites/DesignPatterns/blob/master/CompositePattern/FileSystem/src/ui/FileSystem.java)<br>(abgerufen am 11.05.2020).
 
-Das &ldquo;*Beginners Example*&rdquo;-Beispiel kann [hier](http://www.vishalchovatiya.com/composite-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
+Das &bdquo;*Beginners Example*&rdquo;-Beispiel kann [hier](http://www.vishalchovatiya.com/composite-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
 
 ---
 

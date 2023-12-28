@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Ermöglicht die Interaktion von Objekten mit inkompatiblen Schnittstellen.&rdquo;
+&bdquo;Ermöglicht die Interaktion von Objekten mit inkompatiblen Schnittstellen.&rdquo;
 
 Das *Adapter Pattern* ist ein strukturelles Entwurfsmuster, das es Objekten mit
 inkompatiblen Schnittstellen ermöglicht, zusammenarbeiten zu können.
@@ -33,7 +33,7 @@ Adapter Entwurfsmuster werden häufig beim Erstellen eines neuen Systems verwende
 
 Das Adapter Entwurfsmuster ist ein strukturelles Muster, das eine Vorgehensweise
 zum Erstellen von Beziehungen zwischen Objekten definiert.
-Das Muster &ldquo;übersetzt&rdquo; eine Schnittstelle für eine Klasse in eine andere kompatible Schnittstelle.
+Das Muster &bdquo;übersetzt&rdquo; eine Schnittstelle für eine Klasse in eine andere kompatible Schnittstelle.
 
 Es gelangt zum Einsatz, wenn Anforderungen geändert werden
 und Funktionen von Klassen zu implementieren sind,
@@ -104,7 +104,7 @@ das standardmäßig auf `std::less` voreingestellt ist.
 #### Weitere Beispiele zum Adapter Pattern in der STL:
 
 Neben den *Container Adaptern* in der STL gibt es auch *Iteratoren Adapter*,
-beispielsweise die &ldquo;Einfüge Iteratoren&rdquo;:
+beispielsweise die &bdquo;Einfüge Iteratoren&rdquo;:
 
   * `std::front_inserter`
   * `std::back_inserter`
@@ -121,9 +121,9 @@ in einen Container einfügen.
   * **Objekt Adapter Ansatz**:
     Diese Implementierung verwendet das Prinzip der *Komposition* von Objekten:
     Der Adapter implementiert die Schnittstelle eines Objekts, die für den Client relevant sind.
-    Die anderen Objekte werden &ldquo;umhüllt&rdquo;, deren Funktionalität ist über die eine bekannte Schnittstelle nach außen zu transportieren.
+    Die anderen Objekte werden &bdquo;umhüllt&rdquo;, deren Funktionalität ist über die eine bekannte Schnittstelle nach außen zu transportieren.
     Der Zugriff auf die - schnittstellentechnisch gesehen - inkompatiblen Funktion dieser Objekte ist die eigentliche Dienstleistung des Adapter-Objekts.
-    Dieser Ansatz kann in allen gängigen Programmiersprachen implementiert werden (&ldquo;*has-a*&rdquo; Relationship / &ldquo;*hat-ein*&rdquo; Beziehung).
+    Dieser Ansatz kann in allen gängigen Programmiersprachen implementiert werden (&bdquo;*has-a*&rdquo; Relationship / &bdquo;*hat-ein*&rdquo; Beziehung).
 
   * **Klassen Adapter Ansatz**:
     Diese Implementierung verwendet die Vererbung: Der Adapter erbt Schnittstellen von allen Objekten gleichzeitig
@@ -167,7 +167,7 @@ Unter
 findet sich eine Umsetzung des Adapter Patterns mit Modern C++ Sprachmitteln vor.
 
 Der Adapter unterstützt hier die Adaptees (die nicht verwandt sind und unterschiedliche Schnittstellen haben)
-unter Verwendung derselben &ldquo;Zielschnittstelle&rdquo;, die dem Client/API-Benutzer bekannt ist.
+unter Verwendung derselben &bdquo;Zielschnittstelle&rdquo;, die dem Client/API-Benutzer bekannt ist.
 
 Das Beispiel erfüllt diese Eigenschaft, indem es die Lambda-Funktionen und das Klassentemplate `std::function<>`
 von C++ 11 verwendet.

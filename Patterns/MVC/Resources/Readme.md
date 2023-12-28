@@ -116,7 +116,7 @@ Kommunikationswege (siehe dazu auch *Abbildung* 4):
 
 Lassen Sie uns das Model-View-Controller Paradigma am Beispiel eines Ventils betrachten (siehe dazu auch
 *Abbildung* 5). Ein Ventil, so wie wir es beispielsweise im Maschinenbau vorfinden, kann als Zustand entweder
-&ldquo;offen&rdquo;, &ldquo;geschlossen&rdquo; oder möglicherweise auch &ldquo;zu einem gewissen Grad geöffnet&rdquo; besitzen. Neben
+&bdquo;offen&rdquo;, &bdquo;geschlossen&rdquo; oder möglicherweise auch &bdquo;zu einem gewissen Grad geöffnet&rdquo; besitzen. Neben
 diesem (passiven) Verhalten ist es auch möglich, aktiv über das Auslösen von Funktionen den Zustand des
 Modells zu beeinflussen, das Ventil kann (teilweise) geöffnet oder (teilweise) geschlossen werden
 

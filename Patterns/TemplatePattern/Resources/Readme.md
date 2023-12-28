@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Um einen Entwurf eines Algorithmus auf einer höheren Ebene bereitzustellen, der von seinen abgeleiteten Klassen zu vervollständigen ist.&rdquo;
+&bdquo;Um einen Entwurf eines Algorithmus auf einer höheren Ebene bereitzustellen, der von seinen abgeleiteten Klassen zu vervollständigen ist.&rdquo;
 
 Definiert das prinzipielle Grundgerüst eines Algorithmus in einer zentralen Methode.
 Diese lagert einen oder vorzugsweise mehrere Teilschritte in Methoden abgeleiteter Klassen aus.
@@ -42,7 +42,7 @@ In einer niedrigeren Abstraktionsebene (Detailebene) können die Teilmethoden ein
 #### Lösung:
 
 Das *Template Method Pattern* hat zum Inhalt, dass Sie einen Algorithmus in eine Reihe von Schritten aufteilen,
-diese Schritte in Methoden umwandeln und diese Methoden in einer einzigen &ldquo;Vorlagenmethode&rdquo; aufrufen,
+diese Schritte in Methoden umwandeln und diese Methoden in einer einzigen &bdquo;Vorlagenmethode&rdquo; aufrufen,
 daher auch der Name dieses Entwurfsmusters.
 Die Schritte können entweder abstrakt sein oder eine Standardimplementierung aufweisen.
 Um den Algorithmus zu verwenden, muss der Client eine eigene Unterklasse bereitstellen, alle abstrakten Schritte implementieren und bei Bedarf einige der optionalen Schritte überschreiben.
@@ -84,7 +84,7 @@ implementieren diese Schritte gemäß der vom sozialen Netzwerk bereitgestellten A
 Die Klasse `SocialNetwork` repräsentiert die Basisklasse des sozialen Netzwerks.
 Zwei weitere Klassen `Twitter` und `Facebook` stehen für konkrete Beispiele sozialer Netzwerke.
 
-Die &ldquo;Vorlagenmethode&rdquo; ist in der Klasse `SocialNetwork` vorgegeben, sie lautet `post`:
+Die &bdquo;Vorlagenmethode&rdquo; ist in der Klasse `SocialNetwork` vorgegeben, sie lautet `post`:
 
 ```cpp
 bool post(const std::string& message);
@@ -110,7 +110,7 @@ Das *Strategy*-Pattern erhält unterschiedliche Strategien in der Gestalt von Obj
 und kann somit zur Laufzeit seine Strategien austauschen.
 
 Die *Template*-Methode kehrt den Kontrollfluss nach dem Hollywood-Prinzip um:
-&ldquo;Don't call us, we call you&rdquo;.
+&bdquo;Don't call us, we call you&rdquo;.
 
 Das *Strategy*-Pattern gleicht mehr einer Black Box.
 Es ermöglicht, eine Strategie durch eine andere zu ersetzen, ohne deren Details zu kennen.

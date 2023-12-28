@@ -10,7 +10,7 @@
 
 #### Ziel / Absicht:
 
-&ldquo;Clients sollen nicht gezwungen werden, sich auf Schnittstellen zu verlassen, die sie nicht verwenden&rdquo;.
+&bdquo;Clients sollen nicht gezwungen werden, sich auf Schnittstellen zu verlassen, die sie nicht verwenden&rdquo;.
 
 In anderen Worten:
   * Das *Interface-Segregationsprinzip* ist eng mit dem *Single-Responsibility-Prinzip* verwandt.

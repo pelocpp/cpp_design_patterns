@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Erstelle eine Kopie eines Objekts durch einen Zeiger auf seinen Basistyp.&rdquo;
+&bdquo;Erstelle eine Kopie eines Objekts durch einen Zeiger auf seinen Basistyp.&rdquo;
 
 Das *Prototype Pattern* ist ein Entwurfsmuster,
 das zum Instanziieren einer Klasse auf das Kopieren oder Klonen der Eigenschaften eines anderen, vorhandenen Objekts zurückgreift.
@@ -68,7 +68,7 @@ In manchen Programmiersprachen wird die `clone`-Methode automatisch bereitgestel
 #### Eine anschauliche Beschreibung:
 
 Wir betrachten das Entwurfsmuster *Prototyp* an Hand der Fragestellung
-&ldquo;Was ist der Unterschied zwischen dem *Prototyp*-Entwurfsmuster und dem Kopierkonstruktor in C++&rdquo;?
+&bdquo;Was ist der Unterschied zwischen dem *Prototyp*-Entwurfsmuster und dem Kopierkonstruktor in C++&rdquo;?
 
   * Der Kopierkonstruktor ist ein programmiersprachliches Konstrukt der Sprache C++.
 
@@ -128,8 +128,8 @@ dass die Methode `ConcretePrototype::clone` stattdessen einen `Prototype`-Zeiger
 In JavaScript ist das *Prototype Pattern* quasi nativ enthalten.
 
 Die Erstellung von Objekten erfolgt hier &ndash; unter anderem &ndash; auf der Basis von so genannten
-&ldquo;Konstruktorfunktionen&rdquo;, die als Blaupausen für neue Objekte verwendet werden können.
-Man spricht dabei auch von der so genannten &ldquo;*Prototypischen Vererbung*&rdquo;.
+&bdquo;Konstruktorfunktionen&rdquo;, die als Blaupausen für neue Objekte verwendet werden können.
+Man spricht dabei auch von der so genannten &bdquo;*Prototypischen Vererbung*&rdquo;.
 
 ---
 
@@ -150,7 +150,7 @@ Man spricht dabei auch von der so genannten &ldquo;*Prototypischen Vererbung*&rd
 Wir betrachten ein Schachbrett mit Schachfiguren.
 Diese Figuren sind unterschiedlichen Typs (König, Dame, Bauern, etc.).
 In einem Schachprogramm sind Sie bisweilen gezwungen, Kopien eines Schachbretts zu erzeugen,
-um auf dem kopierten Brett &ldquo;Testzüge&rdquo; vornehmen zu können.
+um auf dem kopierten Brett &bdquo;Testzüge&rdquo; vornehmen zu können.
 Für das Kopieren des Schachbretts bzw. der Schachfiguren ist das *Virtueller Konstruktor*-Idiom
 in nahezu idealerweise geeignet:
 

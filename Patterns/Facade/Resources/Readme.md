@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Bereitstellung einer einheitlichen (vereinfachten) Schnittstelle durch Verbergen einer vorhandenen Systemkomplexität.&rdquo;
+&bdquo;Bereitstellung einer einheitlichen (vereinfachten) Schnittstelle durch Verbergen einer vorhandenen Systemkomplexität.&rdquo;
 
 Das *Facade Pattern* ist ein strukturelles Entwurfsmuster,
 das verwendet wird, um den Zugriff auf Funktionen in komplexen oder schlecht gestalteten Subsystemen/Bibliotheken
@@ -85,12 +85,12 @@ Es besteht im Wesentlichen aus drei Teilen:
 ###### Pros:
 
   * Die Komplexität eines existierenden Quellcodes kann vor dem Client verborgen werden.
-  * &ldquo;Macht Schnittstellen einfach richtig zu bedienen und schwer falsch zu verwenden.&rdquo; (Scott Meyers).
+  * &bdquo;Macht Schnittstellen einfach richtig zu bedienen und schwer falsch zu verwenden.&rdquo; (Scott Meyers).
   * Kann behilflich sein, komplexe Systeme auf eine andere Plattform zu portieren, weil der Client nur auf die Fassade angewiesen ist.
 
 ###### Kontras:
 
-  * Eine Fassade hat möglicherweise zu viele Verantwortlichkeiten und endet im Antimuster &ldquo;God Object&rdquo;.
+  * Eine Fassade hat möglicherweise zu viele Verantwortlichkeiten und endet im Antimuster &bdquo;God Object&rdquo;.
 
 ---
 

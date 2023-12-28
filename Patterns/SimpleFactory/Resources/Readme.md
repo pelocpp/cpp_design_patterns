@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Erstellung von Objekten, ohne dem Client die Erstellungslogik zur Verfügung zu stellen.&rdquo;
+&bdquo;Erstellung von Objekten, ohne dem Client die Erstellungslogik zur Verfügung zu stellen.&rdquo;
 
 Das *Simple Factory Pattern* ist eine Vorgehensweise, Objekte zu erstellen,
 ohne die Erstellungslogik dem Client zur Verfügung zu stellen.
@@ -230,7 +230,7 @@ Point p{ Point::Factory::NewCartesian(2, 3) };
 ---
 
 
-##### Zweiter Anwendungsfall des *Simple Factory* Patterns: &ldquo;What's wrong with `new`?&rdquo;
+##### Zweiter Anwendungsfall des *Simple Factory* Patterns: &bdquo;What's wrong with `new`?&rdquo;
   
 Technisch betrachtet ist mit `new` nichts falsch &ndash;
 in keinster Weise. Das Problem ist eher, dass im Falle
@@ -301,7 +301,7 @@ aus der Methode `orderPizza` herausnehmen?
 
 Moment! *Objekterzeugung*. Da sind wir doch beim `new`-Operator angekommen!
 Also machen wir die Beobachtung, dass es Sinn ergeben kann,
-den Aufruf des `new`-Operators für eine Pizza an &ldquo;anderer&rdquo; Stelle
+den Aufruf des `new`-Operators für eine Pizza an &bdquo;anderer&rdquo; Stelle
 zu platzieren:
 
 ```cpp
@@ -350,7 +350,7 @@ std::shared_ptr<IPizza> orderPizzaEx(std::string type)
 }
 ```
 
-Diese Überlegungen sollen die Einführung eines &ldquo;Fabrik&rdquo;-Gedankens motivieren.
+Diese Überlegungen sollen die Einführung eines &bdquo;Fabrik&rdquo;-Gedankens motivieren.
 
 ---
 

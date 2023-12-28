@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&ldquo;Um Benachrichtigungen zu erhalten, wenn Ereignisse eintreten.&rdquo;
+&bdquo;Um Benachrichtigungen zu erhalten, wenn Ereignisse eintreten.&rdquo;
 
 Das *Observer Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 mit dem Sie einen Mechanismus für Benachrichtigungen definieren,
@@ -42,12 +42,12 @@ ist die Information über die Verfügbarkeit am effizientesten gegeben.
 
 #### Lösung:
 
-Das Objekt, das den bereitzustellenden Status besitzt, wird häufig als &ldquo;*Subject*&rdquo; oder auch
-&ldquo;*Publisher*&rdquo; bezeichnet. Diejenigen Objekte, die die Änderungen am Status des *Publishers* verfolgen,
-werden als &ldquo;*Subscriber*&rdquo; oder auch &ldquo;*Observer*&rdquo; bezeichnet. Das Pendant eines &ldquo;*Observers*&rdquo;
-kann man auch als &ldquo;*Observable*&rdquo; bezeichnen.
+Das Objekt, das den bereitzustellenden Status besitzt, wird häufig als &bdquo;*Subject*&rdquo; oder auch
+&bdquo;*Publisher*&rdquo; bezeichnet. Diejenigen Objekte, die die Änderungen am Status des *Publishers* verfolgen,
+werden als &bdquo;*Subscriber*&rdquo; oder auch &bdquo;*Observer*&rdquo; bezeichnet. Das Pendant eines &bdquo;*Observers*&rdquo;
+kann man auch als &bdquo;*Observable*&rdquo; bezeichnen.
 
-Das *Observer Pattern* sieht vor, dass das &ldquo;*Subject*&rdquo; einen Benachrichtigungsmechanismus der Gestalt aufweist, 
+Das *Observer Pattern* sieht vor, dass das &bdquo;*Subject*&rdquo; einen Benachrichtigungsmechanismus der Gestalt aufweist, 
 dass einzelne Objekte (*Subscriber*) sich für das Benachrichtigen von Ereignissen
 an- und abmelden können.
 
@@ -77,7 +77,7 @@ um *Subscriber* zu dieser Liste hinzuzufügen und aus dieser wieder zu entfernen.
 
 Das *Conceptual Example* liegt in drei Varianten vor:
 
-  * Variante 1: klassisch - d.h. mit &ldquo;raw&rdquo;-Zeigern.
+  * Variante 1: klassisch - d.h. mit &bdquo;raw&rdquo;-Zeigern.
   * Variante 2: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
   * Variante 3: Wie Variante 2, aber mit `std::enable_shared_from_this<>` Mechanismus.
 
@@ -91,7 +91,7 @@ Das *Conceptual Example* liegt in drei Varianten vor:
 
 #### Realisierung mit Smart-Pointern
 
-Im &ldquo;*Subject*&rdquo; ist &ndash; wie beschrieben &ndash; eine Liste mit
+Im &bdquo;*Subject*&rdquo; ist &ndash; wie beschrieben &ndash; eine Liste mit
 den *Beobachtern* zu verwalten. Hier sollte man beachten,
 dass eine Liste mit `std::weak_ptr`-Zeigern die bessere Wahl
 im Vergleich zu `std::shared_ptr`-Objekten ist.
@@ -129,7 +129,7 @@ Die Klasse `std::weak_ptr` besitzt eine `owner_before` Methode,
 die eine Eigentümer-basierte Reihenfolge von `std::weak_ptr`-Zeigern implementiert.
 
 Eine detailliertere Beschreibung kann man unter
-&ldquo;[Removing item from list of weak_ptrs](https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs) &rdquo;
+&bdquo;[Removing item from list of weak_ptrs](https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs) &rdquo;
 nachlesen.
 
 ---
@@ -144,8 +144,8 @@ vor.
 
 **Hinweis** zu `shared_from_this`:
 
-In Variante 2 wird prinzipiell ohne &ldquo;raw&rdquo;-Zeiger gearbeitet, also so,
-wie man es der &ldquo;reinen Lehre&rdquo; nach machen sollte. Dabei stellt sich aber eine Frage:
+In Variante 2 wird prinzipiell ohne &bdquo;raw&rdquo;-Zeiger gearbeitet, also so,
+wie man es der &bdquo;reinen Lehre&rdquo; nach machen sollte. Dabei stellt sich aber eine Frage:
 Wie erhalte ich von einem Objekt einen `std::shared_ptr`, desses Objekterzeugung
 außerhalb meines Wirkungskreises liegt. Die Frage lautet also gewissermaßen:
 
