@@ -154,6 +154,10 @@
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="SRP.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\ECommerceProduct.png" />
+    <Image Include="Resources\ECommerceProduct2.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

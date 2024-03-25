@@ -13,8 +13,10 @@
 &bdquo;Klassen sollten für Erweiterungen offen, für Änderungen geschlossen sein&rdquo;.
 
 In anderen Worten:
+
 Das Prinzip bedeutet wörtlich genommen, dass man in der Lage sein sollte,
 das Verhalten einer Klasse zu erweitern, ohne sie dabei zu verändern.
+
 Auf den ersten Blick mag das *Open-Closed-Prinzip* etwas seltsam erscheinen und die Frage aufwerfen,
 wie man das Verhalten einer Klasse &bdquo;ändern&rdquo; können soll, ohne diese dabei zu &bdquo;verändern&rdquo;?
 
@@ -24,7 +26,82 @@ Es gibt darauf im objektorientierten Design mehrere Antworten wie beispielsweise
   * statischer Polymorphismus und/oder
   * C++-Templates.
 
-Wir betrachten das *Open-Closed-Prinzip* an einem Beispiel:
+Wir betrachten das *Open-Closed-Prinzip* an zwei Beispielen.
+
+### 1. Beispiel
+
+Um es nochmal zu wiederholen:
+
+> Das Open-Closed-Prinzip besagt, dass eine Klasse für Erweiterungen offen, für Änderungen jedoch geschlossen sein sollte.
+
+Das bedeutet, dass es immer dann, wenn Sie neue Funktionen benötigen, es besser ist, die Basisfunktionalität zu erweitern, als sie zu modifizieren.
+
+Hierzu ein Beispiel:
+
+Wir betrachten eine E-Commerce-Anwendung, die eine Klasse für Produkte benötigt:
+
+<img src="./ECommerceProduct.png" width="250">
+
+*Abbildung* 1: Entwurf eine Klasse `Product`.
+
+
+Jedes `Product`-Objekt verfügt über drei Eigenschaften: *Name*, *Preis* und *Gewicht*.
+
+Stellen Sie sich nun vor, dass nach dem Entwurf der Produktklasse
+und der gesamten E-Commerce-Plattform eine neue Anforderung von den Kunden kommt.
+
+Sie wollen nun digitale Produkte wie E-Books, Filme und Audioaufnahmen kaufen.
+
+Bis auf das Gewicht des Produkts ist alles in Ordnung.
+
+Da es nun möglicherweise zwei Arten von Produkten gibt – materielle und digitale –, sollten wir die Logik der Produktnutzung überdenken.
+
+Wir können eine neue Funktion in die Klasse `Product` integrieren, wie im Code hier gezeigt:
+
+```cpp
+class Product
+{
+public:
+    // code omitted for brevity
+    bool is_digital() const {
+        return weight_ == 0.0;
+    }
+
+    // code omitted for brevity
+};
+```
+
+Offensichtlich haben wir die Klasse modifiziert – und damit dem Offen-Geschlossen-Prinzip widersprochen.
+
+Das Prinzip besagt, dass die Klasse zur Änderung geschlossen werden sollte.
+
+Es sollte für eine Erweiterung geöffnet sein.
+
+Dies können wir erreichen, indem wir die Produktklasse neu gestalten und sie zu einer abstrakten Basisklasse für alle Produkte machen.
+
+Als Nächstes erstellen wir zwei weitere Klassen, die die Basisklasse `Product` erben: `PhysicalProduct und `DigitalProduct`.
+
+Das folgende Klassendiagramm zeigt das neue Design:
+
+<img src="./ECommerceProduct2.png" width="600">
+
+*Abbildung* 2: Redesign der Klasse `Product`.
+
+Wie Sie im vorherigen Diagramm sehen können, haben wir die Eigenschaft „weight_“ aus der Klasse „Product“ entfernt.
+
+Da wir nun zwei weitere Klassen haben, verfügt `PhysicalProduct` über eine Weight_-Eigenschaft und `DigitalProduct` über keine.
+
+Stattdessen verfügt es über eine file_path_-Eigenschaft.
+
+Dieser Ansatz erfüllt das Offen-Geschlossen-Prinzip, da nun alle Klassen für Erweiterungen offen sind.
+
+Wir verwenden Vererbung, um Klassen zu erweitern.
+
+
+### 2. Beispiel
+
+
+
 
 #### Beispiel: Violating the Open Closed Principle
 

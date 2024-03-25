@@ -51,4 +51,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\ECommerceProduct.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\ECommerceProduct2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
