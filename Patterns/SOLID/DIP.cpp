@@ -120,7 +120,9 @@ void test_conceptual_example_dip()
     relationships.addParentAndChild(parent, child1);
     relationships.addParentAndChild(parent, child2);
 
-    FamilyTree tree{ relationships };
+    const RelationshipBrowser& browser = relationships;
+
+    FamilyTree tree{ browser };
 }
 
 void test_dip()
