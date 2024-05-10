@@ -42,13 +42,13 @@ namespace LiskovSubstitutionPrinciple01
         }
     };
 
-    void process(Rectangle& r) {
+    static void process(Rectangle& r) {
         size_t w{ r.getWidth() };
         r.setHeight(10);
         //assert((w * 10) == r.area());  // fails for Square <-- !!!
     }
 
-    void process2(Rectangle& r) {
+    static void process2(Rectangle& r) {
         size_t w{ r.getWidth() };
         r.setHeight(10);
         if (dynamic_cast<Square*>(&r) != nullptr)
@@ -101,13 +101,13 @@ namespace LiskovSubstitutionPrinciple02
         virtual size_t area() const override { return m_size * m_size; }
     };
 
-    void process(Shape& s)
+    static void process(Shape& s)
     {
         // use polymorphic behaviour only, e.g. area()
     }
 }
 
-void test_anti_conceptual_example_lsp()
+static void test_anti_conceptual_example_lsp()
 {
     using namespace LiskovSubstitutionPrinciple01;
 
@@ -117,7 +117,7 @@ void test_anti_conceptual_example_lsp()
     process(s);
 }
 
-void test_conceptual_example_lsp()
+static void test_conceptual_example_lsp()
 {
     using namespace LiskovSubstitutionPrinciple02;
 }

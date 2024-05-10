@@ -91,7 +91,7 @@ namespace DependencyInversionPrinciple02
     };
 }
 
-void test_anti_conceptual_example_dip()
+static void test_anti_conceptual_example_dip()
 {
     using namespace DependencyInversionPrinciple01;
 
@@ -107,7 +107,7 @@ void test_anti_conceptual_example_dip()
     FamilyTree tree{ relationships };
 }
 
-void test_conceptual_example_dip()
+static void test_conceptual_example_dip()
 {
     using namespace DependencyInversionPrinciple02;
 

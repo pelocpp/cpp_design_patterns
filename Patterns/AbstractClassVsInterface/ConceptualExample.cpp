@@ -12,16 +12,18 @@ namespace AbstractClassVsInterface {
     {
     public:
         virtual void method_first() = 0;             // only 'abstract' methods
-        virtual void method_second() = 0;
+        virtual void method_second() = 0;            // only 'abstract' methods
     };
 
     /* abstract class declaration */
     class AbstractClass 
     {
     public:
-        AbstractClass(std::string message) : m_message{ message } {}
+        AbstractClass(std::string message)
+            : m_message{ message }
+        {}
 
-        virtual void method_third() = 0;             // 'abstract' method
+        virtual void method_third() = 0;             // another 'abstract' method
 
         virtual void method_fourth()                 // method with implementation
         { 
@@ -29,14 +31,16 @@ namespace AbstractClassVsInterface {
         }
 
     private:
-        std::string m_message;                       // data
+        std::string m_message;                       // some data
     };
 
     /* abstract class inheriting from an interface */
     class AnotherAbstractClass : public Interface
     {
     public:
-        AnotherAbstractClass(double value) : m_value { value } {}
+        AnotherAbstractClass(double value) 
+            : m_value { value }
+        {}
 
         virtual void method_first() override
         {
@@ -90,6 +94,8 @@ namespace AbstractClassVsInterface {
         double m_oneMoreValue;
     };
 
+    // =======================================================================
+
     Interface* getInterface()
     {
         AnotherConcreteClass* obj = new AnotherConcreteClass();
@@ -99,13 +105,17 @@ namespace AbstractClassVsInterface {
         return obj;
     }
 
-    void client()
+    // =======================================================================
+
+    static void client()
     {
         Interface* ip;
         ip = getInterface();
         ip->method_first();
     }
 }
+
+// ===========================================================================
 
 void test_conceptual_example()
 {
@@ -142,7 +152,7 @@ void test_conceptual_example()
     Interface* obj001{ &obj4 };
     obj001->method_first();
     obj001->method_second();
-    //  AbstractClass* obj002{ &obj4 };     // Error
+    // AbstractClass* obj002{ &obj4 };     // Error
     AnotherAbstractClass* obj003{ &obj4 };
     obj003->method_first();
     obj003->method_second();

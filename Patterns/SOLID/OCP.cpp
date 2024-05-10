@@ -8,8 +8,7 @@
 #include <memory>
 #include <numeric>
 
-
-namespace SimpleConceptualExampleOCP {
+namespace SimpleAntiConceptualExampleOCP {
 
     class Product
     {
@@ -19,6 +18,10 @@ namespace SimpleConceptualExampleOCP {
         double      m_weight;
 
     public:
+        Product (std::string name, double price, double weight) 
+            : m_name{ name}, m_price{ price }, m_weight{ weight }
+        {}
+
         void setName(const std::string& name) { m_name = name; }
         std::string  getName() const { return m_name; }
 
@@ -28,28 +31,95 @@ namespace SimpleConceptualExampleOCP {
         void setWeight(double weight) { m_weight = weight; }
         double getWeight() const { return m_weight; }
     };
-
-
 }
 
+namespace SimpleConceptualExampleOCP {
+
+    class Product
+    {
+    private:
+        std::string m_name;
+        double      m_price;
+
+    public:
+        Product(std::string name, double price)
+            : m_name{ name }, m_price{ price }
+        {}
+
+        void setName(const std::string& name) { m_name = name; }
+        std::string  getName() const { return m_name; }
+
+        void setPrice(double price) { m_price = price; }
+        double getPrice() const { return m_price; }
+    };
+
+    class PhysicalProduct : public Product
+    {
+    private:
+        double m_weight;
+
+    public:
+        PhysicalProduct(std::string name, double price, double weight)
+            : Product{ name , price }, m_weight{ weight }
+        {}
+
+        void setWeight(double weight) { m_weight = weight; }
+        double getWeight() const { return m_weight; }
+    };
+
+    class DigitalProduct : public Product
+    {
+    private:
+        std::string m_filePath;
+
+    public:
+        DigitalProduct(std::string name, double price, std::string path)
+            : Product{ name , price }, m_filePath{ path }
+        {}
+
+        void setFilePath(const std::string& filePath) { m_filePath = filePath; }
+        std::string  getFilePath() const { return m_filePath; }
+    };
+}
+
+static void test_anti_simple_conceptual_example_ocp()
+{
+    using namespace SimpleAntiConceptualExampleOCP;
+
+    Product p{ "Computer", 999.90, 5.0 };
+}
+
+static void test_simple_conceptual_example_ocp()
+{
+    using namespace SimpleConceptualExampleOCP;
+
+    PhysicalProduct p1{ "Computer", 999.90, 5.0 };
+
+    DigitalProduct p2{ "Mp3 Stream", 19.90, "Beatles/Best of" };
+}
 
 // ===========================================================================
 
-enum class Color { Red, Green, Black, Gray };
+namespace SecondExampleOCP {
 
-enum class Size { Small, Medium, Large };
+    enum class Color { Red, Green, Black, Gray };
 
-struct Product
-{
-    std::string m_name;
-    Color       m_color;
-    Size        m_size;
-};
+    enum class Size { Small, Medium, Large };
 
-template <typename T>
-using Products = std::vector<std::shared_ptr<T>>;
+    struct Product
+    {
+        std::string m_name;
+        Color       m_color;
+        Size        m_size;
+    };
 
-namespace AntiConceptualExampleOCP {
+    template <typename T>
+    using Products = std::vector<std::shared_ptr<T>>;
+}
+
+namespace AntiSecondConceptualExampleOCP {
+
+    using namespace SecondExampleOCP;
 
     struct ProductFilter 
     {
@@ -88,7 +158,9 @@ namespace AntiConceptualExampleOCP {
     };
 }
 
-namespace ConceptualExampleOCP {
+namespace SecondConceptualExampleOCP {
+
+    using namespace SecondExampleOCP;
 
     template <typename T>
     struct ISpecification {
@@ -218,9 +290,10 @@ namespace ConceptualExampleOCP {
     };
 }
 
-void test_anti_conceptual_example_ocp ()
+static void test_anti_conceptual_example_ocp ()
 {
-    using namespace AntiConceptualExampleOCP;
+    using namespace SecondExampleOCP;
+    using namespace AntiSecondConceptualExampleOCP;
 
     Products<Product> products
     {
@@ -236,9 +309,10 @@ void test_anti_conceptual_example_ocp ()
         std::cout << product->m_name << " is green & large" << std::endl;
 }
 
-void test_conceptual_example_ocp_01()
+static void test_conceptual_example_ocp_01()
 {
-    using namespace ConceptualExampleOCP;
+    using namespace SecondExampleOCP;
+    using namespace SecondConceptualExampleOCP;
 
     Products<Product> products
     {
@@ -258,9 +332,10 @@ void test_conceptual_example_ocp_01()
     }
 }
 
-void test_conceptual_example_ocp_02()
+static void test_conceptual_example_ocp_02()
 {
-    using namespace ConceptualExampleOCP;
+    using namespace SecondExampleOCP;
+    using namespace SecondConceptualExampleOCP;
 
     Products<Product> products
     {
@@ -284,9 +359,10 @@ void test_conceptual_example_ocp_02()
     }
 }
 
-void test_conceptual_example_ocp_03()
+static void test_conceptual_example_ocp_03()
 {
-    using namespace ConceptualExampleOCP;
+    using namespace SecondExampleOCP;
+    using namespace SecondConceptualExampleOCP;
 
     // combined specification
     AndSpecification<Product> specification {
@@ -322,9 +398,10 @@ void test_conceptual_example_ocp_03()
     std::cout << "Result: " << std::boolalpha << result << std::endl;
 }
 
-void test_conceptual_example_ocp_04()
+static void test_conceptual_example_ocp_04()
 {
-    using namespace ConceptualExampleOCP;
+    using namespace SecondExampleOCP;
+    using namespace SecondConceptualExampleOCP;
 
     Products<Product> products
     {
@@ -367,9 +444,10 @@ void test_conceptual_example_ocp_04()
     std::cout << "Result: " << std::boolalpha << result << std::endl;
 }
 
-void test_conceptual_example_ocp_05()
+static void test_conceptual_example_ocp_05()
 {
-    using namespace ConceptualExampleOCP;
+    using namespace SecondExampleOCP;
+    using namespace SecondConceptualExampleOCP;
 
     Products<ProductEx> products
     {

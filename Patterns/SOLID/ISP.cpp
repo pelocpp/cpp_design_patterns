@@ -111,7 +111,7 @@ namespace InterfaceSegregationPrinciple02
     };
 }
 
-void test_anti_conceptual_example_isp()
+static void test_anti_conceptual_example_isp()
 {
     using namespace InterfaceSegregationPrinciple01;
 
@@ -124,7 +124,7 @@ void test_anti_conceptual_example_isp()
     scanner.fax(doc);    // does not work !!!
 }
 
-void test_conceptual_example_isp()
+static void test_conceptual_example_isp()
 {
     using namespace InterfaceSegregationPrinciple02;
 

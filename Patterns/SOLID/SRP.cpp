@@ -67,7 +67,7 @@ namespace ConceptualExampleSRP
     };
 }
 
-void test_anti_conceptual_example_srp ()
+static void test_anti_conceptual_example_srp ()
 {
     using namespace AntiConceptualExampleSRP;
 
@@ -77,7 +77,7 @@ void test_anti_conceptual_example_srp ()
     journal.save("diary.txt", std::cout);
 }
 
-void test_conceptual_example_srp()
+static void test_conceptual_example_srp()
 {
     using namespace ConceptualExampleSRP;
 
