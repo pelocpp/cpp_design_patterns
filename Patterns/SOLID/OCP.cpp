@@ -8,6 +8,33 @@
 #include <memory>
 #include <numeric>
 
+
+namespace SimpleConceptualExampleOCP {
+
+    class Product
+    {
+    private:
+        std::string m_name;
+        double      m_price;
+        double      m_weight;
+
+    public:
+        void setName(const std::string& name) { m_name = name; }
+        std::string  getName() const { return m_name; }
+
+        void setPrice(double price) { m_price = price; }
+        double getPrice() const { return m_price; }
+
+        void setWeight(double weight) { m_weight = weight; }
+        double getWeight() const { return m_weight; }
+    };
+
+
+}
+
+
+// ===========================================================================
+
 enum class Color { Red, Green, Black, Gray };
 
 enum class Size { Small, Medium, Large };

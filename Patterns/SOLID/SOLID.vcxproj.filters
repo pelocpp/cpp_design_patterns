@@ -30,6 +30,12 @@
     <None Include="Resources\InterfaceSegregationPrinciple.md">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_single_responsibility_principle_class_product.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_single_responsibility_principle_class_product_redesign.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SRP.cpp">
@@ -50,13 +56,5 @@
     <ClCompile Include="ISP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\ECommerceProduct.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\ECommerceProduct2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
 </Project>

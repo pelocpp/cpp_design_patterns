@@ -14,14 +14,14 @@
 
 In anderen Worten:
 
-  * Das Prinzip der Single Responsibility legt Wert auf Einfachheit, also ein Objekt, eine Aufgabe.
+  * Das Prinzip der &bdquo;Single Responsibility&rdquo; legt Wert auf Einfachheit, also &bdquo;ein Objekt, eine Aufgabe&rdquo;.
 
   * Es geht darum, die Funktionalität von Objekten und deren Beziehungskomplexität zu reduzieren.
 
   * Man hat Sorge dafür zu tragen, dass jedes Objekt eine Verantwortung hat, auch wenn es nicht immer einfach ist,
 ein komplexes Objekt in kleinere und einfachere Komponenten zu zerlegen.
 
-  * Es geht folglich nicht darum, nur eine Methode in einer Klasse zu haben &ndash; es geht darum, eine Klasse oder das Modul für eine Sache verantwortlich zu machen.
+  * Es geht folglich nicht darum, nur eine Methode in einer Klasse zu haben &ndash; es geht darum, eine Klasse für eine Sache verantwortlich zu machen.
 
 
 

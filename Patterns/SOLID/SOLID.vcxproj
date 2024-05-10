@@ -141,6 +141,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Resources\DependencyInversionPrinciple.md" />
+    <None Include="Resources\dp_single_responsibility_principle_class_product.svg" />
+    <None Include="Resources\dp_single_responsibility_principle_class_product_redesign.svg" />
     <None Include="Resources\InterfaceSegregationPrinciple.md" />
     <None Include="Resources\LiskovSubstitutionPrinciple.md" />
     <None Include="Resources\OpenClosedPrinciple.md" />
@@ -153,10 +155,6 @@
     <ClCompile Include="OCP.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="SRP.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\ECommerceProduct.png" />
-    <Image Include="Resources\ECommerceProduct2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
