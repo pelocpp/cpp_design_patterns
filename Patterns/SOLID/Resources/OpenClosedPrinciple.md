@@ -23,14 +23,14 @@ Wir betrachten das *Open-Closed-Prinzip* an zwei Beispielen.
 
 ### 1. Beispiel
 
-Wir betrachten eine Klasse `Product` für Produkte eines E-Commerce Warenhauses.
+Wir legen im Folgenden eine Klasse `Product` für Produkte eines E-Commerce Warenhauses zu Grunde.
 
 In UML-Notation könnte ein einfaches Diagramm für die Klasse `Product` so aussehen:
 
 
 <img src="./dp_single_responsibility_principle_class_product.svg" width="300">
 
-*Abbildung* 1: Entwurf eine Klasse `Product`.
+*Abbildung* 1: Entwurf einer Klasse `Product`.
 
 Jedes `Product`-Objekt verfügt über drei Eigenschaften: *Name*, *Preis* und *Gewicht*.
 
@@ -42,8 +42,7 @@ Sie wollen nun digitale Produkte wie E-Books, Filme und Audioaufnahmen kaufen.
 Bis auf das Gewicht des Produkts ist alles in Ordnung.
 
 Da es nun möglicherweise zwei Arten von Produkten gibt &ndash; materielle und digitale &ndash;,
-sollten wir die Realisierung der `Product`-Klasse überdenken.
-
+müssen wir die Realisierung der `Product`-Klasse überdenken.
 Wir könnten eine neue Methode `isDigital` in die Klasse `Product` integrieren:
 
 ```cpp
@@ -61,12 +60,12 @@ public:
 
 Offensichtlich haben wir die Klasse `Product` modifiziert &ndash; und damit dem *Open-Closed-Prinzip*  widersprochen.
 
-Das Prinzip besagt, dass die Klasse
+Das Prinzip besagt, dass eine Klasse
 
   * für Änderungen geschlossen sein sollte,
   * hingegen für Erweiterungen aber offen sein sollte.
 
-Dies können wir erreichen, indem wir die Klasse `Product` neu gestalten und sie zu einer abstrakten Basisklasse für alle Produkte umbauen.
+Dies können wir erreichen, indem wir die Klasse `Product` neu gestalten und sie zu einer abstrakten Basisklasse für konkrete Produkte umbauen.
 
 Wir erstellen als Nächstes zwei weitere Klassen, die von der nun umgestalteten Basisklasse `Product` erben: `PhysicalProduct` und `DigitalProduct`.
 
@@ -77,15 +76,14 @@ Das folgende Klassendiagramm zeigt das neue Design:
 *Abbildung* 2: Redesign der Klasse `Product` mit zwei weiteren Klassen `PhysicalProduct` und `DigitalProduct`.
 
 
-Wir können im letzten Diagramm erkennen, dass wir die Eigenschaft `m__weight` aus der Klasse `Product` entfernt haben.
+Wir können im letzten Diagramm erkennen, dass
 
-Die Anforderungen des Kunden wurden mit zwei zusätzlichen Klassen `PhysicalProduct` und `DigitalProduct` erfüllt.
-
-Eine dieser Klassen (`PhysicalProduct`) besitzt nun die Eigenschaft `m__weight`.
-
-Die anderen Klasse `DigitalProduct`, für die ein Gewicht nicht relevant ist,
-besitzt stattdessen eine Eigenschaft `m_filePath`, die symbolisch für die Ablage eines digitalen Produkts
-in der internen Datenhaltung des E-Commerce Warenhauses stehen soll.
+  * wir die Eigenschaft `m_weight` aus der Klasse `Product` entfernt haben,
+  * die Anforderungen des Kunden mit zwei zusätzlichen Klassen `PhysicalProduct` und `DigitalProduct` erfüllt wurden,
+  * eine dieser Klassen (`PhysicalProduct`) in gewohnter Manier die Eigenschaft `m_weight` besitzt und
+  * eine zweite, zusätzliche Klasse `DigitalProduct`, für die ein Gewicht nicht relevant ist,
+stattdessen eine Eigenschaft `m_filePath` besitzt, die symbolisch für die Ablage eines digitalen Produkts
+in der internen Datenhaltung des E-Commerce Warenhauses steht.
 
 *Bemerkung*:
 Das Ziel des *Open-Closed-Prinzips* wurde mit dem Konzept der *Vererbung* umgesetzt.
