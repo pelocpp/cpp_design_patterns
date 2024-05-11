@@ -62,7 +62,7 @@ Es besteht nur aus einer einzigen Klasse:
     die pro Aufruf eine einzelne Instanz zurückgibt (Referenz, Zeiger),
     die in einer privaten Variablen residiert.
 
-<img src="dp_singleton_pattern.svg" width="300">
+<img src="dp_singleton_pattern_01.svg" width="300">
 
 *Abbildung* 1: Schematische Darstellung des *Singleton Patterns*.
 
@@ -124,7 +124,13 @@ Mit anderen Worten:<br />
 Ein Singleton ist in der objektorientierten Programmierung wie eine **globale Variable**
 in der prozeduralen Programmierung.
 
-Sie können derartige globale Objekt überall und jederzeit verwenden.
+Sie können derartige globale Objekt überall und jederzeit verwenden:
+
+
+<img src="dp_singleton_pattern_02_critics.svg" width="700">
+
+*Abbildung* 2: Ein Singleton verhält sich wie eine globale Variable!
+
 
 ---
 
@@ -132,15 +138,15 @@ Sie können derartige globale Objekt überall und jederzeit verwenden.
 
 Kurze Wiederholung zur *Dependency Injection*:
 
-  * &bdquo;Entkopplung von Komponenten von ihren benötigten Diensten auf eine Weise,
-    dass die Komponenten weder die Namen dieser Dienste kennen noch wissen,
-    wie diese erworben werden können&rdquo;
+> &bdquo;Entkopplung von Komponenten und ihren benötigten Diensten auf eine Weise,
+  dass die Komponenten weder die Namen dieser Dienste kennen noch wissen,
+  wie diese erworben werden können&rdquo;.
 
 
 Wir betrachten zunächst ein Negativbeispiel an Hand einer *Logger*-Klasse.
 
 *Logger*-Klassen stehen exemplarisch für 
-Serviceklassen, die die Möglichkeit bietet, Logeinträge zu schreiben.
+Service-Klassen, die die Möglichkeit bietet, Log-Einträge zu schreiben.
 
 Solche *Logger*-Klassen werden oft als Singletons implementiert:
 
@@ -192,27 +198,38 @@ Eine mögliche Anwendung mit dieser *Logger*-Klasse könnte so aussehen:
 19: }
 ```
 
+
+<img src="dp_singleton_pattern_03_logger_singleton.svg" width="600">
+
+*Abbildung* 3: Vier domänenspezifische Klassen eines E-Commerce Warenhauses hängen von einem `Logger`-Singletonobjekt ab.
+
+
 Wie können wir uns nun von dem Singleton-Objekt befreien?
 
 Wir wenden das *Dependency Inversion Prinzip* auf folgende Weise an:
-Zunächst führen wir eine Abstraktion (eine Schnittstelle) ein &ndash; Schnittstelle `ILoggingFacility`.
+Zunächst führen wir eine Abstraktion ein &ndash; eine Schnittstelle `ILoggingFacility`.
 
-Auf diese Weise machen wir sowohl die `CustomerRepository`-Klasse 
-als auch den konkreten Logger von dieser Schnittstelle abhängig.
+Auf diese Weise machen wir dann sowohl die `CustomerRepository`-Klasse 
+als auch den konkreten Logger von dieser Schnittstelle abhängig,
+siehe dazu *Abbildung* 4:
 
-Die `ILoggingFacility`-Schnittstelle definieren wir so:
+<img src="dp_singleton_pattern_04_logger_di_01.svg" width="700">
+
+*Abbildung* 4: Entkopplung der beiden Klassen `CustomerRepository` und `StandardOutputLogger`.
+
+
+
+Die `ILoggingFacility`-Schnittstelle definieren wir dabei so:
 
 ```cpp
-01: 
-02: class ILoggingFacility
-03: {
-04: public:
-05:     virtual ~ILoggingFacility() = default;
-06: 
-07:     virtual void writeInfoEntry(std::string_view entry) = 0;
-08:     virtual void writeWarnEntry(std::string_view entry) = 0;
-09:     virtual void writeErrorEntry(std::string_view entry) = 0;
-10: };
+01: class ILoggingFacility
+02: {
+03: public:
+04:     virtual ~ILoggingFacility() = default;
+05:     virtual void writeInfoEntry(std::string_view entry) = 0;
+06:     virtual void writeWarnEntry(std::string_view entry) = 0;
+07:     virtual void writeErrorEntry(std::string_view entry) = 0;
+08: };
 ```
 
 Damit wenden wir uns einer möglichen Implementierung dieser Schnittstelle zu,
@@ -238,12 +255,12 @@ Damit fehlt noch die `CustomerRepository`-Klasse. Wir ändern die vorhandene Klas
 
   * Zuerst erstellen wir eine neue Instanzvariable vom `std::shared_ptr`-Typ des Schnittstellentyps `ILoggingFacility`.
 
-  * Eine entsprechende Zeigerinstanz wird über einen Initialisierungskonstruktor an die Klasse übergeben.
+  * Eine entsprechende Variable wird über einen Initialisierungskonstruktor an die Klasse übergeben.
 
   * Mit anderen Worten: Wir erlauben, dass eine Instanz einer Klasse, die die `ILoggingFacility`-Schnittstelle implementiert, während der Erstellung in das `CustomerRepository`-Objekt importiert wird,
     oder wie es im *Dependency Inversion*-Fachjargon heißt: &bdquo;injiziert&rdquo;.
 
-  * Wir löschen auch den Standardkonstruktor, da wir nicht zulassen möchten, dass ein `CustomerRepository` ohne Logger erstellt wird.
+  * Wir löschen auch den Standardkonstruktor, da wir nicht zulassen möchten, dass ein `CustomerRepository`-Objekt ohne Logger erstellt wird.
 
   * Darüber hinaus entfernen wir die direkte Abhängigkeit in der Implementierung zum Singleton und verwenden stattdessen den Shared Pointer `m_logger` zum Schreiben von Protokolleinträgen.
 
@@ -257,7 +274,7 @@ Damit fehlt noch die `CustomerRepository`-Klasse. Wir ändern die vorhandene Klas
 05: 
 06:     explicit CustomerRepository(const std::shared_ptr<LoggingFacility>& logger)
 07:         : m_logger{ logger }
-08:     { }
+08:     {}
 09:         
 10:     Customer findCustomerById(const Identifier& customerId)
 11:     {
@@ -271,9 +288,8 @@ Damit fehlt noch die `CustomerRepository`-Klasse. Wir ändern die vorhandene Klas
 19: };
 ```
 
-
 Betrachten Sie an der letzten Realisierung der Klasse `CustomerRepository`
-die Folge dieser Umgestaltung: Die `CustomerRepository`-Klasse ist nicht mehr von einem bestimmten Logger abhängig.
+die Folge dieser Umgestaltung: Die `CustomerRepository`-Klasse ist nicht mehr von einem bestimmten Logger abhängig!
 
 Stattdessen ist ein `CustomerRepository`-Objekt nur von einer Abstraktion (Schnittstelle) abhängig,
 die nun explizit in der Klasse und ihrer Schnittstelle sichtbar ist
@@ -282,7 +298,12 @@ die nun explizit in der Klasse und ihrer Schnittstelle sichtbar ist
 Das bedeutet, dass die `CustomerRepository`-Klasse nun Service-Objekte für Protokollierungszwecke akzeptiert, die von *außen* übergeben werden.
 
 Wir haben in der Realisierung der `CustomerRepository`-Klasse damit keinen Zugriff auf
-ein Singleton-Objekt verankert!
+ein Singleton-Objekt von *innen* verankert!
+
+<img src="dp_singleton_pattern_05_logger_di_02.svg" width="800">
+
+*Abbildung* 5: E`CustomerRepository`-Objekten können über ihren Konstruktor unterschiedliche Logger-Implementierungen zur Verfügung gestellt werden.
+
 
 ---
 
@@ -319,6 +340,10 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#Singleton)
 
 vor.
+
+Die Anregungen zur Betrachtung &bdquo;Eine Alternative zum Singleton Pattern: *Dependency Injection*&rdquo;
+stammen aus dem Buch &bdquo;Hands-On Design Patterns with C++&rdquo; von Stephan Roth,
+siehe hierzu auch das [Literaturverzeichnis](../../../Resources/Readme_07_Literature.md).
 
 ---
 

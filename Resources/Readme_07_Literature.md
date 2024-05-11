@@ -21,6 +21,14 @@
 
 ---
 
+  * Stephan Roth: &bdquo;Clean C++ 20&rdquo;.</br>
+    Apress (18. Juni 2021), 508 Seiten. Sprache: Englisch. ISBN-10: 1484259483, ISBN-13: 978-1484259481.
+
+    Der Autor schöpft aus einem umfangreichen Repertoire an Erfahrungen und stellt in seinem Buch ein ganzheitliches Verständnis für das Thema Softwareentwicklung
+    mit einem besonderem Fokus für Entwurfsmuster.
+
+---
+
   * Dmitri Nesteruk: &bdquo;Design Patterns in Modern C++: Reusable Approaches for Object-Oriented Software Design&rdquo;.</br>
     Apress (19. April 2018), 332 Seiten. Sprache: Englisch. ISBN-10: 9781484236024, ISBN-13: 978-1484236024.
 

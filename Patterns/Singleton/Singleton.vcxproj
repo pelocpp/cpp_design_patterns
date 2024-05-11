@@ -146,7 +146,11 @@
     <ClCompile Include="Singleton_vs_Dependency_Injection.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\dp_singleton_pattern.svg" />
+    <None Include="Resources\dp_singleton_pattern_01.svg" />
+    <None Include="Resources\dp_singleton_pattern_02_critics.svg" />
+    <None Include="Resources\dp_singleton_pattern_03_logger_singleton.svg" />
+    <None Include="Resources\dp_singleton_pattern_04_logger_di_01.svg" />
+    <None Include="Resources\dp_singleton_pattern_05_logger_di_02.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
