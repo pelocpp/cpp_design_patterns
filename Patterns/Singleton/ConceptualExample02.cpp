@@ -35,14 +35,13 @@ namespace ConceptualExample02 {
 
     public:
         /**
-         * Singletons should not be cloneable!
+         * Singletons should not be cloneable nor assignable nor moveable!
          */
-        Singleton(Singleton& other) = delete;
 
-        /**
-         * Singletons should not be assignable!
-         */
-        void operator=(const Singleton&) = delete;
+        Singleton(const Singleton&) = delete;
+        Singleton(Singleton&&) noexcept = delete;
+        Singleton& operator=(const Singleton&) = delete;
+        Singleton& operator=(Singleton&&) noexcept = delete;
 
         /**
          * This is the static method that controls the access to the singleton

@@ -143,6 +143,7 @@
     <ClCompile Include="ConceptualExample01.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="ConceptualExample02.cpp" />
+    <ClCompile Include="Singleton_vs_Dependency_Injection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dp_singleton_pattern.svg" />

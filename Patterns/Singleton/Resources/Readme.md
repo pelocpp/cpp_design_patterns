@@ -115,11 +115,185 @@ Singleton* Singleton::getInstance()
 
 ---
 
+#### Kritik am Singleton Pattern
+
+Aufgrund der globalen Sichtbarkeit und des öffentlichen Zugriffs können Singleton-Objekte
+überall in der Implementierung anderer Klassen / im gesamten Programm verwendet werden.
+
+Mit anderen Worten:<br />
+Ein Singleton ist in der objektorientierten Programmierung wie eine **globale Variable**
+in der prozeduralen Programmierung.
+
+Sie können derartige globale Objekt überall und jederzeit verwenden.
+
+---
+
+#### Eine Alternative zum Singleton Pattern: *Dependency Injection*
+
+Kurze Wiederholung zur *Dependency Injection*:
+
+  * &bdquo;Entkopplung von Komponenten von ihren benötigten Diensten auf eine Weise,
+    dass die Komponenten weder die Namen dieser Dienste kennen noch wissen,
+    wie diese erworben werden können&rdquo;
+
+
+Wir betrachten zunächst ein Negativbeispiel an Hand einer *Logger*-Klasse.
+
+*Logger*-Klassen stehen exemplarisch für 
+Serviceklassen, die die Möglichkeit bietet, Logeinträge zu schreiben.
+
+Solche *Logger*-Klassen werden oft als Singletons implementiert:
+
+```cpp
+01: class Logger final
+02: {
+03: public:
+04:     static Logger& getInstance()
+05:     {
+06:         static Logger theLogger{};
+07:         return theLogger;
+08:     }
+09: 
+10:     void writeInfoEntry(std::string_view entry) {
+11:         std::cout << "[INFO] " << entry << std::endl;
+12:     }
+13: 
+14:     void writeWarnEntry(std::string_view entry) {
+15:         std::cout << "[WARNING] " << entry << std::endl;
+16:     }
+17: 
+18:     void writeErrorEntry(std::string_view entry) {
+19:         std::cout << "[ERROR] " << entry << std::endl;
+20:     }
+21: };
+```
+
+Eine mögliche Anwendung mit dieser *Logger*-Klasse könnte so aussehen:
+
+```cpp
+01: class CustomerRepository {
+02: public:
+03:     Customer findCustomerById(const Identifier& customerId)
+04:     {
+05:         Logger::getInstance().writeInfoEntry ("findCustomerById called ... ");
+06:         // ...
+07:         return {};
+08:     }
+09:     // ...
+10: };
+11: 
+12: void test()
+13: {
+14:     CustomerRepository customerRepository{ };
+15: 
+16:     Identifier id{};
+17: 
+18:     customerRepository.findCustomerById(id);
+19: }
+```
+
+Wie können wir uns nun von dem Singleton-Objekt befreien?
+
+Wir wenden das *Dependency Inversion Prinzip* auf folgende Weise an:
+Zunächst führen wir eine Abstraktion (eine Schnittstelle) ein &ndash; Schnittstelle `ILoggingFacility`.
+
+Auf diese Weise machen wir sowohl die `CustomerRepository`-Klasse 
+als auch den konkreten Logger von dieser Schnittstelle abhängig.
+
+Die `ILoggingFacility`-Schnittstelle definieren wir so:
+
+```cpp
+01: 
+02: class ILoggingFacility
+03: {
+04: public:
+05:     virtual ~ILoggingFacility() = default;
+06: 
+07:     virtual void writeInfoEntry(std::string_view entry) = 0;
+08:     virtual void writeWarnEntry(std::string_view entry) = 0;
+09:     virtual void writeErrorEntry(std::string_view entry) = 0;
+10: };
+```
+
+Damit wenden wir uns einer möglichen Implementierung dieser Schnittstelle zu,
+der Klasse `StandardOutputLogger`:
+
+```cpp
+01: class StandardOutputLogger : public ILoggingFacility {
+02: public:
+03:     void writeInfoEntry(std::string_view entry) override {
+04:         std::cout << "[INFO] " << entry << std::endl;
+05:     }
+06:     void writeWarnEntry(std::string_view entry) override {
+07:         std::cout << "[WARNING] " << entry << std::endl;
+08:     }
+09:     void writeErrorEntry(std::string_view entry) override {
+10:         std::cout << "[ERROR] " << entry << std::endl;
+11:     }
+12: };
+```
+
+
+Damit fehlt noch die `CustomerRepository`-Klasse. Wir ändern die vorhandene Klasse wie folgt:
+
+  * Zuerst erstellen wir eine neue Instanzvariable vom `std::shared_ptr`-Typ des Schnittstellentyps `ILoggingFacility`.
+
+  * Eine entsprechende Zeigerinstanz wird über einen Initialisierungskonstruktor an die Klasse übergeben.
+
+  * Mit anderen Worten: Wir erlauben, dass eine Instanz einer Klasse, die die `ILoggingFacility`-Schnittstelle implementiert, während der Erstellung in das `CustomerRepository`-Objekt importiert wird,
+    oder wie es im *Dependency Inversion*-Fachjargon heißt: &bdquo;injiziert&rdquo;.
+
+  * Wir löschen auch den Standardkonstruktor, da wir nicht zulassen möchten, dass ein `CustomerRepository` ohne Logger erstellt wird.
+
+  * Darüber hinaus entfernen wir die direkte Abhängigkeit in der Implementierung zum Singleton und verwenden stattdessen den Shared Pointer `m_logger` zum Schreiben von Protokolleinträgen.
+
+
+
+```cpp
+01: class CustomerRepository
+02: {
+03: public:
+04:     CustomerRepository() = delete;
+05: 
+06:     explicit CustomerRepository(const std::shared_ptr<LoggingFacility>& logger)
+07:         : m_logger{ logger }
+08:     { }
+09:         
+10:     Customer findCustomerById(const Identifier& customerId)
+11:     {
+12:         m_logger->writeInfoEntry("findCustomerById called ... ");
+13:         // ...
+14:         return {};
+15:     }
+16: 
+17: private:
+18:     std::shared_ptr<LoggingFacility> m_logger;
+19: };
+```
+
+
+Betrachten Sie an der letzten Realisierung der Klasse `CustomerRepository`
+die Folge dieser Umgestaltung: Die `CustomerRepository`-Klasse ist nicht mehr von einem bestimmten Logger abhängig.
+
+Stattdessen ist ein `CustomerRepository`-Objekt nur von einer Abstraktion (Schnittstelle) abhängig,
+die nun explizit in der Klasse und ihrer Schnittstelle sichtbar ist
+(auf Grund der Instanzvariable `m_logger` des Typs `std::shared_ptr<LoggingFacility>` und auf Grund des Konstruktors, der wiederum eine `std::shared_ptr<LoggingFacility>`-Variable übergeben bekommt).
+
+Das bedeutet, dass die `CustomerRepository`-Klasse nun Service-Objekte für Protokollierungszwecke akzeptiert, die von *außen* übergeben werden.
+
+Wir haben in der Realisierung der `CustomerRepository`-Klasse damit keinen Zugriff auf
+ein Singleton-Objekt verankert!
+
+---
+
 #### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version
 
 [Quellcode 2](../ConceptualExample02.cpp) &ndash; Mit *Double-Checked Locking*
+
+[Quellcode 3](../Singleton_vs_Dependency_Injection.cpp) &ndash; Eine Alternative zum Singleton Pattern: *Dependency Injection*
+
 
 ---
 

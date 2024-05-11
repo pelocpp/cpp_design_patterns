@@ -11,10 +11,16 @@ namespace ConceptualExample01 {
     class Singleton final
     {
     private:
-        Singleton() {};
-
         static Singleton* m_instance;
         static std::mutex m_mutex;
+
+    private:
+        Singleton() = default;
+
+        Singleton(const Singleton&) = delete;
+        Singleton(Singleton&&) noexcept = delete;
+        Singleton& operator=(const Singleton&) = delete;
+        Singleton& operator=(Singleton&&) noexcept = delete;
 
     public:
         static Singleton* getInstance()
@@ -46,6 +52,16 @@ namespace ConceptualExample01 {
 
             return m_instance;
         }
+
+        void doThis() const
+        {
+            std::cout << "doing this on singleton instance (" << this << ")." << std::endl;
+        }
+
+        void doThat() const
+        {
+            std::cout << "doing that on singleton instance (" << this << ")." << std::endl;
+        }
     };
 
     Singleton* Singleton::m_instance{ nullptr };
@@ -53,6 +69,14 @@ namespace ConceptualExample01 {
 }
 
 void test_singleton_01()
+{
+    using namespace ConceptualExample01;
+
+    Singleton::getInstance()->doThis();
+    Singleton::getInstance()->doThat();
+}
+
+void test_singleton_01_a()
 {
     using namespace ConceptualExample01;
 

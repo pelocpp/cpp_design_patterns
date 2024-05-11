@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{7eab0743-d55f-4f31-8db7-6ca2cee12e5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SingletonVsDependencyInjection">
+      <UniqueIdentifier>{e0966cfb-ff8f-41f7-aacd-1da568fbf2bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -26,6 +29,9 @@
     </ClCompile>
     <ClCompile Include="ConceptualExample01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton_vs_Dependency_Injection.cpp">
+      <Filter>Source Files\SingletonVsDependencyInjection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
