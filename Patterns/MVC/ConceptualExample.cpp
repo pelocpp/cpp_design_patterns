@@ -12,7 +12,7 @@ namespace ConceptualExample {
     // interface observer
     struct IValveObserver
     {
-        virtual ~IValveObserver() {};
+        virtual ~IValveObserver() {}
 
         virtual void valveValueChanged(int) = 0;
     };
@@ -107,7 +107,7 @@ namespace ConceptualExample {
 
     public:
 
-        ValveViewLabel() {};
+        ValveViewLabel() {}
 
         void attach(std::shared_ptr<IValveModel> model) {
             m_model = model;
@@ -155,7 +155,7 @@ namespace ConceptualExample {
         }
     };
 
-    void clientCode()
+    static void clientCode()
     {
         // create model
         std::shared_ptr<IValveModel> model{ std::make_shared<ValveModelImpl>() };

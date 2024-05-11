@@ -111,7 +111,7 @@ namespace ConceptualExample01 {
         }
     };
 
-    void clientCode()
+    static void clientCode()
     {
         ConcreteColleagueA* c1{ new ConcreteColleagueA{} };
         ConcreteColleagueB* c2{ new ConcreteColleagueB{} };

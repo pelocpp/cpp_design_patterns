@@ -4,7 +4,7 @@
 
 class IFileComponent {
 public:
-    virtual ~IFileComponent() {};
+    virtual ~IFileComponent() {}
 
     virtual void display(const std::string&) const = 0;
 };

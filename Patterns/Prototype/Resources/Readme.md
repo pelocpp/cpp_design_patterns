@@ -197,7 +197,7 @@ in nahezu idealerweise geeignet:
 40: public:
 41:     GameBoard();                       // default c'tor
 42:     GameBoard(const GameBoard&);       // copy c'tor
-43:     virtual ~GameBoard() {};    // virtual defaulted d'tor
+43:     virtual ~GameBoard() {}            // virtual defaulted d'tor
 44: 
 45:     GameBoard& operator=(const GameBoard&);   // assignment operator
 46: 

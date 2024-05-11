@@ -114,7 +114,7 @@ namespace ConceptualExample02 {
      * As long as the client keeps working with the FactoryBase
      * via the base interface, you can pass it any FactoryBase's subclass.
      */
-    void clientCode(const FactoryBase& factory) {
+    static void clientCode(const FactoryBase& factory) {
 
         std::cout
             << "Client (doesn't know the factory's concrete class type)"

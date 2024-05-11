@@ -97,7 +97,7 @@ namespace MotivationVisitor02
         std::list<std::string> m_content;
     };
 
-    void clientCode02()
+    static void clientCode02()
     {
         Document * d1 = new HTML;
         d1->addToList("This is line");
@@ -171,7 +171,7 @@ namespace MotivationVisitor03
         }
     };
 
-    void clientCode03() {
+    static void clientCode03() {
 
         Document * d1 = new HTML;
         d1->addToList("This is line");
@@ -268,7 +268,7 @@ namespace MotivationVisitor04
         std::cout << "</ul>" << std::endl;
     }
 
-    void clientCode04()
+    static void clientCode04()
     {
         DocumentVisitor* dp = new DocumentPrinter();
 
@@ -347,7 +347,7 @@ namespace MotivationVisitor05
     };
 
     /* ------ std::variant & std::visit -------- */
-    void clientCode05() {
+    static void clientCode05() {
         HTML hd;
         hd.addToList("This is line");
         std::variant<Markdown, HTML> doc = hd;

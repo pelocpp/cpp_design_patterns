@@ -108,7 +108,7 @@ namespace DepartmentStoreExample {
         State m_state;
     };
 
-    void clientCode_01()
+    static void clientCode_01()
     {
         DepartmentStoreStateMachine fsm = DepartmentStoreStateMachine{};
         std::string report;
@@ -138,7 +138,7 @@ namespace DepartmentStoreExample {
         std::cout << std::endl;
     }
 
-    void clientCode_02()
+    static void clientCode_02()
     {
         auto fsm = DepartmentStoreStateMachine{};
         std::cout << fsm.reportCurrentState() << std::endl;

@@ -13,7 +13,7 @@ namespace ApdaterPatternClassAdapterApproach {
     // interface MediaPlayer
     class IMediaPlayer {
     public:
-        virtual ~IMediaPlayer() {};
+        virtual ~IMediaPlayer() {}
 
         virtual void play(std::string audioType, std::string fileName) = 0;
     };
@@ -68,7 +68,8 @@ namespace ApdaterPatternClassAdapterApproach {
     class MediaAdapter : public IMediaPlayer, private VlcPlayer, private Mp4Player {
     public:
         // c'tor
-        MediaAdapter() {};
+        MediaAdapter() {}
+
         void play(std::string audioType, std::string fileName) override;
     };
 

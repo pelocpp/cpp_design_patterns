@@ -62,7 +62,7 @@ namespace RealWorldFactoryMethod {
         virtual float productionCharge() const = 0;
 
     public:
-        virtual ~AbstractTVFactory() {};
+        virtual ~AbstractTVFactory() {}
 
         /**
          * Note that the FactoryBase's class primary responsibility is
@@ -140,11 +140,11 @@ namespace RealWorldFactoryMethod {
         }
     };
 
-    void clientCode01(const std::shared_ptr<AbstractTVFactory> factory) {
+    static void clientCode01(const std::shared_ptr<AbstractTVFactory> factory) {
         factory->orderTV();
     }
 
-    void clientCode02(const std::shared_ptr<AbstractTVFactory> factory) {
+    vstatic oid clientCode02(const std::shared_ptr<AbstractTVFactory> factory) {
         std::cout
             << "My new television receiver costs me "
             << factory->totalCharge()

@@ -84,7 +84,7 @@ namespace ShapesExample {
     /**
      *  Use the 'Shape' and 'IDrawAPI' classes to draw different colored circles
      */
-    void clientCode01()
+    static void clientCode01()
     {
         // two different bridge implementor classes
         std::unique_ptr<IDrawAPI> redCircleDrawer {
@@ -105,7 +105,7 @@ namespace ShapesExample {
         circle->draw();
     }
 
-    void clientCode02()
+    static void clientCode02()
     {
         // two different bridge implementor classes
         std::unique_ptr<IDrawAPI> redCircleDrawer {

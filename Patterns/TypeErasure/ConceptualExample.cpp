@@ -46,7 +46,7 @@ namespace ConceptualExample
                 << animal->say() << "' :)." << std::endl;
         }
 
-        void clientCode()
+        static void clientCode()
         {
             std::shared_ptr<IAnimal> aCow{ std::make_shared<Cow>() };
             std::shared_ptr<IAnimal> aPig{ std::make_shared<Pig>() };
@@ -75,7 +75,7 @@ namespace ConceptualExample
             std::string say() const { return "woof"; }
         };
 
-        void clientCode()
+        static void clientCode()
         {
             std::shared_ptr<Dog> aDog{ std::make_shared<Dog>() };
             seeAndSay<Dog>(aDog);
@@ -149,7 +149,7 @@ namespace ConceptualExample
                 << animal->say() << "' :)." << std::endl;
         }
 
-        void clientCode()
+        static void clientCode()
         {
             std::shared_ptr<MyAnimal> aCow{ std::make_shared<MyCow>() };
             std::shared_ptr<MyAnimal> aPig{ std::make_shared<MyPig>() };
@@ -213,7 +213,7 @@ namespace ConceptualExample
                 << animal->say() << "' :)." << std::endl;
         }
 
-        void clientCode()
+        static void clientCode()
         {
             std::shared_ptr<MyAnimal> spCow{ std::make_shared<AnimalWrapper<Cow>>(Cow{}) };
             std::shared_ptr<MyAnimal> spPig{ std::make_shared<AnimalWrapper<Pig>>(Pig{}) };
@@ -297,7 +297,7 @@ namespace ConceptualExample
             }
         };
 
-        void clientCode()
+        static void clientCode()
         {
             SeeAndSay animals;
 
@@ -383,7 +383,7 @@ namespace ConceptualExample
             }
         };
 
-        void clientCode()
+        static void clientCode()
         {
             SeeAndSay animals;
 
@@ -469,7 +469,7 @@ namespace ConceptualExample
             }
         };
 
-        void clientCode()
+        static void clientCode()
         {
             SeeAndSay animals;
 

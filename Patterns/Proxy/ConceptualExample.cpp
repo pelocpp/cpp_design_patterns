@@ -58,7 +58,8 @@ private:
      */
 public:
     Proxy(std::shared_ptr<RealSubject> realSubject) 
-        : m_realSubject{ realSubject } {}
+        : m_realSubject{ realSubject }
+    {}
 
     /**
      * The most common applications of the Proxy pattern are lazy loading,
@@ -81,7 +82,7 @@ public:
  * directly. In this case, to implement the pattern more easily, you can extend
  * your proxy from the real subject's class.
  */
-void clientCode(std::shared_ptr<SubjectBase> subject) {
+static void clientCode(std::shared_ptr<SubjectBase> subject) {
 
     subject->request();
 }

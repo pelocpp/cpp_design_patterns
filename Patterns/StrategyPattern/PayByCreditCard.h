@@ -13,7 +13,7 @@ private:
 
 public:
     PayByCreditCard();
-    ~PayByCreditCard() {};
+    ~PayByCreditCard() {}
 
     virtual bool pay(int paymentAmount) override;
     virtual void collectPaymentDetails() override;

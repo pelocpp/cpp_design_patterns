@@ -41,7 +41,7 @@ public:
  * The client code works with all of the objects via the base interface.
  * The function which requires an AbstractObject instance, will not accept null
  */
-void clientCode(const AbstractObject& obj) {
+static void clientCode(const AbstractObject& obj) {
     // obj may never be null here
     std::string result = obj.operation();
     std::cout << "RESULT: " << result << std::endl;

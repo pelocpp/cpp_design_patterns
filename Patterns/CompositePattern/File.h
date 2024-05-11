@@ -4,9 +4,9 @@
 
 class File : public IFileComponent {
 public:
-    File() {};
+    File() {}
     File(const std::string& name, const std::string& data);
-    ~File() {};
+    ~File() {}
 
     // getter
     std::string getName();

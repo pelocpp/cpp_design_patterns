@@ -151,7 +151,7 @@ namespace Bookstore_Example {
         Stock m_stock;
     };
 
-    void clientCode_01() {
+    static void clientCode_01() {
 
         Book cBook{ "C", "Dennis Ritchie", 11.99, 12 };
         Book javaBook{"Java", "James Gosling", 17.99, 21 };
@@ -173,7 +173,7 @@ namespace Bookstore_Example {
         std::cout << "Count of elements in Bookstore: " << count << std::endl;
     }
 
-    void clientCode_02() {
+    static void clientCode_02() {
 
         Book cBook{ "C", "Dennis Ritchie", 11.99, 1 };
         Movie movieBond{ "Spectre", "Sam Mendes", 8.99, 1 };

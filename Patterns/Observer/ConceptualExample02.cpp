@@ -16,14 +16,14 @@ namespace ObserverDesignPatternSmartPointer {
 
     class IObserver {
     public:
-        virtual ~IObserver() {};
+        virtual ~IObserver() {}
 
         virtual void update(const std::string&) = 0;
     };
 
     class ISubject {
     public:
-        virtual ~ISubject() {};
+        virtual ~ISubject() {}
 
         virtual void attach(std::weak_ptr<IObserver>) = 0;
         virtual void detach(std::weak_ptr<IObserver>) = 0;

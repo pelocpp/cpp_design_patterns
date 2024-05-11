@@ -12,7 +12,7 @@ namespace OnlineShopExample {
     class Visitor
     {
     public:
-        virtual ~Visitor() {};
+        virtual ~Visitor() {}
 
         // note: implicit forward declarations
         virtual void visit(const class Book*) = 0;
@@ -190,7 +190,7 @@ namespace OnlineShopExample {
         std::list<std::shared_ptr<Element>> m_products;
 
     public:
-        ShoppingBasket() {};
+        ShoppingBasket() {}
 
         std::list<std::shared_ptr<Element>> GetProducts()
         {
@@ -231,7 +231,7 @@ namespace OnlineShopExample {
         }
     };
 
-    void clientCode()
+    static void clientCode()
     {
         ShoppingBasket basket;
 

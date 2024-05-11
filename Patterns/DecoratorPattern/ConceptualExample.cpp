@@ -112,7 +112,7 @@ public:
  * This way it can stay independent of the concrete classes of components
  * it works with.
  */
-void clientCode(std::shared_ptr<Component> component) {
+static void clientCode(std::shared_ptr<Component> component) {
     // ...
     std::cout << "Result: " << component->operation();
     // ...

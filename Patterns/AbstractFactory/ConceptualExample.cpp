@@ -12,7 +12,7 @@
  */
 class AbstractProductA {
 public:
-    virtual ~AbstractProductA() {};
+    virtual ~AbstractProductA() {}
 
     virtual std::string usefulFunctionA() const = 0;
 };
@@ -43,7 +43,7 @@ class AbstractProductB {
      * Product B is able to do its own thing...
      */
 public:
-    virtual ~AbstractProductB() {};
+    virtual ~AbstractProductB() {}
 
     virtual std::string usefulFunctionB() const = 0;
 
@@ -144,7 +144,7 @@ public:
  * product subclass to the client code without breaking it.
  */
 
-void clientCode(const std::shared_ptr<AbstractFactory>& factory) {
+static void clientCode(const std::shared_ptr<AbstractFactory>& factory) {
     const std::shared_ptr<AbstractProductA> product_a = factory->createProductA();
     const std::shared_ptr<AbstractProductB> product_b = factory->createProductB();
     std::cout << product_b->usefulFunctionB() << std::endl;

@@ -11,7 +11,7 @@ namespace JobApplicationExample {
     class State
     {
     public:
-        virtual ~State() {};
+        virtual ~State() {}
 
         virtual void inform() = 0;             // inform applicant
         virtual void process() = 0;            // process job application
@@ -173,7 +173,7 @@ namespace JobApplicationExample {
         }
     };
 
-    void clientCode()
+    static void clientCode()
     {
         JobApplication b;
         b.print();

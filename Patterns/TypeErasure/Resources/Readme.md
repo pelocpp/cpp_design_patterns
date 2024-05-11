@@ -86,7 +86,7 @@ eine Unterklasse, die von der Basisklasse (Schnittstellenklasse) erbt und ihre M
 33:         << animal->say() << "' :)." << std::endl;
 34: }
 35: 
-36: void clientCode()
+36: static void clientCode()
 37: {
 38:     std::shared_ptr<IAnimal> aCow { std::make_shared<Cow>() };
 39:     std::shared_ptr<IAnimal> aPig { std::make_shared<Pig>() };
@@ -134,7 +134,7 @@ Beispiel:
 05:     std::string say() const { return "woof"; }
 06: };
 07: 
-08: void clientCode()
+08: static void clientCode()
 09: {
 10:     std::shared_ptr<Dog> aDog{ std::make_shared<Dog>() };
 11:     seeAndSay<Dog>(aDog);
@@ -237,7 +237,7 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 63:         << animal->say() << "' :)." << std::endl;
 64: }
 65: 
-66: void clientCode()
+66: static void clientCode()
 67: {
 68:     std::shared_ptr<MyAnimal> aCow{ std::make_shared<MyCow>() };
 69:     std::shared_ptr<MyAnimal> aPig{ std::make_shared<MyPig>() };
@@ -327,7 +327,7 @@ damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und 
 45:     }
 46: };
 47: 
-48: void clientCode()
+48: static void clientCode()
 49: {
 50:     SeeAndSay animals;
 51: 
@@ -406,7 +406,7 @@ Wir formulieren das letzte Beispiel entsprechend der *Type Erasure* Namensgebung
 45:     }
 46: };
 47: 
-48: void clientCode()
+48: static void clientCode()
 49: {
 50:     SeeAndSay animals;
 51: 
@@ -484,7 +484,7 @@ den Instanzvariablen verwalten sie eine Referenz des umhüllten Objekts:
 45:     }
 46: };
 47: 
-48: void clientCode()
+48: static void clientCode()
 49: {
 50:     SeeAndSay animals;
 51: 

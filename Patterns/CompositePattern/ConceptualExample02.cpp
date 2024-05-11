@@ -140,7 +140,7 @@ namespace CompositePatternSmartPointer {
     /**
      * The client code works with all of the components via the base interface.
      */
-    void clientCode(std::shared_ptr<Component> component) {
+    static void clientCode(std::shared_ptr<Component> component) {
         std::cout << "Result: " << component->operation();
     }
 
@@ -149,7 +149,7 @@ namespace CompositePatternSmartPointer {
      * base Component class, the client code can work with any component, simple or
      * complex, without depending on their concrete classes.
      */
-    void clientCode2(std::shared_ptr<Component> component1, std::shared_ptr<Component> component2) {
+    static void clientCode2(std::shared_ptr<Component> component1, std::shared_ptr<Component> component2) {
         if (component1->isComposite()) {
             component1->add(component2);
         }

@@ -159,7 +159,7 @@ könnten wir folgende Realisierung betrachten:
 48:     std::list<std::string>  m_content;
 49: };
 50: 
-51: void clientCode()
+51: static void clientCode()
 52: {
 53:     Document* d1 = new HTML;
 54:     d1->addToList("This is line");
@@ -245,7 +245,7 @@ um vor allem das *Single*-*Responsibility*-Prinzips zu beachten.
 55:     }
 56: };
 57: 
-58: void clientCode() {
+58: static void clientCode() {
 59:     Document* d1 = new HTML;
 60:     d1->addToList("This is line");
 61:     DocumentPrinter::print(d1);
@@ -354,7 +354,7 @@ Diese wird weiter unten noch näher erläutert werden (begleitender Text und UML-D
 73:     std::cout << "</ul>" << std::endl;
 74: }
 75: 
-76: void clientCode() {
+76: static void clientCode() {
 77:     DocumentVisitor* dp = new DocumentPrinter();
 78: 
 79:     Document* d1 = new HTML;
@@ -461,7 +461,7 @@ Man beachte vorab, dass die Dokumente Klassen `Markdown` und `HTML` nicht mehr e
 55: };
 56: 
 57: /* ------ std::variant & std::visit -------- */
-58: void clientCode() {
+58: static void clientCode() {
 59:     HTML hd;
 60:     hd.addToList("This is line");
 61:     std::variant<Markdown, HTML> doc = hd;

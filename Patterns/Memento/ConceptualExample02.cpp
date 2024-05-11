@@ -173,7 +173,7 @@ namespace ConceptualExample02 {
         }
     };
 
-    void clientCode() {
+    static void clientCode() {
         std::shared_ptr<Originator> originator{ 
             std::make_shared<Originator>("I'm the original state of this Originator")
         };

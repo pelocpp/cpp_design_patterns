@@ -12,7 +12,7 @@ namespace IteratorPatternStandard {
     class IteratorBase
     {
     public:
-        virtual ~IteratorBase() {};
+        virtual ~IteratorBase() {}
 
         virtual void reset() = 0;
         virtual const T& getCurrent() const = 0;

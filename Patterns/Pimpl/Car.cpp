@@ -24,7 +24,7 @@ Car::~Car()
     delete m_engineRaw;
 }
 
-// Car::~Car() {};
+// Car::~Car() {}
 
 void Car::coolDown()
 {

@@ -43,7 +43,7 @@ namespace ConceptualExampleChainOfResponsibility {
     class ConcreteHandlerA : public HandlerBase
     {
     public:
-        ConcreteHandlerA() {};
+        ConcreteHandlerA() {}
 
         void handleRequest(const Request& req) const override
         {
@@ -59,7 +59,7 @@ namespace ConceptualExampleChainOfResponsibility {
     class ConcreteHandlerB : public HandlerBase
     {
     public:
-        ConcreteHandlerB() {};
+        ConcreteHandlerB() {}
 
         void handleRequest(const Request& req) const override
         {
@@ -75,7 +75,7 @@ namespace ConceptualExampleChainOfResponsibility {
     class ConcreteHandlerC : public HandlerBase
     {
     public:
-        ConcreteHandlerC() {};
+        ConcreteHandlerC() {}
 
         void handleRequest(const Request& req) const override
         {
@@ -92,7 +92,7 @@ namespace ConceptualExampleChainOfResponsibility {
      * The client code is usually suited to work with a single handler.
      * In most cases, it is not even aware that the handler is part of a chain.
      */
-    void clientCode(std::shared_ptr<HandlerBase> handler)
+    static void clientCode(std::shared_ptr<HandlerBase> handler)
     {
         std::array<Request, 8> requests = {
             Request{ 7, std::string{ "Req. No.  7"} },

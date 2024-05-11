@@ -2,12 +2,13 @@
 // DirectoryEx.h
 // ===========================================================================
 
-class DirectoryEx : public IFileComponent {
+class DirectoryEx : public IFileComponent
+{
 public:
     // c'tor(s), d'tor
-    DirectoryEx() {};
+    DirectoryEx() {}
     DirectoryEx(const std::string& name);
-    ~DirectoryEx() {};
+    ~DirectoryEx() {}
 
     // getter
     std::string getName();

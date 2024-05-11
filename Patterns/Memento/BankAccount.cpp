@@ -86,7 +86,7 @@ namespace BankAccountMemento
         return os << "Balance: " << ac.m_balance;
     }
 
-    void clientCode_01()
+    static void clientCode_01()
     {
         BankAccount ba{ 0 };
         ba.deposit(50);
@@ -110,7 +110,7 @@ namespace BankAccountMemento
     Redo 2: balance: 150
     */
 
-    void clientCode_02()
+    static void clientCode_02()
     {
         BankAccount ba{ 100 };
         ba.deposit(50);

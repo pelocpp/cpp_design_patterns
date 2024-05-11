@@ -13,7 +13,7 @@
 class ITarget
 {
 public:
-    virtual ~ITarget() {};
+    virtual ~ITarget() {}
 
     virtual std::string getRequest() const = 0;
 };
@@ -24,7 +24,7 @@ public:
 class Target : public ITarget
 {
 public:
-    Target() {};
+    Target() {}
 
     virtual std::string getRequest() const override
     {
@@ -40,7 +40,7 @@ public:
 class Adaptee
 {
 public:
-    Adaptee() {};
+    Adaptee() {}
 
     std::string getSpecificRequest() const
     {
@@ -58,7 +58,9 @@ private:
     std::shared_ptr<Adaptee> m_adaptee;
 
 public:
-    Adapter(std::shared_ptr<Adaptee> adaptee) : m_adaptee{ adaptee } {}
+    Adapter(std::shared_ptr<Adaptee> adaptee) 
+        : m_adaptee{ adaptee }
+    {}
 
     std::string getRequest() const override {
 
@@ -73,7 +75,7 @@ public:
 /**
  * The client code supports all classes that follow the Target interface
  */
-static void clientCode(std::shared_ptr<ITarget> target) {
+static static void clientCode(std::shared_ptr<ITarget> target) {
 
     std::string request{ target->getRequest() };
     std::cout << request << std::endl << std::endl;

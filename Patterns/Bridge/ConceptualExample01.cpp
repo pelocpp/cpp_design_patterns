@@ -49,7 +49,7 @@ namespace ConceptualExampleBridge01 {
         }
     };
 
-    void clientCode(std::shared_ptr<Abstraction> abstraction) {
+    static void clientCode(std::shared_ptr<Abstraction> abstraction) {
         // ...
         abstraction->operation();
         // ...

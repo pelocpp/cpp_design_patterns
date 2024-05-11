@@ -13,7 +13,7 @@ namespace VirtualConstructorIdiom_02 {
         virtual Window* create() = 0;
         virtual Window* clone() = 0;
 
-        virtual ~Window() {};
+        virtual ~Window() {}
     };
 
     // Concrete Products 

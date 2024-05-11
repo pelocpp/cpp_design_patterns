@@ -128,7 +128,7 @@ namespace CompositePatternRawPointer {
     /**
      * The client code works with all of the components via the base interface.
      */
-    void clientCode(Component* component) {
+    static void clientCode(Component* component) {
         std::cout << "Result: " << component->operation();
     }
 
@@ -137,7 +137,7 @@ namespace CompositePatternRawPointer {
      * base Component class, the client code can work with any component, simple or
      * complex, without depending on their concrete classes.
      */
-    void clientCode2(Component* component1, Component* component2) {
+    static void clientCode2(Component* component1, Component* component2) {
         if (component1->isComposite()) {
             component1->add(component2);
         }

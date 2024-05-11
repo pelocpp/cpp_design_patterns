@@ -27,8 +27,6 @@ Ist eine Klasse auf eine bestimmte Schnittstelle angewiesen,
 die von einer anderen Klasse nicht implementiert wird,
 fungiert der Adapter als Übersetzer zwischen diesen beiden Klassen.
 
-Adapter Entwurfsmuster werden häufig beim Erstellen eines neuen Systems verwendet.
-
 #### Problem:
 
 Das Adapter Entwurfsmuster ist ein strukturelles Muster, das eine Vorgehensweise

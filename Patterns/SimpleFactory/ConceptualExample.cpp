@@ -11,14 +11,15 @@ namespace ConceptualExample {
     class IShape
     {
     public:
-        virtual ~IShape() {};
+        virtual ~IShape() {}
 
         virtual void draw() = 0;
     };
 
     class Rectangle : public IShape {
     public:
-        Rectangle() {};
+        Rectangle() {}
+
         void draw() override
         {
             std::cout << "> Rectangle::draw()" << std::endl;
@@ -27,7 +28,8 @@ namespace ConceptualExample {
 
     class Square : public IShape {
     public:
-        Square() {};
+        Square() {}
+
         void draw() override
         {
             std::cout << "> Square::draw()" << std::endl;
@@ -36,7 +38,8 @@ namespace ConceptualExample {
 
     class Circle : public IShape {
     public:
-        Circle() {};
+        Circle() {}
+
         void draw() override
         {
             std::cout << "> Circle ::draw()" << std::endl;

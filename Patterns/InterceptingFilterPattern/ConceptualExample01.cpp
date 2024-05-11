@@ -90,7 +90,7 @@ namespace ConceptualExample01 {
         std::shared_ptr<FilterChain> m_filterChain;
 
     public:
-        FilterManager() {};
+        FilterManager() {}
 
         void setFilterChain(std::shared_ptr<FilterChain>& chain)
         {

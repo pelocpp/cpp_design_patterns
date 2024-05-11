@@ -220,7 +220,7 @@ und
 
 vor.
 
-Die beiden Beispiele &bdquo;Property Proxy&bdquo; und &bdquo;Virtual Proxy&bdquo;
+Die beiden Beispiele &bdquo;Property Proxy&rdquo; und &bdquo;Virtual Proxy&rdquo;
 stammen aus dem [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/proxy-design-pattern-in-modern-cpp/).
 
 ---

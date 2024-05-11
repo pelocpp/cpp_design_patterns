@@ -24,8 +24,9 @@
   * Stephan Roth: &bdquo;Clean C++ 20&rdquo;.</br>
     Apress (18. Juni 2021), 508 Seiten. Sprache: Englisch. ISBN-10: 1484259483, ISBN-13: 978-1484259481.
 
-    Der Autor schöpft aus einem umfangreichen Repertoire an Erfahrungen und stellt in seinem Buch ein ganzheitliches Verständnis für das Thema Softwareentwicklung
-    mit einem besonderem Fokus für Entwurfsmuster.
+    Der Autor schöpft aus einem umfangreichen Repertoire programmiersprachlicher Erfahrungen.
+    Dieses Wissen wird in seinem Buch in einem ganzheitlichen Ansatz für das Thema Softwareentwicklung &ndash; vorzugsweise in C++ &ndash; aufbereitet,
+    ein besonderer Fokus ruht auf der Betrachtung von Entwurfsprinzipien und Entwurfsmustern. 
 
 ---
 

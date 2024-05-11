@@ -32,7 +32,7 @@ namespace PluggableAdapterDesignApproach {
     };
 
     // Interface already shipped & known to client
-    void makeDrink(IBeverage& drink) {
+    static void makeDrink(IBeverage& drink) {
         drink.getBeverage();             
     }
 
@@ -94,7 +94,7 @@ namespace PluggableAdapterDesignApproach {
 
 // ===========================================================================
 
-void test_pluggable_adapter_design_01()
+static void test_pluggable_adapter_design_01()
 {
     using namespace PluggableAdapterDesignApproach;
 
@@ -115,7 +115,7 @@ void test_pluggable_adapter_design_01()
     makeDrink(adapter2);
 }
 
-void test_pluggable_adapter_design_02()
+static void test_pluggable_adapter_design_02()
 {
     using namespace PluggableAdapterDesignApproach;
 

@@ -134,7 +134,7 @@ namespace ConceptualExample02 {
         FilterManager m_filterManager;
 
     public:
-        Client() {};
+        Client() {}
 
         void setFilterManager(const FilterManager& filterManager)
         {

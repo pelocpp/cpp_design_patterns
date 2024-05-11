@@ -25,7 +25,7 @@ namespace IteratorPatternCpp {
     class AggregateBase
     {
     public:
-        virtual ~AggregateBase() {};
+        virtual ~AggregateBase() {}
 
         virtual IteratorBase<T>* createForwardIterator() = 0;
         virtual IteratorBase<T>* createBackwardIterator() = 0;

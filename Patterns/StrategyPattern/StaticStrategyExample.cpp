@@ -16,7 +16,7 @@ enum class Format { Markdown, Html };
 
 struct IListStrategy
 {
-    virtual ~IListStrategy() {};
+    virtual ~IListStrategy() {}
 
     virtual void start(std::ostringstream& oss) = 0;
     virtual void end(std::ostringstream& oss) = 0;

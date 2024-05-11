@@ -90,7 +90,7 @@ namespace ConceptualExampleBridge02 {
      * the Abstraction class. This way the client code can support any abstraction-
      * implementation combination.
      */
-    void clientCode(std::shared_ptr<Abstraction> abstraction)
+    static void clientCode(std::shared_ptr<Abstraction> abstraction)
     {
         // ...
         std::cout << abstraction->Operation() << std::endl;

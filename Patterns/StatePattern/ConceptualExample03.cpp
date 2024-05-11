@@ -118,7 +118,7 @@ namespace ConceptualExample03 {
     /**
      * The client code.
      */
-    void clientCode() {
+    static void clientCode() {
         Context* context = new Context(new ConcreteStateA);
         context->request1();
         context->request2();

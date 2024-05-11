@@ -71,7 +71,7 @@ namespace ConceptualExampleBuilder01 {
         }
     };
 
-    void clientCode(Director& director)
+    static void clientCode(Director& director)
     {
         std::shared_ptr<Builder> builder{ 
             std::make_shared<ConcreteBuilder>()

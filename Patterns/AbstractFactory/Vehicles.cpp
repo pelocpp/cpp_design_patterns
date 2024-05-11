@@ -62,7 +62,7 @@ public:
 class IVehicleFactory
 {
 public:
-    virtual ~IVehicleFactory() {};
+    virtual ~IVehicleFactory() {}
 
     virtual std::shared_ptr<Vehicle> createEconomyCar() = 0;
     virtual std::shared_ptr<Vehicle> createRacingCar() = 0;

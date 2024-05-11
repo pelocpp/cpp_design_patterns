@@ -126,7 +126,7 @@ Hier ist ein Beispiel:
 03: public:
 04:     virtual Window* create() = 0;
 05:     virtual Window* clone() = 0;
-06:     virtual ~Window() {};
+06:     virtual ~Window() {}
 07: };
 08: 
 09: // Concrete Products 

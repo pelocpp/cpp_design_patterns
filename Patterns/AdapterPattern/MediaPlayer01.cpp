@@ -1,5 +1,5 @@
 // ===========================================================================
-// MediaPlayer.cpp // Adapter Pattern // Classical Approach (Object Adapter)
+// MediaPlayer01.cpp // Adapter Pattern // Classical Approach (Object Adapter)
 // ===========================================================================
 
 #include <iostream>
@@ -14,7 +14,7 @@ namespace ApdaterPatternClassicalApproach {
     class IMediaPlayer 
     {
     public:
-        virtual ~IMediaPlayer() {};
+        virtual ~IMediaPlayer() {}
 
         virtual void play(std::string audioType, std::string fileName) = 0;
     };
@@ -25,7 +25,7 @@ namespace ApdaterPatternClassicalApproach {
     class IVlcMediaPlayer
     {
     public:
-        virtual ~IVlcMediaPlayer() {};
+        virtual ~IVlcMediaPlayer() {}
 
         virtual void playVlc(std::string fileName) = 0;
     };
@@ -34,7 +34,7 @@ namespace ApdaterPatternClassicalApproach {
     class IMp4MediaPlayer
     {
     public:
-        virtual ~IMp4MediaPlayer() {};
+        virtual ~IMp4MediaPlayer() {}
 
         virtual void playMp4(std::string fileName) = 0;
     };
@@ -124,8 +124,7 @@ namespace ApdaterPatternClassicalApproach {
     // ===========================================================================
 
     // create class 'AudioPlayerExtended'
-    // implementing 'MediaPlayer' interface
-    // with adapter addition
+    // implementing 'MediaPlayer' interface with adapter addition
     class AudioPlayerExtended : public IMediaPlayer
     {
     private:
@@ -176,6 +175,7 @@ static void clientCode(std::shared_ptr<ApdaterPatternClassicalApproach::IMediaPl
 void test_media_player_01()
 {
     using namespace ApdaterPatternClassicalApproach;
+
     std::shared_ptr <IMediaPlayer> audioPlayer1{
         std::make_shared<AudioPlayer>()
     };

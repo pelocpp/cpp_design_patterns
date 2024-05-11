@@ -33,7 +33,7 @@ namespace ConceptualExample03 {
         std::weak_ptr<MediatorBaseAlternate> m_mediator;
 
     public:
-        ColleagueBase() {};
+        ColleagueBase() {}
 
         ColleagueBase(std::shared_ptr<MediatorBaseAlternate> mediator) 
             : m_mediator{ mediator } {}
@@ -134,7 +134,7 @@ namespace ConceptualExample03 {
         }
     };
 
-    void clientCode()
+    static void clientCode()
     {
         std::shared_ptr<ConcreteColleagueA> c1{ 
             new ConcreteColleagueA()

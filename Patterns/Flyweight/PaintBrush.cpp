@@ -11,7 +11,7 @@ namespace PaintBrushFlyweight {
     class Pen
     {
     public:
-        ~Pen() {};
+        ~Pen() {}
 
         virtual void setColor(std::string color) = 0;
         virtual void draw(std::string content) = 0;
