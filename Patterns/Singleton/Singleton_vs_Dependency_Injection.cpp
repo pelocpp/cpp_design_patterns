@@ -71,14 +71,17 @@ namespace DependencyInjectionLogger {
 
     // ============================================================
 
-    class StandardOutputLogger : public LoggingFacility {
+    class StandardOutputLogger : public LoggingFacility
+    {
     public:
         void writeInfoEntry(std::string_view entry) override {
             std::cout << "[INFO] " << entry << std::endl;
         }
+
         void writeWarnEntry(std::string_view entry) override {
             std::cout << "[WARNING] " << entry << std::endl;
         }
+
         void writeErrorEntry(std::string_view entry) override {
             std::cout << "[ERROR] " << entry << std::endl;
         }
@@ -120,7 +123,29 @@ namespace DependencyInjectionLogger {
 
         customerRepository.findCustomerById(id);
     }
+
+    // ============================================================
+
+    class MockLogger : public LoggingFacility
+    {
+    public:
+        void writeInfoEntry(std::string_view entry) override {}
+        void writeWarnEntry(std::string_view entry) override {}
+        void writeErrorEntry(std::string_view entry) override {}
+    };
+
+    static void test_di_mock_logger()
+    {
+        std::shared_ptr<LoggingFacility> logger = std::make_shared<MockLogger>();
+
+        CustomerRepository customerRepository{ logger };
+
+        Identifier id{};
+
+        customerRepository.findCustomerById(id);
+    }
 }
+
 
 // ============================================================
 
@@ -128,6 +153,7 @@ void test_singleton_vs_di()
 {
     SingletonLogger::test_singleton_logger();
     DependencyInjectionLogger::test_di_logger();
+    DependencyInjectionLogger::test_di_mock_logger();
 }
 
 // ===========================================================================

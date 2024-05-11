@@ -104,7 +104,7 @@ namespace ConceptualExample02 {
     }
 }
 
-void test_singleton_02()
+void test_singleton_03()
 {
     using namespace ConceptualExample02;
 

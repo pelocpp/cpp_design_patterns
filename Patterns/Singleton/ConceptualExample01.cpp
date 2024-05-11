@@ -76,7 +76,7 @@ void test_singleton_01()
     Singleton::getInstance()->doThat();
 }
 
-void test_singleton_01_a()
+void test_singleton_02()
 {
     using namespace ConceptualExample01;
 

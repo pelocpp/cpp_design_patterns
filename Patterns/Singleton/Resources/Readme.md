@@ -198,28 +198,18 @@ Eine mögliche Anwendung mit dieser *Logger*-Klasse könnte so aussehen:
 19: }
 ```
 
+Jedes Objekt, dass die Dienste eines Logging-Objekts in Anspruch nehmen möchte,
+muss auf dieses einmal existierende Logging-Objekt zugreifen:
 
 <img src="dp_singleton_pattern_03_logger_singleton.svg" width="600">
 
-*Abbildung* 3: Vier domänenspezifische Klassen eines E-Commerce Warenhauses hängen von einem `Logger`-Singletonobjekt ab.
+*Abbildung* 3: Vier domänenspezifische Klassen eines E-Commerce Warenhauses hängen von einem `Logger`-Singleton Objekt ab.
 
 
 Wie können wir uns nun von dem Singleton-Objekt befreien?
 
 Wir wenden das *Dependency Inversion Prinzip* auf folgende Weise an:
-Zunächst führen wir eine Abstraktion ein &ndash; eine Schnittstelle `ILoggingFacility`.
-
-Auf diese Weise machen wir dann sowohl die `CustomerRepository`-Klasse 
-als auch den konkreten Logger von dieser Schnittstelle abhängig,
-siehe dazu *Abbildung* 4:
-
-<img src="dp_singleton_pattern_04_logger_di_01.svg" width="700">
-
-*Abbildung* 4: Entkopplung der beiden Klassen `CustomerRepository` und `StandardOutputLogger`.
-
-
-
-Die `ILoggingFacility`-Schnittstelle definieren wir dabei so:
+Zunächst führen wir eine Abstraktion ein &ndash; eine Schnittstelle `ILoggingFacility`:
 
 ```cpp
 01: class ILoggingFacility
@@ -232,22 +222,34 @@ Die `ILoggingFacility`-Schnittstelle definieren wir dabei so:
 08: };
 ```
 
+Auf diese Weise machen wir dann sowohl die `CustomerRepository`-Klasse 
+als auch den konkreten Logger von dieser Schnittstelle abhängig,
+siehe dazu *Abbildung* 4:
+
+<img src="dp_singleton_pattern_04_logger_di_01.svg" width="700">
+
+*Abbildung* 4: Entkopplung der beiden Klassen `CustomerRepository` und `StandardOutputLogger`.
+
+
 Damit wenden wir uns einer möglichen Implementierung dieser Schnittstelle zu,
 der Klasse `StandardOutputLogger`:
 
 ```cpp
-01: class StandardOutputLogger : public ILoggingFacility {
-02: public:
-03:     void writeInfoEntry(std::string_view entry) override {
-04:         std::cout << "[INFO] " << entry << std::endl;
-05:     }
-06:     void writeWarnEntry(std::string_view entry) override {
-07:         std::cout << "[WARNING] " << entry << std::endl;
-08:     }
-09:     void writeErrorEntry(std::string_view entry) override {
-10:         std::cout << "[ERROR] " << entry << std::endl;
-11:     }
-12: };
+01: class StandardOutputLogger : public LoggingFacility
+02: {
+03: public:
+04:     void writeInfoEntry(std::string_view entry) override {
+05:         std::cout << "[INFO] " << entry << std::endl;
+06:     }
+07: 
+08:     void writeWarnEntry(std::string_view entry) override {
+09:         std::cout << "[WARNING] " << entry << std::endl;
+10:     }
+11: 
+12:     void writeErrorEntry(std::string_view entry) override {
+13:         std::cout << "[ERROR] " << entry << std::endl;
+14:     }
+15: };
 ```
 
 
