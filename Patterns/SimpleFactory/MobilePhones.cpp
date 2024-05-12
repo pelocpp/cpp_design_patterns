@@ -1,5 +1,5 @@
 // ===========================================================================
-// Factory a.k.a. Simple Factory Pattern // Mobile Phones
+// MobilePhones.cpp // Factory a.k.a. Simple Factory Pattern // Mobile Phones
 // ===========================================================================
 
 #include <iostream>
@@ -14,7 +14,8 @@ namespace MobilePhonesExample {
         virtual void sendMessage() = 0;
     };
 
-    class Samsung : public IMobile {
+    class Samsung : public IMobile 
+    {
     public:
         void sendMessage() override
         {
@@ -22,7 +23,8 @@ namespace MobilePhonesExample {
         }
     };
 
-    class IPhone : public IMobile {
+    class IPhone : public IMobile 
+    {
     public:
         void sendMessage() override
         {
@@ -30,7 +32,7 @@ namespace MobilePhonesExample {
         }
     };
 
-    void test_01()
+    static void test_01()
     {
         std::shared_ptr<IMobile> mobile1 = std::make_shared<Samsung>();
         mobile1->sendMessage();
@@ -42,14 +44,16 @@ namespace MobilePhonesExample {
     class MobileFactory 
     {
     private:
-        std::shared_ptr<IMobile> m_mobile = nullptr;
+        std::shared_ptr<IMobile> m_mobile;
 
     public:
         MobileFactory() : m_mobile(nullptr) {}
 
         // getType method will return IMobile object creation  
         // according to the parameter passsed
-        std::shared_ptr<IMobile> getType(std::string str) {
+        //
+        std::shared_ptr<IMobile> getType(std::string str) 
+        {
 
             if (str == std::string("Samsung")) {
                 m_mobile = std::make_shared<Samsung>();
@@ -66,6 +70,7 @@ namespace MobilePhonesExample {
 void test_mobile_phones_01()
 {
     using namespace MobilePhonesExample;
+
     MobileFactory factory;
     factory.getType("Samsung")->sendMessage();
 }
@@ -73,8 +78,10 @@ void test_mobile_phones_01()
 void test_mobile_phones_02()
 {
     using namespace MobilePhonesExample;
+
     MobileFactory factory;
-    std::shared_ptr<IMobile> mobile = factory.getType("Huawei");
+
+    std::shared_ptr<IMobile> mobile{ factory.getType("Huawei") };
     if (mobile == nullptr)
     {
         std::cout << "Wrong Type" << std::endl;

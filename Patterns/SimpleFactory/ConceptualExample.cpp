@@ -16,7 +16,8 @@ namespace ConceptualExample {
         virtual void draw() = 0;
     };
 
-    class Rectangle : public IShape {
+    class Rectangle : public IShape 
+    {
     public:
         Rectangle() {}
 
@@ -26,7 +27,8 @@ namespace ConceptualExample {
         }
     };
 
-    class Square : public IShape {
+    class Square : public IShape 
+    {
     public:
         Square() {}
 
@@ -36,7 +38,8 @@ namespace ConceptualExample {
         }
     };
 
-    class Circle : public IShape {
+    class Circle : public IShape 
+    {
     public:
         Circle() {}
 
@@ -48,7 +51,8 @@ namespace ConceptualExample {
 
     class ShapeFactory
     {
-        enum class StringCode {
+        enum class StringCode 
+        {
             Rectangle,
             Square,
             Circle,
@@ -94,28 +98,35 @@ namespace ConceptualExample {
         }
     };
 
-    void test_without_factory()
+    static void test_without_factory()
     {
         // using classes explicitely
-        Rectangle* rect = new Rectangle{};
+        //
+        Rectangle* rect{ new Rectangle{} };
         rect->draw();
-        Circle* circle = new Circle{};
+
+        Circle* circle{ new Circle{} };
         circle->draw();
-        Square* square = new Square{};
+
+        Square* square{ new Square{} };
         square->draw();
     }
 
-    void test_with_factory()
+    static void test_with_factory()
     {
         // using classes indirectly with factory
         // (knowledge about explicit classes not necessary)
+        // 
         ShapeFactory shapeFactory;
 
         std::shared_ptr<IShape> shape{};
+
         shape = shapeFactory.getShape("Circle");
         shape->draw();
+
         shape = shapeFactory.getShape("Rectangle");
         shape->draw();
+
         shape = shapeFactory.getShape("Square");
         shape->draw();
     }

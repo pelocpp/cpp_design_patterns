@@ -87,13 +87,13 @@ Betrachten Sie den folgenden Vorschlag:
 06: };
 07: 
 08: // abstraction
-09: struct RelationshipBrowser
+09: struct IRelationshipBrowser
 10: {
 11:     virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
 12: };
 13: 
 14: // low-level <<<<<<<<< -------------------
-15: class Relationships : public RelationshipBrowser
+15: class Relationships : public IRelationshipBrowser
 16: {
 17: private:
 18:     std::vector<std::tuple<Person, Relationship, Person>> m_relations;
@@ -120,7 +120,7 @@ Betrachten Sie den folgenden Vorschlag:
 39: class FamilyTree
 40: {
 41: public:
-42:     FamilyTree(const RelationshipBrowser& browser) {
+42:     FamilyTree(const IRelationshipBrowser& browser) {
 43: 
 44:         for (const auto& child : browser.findAllChildrenOf("John")) {
 45:             std::cout << "John has a child called " << child.m_name << std::endl;
@@ -128,6 +128,14 @@ Betrachten Sie den folgenden Vorschlag:
 47:     }
 48: };
 ```
+
+
+Wir betrachten das Redesign in *Abbildung* 1:
+
+<img src="./dp_dependency_inversion.svg" width="800">
+
+*Abbildung* 1: Anwendung des *Dependency Inversion* Prinzips.
+
 
 ##### Beachten Sie an dem Quellcode:
 

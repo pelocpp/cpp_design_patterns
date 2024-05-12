@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Resources\DependencyInversionPrinciple.md" />
+    <None Include="Resources\dp_dependency_inversion.svg" />
     <None Include="Resources\dp_single_responsibility_principle_class_product.svg" />
     <None Include="Resources\dp_single_responsibility_principle_class_product_redesign.svg" />
     <None Include="Resources\InterfaceSegregationPrinciple.md" />

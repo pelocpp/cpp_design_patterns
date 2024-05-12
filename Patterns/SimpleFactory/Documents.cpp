@@ -1,5 +1,5 @@
 // ===========================================================================
-// Factory a.k.a. Simple Factory Pattern // Documents
+// Documents.cpp // Factory a.k.a. Simple Factory Pattern // Documents
 // ===========================================================================
 
 #include <iostream>
@@ -58,7 +58,7 @@ namespace DocumentsExample {
     };
 
     // non recommendable implementation
-    std::unique_ptr<IDocument> open(std::string path) 
+    static std::unique_ptr<IDocument> open(std::string path)
     {
         if (path.ends_with(".pdf"))
             return std::make_unique<PdfDocument>(path);

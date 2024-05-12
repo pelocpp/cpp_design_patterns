@@ -28,7 +28,25 @@ Das *Simple Factory Pattern* wird im eigentlichen Sinne *nicht* als Entwurfsmust
 
 #### Struktur (UML):
 
-Das folgende UML-Diagramm beschreibt eine Implementierung des *Factory Patterns*.
+*Bemerkung*:<br />
+
+Nach dem *Separation of Concerns*-Prinzip sollte die Objekterstellung bzw. -beschaffung
+von den domänenspezifischen Aufgaben, die ein Objekt hat, getrennt werden.
+
+Eigentlich haben wir hierzu schon eine Vorgehensweise kennen gelernt:
+
+Das Prinzip der *Dependency Injection*.
+
+Das *Dependency Injection* folgt diesem Prinzip in der Gestalt,
+dass der gesamte Objekterstellungs- und Abhängigkeitsauflösungsprozess
+in einem Infrastrukturelement zentralisiert ist und sich die Objekte selbst nicht darum kümmern müssen.
+
+*Vorsicht*:<br />
+Was tun wir, wenn ein Objekt irgendwann zur Laufzeit dynamisch erstellt werden muss?
+
+An dieser Stelle kommen Objektfabriken ins Spiel!
+
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Simple Factory Patterns*.
 Es besteht im Wesentlichen aus drei Teilen:
 
   * **ProductBase**: Basisklasse (oder Schnittstelle) für alle Produkte,

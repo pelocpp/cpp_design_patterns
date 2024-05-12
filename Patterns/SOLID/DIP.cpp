@@ -49,13 +49,13 @@ namespace DependencyInversionPrinciple01
 namespace DependencyInversionPrinciple02
 {
     // abstraction
-    struct RelationshipBrowser
+    struct IRelationshipBrowser
     {
         virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
     };
 
     // low-level <<<<<<<<< -------------------
-    class Relationships : public RelationshipBrowser
+    class Relationships : public IRelationshipBrowser
     {
     private:
         std::vector<std::tuple<Person, Relationship, Person>> m_relations;
@@ -82,7 +82,7 @@ namespace DependencyInversionPrinciple02
     class FamilyTree
     {
     public:
-        FamilyTree(const RelationshipBrowser& browser) {
+        FamilyTree(const IRelationshipBrowser& browser) {
 
             for (const auto& child : browser.findAllChildrenOf("John")) {
                 std::cout << "John has a child called " << child.m_name << std::endl;
@@ -120,7 +120,7 @@ static void test_conceptual_example_dip()
     relationships.addParentAndChild(parent, child1);
     relationships.addParentAndChild(parent, child2);
 
-    const RelationshipBrowser& browser = relationships;
+    const IRelationshipBrowser& browser = relationships;
 
     FamilyTree tree{ browser };
 }

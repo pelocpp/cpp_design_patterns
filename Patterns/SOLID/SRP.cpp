@@ -15,7 +15,9 @@ namespace AntiConceptualExampleSRP {
         std::vector<std::string> m_entries;
 
     public:
-        Journal(const std::string& title) : m_title{ title } {}
+        Journal(const std::string& title) 
+            : m_title{ title } 
+        {}
 
         void addEntry(const std::string& entry) {
             static uint32_t count {};
@@ -44,7 +46,9 @@ namespace ConceptualExampleSRP
         std::vector<std::string> m_entries;
 
     public:
-        Journal(const std::string& title) : m_title{ title } {}
+        Journal(const std::string& title)
+            : m_title{ title }
+        {}
 
         void addEntry(const std::string& entry) {
             static uint32_t count {};

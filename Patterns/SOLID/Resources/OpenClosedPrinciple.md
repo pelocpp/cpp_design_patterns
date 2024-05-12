@@ -24,9 +24,7 @@ Wir betrachten das *Open-Closed-Prinzip* an zwei Beispielen.
 ### 1. Beispiel
 
 Wir legen im Folgenden eine Klasse `Product` für Produkte eines E-Commerce Warenhauses zu Grunde.
-
-In UML-Notation könnte ein einfaches Diagramm für die Klasse `Product` so aussehen:
-
+In UML-Notation könnte ein einfaches UML-Diagramm für die Klasse `Product` so aussehen:
 
 <img src="./dp_single_responsibility_principle_class_product.svg" width="300">
 
@@ -66,8 +64,7 @@ Das Prinzip besagt, dass eine Klasse
   * hingegen für Erweiterungen aber offen sein sollte.
 
 Dies können wir erreichen, indem wir die Klasse `Product` neu gestalten und sie zu einer abstrakten Basisklasse für konkrete Produkte umbauen.
-
-Wir erstellen als Nächstes zwei weitere Klassen, die von der nun umgestalteten Basisklasse `Product` erben: `PhysicalProduct` und `DigitalProduct`.
+Wir erstellen als nächstes zwei weitere Klassen, die von der nun umgestalteten Basisklasse `Product` erben: `PhysicalProduct` und `DigitalProduct`.
 
 Das folgende Klassendiagramm zeigt das neue Design:
 
@@ -75,15 +72,14 @@ Das folgende Klassendiagramm zeigt das neue Design:
 
 *Abbildung* 2: Redesign der Klasse `Product` mit zwei weiteren Klassen `PhysicalProduct` und `DigitalProduct`.
 
-
 Wir können im letzten Diagramm erkennen, dass
 
-  * wir die Eigenschaft `m_weight` aus der Klasse `Product` entfernt haben,
-  * die Anforderungen des Kunden mit zwei zusätzlichen Klassen `PhysicalProduct` und `DigitalProduct` erfüllt wurden,
+  * die Eigenschaft `m_weight` aus der Klasse `Product` entfernt wurde,
+  * die Anforderungen des Kunden mit zwei zusätzlichen Klassen `PhysicalProduct` und `DigitalProduct` umgesetzt wurden,
   * eine dieser Klassen (`PhysicalProduct`) in gewohnter Manier die Eigenschaft `m_weight` besitzt und
   * eine zweite, zusätzliche Klasse `DigitalProduct`, für die ein Gewicht nicht relevant ist,
 stattdessen eine Eigenschaft `m_filePath` besitzt, die symbolisch für die Ablage eines digitalen Produkts
-in der internen Datenhaltung des E-Commerce Warenhauses steht.
+in der internen Datenhaltung des E-Commerce Warenhauses stehen soll.
 
 *Bemerkung*:
 Das Ziel des *Open-Closed-Prinzips* wurde mit dem Konzept der *Vererbung* umgesetzt.
@@ -91,7 +87,7 @@ Das Ziel des *Open-Closed-Prinzips* wurde mit dem Konzept der *Vererbung* umgese
 
 ### 2. Beispiel
 
-Das zweite Beispiel beschäftigt sich mit einer Reihe von Produkten (Klasse `Product`).
+Das zweite Beispiel beschäftigt sich ebenfalls mit einer Reihe von Produkten (Klasse `Product`).
 Wie beim ersten Beispiel betrachten wir den Umstand, dass an der Klasse `Product` Änderungen
 vorgenommen werden müssen.
 

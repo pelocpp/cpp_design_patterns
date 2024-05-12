@@ -30,28 +30,31 @@ ein komplexes Objekt in kleinere und einfachere Komponenten zu zerlegen.
 ```cpp
 01: class Journal
 02: {
-03:     std::string               m_title;
-04:     std::vector<std::string>  m_entries;
-05: 
-06: public:
-07:     Journal(const std::string& title) : m_title{ title } {}
-08: 
-09:     void addEntries(const std::string& entry) {
-10:         static uint32_t count = 0;
-11:         count++;
-12:         std::string text = std::to_string(count) + ": " + entry;
-13:         m_entries.push_back(text);
-14:     }
-15: 
-16:     auto getEntries() const { return m_entries; }
-17: 
-18:     void save(const std::string& filename, std::ostream& os) {
-19: 
-20:         for (const auto& s : m_entries) {
-21:             os << s << std::endl;
-22:         }
-23:     }
-24: };
+03: private:
+04:     std::string m_title;
+05:     std::vector<std::string> m_entries;
+06: 
+07: public:
+08:     Journal(const std::string& title) 
+09:         : m_title{ title } 
+10:     {}
+11: 
+12:     void addEntry(const std::string& entry) {
+13:         static uint32_t count {};
+14:         count++;
+15:         std::string text { std::to_string(count) + ": " + entry };
+16:         m_entries.push_back(text);
+17:     }
+18: 
+19:     auto getEntries() const { return m_entries; }
+20: 
+21:     void save(const std::string& filename, std::ostream& os) {
+22: 
+23:         for (const auto& entry : m_entries) {
+24:             os << entry << std::endl;
+25:         }
+26:     }
+27: };
 ```
 
   * Das obige C++-Beispiel könnte in Ordnung zu sein, solange es nur eine einzige Domänenklasse gibt, hier die Klasse `Journal`.
@@ -76,31 +79,34 @@ Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdqu
 ```cpp
 01: class Journal 
 02: {
-03:     std::string               m_title;
-04:     std::vector<std::string>  m_entries;
-05: 
-06: public:
-07:     Journal(const std::string& title) : m_title{ title } {}
-08: 
-09:     void addEntries(const std::string& entry) {
-10:         static uint32_t count = 0;
-11:         count++;
-12:         std::string text = std::to_string(count) + ": " + entry;
-13:         m_entries.push_back(text);
-14:     }
-15: 
-16:     auto get_entries() const { return m_entries; }
-17: };
+03: private:
+04:     std::string m_title;
+05:     std::vector<std::string> m_entries;
+06: 
+07: public:
+08:     Journal(const std::string& title)
+09:         : m_title{ title }
+10:     {}
+11: 
+12:     void addEntry(const std::string& entry) {
+13:         static uint32_t count {};
+14:         count++;
+15:         std::string text { std::to_string(count) + ": " + entry };
+16:         m_entries.push_back(text);
+17:     }
 18: 
-19: struct SavingManager
-20: {
-21:     static void save(const Journal& journal, const std::string& filename, std::ostream& os) {
-22: 
-23:         for (auto& entry : journal.get_entries()) {
-24:             os << entry << std::endl;
-25:         }
-26:     }
-27: };
+19:     auto get_entries() const { return m_entries; }
+20: };
+21: 
+22: struct SavingManager
+23: {
+24:     static void save(const Journal& journal, const std::string& filename, std::ostream& os) {
+25: 
+26:         for (const auto& entry : journal.get_entries()) {
+27:             os << entry << std::endl;
+28:         }
+29:     }
+30: };
 ```
 
   * Die Klasse `Journal` kümmert sich jetzt nur um ihre Daten und Funktionen, die mit dem Journal zusammenhängen.

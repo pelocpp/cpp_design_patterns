@@ -36,6 +36,9 @@
     <None Include="Resources\dp_single_responsibility_principle_class_product_redesign.svg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_dependency_inversion.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SRP.cpp">
