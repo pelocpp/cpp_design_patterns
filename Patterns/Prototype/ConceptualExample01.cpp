@@ -49,7 +49,7 @@ namespace ConceptualExample01
         }
     };
 
-    void clientCode(Prototype* original)
+    static void clientCode(Prototype* original)
     {
         Prototype* copy{ original->clone() };
 
@@ -99,9 +99,7 @@ void test_conceptual_example_01()
 {
     using namespace ConceptualExample01;
 
-    Prototype* prototype{ 
-        new ConcretePrototype { 123 }
-    };
+    Prototype* prototype{ new ConcretePrototype { 123 } };
 
     clientCode(prototype);
 
@@ -112,13 +110,9 @@ void test_conceptual_example_02()
 {
     using namespace ConceptualExample01;
 
-    Prototype* prototype{
-        new ConcretePrototype(123)
-    };
+    Prototype* prototype{ new ConcretePrototype(123) };
         
-    Prototype* clone{ 
-        prototype->clone() 
-    };
+    Prototype* clone{  prototype->clone() };
 
     std::cout << "Prototype: " << prototype->getId() << std::endl;
     std::cout << "Clone:     " << clone->getId() << std::endl;

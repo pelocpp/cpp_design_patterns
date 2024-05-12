@@ -33,12 +33,6 @@ Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterkl
 **Konsequenz**: *Factory Methoden* verhindern, dass anwendungsspezifische Klassen
 in der Anwendung in Erscheinung treten. 
 
-
-#### *Virtual Constructor*:
-
-Dieses Entwurfsmuster ist auch unter dem Namen *Virtual Constructor* bekannt, dazu später noch mehr.
-
-
 #### Lösung:
 
 Das *Factory*-Entwurfsmuster definiert eine Schnittstelle zum Erstellen eines Objekts
@@ -113,80 +107,6 @@ Beschreiben Sie, wie diese Methoden zur Namensgebung des *Factory Method Pattern
 
 ---
 
-#### *Virtual Constructor Idiom*:
-
-Das *Factory Method* Muster wird auch als *Virtual Constructor* Pattern bezeichnet.
-Dieses Idiom bringt zum Ausdruck, dass der Client mit einem Konstruktor ein Objekt erzeugt, dessen Typ er nicht kennt.
-Der gesamte Zweck dieser Redewendung besteht darin, das Klonen eines Objekts über einen Basisklassenzeiger zu ermöglichen.
-Hier ist ein Beispiel:
-
-```cpp
-01: // Product
-02: class Window {
-03: public:
-04:     virtual Window* create() = 0;
-05:     virtual Window* clone() = 0;
-06:     virtual ~Window() {}
-07: };
-08: 
-09: // Concrete Products 
-10: class DefaultWindow : public Window {
-11:     DefaultWindow* create() override {
-12:         std::cout << "Create DefaultWindow" << std::endl;
-13:         return new DefaultWindow();
-14:     }
-15:     DefaultWindow* clone() override {
-16:         std::cout << "Clone DefaultWindow" << std::endl;
-17:         return new DefaultWindow(*this);
-18:     }
-19: };
-20: 
-21: class FancyWindow : public Window {
-22:     FancyWindow* create() override {
-23:         std::cout << "Create FancyWindow" << std::endl;
-24:         return new FancyWindow();
-25:     }
-26:     FancyWindow* clone() override {
-27:         std::cout << "Clone FancyWindow" << std::endl;
-28:         return new FancyWindow(*this);
-29:     }
-30: };
-31: 
-32: // Concrete Creator or Client                             
-33: Window* createWindow(Window& oldWindow) {
-34:     return oldWindow.create();
-35: }
-36: 
-37: Window* cloneWindow(Window& oldWindow) {
-38:     return oldWindow.clone();
-39: }
-40: 
-41: void test_virtual_constructor_idiom()
-42: {
-43:     DefaultWindow defaultWindow;
-44:     FancyWindow fancyWindow;
-45: 
-46:     Window* defaultWindow1 = createWindow(defaultWindow);
-47:     Window* fancyWindow1 = createWindow(fancyWindow);
-48: 
-49:     Window* defaultWindow2 = cloneWindow(defaultWindow);
-50:     Window* fancyWindow2 = cloneWindow(fancyWindow);
-51: 
-52:     delete defaultWindow1;
-53:     delete fancyWindow1;
-54:     delete defaultWindow2;
-55:     delete fancyWindow2;
-56: }
-```
-
-*Beachte*: Die Klasse `Window` unterstützt jetzt zwei Möglichkeiten, neue `Window`-Objekte zu erstellen:
-ein standardmäßig konstruiertes Fensterobjekt mit der Member-Funktion `create` (Zeile 34)
-und ein kopiert konstruiertes Fensterobjekt mit der Member-Funktion `clone` (Zeile 37).
-
-Ein subtiler Unterschied besteht darin, dass die `clone`-Methode den `this`-Zeiger verwendet (Zeile 28). 
-
----
-
 #### Hinweis:
 
 Die beiden Entwurfsmuster *Simple Factory* und *Factory Method* sind nicht 
@@ -219,18 +139,6 @@ und
 [https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#FactoryMethod)
 
 vor.
-
-Das Beispiel zum *Virtual Constructor Idiom* stammt aus
-
-[Stackoverflow: Virtual constructor idiom and factory design](https://stackoverflow.com/questions/11574075/virtual-constructor-idiom-and-factory-design)
-
-
-Ein zweites Beispiel zum *Virtual Constructor Idiom* ist
-
-[Factory Method](https://www.modernescpp.com/index.php?option=com_content&view=article&id=657&catid=58)
-
-entnommen.
-
 
 ---
 

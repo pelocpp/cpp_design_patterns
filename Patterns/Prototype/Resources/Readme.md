@@ -129,7 +129,7 @@ In JavaScript ist das *Prototype Pattern* quasi nativ enthalten.
 
 Die Erstellung von Objekten erfolgt hier &ndash; unter anderem &ndash; auf der Basis von so genannten
 &bdquo;Konstruktorfunktionen&rdquo;, die als Blaupausen für neue Objekte verwendet werden können.
-Man spricht dabei auch von der so genannten &bdquo;*Prototypischen Vererbung*&rdquo;.
+Man spricht dabei auch von der so genannten &bdquo;*prototypischen Vererbung*&rdquo;.
 
 ---
 

@@ -10,6 +10,14 @@ namespace SingletonLogger {
 
     class Logger final
     {
+    private:
+        Logger() = default;
+
+        Logger(const Logger&) = delete;
+        Logger(Logger&&) noexcept = delete;
+        Logger& operator=(const Logger&) = delete;
+        Logger& operator=(Logger&&) noexcept = delete;
+
     public:
         static Logger& getInstance()
         {

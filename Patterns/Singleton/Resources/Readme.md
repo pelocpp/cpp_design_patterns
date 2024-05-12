@@ -62,7 +62,7 @@ Es besteht nur aus einer einzigen Klasse:
     die pro Aufruf eine einzelne Instanz zurückgibt (Referenz, Zeiger),
     die in einer privaten Variablen residiert.
 
-<img src="dp_singleton_pattern_01.svg" width="300">
+<img src="dp_singleton_pattern_01.svg" width="400">
 
 *Abbildung* 1: Schematische Darstellung des *Singleton Patterns*.
 
@@ -153,25 +153,32 @@ Solche *Logger*-Klassen werden oft als Singletons implementiert:
 ```cpp
 01: class Logger final
 02: {
-03: public:
-04:     static Logger& getInstance()
-05:     {
-06:         static Logger theLogger{};
-07:         return theLogger;
-08:     }
+03: private:
+04:     Logger() = default;
+05:     Logger(const Logger&) = delete;
+06:     Logger(Logger&&) noexcept = delete;
+07:     Logger& operator=(const Logger&) = delete;
+08:     Logger& operator=(Logger&&) noexcept = delete;
 09: 
-10:     void writeInfoEntry(std::string_view entry) {
-11:         std::cout << "[INFO] " << entry << std::endl;
-12:     }
-13: 
-14:     void writeWarnEntry(std::string_view entry) {
-15:         std::cout << "[WARNING] " << entry << std::endl;
-16:     }
-17: 
-18:     void writeErrorEntry(std::string_view entry) {
-19:         std::cout << "[ERROR] " << entry << std::endl;
-20:     }
-21: };
+10: public:
+11:     static Logger& getInstance()
+12:     {
+13:         static Logger theLogger{};
+14:         return theLogger;
+15:     }
+16: 
+17:     void writeInfoEntry(std::string_view entry) {
+18:         std::cout << "[INFO] " << entry << std::endl;
+19:     }
+20: 
+21:     void writeWarnEntry(std::string_view entry) {
+22:         std::cout << "[WARNING] " << entry << std::endl;
+23:     }
+24: 
+25:     void writeErrorEntry(std::string_view entry) {
+26:         std::cout << "[ERROR] " << entry << std::endl;
+27:     }
+28: };
 ```
 
 Eine mögliche Anwendung mit dieser *Logger*-Klasse könnte so aussehen:
@@ -201,7 +208,7 @@ Eine mögliche Anwendung mit dieser *Logger*-Klasse könnte so aussehen:
 Jedes Objekt, dass die Dienste eines Logging-Objekts in Anspruch nehmen möchte,
 muss auf dieses einmal existierende Logging-Objekt zugreifen:
 
-<img src="dp_singleton_pattern_03_logger_singleton.svg" width="600">
+<img src="dp_singleton_pattern_03_logger_singleton.svg" width="700">
 
 *Abbildung* 3: Vier domänenspezifische Klassen eines E-Commerce Warenhauses hängen von einem `Logger`-Singleton Objekt ab.
 
@@ -252,8 +259,7 @@ der Klasse `StandardOutputLogger`:
 15: };
 ```
 
-
-Damit fehlt noch die `CustomerRepository`-Klasse. Wir ändern die vorhandene Klasse wie folgt:
+Damit fehlt noch die `CustomerRepository`-Klasse. Wir ändern die vorhandene Klasse wie folgt ab:
 
   * Zuerst erstellen wir eine neue Instanzvariable vom `std::shared_ptr`-Typ des Schnittstellentyps `ILoggingFacility`.
 
@@ -304,7 +310,7 @@ ein Singleton-Objekt von *innen* verankert!
 
 <img src="dp_singleton_pattern_05_logger_di_02.svg" width="800">
 
-*Abbildung* 5: E`CustomerRepository`-Objekten können über ihren Konstruktor unterschiedliche Logger-Implementierungen zur Verfügung gestellt werden.
+*Abbildung* 5: `CustomerRepository`-Objekten können über ihren Konstruktor unterschiedliche Logger-Implementierungen zur Verfügung gestellt werden.
 
 
 ---

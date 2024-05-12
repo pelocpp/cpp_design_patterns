@@ -24,7 +24,7 @@ namespace ExamplesPrototypePattern {
         virtual ~IChessPiece() {}
 
         virtual std::unique_ptr<IChessPiece> clone() const = 0;
-        virtual std::string str() const = 0;
+        virtual std::string name() const = 0;
     };
 
     // -----------------------------------------------------------------------
@@ -38,7 +38,7 @@ namespace ExamplesPrototypePattern {
         ChessPiece(std::string name) : m_name{ name } {}
 
     public:
-        std::string str() const override final {
+        std::string name() const override final {
             return m_name;
         }
     };
@@ -87,6 +87,7 @@ namespace ExamplesPrototypePattern {
 
     public:
         GameBoard();                       // default c'tor
+
         GameBoard(const GameBoard&);       // copy c'tor
 
         virtual ~GameBoard() {}            // virtual defaulted d'tor
@@ -121,8 +122,9 @@ namespace ExamplesPrototypePattern {
             for (size_t j = 0; j != m_cells[i].size(); ++j) {
                 if (other.m_cells[i][j]) {
 
-                    // compiler error
+                    // compiler errors
                     // m_cells[i][j] = other.m_cells[i][j];
+                    // or
                     // m_cells[i][j] = std::make_unique<ChessPiece>(*other.m_cells[i][j]);
 
                     m_cells[i][j] = other.m_cells[i][j]->clone();
@@ -142,8 +144,9 @@ namespace ExamplesPrototypePattern {
             for (size_t j = 0; j != m_cells[i].size(); ++j) {
                 if (other.m_cells[i][j] != nullptr) {
 
-                    // compiler error
+                    // compiler errors:
                     // m_cells[i][j] = other.m_cells[i][j];
+                    // or
                     // m_cells[i][j] = std::make_unique<ChessPiece>(*other.m_cells[i][j]);
 
                     m_cells[i][j] = other.m_cells[i][j]->clone();
@@ -169,7 +172,7 @@ namespace ExamplesPrototypePattern {
         for (const auto& row : board.m_cells) {
             for (const auto& cell : row) {
                 if (cell != nullptr) {
-                    std::cout << std::setw(8) << std::left << cell->str();
+                    std::cout << std::setw(8) << std::left << cell->name();
                 }
                 else {
                     std::cout << std::setw(8) << std::left << "<empty>";
@@ -190,7 +193,7 @@ void test_prototype_pattern_chess_01()
     using namespace ExamplesPrototypePattern;
 
     King king;
-    std::cout << king.str() << std::endl;
+    std::cout << king.name() << std::endl;
 }
 
 void test_prototype_pattern_chess_02()
@@ -206,10 +209,12 @@ void test_prototype_pattern_chess_02()
 
     std::cout << board << std::endl;
 
+    // assignment
     GameBoard boardCopy;
     boardCopy = board;
     std::cout << boardCopy << std::endl;
 
+    // copy c'tor
     GameBoard secondBoardCopy{ board };
     std::cout << secondBoardCopy << std::endl;
 }

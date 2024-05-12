@@ -17,8 +17,6 @@
 void test_conceptual_example_01();
 void test_conceptual_example_02();
 void test_conceptual_example_03();
-void test_conceptual_example_04();
-void test_conceptual_example_05();
 
 void test_prototype_pattern_chess_01();
 void test_prototype_pattern_chess_02();
@@ -30,7 +28,6 @@ int main()
     test_conceptual_example_01();
     test_conceptual_example_02();
     test_conceptual_example_03();
-    test_conceptual_example_04();
 
     test_prototype_pattern_chess_01();
     test_prototype_pattern_chess_02();

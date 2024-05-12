@@ -144,7 +144,7 @@ namespace RealWorldFactoryMethod {
         factory->orderTV();
     }
 
-    vstatic oid clientCode02(const std::shared_ptr<AbstractTVFactory> factory) {
+    static void clientCode02(const std::shared_ptr<AbstractTVFactory> factory) {
         std::cout
             << "My new television receiver costs me "
             << factory->totalCharge()
