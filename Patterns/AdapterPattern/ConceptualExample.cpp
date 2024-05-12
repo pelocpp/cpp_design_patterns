@@ -75,7 +75,7 @@ public:
 /**
  * The client code supports all classes that follow the Target interface
  */
-static static void clientCode(std::shared_ptr<ITarget> target) {
+static void clientCode(std::shared_ptr<ITarget> target) {
 
     std::string request{ target->getRequest() };
     std::cout << request << std::endl << std::endl;
