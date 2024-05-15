@@ -64,15 +64,12 @@ namespace ConceptualExample02 {
     class FilterChain
     {
     private:
-        std::list<std::shared_ptr<IFilter>> m_prefilters;
-        std::list<std::shared_ptr<IFilter>> m_postFilters;
-        std::shared_ptr<Target> m_target;
+        std::list<std::weak_ptr<IFilter>> m_prefilters;
+        std::list<std::weak_ptr<IFilter>> m_postFilters;
+        std::weak_ptr<Target>             m_target;
 
     public:
-        FilterChain()
-        {
-            m_target = nullptr;
-        }
+        FilterChain() = default;
 
         void addFilter(FilterType type, const std::shared_ptr<IFilter>& filter)
         {
@@ -84,10 +81,22 @@ namespace ConceptualExample02 {
 
         void removeFilter(FilterType type, const std::shared_ptr<IFilter>& filter)
         {
+            // https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs
+
             if (type == FilterType::PreFilter)
-                m_prefilters.remove(filter);
+            {
+                m_prefilters.remove_if([&](std::weak_ptr<IFilter> wp) {
+                    return !filter.owner_before(wp) && !wp.owner_before(filter);
+                    }
+                );
+            }
             else
-                m_postFilters.remove(filter);
+            {
+                m_postFilters.remove_if([&](std::weak_ptr<IFilter> wp) {
+                    return !filter.owner_before(wp) && !wp.owner_before(filter);
+                    }
+                );
+            }
         }
 
         void setTarget(const std::shared_ptr<Target>& target)
@@ -97,14 +106,28 @@ namespace ConceptualExample02 {
 
         void executeRequest(std::string request)
         {
-            for (const std::shared_ptr<IFilter>& filter : m_prefilters) {
-                filter->execute(request);
+            std::shared_ptr<Target> target = m_target.lock();
+            if (target == nullptr) {
+                std::cout << "Target Object doesn't exist anymore!" << std::endl;
+                return;
             }
 
-            m_target->operation(request);
+            for (const std::weak_ptr<IFilter>& filter : m_prefilters)
+            {
+                std::shared_ptr<IFilter> tmp{ filter.lock() };
+                if (tmp != nullptr) {
+                    tmp->execute(request);
+                }
+            }
 
-            for (const std::shared_ptr<IFilter>& filter : m_postFilters) {
-                filter->execute(request);
+            target->operation(request);
+
+            for (const std::weak_ptr<IFilter>& filter : m_postFilters)
+            {
+                std::shared_ptr<IFilter> tmp{ filter.lock() };
+                if (tmp != nullptr) {
+                    tmp->execute(request);
+                }
             }
         }
     };
@@ -112,19 +135,22 @@ namespace ConceptualExample02 {
     class FilterManager
     {
     private:
-        std::shared_ptr<FilterChain> m_filterChain;
+        std::weak_ptr<FilterChain> m_chain;
 
     public:
-        FilterManager() {};
+        FilterManager() {}
 
         void setFilterChain(std::shared_ptr<FilterChain>& chain)
         {
-            m_filterChain = chain;
+            m_chain = chain;
         }
 
         void request(std::string request)
         {
-            m_filterChain->executeRequest(request);
+            std::shared_ptr<FilterChain> chain = m_chain.lock();
+            if (chain != nullptr) {
+                chain->executeRequest(request);
+            }
         }
     };
 
@@ -152,19 +178,19 @@ void test_conceptual_example_03()
 {
     using namespace ConceptualExample02;
 
-    std::shared_ptr<Target> target = std::make_shared<Target>();
-    std::shared_ptr<FilterChain> chain = std::make_shared<FilterChain>();
-
+    std::shared_ptr<Target> target{ std::make_shared<Target>() };
+    std::shared_ptr<FilterChain> chain{ std::make_shared<FilterChain>() };
     chain->setTarget(target);
-    std::shared_ptr<IFilter> filter1 = std::make_shared<PreDebugFilter>();
-    std::shared_ptr<IFilter> filter2 = std::make_shared<PostDebugFilter>();
+
+    std::shared_ptr<IFilter> filter1{ std::make_shared<PreDebugFilter>() };
+    std::shared_ptr<IFilter> filter2{ std::make_shared<PostDebugFilter>() };
     chain->addFilter(FilterType::PreFilter, filter1);
     chain->addFilter(FilterType::PostFilter, filter2);
 
-    FilterManager filterManager;
+    FilterManager filterManager{};
     filterManager.setFilterChain(chain);
 
-    Client client;
+    Client client{};
     client.setFilterManager(filterManager);
     client.sendRequest("Starting Downloads");
 }

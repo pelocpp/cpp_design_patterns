@@ -43,13 +43,10 @@ namespace ConceptualExample01 {
     {
     private:
         std::list<std::weak_ptr<IFilter>> m_filters;
-        std::shared_ptr<Target> m_target;
+        std::weak_ptr<Target>             m_target;
 
     public:
-        FilterChain()
-        {
-            m_target = nullptr;
-        }
+        FilterChain() = default;
 
         void addFilter(const std::shared_ptr<IFilter>& filter)
         {
@@ -73,6 +70,12 @@ namespace ConceptualExample01 {
 
         void executeRequest(std::string request)
         {
+            std::shared_ptr<Target> target = m_target.lock();
+            if (target == nullptr) {
+                std::cout << "Target Object doesn't exist anymore!" << std::endl;
+                return;
+            }
+
             for (const std::weak_ptr<IFilter>& filter : m_filters) {
                 std::shared_ptr<IFilter> tmp{ filter.lock() };
                 if (tmp != nullptr) {
@@ -80,26 +83,29 @@ namespace ConceptualExample01 {
                 }
             }
 
-            m_target->operation(request);
+            target->operation(request);
         }
     };
 
     class FilterManager
     {
     private:
-        std::shared_ptr<FilterChain> m_filterChain;
+        std::weak_ptr<FilterChain> m_chain;
 
     public:
         FilterManager() {}
 
         void setFilterChain(std::shared_ptr<FilterChain>& chain)
         {
-            m_filterChain = chain;
+            m_chain = chain;
         }
 
         void request(std::string request)
         {
-            m_filterChain->executeRequest(request);
+            std::shared_ptr<FilterChain> chain = m_chain.lock();
+            if (chain != nullptr) {
+                chain->executeRequest(request);
+            }
         }
     };
 
@@ -127,19 +133,19 @@ void test_conceptual_example_01()
 {
     using namespace ConceptualExample01;
 
-    std::shared_ptr<Target> target = std::make_shared<Target>();
-    std::shared_ptr<FilterChain> chain = std::make_shared<FilterChain>();
+    std::shared_ptr<Target> target{ std::make_shared<Target>() };
+    std::shared_ptr<FilterChain> chain{ std::make_shared<FilterChain>() };
     chain->setTarget(target);
 
-    std::shared_ptr<IFilter> filter1 = std::make_shared<DebugFilter>();
+    std::shared_ptr<IFilter> filter1{ std::make_shared<DebugFilter>() };
+    std::shared_ptr<IFilter> filter2{ std::make_shared<AuthenticationFilter>() };
     chain->addFilter(filter1);
-    std::shared_ptr<IFilter> filter2 = std::make_shared<AuthenticationFilter>();
     chain->addFilter(filter2);
 
-    FilterManager filterManager;
+    FilterManager filterManager{};
     filterManager.setFilterChain(chain);
 
-    Client client;
+    Client client{};
     client.setFilterManager(filterManager);
     client.sendRequest("Starting Downloads");
 }
@@ -149,19 +155,19 @@ void test_conceptual_example_02()
 
     using namespace ConceptualExample01;
 
-    std::shared_ptr<Target> target = std::make_shared<Target>();
+    std::shared_ptr<Target> target{ std::make_shared<Target>() };
     std::shared_ptr<FilterChain> chain = std::make_shared<FilterChain>();
     chain->setTarget(target);
 
-    std::shared_ptr<IFilter> filter1 = std::make_shared<DebugFilter>();
+    std::shared_ptr<IFilter> filter1{ std::make_shared<DebugFilter>() };
+    std::shared_ptr<IFilter> filter2{ std::make_shared<AuthenticationFilter>() };
     chain->addFilter(filter1);
-    std::shared_ptr<IFilter> filter2 = std::make_shared<AuthenticationFilter>();
     chain->addFilter(filter2);
 
-    FilterManager filterManager;
+    FilterManager filterManager{};
     filterManager.setFilterChain(chain);
 
-    Client client;
+    Client client{};
     client.setFilterManager(filterManager);
     client.sendRequest("Starting Downloads");
 
