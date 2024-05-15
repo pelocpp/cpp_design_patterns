@@ -90,15 +90,11 @@ void test_conceptual_example_01() {
 
     using namespace ConceptualExample01;
 
+    auto receiver { std::make_shared<Receiver>() };
+
+    auto command { std::make_shared<ConcreteCommand>(receiver) };
+
     Invoker invoker{};
-
-    std::shared_ptr<Receiver> receiver {
-        std::make_shared<Receiver>()
-    };
-
-    std::shared_ptr<ConcreteCommand> command {
-        std::make_shared<ConcreteCommand>(receiver)
-    };
 
     command->setData("Hello, world!");
 

@@ -256,6 +256,7 @@ einer Hierarchie von Klassen und Schnittstellen der
 Anwender möglicherweise mehr Kenntnisse der Schnittstellen hat &ndash;
 und damit weniger von den realen Klassen, die diese
 Schnittstellen implementieren.
+
 Ein Beispiel hierzu:
 
 ```cpp
@@ -268,7 +269,7 @@ Ein Beispiel hierzu:
 07:     virtual void box() = 0;
 08: };
 09: 
-10: std::shared_ptr<IPizza> orderPizza()
+10: static std::shared_ptr<IPizza> orderPizza()
 11: {
 12:     std::shared_ptr<IPizza> pizza{ std::make_shared<Pizza>()};
 13: 
@@ -285,7 +286,7 @@ Das liest sich nicht schlecht, nur es gibt doch
 mehrere Arten von Pizzas:
 
 ```cpp
-01: std::shared_ptr<IPizza> orderPizza(std::string type)
+01: static std::shared_ptr<IPizza> orderPizza(std::string type)
 02: {
 03:     std::shared_ptr<IPizza> pizza{ nullptr };
 04: 
@@ -299,13 +300,16 @@ mehrere Arten von Pizzas:
 12:         pizza = std::make_shared<PepperoniPizza>();
 13:     }
 14: 
-15:     pizza->prepare();
-16:     pizza->bake();
-17:     pizza->cut();
-18:     pizza->box();
-19: 
-20:     return pizza;
-21: }
+15:     if (pizza != nullptr) {
+16: 
+17:         pizza->prepare();
+18:         pizza->bake();
+19:         pizza->cut();
+20:         pizza->box();
+21:     }
+22: 
+23:     return pizza;
+24: }
 ```
 
 Das ist jetzt schon besser. Nur wie entwickelt sich die Funktion
@@ -355,17 +359,20 @@ fällt in die Rubrik *Simple Factory*.
 Damit sieht unsere `orderPizza`-Methode nun so aus:
 
 ```cpp
-std::shared_ptr<IPizza> orderPizzaEx(std::string type)
-{
-    std::shared_ptr<IPizza> pizza = PizzaFactory::createPizza(type);
-
-    pizza->prepare();
-    pizza->bake();
-    pizza->cut();
-    pizza->box();
-
-    return pizza;
-}
+01: std::shared_ptr<IPizza> orderPizzaEx(std::string type)
+02: {
+03:     std::shared_ptr<IPizza> pizza{ PizzaFactory::createPizza(type) };
+04: 
+05:     if (pizza != nullptr) {
+06: 
+07:         pizza->prepare();
+08:         pizza->bake();
+09:         pizza->cut();
+10:         pizza->box();
+11:     }
+12: 
+13:     return pizza;
+14: }
 ```
 
 Diese Überlegungen sollen die Einführung eines &bdquo;Fabrik&rdquo;-Gedankens motivieren.

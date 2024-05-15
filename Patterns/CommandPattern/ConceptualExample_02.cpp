@@ -135,17 +135,11 @@ void test_conceptual_example_02() {
 
     using namespace ConceptualExample02;
 
-    Invoker invoker;
+    auto simpleCommand{ std::make_shared<SimpleCommand>("Say Hi!") };
 
-    std::shared_ptr<SimpleCommand> simpleCmd {
-        std::make_shared<SimpleCommand>("Say Hi!") 
-    };
+    auto receiver { std::make_shared<Receiver>() };
 
-    std::shared_ptr<Receiver> receiver {
-        std::make_shared<Receiver>()
-    };
-
-    std::shared_ptr<ComplexCommand> complexCmd {
+    auto complexCmd {
         std::make_shared<ComplexCommand>(
             receiver,
             std::string{ "Send email" },
@@ -153,7 +147,9 @@ void test_conceptual_example_02() {
         ) 
     };
 
-    invoker.setOnStart(simpleCmd);
+    Invoker invoker;
+
+    invoker.setOnStart(simpleCommand);
 
     invoker.setOnFinish(complexCmd);
 

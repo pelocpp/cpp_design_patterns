@@ -32,8 +32,7 @@ namespace PizzasExample {
     class ClamPizza : public Pizza {};
     class VeggiePizza : public Pizza {};
 
-
-    std::shared_ptr<IPizza> orderPizza()
+    static std::shared_ptr<IPizza> orderPizza()
     {
         std::shared_ptr<IPizza> pizza{ std::make_shared<Pizza>()};
 
@@ -45,7 +44,7 @@ namespace PizzasExample {
         return pizza;
     }
 
-    std::shared_ptr<IPizza> orderPizza(std::string type)
+    static std::shared_ptr<IPizza> orderPizza(std::string type)
     {
         std::shared_ptr<IPizza> pizza{ nullptr };
 
@@ -59,10 +58,13 @@ namespace PizzasExample {
             pizza = std::make_shared<PepperoniPizza>();
         }
 
-        pizza->prepare();
-        pizza->bake();
-        pizza->cut();
-        pizza->box();
+        if (pizza != nullptr) {
+
+            pizza->prepare();
+            pizza->bake();
+            pizza->cut();
+            pizza->box();
+        }
 
         return pizza;
     }
@@ -98,12 +100,15 @@ namespace PizzasExample {
 
     std::shared_ptr<IPizza> orderPizzaEx(std::string type)
     {
-        std::shared_ptr<IPizza> pizza = PizzaFactory::createPizza(type);
+        std::shared_ptr<IPizza> pizza{ PizzaFactory::createPizza(type) };
 
-        pizza->prepare();
-        pizza->bake();
-        pizza->cut();
-        pizza->box();
+        if (pizza != nullptr) {
+
+            pizza->prepare();
+            pizza->bake();
+            pizza->cut();
+            pizza->box();
+        }
 
         return pizza;
     }
@@ -112,7 +117,7 @@ namespace PizzasExample {
 void test_pizza_01()
 {
     using namespace PizzasExample;
-    std::shared_ptr<IPizza> pizza = orderPizzaEx("pepperoni");
+    std::shared_ptr<IPizza> pizza{ orderPizzaEx("pepperoni") };
 }
 
 // ===========================================================================

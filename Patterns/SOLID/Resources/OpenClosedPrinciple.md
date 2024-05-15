@@ -17,7 +17,7 @@ In anderen Worten:
 > Das Prinzip bedeutet wörtlich genommen, dass man in der Lage sein sollte, das Verhalten einer Klasse zu erweitern, ohne sie dabei zu verändern.
 
 Auf den ersten Blick mag das *Open-Closed-Prinzip* etwas seltsam erscheinen und die Frage aufwerfen,
-wie man das Verhalten einer Klasse &bdquo;ändern&rdquo; können soll, ohne diese dabei zu &bdquo;verändern&rdquo;?
+wie man das Verhalten einer Klasse &bdquo;erweitern&rdquo; können soll, ohne diese dabei zu &bdquo;verändern&rdquo;?
 
 Wir betrachten das *Open-Closed-Prinzip* an zwei Beispielen.
 
