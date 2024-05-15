@@ -48,9 +48,6 @@
     <ClCompile Include="FiniteStateMachine_LightSwitch\LightSwitchMain.cpp">
       <Filter>Source Files\FiniteStateMachine_LightSwitch</Filter>
     </ClCompile>
-    <ClCompile Include="FiniteStateMachine_LightSwitch\Source_StateMachine.cpp">
-      <Filter>Source Files\FiniteStateMachine_LightSwitch</Filter>
-    </ClCompile>
     <ClCompile Include="FiniteStateMachine_LightSwitch\ConcreteLightStates.cpp">
       <Filter>Source Files\FiniteStateMachine_LightSwitch</Filter>
     </ClCompile>

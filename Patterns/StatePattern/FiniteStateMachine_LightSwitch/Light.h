@@ -15,7 +15,7 @@ namespace StateMachine
 		Light();
 
 		// getter
-		ILightState* getCurrentState() const { return currentState; }
+		ILightState* getCurrentState() const { return m_currentState; }
 
 		// the state transition is delegated to the current state
 		void toggle();
@@ -24,7 +24,7 @@ namespace StateMachine
 		void setState(ILightState& newState);
 
 	private:
-		ILightState* currentState;
+		ILightState* m_currentState;
 	};
 }
 

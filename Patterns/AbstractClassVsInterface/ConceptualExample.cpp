@@ -19,9 +19,7 @@ namespace AbstractClassVsInterface {
     class AbstractClass 
     {
     public:
-        AbstractClass(std::string message)
-            : m_message{ message }
-        {}
+        AbstractClass(std::string message) : m_message{ message } {}
 
         virtual void method_third() = 0;             // another 'abstract' method
 
@@ -38,9 +36,7 @@ namespace AbstractClassVsInterface {
     class AnotherAbstractClass : public Interface
     {
     public:
-        AnotherAbstractClass(double value) 
-            : m_value { value }
-        {}
+        AnotherAbstractClass(double value) : m_value { value } {}
 
         virtual void method_first() override
         {

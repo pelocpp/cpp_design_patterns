@@ -18,7 +18,8 @@ namespace ConceptualExample03 {
 
     class Context;
 
-    class State {
+    class State
+    {
     protected:
         Context* m_context;
 
@@ -38,7 +39,8 @@ namespace ConceptualExample03 {
      * reference to an instance of a State subclass, which represents the current
      * state of the Context.
      */
-    class Context {
+    class Context
+    {
     private:
         State* m_state;
 
@@ -79,13 +81,15 @@ namespace ConceptualExample03 {
      * associated with a state of the Context.
      */
 
-    class ConcreteStateA : public State {
+    class ConcreteStateA : public State
+    {
     public:
         void handle1() override;
         void handle2() override;
     };
 
-    class ConcreteStateB : public State {
+    class ConcreteStateB : public State
+    {
     public:
         void handle1() override;
         void handle2() override;

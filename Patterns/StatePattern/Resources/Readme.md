@@ -36,7 +36,7 @@ Und genau das leistet dieses Muster: Wenn sich der Zustand ändert, wird das Obje
 Ein gerne zitiertes Beispiel für dieses Muster ist ein Objekt der Java-Klasse `Thread`.
 Dieses kann eine Reihe sehr unterschiedlicher Zustände annehmen:
 
-<img src="java_thread_states.png" width="500">
+<img src="java_thread_states.png" width="600">
 
 *Abbildung* 2: Der Lebenszyklus eines `Thread`-Objekts.
 
@@ -334,7 +334,7 @@ Das zweite Real-World Beispiel stammt aus dem Buch
 [Software Architecture with C++](https://www.amazon.de/Software-Architecture-effective-architecture-techniques/dp/1838554599)
 von Adrian Ostrowski und Piotr Gaczkowski.
 
-Das Beispiel zum Lichtschalter und entlichen Automaten kann man in dem Artikel
+Das Beispiel zum Lichtschalter und endlichen Automaten kann man in dem Artikel
 [&bdquo;Implementing a Finite State Machine in C++&rdquo;](https://www.aleksandrhovhannisyan.com/blog/implementing-a-finite-state-machine-in-cpp/)
 nachlesen.
 

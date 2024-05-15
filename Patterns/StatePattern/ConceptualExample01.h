@@ -31,7 +31,8 @@ namespace ConceptualExample01 {
     class ConcreteStateA;
     class ConcreteStateB;
 
-    class ConcreteStateA : public StateBase {
+    class ConcreteStateA : public StateBase
+    {
     private:
         std::string m_description;
 
@@ -43,7 +44,8 @@ namespace ConceptualExample01 {
         }
     };
 
-    class ConcreteStateB : public StateBase {
+    class ConcreteStateB : public StateBase
+    {
     private:
         std::string m_description;
 

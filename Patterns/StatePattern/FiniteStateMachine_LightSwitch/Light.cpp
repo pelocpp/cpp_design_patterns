@@ -10,20 +10,20 @@ namespace StateMachine
 	Light::Light()
 	{
 		// set the initial state
-		currentState = &LightOff::getInstance();
+		m_currentState = &LightOff::getInstance();
 	}
 
 	void Light::setState(ILightState& newState)
 	{
-		currentState->exit(this);  // do something before we change state
-		currentState = &newState;  // change state
-		currentState->enter(this); // do something after we change state
+		m_currentState->exit(this);  // do something before we change state
+		m_currentState = &newState;  // change state
+		m_currentState->enter(this); // do something after we change state
 	}
 
 	void Light::toggle()
 	{
 		// delegate the task of determining the next state to the current state!
-		currentState->toggle(this);
+		m_currentState->toggle(this);
 	}
 }
 

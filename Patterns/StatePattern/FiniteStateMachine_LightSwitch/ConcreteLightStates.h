@@ -22,12 +22,11 @@ namespace StateMachine
 		void exit(Light* light) {
 			std::cout << "exiting  state LightOff" << std::endl;
 		}
+
 		static ILightState& getInstance();
 
 	private:
 		LightOff() {}
-		LightOff(const LightOff& other);
-		LightOff& operator=(const LightOff& other);
 	};
 
 	// -----------------------------------------------------------
@@ -44,12 +43,11 @@ namespace StateMachine
 		void exit(Light* light) {
 			std::cout << "exiting  state LowIntensity" << std::endl;
 		}
+
 		static ILightState& getInstance();
 
 	private:
 		LowIntensity() {}
-		LowIntensity(const LowIntensity& other);
-		LowIntensity& operator=(const LowIntensity& other);
 	};
 
 	// -----------------------------------------------------------
@@ -66,12 +64,11 @@ namespace StateMachine
 		void exit(Light* light) {
 			std::cout << "exiting  state MediumIntensity" << std::endl;
 		}
+
 		static ILightState& getInstance();
 
 	private:
 		MediumIntensity() {}
-		MediumIntensity(const MediumIntensity& other);
-		MediumIntensity& operator=(const MediumIntensity& other);
 	};
 
 	// -----------------------------------------------------------
@@ -88,12 +85,11 @@ namespace StateMachine
 		void exit(Light* light) {
 			std::cout << "exiting  state HighIntensity" << std::endl;
 		}
+
 		static ILightState& getInstance();
 
 	private:
 		HighIntensity() {}
-		HighIntensity(const HighIntensity& other);
-		HighIntensity& operator=(const HighIntensity& other);
 	};
 }
 

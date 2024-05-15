@@ -147,7 +147,6 @@
     <ClCompile Include="FiniteStateMachine_LightSwitch\ConcreteLightStates.cpp" />
     <ClCompile Include="FiniteStateMachine_LightSwitch\Light.cpp" />
     <ClCompile Include="FiniteStateMachine_LightSwitch\LightSwitchMain.cpp" />
-    <ClCompile Include="FiniteStateMachine_LightSwitch\Source_StateMachine.cpp" />
     <ClCompile Include="JobApplication.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
