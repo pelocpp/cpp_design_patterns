@@ -35,7 +35,7 @@ namespace ConceptualExample01 {
         static Singleton* getInstanceThreadSafe()
         {
             {
-                std::scoped_lock<std::mutex> lock{ m_mutex };
+                std::lock_guard<std::mutex> lock{ m_mutex };
                 if (m_instance == nullptr) {
                     m_instance = new Singleton{};
                 }
@@ -46,7 +46,7 @@ namespace ConceptualExample01 {
 
         static Singleton* getInstanceThreadSafe_Cpp17()
         {
-            if (std::scoped_lock<std::mutex> lock{ m_mutex }; m_instance == nullptr) {
+            if (std::lock_guard<std::mutex> lock{ m_mutex }; m_instance == nullptr) {
                 m_instance = new Singleton{};
             }
 
@@ -65,7 +65,7 @@ namespace ConceptualExample01 {
     };
 
     Singleton* Singleton::m_instance{ nullptr };
-    std::mutex Singleton::m_mutex;
+    std::mutex Singleton::m_mutex{};
 }
 
 void test_singleton_01()

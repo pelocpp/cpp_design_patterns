@@ -16,10 +16,11 @@
 
 #### Ziel / Absicht:
 
-Das *Singleton Pattern* ist ein Entwurfsmuster, mit dem sichergestellt wird,
-dass es zu einer Klasse nur eine einzige Instanz gibt.
-Immer wenn neue Objekte einer Singleton-Klasse benötigt werden,
-wird die zuvor erstellte Einzelinstanz bereitgestellt.
+###### In einem Satz:
+
+&bdquo;Das *Singleton Pattern* ist ein Entwurfsmuster, mit dem sichergestellt wird, dass es zu einer Klasse nur eine einzige Instanz gibt.&rdquo;
+
+Immer wenn neue Objekte einer Singleton-Klasse benötigt werden, wird die zuvor erstellte Einzelinstanz bereitgestellt.
 
 #### Problem:
 
@@ -58,7 +59,7 @@ roten eine blaue Farbe werden, was so sicherlich nicht erwünscht ist.
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Singleton Patterns*.
 Es besteht nur aus einer einzigen Klasse:
 
-  * **Singleton**: Diese Klasse besitzt eine statische Methode `getSingleton`,
+  * **Singleton**: Diese Klasse besitzt eine statische Methode `getInstance`,
     die pro Aufruf eine einzelne Instanz zurückgibt (Referenz, Zeiger),
     die in einer privaten Variablen residiert.
 
@@ -74,17 +75,17 @@ welches dazu dient, den Zugriff auf ein gemeinsames Objekt durch mehrere gleichz
 Die klassische Realisierung der `getInstance`-Methode weist einen kleinen Schönheitsfehler auf:
 
 ```cpp
-Singleton* Singleton::getInstance()
-{
-    {
-        std::scoped_lock<std::mutex> lock{ m_mutex };
-        if (m_instance == nullptr) {
-            m_instance = new Singleton();
-        }
-    }
-
-    return m_instance;
-}
+01: Singleton* Singleton::getInstance()
+02: {
+03:     {
+04:         std::lock_guard<std::mutex> lock{ m_mutex };
+05:         if (m_instance == nullptr) {
+06:             m_instance = new Singleton();
+07:         }
+08:     }
+09: 
+10:     return m_instance;
+11: }
 ```
 
 Das Erzeugen des (einzigen) Objekts erfolgt thread-sicher, so weit, so gut. Der Schönheitsfehler dabei ist,
@@ -98,19 +99,19 @@ realisiert werden. Hier wird nur das Erzeugen des Singleton-Objekts thread-siche
 der (lesende) Zugriff auf die Zeigervariable des Objekts wird ohne Sperre durchgeführt:
 
 ```cpp
-Singleton* Singleton::getInstance()
-{
-    if (m_instance == nullptr)
-    {
-        std::scoped_lock<std::mutex> lock{ m_mutex };
-        if (m_instance == nullptr)  // <= NOTE: double-check of m_instance being nullptr
-        {
-            m_instance = new Singleton(value);
-        }
-    }
-
-    return m_instance;
-}
+01: Singleton* Singleton::getInstance()
+02: {
+03:     if (m_instance == nullptr)
+04:     {
+05:         std::lock_guard<std::mutex> lock{ m_mutex };
+06:         if (m_instance == nullptr)  // <= NOTE: double-check of m_instance being nullptr
+07:         {
+08:             m_instance = new Singleton(value);
+09:         }
+10:     }
+11: 
+12:     return m_instance;
+13: }
 ```
 
 ---
@@ -146,7 +147,7 @@ Kurze Wiederholung zur *Dependency Injection*:
 Wir betrachten zunächst ein Negativbeispiel an Hand einer *Logger*-Klasse.
 
 *Logger*-Klassen stehen exemplarisch für 
-Service-Klassen, die die Möglichkeit bietet, Log-Einträge zu schreiben.
+Service-Klassen, die die Möglichkeit bieten, Log-Einträge zu schreiben.
 
 Solche *Logger*-Klassen werden oft als Singletons implementiert:
 
@@ -242,7 +243,7 @@ Damit wenden wir uns einer möglichen Implementierung dieser Schnittstelle zu,
 der Klasse `StandardOutputLogger`:
 
 ```cpp
-01: class StandardOutputLogger : public LoggingFacility
+01: class StandardOutputLogger : public ILoggingFacility
 02: {
 03: public:
 04:     void writeInfoEntry(std::string_view entry) override {
@@ -280,7 +281,7 @@ Damit fehlt noch die `CustomerRepository`-Klasse. Wir ändern die vorhandene Klas
 03: public:
 04:     CustomerRepository() = delete;
 05: 
-06:     explicit CustomerRepository(const std::shared_ptr<LoggingFacility>& logger)
+06:     explicit CustomerRepository(const std::shared_ptr<ILoggingFacility>& logger)
 07:         : m_logger{ logger }
 08:     {}
 09:         
@@ -292,7 +293,7 @@ Damit fehlt noch die `CustomerRepository`-Klasse. Wir ändern die vorhandene Klas
 15:     }
 16: 
 17: private:
-18:     std::shared_ptr<LoggingFacility> m_logger;
+18:     std::shared_ptr<ILoggingFacility> m_logger;
 19: };
 ```
 
@@ -301,7 +302,7 @@ die Folge dieser Umgestaltung: Die `CustomerRepository`-Klasse ist nicht mehr vo
 
 Stattdessen ist ein `CustomerRepository`-Objekt nur von einer Abstraktion (Schnittstelle) abhängig,
 die nun explizit in der Klasse und ihrer Schnittstelle sichtbar ist
-(auf Grund der Instanzvariable `m_logger` des Typs `std::shared_ptr<LoggingFacility>` und auf Grund des Konstruktors, der wiederum eine `std::shared_ptr<LoggingFacility>`-Variable übergeben bekommt).
+(auf Grund der Instanzvariable `m_logger` des Typs `std::shared_ptr<ILoggingFacility>` und auf Grund des Konstruktors, der wiederum eine `std::shared_ptr<ILoggingFacility>`-Variable übergeben bekommt).
 
 Das bedeutet, dass die `CustomerRepository`-Klasse nun Service-Objekte für Protokollierungszwecke akzeptiert, die von *außen* übergeben werden.
 
@@ -312,7 +313,6 @@ ein Singleton-Objekt von *innen* verankert!
 
 *Abbildung* 5: `CustomerRepository`-Objekten können über ihren Konstruktor unterschiedliche Logger-Implementierungen zur Verfügung gestellt werden.
 
-
 ---
 
 #### Conceptual Example:
@@ -322,7 +322,6 @@ ein Singleton-Objekt von *innen* verankert!
 [Quellcode 2](../ConceptualExample02.cpp) &ndash; Mit *Double-Checked Locking*
 
 [Quellcode 3](../Singleton_vs_Dependency_Injection.cpp) &ndash; Eine Alternative zum Singleton Pattern: *Dependency Injection*
-
 
 ---
 

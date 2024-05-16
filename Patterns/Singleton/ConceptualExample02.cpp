@@ -68,7 +68,7 @@ namespace ConceptualExample02 {
     };
 
     Singleton* Singleton::m_instance{ nullptr };
-    std::mutex Singleton::m_mutex;
+    std::mutex Singleton::m_mutex{};
 
     /**
      * Static methods should be defined outside the class.
@@ -93,7 +93,7 @@ namespace ConceptualExample02 {
     {
         if (m_instance == nullptr)
         {
-            std::scoped_lock<std::mutex> lock{ m_mutex };
+            std::lock_guard<std::mutex> lock{ m_mutex };
             if (m_instance == nullptr)  // <=== NOTE: double-check of m_instance being nullptr
             {
                 m_instance = new Singleton{ value };

@@ -72,8 +72,6 @@ namespace ConceptualExample {
                 return std::make_shared<ConceptualExample::Square>();
             case StringCode::Circle:
                 return std::make_shared<ConceptualExample::Circle>();
-            case StringCode::None:
-                return std::shared_ptr<IShape>(nullptr);
             default:
                 std::string msg = "Invalid type: " + shapeType;
                 throw std::runtime_error{ msg };

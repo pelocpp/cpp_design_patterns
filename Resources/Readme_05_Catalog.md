@@ -55,7 +55,7 @@ oder die Komplexität des Codes erhöhen.
 ##### Strukturmuster
 
 Strukturmuster beschreiben, wie sich Objekte und Klassen zu größeren Strukturen zusammensetzen lassen,
-ohne dabei einen Verlust an Flexibilität und Effizient einzugehen.
+ohne dabei einen Verlust an Flexibilität und Effizienz einzugehen.
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|

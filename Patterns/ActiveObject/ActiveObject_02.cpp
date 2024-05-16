@@ -107,7 +107,7 @@ namespace ActivatorObject02
 
         bool runNextTask() {
 
-            std::lock_guard<std::mutex> lockGuard(m_mutex);
+            std::unique_lock<std::mutex> lockGuard(m_mutex);
 
             auto isEmpty = m_activationList.empty();
 
@@ -117,7 +117,7 @@ namespace ActivatorObject02
 
                 m_activationList.pop_front();
 
-                // lockGuard.unlock();  // geht mit Lock_guard oder anderen ?????????????
+                lockGuard.unlock();  // don't run task within locked context
 
                 task();
             }

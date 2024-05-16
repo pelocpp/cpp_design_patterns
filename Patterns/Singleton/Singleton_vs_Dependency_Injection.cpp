@@ -67,10 +67,10 @@ namespace SingletonLogger {
 
 namespace DependencyInjectionLogger {
 
-    class LoggingFacility
+    class ILoggingFacility
     {
     public:
-        virtual ~LoggingFacility() = default;
+        virtual ~ILoggingFacility() = default;
 
         virtual void writeInfoEntry(std::string_view entry) = 0;
         virtual void writeWarnEntry(std::string_view entry) = 0;
@@ -79,7 +79,7 @@ namespace DependencyInjectionLogger {
 
     // ============================================================
 
-    class StandardOutputLogger : public LoggingFacility
+    class StandardOutputLogger : public ILoggingFacility
     {
     public:
         void writeInfoEntry(std::string_view entry) override {
@@ -106,7 +106,7 @@ namespace DependencyInjectionLogger {
     public:
         CustomerRepository() = delete;
 
-        explicit CustomerRepository(const std::shared_ptr<LoggingFacility>& logger)
+        explicit CustomerRepository(const std::shared_ptr<ILoggingFacility>& logger)
             : m_logger{ logger }
         { }
         
@@ -118,12 +118,12 @@ namespace DependencyInjectionLogger {
         }
 
     private:
-        std::shared_ptr<LoggingFacility> m_logger;
+        std::shared_ptr<ILoggingFacility> m_logger;
     };
 
     static void test_di_logger()
     {
-        std::shared_ptr<LoggingFacility> logger = std::make_shared<StandardOutputLogger>();
+        std::shared_ptr<ILoggingFacility> logger = std::make_shared<StandardOutputLogger>();
 
         CustomerRepository customerRepository{ logger };
 
@@ -134,7 +134,7 @@ namespace DependencyInjectionLogger {
 
     // ============================================================
 
-    class MockLogger : public LoggingFacility
+    class MockLogger : public ILoggingFacility
     {
     public:
         void writeInfoEntry(std::string_view entry) override {}
@@ -144,7 +144,7 @@ namespace DependencyInjectionLogger {
 
     static void test_di_mock_logger()
     {
-        std::shared_ptr<LoggingFacility> logger = std::make_shared<MockLogger>();
+        std::shared_ptr<ILoggingFacility> logger = std::make_shared<MockLogger>();
 
         CustomerRepository customerRepository{ logger };
 
@@ -153,7 +153,6 @@ namespace DependencyInjectionLogger {
         customerRepository.findCustomerById(id);
     }
 }
-
 
 // ============================================================
 
