@@ -176,14 +176,14 @@ void test_media_player_01()
 {
     using namespace ApdaterPatternClassicalApproach;
 
-    std::shared_ptr <IMediaPlayer> audioPlayer1{
+    std::shared_ptr<IMediaPlayer> audioPlayer1{
         std::make_shared<AudioPlayer>()
     };
 
     clientCode(audioPlayer1);
     std::cout << std::endl;
 
-    std::shared_ptr <IMediaPlayer> audioPlayer2{
+    std::shared_ptr<IMediaPlayer> audioPlayer2{
         std::make_shared<AudioPlayerExtended>()
     };
 

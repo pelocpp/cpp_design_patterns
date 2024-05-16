@@ -240,14 +240,14 @@ namespace SecondConceptualExampleOCP {
 
     // combining multiple logical specifications - with variadic templates
     template <typename T>
-    class GenericSpecification : public ISpecification<T>
+    class GenericAndSpecification : public ISpecification<T>
     {
     private:
         std::vector<std::shared_ptr<ISpecification<T>>> m_vec;
 
     public:
         template <typename ... TArgs>
-        GenericSpecification(const TArgs& ... args)
+        GenericAndSpecification(const TArgs& ... args)
         {
             m_vec = { args ... };
         }
@@ -405,13 +405,13 @@ static void test_conceptual_example_ocp_04()
     };
 
     // combined specification
-    GenericSpecification<Product> specification {
+    GenericAndSpecification<Product> specification {
         std::make_shared<SizeSpecification<Product>>(Size::Small) ,
         std::make_shared<ColorSpecification<Product>>(Color::Gray)
     };
 
     // another combined specification
-    GenericSpecification<Product> anotherSpecification {
+    GenericAndSpecification<Product> anotherSpecification {
         std::make_shared<SizeSpecification<Product>>(Size::Medium) ,
         std::make_shared<ColorSpecification<Product>>(Color::Red)
     };
@@ -451,14 +451,14 @@ static void test_conceptual_example_ocp_05()
     };
 
     // combined specification
-    GenericSpecification<ProductEx> specification{
+    GenericAndSpecification<ProductEx> specification{
         std::make_shared<SizeSpecification<ProductEx>>(Size::Small),
         std::make_shared<ColorSpecification<ProductEx>>(Color::Gray),
         std::make_shared<PriceSpecification>(12.00)
     };
 
     // another combined specification
-    GenericSpecification<ProductEx> anotherSpecification{
+    GenericAndSpecification<ProductEx> anotherSpecification{
         std::make_shared<SizeSpecification<ProductEx>>(Size::Medium),
         std::make_shared<ColorSpecification<ProductEx>>(Color::Red),
         std::make_shared<PriceSpecification>(19.99)

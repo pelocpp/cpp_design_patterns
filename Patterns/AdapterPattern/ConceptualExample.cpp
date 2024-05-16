@@ -81,7 +81,14 @@ static void clientCode(std::shared_ptr<ITarget> target) {
     std::cout << request << std::endl << std::endl;
 }
 
-void test_conceptual_example() {
+void test_conceptual_example_01() {
+
+    std::shared_ptr<Adaptee> adaptee{ new Adaptee{ } };
+    std::shared_ptr<Adapter> adapter{ new Adapter{ adaptee } };
+    clientCode(adapter);
+}
+
+void test_conceptual_example_02() {
 
     std::cout << "Client: I can work fine with the Target object" << std::endl;
     std::shared_ptr<ITarget> target{ new Target{} };
@@ -95,6 +102,12 @@ void test_conceptual_example() {
     std::cout << "Client: But I can work with the Adaptee via the Adapter:" << std::endl;
     std::shared_ptr<Adapter> adapter{ new Adapter{ adaptee } };
     clientCode(adapter);
+}
+
+void test_conceptual_example() {
+
+    test_conceptual_example_01();
+    test_conceptual_example_02();
 }
 
 // ===========================================================================
