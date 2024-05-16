@@ -6,14 +6,14 @@
 void test_conceptual_example();
 void test_ofstream_example();
 void test_file_example();
-void transformText();
+void code_converter();
 
 int main()
 {
     test_conceptual_example();
     test_ofstream_example();
     test_file_example();
-    transformText();
+    code_converter();
     return 0;
 }
 
