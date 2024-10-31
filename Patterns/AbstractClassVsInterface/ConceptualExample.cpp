@@ -68,7 +68,7 @@ namespace AbstractClassVsInterface {
         double m_anotherValue;
     };
 
-    /* concrete class inheriting from an interface */
+    /* concrete class inheriting directly from an interface */
     class AnotherConcreteClass : public Interface
     {
     public:

@@ -31,7 +31,7 @@ ein komplexes Objekt in kleinere und einfachere Komponenten zu zerlegen.
 01: class Journal
 02: {
 03: private:
-04:     std::string m_title;
+04:     std::string              m_title;
 05:     std::vector<std::string> m_entries;
 06: 
 07: public:
@@ -40,7 +40,7 @@ ein komplexes Objekt in kleinere und einfachere Komponenten zu zerlegen.
 10:     {}
 11: 
 12:     void addEntry(const std::string& entry) {
-13:         static uint32_t count {};
+13:         static size_t count {};
 14:         count++;
 15:         std::string text { std::to_string(count) + ": " + entry };
 16:         m_entries.push_back(text);
@@ -80,7 +80,7 @@ Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdqu
 01: class Journal 
 02: {
 03: private:
-04:     std::string m_title;
+04:     std::string              m_title;
 05:     std::vector<std::string> m_entries;
 06: 
 07: public:
@@ -89,7 +89,7 @@ Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdqu
 10:     {}
 11: 
 12:     void addEntry(const std::string& entry) {
-13:         static uint32_t count {};
+13:         static size_t count {};
 14:         count++;
 15:         std::string text { std::to_string(count) + ": " + entry };
 16:         m_entries.push_back(text);

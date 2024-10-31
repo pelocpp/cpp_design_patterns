@@ -77,9 +77,9 @@ Wir können im letzten Diagramm erkennen, dass
   * die Eigenschaft `m_weight` aus der Klasse `Product` entfernt wurde,
   * die Anforderungen des Kunden mit zwei zusätzlichen Klassen `PhysicalProduct` und `DigitalProduct` umgesetzt wurden,
   * eine dieser Klassen (`PhysicalProduct`) in gewohnter Manier die Eigenschaft `m_weight` besitzt und
-  * eine zweite, zusätzliche Klasse `DigitalProduct`, für die ein Gewicht nicht relevant ist,
+  * eine zweite, zusätzliche Klasse `DigitalProduct` entwickelt wurde, für die ein Gewicht nicht relevant ist,
 stattdessen eine Eigenschaft `m_filePath` besitzt, die symbolisch für die Ablage eines digitalen Produkts
-in der internen Datenhaltung des E-Commerce Warenhauses stehen soll.
+in der internen Datenhaltung des E-Commerce Warenhauses steht.
 
 *Bemerkung*:
 Das Ziel des *Open-Closed-Prinzips* wurde mit dem Konzept der *Vererbung* umgesetzt.

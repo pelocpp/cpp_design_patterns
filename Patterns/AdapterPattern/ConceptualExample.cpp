@@ -66,7 +66,10 @@ public:
 
         std::string toReverse{ m_adaptee->getSpecificRequest() };
 
-        std::reverse(std::begin(toReverse), std::end(toReverse));
+        std::reverse(
+            std::begin(toReverse),
+            std::end(toReverse)
+        );
 
         return std::string{ "Adapter: (TRANSLATED) " + toReverse };
     }
@@ -84,7 +87,9 @@ static void clientCode(std::shared_ptr<ITarget> target) {
 void test_conceptual_example_01() {
 
     std::shared_ptr<Adaptee> adaptee{ new Adaptee{ } };
+
     std::shared_ptr<Adapter> adapter{ new Adapter{ adaptee } };
+
     clientCode(adapter);
 }
 

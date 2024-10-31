@@ -11,7 +11,7 @@ namespace AntiConceptualExampleSRP {
     class Journal
     {
     private:
-        std::string m_title;
+        std::string              m_title;
         std::vector<std::string> m_entries;
 
     public:
@@ -20,7 +20,7 @@ namespace AntiConceptualExampleSRP {
         {}
 
         void addEntry(const std::string& entry) {
-            static uint32_t count {};
+            static size_t count {};
             count++;
             std::string text { std::to_string(count) + ": " + entry };
             m_entries.push_back(text);
@@ -42,7 +42,7 @@ namespace ConceptualExampleSRP
     class Journal 
     {
     private:
-        std::string m_title;
+        std::string              m_title;
         std::vector<std::string> m_entries;
 
     public:

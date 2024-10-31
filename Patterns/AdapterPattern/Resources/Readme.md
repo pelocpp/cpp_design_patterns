@@ -191,6 +191,7 @@ aber erweitert werden soll, um *VLC*- und *MP4*-Dateien abspielen zu können.
 Ausgangspunkt ist eine Schnittstelle `IMediaPlayer` und eine konkrete Klasse `AudioPlayer`,
 die die `IMediaPlayer`-Schnittstelle implementiert.
 `AudioPlayer` Objekte spielen nur Audiodateien im MP3-Format ab.
+Bei anderen Formaten reagiert das `AudioPlayer`-Objekt mit einer Fehlermeldung.
 
 Wir haben ferner zwei zusätzliche Schnittstellen `IVlcMediaPlayer` und `IMp4MediaPlayer` sowie konkrete Klassen zur Verfügung,
 die die beiden Schnittstellen implementieren.

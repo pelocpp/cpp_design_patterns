@@ -42,7 +42,7 @@ namespace ApdaterPatternClassicalApproach {
     // ===========================================================================
 
     // class 'AudioPlayer' implementing 'MediaPlayer' interface,
-    // no adapter addition
+    // no adapter addition - generating error messages upon unknown media formats
     // 
     class AudioPlayer : public IMediaPlayer
     {
@@ -124,7 +124,8 @@ namespace ApdaterPatternClassicalApproach {
     // ===========================================================================
 
     // create class 'AudioPlayerExtended'
-    // implementing 'MediaPlayer' interface with adapter addition
+    // implementing 'MediaPlayer' interface with adapter addition;
+    // target media objects are created on demand
     class AudioPlayerExtended : public IMediaPlayer
     {
     private:
