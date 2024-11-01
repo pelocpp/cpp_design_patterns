@@ -98,7 +98,7 @@ Das *Conceptual Example* liegt in drei Versionen vor:
 
 ---
 
-#### Erstes 'Real-World' Beispiel:
+#### Erstes &bdquo;Real-World&rdquo; Beispiel:
 
 Das State Pattern steht offensichtlich eng in Zusammenhang mit *Finite State Machines*,
 zu deutsch *endlichen Automaten*:
@@ -240,7 +240,7 @@ wenn wir von einem Zustand in einen anderen übergehen!
 
 ---
 
-#### Zweites 'Real-World' Beispiel:
+#### Zweites &bdquo;Real-World&rdquo; Beispiel:
 
 Im Buch [Entwurfsmuster: Das umfassende Handbuch](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
 von Matthias Geirhos findet sich zu diesem Entwurfsmuster als Beispiel die Modellierung eines Bewerbungsprozesses vor.
@@ -263,7 +263,7 @@ Eine Einstellung erfolgt somit erst, wenn der Bewerber das Assessment Center erf
 
 ---
 
-#### Zweites 'Real-World' Beispiel mit modernen C++ Sprachelementen:
+#### Zweites &bdquo;Real-World&rdquo; Beispiel mit modernen C++ Sprachelementen:
 
 Das *State Pattern* ist ein Entwurfsmuster, das dabei helfen soll, das Verhalten eines Objekts zu ändern, 
 wenn es intern seinen Zustand verändert.
@@ -330,7 +330,7 @@ und
 
 vor.
 
-Das zweite Real-World Beispiel stammt aus dem Buch 
+Das zweite &bdquo;Real-World&rdquo;-Beispiel stammt aus dem Buch 
 [Software Architecture with C++](https://www.amazon.de/Software-Architecture-effective-architecture-techniques/dp/1838554599)
 von Adrian Ostrowski und Piotr Gaczkowski.
 

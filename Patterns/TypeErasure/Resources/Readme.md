@@ -508,7 +508,7 @@ den Instanzvariablen verwalten sie eine Referenz des umhüllten Objekts:
 
 ---
 
-#### 'Real-World' Beispiel:
+#### &bdquo;Real-World&rdquo; Beispiel:
 
 In der C++-Standardklassenbibliothek (STL) finden wir zwei Anwendungen des *Type Erasure* Idioms vor:
 

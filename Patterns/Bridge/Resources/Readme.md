@@ -86,7 +86,7 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 ---
 
-#### 'Real-World' Beispiel:
+#### &bdquo;Real-World&rdquo; Beispiel:
 
 Bei diesem Muster steht eine Schnittstelle im Mittelpunkt,
 die als Brücke fungiert, die die Funktionalität konkreter Klassen unabhängig

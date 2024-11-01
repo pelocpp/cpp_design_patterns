@@ -73,7 +73,7 @@
     Was kann über Allen Holub noch sagen? Meiner Meinung nach der beste Fachbuchautor weltweit! Werke wie
     *Compiler design in C*, *C+ C++: Programming With Objects in C and C++*, *C Companion* sprechen für sich.
     &bdquo;Holub on Patterns&rdquo; zählt möglicherweise nicht zu seinen besten Werken, aber für Holub-Fans ein Muss.
-    In seinem Buch sind mehrere *Real-World*-Beispiele implementiert, so zum Beispiel der 
+    In seinem Buch sind mehrere &bdquo;Real-World&rdquo;-Beispiele implementiert, so zum Beispiel der 
     Klassiker &bdquo;Game of Life&rdquo;, leider - für diesen Kontext - ebenfalls nur in Java implementiert.
 
 ---

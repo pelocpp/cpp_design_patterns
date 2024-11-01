@@ -39,7 +39,7 @@ namespace ObserverDesignPatternSmartPointer {
     class Subject : public ISubject {
     private:
         std::list<std::weak_ptr<IObserver>> m_list_observers;
-        std::string m_message;
+        std::string                         m_message;
 
     public:
         virtual ~Subject() {
@@ -122,7 +122,7 @@ namespace ObserverDesignPatternSmartPointer {
             printInfo();
         }
 
-        void printInfo() 
+        void printInfo() const
         {
             std::cout 
                 << "Observer \"" << m_number 

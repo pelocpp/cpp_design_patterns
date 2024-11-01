@@ -60,7 +60,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
-#### 'Real-World' Beispiel: `std::unique_ptr<>` und `std::shared_ptr<>`
+#### &bdquo;Real-World&rdquo; Beispiel: `std::unique_ptr<>` und `std::shared_ptr<>`
 
 Ein sehr ansprechendes Beispiel aus der STL für das Proxy Design Pattern
 sind die beiden Smart Pointer Klassen `std::unique_ptr<>` und `std::shared_ptr<>`:
@@ -82,7 +82,7 @@ ob `ptr` ein Raw-Zeiger oder ein Smart Pointer ist.
 
 ---
 
-#### 'Real-World' Beispiel: Property Proxy
+#### &bdquo;Real-World&rdquo; Beispiel: Property Proxy
 
 In anderen Programmiersprachen wie C# gibt es das sprachliche Konstrukt der *Properties*:
 Hierunter versteht man &ndash; in C# &ndash; eine private Instanzvariable
@@ -116,7 +116,7 @@ den (schreibenden und/oder lesenden) Zugriff auf derartige Instanzvariable &bdqu
 
 ---
 
-#### 'Real-World' Beispiel: Virtual Proxy &ndash; Eager vs. Lazy Proxy
+#### &bdquo;Real-World&rdquo; Beispiel: Virtual Proxy &ndash; Eager vs. Lazy Proxy
 
 Ein sogenanntes virtuelles *Proxy*-Objekt vermittelt den Anschein,
 als würden Sie mit einem Objekt arbeiten, so wie Sie es gewohnt sind,

@@ -392,13 +392,13 @@ Diese Überlegungen sollen die Einführung eines &bdquo;Fabrik&rdquo;-Gedankens mo
 
 ---
 
-#### Erstes Real-World Example:
+#### Erstes &bdquo;Real-World&rdquo; Example:
 
 Im Quellcode finden Sie ein selbsterklärendes Beispiel: *Mobil Phones*
 
 ---
 
-#### Zweites Real-World Example:
+#### Zweites &bdquo;Real-World&rdquo; Example:
 
 Wir betrachten ein zweites, konkretes Beispiel,
 in dem es um Dokumente unterschiedlichen Formats geht:
@@ -503,7 +503,7 @@ und
 
 vor.
 
-Das zweite Real-World Beispiel stammt aus dem Buch 
+Das zweite &bdquo;Real-World&rdquo;-Beispiel stammt aus dem Buch 
 [Software Architecture with C++](https://www.amazon.de/Software-Architecture-effective-architecture-techniques/dp/1838554599)
 von Adrian Ostrowski und Piotr Gaczkowski.
 

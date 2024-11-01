@@ -244,7 +244,7 @@ In *Abbildung* 2 können Sie erkennen, dass der Destruktor des RAII-Objekts den a
 
 ---
 
-#### 'Real-World' Beispiel zu Windows Clipboard:
+#### &bdquo;Real-World&rdquo; Beispiel zu Windows Clipboard:
 
 In der Datei *Clipboard.cpp* finden Sie mehrere Klassen und Methoden vor,
 die den schreibenden und lesenden Zugriff auf das Windows Clipboard in RAII-konformer Manier demonstrieren.
@@ -265,7 +265,7 @@ und
 * `GetClipboardData`
 
 
-#### 'Real-World' Beispiel zu `std::ofstream`:
+#### &bdquo;Real-World&rdquo; Beispiel zu `std::ofstream`:
 
 In der Datei *RAII_Ofstream.cpp* finden Sie eine Funktion `writeToFile` vor,
 die das RAII-Idiom verwendet.

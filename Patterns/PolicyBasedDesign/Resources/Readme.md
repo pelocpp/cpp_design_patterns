@@ -33,7 +33,7 @@ Wir bewegen uns im Problemfeld &bdquo;*Entwurfsentscheidungen*&rdquo; bei der So
 Damit sind wir beim Begriff der &bdquo;Policy&rdquo; angekommen:
 
   * *Policies* sind Schnittstellen für konfigurierbare Belange einer Klasse.
-  * Genauer: Eine *Policy* ist eine Klasse oder ein Klassentemplate, die eine Schnittstelle als Dienstleistung zu anderen Klassen definiert. 
+  * Genauer: Eine *Policy* ist eine Klasse oder eine Klassenschablone (Template), die eine Schnittstelle als Dienstleistung zu anderen Klassen definiert. 
   * Eine *Policy*-Klasse implementiert die von der *Policy* vorgegebene Schnittstelle.
   * *Policies* sind vom Benutzer der Klasse auswählbar: der Benutzer kann das Verhalten der *Host*-Klasse durch geeignete Auswahl von *Policy*-Klassen/*Policy*-Objekten anpassen.
 
@@ -56,8 +56,8 @@ Dynamisch allokierte Speicherbereiche können in C++ mit den beiden Anweisungen
 `new` oder `new[]` reserviert werden. Hieraus leitet sich für die Freigabe des allokierten Speichers
 ein kleines Problem bzw. angenehmer formuliert, eine Anforderung an das Programm ab:
 
-  * Speicher wurde mit `new` allokiert &Rightarrow;<br/>Der Speicherbereich ist mit einem Aufruf von `delete`, dem so genannten &bdquo;*Scalar Deleting Destructor*&bdquo; freizugeben.
-  * Speicher wurde mit `new[]` allokiert &Rightarrow;<br/>Der Speicherbereich ist mit einem Aufruf von `delete[]`, dem so genannten &bdquo;*Vector Deleting Destructor*&bdquo; freizugeben.
+  * Speicher wurde mit `new` allokiert &Rightarrow;<br/>Der Speicherbereich ist mit einem Aufruf von `delete`, dem so genannten &bdquo;*Scalar Deleting Destructor*&rdquo; freizugeben.
+  * Speicher wurde mit `new[]` allokiert &Rightarrow;<br/>Der Speicherbereich ist mit einem Aufruf von `delete[]`, dem so genannten &bdquo;*Vector Deleting Destructor*&rdquo; freizugeben.
 
 Das ist leichter gesagt, als getan! Nicht immer lässt sich aus dem Programmcode ableiten,
 welcher der beiden `delete`-Aufrufe abzusetzen ist, da man an Hand der Zeigervariablen nicht erkennen kann,
@@ -186,21 +186,21 @@ Schließlich betrachten wir das Hauptprogramm:
 #### Beispiele zum Policy-Based Design in der STL:
 
 Ein sehr populäres Beispiel für das Policy-Based Design in der STL sind die Speicherallokatoren
-der Container-Klassen wie z.B. `std::vector`. Ein `std::vector`-Objekt benötigt dynamisch allokierten Speicher.
+der Container-Klassen wie z.B. `std::vector<T>`. Ein `std::vector<T>`-Objekt benötigt dynamisch allokierten Speicher.
 Es gibt jedoch viele Strategien zur Speicherallokation, von denen jede für eine bestimmte Situation am besten geeignet ist.
-Wenn die Speicherallokation fest codiert wäre, wäre `std::vector` für eine Vielzahl leistungskritischer Anwendungen unbrauchbar.
+Wenn die Speicherallokation fest codiert wäre, wäre `std::vector<T>` für eine Vielzahl leistungskritischer Anwendungen unbrauchbar.
 
 In der Tat ist die Speicherallokation nicht fest codiert.
 Stattdessen gibt es eine *Policy* &ndash; Standardklasse `std::allocator` &ndash; die steuert, wie der Speicher zugewiesen wird:
 
 Siehe [cppreference.com](https://en.cppreference.com/w/cpp/memory/allocator)
 
-Die Klasse `std::vector` (wie auch andere C++ Containerklassen) verfügt neben dem Elementtyp über einen zweiten Template-Parameter. 
+Die Klasse `std::vector<T>` (wie auch andere C++ Containerklassen) verfügt neben dem Elementtyp über einen zweiten Template-Parameter. 
 Dieser beschreibt die *Policy* für die Speicherallokation.
 
 Sie können Ihre eigene Klasse(n) mit bestimmten Member-Funktionen definieren,
 so dass diese die Anforderungen an einen C++ Speicherallokator erfüllen.
-Die C++ Standardklasse `std::vector` verwendet dann Ihre Vorstellungen
+Die C++ Standardklasse `std::vector<T>` verwendet dann Ihre Vorstellungen
 für die Allokation des Speichers.
 
 ---

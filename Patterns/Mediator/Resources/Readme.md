@@ -97,7 +97,7 @@ Das *Conceptual Example* liegt in drei Varianten vor:
 
 ---
 
-#### Real-World Example:
+#### &bdquo;Real-World&rdquo; Example:
 
 Wir betrachten als reale Anwendung dieses Entwurfsmusters die (triviale) Realisierung eines Chatraums.
 

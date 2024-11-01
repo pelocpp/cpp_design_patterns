@@ -186,41 +186,6 @@ namespace ObserverDesignPatternSmartPointerEx {
         observer2->removeMeFromTheList();
         observer3->removeMeFromTheList();
     }
-
-    //void clientCode() {
-
-    //    std::shared_ptr<Subject> subject{ std::make_shared<Subject>() };
-
-    //    std::shared_ptr<Observer> observer1{ std::make_shared<Observer>(subject) };
-    //    subject->attach(observer1);
-
-    //    std::shared_ptr<Observer> observer2{ std::make_shared<Observer>(subject) };
-    //    subject->attach(observer2);
-
-    //    std::shared_ptr<Observer> observer3{ std::make_shared<Observer>(subject) };
-    //    subject->attach(observer3);
-
-    //    subject->createMessage("Hello World! :D");
-    //    observer3->removeMeFromTheList();
-
-    //    subject->createMessage("The weather is hot today! :p");
-    //    std::shared_ptr<Observer> observer4{ std::make_shared<Observer>(subject) };
-    //    subject->attach(observer4);
-
-    //    observer2->removeMeFromTheList();
-
-    //    std::shared_ptr<Observer> observer5{ std::make_shared<Observer>(subject) };
-    //    subject->attach(observer5);
-
-    //    subject->createMessage("My new car is great! ;)");
-
-    //    observer5->removeMeFromTheList();
-
-    //    subject->someBusinessLogic();
-
-    //    observer4->removeMeFromTheList();
-    //    observer1->removeMeFromTheList();
-    //}
 }
 
 // ===========================================================================
@@ -228,7 +193,6 @@ namespace ObserverDesignPatternSmartPointerEx {
 void test_conceptual_example_03() {
     ObserverDesignPatternSmartPointerEx::clientCode_01();
     ObserverDesignPatternSmartPointerEx::clientCode_02();
-
 }
 
 // ===========================================================================

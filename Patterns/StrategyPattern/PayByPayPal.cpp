@@ -12,7 +12,8 @@
 /**
  * c'tor(s) / d'tor
  */
-PayByPayPal::PayByPayPal()
+PayByPayPal::PayByPayPal() 
+    : m_isSignedIn{}
 {
     m_paypalDataBase = 
     {

@@ -74,9 +74,9 @@ also nicht zu verändern.
 
 ---
 
-#### 'Real-World' Beispiel:
+#### &bdquo;Real-World&rdquo; Beispiel:
 
-Im 'Real-World' Beispiel zu diesem Entwurfsmuster 
+Im &bdquo;Real-World&rdquo; Beispiel zu diesem Entwurfsmuster 
 definiert die Template-Methode einen Algorithmus für die Arbeit mit einem sozialen Netzwerk.
 Unterklassen, die einem bestimmten sozialen Netzwerk entsprechen,
 implementieren diese Schritte gemäß der vom sozialen Netzwerk bereitgestellten API.

@@ -15,7 +15,7 @@ public:
 
     virtual bool logIn() = 0;
     virtual bool sendData(const std::string& data) = 0;
-    virtual void logOut() = 0;
+    virtual void logOut() const = 0;
 
 protected:
     std::string m_username;

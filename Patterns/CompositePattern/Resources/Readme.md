@@ -298,7 +298,7 @@ void main() {
 In einer zweiten Implementierung stellen wir eine Realisierung auf Basis des C++17 Filesystems und unter Verwendung
 der Klasse `std::shared_ptr<FileComponent>` vor.
 
-#### 'Real-World' Beispiel:
+#### &bdquo;Real-World&rdquo; Beispiel:
 
 In den Beispielen zu diesem Entwurfsmuster (siehe Klasse `DirectoryEx` und Datei `FileSystemAdvanced.cpp`)
 können Sie die Umsetzung des *Composite Entwurfsmusters* am realen Dateisystem betrachten.

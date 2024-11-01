@@ -53,7 +53,7 @@ class TextProcessor
 {
 private:
     std::unique_ptr<IListStrategy> m_list_strategy;
-    std::ostringstream m_oss;
+    std::ostringstream             m_oss;
 
 public:
     void clear() {
@@ -72,7 +72,8 @@ public:
 
     void set_output_format(Format format) {
 
-        switch (format) {
+        switch (format)
+        {
         case Format::Markdown:
             m_list_strategy = std::make_unique<MarkdownListStrategy>();
             break;
@@ -108,7 +109,7 @@ template<typename TListStrategy>
 class TextProcessorEx
 {
 private:
-    TListStrategy m_list_strategy;
+    TListStrategy      m_list_strategy;
     std::ostringstream m_oss;
 
 public:

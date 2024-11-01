@@ -76,7 +76,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
-#### Real-World Example:
+#### &bdquo;Real-World&rdquo; Example:
 
 Wir betrachten als reale Anwendung dieses Entwurfsmusters die (triviale) Realisierung 
 eines Anmeldeprozesses (Login).

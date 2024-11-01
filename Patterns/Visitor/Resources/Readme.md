@@ -548,7 +548,7 @@ mit abgehandelt.
 
 ---
 
-#### Erstes 'Real-World' Beispiel:
+#### Erstes &bdquo;Real-World&rdquo; Beispiel:
 
 Das *Visitor*-Entwurfsmuster lässt sich in *Modern C++* mit `std::variant` und `std::visit` sehr einfach umsetzen.
 
@@ -624,7 +624,7 @@ bookstore.addMedia(csharpBook);
 
 ---
 
-#### Zweites 'Real-World' Beispiel:
+#### Zweites &bdquo;Real-World&rdquo; Beispiel:
 
 Im Buch [Entwurfsmuster: Das umfassende Handbuch](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
 von Matthias Geirhos findet sich zu diesem Entwurfsmuster ein Beispiel aus der Welt des Onlinehandels vor.

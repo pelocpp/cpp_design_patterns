@@ -85,7 +85,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
-#### Real-World Example:
+#### &bdquo;Real-World&rdquo; Example:
 
 Wir stellen eine Klasse `BankAccount` vor, 
 in der wir jede Änderung als *Memento* aufzeichnen.

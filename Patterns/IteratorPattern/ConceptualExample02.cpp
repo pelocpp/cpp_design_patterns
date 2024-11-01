@@ -147,7 +147,7 @@ void test_conceptual_example_03() {
 
     ConcreteAggregate<int> intContainer;
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; ++i) {
         intContainer.add(i);
     }
 

@@ -158,7 +158,7 @@ void test_layout_manager_example()
 
     std::list<std::shared_ptr<Widget>> widgets;
 
-    for (int i = 0; i < 5; i++)
+    for (int i{}; i != 5; ++i)
     {
         widgets.push_back(std::make_shared<Widget>(widgetHtmlCode));
     }

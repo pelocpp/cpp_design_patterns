@@ -91,7 +91,7 @@ Die mit `c` beginnenden Fabrikfunktionen geben konstante Iteratoren zurück.
 ---
 
 
-#### 'Real-World' Beispiel:
+#### &bdquo;Real-World&rdquo; Beispiel:
 
 [Quellcode 3](../RealWorldFactoryMethod.cpp) - *Real-World*-Beispiel (`ITelevision`), das exemplarisch mehrere *Factory Methods* betrachtet.<br/>
 

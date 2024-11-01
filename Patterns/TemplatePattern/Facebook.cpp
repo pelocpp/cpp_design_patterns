@@ -18,7 +18,7 @@ bool Facebook::logIn()
     std::cout << "Checking user's parameters" << std::endl;
     std::cout << "Name: " << m_username << std::endl;
     std::cout << "Password: ";
-    for (unsigned int i = 0; i < m_password.length(); i++) {
+    for (unsigned int i = 0; i < m_password.length(); ++i) {
         std::cout << "*";
     }
 
@@ -40,7 +40,7 @@ bool Facebook::sendData(const std::string& data)
     }
 }
 
-void Facebook::logOut()
+void Facebook::logOut() const
 {
     std::cout << "User: '" << m_username << "' was logged out from Facebook" << std::endl;
 }
@@ -52,7 +52,7 @@ void Facebook::simulateNetworkLatency()
     while (i < 5) {
         std::cout << '.';
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        i++;
+        ++i;
     }
 }
 

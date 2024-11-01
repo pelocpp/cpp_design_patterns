@@ -103,7 +103,7 @@ Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 vor.
 
-#### 'Real-World' Beispiel:
+#### &bdquo;Real-World&rdquo; Beispiel:
 
 Ein Klassiker für dieses Entwurfsmuster ist die Java Swing Oberflächenbibliothek und hier im
 Speziellen der Aspekt "*Look and Feel*".
@@ -127,9 +127,9 @@ der unterschiedlichen Bibliotheken, also sprich konkreten UI-Fabriken vor:
 Tabelle 1: Verfügbare *Look and Feel* UI-Fabriken.
 
 
-#### Zweites 'Real-World' Beispiel:
+#### Zweites &bdquo;Real-World&rdquo; Beispiel:
 
-Im 'Real-World' Beispiel zu diesem Entwurfsmuster wird
+Im &bdquo;Real-World&rdquo; Beispiel zu diesem Entwurfsmuster wird
 die Herstellung verschiedener Fahrzeugtypen verschiedener Hersteller betrachtet.
 Es gibt eine abstrakte Fabrikschnittstelle namens `IVehicleFactory` (*Abstract Factory*)
 und zwei konkrete Fabrikimplementierungen namens `FordFactory`  und `MitsubishiFactory`. 
@@ -137,7 +137,7 @@ und zwei konkrete Fabrikimplementierungen namens `FordFactory`  und `MitsubishiF
 mit denen `Vehicle`-Objekte zurückgegeben werden.
 Die Klasse `Vehicle` ist eine abstrakte Basisklasse für alle konkreten Produkte.
 
-Die Ausgaben des '*Real-World*'-Beispiels lauten:
+Die Ausgaben des &bdquo;Real-World&rdquo;-Beispiels lauten:
 
 ```
 Model: Ford Focus

@@ -9,7 +9,7 @@ public:
 
     virtual bool logIn() override;
     virtual bool sendData(const std::string& data) override;
-    virtual void logOut() override;
+    virtual void logOut() const override;
 
 private:
     void simulateNetworkLatency();

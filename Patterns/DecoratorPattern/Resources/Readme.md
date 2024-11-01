@@ -173,13 +173,13 @@ der Deklaration zur Laufzeit:
 
 ---
 
-#### 'Real-World' Beispiel:
+#### &bdquo;Real-World&rdquo; Beispiel:
 
 [Quellcode &bdquo;Dynamic Shapes&rdquo;](../DynamicShapes.cpp)
 
 ---
 
-Das 'Real-World' Beispiel zu diesem Entwurfsmuster beschäftigt sich mit semi-grafischen GDI-Elementen (*Graphics Device Interface*)
+Das &bdquo;Real-World&rdquo; Beispiel zu diesem Entwurfsmuster beschäftigt sich mit semi-grafischen GDI-Elementen (*Graphics Device Interface*)
 wie Kreisen, Rechtecken, etc.
 In einer Grundausführung lassen sich derartige Figuren einfach schwarz-weiß zeichnen. Auf Wunsch, auch zur Laufzeit, könnte man diese Figuren
 farbig und/oder mit einer entsprechenden Transparenz zeichnen.
@@ -284,7 +284,7 @@ A circle of radius 15.000000 has color green has 19.6078% transparency
 
 ---
 
-#### 'Real-World' Beispiel zum Zweiten: Statisches Dekorieren mit Templates
+#### &bdquo;Real-World&rdquo; Beispiel zum Zweiten: Statisches Dekorieren mit Templates
 
 [Quellcode &bdquo;Statische Shapes&rdquo;](../StaticShapes.cpp)
 

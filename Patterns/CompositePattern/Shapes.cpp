@@ -64,15 +64,27 @@ size_t Group::m_indentation = 0;
 
 void test_shapes()
 {
-    std::shared_ptr<Group> root = std::make_shared<Group>("Root");
+    // root node for composite component
+    std::shared_ptr<Group> root{ std::make_shared<Group>("Root") };
 
-    std::shared_ptr<IShape> circle = std::make_shared<Circle>("Top Level Circle");
+    // top level circle
+    std::shared_ptr<IShape> circle{
+        std::make_shared<Circle>("Top Level Circle") 
+    };
     root->push(circle);
 
+    // creating sub group with another two circles
     std::shared_ptr<Group> subgroup = std::make_shared<Group>("Subgroup");
-    subgroup->push(std::make_shared<Circle>("First Second Level Circle"));
-    subgroup->push(std::make_shared<Circle>("Another Second Level Circle"));
+    std::shared_ptr<IShape> secondLevelcircle{ 
+        std::make_shared<Circle>("First Second Level Circle")
+    };
+    std::shared_ptr<IShape> anotherSecondLevelcircle{ 
+        std::make_shared<Circle>("Another Second Level Circle") 
+    };
+    subgroup->push(secondLevelcircle);
+    subgroup->push(anotherSecondLevelcircle);
 
+    // adding sub group to root
     root->push(subgroup);
 
     root->draw();

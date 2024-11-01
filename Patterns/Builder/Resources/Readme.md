@@ -68,9 +68,9 @@ Product parts: Part A1, Part C1
 
 ---
 
-#### Ein erstes 'Real-World' Beispiel:
+#### Ein erstes &bdquo;Real-World&rdquo; Beispiel:
 
-Das 'Real-World' Beispiel zu diesem Entwurfsmuster orientiert sich an den UI-Bibliotheken von Java.
+Das &bdquo;Real-World&rdquo; Beispiel zu diesem Entwurfsmuster orientiert sich an den UI-Bibliotheken von Java.
 Wir implementieren - natürlich stark vereinfacht - einen Layoutmanager.
 Das Ergebnis könnten Java-Containerobjekte sein, oder - etwas einfacher gestrickt - in unserem Fall HTML-Code.
 
@@ -122,7 +122,7 @@ entnehmen Sie *Abbildung* 2:
 *Abbildung* 2: Implementierung eines LayoutManagers mit dem *Builder Pattern*.
 
 Weitere Details zur Umsetzung des Beispiels entnehmen Sie bitte dem [Quellcode](../LayoutManagerExample.cpp).
-Die Ausgaben des 'Real-World'-Beispiels lauten:
+Die Ausgaben des &bdquo;Real-World&rdquo;-Beispiels lauten:
 
 ```
 HTML: HTML-Code for BorderLayoutManager
@@ -132,7 +132,10 @@ HTML: HTML-Code for FlowLayout
 
 ---
 
-#### Ein zweites 'Real-World' Beispiel: Fluent Builder
+#### Ein zweites &bdquo;Real-World&rdquo; Beispiel: Fluent Builder
+
+*Bemerkung*:<br />
+Diese Anwendung des Builder Patterns wird auch als &bdquo;Named Arguments in C++&rdquo; bezeichnet.
 
 Wir betrachten nun ein Beispiel, in dem eine Klasse (Klasse `Person`)
 viele Daten (hier: zur Person und zum Beruf) haben kann.
@@ -202,7 +205,7 @@ und
 
 vor.
 
-Das 'Real-World'-Beispiel ist eine Portierung eines entsprechenden C#-Beispiels aus dem Buch von Matthias Geirhos,
+Das &bdquo;Real-World&rdquo;-Beispiel ist eine Portierung eines entsprechenden C#-Beispiels aus dem Buch von Matthias Geirhos,
 siehe dazu das [Literaturverzeichnis](../../../Resources/Readme_07_Literature.md).
 
 ---

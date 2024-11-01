@@ -76,7 +76,7 @@ ein praxisnahes Beispiel vor.
 
 ---
 
-#### 'Real-World' Beispiel:
+#### &bdquo;Real-World&rdquo; Beispiel:
 
 Für das *Command Pattern* wird in
 ["Entwurfsmuster: Das umfassende Handbuch" von Matthias Geirhos](https://www.amazon.de/Entwurfsmuster-umfassende-Handbuch-Matthias-Geirhos/dp/3836227622)
@@ -90,7 +90,7 @@ soweit er die Verwendung des *Command Pattern* Entwurfsmusters betrifft, siehe *
 Ein Kommando wird in *Abbildung* 2 durch die Klasse `Move` dargestellt.
 Davon leiten sich unterschiedliche Kommandos ab, beim Schachspiel reden wir hier von einem Spielzug.
 Neben einem "normalen" Zug, der nur die Regeln der jeweiligen Spielfigur zu beachten hat, gibt es auch spezielle Züge
-wie "Rochaden" (engl. *Castling*)
+wie "Rochade" (engl. *Castling*)
 und die "Umwandlung eines Bauern" (engl. *PromotePawn*).
 
 Ein Spielfeld (engl. *Board*) verwaltet Spielzüge, oder eben Kommandos, um in der Nomenklatur dieses Entwurfsmusters zu bleiben.

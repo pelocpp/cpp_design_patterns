@@ -145,7 +145,7 @@ Man spricht dabei auch von der so genannten &bdquo;*prototypischen Vererbung*&rd
 
 ---
 
-#### Real-World Example:
+#### &bdquo;Real-World&rdquo; Example:
 
 Wir betrachten ein Schachbrett mit Schachfiguren.
 Diese Figuren sind unterschiedlichen Typs (König, Dame, Bauern, etc.).

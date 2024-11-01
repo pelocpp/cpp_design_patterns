@@ -101,7 +101,7 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 ---
 
-#### Erstes 'Real-World' Beispiel:
+#### Erstes &bdquo;Real-World&rdquo; Beispiel:
 
 Wir betrachten als Anwendung eine Spiele-Applikation, in der viele Bäume zu dekorativen Zwecken platziert sind.
 Einen solchen Baum (Klasse `Tree`) gibt es  stilistisch in den drei Varianten &bdquo;Palme&rdquo;, &bdquo;Zypresse&rdquo; oder &bdquo;Gartenbaum&rdquo;
@@ -161,7 +161,7 @@ Damit legen wir folgende Realisierung im Beispiel zu Grunde:
 
 ---
 
-#### Zweites 'Real-World' Beispiel:
+#### Zweites &bdquo;Real-World&rdquo; Beispiel:
 
 
 Wir betrachten als Beispiel eine *Paint-Brush*-Anwendung.

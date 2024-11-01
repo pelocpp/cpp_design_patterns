@@ -140,7 +140,7 @@ public:
  * in order to make the right choice.
  */
 
-void clientCode()
+static void clientCode()
 {
     std::cout << "Client: Strategy is set to normal sorting:" << std::endl;
 

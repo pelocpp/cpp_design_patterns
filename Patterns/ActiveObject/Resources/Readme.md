@@ -93,7 +93,7 @@ Das konzeptionelle Beispiel besitzt &ndash; in Folge seiner vereinfachenden Dars
 
 ---
 
-#### Erstes Real-World Example:
+#### Erstes &bdquo;Real-World&rdquo; Example:
 
 Das Beispiel veranschaulicht eine einfache Umsetzung des *Active Object* Patterns mit C++&ndash;Sprachmitteln wie
 `std::future`, `std::packaged_task` und `std::jthread`.
@@ -107,7 +107,7 @@ transportiert werden kann.
 
 ---
 
-#### Zweites Real-World Example:
+#### Zweites &bdquo;Real-World&rdquo; Example:
 
 Das zweite &bdquo;Real-World&rdquo;-Beispiel berechnet die Summe der natürlichen Zahlen von 1 bis *n*.
 Das könnte man natürlich in einem einzigen Thread abhandeln, und mit Hilfe der Gaußschen Summenformel ließe sich

@@ -139,7 +139,7 @@ das Muster auf Basis des *Klassen Adapter* Ansatzes vor:
 
 *Abbildung* 2: Schematische Darstellung des *Adapter Patterns* (*Klassen Adapter Ansatzes*).
 
-Im *Real-World* Beispiel zu diesem Entwurfsmuster finden Sie beide Varianten umgesetzt vor.
+Im &bdquo;Real-World&rdquo; Beispiel zu diesem Entwurfsmuster finden Sie beide Varianten umgesetzt vor.
 
 ---
 
@@ -182,7 +182,7 @@ von C++ 11 verwendet.
 
 ---
 
-#### Real-World Example:
+#### &bdquo;Real-World&rdquo; Beispiel:
 
 Wir demonstrieren den Einsatz des Adapter Patterns anhand des folgenden Beispiels,
 in dem wir ein Audio-Player-Gerät betrachten, das nur *MP3*-Dateien abspielen kann,

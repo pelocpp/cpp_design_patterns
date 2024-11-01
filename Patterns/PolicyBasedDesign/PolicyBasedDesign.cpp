@@ -8,6 +8,8 @@
 
 namespace PolicyBasedDesign_01 {
 
+    // erroneous implementation
+
     template <typename T>
     class SmartPtr
     {
@@ -37,11 +39,11 @@ namespace PolicyBasedDesign_01 {
 
     class Class {};
 
-    void test_01() {
+    static void test_01() {
         SmartPtr<Class> ptr{ new Class{} };
     }
 
-    void test_02() {
+    static void test_02() {
 
         SmartPtr<int> sp1{ new int{ 123 } };
         SmartPtr<int> sp2{ new int[5] { 1, 2, 3, 4, 5 } };
@@ -50,7 +52,7 @@ namespace PolicyBasedDesign_01 {
         // Scalar Deleting Destructor or Vector Deleting Destructor?
     }
 
-    void test()
+    static void test()
     {
         test_01();
         test_02();
@@ -58,6 +60,8 @@ namespace PolicyBasedDesign_01 {
 }
 
 namespace PolicyBasedDesign_02 {
+
+    // correct implementation
 
     template <typename T, typename DeletionPolicy>
     class SmartPtr
@@ -104,7 +108,7 @@ namespace PolicyBasedDesign_02 {
         }
     };
 
-    void test()
+    static void test()
     {
         SmartPtr<Class, ScalarDeletePolicy<Class>> ptr(new Class{});
 
@@ -143,7 +147,7 @@ namespace PolicyBasedDesign_10 {
         TOutputPolicy m_policy;
     };
 
-    void test() {
+    static void test() {
 
         Logger<LogToConsole> consoleLogger{};
         consoleLogger.log("Important information");
@@ -152,7 +156,7 @@ namespace PolicyBasedDesign_10 {
         fileLogger.log("Important information");
     }
 
-    void test_02() {
+    static void test_02() {
 
         std::cout << sizeof(LogToConsole) << std::endl;
         std::cout << sizeof(LogToFile) << std::endl;
@@ -189,7 +193,7 @@ namespace PolicyBasedDesign_11 {
        using TOutputPolicy::write;
     };
 
-    void test() {
+    static void test() {
 
         Logger<LogToConsole> consoleLogger{};
         consoleLogger.log("Important information");
@@ -198,7 +202,7 @@ namespace PolicyBasedDesign_11 {
         fileLogger.log("Important information");
     }
 
-    void test_02() {
+    static void test_02() {
         std::cout << sizeof(LogToConsole) << std::endl;
         std::cout << sizeof(LogToFile) << std::endl;
         std::cout << sizeof(Logger<LogToConsole>) << std::endl;

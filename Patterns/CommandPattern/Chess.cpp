@@ -18,8 +18,8 @@ namespace ChessExample {
 
     public:
         // c'tor(s)
-        Position() : m_x(-1), m_y(-1) {}
-        Position(int x, int y) : m_x(x), m_y(y) {}
+        Position() : m_x{ -1 }, m_y{ -1 } {}
+        Position(int x, int y) : m_x{ x }, m_y{ y } {}
 
         // getter/setter
         int getX() const { return m_x; }
@@ -31,12 +31,12 @@ namespace ChessExample {
     class ChessPiece
     {
     private:
-        bool  m_isComputer;
+        bool     m_isComputer;
         Position m_currentPosition;
 
     public:
         // c'tor(s)
-        ChessPiece() : m_isComputer(false), m_currentPosition() {}
+        ChessPiece() : m_isComputer{ false }, m_currentPosition{} {}
         ChessPiece(bool isComputer, const Position& position)
         {
             m_isComputer = isComputer;
@@ -78,7 +78,8 @@ namespace ChessExample {
         {
             ChessPiece::validateMove(newPosition);
 
-            if (newPosition.getX() != getCurrentPosition().getX() && newPosition.getY() != getCurrentPosition().getY())
+            if (newPosition.getX() != getCurrentPosition().getX() &&
+                newPosition.getY() != getCurrentPosition().getY())
                 throw std::invalid_argument("Der Turm darf nicht diagonal bewegt werden");
         }
     };
@@ -107,7 +108,9 @@ namespace ChessExample {
         Position m_oldPosition;
 
     public:
-        SimpleMove(std::shared_ptr<ChessPiece> piece, Position position) : Move(piece), m_newPosition(position) {}
+        SimpleMove(std::shared_ptr<ChessPiece> piece, Position position) 
+            : Move(piece), m_newPosition(position) 
+        {}
 
         virtual void doMove() override
         {
@@ -139,7 +142,7 @@ namespace ChessExample {
                 << getChessPiece()->getCurrentPosition().getY() 
                 << std::endl;
 
-            std::shared_ptr<ChessPiece> piece = getChessPiece();
+            std::shared_ptr<ChessPiece> piece{ getChessPiece() };
             piece->move(m_oldPosition);
 
             std::cout 
@@ -167,20 +170,24 @@ namespace ChessExample {
 
         void play()
         {
-            std::cout << "Spiele " << m_moves.size() << " Spielzuege" << std::endl;
+            std::cout << "Spiele " << m_moves.size() << " Spielzuege:" << std::endl;
+
             while (!m_moves.empty())
             {
-                std::shared_ptr<Move> move = m_moves.front();
+                std::shared_ptr<Move> move{ m_moves.front() };
                 m_moves.pop();
 
                 move->doMove();
                 m_undos.push(move);
             }
-            std::cout << "Spielzuege gespielt" << std::endl;
+
+            std::cout << "Done." << std::endl;
         }
 
         void undo()
         {
+            std::cout << "Starte Undos:" << std::endl;
+
             if (!m_undos.empty())
             {
                 std::shared_ptr<Move> move = m_undos.top();
@@ -202,25 +209,40 @@ namespace ChessExample {
 
         void play(std::shared_ptr<ChessPiece> piece, Position position)
         {
-            std::shared_ptr<Move> move = std::make_shared<SimpleMove>(piece, position);
+            std::shared_ptr<Move> move{ std::make_shared<SimpleMove>(piece, position) };
             m_board.enqueue(move);
             m_board.play();
+        }
+
+        void enqueue(std::shared_ptr<ChessPiece> piece, Position position)
+        {
+            std::shared_ptr<Move> move{ std::make_shared<SimpleMove>(piece, position) };
+            m_board.enqueue(move);
         }
 
         void undo()
         {
             m_board.undo();
         }
+
+        void play()
+        {
+            m_board.play();
+        }
     };
 
-    void clientCode()
+    static void clientCode()
     {
         ChessGame game;
 
-        std::shared_ptr<ChessPiece> tower = std::make_shared<Tower>(false, Position(1, 1));
+        std::shared_ptr<ChessPiece> tower{
+            std::make_shared<Tower>(false, Position(1, 1))
+        };
 
-        game.play(tower, Position(4, 1));
-        game.play(tower, Position(6, 1));
+        game.enqueue(tower, Position(4, 1));
+        game.enqueue(tower, Position(6, 1));
+
+        game.play();
 
         game.undo();
         game.undo();
