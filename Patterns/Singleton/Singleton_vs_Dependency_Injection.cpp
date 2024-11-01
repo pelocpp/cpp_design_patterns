@@ -13,6 +13,7 @@ namespace SingletonLogger {
     private:
         Logger() = default;
 
+        // no copying or moving
         Logger(const Logger&) = delete;
         Logger(Logger&&) noexcept = delete;
         Logger& operator=(const Logger&) = delete;

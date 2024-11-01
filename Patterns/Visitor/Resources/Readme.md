@@ -44,9 +44,11 @@ Der Sinn des Visitors besteht darin, die eigentliche Operation auf den Daten von
 der Verwaltungs­struktur zu trennen. Aus der Entkopplung dieser beiden Aspekte entstehen
 Freiheitsgrade für Variationen dieses Entwurfsmusters.
 
-#### Eine didaktische Herleitung in 4 Schritten:
+---
 
-##### Schritt 1: Ein &bdquo;aufdringlicher&rdquo; Besucher (*intrusive Visitor*)
+### Eine didaktische Herleitung in 4 Schritten:
+
+#### Schritt 1: Ein &bdquo;aufdringlicher&rdquo; Besucher (*intrusive Visitor*)
 
 Nehmen wir an, wir haben eine Hierarchie von Dokumentenobjekten der folgenden Gestalt:
 
@@ -99,11 +101,11 @@ indem wir jede einzelne `Document`-Klasse irgendwie unabhängig um eine `print`-M
 ergänzen.
 
 Was wir jetzt nicht tun wollen, ist, dass wir jedes Mal, wenn wir eine neue Anforderung (*Concern*) erhalten,
-in den vorhandenen Code zurückkehren und jede Klasse in der Hierarchie (mit zusätzlichen virtuellen Funktionen) ändern.
+in den vorhandenen Code eingreifen und jede Klasse in der Hierarchie (mit zusätzlichen virtuellen Funktionen) ändern.
 
 Dies würde einen Verstoß gegen das *Open*-*Closed*-Prinzip darstellen!
 Zum Zweiten gibt es auch noch das *Single*-*Responsibility*-Prinzip, an das wir uns halten wollen.
-Kurz gesagt besagt dieses, dass wir für eine neue Anforderung eine separate Klasse zu erstellen haben.
+Kurz gesagt besagt dies, dass wir für eine neue Anforderung eine separate Klasse zu erstellen haben.
 
 Würden wir das jetzt alles Mal für einen kurzen Moment außer Acht lassen,
 könnten wir folgende Realisierung betrachten:
@@ -185,7 +187,7 @@ Jedes *Concern* sollte in einer separaten Klasse abgehandelt werden,
 um vor allem das *Single*-*Responsibility*-Prinzips zu beachten.
 
 
-##### Schritt 2: Ein &bdquo;reflektierender&rdquo; Besucher (*reflective Visitor*)
+#### Schritt 2: Ein &bdquo;reflektierender&rdquo; Besucher (*reflective Visitor*)
 
 ```cpp
 01: class Document
@@ -273,7 +275,7 @@ um deren Verarbeitung es geht, werden Sie am Ende eine lange Kaskade von `if`/`e
 und unnötige Performanceaufwendungen für *RTTI* haben.
 
 
-##### Schritt 3: Ein &bdquo;klassischer&rdquo; Besucher (*classic Visitor*)
+#### Schritt 3: Ein &bdquo;klassischer&rdquo; Besucher (*classic Visitor*)
 
 Damit kommen wir nun auf die klassische Umsetzung des *Visitor* Patterns zu sprechen.
 Diese wird weiter unten noch näher erläutert werden (begleitender Text und UML-Diagramm):
@@ -372,7 +374,7 @@ Diese wird weiter unten noch näher erläutert werden (begleitender Text und UML-D
 ```
 
 Wie Sie sehen können, haben wir es nun mit zwei Ebenen der Indirektion zu tun.
-Damit wurden vor allem vermieden, die zwei Prinzipien
+Damit wurde vor allem vermieden, die zwei Prinzipien
 *Open*-*Closed-Principle* und *Single*-*Responsibility-Principle* zu verletzen.
 
 Hierfür gibt es ein spezielles Schlagwort: *Double Dispatch*, siehe dazu auch *Abbildung* 1:
@@ -398,7 +400,7 @@ vor. Dieses Mal wird &ndash; auf Grund des virtuellen Methodenaufrufmechanismus 
 der Aufruf an die Methode `DocumentPrinter::visit(HTML*)` delegiert (unter Berücksichtigung
 des Zeigertyps `HTML*`).
 
-##### Schritt 4: Alternativer Ansatz für *Double Dispatch* in Modern C++ (`std::variant` und `std::visit`)
+#### Schritt 4: Alternativer Ansatz für *Double Dispatch* in Modern C++ (`std::variant` und `std::visit`)
 
 Man beachte vorab, dass die Dokumente Klassen `Markdown` und `HTML` nicht mehr einer Klassenhierarchie angehören:
 
@@ -491,6 +493,62 @@ d.h. in unserem Beispiel ein `DocumentPrinter`-Objekt,
 das für alle möglichen Typen einen überladenen Funktionsoperator `operator()` &ndash;
 auch als *Funktor* bezeichnet &ndash; bereitstellt.
 
+#### Schritt 5: Noch einmal der alternative Ansatz: `std::variant`, `std::visit` und ein generisches Lambdaobjekt 
+
+Der letzte Schritt aus dieser Betrachtung ist sehr ähnlich zu Schritt 4.
+
+Die beiden Klassen `HTML` und `Markdown` sind unverändert.
+
+An die Stelle eines aufrufbaren Objekts (Klasse mit überladenem Operator `operator()`)
+tritt nun ein generisches Lambdaobjekt.
+
+Techniken aus dem Modern C++ Umfeld wie `decltype`, `std::remove_reference`, `std::is_same`
+und `if constexpr` kommen jetzt zum Einsatz:
+
+```cpp
+01: static void clientCode06() {
+02: 
+03:     auto genericVisitor = [](const auto& doc) {
+04: 
+05:         using DocumentType = decltype (doc);
+06: 
+07:         using DocumentTypeWithoutRef = std::remove_reference<DocumentType>::type;
+08: 
+09:         using DocumentTypeWithoutRefAndConst
+10:             = std::remove_const<DocumentTypeWithoutRef>::type;
+11: 
+12:         if constexpr (std::is_same<DocumentTypeWithoutRefAndConst, HTML>::value == true)
+13:         {
+14:             std::cout << "<ul>" << std::endl;
+15:             for (const std::string& item : doc.getContent()) {
+16:                 std::cout << "    " << doc.getStart() << item << doc.getEnd() << std::endl;
+17:             }
+18:             std::cout << "</ul>" << std::endl;
+19:         }
+20:         else if constexpr (std::is_same<DocumentTypeWithoutRefAndConst, Markdown>::value == true)
+21:         {
+22:             for (const std::string& item : doc.getContent()) {
+23:                 std::cout << doc.getStart() << item << std::endl;
+24:             }
+25:         }
+26:         else
+27:         {
+28:             std::cout << "Unknown Document Format! " << std::endl;
+29:         }
+30:     };
+31: 
+32:     HTML hd;
+33:     hd.addToList("This is line");
+34:     std::variant<Markdown, HTML> var{ hd };
+35:     std::visit(genericVisitor, var);
+36: 
+37:     Markdown md;
+38:     md.addToList("This is another line");
+39:     var = md;
+40:     std::visit(genericVisitor, var);
+41: }
+```
+
 #### Zusammenfassung:
 
 Die Traver­sierung wird durch die erwähnte Infra­struktur aus Methoden übernommen.
@@ -509,6 +567,8 @@ Die Daten-Klassen sind mit Attributen (Eigenschaften, *getter*/*setter*-Methoden
 dass diese vom &bdquo;Besucher&rdquo;-Objekt geeignet verwendet werden können.
 Typischerweise wird das Datenobjekt als Parameter an eine Methode des &bdquo;Besucher&rdquo;-Objekts übergeben
 (die Konvention besteht darin, diese Methode `visit` zu nennen).
+
+---
 
 #### Struktur (UML):
 

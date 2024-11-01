@@ -201,7 +201,7 @@ Der Gebrauch des `friend`-Schlüsselworts ist häufig ein Indikator,
 dass gegen das *Open-Closed-Prinzip* verstoßen wird.
 
 
-###### *Inner Factory*:
+#### *Inner Factory*:
 
 Wir machen eine kritische Beobachtung, die wir in unserer Factory-Klasse übersehen haben:
 Es gibt keine wirkliche Verbindung zwischen den beiden Klassen `PointFactory` und `Point`!
@@ -241,14 +241,14 @@ Point p{ Point::Factory::NewCartesian(2, 3) };
 
 ---
 
-###### Die Essenz des *Simple Factory* Patterns:
+#### Die Essenz des *Simple Factory* Patterns:
 
 > Umstellung auf private Konstruktoren und Bereitstellung von Klassenmethoden.
 
 ---
 
 
-##### Zweiter Anwendungsfall des *Simple Factory* Patterns: &bdquo;What's wrong with `new`?&rdquo;
+#### Zweiter Anwendungsfall des *Simple Factory* Patterns: &bdquo;What's wrong with `new`?&rdquo;
   
 Technisch betrachtet ist mit `new` nichts falsch &ndash;
 in keinster Weise. Das Problem ist eher, dass im Falle

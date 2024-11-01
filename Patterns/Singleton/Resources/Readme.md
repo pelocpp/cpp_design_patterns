@@ -50,7 +50,7 @@ zurückliefern:
 public static Color FromArgb (byte a, byte r, byte g, byte b);
 ```
 
-Natürlich setzt dies voraus, dass die Klasse Color in derartigen Anwendungsfällen
+Natürlich setzt dies voraus, dass die Klasse `Color` in derartigen Anwendungsfällen
 *immutable*, also unveränderbar ist. Andernfalls könnte zur Laufzeit aus einer
 roten eine blaue Farbe werden, was so sicherlich nicht erwünscht ist.
 
@@ -121,7 +121,7 @@ der (lesende) Zugriff auf die Zeigervariable des Objekts wird ohne Sperre durchg
 Aufgrund der globalen Sichtbarkeit und des öffentlichen Zugriffs können Singleton-Objekte
 überall in der Implementierung anderer Klassen / im gesamten Programm verwendet werden.
 
-Mit anderen Worten:<br />
+*Mit anderen Worten*:<br />
 Ein Singleton ist in der objektorientierten Programmierung wie eine **globale Variable**
 in der prozeduralen Programmierung.
 
@@ -156,30 +156,33 @@ Solche *Logger*-Klassen werden oft als Singletons implementiert:
 02: {
 03: private:
 04:     Logger() = default;
-05:     Logger(const Logger&) = delete;
-06:     Logger(Logger&&) noexcept = delete;
-07:     Logger& operator=(const Logger&) = delete;
-08:     Logger& operator=(Logger&&) noexcept = delete;
-09: 
-10: public:
-11:     static Logger& getInstance()
-12:     {
-13:         static Logger theLogger{};
-14:         return theLogger;
-15:     }
-16: 
-17:     void writeInfoEntry(std::string_view entry) {
-18:         std::cout << "[INFO] " << entry << std::endl;
-19:     }
-20: 
-21:     void writeWarnEntry(std::string_view entry) {
-22:         std::cout << "[WARNING] " << entry << std::endl;
-23:     }
-24: 
-25:     void writeErrorEntry(std::string_view entry) {
-26:         std::cout << "[ERROR] " << entry << std::endl;
-27:     }
-28: };
+05: 
+06:     // no copying or moving
+07:     Logger(const Logger&) = delete;
+08:     Logger(Logger&&) noexcept = delete;
+09:     Logger& operator=(const Logger&) = delete;
+10:     Logger& operator=(Logger&&) noexcept = delete;
+11: 
+12: public:
+13:     static Logger& getInstance()
+14:     {
+15:         static Logger theLogger{};
+16:         return theLogger;
+17:     }
+18: 
+19:     void writeInfoEntry(std::string_view entry) {
+20:         std::cout << "[INFO] " << entry << std::endl;
+21:     }
+22: 
+23:     void writeWarnEntry(std::string_view entry) {
+24:         std::cout << "[WARNING] " << entry << std::endl;
+25:     }
+26: 
+27:     void writeErrorEntry(std::string_view entry) {
+28:         std::cout << "[ERROR] " << entry << std::endl;
+29:     }
+30: };
+;
 ```
 
 Eine mögliche Anwendung mit dieser *Logger*-Klasse könnte so aussehen:
@@ -237,7 +240,6 @@ siehe dazu *Abbildung* 4:
 <img src="dp_singleton_pattern_04_logger_di_01.svg" width="700">
 
 *Abbildung* 4: Entkopplung der beiden Klassen `CustomerRepository` und `StandardOutputLogger`.
-
 
 Damit wenden wir uns einer möglichen Implementierung dieser Schnittstelle zu,
 der Klasse `StandardOutputLogger`:

@@ -5,9 +5,10 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <type_traits>
 #include <variant>
 
-namespace MotivationVisitor01
+namespace MotivationVisitor_01_Starting_Point
 {
     class Document
     {
@@ -45,7 +46,7 @@ namespace MotivationVisitor01
     };
 }
 
-namespace MotivationVisitor02
+namespace MotivationVisitor_02_Intrusive
 {
     class Document
     {
@@ -112,7 +113,7 @@ namespace MotivationVisitor02
     }
 }
 
-namespace MotivationVisitor03
+namespace MotivationVisitor_03_Reflective
 {
     class Document
     {
@@ -186,7 +187,7 @@ namespace MotivationVisitor03
     }
 }
 
-namespace MotivationVisitor04
+namespace MotivationVisitor_04_Classical_Visitor_Pattern
 {
     // ---------------------------------------------
     // Generic Visitor Classes
@@ -288,7 +289,7 @@ namespace MotivationVisitor04
 
 // ===========================================================================
 
-namespace MotivationVisitor05
+namespace MotivationVisitor_05_Modern_Cpp
 {
     /* ------ Document Classes -------- */
     class Markdown
@@ -301,7 +302,7 @@ namespace MotivationVisitor05
         Markdown() : m_start{ "* " } {}
 
         void addToList(const std::string& line) {
-            m_content.push_back(line); 
+            m_content.push_back(line);
         }
 
         std::string getStart() const { return m_start; }
@@ -319,7 +320,7 @@ namespace MotivationVisitor05
         HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 
         void addToList(const std::string& line) {
-            m_content.push_back(line); 
+            m_content.push_back(line);
         }
 
         std::string getStart() const { return m_start; }
@@ -361,16 +362,103 @@ namespace MotivationVisitor05
     }
 }
 
+// ===========================================================================
+
+namespace MotivationVisitor_06_Much_More_Modern_Cpp
+{
+    /* ------ Document Classes -------- */
+    class Markdown
+    {
+    private:
+        std::string m_start;
+        std::list<std::string> m_content;
+
+    public:
+        Markdown() : m_start{ "* " } {}
+
+        void addToList(const std::string& line) {
+            m_content.push_back(line); 
+        }
+
+        std::string getStart() const { return m_start; }
+        std::list<std::string> getContent() const { return m_content; }
+    };
+
+    class HTML
+    {
+    private:
+        std::string m_start;
+        std::string m_end;
+        std::list<std::string> m_content;
+
+    public:
+        HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
+
+        void addToList(const std::string& line) {
+            m_content.push_back(line); 
+        }
+
+        std::string getStart() const { return m_start; }
+        std::string getEnd() const { return m_end; }
+        std::list<std::string> getContent() const { return m_content; }
+    };
+
+    /* ------ std::variant & std::visit & Generic Lambda -------- */
+    static void clientCode06() {
+
+        auto genericVisitor = [](const auto& doc) {
+
+            using DocumentType = decltype (doc);
+
+            using DocumentTypeWithoutRef = std::remove_reference<DocumentType>::type;
+
+            using DocumentTypeWithoutRefAndConst
+                = std::remove_const<DocumentTypeWithoutRef>::type;
+
+            if constexpr (std::is_same<DocumentTypeWithoutRefAndConst, HTML>::value == true)
+            {
+                std::cout << "<ul>" << std::endl;
+                for (const std::string& item : doc.getContent()) {
+                    std::cout << "    " << doc.getStart() << item << doc.getEnd() << std::endl;
+                }
+                std::cout << "</ul>" << std::endl;
+            }
+            else if constexpr (std::is_same<DocumentTypeWithoutRefAndConst, Markdown>::value == true)
+            {
+                for (const std::string& item : doc.getContent()) {
+                    std::cout << doc.getStart() << item << std::endl;
+                }
+            }
+            else
+            {
+                std::cout << "Unknown Document Format! " << std::endl;
+            }
+        };
+
+        HTML hd;
+        hd.addToList("This is line");
+        std::variant<Markdown, HTML> var{ hd };
+        std::visit(genericVisitor, var);
+
+        Markdown md;
+        md.addToList("This is another line");
+        var = md;
+        std::visit(genericVisitor, var);
+    }
+}
+
 void test_motivation_example()
 {
-    using namespace MotivationVisitor02;
+    using namespace MotivationVisitor_02_Intrusive;
     clientCode02();
-    using namespace MotivationVisitor03;
+    using namespace MotivationVisitor_03_Reflective;
     clientCode03();
-    using namespace MotivationVisitor04;
+    using namespace MotivationVisitor_04_Classical_Visitor_Pattern;
     clientCode04();
-    using namespace MotivationVisitor05;
+    using namespace MotivationVisitor_05_Modern_Cpp;
     clientCode05();
+    using namespace MotivationVisitor_06_Much_More_Modern_Cpp;
+    clientCode06();
 }
 
 // ===========================================================================
