@@ -24,6 +24,7 @@
     <ProjectGuid>{e78ce94a-7606-4f5d-8658-c2561f3b1e68}</ProjectGuid>
     <RootNamespace>RAIIIdiom</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>RAII</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

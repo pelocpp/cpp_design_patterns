@@ -115,7 +115,7 @@ namespace ExamplesPrototypePattern {
     GameBoard::GameBoard(const GameBoard& other) : GameBoard()
     {
         // need to redirect to default c'tor at first 
-        // to allocate the proper amount of memory
+        // to allocate the proper amount of memory (using resize)
 
         // now copy the data
         for (size_t i = 0; i != m_cells.size(); ++i) {

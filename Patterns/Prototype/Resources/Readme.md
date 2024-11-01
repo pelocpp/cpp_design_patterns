@@ -115,9 +115,9 @@ Es besteht im Wesentlichen aus zwei Teilen:
 
 #### Hinweis:
 
-Es ist **nicht** möglich, das *Virtueller Konstruktor*-Idiom unverändert &ndash; so wie im
+Es ist **nicht** möglich, das &bdquo;*Virtueller Konstruktor*&rdquo;-Idiom unverändert &ndash; so wie im
 ersten konzeptionellen Beispiel gezeigt &ndash; für *Smart Pointer* (`std::shared_ptr`, `std::unique_ptr`) zu implementieren.
-Der Grund besteht darin, dass abgeleitete, virtuelle Methoden kovariante Rückgabetypen haben müssen.
+Der Grund besteht darin, dass abgeleitete, virtuelle Methoden **kovariante** Rückgabetypen haben müssen.
 Bei den beiden Datentypen `std::shared_ptr<Prototype>` und `std::shared_ptr<ConcretePrototype>` ist dies **nicht** der Fall.
 
 Eine pragmatische Umgehung dieses Problems besteht darin,
