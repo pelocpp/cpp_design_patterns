@@ -1,3 +1,7 @@
+// ===========================================================================
+// DynamicShapes.cpp // Decorator Pattern
+// ===========================================================================
+
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -173,3 +177,7 @@ void test_dynamic_decoration_03() {
     std::cout << greenTransparentCircle->draw() << std::endl;
     // "A circle of radius 15.000000 has color green has 19.6078% transparency"
 }
+
+// ===========================================================================
+// End-of-File
+// ===========================================================================

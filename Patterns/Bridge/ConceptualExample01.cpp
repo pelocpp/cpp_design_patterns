@@ -63,8 +63,12 @@ void test_conceptual_example_01()
     std::shared_ptr<Abstraction> abstraction {
         std::make_shared<RefinedAbstraction>()
     };
+
+    std::shared_ptr<Implementor> implementation {
+        std::make_shared<ConcreteImplementor>()
+    };
     
-    abstraction->setImplementor(std::make_shared<ConcreteImplementor>());
+    abstraction->setImplementor(implementation);
     
     clientCode(abstraction);
 }

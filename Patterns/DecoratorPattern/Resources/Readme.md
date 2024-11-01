@@ -21,7 +21,7 @@
 &bdquo;Erleichtert das Hinzufügen zusätzlicher Funktionalität zu Objekten.&rdquo;
 
 Das *Decorator Pattern* ist ein strukturelles Entwurfsmuster, das die Funktionalität eines Objekts erweitert,
-indem es dieses mit einer oder mehreren Dekorationsklassen &bdquo;umhüllt&rdquo;, oder gewissermaßen *dekoriert*.
+indem es dieses mit einer oder mehreren Dekorationsklassen &bdquo;umhüllt&rdquo;, oder gewissermaßen &bdquo;dekoriert&rdquo;.
 *Decorator* Klassen können vorhandene Elemente ändern und zur Laufzeit neue Methoden und Eigenschaften hinzufügen.
 
 ##### Hinweis:
@@ -62,7 +62,7 @@ die vor oder nach der Basisfunktionalität des betrachteten Objekts auszuführen s
 #### Lösung:
 
 *Wrapper* oder Hülle ist der alternative Kurzname für das Decorator-Pattern,
-der die Hauptidee des Musters klar zum Ausdruck bringt. Ein &bdquo;Wrapper&rdquo; ist ein Objekt,
+der die Hauptidee des Musters klarer zum Ausdruck bringt. Ein &bdquo;Wrapper&rdquo; ist ein Objekt,
 das mit einem &bdquo;Ziel&rdquo;-Objekt verknüpft werden kann. Das Wrapper-Objekt enthält die gleichen Methoden
 wie das Ziel und delegiert alle eingehenden Requests an es.
 Der Wrapper kann das Verhalten jedoch ändern,

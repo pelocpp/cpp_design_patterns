@@ -30,6 +30,8 @@ public:
     }
 };
 
+// ---------------------------------------------------------------------------
+
 /**
  * The base Decorator class follows the same interface as the concrete components.
  * The primary purpose of this class is to define the wrapping interface for all
@@ -107,6 +109,8 @@ public:
     }
 };
 
+// ---------------------------------------------------------------------------
+
 /**
  * The client code works only with objects using the Component interface.
  * This way it can stay independent of the concrete classes of components
@@ -139,6 +143,7 @@ void test_conceptual_example_02() {
      * Note how decorators can wrap not only simple components
      * but the other decorators as well.
      */
+
     std::shared_ptr<Component> component{ 
         std::make_shared<ConcreteComponent>()
     };
@@ -151,21 +156,46 @@ void test_conceptual_example_02() {
         std::make_shared<ConcreteDecoratorB>(decorator1)
     };
 
-    std::cout << "Client: Now I've got a decorated component:" << std::endl;
+    std::cout << "Client: Decorated component:" << std::endl;
     clientCode(decorator2);
     std::cout << std::endl << std::endl;
 
-    /**
-     * Demonstrate nested use of decorator objects
-     */
-    std::shared_ptr<Component> decorator{
-        std::make_shared<ConcreteDecoratorA>(
-            std::make_shared<ConcreteDecoratorB>(
-                std::make_shared<ConcreteDecoratorC>(component))) };
+    // --------------------------------------------------------------
 
-    std::cout << "Client: Another decorated component:" << std::endl;
+    /**
+    * Same as before - written in a more compact syntax:
+    * Nested usage of decorator objects
+    */
+
+    std::shared_ptr<Component> decorator {
+    std::make_shared<ConcreteDecoratorB>(
+        std::make_shared<ConcreteDecoratorA>(component))
+    };
+
+    std::cout << "Client: Same decorated component - written in a more compact syntax:" << std::endl;
     clientCode(decorator);
     std::cout << std::endl << std::endl;
+
+    // --------------------------------------------------------------
+
+    /**
+     * One more Demonstration of nested use of decorator objects
+     */
+
+    decorator =
+        std::make_shared<ConcreteDecoratorA>(
+            std::make_shared<ConcreteDecoratorB>(
+                std::make_shared<ConcreteDecoratorC>(component)));
+
+    std::cout << "Client: Decorated component using three decorator objects:" << std::endl;
+    clientCode(decorator);
+    std::cout << std::endl << std::endl;
+
+    // --------------------------------------------------------------
+
+    /**
+     * Demonstrate reverse Decoration
+     */
 
     decorator =
         std::make_shared<ConcreteDecoratorC>(
