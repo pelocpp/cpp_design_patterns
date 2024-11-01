@@ -342,7 +342,7 @@ Sehen Sie hierzu eine Realisierung im Quellcode der Klasse `GenericSpecification
 
 Die Anregungen zu diesem Beispiel finden Sie in
 
-[Open Closed Principle in C++](http://www.vishalchovatiya.com/open-closed-principle-in-cpp-solid-as-a-rock/)
+[Open Closed Principle in C++](https://vishalchovatiya.com/posts//single-responsibility-principle-in-cpp-solid-as-a-rock/)
 
 von Vishal Chovatija.
 

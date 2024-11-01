@@ -6,7 +6,7 @@
 
 <img src="dp_visitorpattern_intro.png" width="600" />
 
-<sup>(Credits: [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/category/design-patterns/))</sup>
+<sup>(Credits: [Blog von Vishal Chovatiya](https://vishalchovatiya.com/pages/start-here/))</sup>
 
 ---
 
@@ -668,7 +668,7 @@ Eng verwandt mit dem  *Visitor Pattern* ist das  *Double Dispatch* Pattern. Sieh
 
 und 
 
-[Double Dispatch in C++](http://www.vishalchovatiya.com/double-dispatch-in-cpp/)
+[Double Dispatch in C++](https://vishalchovatiya.com/posts/double-dispatch-in-cpp/)
 
 ---
 

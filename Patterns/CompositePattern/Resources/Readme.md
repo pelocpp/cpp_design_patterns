@@ -6,7 +6,7 @@
 
 <img src="dp_composite_pattern_intro.png" width="600" />
 
-<sup>(Credits: [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/category/design-patterns/))</sup>
+<sup>(Credits: [Blog von Vishal Chovatiya](https://vishalchovatiya.com/pages/start-here/))</sup>
 
 ---
 
@@ -401,7 +401,7 @@ Anregungen zum Beispiel und zum C++17 Filesystem findet man zum Beispiel unter
 
 [github.com/achimoraites/DesignPatterns](https://github.com/achimoraites/DesignPatterns/blob/master/CompositePattern/FileSystem/src/ui/FileSystem.java)<br>(abgerufen am 11.05.2020).
 
-Das &bdquo;*Beginners Example*&rdquo;-Beispiel kann [hier](http://www.vishalchovatiya.com/composite-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
+Das &bdquo;*Beginners Example*&rdquo;-Beispiel kann [hier](https://vishalchovatiya.com/posts//composite-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
 
 ---
 

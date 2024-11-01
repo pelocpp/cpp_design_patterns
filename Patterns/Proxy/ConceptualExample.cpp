@@ -8,7 +8,7 @@
 /**
  * The SubjectBase interface declares common operations for both 'RealSubject'
  *    and the 'Proxy'. As long as the client works with 'RealSubject'
- *    using this interface,you'll be able to pass it a proxy
+ *    using this interface, you'll be able to pass it a proxy
  *    instead of a real subject.
  */
 class SubjectBase 
@@ -77,7 +77,7 @@ public:
 
 /**
  * The client code is supposed to work with all objects (both subjects and
- * proxies) via the Subject interface in order to support both real subjects and
+ * proxies) via the SubjectBase interface in order to support both real subjects and
  * proxies. In real life, however, clients mostly work with their real subjects
  * directly. In this case, to implement the pattern more easily, you can extend
  * your proxy from the real subject's class.
@@ -131,7 +131,7 @@ void test_conceptual_example_02()
     /*  Note: std::static_pointer_cast is necessary, because I defined
      *        realSubject from type SubjectBase - not RealSubject
      */
-    std::shared_ptr<Proxy> secondProxy{
+    std::shared_ptr<Proxy> secondProxy {
         std::make_shared<Proxy>(std::static_pointer_cast<RealSubject>(realSubject))
     };
 

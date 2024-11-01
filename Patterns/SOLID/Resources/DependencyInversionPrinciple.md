@@ -156,7 +156,7 @@ Wir betrachten das Redesign in *Abbildung* 1:
 
 Die Anregungen zu diesem Beispiel finden Sie in
 
-[Dependency Inversion Principle in C++](http://www.vishalchovatiya.com/dependency-inversion-principle-in-cpp-solid-as-a-rock/)
+[Dependency Inversion Principle in C++](https://vishalchovatiya.com/posts//single-responsibility-principle-in-cpp-solid-as-a-rock/)
 
 von Vishal Chovatija.
 

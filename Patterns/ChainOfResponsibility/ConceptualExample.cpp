@@ -17,7 +17,8 @@ namespace ConceptualExampleChainOfResponsibility {
 
     public:
         Request(int type, const std::string& param) 
-            : m_type{ type }, m_param{ param } {}
+            : m_type{ type }, m_param{ param } 
+        {}
 
         int getType() const { return m_type; }
         std::string getParam() const { return m_param; }
@@ -94,7 +95,8 @@ namespace ConceptualExampleChainOfResponsibility {
      */
     static void clientCode(std::shared_ptr<HandlerBase> handler)
     {
-        std::array<Request, 8> requests = {
+        std::array<Request, 8> requests =
+        {
             Request{ 7, std::string{ "Req. No.  7"} },
             Request{25, std::string{ "Req. No. 25"} },
             Request{17, std::string{ "Req. No. 17"} },
@@ -119,10 +121,12 @@ void test_conceptual_example_01() {
     std::shared_ptr<HandlerBase> h2 { std::make_shared<ConcreteHandlerB>() };
     std::shared_ptr<HandlerBase> h3 { std::make_shared<ConcreteHandlerC>() };
 
+    // construct chain of handlers
     h1->setSuccessor(h2);
     h2->setSuccessor(h3);
 
-    std::array<Request, 8> requests = {
+    std::array<Request, 8> requests =
+    {
         Request{ 7, std::string{ "Req. No.  7"} },
         Request{25, std::string{ "Req. No. 25"} },
         Request{17, std::string{ "Req. No. 17"} },

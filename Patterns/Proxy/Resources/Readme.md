@@ -6,7 +6,7 @@
 
 <img src="dp_proxy_pattern_intro.png" width="600" />
 
-<sup>(Credits: [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/category/design-patterns/))</sup>
+<sup>(Credits: [Blog von Vishal Chovatiya](https://vishalchovatiya.com/pages/start-here/))</sup>
 
 ---
 
@@ -111,7 +111,7 @@ inklusive *getter*- und *setter*-Methode für diese Variable.
 ```
 
 Der Vorteil dieser *Properties* &ndash; samt der vorgestellten Realisierung in C++ &ndash; liegt
-darin begründet, dass man auf diese Weise 
+darin, dass man auf diese Weise 
 den (schreibenden und/oder lesenden) Zugriff auf derartige Instanzvariable &bdquo;abfangen&rdquo; bzw. &bdquo;mitloggen&rdquo; kann.
 
 ---
@@ -221,7 +221,7 @@ und
 vor.
 
 Die beiden Beispiele &bdquo;Property Proxy&rdquo; und &bdquo;Virtual Proxy&rdquo;
-stammen aus dem [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/proxy-design-pattern-in-modern-cpp/).
+stammen aus dem [Blog von Vishal Chovatiya](https://vishalchovatiya.com/posts//proxy-design-pattern-in-modern-cpp/).
 
 ---
 

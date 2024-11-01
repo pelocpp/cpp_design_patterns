@@ -98,7 +98,7 @@
 
 ---
 
-  * Blog von Vishal Chovatiya:<br/>[What Is Design Pattern?](http://www.vishalchovatiya.com/what-is-design-pattern)
+  * Blog von Vishal Chovatiya:<br/>[Design Patterns With Modern C++](https://vishalchovatiya.com/pages/start-here/)
     (abgerufen am 20.01.2023)
 
 ---

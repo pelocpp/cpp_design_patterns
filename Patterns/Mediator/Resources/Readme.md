@@ -6,7 +6,7 @@
 
 <img src="dp_mediator_pattern_intro.png" width="600" />
 
-<sup>(Credits: [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/category/design-patterns/))</sup>
+<sup>(Credits: [Blog von Vishal Chovatiya](https://vishalchovatiya.com/pages/start-here/))</sup>
 
 ---
 
@@ -164,7 +164,7 @@ und
 
 vor.
 
-Das *Real*-*World*-Beispiel kann [hier](http://www.vishalchovatiya.com/mediator-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
+Das *Real*-*World*-Beispiel kann [hier](https://vishalchovatiya.com/posts//mediator-design-pattern-in-modern-cpp/) im Original nachgelesen werden.
 
 ---
 

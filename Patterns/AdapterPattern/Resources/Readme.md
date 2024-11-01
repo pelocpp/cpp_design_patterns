@@ -6,7 +6,7 @@
 
 <img src="dp_adapter_pattern_intro.png" width="600" />
 
-<sup>(Credits: [Blog von Vishal Chovatiya](http://www.vishalchovatiya.com/category/design-patterns/))</sup>
+<sup>(Credits: [Blog von Vishal Chovatiya](https://vishalchovatiya.com/pages/start-here/))</sup>
 
 ---
 
@@ -161,7 +161,7 @@ Im *Real-World* Beispiel zu diesem Entwurfsmuster finden Sie beide Varianten umg
 #### Pluggable Adapter Design Pattern mit Modern C++:
 
 Unter 
-[Adapter Design Pattern in Modern C++ (Vishal Chovatiya)](http://www.vishalchovatiya.com/adapter-design-pattern-in-modern-cpp/)
+[Adapter Design Pattern in Modern C++ (Vishal Chovatiya)](https://vishalchovatiya.com/posts//adapter-design-pattern-in-modern-cpp/)
 findet sich eine Umsetzung des Adapter Patterns mit Modern C++ Sprachmitteln vor.
 
 Der Adapter unterstützt hier die Adaptees (die nicht verwandt sind und unterschiedliche Schnittstellen haben)

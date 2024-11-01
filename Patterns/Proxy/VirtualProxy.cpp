@@ -16,7 +16,9 @@ private:
     std::string m_filename;
 
 public:
-    EagerBitmap(const std::string& filename) : m_filename{ filename } {
+    EagerBitmap(const std::string& filename) 
+        : m_filename{ filename } 
+    {
         std::cout << "loading image from " << m_filename << std::endl;
         // steps to load the image ...
     }
@@ -33,7 +35,9 @@ private:
     std::string                    m_filename;
 
 public:
-    LazyBitmap(const std::string& filename) : m_filename{ filename } {}
+    LazyBitmap(const std::string& filename)
+        : m_filename{ filename }
+    {}
 
     void draw() {
         if (! m_bmp) {

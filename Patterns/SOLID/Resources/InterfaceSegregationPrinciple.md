@@ -167,7 +167,7 @@ ein Design zu korrigieren:
 
 Die Anregungen zu diesem Beispiel finden Sie in
 
-[Interface Segregation Principle in C++](http://www.vishalchovatiya.com/interface-segregation-principle-in-cpp-solid-as-a-rock/)
+[Interface Segregation Principle in C++](https://vishalchovatiya.com/posts//single-responsibility-principle-in-cpp-solid-as-a-rock/)
 
 von Vishal Chovatija.
 

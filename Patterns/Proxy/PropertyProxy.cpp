@@ -12,8 +12,12 @@ private:
 
 public:
     Property(const T initialValue) { *this = initialValue; }
-    operator T() { return m_value; }
-    T operator= (T newValue) { return m_value = newValue; }
+
+    operator T () { return m_value; }  // type conversion operator
+
+    T operator= (T newValue) {         // assignment operator - using type T
+        return m_value = newValue;
+    }
 };
 
 struct Rectangle
@@ -27,7 +31,10 @@ struct Rectangle
 void test_property_proxy()
 {
     Rectangle rect;
+
     rect.m_width = 20;
+
+    size_t width = rect.m_width;
 
     std::cout << rect.m_top << std::endl;
     std::cout << rect.m_left << std::endl;

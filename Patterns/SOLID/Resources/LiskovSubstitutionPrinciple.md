@@ -177,7 +177,7 @@ eine so genannte &bdquo;*is-substitutable-for*&rdquo;-Beziehung zum geerbten Obj
 
 Die Anregungen zu diesem Beispiel finden Sie in
 
-[Liskov’s Substitution Principle in C++](http://www.vishalchovatiya.com/liskovs-substitution-principle-in-cpp-solid-as-a-rock/)
+[Liskov’s Substitution Principle in C++](https://vishalchovatiya.com/posts//single-responsibility-principle-in-cpp-solid-as-a-rock/)
 
 von Vishal Chovatija.
 

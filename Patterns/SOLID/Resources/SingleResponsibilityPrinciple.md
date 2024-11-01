@@ -126,7 +126,7 @@ Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdqu
 
 Die Anregungen zu diesem Beispiel finden Sie in
 
-[Single Responsibility Principle in C++](http://www.vishalchovatiya.com/single-responsibility-principle-in-cpp-solid-as-a-rock/)
+[Single Responsibility Principle in C++](https://vishalchovatiya.com/posts//single-responsibility-principle-in-cpp-solid-as-a-rock/)
 
 von Vishal Chovatija.
 
