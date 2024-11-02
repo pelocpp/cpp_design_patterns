@@ -55,15 +55,19 @@ namespace ConceptualExample02 {
         void operationA()
         {
             std::cout << "Component Colleague A does operation A." << std::endl;
-            std::shared_ptr<MediatorBase> sp = m_mediator.lock();
-            sp->notify(shared_from_this(), "operation A");
+            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
+            if (sp != nullptr) {
+                sp->notify(shared_from_this(), "operation A");
+            }
         }
 
         void operationB()
         {
             std::cout << "Component Colleague A does operation B." << std::endl;
-            std::shared_ptr<MediatorBase> sp = m_mediator.lock();
-            sp->notify(shared_from_this(), "B");
+            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
+            if (sp != nullptr) {
+                sp->notify(shared_from_this(), "B");
+            }
         }
     };
 
@@ -72,15 +76,19 @@ namespace ConceptualExample02 {
         void operationC()
         {
             std::cout << "Component Colleague B does operation C." << std::endl;
-            std::shared_ptr<MediatorBase> sp = m_mediator.lock();
-            sp->notify(shared_from_this(), "C");
+            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
+            if (sp != nullptr) {
+                sp->notify(shared_from_this(), "C");
+            }
         }
 
         void operationD()
         {
             std::cout << "Component Colleague B does operation D." << std::endl;
-            std::shared_ptr<MediatorBase> sp = m_mediator.lock();
-            sp->notify(shared_from_this(), "D");
+            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
+            if (sp != nullptr) {
+                sp->notify(shared_from_this(), "D");
+            }
         }
     };
 
@@ -137,16 +145,16 @@ namespace ConceptualExample02 {
 
     static void clientCode()
     {
-        std::shared_ptr<ConcreteColleagueA> c1{ 
+        std::shared_ptr<ConcreteColleagueA> cA{ 
             new ConcreteColleagueA()
         };
 
-        std::shared_ptr<ConcreteColleagueB> c2{ 
+        std::shared_ptr<ConcreteColleagueB> cB{ 
             new ConcreteColleagueB()
         };
 
         std::shared_ptr<ConcreteMediator> mediator{ 
-            std::make_shared<ConcreteMediator>(c1, c2)
+            std::make_shared<ConcreteMediator>(cA, cB)
         };
 
         // Note: this method call CANNOT be integrated into the c'tor call before:
@@ -155,10 +163,10 @@ namespace ConceptualExample02 {
         mediator->setConcreteColleagues();
 
         std::cout << "Client triggers operation A." << std::endl;
-        c1->operationA();
+        cA->operationA();
         std::cout << std::endl;
         std::cout << "Client triggers operation D." << std::endl;
-        c2->operationD();
+        cB->operationD();
     }
 }
 
