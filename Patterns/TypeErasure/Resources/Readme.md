@@ -68,15 +68,15 @@ eine Unterklasse, die von der Basisklasse (Schnittstellenklasse) erbt und ihre M
 15: class Pig : public IAnimal
 16: {
 17: public:
-18:     std::string see() const { return "pig"; }
-19:     std::string say() const { return "oink"; }
+18:     virtual std::string see() const override { return "pig"; }
+19:     virtual std::string say() const override { return "oink"; }
 20: };
 21: 
 22: class Dog : public IAnimal
 23: {
 24: public:
-25:     std::string see() const { return "dog"; }
-26:     std::string say() const { return "woof"; }
+25:     virtual std::string see() const override { return "dog"; }
+26:     virtual std::string say() const override { return "woof"; }
 27: };
 28: 
 29: void seeAndSay(const std::shared_ptr<IAnimal>& animal)
