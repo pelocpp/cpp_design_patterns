@@ -42,13 +42,13 @@ namespace ConceptualExample01 {
 
     void ConcreteStateA::handle(Context* context) 
     {
-        StateBase* base = new ConcreteStateB();
+        StateBase* base{ new ConcreteStateB() };
         context->setState(base);
     }
 
     void ConcreteStateB::handle(Context* context)
     {
-        StateBase* base = new ConcreteStateA();
+        StateBase* base{ new ConcreteStateA() };
         context->setState(base);
     }
 }

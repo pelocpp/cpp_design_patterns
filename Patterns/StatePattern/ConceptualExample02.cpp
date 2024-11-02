@@ -29,13 +29,13 @@ namespace ConceptualExample02 {
 
     void ConcreteStateA::handle(std::shared_ptr<Context> context)
     {
-        std::shared_ptr<StateBase> newState = std::make_shared<ConcreteStateB>();
+        std::shared_ptr<StateBase> newState{ std::make_shared<ConcreteStateB>() };
         context->setState(newState);
     }
 
     void ConcreteStateB::handle(std::shared_ptr<Context> context)
     {
-        std::shared_ptr<StateBase> newState = std::make_shared<ConcreteStateA>();
+        std::shared_ptr<StateBase> newState{ std::make_shared<ConcreteStateA>() };
         context->setState(newState);
     }
 }

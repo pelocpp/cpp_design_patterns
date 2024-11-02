@@ -3,20 +3,21 @@
 // ===========================================================================
 
 #include <iostream>
-#include <string>
 #include <memory>
+#include <string>
 #include <unordered_map>
+
 
 // very simple example of flyweight pattern
 namespace ConceptualExample {
 
-     /**
-     * Flyweight Design Pattern
-     *
-     * Intent: Lets you fit more objects into the available amount of RAM by sharing
-     * common parts of state between multiple objects, instead of keeping all of the
-     * data in each object.
-     */
+    /**
+    * Flyweight Design Pattern
+    *
+    * Intent: Lets you fit more objects into the available amount of RAM by sharing
+    * common parts of state between multiple objects, instead of keeping all of the
+    * data in each object.
+    */
 
     class SharedState
     {
@@ -26,7 +27,7 @@ namespace ConceptualExample {
         std::string m_color;
 
         SharedState(const std::string& brand, const std::string& model, const std::string& color)
-            : m_brand{ brand }, m_model{ model }, m_color{color } {}
+            : m_brand{ brand }, m_model{ model }, m_color{ color } {}
 
         friend std::ostream& operator<<(std::ostream& os, const SharedState& ss);
     };
@@ -60,29 +61,29 @@ namespace ConceptualExample {
      * the rest of the state (extrinsic state, unique for each entity) via its
      * method parameters.
      */
-    class Flyweight
+    class Flyweight // contains shared State + unique state via method parameters
     {
     private:
-        std::shared_ptr<SharedState> m_repeatingState;
+        std::shared_ptr<SharedState> m_sharedState;
 
     public:
         Flyweight(const SharedState& state)
         {
-            m_repeatingState = std::make_shared<SharedState>(state);
+            m_sharedState = std::make_shared<SharedState>(state);
         }
 
         ~Flyweight() {}
 
         std::shared_ptr<SharedState> getSharedState() const
         {
-            return m_repeatingState;
+            return m_sharedState;
         }
 
         void operation(const UniqueState& unique_state) const
         {
             std::cout
                 << "Flyweight: Displaying shared ("
-                << *m_repeatingState
+                << *m_sharedState
                 << ") and unique ("
                 << unique_state
                 << ") state."
@@ -126,11 +127,12 @@ namespace ConceptualExample {
          */
         std::shared_ptr<Flyweight> getFlyweight(const SharedState& sharedState)
         {
-            std::string key = getKey(sharedState);
+            std::string key{ getKey(sharedState) };
+
             if (m_flyweights.find(key) == m_flyweights.end())
             {
                 std::cout << "FlyweightFactory: Can't find a flyweight, creating new one." << std::endl;
-                std::shared_ptr<Flyweight> flyweight = std::make_shared<Flyweight>(sharedState);
+                std::shared_ptr<Flyweight> flyweight{ std::make_shared<Flyweight>(sharedState) };
                 std::pair<std::string, std::shared_ptr<Flyweight>> pair = std::make_pair<>(key, flyweight);
                 m_flyweights.insert(pair);
                 // or
@@ -156,40 +158,104 @@ namespace ConceptualExample {
         }
     };
 
-    void addCarToDatabase(
+    static void addCarToDatabase(
         FlyweightFactory& factory,
         const std::string& owner,
-        const std::string& plates, 
-        const std::string& brand, 
+        const std::string& plates,
+        const std::string& brand,
         const std::string& model,
         const std::string& color)
     {
         std::cout << std::endl << "Client: Adding a car to database." << std::endl;
-        std::shared_ptr<Flyweight> flyweight = factory.getFlyweight({ brand, model, color });
-        
-        // client code either stores or calculates extrinsic state
-        // and passes it to the flyweight's methods.
-        flyweight->operation({ owner, plates});
+
+        SharedState sharedState{ brand, model, color };
+
+        std::shared_ptr<Flyweight> flyweight = factory.getFlyweight(sharedState);
+
+        // client code passes unique state to the Flyweight's methods
+
+        UniqueState uniqueState{ owner, plates };
+
+        flyweight->operation(uniqueState);
+    }
+
+    static void addCarToDatabase(
+        FlyweightFactory& factory,
+        const SharedState& sharedState,
+        const UniqueState& uniqueState)
+    {
+        std::cout << std::endl << "Client: Adding a car to database." << std::endl;
+
+        std::shared_ptr<Flyweight> flyweight = factory.getFlyweight(sharedState);
+
+        // client code passes unique state to the Flyweight's methods
+        flyweight->operation(uniqueState);
     }
 }
 
-void test_conceptual_example() {
+static void test_conceptual_example_01() {
 
     using namespace ConceptualExample;
 
     /**
-     * client code usually creates a bunch of pre-populated flyweights in the
-     * initialization stage of the application.
+     * client code usually creates a bunch of pre-populated flyweights
+     * in the initialization stage of the application.
      */
 
-    FlyweightFactory factory {
-        {
-            {"Chevrolet", "Camaro2018", "pink"},
-            {"Mercedes Benz", "C300", "black"},
-            {"Mercedes Benz", "C500", "red"},
-            {"BMW", "M5", "red"},
-            {"BMW", "X6", "white"}
-        }
+    FlyweightFactory factory
+    {
+        /* std::initializer_list of SharedState-objects
+        */
+        {"Chevrolet", "Camaro2018", "pink"},
+        {"Mercedes Benz", "C300", "black"},
+        {"Mercedes Benz", "C500", "red"},
+        {"BMW", "M5", "red"},
+        {"BMW", "X6", "white"}
+    };
+
+    factory.listFlyweights();
+
+    SharedState sharedState{ "BMW", "M5", "red" };              // <== this car variant always exists
+    UniqueState uniqueState{ "James Doe", "CL234IR" };
+
+    addCarToDatabase(
+        factory,
+        sharedState,
+        uniqueState
+    );
+
+    SharedState anotherSharedState{ "BMW", "X1", "red" };       // <== this car variant doesn't exist
+    UniqueState anotherUniqueState{ "James Doe", "CL234IR" };
+
+    addCarToDatabase(
+        factory,
+        anotherSharedState,
+        anotherUniqueState
+    );
+
+    std::cout << std::endl;
+
+    factory.listFlyweights();
+}
+
+static void test_conceptual_example_02() {
+
+    using namespace ConceptualExample;
+
+    /**
+     * client code usually creates a bunch of pre-populated flyweights
+     * in the initialization stage of the application.
+     */
+
+    FlyweightFactory factory
+    {
+        /* std::initializer_list of Shared State objects
+        */
+        {"Chevrolet", "Camaro2018", "pink"},
+        {"Mercedes Benz", "C300", "black"},
+        {"Mercedes Benz", "C500", "red"},
+        {"BMW", "M5", "red"},
+        {"BMW", "X6", "white"}
     };
 
     factory.listFlyweights();
@@ -198,8 +264,8 @@ void test_conceptual_example() {
         factory,
         "James Doe",
         "CL234IR",
-        "BMW",          
-        "M5",       // <== this car variant always exists
+        "BMW",
+        "M5",         // <== this car variant always exists
         "red");
 
     addCarToDatabase(
@@ -207,12 +273,18 @@ void test_conceptual_example() {
         "James Doe",
         "CL234IR",
         "BMW",
-        "X1",       // <== this car variant doesn't exist
+        "X1",         // <== this car variant doesn't exist
         "red");
 
     std::cout << std::endl;
 
     factory.listFlyweights();
+}
+
+void test_conceptual_example()
+{
+    test_conceptual_example_01();
+    test_conceptual_example_02();
 }
 
 // ===========================================================================

@@ -166,8 +166,8 @@ wenn wir den nächsten Zustand erreichen oder bevor wir den aktuellen Zustand ver
 Typischerweise sind derartige Maßnahmen, die wir vor und nach einem Zustandsübergang ergreifen möchten,
 zustandsabhängig.
 Das bedeutet, dass wir zunächst prüfen müssen, in welchem Zustand wir uns gerade befinden,
-damit wir entsprechend handeln können, entweder mit einer `switch`-Anweisung
-oder verketteten `if`-`else`-Bedingungen &ndash; beides
+damit wir entsprechend handeln können. Dies kann entweder mit einer `switch`-Anweisung
+oder mit verketteten `if`-`else`-Bedingungen erfolgen &ndash; beides
 ist mit zunehmender Anzahl von Zuständen schwer aufrechtzuerhalten.
 
 Die Idee des State Pattern liegt nun darin,
