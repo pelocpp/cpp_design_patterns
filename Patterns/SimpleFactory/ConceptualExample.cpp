@@ -64,18 +64,28 @@ namespace ConceptualExample {
         {
             enum class StringCode shape = stringToEnum(shapeType);
 
+            std::shared_ptr<IShape> shapePtr;
+
             switch (shape)
             {
             case StringCode::Rectangle:
-                return std::make_shared<ConceptualExample::Rectangle>();
+                shapePtr = std::make_shared<Rectangle>();
+                break;
+
             case StringCode::Square:
-                return std::make_shared<ConceptualExample::Square>();
+                shapePtr = std::make_shared<Square>();
+                break;
+
             case StringCode::Circle:
-                return std::make_shared<ConceptualExample::Circle>();
+                shapePtr = std::make_shared<Circle>();
+                break;
+
             default:
                 std::string msg = "Invalid type: " + shapeType;
                 throw std::runtime_error{ msg };
             }
+
+            return shapePtr;
         }
 
     private:
