@@ -53,6 +53,8 @@ namespace ConceptualExample02 {
         }
     };
 
+    // ---------------------------------------------------------------------------
+
     class Target
     {
     public:
@@ -60,6 +62,8 @@ namespace ConceptualExample02 {
             std::cout << "Executing Request: " << request << std::endl;
         }
     };
+
+    // ---------------------------------------------------------------------------
 
     class FilterChain
     {

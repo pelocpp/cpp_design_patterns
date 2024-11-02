@@ -78,6 +78,8 @@ namespace StaticDecoration {
         }
     };
 
+    // ---------------------------------------------------------------------------
+
     template <typename T>
     class ColoredShape : public T
     {
@@ -104,6 +106,8 @@ namespace StaticDecoration {
             return oss.str();
         }
     };
+
+    // ---------------------------------------------------------------------------
 
     template <typename T>
     struct TransparentShape : public T

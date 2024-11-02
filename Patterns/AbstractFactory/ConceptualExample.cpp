@@ -154,12 +154,12 @@ static void clientCode(const std::shared_ptr<AbstractFactory>& factory) {
 // function prototypes
 void test_conceptual_example()
 {
-    std::cout << "Client: Testing client code with the first factory type:" << std::endl;;
+    std::cout << "Client: Testing client code with the first factory type:" << std::endl;
     std::shared_ptr<ConcreteFactory1> f1 = std::make_shared<ConcreteFactory1>();
     clientCode(f1);
     std::cout << std::endl;
 
-    std::cout << "Client: Testing the same client code with the second factory type:" << std::endl;;
+    std::cout << "Client: Testing the same client code with the second factory type:" << std::endl;
     std::shared_ptr<ConcreteFactory2> f2 = std::make_shared<ConcreteFactory2>();
     clientCode(f2);
 }

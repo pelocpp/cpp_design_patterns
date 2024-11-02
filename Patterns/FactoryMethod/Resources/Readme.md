@@ -50,14 +50,15 @@ Es besteht im Wesentlichen aus vier Teilen:
 
   * **FactoryBase**: Abstrakte Klasse (oder Schnittstelle) für konkrete *Factory*-Klassen,
     die die gesuchten Objekte zurückgeben.
-    Diese Klasse enthält die Signatur der Methode `FactoryMethod`,
-    die ein `ProductBase`-Objekt zurückliefert.
+    Wichtigste Aufgabe dieser Klasse ist die Bereitstellung (Definition) der *Fabrikmethode*: 
+    Die Signatur der Methode `FactoryMethod` wird festgelegt, die ein `ProductBase`-Objekt zurückliefert.
   * **ConcreteFactory**: Repräsentiert eine konkrete Umsetzung der `FactoryBase`-Klasse.
     Normalerweise überschreibt diese Klasse die generierende Methode
     `FactoryMethod` und gibt ein `ConcreteProduct`-Objekt zurück.
   * **ProductBase**: Basisklasse (oder Schnittstelle) für alle Produkte,
     die von konkreten *Factory*-Klassen hergestellt werden.
   * **ConcreteProduct**: Konkrete Implementierung der Klasse `ProductBase`.
+    Einfacher formuliert: Eine Klasse für ein konkret zu erstellendes Produkt.
     Konkrete `ProductBase`-Klassen sollten produktspezifische
     Funktionalitäten enthalten. Objekte des Typs `ConcreteProduct` werden von Methoden
     der *Factory*-Klassen erstellt.
@@ -65,6 +66,21 @@ Es besteht im Wesentlichen aus vier Teilen:
 <img src="dp_factory_method_pattern.svg" width="500">
 
 *Abbildung* 1: Schematische Darstellung des *Factory Method Patterns*.
+
+---
+
+#### Einige Anmerkungen
+
+Der Begriff &bdquo;*Factory* (*Fabrik*)&rdquo; tritt in der Software als auch in der Literatur etwas inflationär in Erscheinung.
+Nicht immer wird dieses Konzept einheitlich verwendet.
+ 
+Das &bdquo;Factory Method Pattern&rdquo; definiert zuallererst eine Methode, die ein Objekt erzeugt.
+Von welchem Klassentyp dieses Objekt ist, entscheidet die konkrete Klasse, die diese Methode implementiert.
+
+Es gibt also **zwei** Vererbungshierarchien:
+
+  * eine mit den *Factory*-Klassen.
+  * eine zweite mit den zu erzeugenden Objekten (wir bezeichnen sie als *Produkte*).
 
 ---
 

@@ -43,16 +43,24 @@ namespace ConceptualExample01 {
     public:
         std::shared_ptr<ProductBase> FactoryMethod(int type) override
         {
+            std::shared_ptr<ProductBase> product;
+
             switch (type)
             {
             case 1:
-                return std::make_shared<ConcreteProduct1>();
+                product = std::make_shared<ConcreteProduct1>();
+                break;
+
             case 2:
-                return std::make_shared<ConcreteProduct2>();
+                product = std::make_shared<ConcreteProduct2>();
+                break;
+
             default:
-                std::string msg = "Invalid type: " + std::to_string(type);
+                std::string msg = "Invalid Troduct Id: " + std::to_string(type);
                 throw std::runtime_error(msg);
             }
+
+            return product;
         }
     };
 }

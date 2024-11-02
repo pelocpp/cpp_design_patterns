@@ -55,6 +55,8 @@ public:
     }
 };
 
+// ---------------------------------------------------------------------------
+
 /**
  * Concrete Decorators call the wrapped object and alter its result in some way.
  */

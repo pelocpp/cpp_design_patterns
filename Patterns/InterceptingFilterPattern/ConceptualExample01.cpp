@@ -31,6 +31,8 @@ namespace ConceptualExample01 {
         }
     };
 
+    // ---------------------------------------------------------------------------
+
     class Target
     {
     public:
@@ -38,6 +40,8 @@ namespace ConceptualExample01 {
             std::cout << "Executing Request: " << request << std::endl;
         }
     };
+
+    // ---------------------------------------------------------------------------
 
     class FilterChain
     {
@@ -70,7 +74,7 @@ namespace ConceptualExample01 {
 
         void executeRequest(std::string request)
         {
-            std::shared_ptr<Target> target = m_target.lock();
+            std::shared_ptr<Target> target{ m_target.lock() };
             if (target == nullptr) {
                 std::cout << "Target Object doesn't exist anymore!" << std::endl;
                 return;
@@ -102,7 +106,7 @@ namespace ConceptualExample01 {
 
         void request(std::string request)
         {
-            std::shared_ptr<FilterChain> chain = m_chain.lock();
+            std::shared_ptr<FilterChain> chain{ m_chain.lock() };
             if (chain != nullptr) {
                 chain->executeRequest(request);
             }
@@ -128,6 +132,8 @@ namespace ConceptualExample01 {
         }
     };
 }
+
+// ---------------------------------------------------------------------------
 
 void test_conceptual_example_01()
 {
@@ -156,7 +162,7 @@ void test_conceptual_example_02()
     using namespace ConceptualExample01;
 
     std::shared_ptr<Target> target{ std::make_shared<Target>() };
-    std::shared_ptr<FilterChain> chain = std::make_shared<FilterChain>();
+    std::shared_ptr<FilterChain> chain{ std::make_shared<FilterChain>() };
     chain->setTarget(target);
 
     std::shared_ptr<IFilter> filter1{ std::make_shared<DebugFilter>() };

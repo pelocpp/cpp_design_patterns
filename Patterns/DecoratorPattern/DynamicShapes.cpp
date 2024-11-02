@@ -57,6 +57,8 @@ namespace DynamicDecoration {
         }
     };
 
+    // ---------------------------------------------------------------------------
+
     // corresponds to 'base decorator class'
     class ShapeDecorator : public IShape {
     protected:
@@ -69,6 +71,7 @@ namespace DynamicDecoration {
 
         // base decorator class delegates all work to the wrapped component
         virtual std::string draw() const override {
+
             return m_component->draw();
         }
     };
