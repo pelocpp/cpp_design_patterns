@@ -18,7 +18,7 @@ namespace ConceptualExample01 {
     class MediatorBase 
     {
     public:
-        virtual void notify(ColleagueBase* sender, std::string event) const = 0;
+        virtual void notify(ColleagueBase* sender, const std::string& event) const = 0;
     };
 
     /**
@@ -94,7 +94,7 @@ namespace ConceptualExample01 {
             m_component2->setMediator(this);
         }
 
-        void notify(ColleagueBase* sender, std::string event) const override
+        void notify(ColleagueBase* sender, const std::string& event) const override
         {
             if (event == "A")
             {

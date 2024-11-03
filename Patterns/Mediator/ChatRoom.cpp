@@ -10,25 +10,26 @@
 
 namespace ChatRoomMediatorPattern
 {
-    // MediatorBase
-    class ChatRoom 
+    class ChatRoomBase     // MediatorBase
     {
     public:
-        virtual void broadcast(std::string from, std::string msg) = 0;                 // notify
-        virtual void message(std::string from, std::string to, std::string msg) = 0;   // reactOn
+        virtual void broadcast(const std::string& from, const std::string& msg) = 0;                        // notify
+        virtual void message(const std::string& from, const std::string& to, const std::string& msg) = 0;   // reactOn
     };
 
-    // ColleagueBase
-    class PersonBase {
+
+    class PersonBase       // ColleagueBase
+    {
     protected:
-        std::weak_ptr<ChatRoom> m_room;
+        std::weak_ptr<ChatRoomBase> m_room;
 
     public:
         PersonBase() {};
     };
 
-    // Concrete Colleague
-    class Person : public PersonBase
+    // -----------------------------------------------------------------------
+
+    class Person : public PersonBase  // Concrete Colleague
     {
     private:
         std::string m_name;
@@ -36,26 +37,28 @@ namespace ChatRoomMediatorPattern
 
     public:
         // c'tors
-        Person(std::string name);
+        Person(const std::string& name);
 
         // getter/setter
-        void setRoom(const std::shared_ptr<ChatRoom>& sp);
+        void setRoom(const std::shared_ptr<ChatRoomBase>& sp);
         const std::string& getName() const;
 
-        void say(std::string msg) const;
+        void say(const std::string& msg) const;
         void postMessage(const std::string& to, const std::string& msg) const;
         void receive(const std::string& from, const std::string& msg);
     };
 
+    // -----------------------------------------------------------------------
+
     // Concrete Mediator
-    class GoogleChat : public ChatRoom, public std::enable_shared_from_this<GoogleChat>
+    class ChatRoom : public ChatRoomBase, public std::enable_shared_from_this<ChatRoom>
     {
     private:
         std::vector<std::shared_ptr<Person>> m_people;
 
     public:
-        virtual void broadcast(std::string from, std::string msg) override;
-        virtual void message(std::string from, std::string to, std::string msg) override;
+        virtual void broadcast(const std::string& from, const std::string& msg) override;
+        virtual void message(const std::string& from, const std::string& to, const std::string& msg) override;
 
         void join(const std::shared_ptr<Person>& person);
     };
@@ -63,61 +66,74 @@ namespace ChatRoomMediatorPattern
     // ===========================================================================
     // implementation class Person
 
-    Person::Person(std::string name) : PersonBase{}, m_name{ name } {}
+    Person::Person(const std::string& name) 
+        : PersonBase{}, m_name{ name } 
+    {}
 
-    void Person::setRoom(const std::shared_ptr<ChatRoom>& sp) {
-        m_room = sp;
+    void Person::setRoom(const std::shared_ptr<ChatRoomBase>& room) {
+        m_room = room;
     }
 
-    const std::string& Person::getName() const { return m_name; }
+    const std::string& Person::getName() const {
+        return m_name;
+    }
 
-    void Person::say(std::string msg) const {
+    void Person::say(const std::string& msg) const {
 
-        if (std::shared_ptr<ChatRoom> room; (room = m_room.lock()) != nullptr) {
+        std::shared_ptr<ChatRoomBase> room{ m_room.lock() };
+        if (room != nullptr) {
             room->broadcast(m_name, msg);
         }
     }
 
     void Person::postMessage(const std::string& to, const std::string& msg) const {
 
-        if (std::shared_ptr<ChatRoom> room; (room = m_room.lock()) != nullptr) {
+        std::shared_ptr<ChatRoomBase> room{ m_room.lock() };
+        if (room != nullptr) {
             room->message(m_name, to, msg);
         }
     }
 
     void Person::receive(const std::string& from, const std::string& msg) {
         std::string s{ from + ": \"" + msg + "\"" };
-        std::cout << "[" << m_name << "'s chat session] " << s << "\n";
+        std::cout << "[" << m_name << "'s chat session] " << s << std::endl;
         m_log.emplace_back(s);
     }
 
     // ===========================================================================
-    // implementation class GoogleChat
+    // implementation class ChatRoom
 
-    void GoogleChat::join(const std::shared_ptr<Person>& person) {
-        std::string join_msg{ person->getName() + " joins the chat" };
-        broadcast("room", join_msg);
+    void ChatRoom::join(const std::shared_ptr<Person>& person) {
+        // add person to chat room
         person->setRoom(shared_from_this());
         m_people.push_back(person);
+
+        // inform all chat room members - including the current one - about a new member
+        std::string join_msg{ person->getName() + " joins the chat" };
+        broadcast("my_room", join_msg);
     }
 
-    void GoogleChat::broadcast(std::string from, std::string msg) {
+    void ChatRoom::broadcast(const std::string& from, const std::string& msg) {
         for (const auto& person : m_people) {
+            // send message to all chat room members - excluding the sender
             if (person->getName() != from)
                 person->receive(from, msg);
         }
     }
 
-    void GoogleChat::message(std::string from, std::string to, std::string msg) {
-        std::vector<std::shared_ptr<Person>>::iterator target = std::find_if(
-            std::begin(m_people),
-            std::end(m_people),
-            [&](const auto& person) {
-                return person->getName() == to;
-            }
-        );
+    void ChatRoom::message(const std::string& from, const std::string& to, const std::string& msg) {
 
-        if (target != std::end(m_people)) {
+        std::vector<std::shared_ptr<Person>>::iterator target{ 
+            std::find_if(
+                m_people.begin(),
+                m_people.end(),
+                [&](const auto& person) {
+                    return person->getName() == to;
+                }
+            ) 
+        };
+
+        if (target != m_people.end()) {
             (*target)->receive(from, msg);
         }
     }
@@ -132,7 +148,7 @@ void test_chatroom_example()
     std::shared_ptr<Person> jane{ std::make_shared<Person>("Jane") };
 
     // mediator
-    std::shared_ptr<GoogleChat> room{ std::make_shared<GoogleChat>() };
+    std::shared_ptr<ChatRoom> room{ std::make_shared<ChatRoom>() };
 
     // join colleagues with mediator
     room->join(john);

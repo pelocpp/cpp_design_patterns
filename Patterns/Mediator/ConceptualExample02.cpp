@@ -19,7 +19,7 @@ namespace ConceptualExample02 {
     public:
         virtual ~MediatorBase() {}
 
-        virtual void notify(std::shared_ptr<ColleagueBase> sender, std::string event) const = 0;
+        virtual void notify(std::shared_ptr<ColleagueBase> sender, const std::string& event) const = 0;
     };
 
     /**
@@ -128,7 +128,7 @@ namespace ConceptualExample02 {
             m_componentB->setMediator(shared_from_this());
         }
 
-        void notify(std::shared_ptr<ColleagueBase> sender, std::string event) const override
+        void notify(std::shared_ptr<ColleagueBase> sender, const std::string& event) const override
         {
             if (event == "A") {
                 std::cout << "Mediator reacts on A and triggers following operations:" << std::endl;

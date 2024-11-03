@@ -157,24 +157,24 @@ void test_active_object_03()
     std::vector<std::future<std::tuple<size_t, size_t, size_t>>> futures;
 
     std::for_each(
-        std::begin(futures1),
-        std::end(futures1),
+        futures1.begin(),
+        futures1.end(),
         [&](auto& future) {
             futures.push_back(std::move(future));
         }
     );
 
     std::for_each(
-        std::begin(futures2),
-        std::end(futures2),
+        futures2.begin(),
+        futures2.end(),
         [&](auto& future) {
             futures.push_back(std::move(future));
         }
     );
 
     std::for_each(
-        std::begin(futures3),
-        std::end(futures3),
+        futures3.begin(),
+        futures3.end(),
         [&](auto& future) {
             futures.push_back(std::move(future));
         }

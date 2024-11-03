@@ -67,8 +67,8 @@ public:
         std::string toReverse{ m_adaptee->getSpecificRequest() };
 
         std::reverse(
-            std::begin(toReverse),
-            std::end(toReverse)
+            toReverse.begin(),
+            toReverse.end()
         );
 
         return std::string{ "Adapter: (TRANSLATED) " + toReverse };

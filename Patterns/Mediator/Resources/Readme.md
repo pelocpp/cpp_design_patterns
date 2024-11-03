@@ -102,8 +102,8 @@ Das *Conceptual Example* liegt in drei Varianten vor:
 Wir betrachten als reale Anwendung dieses Entwurfsmusters die (triviale) Realisierung eines Chatraums.
 
 Die zentrale Komponente &ndash; also der *Mediator* &ndash; ist in diesem Beispiel
-eine Instanz der Klasse `GoogleChat`.
-Jede Person im Chatraum hat eine Referenz oder einen Verweis auf dieses Objekt (hier: `std::weak_ptr<ChatRoom>`).
+eine Instanz der Klasse `ChatRoom`.
+Jede Person im Chatraum hat eine Referenz oder einen Verweis auf dieses Objekt (hier: `std::weak_ptr<ChatRoomBase>`).
 Daher kommunizieren sie alle ausschließlich über diesen Knotenpunkt und damit eben nicht direkt.
 
 Die Clients haben keine direkten Referenzen voneinander.
@@ -115,26 +115,29 @@ Der Chatraum ist der eigentliche Vermittler, er kümmert sich um die Details der 
 
 ##### Zuordnung der Klassen:
 
-  * Klasse `ChatRoom` &ndash; Klasse `MediatorBase` 
+  * Klasse `ChatRoomBase` &ndash; Klasse `MediatorBase` 
   * Klasse `PersonBase` &ndash; Klasse `ColleagueBase` 
   * Klasse `Person` &ndash; Klasse `ConcreteColleague` 
-  * Klasse `GoogleChat` &ndash; Klasse `ConcreteMediator` 
+  * Klasse `ChatRoom` &ndash; Klasse `ConcreteMediator` 
 
 [ChatRoom](../ChatRoom.cpp) &ndash; Anwendungsfall zum *Mediator* Pattern.
 
 *Hinweis*: In der Realisierung des Chatraums sind zwei Implementierungsdetails zu beachten:
 
   * Einsatz von Klasse `std::weak_ptr`
-  * `std::enable_shared_from_this<GoogleChat>` und `shared_from_this()`
+  * `std::enable_shared_from_this<ChatRoom>` und `shared_from_this()`
 
 *Ausgabe*:
 
 ```
-[John's chat session] room: "Jane joins the chat"
+[John's chat session] my_room: "John joins the chat"
+[John's chat session] my_room: "Jane joins the chat"
+[Jane's chat session] my_room: "Jane joins the chat"
 [Jane's chat session] John: "Hi anybody ..."
 [John's chat session] Jane: "Oh, hello John"
-[John's chat session] room: "Simon joins the chat"
-[Jane's chat session] room: "Simon joins the chat"
+[John's chat session] my_room: "Simon joins the chat"
+[Jane's chat session] my_room: "Simon joins the chat"
+[Simon's chat session] my_room: "Simon joins the chat"
 [John's chat session] Simon: "Hi everyone!"
 [Jane's chat session] Simon: "Hi everyone!"
 [Simon's chat session] Jane: "Glad you found us, simon!"

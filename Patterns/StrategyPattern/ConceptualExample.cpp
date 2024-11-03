@@ -91,17 +91,20 @@ public:
 
     virtual std::string doAlgorithm(const std::vector<std::string>& data) const override
     {
-        std::string result;
+        std::string result{};
         
         std::for_each(
-            std::begin(data), 
-            std::end(data), 
+            data.begin(),
+            data.end(),
             [&](const std::string& letter) {
                 result += letter;
             }
         );
         
-        std::sort(std::begin(result), std::end(result));
+        std::sort(
+            result.begin(),
+            result.end()
+        );
 
         return result;
     }
@@ -119,16 +122,22 @@ public:
         std::string result;
 
         std::for_each(
-            std::begin(data), 
-            std::end(data),
+            data.begin(),
+            data.end(),
             [&](const std::string& letter) {
                 result += letter;
             }
         );
 
-        std::sort(std::begin(result), std::end(result));
+        std::sort(
+            result.begin(),
+            result.end()
+        );
 
-        std::reverse(std::begin(result), std::end(result));
+        std::reverse(
+            result.begin(),
+            result.end()
+        );
 
         return result;
     }

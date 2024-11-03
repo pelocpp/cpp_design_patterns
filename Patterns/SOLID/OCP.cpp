@@ -254,15 +254,17 @@ namespace SecondConceptualExampleOCP {
 
         virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
 
-            bool result = std::accumulate(
-                std::begin(m_vec),
-                std::end(m_vec),
-                true,
-                [product](bool last, const auto& next) -> bool {
-                    bool tmp = next->isSatisfied(product);
-                    return last && tmp;
-                }
-            );
+            bool result{ 
+                std::accumulate(
+                    m_vec.begin(),
+                    m_vec.end(),
+                    true,
+                    [product](bool last, const auto& next) -> bool {
+                        bool tmp = next->isSatisfied(product);
+                        return last && tmp;
+                    }
+                ) 
+            };
 
             return result;
         }

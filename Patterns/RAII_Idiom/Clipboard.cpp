@@ -224,8 +224,8 @@ namespace Clipboard {
             int indent{ (m_code.size() < 100) ? 2 : 3 };
 
             m_conv = std::accumulate(
-                std::begin(m_code),
-                std::end(m_code),
+                m_code.begin(),
+                m_code.end(),
                 std::string(""),
                 [indent, counter = 0](const std::string& first, const std::string& next) mutable -> std::string {
 
