@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <string_view>
 #include <memory>
 #include <vector>
 #include <chrono>
@@ -20,8 +21,8 @@ namespace ConceptualExample02 {
         virtual ~Memento() {};
 
         virtual std::string getName() const = 0;
-        virtual std::string date() const = 0;
-        virtual std::string state() const = 0;
+        virtual std::string getDate() const = 0;
+        virtual std::string getState() const = 0;
     };
 
     /**
@@ -45,7 +46,7 @@ namespace ConceptualExample02 {
         /**
          * The Originator uses this method when restoring its state.
          */
-        virtual std::string state() const override {
+        virtual std::string getState() const override {
             return m_state;
         }
 
@@ -56,23 +57,23 @@ namespace ConceptualExample02 {
             return m_date + " / [" + m_state.substr(0, 9) + " ...]";
         }
 
-        virtual std::string date() const override {
+        virtual std::string getDate() const override {
             return m_date;
         }
 
     private:
         std::string currentTimeToString() {
             char str[32];
-            std::time_t now = std::time(0);
+            std::time_t now{ std::time(0) };
             ctime_s(str, sizeof str, &now);
-            return std::string(str);
+            return std::string{ str };
         }
     };
 
     /**
      * The Originator holds some important state that may change over time. It also
-     * defines a method for saving the state inside a memento and another method for
-     * restoring the state from it.
+     * defines a method for saving the state inside a memento
+     * and another method for restoring the state from it.
      */
     class Originator 
     {
@@ -81,7 +82,7 @@ namespace ConceptualExample02 {
 
     public:
         Originator(std::string state) : m_state{ state } {
-            std::cout << "Originator: My initial state is: " << m_state << std::endl;
+            std::cout << "Originator: initial state: " << m_state << std::endl;
         }
 
         /**
@@ -90,9 +91,9 @@ namespace ConceptualExample02 {
          * logic via the save() method.
          */
         void doSomething() {
-            std::cout << "Originator: I'm doing something important!" << std::endl;
+            std::cout << "Originator: working ..." << std::endl;
             m_state = generateRandomString(30);  // now state of Originator changes!
-            std::cout << "Originator: and my state has changed to: " << m_state << std::endl;
+            std::cout << "Originator: state has changed to: " << m_state << std::endl;
         }
 
         /**
@@ -105,26 +106,27 @@ namespace ConceptualExample02 {
         /**
          * Restores the Originator's state from a memento object.
          */
-        void restore(std::shared_ptr<Memento> memento) {
-            m_state = memento->state();
-            std::cout << "Originator: My state has changed to: " << m_state << std::endl;
+        void restore(std::shared_ptr<Memento>& memento) {
+            m_state = memento->getState();
+            std::cout << "Originator: state has changed to: " << m_state << std::endl;
         }
 
     private:
         std::string generateRandomString(int length = 10) {
-            const char alphanum[]{
+
+            std::string_view alphanum {
                 "0123456789"
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                "abcdefghijklmnopqrstuvwxyz" };
+                "abcdefghijklmnopqrstuvwxyz"
+            };
 
-            size_t stringLength{ sizeof(alphanum) - 1 };
+            std::string randomString{};
 
-            std::string random_string;
-            for (size_t i = 0; i != length; ++i) {
-                random_string += alphanum[std::rand() % stringLength];
+            for (size_t i{}; i != length; ++i) {
+                randomString += alphanum[std::rand() % alphanum.size()];
             }
 
-            return random_string;
+            return randomString;
         }
     };
 
@@ -141,11 +143,16 @@ namespace ConceptualExample02 {
 
     public:
         CareTaker(std::shared_ptr<Originator> originator) 
-            : m_originator{ originator } {}
+            : m_originator{ originator } 
+        {}
 
         void backup() {
-            std::cout << "\nCareTaker: Saving Originator's state..." << std::endl;
-            m_mementos.push_back(m_originator->save());
+            std::cout << std::endl << "CareTaker:  Saving Originator's state" << std::endl;
+
+            const auto& state = m_originator->save();
+            m_mementos.push_back(state);
+
+            // m_mementos.push_back(m_originator->save());
         }
 
         void undo() {
@@ -155,7 +162,8 @@ namespace ConceptualExample02 {
 
             std::shared_ptr<Memento> memento{ m_mementos.back() };
             m_mementos.pop_back();
-            std::cout << "CareTaker: Restoring state to: " << memento->getName() << std::endl;
+
+            std::cout << "CareTaker: Restoring state: " << memento->getName() << std::endl;
             
             try {
                 m_originator->restore(memento);
@@ -166,7 +174,7 @@ namespace ConceptualExample02 {
         }
 
         void showHistory() const {
-            std::cout << "CareTaker: Here's the list of mementos:\n";
+            std::cout << "CareTaker: List of mementos:" << std::endl;
             for (std::shared_ptr<Memento> memento : m_mementos) {
                 std::cout << memento->getName() << std::endl;
             }
@@ -174,11 +182,13 @@ namespace ConceptualExample02 {
     };
 
     static void clientCode() {
-        std::shared_ptr<Originator> originator{ 
-            std::make_shared<Originator>("I'm the original state of this Originator")
+        std::shared_ptr<Originator> originator { 
+            std::make_shared<Originator>("Original state of this Originator")
         };
 
-        std::shared_ptr<CareTaker> caretaker{ std::make_shared<CareTaker>(originator) };
+        std::shared_ptr<CareTaker> caretaker{ 
+            std::make_shared<CareTaker>(originator)
+        };
 
         caretaker->backup();
         originator->doSomething();
@@ -189,12 +199,13 @@ namespace ConceptualExample02 {
 
         std::cout << std::endl;
         caretaker->showHistory();
-        std::cout << "\nClient: Now, let's rollback!\n\n";
+        std::cout << "\nClient: Do a rollback!\n\n";
         caretaker->undo();
-        std::cout << "\nClient: Once more!\n\n";
+        std::cout << "\nClient: Do second rollback!\n\n";
+        caretaker->undo();
+        std::cout << "\nClient: Do third rollback!\n\n";
         caretaker->undo();
     }
-
 }
 
 void test_conceptual_example_02() {

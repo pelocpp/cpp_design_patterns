@@ -14,8 +14,7 @@ namespace BankAccountMemento
         friend std::ostream& operator<<(std::ostream& os, const BankAccount& ac);
 
     private:
-        int m_balance;
-        size_t m_current;
+        int    m_balance;
 
         struct Memento
         {
@@ -23,7 +22,8 @@ namespace BankAccountMemento
             int m_balance;
         };
 
-        std::vector<std::shared_ptr<Memento>> m_changes;
+        size_t m_index;
+        std::vector<std::shared_ptr<Memento>> m_mementos;
 
     public:
         // c'tors
@@ -43,42 +43,42 @@ namespace BankAccountMemento
     BankAccount::BankAccount() : BankAccount{ 0 } {}
 
     BankAccount::BankAccount(int balance)
-        : m_balance{ balance }, m_current{ 0 } 
+        : m_balance{ balance }, m_index{ 0 } 
     {
-        m_changes.push_back(std::make_shared<Memento>(m_balance));
+        m_mementos.push_back(std::make_shared<Memento>(m_balance));
     }
 
     void BankAccount::deposit(int amount) {
         m_balance += amount;
-        m_changes.push_back(std::make_shared<Memento>(m_balance));
-        m_current++;
+        m_mementos.push_back(std::make_shared<Memento>(m_balance));
+        m_index++;
     }
 
     void BankAccount::withdraw(int amount) {
         m_balance -= amount;
-        m_changes.push_back(std::make_shared<Memento>(m_balance));
-        m_current++;
+        m_mementos.push_back(std::make_shared<Memento>(m_balance));
+        m_index++;
     }
 
     void BankAccount::restore(const std::shared_ptr<BankAccount::Memento>& memento) {
         if (memento) {
             m_balance = memento->m_balance;
-            m_changes.push_back(memento);
-            m_current = m_changes.size() - 1;
+            m_mementos.push_back(memento);
+            m_index = m_mementos.size() - 1;
         }
     }
 
     void BankAccount::undo() {
-        if (m_current > 0) {
-            --m_current;
-            m_balance = m_changes[m_current]->m_balance;
+        if (m_index > 0) {
+            --m_index;
+            m_balance = m_mementos[m_index]->m_balance;
         }
     }
 
     void BankAccount::redo() {
-        if ((m_current + 1) < m_changes.size()) {
-            ++m_current;
-            m_balance = m_changes[m_current]->m_balance;
+        if ((m_index + 1) < m_mementos.size()) {
+            ++m_index;
+            m_balance = m_mementos[m_index]->m_balance;
         }
     }
 

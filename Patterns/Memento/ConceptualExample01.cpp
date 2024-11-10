@@ -15,10 +15,11 @@ namespace ConceptualExample01 {
         std::string m_state;
 
     public:
+        // c'tor
         Memento(const std::string& state) : m_state{ state } {}
 
         // getter
-        auto getState() { return m_state; }
+        const auto& getState() { return m_state; }
     };
 
     class Originator
@@ -40,7 +41,9 @@ namespace ConceptualExample01 {
         }
 
         void setMemento(std::shared_ptr<Memento> memento) {
-            setState (memento->getState());
+
+            const auto& state = memento->getState();
+            setState(state);
         }
     };
 

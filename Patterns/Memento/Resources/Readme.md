@@ -39,7 +39,7 @@ in anderen Büchern wiederum tritt es als *Snapshot* Entwurfsmuster in Erscheinun
 Das Memento-Muster delegiert das Erstellen des Status-Schnappschusses an den tatsächlichen Eigentümer dieses Status,
 also das betrachtete Ursprungsobjekt.
 Dies hat den Vorteil, dass ein Zugriff auf den Status des Objekts &bdquo;von außen&rdquo; nicht notwendig ist,
-da in den meisten Fällen auf Grund des Zugriffsschutzes der privaten (`private`) und geschützten  (`protected`) Variablen auch gar nicht möglich ist.
+der in den meisten Fällen auf Grund des Zugriffsschutzes der privaten (`private`) und geschützten  (`protected`) Variablen auch gar nicht möglich ist.
 Das Ursprungsobjekt selbst hat den vollen Zugriff auf seinen eigenen Status.
 
 Das Muster sieht vor, die Kopie des Objektstatus in einem speziellen Objekt namens &bdquo;Memento&rdquo; zu speichern.
@@ -67,7 +67,7 @@ Es besteht im Wesentlichen aus drei Teilen:
     Die andere Schnittstelle besteht zum Urheber und ermöglicht ihm den Zugriff auf den gesamten Status, der erforderlich ist,
     damit der Urheber einen ursprünglichen Zustand wiederherstellen kann.
   * **CareTaker**: Ist verantwortlich für die Aufbewahrung des Memento-Objekts.
-    Das Memento-Objekt ist für den CareTaker eine Black-Box,
+    Das Memento-Objekt ist für den *CareTaker* eine Black-Box,
     der CareTaker kann darauf nicht zugreifen. 
 
 
@@ -91,7 +91,12 @@ Wir stellen eine Klasse `BankAccount` vor,
 in der wir jede Änderung als *Memento* aufzeichnen.
 Zu einem späteren Zeitpunkt kann der Benutzer das `BankAccount`-Objekt auf diesen Snapshot zurückzusetzen.
 
-[Quellcode 3](../BankAccount.cpp) &ndash; Ein Bankkonto mit *Undo*/*Redo*-Funktionalität
+In diesem Beispiel wird die `Memento`-Klasse als innere Klasse der `BankAccount`-Klasse implementiert.
+Dies ist auch eine Möglichkeit, um der `BankAccount`-Klasse den vollen Zugriff auf alle Werte eines *Memento*-Objekts zu geben.
+
+Das `BankAccount`-Beispiel demonstriert die Realisierung einer *Undo*/*Redo*-Funktionalität.
+
+[Quellcode 3](../BankAccount.cpp) &ndash; Ein Bankkonto mit *Undo*/*Redo*-Funktionalität.
 
 ---
 
