@@ -14,11 +14,11 @@
 class Vehicle
 {
 protected:
-    std::string m_model;
-    std::string m_engine;
-    std::string m_transmission;
-    std::string m_body;
-    int m_doors;
+    std::string            m_model;
+    std::string            m_engine;
+    std::string            m_transmission;
+    std::string            m_body;
+    int                    m_doors;
     std::list<std::string> m_accessories;
 
 private:
@@ -26,11 +26,13 @@ private:
     Vehicle() = delete; // class shoud be abstract
 
 public:
-    Vehicle(
-        std::string model, std::string engine, std::string transmission,
-        std::string body,int doors) : 
-        m_model{ model }, m_engine{ engine }, m_transmission{ transmission },
-        m_body{ body }, m_doors{ doors }
+    Vehicle(std::string model, std::string engine,
+        std::string transmission, std::string body, int doors) :
+        m_model{ model },
+        m_engine{ engine },
+        m_transmission{ transmission },
+        m_body{ body },
+        m_doors{ doors }
     {}
 
     // public interface
@@ -48,6 +50,7 @@ public:
         oss << "  Doors: " << m_doors << '\n';
         oss << "  Transmission: " << m_transmission << '\n';
         oss << "  Accessories: " << '\n';
+
         for (std::string accessory : m_accessories) {
             oss << "    " << accessory << '\n';
         }
@@ -75,14 +78,13 @@ public:
 class FordExplorer : public Vehicle
 {
 public:
-    FordExplorer() 
-        : Vehicle(
-            "Ford Explorer",
-            "4.0 L Cologne V6",
-            "5-speed M50D-R1 manual",
-            "SUV",
-            5)
-    {
+    FordExplorer() : Vehicle(
+        "Ford Explorer",
+        "4.0 L Cologne V6",
+        "5-speed M50D-R1 manual",
+        "SUV",
+        5
+    ) {
         m_accessories.push_back("Car Cover");
         m_accessories.push_back("Sun Shade");
     }
@@ -91,14 +93,13 @@ public:
 class FordFocus : public Vehicle
 {
 public:
-    FordFocus()
-        : Vehicle(
-            "Ford Focus",
-            "1.0 L EcoBoost I3", 
-            "6-speed PowerShift automatic", 
-            "5-door hatchback", 
-            5)
-    {
+    FordFocus() : Vehicle(
+        "Ford Focus",
+        "1.0 L EcoBoost I3",
+        "6-speed PowerShift automatic",
+        "5-door hatchback",
+        5
+    ) {
         m_accessories.push_back("Car Cover");
     }
 };
@@ -106,49 +107,53 @@ public:
 class FordGT1 : public Vehicle
 {
 public:
-    FordGT1()
-        : Vehicle(
-            "Ford GT1", 
-            "5.4 L Supercharged Modular V8",
-            "6-speed manual",
-            "Roadster", 
-            2) {}
+    FordGT1() : Vehicle(
+        "Ford GT1",
+        "5.4 L Supercharged Modular V8",
+        "6-speed manual",
+        "Roadster",
+        2
+    ) {
+    }
 };
 
 class MitsubishiPajero : public Vehicle
 {
 public:
-    MitsubishiPajero()
-        : Vehicle(
-            "Mitsubishi Pajero Super Exceed",
-            "6G75 3.8 V6",
-            "5-speed manual", 
-            "SUV", 
-            5) {}
+    MitsubishiPajero() : Vehicle(
+        "Mitsubishi Pajero Super Exceed",
+        "6G75 3.8 V6",
+        "5-speed manual",
+        "SUV",
+        5
+    ) {
+    }
 };
 
 class MitsubishiI : public Vehicle
 {
 public:
-    MitsubishiI()
-        : Vehicle(
-            "Mitsubishi I",
-            "659 cc DOHC MIVEC",
-            "6-speed automatic",
-            "Kei car", 
-            5) {}
+    MitsubishiI() : Vehicle(
+        "Mitsubishi I",
+        "659 cc DOHC MIVEC",
+        "6-speed automatic",
+        "Kei car",
+        5
+    ) {
+    }
 };
 
 class MitsubishiLancerEvoIX : public Vehicle
 {
 public:
-    MitsubishiLancerEvoIX()
-        : Vehicle(
-            "Mitsubishi Lancer Evo IX",
-            "4B10 1.8 L DOHC I4",
-            "6-speed twin-clutch transmission", 
-            "4-door sedar", 
-            4) {}
+    MitsubishiLancerEvoIX() : Vehicle(
+        "Mitsubishi Lancer Evo IX",
+        "4B10 1.8 L DOHC I4",
+        "6-speed twin-clutch transmission",
+        "4-door sedar",
+        4
+    ) {
+    }
 };
 
 // ===========================================================================
@@ -162,12 +167,12 @@ public:
         return std::make_shared<FordFocus>();
     }
 
-    std::shared_ptr<Vehicle>  createRacingCar()
+    std::shared_ptr<Vehicle> createRacingCar()
     {
         return std::make_shared<FordGT1>();
     }
 
-    std::shared_ptr<Vehicle>  createSUV()
+    std::shared_ptr<Vehicle> createSUV()
     {
         return std::make_shared<FordExplorer>();
     }
@@ -181,12 +186,12 @@ public:
         return std::make_shared<MitsubishiI>();
     }
 
-    std::shared_ptr<Vehicle>  createRacingCar()
+    std::shared_ptr<Vehicle> createRacingCar()
     {
         return std::make_shared<MitsubishiLancerEvoIX>();
     }
 
-    std::shared_ptr<Vehicle>  createSUV()
+    std::shared_ptr<Vehicle> createSUV()
     {
         return std::make_shared<MitsubishiPajero>();
     }
@@ -196,9 +201,9 @@ public:
 
 void test_vehicles() {
 
-    std::list<std::shared_ptr<IVehicleFactory>> factories {
+    std::list<std::shared_ptr<IVehicleFactory>> factories{
         std::make_shared<FordFactory>(),
-        std::make_shared<MitsubishiFactory>() 
+        std::make_shared<MitsubishiFactory>()
     };
 
     for (std::shared_ptr<IVehicleFactory> factory : factories) {
@@ -206,7 +211,7 @@ void test_vehicles() {
         std::shared_ptr<Vehicle> vehicle;
 
         vehicle = factory->createEconomyCar();
-        vehicle->showInfo();   
+        vehicle->showInfo();
 
         vehicle = factory->createRacingCar();
         vehicle->showInfo();

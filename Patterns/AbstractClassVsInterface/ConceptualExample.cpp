@@ -92,7 +92,7 @@ namespace AbstractClassVsInterface {
 
     // =======================================================================
 
-    Interface* getInterface()
+    static Interface* getInterface()
     {
         AnotherConcreteClass* obj = new AnotherConcreteClass();
         // or
@@ -129,10 +129,11 @@ void test_conceptual_example()
 
     // ---------------------------------------------
 
+    // using references
     Interface& obj01{ obj4 };
     obj01.method_first();
     obj01.method_second();
-    // AbstractClass& obj02{ obj4 };        // Error
+    // AbstractClass& obj02{ obj4 };        // Error - no relationship with interface 'Interface'
     AnotherAbstractClass& obj03{ obj4 };
     obj03.method_first();
     obj03.method_second();
@@ -145,6 +146,7 @@ void test_conceptual_example()
 
     // ---------------------------------------------
 
+    // using pointers
     Interface* obj001{ &obj4 };
     obj001->method_first();
     obj001->method_second();

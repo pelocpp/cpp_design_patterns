@@ -47,11 +47,11 @@ namespace IteratorPatternStandard {
 
     public:
         IteratorBase<T>* createForwardIterator() {
-            return new class ForwardIterator<T> { this };
+            return new ForwardIterator<T> { this };
         }
 
         IteratorBase<T>* createBackwardIterator() {
-            return new class BackwardIterator<T> { this };
+            return new BackwardIterator<T> { this };
         }
 
         void add(const T& content)

@@ -111,12 +111,12 @@ namespace RealWorldFactoryMethod {
 
         virtual float totalCharge() final {   // <= final method (!)
 
-            float charge {
+            float total{
                 shippingCharge() +            // <= abstract method (!)
                 productionCharge()            // <= abstract method (!)
             };          
 
-            return charge;
+            return total;
         }
     };
 

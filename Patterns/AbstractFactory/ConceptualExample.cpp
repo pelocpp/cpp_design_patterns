@@ -28,6 +28,7 @@ public:
 };
 
 class ConcreteProductA2 : public AbstractProductA {
+public:
     std::string usefulFunctionA() const override {
         return "The result of the product A2.";
     }
@@ -71,7 +72,7 @@ public:
      * argument.
      */
     std::string anotherUsefulFunctionB(const AbstractProductA& collaborator) const override {
-        const std::string result = collaborator.usefulFunctionA();
+        const std::string result{ collaborator.usefulFunctionA() };
         return "The result of the B1 collaborating with ( " + result + " )";
     }
 };
@@ -88,7 +89,7 @@ public:
      * argument.
      */
     std::string anotherUsefulFunctionB(const AbstractProductA& collaborator) const override {
-        const std::string result = collaborator.usefulFunctionA();
+        const std::string result{ collaborator.usefulFunctionA() };
         return "The result of the B2 collaborating with ( " + result + " )";
     }
 };
@@ -144,9 +145,11 @@ public:
  * product subclass to the client code without breaking it.
  */
 
-static void clientCode(const std::shared_ptr<AbstractFactory>& factory) {
-    const std::shared_ptr<AbstractProductA> product_a = factory->createProductA();
-    const std::shared_ptr<AbstractProductB> product_b = factory->createProductB();
+static void clientCode(const std::shared_ptr<AbstractFactory>& factory)
+{
+    const std::shared_ptr<AbstractProductA> product_a{ factory->createProductA() };
+    const std::shared_ptr<AbstractProductB> product_b{ factory->createProductB() };
+
     std::cout << product_b->usefulFunctionB() << std::endl;
     std::cout << product_b->anotherUsefulFunctionB(*product_a) << std::endl;
 }
@@ -155,12 +158,12 @@ static void clientCode(const std::shared_ptr<AbstractFactory>& factory) {
 void test_conceptual_example()
 {
     std::cout << "Client: Testing client code with the first factory type:" << std::endl;
-    std::shared_ptr<ConcreteFactory1> f1 = std::make_shared<ConcreteFactory1>();
+    std::shared_ptr<ConcreteFactory1> f1{ std::make_shared<ConcreteFactory1>() };
     clientCode(f1);
     std::cout << std::endl;
 
     std::cout << "Client: Testing the same client code with the second factory type:" << std::endl;
-    std::shared_ptr<ConcreteFactory2> f2 = std::make_shared<ConcreteFactory2>();
+    std::shared_ptr<ConcreteFactory2> f2{ std::make_shared<ConcreteFactory2>() };
     clientCode(f2);
 }
 
