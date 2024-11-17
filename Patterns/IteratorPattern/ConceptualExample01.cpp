@@ -34,6 +34,12 @@ namespace IteratorPatternStandard {
     // =======================================================================
 
     template <typename T>
+    class ForwardIterator;
+
+    template <typename T>
+    class BackwardIterator;
+
+    template <typename T>
     class ConcreteAggregate : public AggregateBase<T>
     {
     private:
@@ -41,11 +47,11 @@ namespace IteratorPatternStandard {
 
     public:
         IteratorBase<T>* createForwardIterator() {
-            return new class ForwardIterator<T>(this);
+            return new class ForwardIterator<T> { this };
         }
 
         IteratorBase<T>* createBackwardIterator() {
-            return new class BackwardIterator<T>(this);
+            return new class BackwardIterator<T> { this };
         }
 
         void add(const T& content)
