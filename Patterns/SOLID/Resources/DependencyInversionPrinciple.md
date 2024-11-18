@@ -50,18 +50,25 @@ Was versteht man eigentlich unter &bdquo;High-Level&rdquo;- und &bdquo;Low-Level
 21: // high-level <<<<<<<<< -------------------
 22: class FamilyTree
 23: {
-24: public:
-25:     FamilyTree(const Relationships& relationships)
-26:     {
-27:         // using structured binding (C++ 17) and range-based for loop (C++ 11)
-28:         for (const auto& [first, relation, second] : relationships.m_relations)
-29:         {
-30:             if (first.m_name == "John" && relation == Relationship::Parent) {
-31:                 std::cout << "John has a child called " << second.m_name << std::endl;
-32:             }
-33:         }
-34:     }
-35: };
+24: private:
+25:     const Relationships& m_relationships;
+26: 
+27: public:
+28:     FamilyTree(const Relationships& relationships) 
+29:         : m_relationships{ relationships }
+30:     {}
+31: 
+32:     void showChildrenOfJohn()
+33:     {
+34:         // using structured binding (C++ 17) and range-based for loop (C++ 11)
+35:         for (const auto& [first, relation, second] : m_relationships.m_relations)
+36:         {
+37:             if (first.m_name == "John" && relation == Relationship::Parent) {
+38:                 std::cout << "John has a child called " << second.m_name << std::endl;
+39:             }
+40:         }
+41:     }
+42: };
 ```
 
 Erkennen Sie die Nachteile dieser Implementierung?
@@ -86,49 +93,51 @@ Betrachten Sie den folgenden Vorschlag:
 05:     std::string m_name;
 06: };
 07: 
-08: // abstraction
-09: struct IRelationshipBrowser
+08: // low-level <<<<<<<<< -------------------
+09: class Relationships : public IRelationshipBrowser
 10: {
-11:     virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
-12: };
+11: private:
+12:     std::vector<std::tuple<Person, Relationship, Person>> m_relations;
 13: 
-14: // low-level <<<<<<<<< -------------------
-15: class Relationships : public IRelationshipBrowser
-16: {
-17: private:
-18:     std::vector<std::tuple<Person, Relationship, Person>> m_relations;
+14: public:
+15:     void addParentAndChild(const Person& parent, const Person& child) {
+16:         m_relations.push_back({ parent, Relationship::Parent, child });
+17:         m_relations.push_back({ child, Relationship::Child, parent });
+18:     }
 19: 
-20: public:
-21:     void addParentAndChild(const Person& parent, const Person& child) {
-22:         m_relations.push_back({ parent, Relationship::Parent, child });
-23:         m_relations.push_back({ child, Relationship::Child, parent });
-24:     }
-25: 
-26:     std::vector<Person> findAllChildrenOf(const std::string& name) const override {
-27: 
-28:         std::vector<Person> result;
-29:         for (const auto& [first, rel, second] : m_relations) {
-30:             if (first.m_name == name && rel == Relationship::Parent) {
-31:                 result.push_back(second);
-32:             }
-33:         }
-34:         return result;
-35:     }
-36: };
+20:     std::vector<Person> findAllChildrenOf(const std::string& name) const override {
+21: 
+22:         std::vector<Person> result;
+23:         for (const auto& [first, rel, second] : m_relations) {
+24:             if (first.m_name == name && rel == Relationship::Parent) {
+25:                 result.push_back(second);
+26:             }
+27:         }
+28:         return result;
+29:     }
+30: };
+31: 
+32: // high-level <<<<<<<<< -------------------
+33: class FamilyTree
+34: {
+35: private:
+36:     const IRelationshipBrowser& m_browser;
 37: 
-38: // high-level <<<<<<<<< -------------------
-39: class FamilyTree
-40: {
-41: public:
-42:     FamilyTree(const IRelationshipBrowser& browser) {
-43: 
-44:         for (const auto& child : browser.findAllChildrenOf("John")) {
-45:             std::cout << "John has a child called " << child.m_name << std::endl;
-46:         }
-47:     }
-48: };
+38: public:
+39:     FamilyTree(const IRelationshipBrowser& browser) 
+40:         : m_browser { browser } 
+41:     {}
+42: 
+43:     void showChildrenOfJohn() {
+44: 
+45:         std::vector<Person> children{ m_browser.findAllChildrenOf("John") };
+46: 
+47:         for (const auto& child : children) {
+48:             std::cout << "John has a child called " << child.m_name << std::endl;
+49:         }
+50:     }
+51: };
 ```
-
 
 Wir betrachten das Redesign in *Abbildung* 1:
 

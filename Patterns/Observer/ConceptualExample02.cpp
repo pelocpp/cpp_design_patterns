@@ -38,7 +38,7 @@ namespace ObserverDesignPatternSmartPointer {
 
     class Subject : public ISubject {
     private:
-        std::list<std::weak_ptr<IObserver>> m_list_observers;
+        std::list<std::weak_ptr<IObserver>> m_observers;
         std::string                         m_message;
 
     public:
@@ -50,14 +50,14 @@ namespace ObserverDesignPatternSmartPointer {
          * subscription management methods.
          */
         void attach(std::weak_ptr<IObserver> observer) override {
-            m_list_observers.push_back(observer);
+            m_observers.push_back(observer);
         }
 
         void detach(std::weak_ptr<IObserver> observer) override {
 
             // https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs
 
-            m_list_observers.remove_if([&](std::weak_ptr<IObserver> wp) {
+            m_observers.remove_if([&](std::weak_ptr<IObserver> wp) {
                 return !observer.owner_before(wp) && !wp.owner_before(observer);
                 }
             );
@@ -69,7 +69,7 @@ namespace ObserverDesignPatternSmartPointer {
         }
 
         void howManyObservers() {
-            std::cout << "There are " << m_list_observers.size() << " observers in the list.\n";
+            std::cout << "There are " << m_observers.size() << " observers in the list.\n";
         }
 
         /**
@@ -87,7 +87,7 @@ namespace ObserverDesignPatternSmartPointer {
     private:
         void notify() {
             howManyObservers();
-            for (std::weak_ptr<IObserver>& weakPtr : m_list_observers) {
+            for (std::weak_ptr<IObserver>& weakPtr : m_observers) {
                 std::shared_ptr<IObserver> sharedPtr{ weakPtr.lock() };
                 if (sharedPtr != nullptr) {
                     sharedPtr->update(m_message);
@@ -133,7 +133,7 @@ namespace ObserverDesignPatternSmartPointer {
 
     int Observer::m_static_number = 0;
 
-    static void clientCode() {
+    static void clientCode_01() {
 
         std::shared_ptr<Subject> subject{ std::make_shared<Subject>() };
 
@@ -152,12 +152,38 @@ namespace ObserverDesignPatternSmartPointer {
         subject->detach(observer2);
         subject->detach(observer3);
     }
+
+    static void clientCode_02() {
+
+        std::shared_ptr<Subject> subject{ std::make_shared<Subject>() };
+
+        std::shared_ptr<IObserver> observer1{ std::make_shared<Observer>() };
+        std::shared_ptr<IObserver> observer2{ std::make_shared<Observer>() };
+
+        subject->attach(observer1);
+        subject->attach(observer2);
+
+        {
+            std::shared_ptr<IObserver> observer3{ std::make_shared<Observer>() };
+            subject->attach(observer3);
+            subject->createMessage("Hello World!");
+        }
+
+        // Note: Watch contents of 'm_observers' list
+
+        subject->createMessage("Hello World Again");
+
+        subject->detach(observer1);
+        subject->detach(observer2);
+    }
 }
 
 // ===========================================================================
 
-void test_conceptual_example_02() {
-    ObserverDesignPatternSmartPointer::clientCode();
+void test_conceptual_example_02()
+{
+    ObserverDesignPatternSmartPointer::clientCode_01();
+    ObserverDesignPatternSmartPointer::clientCode_02();
 }
 
 // ===========================================================================

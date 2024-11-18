@@ -32,11 +32,18 @@ namespace DependencyInversionPrinciple01
     // high-level <<<<<<<<< -------------------
     class FamilyTree
     {
+    private:
+        const Relationships& m_relationships;
+
     public:
-        FamilyTree(const Relationships& relationships)
+        FamilyTree(const Relationships& relationships) 
+            : m_relationships{ relationships }
+        {}
+
+        void showChildrenOfJohn()
         {
             // using structured binding (C++ 17) and range-based for loop (C++ 11)
-            for (const auto& [first, relation, second] : relationships.m_relations)
+            for (const auto& [first, relation, second] : m_relationships.m_relations)
             {
                 if (first.m_name == "John" && relation == Relationship::Parent) {
                     std::cout << "John has a child called " << second.m_name << std::endl;
@@ -81,10 +88,19 @@ namespace DependencyInversionPrinciple02
     // high-level <<<<<<<<< -------------------
     class FamilyTree
     {
-    public:
-        FamilyTree(const IRelationshipBrowser& browser) {
+    private:
+        const IRelationshipBrowser& m_browser;
 
-            for (const auto& child : browser.findAllChildrenOf("John")) {
+    public:
+        FamilyTree(const IRelationshipBrowser& browser) 
+            : m_browser { browser } 
+        {}
+
+        void showChildrenOfJohn() {
+
+            std::vector<Person> children{ m_browser.findAllChildrenOf("John") };
+
+            for (const auto& child : children) {
                 std::cout << "John has a child called " << child.m_name << std::endl;
             }
         }
@@ -105,6 +121,8 @@ static void test_anti_conceptual_example_dip()
     relationships.addParentAndChild(parent, child2);
 
     FamilyTree tree{ relationships };
+
+    tree.showChildrenOfJohn();
 }
 
 static void test_conceptual_example_dip()
@@ -123,6 +141,8 @@ static void test_conceptual_example_dip()
     const IRelationshipBrowser& browser = relationships;
 
     FamilyTree tree{ browser };
+
+    tree.showChildrenOfJohn();
 }
 
 void test_dip()

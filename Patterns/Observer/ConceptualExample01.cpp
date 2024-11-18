@@ -44,8 +44,8 @@ namespace ObserverDesignPatternClassic {
 
     class Subject : public ISubject {
     private:
-        std::list<IObserver*> m_list_observers;
-        std::string m_message;
+        std::list<IObserver*> m_observers;
+        std::string           m_message;
 
     public:
         virtual ~Subject() {
@@ -56,11 +56,11 @@ namespace ObserverDesignPatternClassic {
          * The subscription management methods.
          */
         void attach(IObserver* observer) override {
-            m_list_observers.push_back(observer);
+            m_observers.push_back(observer);
         }
 
         void detach(IObserver* observer) override {
-            m_list_observers.remove(observer);
+            m_observers.remove(observer);
         }
 
         void createMessage(std::string message = "<empty>") {
@@ -69,7 +69,7 @@ namespace ObserverDesignPatternClassic {
         }
 
         void howManyObservers() {
-            std::cout << "There are " << m_list_observers.size() << " observers in the list.\n";
+            std::cout << "There are " << m_observers.size() << " observers in the list.\n";
         }
 
         /**
@@ -87,7 +87,7 @@ namespace ObserverDesignPatternClassic {
     private:
         void notify() {
             howManyObservers();
-            for (const auto& observer : m_list_observers) {
+            for (const auto& observer : m_observers) {
                 observer->update(m_message);
             }
         }

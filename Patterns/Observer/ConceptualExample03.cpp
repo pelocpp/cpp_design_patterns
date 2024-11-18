@@ -37,8 +37,8 @@ namespace ObserverDesignPatternSmartPointerEx {
 
     class Subject : public ISubject {
     private:
-        std::list<std::weak_ptr<IObserver>> m_list_observers;
-        std::string m_message;
+        std::list<std::weak_ptr<IObserver>> m_observers;
+        std::string                         m_message;
 
     public:
         virtual ~Subject() {
@@ -49,11 +49,11 @@ namespace ObserverDesignPatternSmartPointerEx {
          * subscription management methods.
          */
         void attach(std::weak_ptr<IObserver> observer) override {
-            m_list_observers.push_back(observer);
+            m_observers.push_back(observer);
         }
 
         void detach(std::weak_ptr<IObserver> observer) override {
-            m_list_observers.remove_if([&](std::weak_ptr<IObserver> wp) {
+            m_observers.remove_if([&](std::weak_ptr<IObserver> wp) {
                 return !observer.owner_before(wp) && !wp.owner_before(observer);
                 }
             );
@@ -65,7 +65,7 @@ namespace ObserverDesignPatternSmartPointerEx {
         }
 
         void howManyObservers() {
-            std::cout << "There are " << m_list_observers.size() << " observers in the list.\n";
+            std::cout << "There are " << m_observers.size() << " observers in the list.\n";
         }
 
         /**
@@ -83,7 +83,7 @@ namespace ObserverDesignPatternSmartPointerEx {
     private:
         void notify() {
             howManyObservers();
-            for (std::weak_ptr<IObserver>& weakPtr : m_list_observers) {
+            for (std::weak_ptr<IObserver>& weakPtr : m_observers) {
                 std::shared_ptr<IObserver> sharedPtr{ weakPtr.lock() };
                 if (sharedPtr != nullptr) {
                     sharedPtr->update(m_message);
@@ -179,6 +179,10 @@ namespace ObserverDesignPatternSmartPointerEx {
         std::shared_ptr<Observer> observer2{ std::make_shared<Observer>(subject) };
         std::shared_ptr<Observer> observer3{ std::make_shared<Observer>(subject) };
 
+        subject->attach(observer1);
+        subject->attach(observer2);
+        subject->attach(observer3);
+
         subject->createMessage("Hello World!");
         subject->createMessage("Hello World Again");
 
@@ -190,7 +194,8 @@ namespace ObserverDesignPatternSmartPointerEx {
 
 // ===========================================================================
 
-void test_conceptual_example_03() {
+void test_conceptual_example_03()
+{
     ObserverDesignPatternSmartPointerEx::clientCode_01();
     ObserverDesignPatternSmartPointerEx::clientCode_02();
 }
