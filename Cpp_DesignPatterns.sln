@@ -69,7 +69,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Facade", "Patterns\Facade\F
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mediator", "Patterns\Mediator\Mediator.vcxproj", "{AA54CB96-0C86-4061-830C-45E4213B8A75}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RAII_Idiom", "Patterns\RAII_Idiom\RAII_Idiom.vcxproj", "{E78CE94A-7606-4F5D-8658-C2561F3B1E68}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RAII", "Patterns\RAII_Idiom\RAII_Idiom.vcxproj", "{E78CE94A-7606-4F5D-8658-C2561F3B1E68}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pimpl", "Patterns\Pimpl\Pimpl.vcxproj", "{D59D5682-450F-4DB0-A823-4603F50FB541}"
 EndProject
@@ -86,8 +86,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleFactory", "Patterns\SimpleFactory\SimpleFactory.vcxproj", "{1B1FD20D-228C-4171-B256-8E4751FD9CB8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PolicyBasedDesign", "Patterns\PolicyBasedDesign\PolicyBasedDesign.vcxproj", "{F5666AC7-0844-4854-9E46-5B1ECA650633}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ActiveObject", "Patterns\ActiveObject\ActiveObject.vcxproj", "{4A409428-374A-44F8-B4F2-03F61E6D62D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -361,14 +359,6 @@ Global
 		{F5666AC7-0844-4854-9E46-5B1ECA650633}.Release|x64.Build.0 = Release|x64
 		{F5666AC7-0844-4854-9E46-5B1ECA650633}.Release|x86.ActiveCfg = Release|Win32
 		{F5666AC7-0844-4854-9E46-5B1ECA650633}.Release|x86.Build.0 = Release|Win32
-		{4A409428-374A-44F8-B4F2-03F61E6D62D0}.Debug|x64.ActiveCfg = Debug|x64
-		{4A409428-374A-44F8-B4F2-03F61E6D62D0}.Debug|x64.Build.0 = Debug|x64
-		{4A409428-374A-44F8-B4F2-03F61E6D62D0}.Debug|x86.ActiveCfg = Debug|Win32
-		{4A409428-374A-44F8-B4F2-03F61E6D62D0}.Debug|x86.Build.0 = Debug|Win32
-		{4A409428-374A-44F8-B4F2-03F61E6D62D0}.Release|x64.ActiveCfg = Release|x64
-		{4A409428-374A-44F8-B4F2-03F61E6D62D0}.Release|x64.Build.0 = Release|x64
-		{4A409428-374A-44F8-B4F2-03F61E6D62D0}.Release|x86.ActiveCfg = Release|Win32
-		{4A409428-374A-44F8-B4F2-03F61E6D62D0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
