@@ -113,7 +113,7 @@ die sich mit dem Multithreading-Programmierparadigma befassen:
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| [*Active Object*](../Patterns/ActiveObject/Resources/Readme.md) | *Active Object* Entwurfsmuster |
+| Active Object | *Active Object* Entwurfsmuster |
 | Monitor Object | *Monitor Object* Entwurfsmuster |
 
 *Tabelle* 5: *Concurrency Pattern*
