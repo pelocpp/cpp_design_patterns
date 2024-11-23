@@ -66,11 +66,11 @@ namespace ActivatorObject03
             auto future = task.get_future();
 
             // std::cout << "   queueing task [" << a << "," << b << "]" << std::endl;
-            std::string s = "   queueing task [" + std::to_string(a) + "," + std::to_string(b) + "]\n";
+            std::string s{ "   queueing task [" + std::to_string(a) + "," + std::to_string(b) + "]\n" };
             std::cout << s;
 
             {
-                std::lock_guard<std::mutex> lockGuard{ m_mutex };
+                std::lock_guard<std::mutex> guard{ m_mutex };
 
                 m_activationList.push_back(std::move(task));
             }
@@ -94,7 +94,7 @@ namespace ActivatorObject03
 
             std::lock_guard<std::mutex> lockGuard(m_mutex);
 
-            auto isEmpty = m_activationList.empty();
+            auto isEmpty{ m_activationList.empty() };
 
             if (!isEmpty) {
 

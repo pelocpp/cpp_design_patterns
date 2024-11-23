@@ -38,9 +38,9 @@ using Operation = std::function<void()>;
 
 class DispatchQueue {
 
-    std::mutex m_mutex;
+    std::mutex              m_mutex;
     std::condition_variable m_empty;
-    std::queue<Operation> m_queue;
+    std::queue<Operation>   m_queue;
 
 public:
     void put(Operation op) {

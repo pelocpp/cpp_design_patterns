@@ -60,14 +60,14 @@ namespace ActivatorObject02
 
             SumRange range{ a, b };
 
-            std::packaged_task<std::tuple<size_t, size_t, size_t>()> task(range);
+            std::packaged_task<std::tuple<size_t, size_t, size_t>()> task{ range };
 
-            auto future = task.get_future();
+            std::future<std::tuple<size_t, size_t, size_t>> future{ task.get_future() };
 
             std::cout << "   queueing task [" << a << "," << b << "]" << std::endl;
 
             {
-                std::lock_guard<std::mutex> lockGuard{ m_mutex };
+                std::lock_guard<std::mutex> guard{ m_mutex };
 
                 m_activationList.push_back(std::move(task));
             }
@@ -87,29 +87,11 @@ namespace ActivatorObject02
 
     private:
 
-        //bool runNextTask() {
-
-        //    std::lock_guard<std::mutex> lockGuard(m_mutex);
-
-        //    auto isEmpty = m_activationList.empty();
-
-        //    if (!isEmpty) {
-
-        //        auto task{ std::move(m_activationList.front()) };
-
-        //        m_activationList.pop_front();
-
-        //        task();
-        //    }
-
-        //    return isEmpty;
-        //}
-
         bool runNextTask() {
 
-            std::unique_lock<std::mutex> lockGuard(m_mutex);
+            std::unique_lock<std::mutex> guard{ m_mutex };
 
-            auto isEmpty = m_activationList.empty();
+            bool isEmpty{ m_activationList.empty() };
 
             if (!isEmpty) {
 
@@ -117,7 +99,7 @@ namespace ActivatorObject02
 
                 m_activationList.pop_front();
 
-                lockGuard.unlock();  // don't run task within locked context
+                guard.unlock();  // don't run task within locked context
 
                 task();
             }

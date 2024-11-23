@@ -22,16 +22,16 @@
 
 namespace ActivatorObject01
 {
-    class Adder
+    class AddOperation
     {
     public:
-        Adder(int a, int b) : m_a{ a }, m_b{ b } {}
+        AddOperation(int a, int b) : m_a{ a }, m_b{ b } {}
 
-        std::tuple<int, int, int> operator() () {
+        auto operator() () {
 
             std::cout << "adding " << m_a << " and " << m_b << " ... " << std::endl;
 
-            auto result = std::make_tuple(m_a, m_b, m_a + m_b);
+            auto result{ std::make_tuple(m_a, m_b, m_a + m_b) };
 
             return result;
         }
@@ -52,14 +52,14 @@ namespace ActivatorObject01
 
         std::future<std::tuple<int, int, int>> enqueueTask(int a, int b) {
 
-            Adder adder{ a, b };
+            AddOperation operation{ a, b };
 
-            std::packaged_task<std::tuple<int, int, int>()> task (adder);
+            std::packaged_task<std::tuple<int, int, int>()> task{ operation };
 
             auto future = task.get_future();
 
             {
-                std::lock_guard<std::mutex> lockGuard{ m_mutex };
+                std::lock_guard<std::mutex> guard{ m_mutex };
 
                 m_activationElement = std::move(task);
             }
@@ -76,7 +76,7 @@ namespace ActivatorObject01
 
         void runSingleTask() {
 
-            std::lock_guard<std::mutex> lockGuard(m_mutex);
+            std::lock_guard<std::mutex> guard(m_mutex);
 
             if (m_activationElement.valid()) {
 
@@ -94,7 +94,7 @@ void test_active_object_01()
 
     ActiveObject activeObject;
 
-    auto future = activeObject.enqueueTask(3, 5);
+    auto future{ activeObject.enqueueTask(3, 5) };
 
     // start the active object
     activeObject.run();

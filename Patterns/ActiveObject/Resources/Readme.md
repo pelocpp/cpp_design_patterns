@@ -44,7 +44,7 @@ Die Schlüsselelemente des *Active Object* Patterns sind:
   in der *ActivationList* aus. Der Proxy läuft im Client-Thread.
 
   * Dispatch Queue (auch *ActivationList*) &ndash; Die Aktivierungsliste
-  verwaltet ausstehende Anfragen ((in C++ im Regelfall ein `std::packaged_task`-Objekt)).
+  verwaltet ausstehende Anfragen (in C++ im Regelfall ein `std::packaged_task`-Objekt).
   Die Aktivierungsliste entkoppelt den Thread des Clients
   vom Thread des aktiven Objekts. Der Proxy fügt Anforderungsobjekte ein und der Scheduler entfernt diese.
   Folglich muss der Zugriff auf die Aktivierungsliste serialisiert werden.
@@ -113,7 +113,7 @@ Das zweite &bdquo;Real-World&rdquo;-Beispiel berechnet die Summe der natürlichen
 Das könnte man natürlich in einem einzigen Thread abhandeln, und mit Hilfe der Gaußschen Summenformel ließe sich
 die Berechnung nochmals vereinfachen.
 Dennoch habe ich dieses Beispiel gewählt, um zum einen den Anwendungsfall
-einfach gestalten zu können, und zum anderen, weil sich die Summe der natürlichen Zahlen von 1 bis *n* auch abschnittweise berechnen lässt.
+einfach gestalten zu können, und zum anderen, weil sich die Summe der natürlichen Zahlen von 1 bis *n* auch abschnittsweise berechnen lässt.
 An dieser Stelle kommen nun viele Teilaufgaben (*Tasks*) und ein *Active Object* ins Spiel.
 
 Das Beispiel liegt in 2 Versionen vor:
