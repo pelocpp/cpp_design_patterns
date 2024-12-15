@@ -60,12 +60,12 @@ namespace LiskovSubstitutionPrinciple01
 
 namespace LiskovSubstitutionPrinciple02
 {
-    struct Shape
+    struct IShape
     {
         virtual size_t area() const = 0;
     };
 
-    struct Rectangle : public Shape
+    struct Rectangle : public IShape
     {
     private:
         size_t m_width;
@@ -85,7 +85,7 @@ namespace LiskovSubstitutionPrinciple02
         virtual size_t area() const override { return m_width * m_height; }
     };
 
-    struct Square : public Shape
+    struct Square : public IShape
     {
     private:
         size_t m_size;
@@ -101,7 +101,7 @@ namespace LiskovSubstitutionPrinciple02
         virtual size_t area() const override { return m_size * m_size; }
     };
 
-    static void process(Shape& s)
+    static void process(IShape& s)
     {
         // use polymorphic behaviour only, e.g. area()
     }

@@ -106,7 +106,7 @@ Es besteht im Wesentlichen aus zwei Teilen:
 
   * **Prototype**: Abstrakte Basisklasse, die eine (abstrakte) `clone`-Methode besitzt. 
     Die `clone`-Methode liefert ein Prototypobjekt zurück.
-  * **ConcretePrototype**: Klasse, die sich von der Prototype-Basisklasse ableitet. Sie kann zusätzliche Funktionen enthalten.
+  * **ConcretePrototype**: Klasse, die sich von der `Prototype`-Basisklasse ableitet. Sie kann zusätzliche Funktionen enthalten.
     In dieser Klasse wird die `clone`-Methode überschrieben.
 
 <img src="dp_prototype_pattern.svg" width="500">

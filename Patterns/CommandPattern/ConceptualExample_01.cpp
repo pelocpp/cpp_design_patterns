@@ -3,8 +3,8 @@
 // ===========================================================================
 
 #include <iostream>
-#include <string>
 #include <memory>
+#include <string>
 
 namespace ConceptualExample01 {
 
@@ -94,9 +94,9 @@ void test_conceptual_example_01() {
 
     auto command { std::make_shared<ConcreteCommand>(receiver) };
 
-    Invoker invoker{};
-
     command->setData("Hello, world!");
+
+    Invoker invoker{};
 
     invoker.setCommand(command);
 

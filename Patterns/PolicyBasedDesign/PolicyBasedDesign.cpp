@@ -2,9 +2,9 @@
 // PolicyBasedDesign.cpp
 // ===========================================================================
 
+#include <fstream>
 #include <iostream>
 #include <string>
-#include <fstream>
 
 namespace PolicyBasedDesign_01 {
 
@@ -140,14 +140,11 @@ namespace PolicyBasedDesign_10 {
     class Logger {
     public:
         void log(const std::string& message) const {
-            m_policy.write(message);
+            TOutputPolicy::write(message);
         }
-
-    private:
-        TOutputPolicy m_policy;
     };
 
-    static void test() {
+    static void test_01() {
 
         Logger<LogToConsole> consoleLogger{};
         consoleLogger.log("Important information");
@@ -190,10 +187,10 @@ namespace PolicyBasedDesign_11 {
             write(mess);
         }
     private:
-       using TOutputPolicy::write;
+        using TOutputPolicy::write;
     };
 
-    static void test() {
+    static void test_01() {
 
         Logger<LogToConsole> consoleLogger{};
         consoleLogger.log("Important information");
@@ -213,7 +210,8 @@ namespace PolicyBasedDesign_11 {
 void test_conceptual_example_01() {
 
     using namespace PolicyBasedDesign_01;
-    test();
+    test_01();
+    test_02();
 }
 
 void test_conceptual_example_02() {
@@ -225,13 +223,15 @@ void test_conceptual_example_02() {
 void test_conceptual_example_10() {
 
     using namespace PolicyBasedDesign_10;
-    test();
+    test_01();
+    test_02();
 }
 
 void test_conceptual_example_11() {
 
     using namespace PolicyBasedDesign_11;
-    test();
+    test_01();
+    test_02();
 }
 
 // ===========================================================================

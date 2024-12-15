@@ -108,12 +108,12 @@ In gutem Quellcode sind derartige Überprüfungen nicht vorhanden!
 #### Beispiel: Respecting the Liskov’s Substitution Principle
 
 ```cpp
-01: struct Shape
+01: struct IShape
 02: {
 03:     virtual size_t area() const = 0;
 04: };
 05: 
-06: struct Rectangle : public Shape
+06: struct Rectangle : public IShape
 07: {
 08: private:
 09:     size_t m_width;
@@ -133,7 +133,7 @@ In gutem Quellcode sind derartige Überprüfungen nicht vorhanden!
 23:     size_t area() const override { return m_width * m_height; }
 24: };
 25: 
-26: struct Square : public Shape
+26: struct Square : public IShape
 27: {
 28: private:
 29:     size_t m_size;
@@ -149,7 +149,7 @@ In gutem Quellcode sind derartige Überprüfungen nicht vorhanden!
 39:     virtual size_t area() const override { return m_size * m_size; }
 40: };
 41: 
-42: void process(Shape& s)
+42: void process(IShape& s)
 43: {
 44:     // use polymorphic behaviour only, e.g. area()
 45: }
