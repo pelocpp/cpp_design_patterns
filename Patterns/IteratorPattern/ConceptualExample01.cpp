@@ -47,17 +47,17 @@ namespace IteratorPatternStandard {
 
     public:
         IteratorBase<T>* createForwardIterator() {
-            return new ForwardIterator<T> { this };
+            return new ForwardIterator<T>{ this };
         }
 
         IteratorBase<T>* createBackwardIterator() {
-            return new BackwardIterator<T> { this };
+            return new BackwardIterator<T>{ this };
         }
 
         void add(const T& content)
         {
             m_vector.push_back(content);
-        }   
+        }
 
         int size() const
         {
@@ -82,11 +82,12 @@ namespace IteratorPatternStandard {
     {
     private:
         const ConcreteAggregate<T>* m_aggregate;
-        int m_pos;
+        int                         m_pos;
 
     public:
-        ForwardIterator(const ConcreteAggregate<T>* agg) 
-            : m_aggregate{ agg }, m_pos{ -1 } {}
+        ForwardIterator(const ConcreteAggregate<T>* agg)
+            : m_aggregate{ agg }, m_pos{ -1 }
+        {}
 
         void reset() override
         {
@@ -100,7 +101,7 @@ namespace IteratorPatternStandard {
 
         bool hasNext() override
         {
-            bool erg = false;
+            bool erg{ false };
             if (m_pos < m_aggregate->size() - 1)
             {
                 m_pos++;
@@ -115,11 +116,12 @@ namespace IteratorPatternStandard {
     {
     private:
         const ConcreteAggregate<T>* m_aggregate;
-        int m_pos;
+        int                         m_pos;
 
     public:
-        BackwardIterator(const ConcreteAggregate<T>* agg) 
-            : m_aggregate{ agg }, m_pos{ agg->size() } {}
+        BackwardIterator(const ConcreteAggregate<T>* agg)
+            : m_aggregate{ agg }, m_pos{ agg->size() } 
+        {}
 
         void reset() override
         {
@@ -133,7 +135,7 @@ namespace IteratorPatternStandard {
 
         bool hasNext() override
         {
-            bool erg = false;
+            bool erg{ false };
             if (m_pos > 0)
             {
                 m_pos--;
@@ -148,30 +150,31 @@ namespace IteratorPatternStandard {
 
 void test_conceptual_example_01() {
 
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
     using namespace IteratorPatternStandard;
 
-    ConcreteAggregate<int> intContainer;
-
+    ConcreteAggregate<int> intContainer{};
     for (int i = 0; i < 3; ++i) {
         intContainer.add(i);
     }
 
-    IteratorBase<int>* intIter = intContainer.createForwardIterator();
-    while (intIter->hasNext())
+    IteratorBase<int>* iter{ intContainer.createForwardIterator() };
+    while (iter->hasNext())
     {
-        std::cout << intIter->getCurrent() << std::endl;
+        std::cout << iter->getCurrent() << std::endl;
     }
-    delete intIter;
+    delete iter;
     std::cout << std::endl;
 
-    ConcreteAggregate<std::string> stringContainer;
+    ConcreteAggregate<std::string> stringContainer{};
     stringContainer.add("123");
     stringContainer.add("456");
     stringContainer.add("789");
     std::cout << "Size: " << stringContainer.size() << std::endl;
     std::cout << "[1]:  " << stringContainer.get(1) << std::endl;
 
-    IteratorBase<std::string>* it = stringContainer.createForwardIterator();
+    IteratorBase<std::string>* it{ stringContainer.createForwardIterator() };
     while (it->hasNext())
     {
         std::cout << it->getCurrent() << std::endl;
@@ -198,14 +201,14 @@ void test_conceptual_example_02() {
 
     using namespace IteratorPatternStandard;
 
-    ConcreteAggregate<int> intContainer;
+    ConcreteAggregate<int> intContainer{};
 
     for (int i = 0; i < 10; ++i) {
         intContainer.add(i);
     }
 
-    IteratorBase<int>* intIter1 = intContainer.createForwardIterator();
-    IteratorBase<int>* intIter2 = intContainer.createForwardIterator();
+    IteratorBase<int>* intIter1{ intContainer.createForwardIterator() };
+    IteratorBase<int>* intIter2{ intContainer.createForwardIterator() };
 
     // using first iterator three times
     if (intIter1->hasNext()) {

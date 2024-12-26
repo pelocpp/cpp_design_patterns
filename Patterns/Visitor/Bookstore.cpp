@@ -37,6 +37,7 @@ namespace Bookstore_ExampleClassic {
         std::string getAuthor() const { return m_author; }
         std::string getTitle() const { return m_title; }
 
+        // interface 'IMedia'
         double getPrice() const override { return m_price; }
         size_t getCount() const override { return m_count; }
     };
@@ -59,6 +60,7 @@ namespace Bookstore_ExampleClassic {
         std::string getTitle() const { return m_title; }
         std::string getDirector() const { return m_director; }
 
+        // interface 'IMedia'
         double getPrice() const override { return m_price; }
         size_t getCount() const override { return m_count; }
     };
@@ -68,6 +70,8 @@ namespace Bookstore_ExampleClassic {
     private:
         using Stock = std::vector<std::shared_ptr<IMedia>>;
         using StockList = std::initializer_list<std::shared_ptr<IMedia>>;
+
+        Stock m_stock;
 
     public:
         explicit Bookstore(StockList stock) : m_stock{ stock } {}
@@ -97,9 +101,6 @@ namespace Bookstore_ExampleClassic {
 
             return total;
         }
-
-    private:
-        Stock m_stock;
     };
 
     static void clientCodeClassic_01() {
@@ -198,6 +199,8 @@ namespace Bookstore_ExampleModern {
         using Stock = std::vector<std::variant<TMedia ...>>;
         using StockList = std::initializer_list<std::variant<TMedia ...>>;
 
+        Stock m_stock;
+
     public:
         explicit Bookstore(StockList stock) : m_stock{ stock } {}
 
@@ -295,9 +298,6 @@ namespace Bookstore_ExampleModern {
 
             return total;
         }
-
-    private:
-        Stock m_stock;
     };
 
     static void clientCodeModern_01() {

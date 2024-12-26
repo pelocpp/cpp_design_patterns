@@ -2,11 +2,11 @@
 // StaticShapes.cpp // Decorator Pattern
 // ===========================================================================
 
-#include <iostream>
+#include <concepts>
 #include <iomanip>
-#include <string>
+#include <iostream>
 #include <sstream>
-#include <memory>
+#include <string>
 
 namespace StaticDecoration {
 
@@ -79,25 +79,29 @@ namespace StaticDecoration {
     };
 
     // ---------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------
+
+    // template argument must be derived from IShape
+    template <typename T>
+    concept ConceptIShapeObject = std::derived_from<T, IShape>;
+
+    // ---------------------------------------------------------------------------
 
     template <typename T>
+        requires ConceptIShapeObject<T>
     class ColoredShape : public T
     {
-        // formally 'static_assert' is a declaration
-        static_assert (
-            std::is_base_of<IShape, T>::value,
-            "Template argument must be a Shape"
-        );
-
     private:
         std::string m_color;
 
     public:
-        void setColor(const std::string& color) { m_color = color; }
-
+        // c'tor
         template <typename ... TARGS>
-        ColoredShape(const std::string& color, TARGS&& ...args)
-            : T{ std::forward<TARGS>(args) ... }, m_color{ color } {}
+        ColoredShape(const std::string& color, TARGS&& ...args) :
+            T{ std::forward<TARGS>(args) ... }, m_color{ color } 
+        {}
+
+        void setColor(const std::string& color) { m_color = color; }
 
         virtual std::string draw() const override {
             std::ostringstream oss;
@@ -110,17 +114,14 @@ namespace StaticDecoration {
     // ---------------------------------------------------------------------------
 
     template <typename T>
+        requires ConceptIShapeObject<T>
     struct TransparentShape : public T
     {
-        static_assert (
-            std::is_base_of<IShape, T>::value,
-            "Template argument must be a Shape"
-        );
-
     private:
         uint8_t m_transparency;
 
     public:
+        // c'tor
         template<typename ... TARGS>
         TransparentShape(uint8_t transparency, TARGS&& ...args)
             : T{ std::forward<TARGS>(args)... }, m_transparency{ transparency } {}
@@ -136,6 +137,8 @@ namespace StaticDecoration {
     };
 }
 
+class NonConformantCircle {};
+
 void test_static_decoration_01()
 {
     using namespace StaticDecoration;
@@ -148,6 +151,9 @@ void test_static_decoration_01()
 
     Rectangle rectangle{ 30.0, 40.0 };
     std::cout << rectangle.draw() << std::endl;
+
+    // just testing 'concepts' constraints
+    // ColoredShape<NonConformantCircle> whatCircle{};
 
     ColoredShape<Circle> greenCircle{ 
         std::string{ "green" }, 5.0 

@@ -124,14 +124,14 @@ public:
 Ähnlich wie für C++ Standard-Iteratoren gelten auch für die drei Methoden `reset`, `getCurrent` und `hasNext`
 einige Regeln bzw. Konventionen:
 
-  * Der Aufruf von `getCurrent` muss "geschützt" sein:
+  * Der Aufruf von `getCurrent` muss &bdquo;geschützt&rdquo; sein:
     ```cpp
     while (iter.hasNext()) { 
         elem = iter.getCurrent();
     }
     ```
 
-  * Ein Aufruf von `getCurrent` ohne vorhergehenden Aufruf von `hasNext` bewirkt ein *"undefined behaviour"*:
+  * Ein Aufruf von `getCurrent` ohne vorhergehenden Aufruf von `hasNext` bewirkt ein *&bdquo;undefined behaviour&rdquo;*:
     ```cpp
     // no preceding call of 'hasNext':
     elem = iter.getCurrent();  // "undefined behaviour", z.B. exception 

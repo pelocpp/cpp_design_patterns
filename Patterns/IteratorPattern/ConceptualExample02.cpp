@@ -34,20 +34,21 @@ namespace IteratorPatternCpp {
     // =======================================================================
 
     /**
-     * C++ has its own implementation of iterator that works with
+     * C++ has its own implementation of iterators that work with
      * different generics containers defined by the standard library.
      */
 
     template <typename TElement, typename TContainer>
     class Iterator : public IteratorBase<TElement> {
 
-        using TIterator = typename std::vector<TElement>::iterator;
+       using TIterator = typename std::vector<TElement>::iterator;
+       // using TIterator = typename TContainer::iterator;
 
     private:
         TContainer* m_container;
-        TIterator m_iterator;
-        bool m_reverse;
-        bool m_notFirstAccess;
+        TIterator   m_iterator;
+        bool        m_reverse;
+        bool        m_notFirstAccess;
 
     public:
         Iterator(TContainer* p_data, bool reverse)
@@ -145,28 +146,28 @@ void test_conceptual_example_03() {
 
     using namespace IteratorPatternCpp;
 
-    ConcreteAggregate<int> intContainer;
+    ConcreteAggregate<int> intContainer{};
 
     for (int i = 0; i < 3; ++i) {
         intContainer.add(i);
     }
 
-    IteratorBase<int>* intIter = intContainer.createForwardIterator();
-    while (intIter->hasNext())
+    IteratorBase<int>* iter{ intContainer.createForwardIterator() };
+    while (iter->hasNext())
     {
-        std::cout << intIter->getCurrent() << std::endl;
+        std::cout << iter->getCurrent() << std::endl;
     }
-    delete intIter;
+    delete iter;
     std::cout << std::endl;
 
-    ConcreteAggregate<std::string> stringContainer;
+    ConcreteAggregate<std::string> stringContainer{};
     stringContainer.add("123");
     stringContainer.add("456");
     stringContainer.add("789");
     std::cout << "Size: " << stringContainer.size() << std::endl;
     std::cout << "[1]:  " << stringContainer.get(1) << std::endl;
 
-    IteratorBase<std::string>* it = stringContainer.createForwardIterator();
+    IteratorBase<std::string>* it{ stringContainer.createForwardIterator() };
     while (it->hasNext())
     {
         std::cout << it->getCurrent() << std::endl;
