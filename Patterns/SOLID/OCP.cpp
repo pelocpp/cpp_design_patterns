@@ -7,6 +7,7 @@
 #include <vector>
 #include <memory>
 #include <numeric>
+#include <concepts>
 
 namespace AntiFirstExampleOCP {
 
@@ -113,8 +114,48 @@ namespace SecondExampleOCP {
         Size        m_size;
     };
 
+    struct AnotherProduct
+    {
+        std::string m_name;
+        Color       m_color;
+        size_t      m_weight;
+    };
+
+    struct YetAnotherProduct
+    {
+        std::string m_name;
+        Color       m_color;
+        size_t      m_size;
+    };
+
     template <typename T>
+    concept ProductRequirements = requires(T t) {
+        { t.m_name };
+        { t.m_color };
+        { t.m_size };
+    };
+
+    template <typename T>
+    concept ProductRequirementsImproved = requires(T t) {
+        { t.m_name } -> std::same_as<std::string&>;
+        { t.m_color } -> std::same_as<Color&>;
+        { t.m_size } -> std::same_as<Size&>;
+    };
+
+    template <typename T>
+        requires ProductRequirements<T>
     using Products = std::vector<std::shared_ptr<T>>;
+
+    static Products<Product> testConceptsAndRequirements()
+    {
+        constexpr bool isValid1{ ProductRequirements<Product> };
+        constexpr bool isValid2{ ProductRequirements<AnotherProduct> };
+        constexpr bool isValid3{ ProductRequirements<YetAnotherProduct> };
+
+        constexpr bool isValid4{  ProductRequirementsImproved<Product> };
+        constexpr bool isValid5{  ProductRequirementsImproved<AnotherProduct> };
+        constexpr bool isValid6{  ProductRequirementsImproved<YetAnotherProduct> };
+    }
 }
 
 namespace AntiSecondConceptualExampleOCP {
