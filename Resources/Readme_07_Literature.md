@@ -75,9 +75,9 @@
 
     Meines Erachtens eines der besten Bücher zu diesem Thema. Alle Muster sind einfach verständlich beschrieben,
     die Auswahl der Beispiel ist gut gelungen. Einziger Nachteil aus Sicht von C++: Die Beispiele sind in Java
-    geschrieben. Auf der WebSite zu diesem Buch sind auch C++ - Beispiele verfügbar.
+    geschrieben. Auf der WebSite zu diesem Buch sind auch C++&ndash;Beispiele verfügbar.
 
-   <img src="Buch_Shalloway_Trott_Design_Patterns_Explained.png" width="150">
+    <img src="Buch_Shalloway_Trott_Design_Patterns_Explained.png" width="150">
 
 ---
 
