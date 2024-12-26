@@ -10,6 +10,8 @@
     Hier werden die wichtigsten Entwurfsmuster für die verschiedensten Anwendungsfälle aufgelistet
     und anschaulich anhand praxisnaher Beispiele erläutert. Kaufempfehlung für alle, die sich mit Entwurfsmustern auseinandersetzen wollen.
 
+    <img src="Buch_Matthias_Geirhos_Entwurfsmuster.png" width="150">
+
 ---
 
   * Fedor G. Pikus: &bdquo;Hands-On Design Patterns with C++&rdquo;.</br>
@@ -18,6 +20,8 @@
     Ein vergleichsweise anspruchsvolles Buch zu Entwurfsmustern in C++. Neben Klassikern wir *Singleton*, *Factory* und *Adapter*
     werden moderne C++-Konzepte wie RAII, SFINAE, CRTP und Type Erasure betrachtet. Sehr gut geschrieben,
     möglicherweise nichts für den Einsteiger in diese Thematik.
+
+    <img src="Buch_Fedor_Pikus_Design_Pattern.png" width="150">
 
 ---
 
@@ -31,6 +35,8 @@
     Die Beispiel sind vergleichsweise einfach gehalten, aber dadurch besitzen sie eine starke Prägnanz,
     um den Blick auf das Wesentliche zu lenken. 
 
+    <img src="Buch_Stephan_Roth_Clean_Cpp_20.png" width="150">
+
 ---
 
   * Dmitri Nesteruk: &bdquo;Design Patterns in Modern C++: Reusable Approaches for Object-Oriented Software Design&rdquo;.</br>
@@ -38,6 +44,8 @@
 
     Einfach zu lesendes Buch zum Thema &bdquo;Design Patterns&rdquo;. An vielen Stellen wird versucht,
     die neuen Sprachelemente von C++ in den Beispielen zur Anwendung zu bringen.
+
+    <img src="Buch_Dmitri_Nesteruk_Design_Pattern_in_Modern_Cpp.png" width="150">
 
 ---
 
@@ -49,12 +57,16 @@
     Es werden 23 Patterns vorstellt, die die Grundlage der meisten Bücher zu diesem Thema darstellen.
     Das Buch ist auch in deutscher Fassung erschienen, siehe den folgenden Abschnitt.
 
+    <img src="Buch_Gamma_Vlissides_GoF_Design_Pattern_Original.png" width="150">
+
 ---
 
   * Erich Gamma, John Vlissides, Ralph Johnson, Richard Helm: &bdquo;Design Patterns: Entwurfsmuster als Elemente wiederverwendbarer objektorientierter Software&rdquo;.</br>
     MITP Verlag (1. Februar 2015), 480 Seiten. Sprache: Deutsch. ISBN-13: 978-3826697005, ISBN-10: 3826697006.
 
     Deutsche Version des Bestsellers von Gamma und Co., siehe Abschitt zuvor.
+
+    <img src="Buch_Gamma_Vlissides_GoF_Design_Pattern_Übersetzung.png" width="150">
 
 ---
 
@@ -64,6 +76,8 @@
     Meines Erachtens eines der besten Bücher zu diesem Thema. Alle Muster sind einfach verständlich beschrieben,
     die Auswahl der Beispiel ist gut gelungen. Einziger Nachteil aus Sicht von C++: Die Beispiele sind in Java
     geschrieben. Auf der WebSite zu diesem Buch sind auch C++ - Beispiele verfügbar.
+
+   <img src="Buch_Shalloway_Trott_Design_Patterns_Explained.png" width="150">
 
 ---
 
@@ -75,6 +89,8 @@
     &bdquo;Holub on Patterns&rdquo; zählt möglicherweise nicht zu seinen besten Werken, aber für Holub-Fans ein Muss.
     In seinem Buch sind mehrere &bdquo;Real-World&rdquo;-Beispiele implementiert, so zum Beispiel der 
     Klassiker &bdquo;Game of Life&rdquo;, leider - für diesen Kontext - ebenfalls nur in Java implementiert.
+
+    <img src="Buch_Allen_Holub_Design_Pattern.png" width="150">
 
 ---
 
