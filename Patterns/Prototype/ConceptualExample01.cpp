@@ -45,7 +45,7 @@ namespace ConceptualExample01
         // but 'virtual ConcretePrototype* clone()' compiles too
         virtual Prototype* clone() const override
         {
-            return new ConcretePrototype(*this);
+            return new ConcretePrototype{ *this };
         }
     };
 

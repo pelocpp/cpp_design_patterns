@@ -44,7 +44,7 @@ namespace ChessExample {
         }
 
         // getter/setter
-        Position getCurrentPosition() const { return m_currentPosition; }
+        const Position& getCurrentPosition() const { return m_currentPosition; }
         void setCurrentPosition(const Position& currentPosition) { m_currentPosition = currentPosition; }
 
         bool isComputer() const { return m_isComputer; }
@@ -91,10 +91,10 @@ namespace ChessExample {
 
     public:
         // c'tor(s)
-        Move(std::shared_ptr<ChessPiece> piece) { m_piece = piece; }
+        Move(const std::shared_ptr<ChessPiece>& piece) : m_piece{ piece } {}
 
         // public (concrete) interface
-        std::shared_ptr<ChessPiece> getChessPiece() { return m_piece; }
+        std::shared_ptr<ChessPiece>& getChessPiece() { return m_piece; }
 
         // abstract interface
         virtual void doMove() = 0;
@@ -108,8 +108,8 @@ namespace ChessExample {
         Position m_oldPosition;
 
     public:
-        SimpleMove(std::shared_ptr<ChessPiece> piece, Position position) 
-            : Move(piece), m_newPosition(position) 
+        SimpleMove(const std::shared_ptr<ChessPiece>& piece, const Position& position) 
+            : Move{ piece }, m_newPosition{ position }, m_oldPosition{}
         {}
 
         virtual void doMove() override
@@ -122,7 +122,7 @@ namespace ChessExample {
                 << m_oldPosition.getY()
                 << std::endl;
 
-            std::shared_ptr<ChessPiece> piece = getChessPiece();
+            std::shared_ptr<ChessPiece> piece{ getChessPiece() };
             piece->move(m_newPosition);
 
             std::cout
@@ -163,7 +163,7 @@ namespace ChessExample {
     public:
         Board() {}
 
-        void enqueue(std::shared_ptr<Move> spielzug)
+        void enqueue(const std::shared_ptr<Move>& spielzug)
         {
             m_moves.push(spielzug);
         }
@@ -207,14 +207,14 @@ namespace ChessExample {
     public:
         ChessGame() {}
 
-        void play(std::shared_ptr<ChessPiece> piece, Position position)
+        void play(const std::shared_ptr<ChessPiece>& piece, const Position& position)
         {
             std::shared_ptr<Move> move{ std::make_shared<SimpleMove>(piece, position) };
             m_board.enqueue(move);
             m_board.play();
         }
 
-        void enqueue(std::shared_ptr<ChessPiece> piece, Position position)
+        void enqueue(const std::shared_ptr<ChessPiece>& piece, const Position& position)
         {
             std::shared_ptr<Move> move{ std::make_shared<SimpleMove>(piece, position) };
             m_board.enqueue(move);
@@ -233,14 +233,14 @@ namespace ChessExample {
 
     static void clientCode()
     {
-        ChessGame game;
+        ChessGame game{};
 
-        std::shared_ptr<ChessPiece> tower{
-            std::make_shared<Tower>(false, Position(1, 1))
+        std::shared_ptr<ChessPiece> tower {
+            std::make_shared<Tower>(false, Position{ 1, 1 })
         };
 
-        game.enqueue(tower, Position(4, 1));
-        game.enqueue(tower, Position(6, 1));
+        game.enqueue(tower, Position{ 4, 1 });
+        game.enqueue(tower, Position{ 6, 1 });
 
         game.play();
 

@@ -21,7 +21,7 @@ namespace DynamicStrategyPatternExample {
 
         virtual void start(std::ostringstream& oss) = 0;
         virtual void end(std::ostringstream& oss) = 0;
-        virtual void add_list_item(std::ostringstream& oss, const std::string& item) = 0;
+        virtual void add_item(std::ostringstream& oss, const std::string& item) = 0;
     };
 
     struct MarkdownListStrategy : public IListStrategy
@@ -30,7 +30,7 @@ namespace DynamicStrategyPatternExample {
 
         virtual void end(std::ostringstream& oss) override {};
 
-        virtual void add_list_item(std::ostringstream& oss, const std::string& item) override {
+        virtual void add_item(std::ostringstream& oss, const std::string& item) override {
             oss << " - " << item << std::endl;
         }
     };
@@ -45,7 +45,7 @@ namespace DynamicStrategyPatternExample {
             oss << "</ul>" << std::endl;
         }
 
-        virtual void add_list_item(std::ostringstream& oss, const std::string& item) override {
+        virtual void add_item(std::ostringstream& oss, const std::string& item) override {
             oss << "\t<li>" << item << "</li>" << std::endl;
         }
     };
@@ -66,7 +66,7 @@ namespace DynamicStrategyPatternExample {
 
             m_list_strategy->start(m_oss);
             for (const auto& item : items) {
-                m_list_strategy->add_list_item(m_oss, item);
+                m_list_strategy->add_item(m_oss, item);
             }
             m_list_strategy->end(m_oss);
         }
@@ -111,12 +111,12 @@ void test_dynamic_strategy_example ()
 
 namespace StaticStrategyPatternExample {
 
-    template <typename T>
-    concept TextProcessorRequirements = requires(T v, std::ostringstream& oss, const std::string& item)
+    template <typename TList>
+    concept TextProcessorRequirements = requires(TList& list, std::ostringstream& oss, const std::string& item)
     {
-        { v.start(oss) } -> std::same_as<void>;
-        { v.end(oss) } -> std::same_as<void>;
-        { v.add_list_item(oss, item) } -> std::same_as<void>;
+        { list.start(oss) } -> std::same_as<void>;
+        { list.end(oss) } -> std::same_as<void>;
+        { list.add_item(oss, item) } -> std::same_as<void>;
     };
 
     template<typename TList>
@@ -132,7 +132,7 @@ namespace StaticStrategyPatternExample {
         {
             m_list.start(m_oss);
             for (const auto& item : items) {
-                m_list.add_list_item(m_oss, item);
+                m_list.add_item(m_oss, item);
             }
             m_list.end(m_oss);
         }
@@ -146,7 +146,7 @@ namespace StaticStrategyPatternExample {
 
         void end(std::ostringstream& oss) {};
 
-        void add_list_item(std::ostringstream& oss, const std::string& item) {
+        void add_item(std::ostringstream& oss, const std::string& item) {
             oss << " - " << item << std::endl;
         }
     };
@@ -161,7 +161,7 @@ namespace StaticStrategyPatternExample {
             oss << "</ul>" << std::endl;
         }
 
-        void add_list_item(std::ostringstream& oss, const std::string& item) {
+        void add_item(std::ostringstream& oss, const std::string& item) {
             oss << "\t<li>" << item << "</li>" << std::endl;
         }
     };

@@ -60,8 +60,10 @@ namespace ApdaterPatternClassAdapterApproach {
     // ===========================================================================
 
     // Create adapter class 'MediaAdapter':
+    // 
     // This implementation uses inheritance: the new adapter inherits behaviors 
     // from both the existing client and from missing / incompatible services.
+    // 
     // Obviously this approach can only be implemented in programming languages
     // that support multiple inheritance, such as C++.
 

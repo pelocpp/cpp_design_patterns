@@ -147,6 +147,7 @@
     <ClCompile Include="Vehicles.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\AbstractFactory.png" />
     <Image Include="Resources\dp_factory_pattern_intro.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

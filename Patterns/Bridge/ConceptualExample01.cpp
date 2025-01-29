@@ -23,7 +23,7 @@ namespace ConceptualExampleBridge01 {
         std::shared_ptr<Implementor> m_implementor;
 
     public:
-        void setImplementor(std::shared_ptr<Implementor> implementor)
+        void setImplementor(const std::shared_ptr<Implementor>& implementor)
         {
             m_implementor = implementor;
         }
@@ -49,7 +49,7 @@ namespace ConceptualExampleBridge01 {
         }
     };
 
-    static void clientCode(std::shared_ptr<Abstraction> abstraction) {
+    static void clientCode(const std::shared_ptr<Abstraction>& abstraction) {
         // ...
         abstraction->operation();
         // ...

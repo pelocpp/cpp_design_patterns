@@ -1,15 +1,19 @@
+// ===========================================================================
+// ConceptualExample.cpp // Null Object Pattern
+// ===========================================================================
+
 #include <iostream>
-#include <string>
-#include <sstream>
 #include <memory>
+#include <sstream>
+#include <string>
 
 class Logger
 {
 public:
     virtual ~Logger() {}
 
-    virtual void info(const std::string& s) = 0;
-    virtual void warn(const std::string& s) = 0;
+    virtual void info(const std::string&) = 0;
+    virtual void warn(const std::string&) = 0;
 };
 
 class ConsoleLogger : public Logger
@@ -30,6 +34,7 @@ class NullLogger : public Logger
 {
 public:
     NullLogger() {};
+
     void info(const std::string& s) override {}
     void warn(const std::string& s) override {}
 };
@@ -37,19 +42,16 @@ public:
 class BankAccount
 {
 private:
-    std::shared_ptr<Logger> m_log;
-    std::string m_name;
-    int m_balance = 0;
-
     static std::shared_ptr<Logger> nullLogger;
 
+private:
+    std::shared_ptr<Logger> m_logger;
+    std::string             m_name;
+    int                     m_balance;
+
 public:
-  BankAccount(
-      const std::string& name, 
-      int balance, 
-      const std::shared_ptr<Logger>& logger = nullLogger)
-    :
-      m_log{ logger }, m_name{ name }, m_balance{ balance }
+    BankAccount(const std::string& name, int balance, const std::shared_ptr<Logger>& logger = nullLogger)
+        : m_name{ name }, m_balance{ balance }, m_logger{ logger }
     {}
 
     void deposit(int amount)
@@ -59,13 +61,13 @@ public:
         std::ostringstream oss;
         oss << "Deposited ";
         oss << std::to_string(amount);
-        oss << "€ to ";
+        oss << " euro to ";
         oss << m_name;
         oss << ", balance is now ";
         oss << std::to_string(m_balance);
-        oss << "€";
+        oss << " euro";
 
-        m_log->info(oss.str());
+        m_logger->info(oss.str());
     }
 
     void withdraw(int amount)
@@ -78,32 +80,34 @@ public:
 
             oss << "Withdrew ";
             oss << std::to_string(amount);
-            oss << "€ from ";
+            oss << " euro from ";
             oss << m_name;
             oss << ", ";
             oss << std::to_string(m_balance);
-            oss << "€ left";
+            oss << " euro left";
 
-            m_log->info(oss.str());
+            m_logger->info(oss.str());
         } 
         else
         {
             oss << "Tried to withdraw ";
             oss << std::to_string(amount);
-            oss << "€ from ";
+            oss << " euro from ";
             oss << m_name;
             oss << " but couldn't due to low balance";
 
-            m_log->warn(oss.str());
+            m_logger->warn(oss.str());
         }
     }
 };
 
-std::shared_ptr<Logger> BankAccount::nullLogger = std::make_shared<NullLogger>();
+std::shared_ptr<Logger> BankAccount::nullLogger{
+    std::make_shared<NullLogger>() 
+};
 
 void test_bank_account()
 {
-    std::shared_ptr<Logger> logger = std::make_shared<ConsoleLogger>();
+    std::shared_ptr<Logger> logger{ std::make_shared<ConsoleLogger>() };
 
     BankAccount account{ "primary account", 1000, logger };
     account.deposit(2000);
@@ -118,3 +122,7 @@ void test_bank_account()
     account2.withdraw(1000);
     std::cout << "Done." << std::endl;
 }
+
+// ===========================================================================
+// End-of-File
+// ===========================================================================

@@ -129,7 +129,7 @@ namespace ApdaterPatternClassicalApproach {
     class AudioPlayerExtended : public IMediaPlayer
     {
     private:
-        std::shared_ptr<MediaAdapter> m_mediaAdapter;
+        std::shared_ptr<IMediaPlayer> m_mediaAdapter;
 
     public:
         void play(std::string audioType, std::string fileName) override;

@@ -21,8 +21,8 @@ public:
 class RealObject : public AbstractObject
 {
 public:
-    std::string  operation() const override {
-        return std::string("computed something!");
+    std::string operation() const override {
+        return std::string{ "computed something!" };
     }
 };
 
@@ -42,12 +42,14 @@ public:
  * The function which requires an AbstractObject instance, will not accept null
  */
 static void clientCode(const AbstractObject& obj) {
+
     // obj may never be null here
-    std::string result = obj.operation();
+    std::string result{ obj.operation() };
     std::cout << "RESULT: " << result << std::endl;
 }
 
-void test_conceptual_example() {
+void test_conceptual_example()
+{
     RealObject realObject;
     clientCode(realObject);
     NullObject nullObject;
