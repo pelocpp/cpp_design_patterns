@@ -1,3 +1,7 @@
+// ===========================================================================
+// Car.cpp
+// ===========================================================================
+
 class Car
 {
 public:
@@ -8,7 +12,14 @@ public:
     void coolDown();
 
 private:
-    class EngineImpl;
-    EngineImpl* m_engineRaw;
-    std::unique_ptr<EngineImpl> m_engineUnique;
+    class EngineImpl;           // forward declaration
+
+    EngineImpl*                 m_engineRaw;      // raw pointer
+    // or
+    std::unique_ptr<EngineImpl> m_engineUnique;   // smart pointer
 };
+
+// ===========================================================================
+// End-of-File
+// ===========================================================================
+

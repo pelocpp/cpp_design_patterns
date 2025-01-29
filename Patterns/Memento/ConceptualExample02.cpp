@@ -29,7 +29,8 @@ namespace ConceptualExample02 {
      * The Concrete Memento contains the infrastructure
      * for storing the Originator's state.
      */
-    class ConcreteMemento : public Memento {
+    class ConcreteMemento : public Memento
+    {
     private:
         std::string m_state;
         std::string m_date;
@@ -181,7 +182,8 @@ namespace ConceptualExample02 {
         }
     };
 
-    static void clientCode() {
+    static void clientCode()
+    {
         std::shared_ptr<Originator> originator { 
             std::make_shared<Originator>("Original state of this Originator")
         };

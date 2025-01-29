@@ -24,7 +24,7 @@ namespace AntiFirstExampleOCP {
         {}
 
         void setName(const std::string& name) { m_name = name; }
-        std::string  getName() const { return m_name; }
+        std::string getName() const { return m_name; }
 
         void setPrice(double price) { m_price = price; }
         double getPrice() const { return m_price; }
@@ -94,8 +94,7 @@ static void test_simple_conceptual_example_ocp()
 {
     using namespace FirstExampleOCP;
 
-    PhysicalProduct p1{ "Computer", 999.90, 5.0 };
-
+    PhysicalProduct p1 { "Computer", 999.90, 5.0 };
     DigitalProduct p2 { "Mp3 Stream", 19.90, "Beatles/Best of" };
 }
 
@@ -152,9 +151,9 @@ namespace SecondExampleOCP {
         constexpr bool isValid2{ ProductRequirements<AnotherProduct> };
         constexpr bool isValid3{ ProductRequirements<YetAnotherProduct> };
 
-        constexpr bool isValid4{  ProductRequirementsImproved<Product> };
-        constexpr bool isValid5{  ProductRequirementsImproved<AnotherProduct> };
-        constexpr bool isValid6{  ProductRequirementsImproved<YetAnotherProduct> };
+        constexpr bool isValid4{ ProductRequirementsImproved<Product> };
+        constexpr bool isValid5{ ProductRequirementsImproved<AnotherProduct> };
+        constexpr bool isValid6{ ProductRequirementsImproved<YetAnotherProduct> };
     }
 }
 
@@ -204,6 +203,7 @@ namespace SecondConceptualExampleOCP {
     using namespace SecondExampleOCP;
 
     template <typename T>
+        requires ProductRequirements<T>
     struct ISpecification {
         virtual bool isSatisfied(const std::shared_ptr<T>& product) const = 0;
     };
@@ -237,6 +237,7 @@ namespace SecondConceptualExampleOCP {
     };
 
     template <typename T>
+        requires ProductRequirements<T>
     struct IFilter 
     {
         virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const = 0;
@@ -258,6 +259,7 @@ namespace SecondConceptualExampleOCP {
 
     // combining logical specifications - with logical 'and'
     template <typename T>
+        requires ProductRequirements<T>
     class AndSpecification : public ISpecification<T>
     {
     private:

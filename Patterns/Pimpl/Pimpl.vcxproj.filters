@@ -10,10 +10,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -30,6 +30,9 @@
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{c06208db-6fd5-4804-8bad-730535bfe52e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{32c4052c-0720-4dbb-b264-30c9c5c8cbec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
