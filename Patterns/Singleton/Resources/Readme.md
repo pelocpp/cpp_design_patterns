@@ -351,7 +351,7 @@ und
 vor.
 
 Die Anregungen zur Betrachtung &bdquo;Eine Alternative zum Singleton Pattern: *Dependency Injection*&rdquo;
-stammen aus dem Buch &bdquo;Hands-On Design Patterns with C++&rdquo; von Stephan Roth,
+stammen aus dem Buch &bdquo;Clean C++ 20&rdquo; von Stephan Roth,
 siehe hierzu auch das [Literaturverzeichnis](../../../Resources/Readme_07_Literature.md).
 
 ---

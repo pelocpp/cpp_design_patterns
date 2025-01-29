@@ -19,8 +19,7 @@ namespace RealWorldFactoryMethod {
         virtual void switchOff() = 0;
     };
 
-    // concrete Products provide various implementations
-    // of the ITelevision interface
+    // concrete Products provide various implementations of the ITelevision interface
     class LEDTelevision : public ITelevision
     {
     public:
@@ -73,10 +72,11 @@ namespace RealWorldFactoryMethod {
         virtual ~AbstractTVFactory() {}
 
         /**
-         * Note that the FactoryBase's class primary responsibility is
-         * not creating products. Usually, it contains some core business logic that
-         * relies on concrete product objects, returned by the factory method. Subclasses can
-         * indirectly change that business logic by overriding the factory method and
+         * Note that the FactoryBase's class primary responsibility is not only creating products. 
+         * Usually, it contains some core business logic that relies on concrete product objects, 
+         * returned by the factory method.
+         * 
+         * Subclasses can indirectly change that business logic by overriding the factory method and
          * returning a different type of product from it.
          */
 
@@ -103,10 +103,9 @@ namespace RealWorldFactoryMethod {
                 return tvup;
             }
 
-            // concrete factory cannot pruduce this tv currently
-            std::unique_ptr<ITelevision> empty;
+            // concrete factory cannot produce this tv currently
+            std::unique_ptr<ITelevision> empty{};
             return empty;
-
         }
 
         virtual float totalCharge() final {   // <= final method (!)
@@ -130,8 +129,7 @@ namespace RealWorldFactoryMethod {
 
         virtual std::unique_ptr<ITelevision> assembleTelevision() override {
             std::cout << "Assembling LED TV" << std::endl;
-            std::unique_ptr<ITelevision> ledTV{ new LEDTelevision() };
-            return ledTV;
+            return std::make_unique<LEDTelevision>();
         }
 
         virtual float shippingCharge() const override {
@@ -152,9 +150,7 @@ namespace RealWorldFactoryMethod {
 
         virtual std::unique_ptr<ITelevision> assembleTelevision() override {
             std::cout << "Assembling Oled TV" << std::endl;
-            // return std::make_unique<OledTelevision>();
-            std::unique_ptr<ITelevision> oledTV{ new OledTelevision() };
-            return oledTV;
+            return std::make_unique<OledTelevision>();
         }
 
         virtual float shippingCharge() const override {
@@ -166,7 +162,7 @@ namespace RealWorldFactoryMethod {
         }
     };
 
-    static void clientCode(const std::shared_ptr<AbstractTVFactory> factory) {
+    static void clientCode(const std::shared_ptr<AbstractTVFactory>& factory) {
 
         factory->getOrderInformation();
 

@@ -37,7 +37,7 @@ Eigentlich haben wir hierzu schon eine Vorgehensweise kennen gelernt:
 
 Das Prinzip der *Dependency Injection*.
 
-Das *Dependency Injection* folgt diesem Prinzip in der Gestalt,
+*Dependency Injection* folgt diesem Prinzip in der Gestalt,
 dass der gesamte Objekterstellungs- und Abhängigkeitsauflösungsprozess
 in einem Infrastrukturelement zentralisiert ist und sich die Objekte selbst nicht darum kümmern müssen.
 

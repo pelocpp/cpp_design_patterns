@@ -51,7 +51,8 @@ namespace ConceptualExample {
 
     class ShapeFactory
     {
-        enum class StringCode 
+    public:
+        enum class ShapeKind
         {
             Rectangle,
             Square,
@@ -59,50 +60,30 @@ namespace ConceptualExample {
             None
         };
 
-    public:
-        std::shared_ptr<IShape> getShape(std::string shapeType)
+        std::shared_ptr<IShape> getShape(ShapeKind shapeType)
         {
-            enum class StringCode shape = stringToEnum(shapeType);
-
             std::shared_ptr<IShape> shapePtr;
 
-            switch (shape)
+            switch (shapeType)
             {
-            case StringCode::Rectangle:
+            case ShapeKind::Rectangle:
                 shapePtr = std::make_shared<Rectangle>();
                 break;
 
-            case StringCode::Square:
+            case ShapeKind::Square:
                 shapePtr = std::make_shared<Square>();
                 break;
 
-            case StringCode::Circle:
+            case ShapeKind::Circle:
                 shapePtr = std::make_shared<Circle>();
                 break;
 
             default:
-                std::string msg = "Invalid type: " + shapeType;
+                std::string msg = "Invalid Shape Kind";
                 throw std::runtime_error{ msg };
             }
 
             return shapePtr;
-        }
-
-    private:
-        StringCode stringToEnum(const std::string& s) {
-
-            if (s == "Rectangle") {
-                return StringCode::Rectangle;
-            }
-            else if (s == "Square") {
-                return StringCode::Square;
-            }
-            else if (s == "Circle") {
-                return StringCode::Circle;
-            }
-            else {
-                return StringCode::None;
-            }
         }
     };
 
@@ -129,13 +110,13 @@ namespace ConceptualExample {
 
         std::shared_ptr<IShape> shape{};
 
-        shape = shapeFactory.getShape("Circle");
+        shape = shapeFactory.getShape(ShapeFactory::ShapeKind::Circle);
         shape->draw();
 
-        shape = shapeFactory.getShape("Rectangle");
+        shape = shapeFactory.getShape(ShapeFactory::ShapeKind::Rectangle);
         shape->draw();
 
-        shape = shapeFactory.getShape("Square");
+        shape = shapeFactory.getShape(ShapeFactory::ShapeKind::Square);
         shape->draw();
     }
 }

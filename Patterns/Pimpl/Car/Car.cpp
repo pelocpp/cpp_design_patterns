@@ -30,17 +30,10 @@ Car::~Car()
     delete m_engineRaw;
 }
 
-// Car::~Car() {}
-
 void Car::coolDown()
 {
     m_engineRaw->coolDown();
     m_engineUnique->coolDown();
-}
-
-void test_01() {
-    Car vw;
-    vw.coolDown();
 }
 
 // ===========================================================================

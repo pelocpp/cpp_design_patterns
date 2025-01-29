@@ -1,20 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Car.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Car.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="Car\Car.cpp">
+      <Filter>Source Files\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="User\User.cpp">
+      <Filter>Source Files\User</Filter>
+    </ClCompile>
+    <ClCompile Include="User\UserClient.cpp">
+      <Filter>Source Files\User</Filter>
+    </ClCompile>
+    <ClCompile Include="Car\CarClient.cpp">
+      <Filter>Source Files\Car</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -34,10 +35,27 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{32c4052c-0720-4dbb-b264-30c9c5c8cbec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Car">
+      <UniqueIdentifier>{db2e8d6b-773a-4fbf-b98c-412a63504cf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\User">
+      <UniqueIdentifier>{6b66ea74-bf4a-4726-acec-88c4511a90d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\OpaquePointer.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Car\Car.h">
+      <Filter>Source Files\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="Car\Engine.h">
+      <Filter>Source Files\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="User\User.h">
+      <Filter>Source Files\User</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

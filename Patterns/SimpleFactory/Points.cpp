@@ -79,7 +79,7 @@ namespace Factory03 {
         }
     };
 
-    void test()
+    static void test()
     {
         // Point p{ 1, 2 };  // doesn't compile
 
@@ -124,7 +124,7 @@ namespace Factory04 {
         }
     };
 
-    void test()
+    static void test()
     {
         // Point p{ 1, 2 };  // doesn't compile
 
@@ -159,7 +159,7 @@ namespace Factory05 {
         };
     };
 
-    void test() {
+    static void test() {
         Point p{ Point::Factory::NewCartesian(2, 3) };
     }
 }

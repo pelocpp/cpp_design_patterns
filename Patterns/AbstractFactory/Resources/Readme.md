@@ -80,7 +80,16 @@ Sie haben zumindest gemeinsam, dass sie beide den Client von konkreten Typen ent
 Der Client kennt nur die Schnittstelle zur *Factory* und den Produkten. Welche Produkte konkret erstellt werden,
 entscheidet die Unterklasse/Implementierung der Schnittstelle. Der Client stützt sich allein auf Abstraktion.
 
-Damit zu den Unterschieden:
+*Hauptunterschied*:
+
+  * Der Hauptunterschied zwischen einer *Factory-Methode* und einer *abstrakten Factory* besteht darin,
+  dass die Factory-Methode eine *Methode* und eine abstrakte Factory ein *Objekt* ist.
+
+  * Da die Factory-Methode nur eine Methode ist, kann sie in einer Unterklasse überschrieben werden.
+
+  * Die abstrakte Fabrik ist ein Objekt, das über mehrere Fabrikmethoden verfügt.
+
+Damit zu weiteren Unterschieden auf Detailebene:
 
 **Abstract Factory**<br/>
   * Bietet eine Schnittstelle zum Erstellen von Familien verwandter oder abhängiger Objekte, ohne deren konkrete Klassen anzugeben.
@@ -110,6 +119,10 @@ Speziellen der Aspekt "*Look and Feel*".
 Für Oberflächensteuerelemente wie Listen, Comboboxen oder Eingabefelder gibt es hier verschiedene Varianten.
 Diese Varianten sind in ihrer Grundfunktionalität gleich, unterscheiden sich aber in ihrem Aussehen
 und teilweise auch in ihrem Verhalten.
+
+<img src="AbstractFactory.png" width="600" />
+
+*Abbildung* 1: Eine abstrakte Fabrik für die Hantierung unterschiedlicher graphischer Steuerelemente.
 
 Für jedes *Look and Feel* gibt es eine eigene Familie an graphischen Steuerelementen und damit
 eine eigenen Fabrik. Abstrahiert werden all diese Fabriken durch eine zentral definierte abstrakte Fabrik.

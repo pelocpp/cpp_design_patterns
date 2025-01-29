@@ -100,7 +100,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,15 +145,19 @@
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Car.h" />
-    <ClInclude Include="Engine.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="Car\Car.cpp" />
+    <ClCompile Include="Car\CarClient.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="User\User.cpp" />
+    <ClCompile Include="User\UserClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\OpaquePointer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Car\Car.h" />
+    <ClInclude Include="Car\Engine.h" />
+    <ClInclude Include="User\User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

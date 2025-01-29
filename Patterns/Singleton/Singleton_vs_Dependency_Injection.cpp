@@ -6,7 +6,7 @@
 #include <memory>
 #include <string_view>
 
-namespace SingletonLogger {
+namespace ClassicSingletonLogger {
 
     class Logger final
     {
@@ -159,7 +159,7 @@ namespace DependencyInjectionLogger {
 
 void test_singleton_vs_di()
 {
-    SingletonLogger::test_singleton_logger();
+    ClassicSingletonLogger::test_singleton_logger();
     DependencyInjectionLogger::test_di_logger();
     DependencyInjectionLogger::test_di_mock_logger();
 }

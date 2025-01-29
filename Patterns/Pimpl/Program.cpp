@@ -3,11 +3,13 @@
 // ===========================================================================
 
 // function prototypes
-void test_01();
+extern void test_user();
+extern void test_car();
 
 int main()
 {
-    test_01();
+    test_user();
+    test_car();
     return 0;
 }
 
