@@ -58,7 +58,7 @@ private:
     std::shared_ptr<Adaptee> m_adaptee;
 
 public:
-    Adapter(std::shared_ptr<Adaptee> adaptee) 
+    Adapter(const std::shared_ptr<Adaptee>& adaptee) 
         : m_adaptee{ adaptee }
     {}
 
@@ -86,9 +86,9 @@ static void clientCode(std::shared_ptr<ITarget> target) {
 
 void test_conceptual_example_01() {
 
-    std::shared_ptr<Adaptee> adaptee{ new Adaptee{ } };
+    std::shared_ptr<Adaptee> adaptee{ std::make_shared<Adaptee>() };
 
-    std::shared_ptr<Adapter> adapter{ new Adapter{ adaptee } };
+    std::shared_ptr<Adapter> adapter{ std::make_shared<Adapter>(adaptee) };
 
     clientCode(adapter);
 }
@@ -96,16 +96,16 @@ void test_conceptual_example_01() {
 void test_conceptual_example_02() {
 
     std::cout << "Client: I can work fine with the Target object" << std::endl;
-    std::shared_ptr<ITarget> target{ new Target{} };
+    std::shared_ptr<ITarget> target{ std::make_shared<Target>() };
     clientCode(target);
 
-    std::shared_ptr<Adaptee> adaptee{ new Adaptee{ } };
+    std::shared_ptr<Adaptee> adaptee{ std::make_shared<Adaptee>() };
     std::cout << "Client: The Adaptee class has an incompatible interface:" << std::endl;
     std::string specificRequest = adaptee->getSpecificRequest();
     std::cout << "Adaptee: " << specificRequest << std::endl << std::endl;
 
     std::cout << "Client: But I can work with the Adaptee via the Adapter:" << std::endl;
-    std::shared_ptr<Adapter> adapter{ new Adapter{ adaptee } };
+    std::shared_ptr<Adapter> adapter{ std::make_shared<Adapter>(adaptee) };
     clientCode(adapter);
 }
 

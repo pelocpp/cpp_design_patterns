@@ -197,127 +197,175 @@ sind die am meisten verbreitete Vorgehensweise:
 009: };
 010: 
 011: template <typename T>
-012: using Products = std::vector<std::shared_ptr<T>>;
-013: 
-014: template <typename T>
-015: struct ISpecification {
-016:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const = 0;
-017: };
-018: 
-019: template <typename T>
-020: class ColorSpecification : public ISpecification<T> 
-021: {
-022: private:
-023:     Color m_color;
-024:         
-025: public:
-026:     ColorSpecification(Color color) : m_color{ color } {}
-027: 
-028:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
-029:         return product->m_color == m_color; 
-030:     }
-031: };
-032: 
-033: template <typename T>
-034: class SizeSpecification : public ISpecification<T>
-035: {
-036: private:
-037:     Size m_size;
-038:         
-039: public:
-040:     SizeSpecification(Size size) : m_size{ size } {}
-041:         
-042:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
-043:         return product->m_size == m_size;
-044:     }
-045: };
-046: 
-047: template <typename T>
-048: struct IFilter 
-049: {
-050:     virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const = 0;
-051: };
-052: 
-053: template <typename T>
-054: struct ProductFilter : public IFilter<T>
-055: {
-056:     virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const override
-057:     {
-058:         Products<T> result;
-059:         for (const auto& product : products) {
-060:             if (spec.isSatisfied(product))
-061:                 result.push_back(product);
-062:         }
-063:         return result;
-064:     }
-065: };
-066: 
-067: // combining logical specifications - with logical 'and'
-068: template <typename T>
-069: class AndSpecification : public ISpecification<T>
-070: {
-071: private:
-072:     const ISpecification<T>& m_first;
-073:     const ISpecification<T>& m_second;
-074: 
-075: public:
-076:     AndSpecification(const ISpecification<T>& first, const ISpecification<T>& second)
-077:         : m_first{ first }, m_second{ second } {}
-078: 
-079:     virtual bool isSatisfied(const std::shared_ptr<Product>& product) const override {
-080:         return m_first.isSatisfied(product) && m_second.isSatisfied(product);
+012: concept ProductRequirements = requires(T t) {
+013:     { t.m_name };
+014:     { t.m_color };
+015:     { t.m_size };
+016: };
+017: 
+018: template <typename T>
+019: concept ProductRequirementsImproved = requires(T t) {
+020:     { t.m_name } -> std::same_as<std::string&>;
+021:     { t.m_color } -> std::same_as<Color&>;
+022:     { t.m_size } -> std::same_as<Size&>;
+023: };
+024: 
+025: template <typename T>
+026:     requires ProductRequirements<T>
+027: using Products = std::vector<std::shared_ptr<T>>;
+028: 
+029: template <typename T>
+030:     requires ProductRequirements<T>
+031: struct ISpecification {
+032:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const = 0;
+033: };
+034: 
+035: template <typename T>
+036: class ColorSpecification : public ISpecification<T> 
+037: {
+038: private:
+039:     Color m_color;
+040:         
+041: public:
+042:     ColorSpecification(Color color) : m_color{ color } {}
+043: 
+044:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
+045:         return product->m_color == m_color; 
+046:     }
+047: };
+048: 
+049: template <typename T>
+050: class SizeSpecification : public ISpecification<T>
+051: {
+052: private:
+053:     Size m_size;
+054:         
+055: public:
+056:     SizeSpecification(Size size) : m_size{ size } {}
+057:         
+058:     virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
+059:         return product->m_size == m_size;
+060:     }
+061: };
+062: 
+063: template <typename T>
+064:     requires ProductRequirements<T>
+065: struct IFilter 
+066: {
+067:     virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const = 0;
+068: };
+069: 
+070: template <typename T>
+071: struct ProductFilter : public IFilter<T>
+072: {
+073:     virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const override
+074:     {
+075:         Products<T> result{};
+076:         for (const auto& product : products) {
+077:             if (spec.isSatisfied(product))
+078:                 result.push_back(product);
+079:         }
+080:         return result;
 081:     }
 082: };
 083: 
-084: // combining logical specifications - with logical 'and' using operator notation
+084: // combining logical specifications - with logical 'and'
 085: template <typename T>
-086: AndSpecification<T> operator&& (const ISpecification<T>& first, const ISpecification<T>& second) {
-087:     return AndSpecification<T>{ first, second };
-088: }
-089: 
-090: void test_01()
-091: {
-092:     Products<Product> products
-093:     {
-094:         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
-095:         std::make_shared<Product>("Chair", Color::Green, Size::Large),
-096:         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
-097:     };
-098: 
-099:     ProductFilter<Product> productFilter;
-100: 
-101:     ColorSpecification<Product> greenProducts {
-102:         ColorSpecification<Product>{ Color::Green }
-103:     };
-104: 
-105:     for (const auto& product : productFilter.filter(products, greenProducts)) {
-106:         std::cout << product->m_name << " is green" << std::endl;
-107:     }
-108: }
-109: 
-110: void test_02()
-111: {
-112:     Products<Product> products
-113:     {
-114:         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
-115:         std::make_shared<Product>("Chair", Color::Green, Size::Large),
-116:         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
-117:     };
+086:     requires ProductRequirements<T>
+087: class AndSpecification : public ISpecification<T>
+088: {
+089: private:
+090:     const ISpecification<T>& m_first;
+091:     const ISpecification<T>& m_second;
+092: 
+093: public:
+094:     AndSpecification(const ISpecification<T>& first, const ISpecification<T>& second)
+095:         : m_first{ first }, m_second{ second } {}
+096: 
+097:     virtual bool isSatisfied(const std::shared_ptr<Product>& product) const override {
+098:         return m_first.isSatisfied(product) && m_second.isSatisfied(product);
+099:     }
+100: };
+101: 
+102: // combining logical specifications - with logical 'and' using operator notation
+103: template <typename T>
+104: AndSpecification<T> operator&& (const ISpecification<T>& first, const ISpecification<T>& second) {
+105:     return AndSpecification<T>{ first, second };
+106: }
+107: 
+108: static void test_conceptual_example_ocp_01()
+109: {
+110:     Products<Product> products
+111:     {
+112:         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
+113:         std::make_shared<Product>("Chair", Color::Green, Size::Large),
+114:         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
+115:     };
+116: 
+117:     ProductFilter<Product> productFilter;
 118: 
-119:     ProductFilter<Product> productFilter;
+119:     ColorSpecification<Product> greenSpecification{ Color::Green };
 120: 
-121:     ColorSpecification<Product> greenProducts {
-122:         ColorSpecification<Product>{ Color::Green }
-123:     };
-124: 
-125:     SizeSpecification largeProducts{
-126:         SizeSpecification<Product>{ Size::Large }
-127:     };
-128: 
-129:     for (const auto& product : productFilter.filter(products, greenProducts && largeProducts)) {
-130:         std::cout << product->m_name << " is green and large" << std::endl;
-131:     }
-132: }
+121:     for (const auto& product : productFilter.filter(products, greenSpecification)) {
+122:         std::cout << product->m_name << " is green" << std::endl;
+123:     }
+124: }
+125: 
+126: static void test_conceptual_example_ocp_02()
+127: {
+128:     Products<Product> products
+129:     {
+130:         std::make_shared<Product>("Computer", Color::Gray, Size::Small),
+131:         std::make_shared<Product>("Chair", Color::Green, Size::Large),
+132:         std::make_shared<Product>("Headset", Color::Red, Size::Medium)
+133:     };
+134: 
+135:     ProductFilter<Product> productFilter;
+136: 
+137:     ColorSpecification<Product> greenSpecification{ Color::Green };
+138: 
+139:     SizeSpecification<Product> largeSpecification{ Size::Large };
+140: 
+141:     for (const auto& product : productFilter.filter(products, greenSpecification&& largeSpecification)) {
+142:         std::cout << product->m_name << " is green and large" << std::endl;
+143:     }
+144: }
+145: 
+146: static void test_conceptual_example_ocp_03()
+147: {
+148:     // combined specification
+149:     AndSpecification<Product> specification {
+150:         SizeSpecification<Product>{ Size::Small },
+151:         ColorSpecification<Product>{ Color::Gray }
+152:     };
+153: 
+154:     // another combined specification - using overloaded operator &&
+155:     AndSpecification<Product> anotherSpecification {
+156:         SizeSpecification<Product>{ Size::Medium } &&
+157:         ColorSpecification<Product>{ Color::Red }
+158:     };
+159: 
+160:     std::shared_ptr<Product> computer {
+161:         std::make_shared<Product>("Computer", Color::Gray, Size::Small) 
+162:     };
+163:     
+164:     std::shared_ptr<Product> chair {
+165:         std::make_shared<Product>("Chair", Color::Green, Size::Large)
+166:     };
+167:     
+168:     std::shared_ptr<Product> headset {
+169:          std::make_shared<Product>("Headset", Color::Red, Size::Medium)
+170:     };
+171: 
+172:     bool result{ specification.isSatisfied(computer) };
+173:     std::cout << "Result: " << std::boolalpha << result << std::endl;
+174: 
+175:     result = specification.isSatisfied(chair);
+176:     std::cout << "Result: " << std::boolalpha << result << std::endl;
+177: 
+178:     result = anotherSpecification.isSatisfied(headset);
+179:     std::cout << "Result: " << std::boolalpha << result << std::endl;
+180: }
 ```
 
 ###### Beachten Sie an dem Quellcode:
