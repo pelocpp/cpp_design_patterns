@@ -225,7 +225,7 @@ static void test_conceptual_example_01() {
     );
 
     SharedState anotherSharedState{ "BMW", "X1", "red" };       // <== this car variant doesn't exist
-    UniqueState anotherUniqueState{ "James Doe", "CL234IR" };
+    UniqueState anotherUniqueState{ "Henri Miller", "WA234AR" };
 
     addCarToDatabase(
         factory,
@@ -270,8 +270,8 @@ static void test_conceptual_example_02() {
 
     addCarToDatabase(
         factory,
-        "James Doe",
-        "CL234IR",
+        "Henri Miller",
+        "WA234AR",
         "BMW",
         "X1",         // <== this car variant doesn't exist
         "red");
