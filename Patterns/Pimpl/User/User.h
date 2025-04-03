@@ -2,13 +2,11 @@
 // User.h
 // ===========================================================================
 
+#pragma once
+
 // https://www.geeksforgeeks.org/pimpl-idiom-in-c-with-examples/
 
-#pragma once
-
 /* |INTERFACE| User.h file */
-
-#pragma once
 
 #include <memory>
 #include <string>
@@ -17,11 +15,11 @@ class User
 {
 public:
 	// c'tor / d'tor
-	User(std::string name);
+	User(std::string&& name);
 	~User();
 
 	// assignment operator and copy constructor
-	// note: copy constructor uses swao idiom
+	// note: assignment operator uses swap idiom
 	User(const User& other);
 	User& operator=(User rhs);
 
@@ -31,10 +29,10 @@ public:
 
 private:
 	// internal implementation class
-	class Impl;
+	class UserImpl;
 
 	// pointer to the internal implementation
-	std::unique_ptr<Impl> m_pimpl;
+	std::unique_ptr<UserImpl> m_pimpl;
 };
 
 // ===========================================================================

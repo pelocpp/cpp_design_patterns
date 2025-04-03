@@ -65,7 +65,12 @@ In seiner Grundform sieht das Muster wie folgt aus:
   * Debugging - Da die Klasse aufgeteilt ist, erkennt man Details bei der Fehlersuche nicht sofort.
 
 
+---
+
 #### Ein Beispiel:
+
+[Quellcode *Car.h*](../Car.h)
+
 
 ##### Grundlagen:
 
@@ -81,8 +86,9 @@ class Car
 {
 public:
    void coolDown();
+
 private:
-   Engine engine_;
+   Engine m_engine;
 };
 ```
 
@@ -124,9 +130,10 @@ public:
    ~Car();
  
    void coolDown();
+
 private:
    class CarImpl;
-   CarImpl* impl_;
+   CarImpl* m_impl;
 };
 ```
  
@@ -149,19 +156,19 @@ public:
       /* ... */
    }
 private:
-   Engine engine_;
+   Engine m_engine;
 };
  
-Car::Car() : impl_(new CarImpl) {}
+Car::Car() : m_impl(new CarImpl) {}
  
 Car::~Car()
 {
-   delete impl_;
+   delete m_impl;
 }
  
 void Car::coolDown()
 {
-   impl_->coolDown();
+   m_impl->coolDown();
 }
 ```
 
@@ -194,7 +201,7 @@ public:
    void coolDown();
 private:
    class CarImpl;
-   std::unique_ptr<CarImpl> impl_;
+   std::unique_ptr<CarImpl> m_impl;
 };
 ```
 
@@ -214,10 +221,10 @@ public:
       /* ... */
    }
 private:
-   Engine engine_;
+   Engine m_engine;
 };
  
-Car::Car() : impl_(new CarImpl) {}
+Car::Car() : m_impl(new CarImpl) {}
 ```
 
 Es sieht so weit alles gut aus - überraschenderweise erhalten wir in diesem Zustand des Programms

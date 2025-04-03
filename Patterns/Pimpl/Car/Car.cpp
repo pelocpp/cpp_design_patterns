@@ -22,7 +22,8 @@ private:
 };
 
 Car::Car() 
-    : m_engineRaw{ new EngineImpl() }, m_engineUnique(std::make_unique<EngineImpl>())
+    : m_engineRaw{ new EngineImpl() },
+      m_engineUnique(std::make_unique<EngineImpl>())
 {}
 
 Car::~Car()
@@ -33,6 +34,7 @@ Car::~Car()
 void Car::coolDown()
 {
     m_engineRaw->coolDown();
+    // oder
     m_engineUnique->coolDown();
 }
 

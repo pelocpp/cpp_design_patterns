@@ -8,15 +8,18 @@
 
 #include <print>
 
-class User::Impl
+class User::UserImpl
 {
 public:
 	std::string m_name;
     int         m_age; 
 
 public:
-	Impl(std::string name) : m_name{ std::move(name) }, m_age{ 30 } {};
-	~Impl() {}
+	UserImpl(std::string&& name)
+		: m_name{ std::move(name) }, m_age{ 30 }
+	{}
+	
+	~UserImpl() {}
 
 	void welcomeMessage() const
 	{
@@ -25,7 +28,8 @@ public:
 };
 
 // constructor connected with our Impl structure
-User::User(std::string name) : m_pimpl{ std::make_unique<Impl>(std::move(name)) }
+User::User(std::string&& name) 
+	: m_pimpl{ std::make_unique<UserImpl>(std::move(name)) }
 {
 	m_pimpl->welcomeMessage();
 }
@@ -34,7 +38,9 @@ User::User(std::string name) : m_pimpl{ std::make_unique<Impl>(std::move(name)) 
 User::~User() = default;
 
 // assignment operator and copy constructor
-User::User(const User& other) : m_pimpl{ new Impl{ *other.m_pimpl } } {}
+User::User(const User& other) 
+	: m_pimpl{ new UserImpl{ *other.m_pimpl } }
+{}
 
 User& User::operator=(User rhs)
 {
