@@ -13,56 +13,48 @@
 namespace ConceptualExample02 {
 
     /**
-     * The Memento interface provides a way to retrieve the memento's metadata, such
-     * as creation date or name. However, it doesn't expose the Originator's state.
-     */
-    class Memento {
-    public:
-        virtual ~Memento() {};
-
-        virtual std::string getName() const = 0;
-        virtual std::string getDate() const = 0;
-        virtual std::string getState() const = 0;
-    };
-
-    /**
-     * The Concrete Memento contains the infrastructure
+     * The Memento contains the infrastructure
      * for storing the Originator's state.
      */
-    class ConcreteMemento : public Memento
+    class Memento
     {
+       friend class Originator;
+
     private:
         std::string m_state;
         std::string m_date;
 
     public:
-        ConcreteMemento(std::string state) : m_state{ state } {
-            m_date = currentTimeToString();
-        }
-
-        ~ConcreteMemento() {
-            std::cout << "d'tor ConcreteMemento" << std::endl;
-        }
-
-        /**
-         * The Originator uses this method when restoring its state.
-         */
-        virtual std::string getState() const override {
-            return m_state;
-        }
-
-        /**
-         * The rest of the methods are used by the CareTaker to display metadata.
-         */
-        virtual std::string getName() const override {
+        std::string getName() {
             return m_date + " / [" + m_state.substr(0, 9) + " ...]";
         }
 
-        virtual std::string getDate() const override {
+    private:
+        // private c'tor(s)
+        Memento(std::string state) : m_state{ state } {
+            m_date = currentTimeToString();
+        }
+
+    public:
+        // destructor is public, so CareTake can hold and release Memento objects
+        ~Memento() {
+            std::cout << "d'tor ConcreteMemento" << std::endl;
+        }
+
+    private:
+        /**
+         * The Originator uses this method when restoring its state.
+         */
+        std::string getState() {
+            return m_state;
+        }
+
+        std::string getDate() {
             return m_date;
         }
 
     private:
+        // helper method
         std::string currentTimeToString() {
             char str[32];
             std::time_t now{ std::time(0) };
@@ -76,7 +68,7 @@ namespace ConceptualExample02 {
      * defines a method for saving the state inside a memento
      * and another method for restoring the state from it.
      */
-    class Originator 
+    class Originator
     {
     private:
         std::string m_state;  // originator's state
@@ -100,8 +92,11 @@ namespace ConceptualExample02 {
         /**
          * Saves the current state inside a memento.
          */
-        std::shared_ptr<Memento> save() {
-            return std::make_shared<ConcreteMemento>(m_state);
+        std::shared_ptr<Memento>  save() {
+
+            Memento* mp = new Memento{ m_state };
+            std::shared_ptr sp = std::shared_ptr<Memento>{ mp };
+            return sp;
         }
 
         /**
@@ -115,7 +110,7 @@ namespace ConceptualExample02 {
     private:
         std::string generateRandomString(int length = 10) {
 
-            std::string_view alphanum {
+            std::string_view alphanum{
                 "0123456789"
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 "abcdefghijklmnopqrstuvwxyz"
@@ -134,7 +129,7 @@ namespace ConceptualExample02 {
     /**
      * The CareTaker doesn't depend on the Concrete Memento class. Therefore, it
      * doesn't have access to the originator's state, stored inside the memento.
-     * It works with all mementos via the base Memento interface.
+     * It works with all mementos via the public Memento interface.
      */
     class CareTaker {
 
@@ -143,17 +138,15 @@ namespace ConceptualExample02 {
         std::shared_ptr<Originator> m_originator;
 
     public:
-        CareTaker(std::shared_ptr<Originator> originator) 
-            : m_originator{ originator } 
-        {}
-
+        CareTaker(std::shared_ptr<Originator> originator)
+            : m_originator{ originator }
+        {
+        }
+  
         void backup() {
-            std::cout << std::endl << "CareTaker:  Saving Originator's state" << std::endl;
-
+            std::cout << std::endl << "CareTaker: Saving Originator's state" << std::endl;
             const auto& state = m_originator->save();
             m_mementos.push_back(state);
-
-            // m_mementos.push_back(m_originator->save());
         }
 
         void undo() {
@@ -165,7 +158,7 @@ namespace ConceptualExample02 {
             m_mementos.pop_back();
 
             std::cout << "CareTaker: Restoring state: " << memento->getName() << std::endl;
-            
+
             try {
                 m_originator->restore(memento);
             }
@@ -184,11 +177,11 @@ namespace ConceptualExample02 {
 
     static void clientCode()
     {
-        std::shared_ptr<Originator> originator { 
+        std::shared_ptr<Originator> originator{
             std::make_shared<Originator>("Original state of this Originator")
         };
 
-        std::shared_ptr<CareTaker> caretaker{ 
+        std::shared_ptr<CareTaker> caretaker{
             std::make_shared<CareTaker>(originator)
         };
 
