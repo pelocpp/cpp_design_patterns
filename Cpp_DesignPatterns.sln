@@ -25,8 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Resources\Readme_03_Design_Principles.md = Resources\Readme_03_Design_Principles.md
 		Resources\Readme_04_Criticism.md = Resources\Readme_04_Criticism.md
 		Resources\Readme_05_Catalog.md = Resources\Readme_05_Catalog.md
-		Resources\Readme_06_Catalog_AntiPattern.md = Resources\Readme_06_Catalog_AntiPattern.md
-		Resources\Readme_07_Literature.md = Resources\Readme_07_Literature.md
+		Resources\Readme_06_Comparison.md = Resources\Readme_06_Comparison.md
+		Resources\Readme_07_Catalog_AntiPattern.md = Resources\Readme_07_Catalog_AntiPattern.md
+		Resources\Readme_08_Literature.md = Resources\Readme_08_Literature.md
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AbstractFactory", "Patterns\AbstractFactory\AbstractFactory.vcxproj", "{DCE69556-F0E6-4511-8D7D-78F89CB818E4}"
