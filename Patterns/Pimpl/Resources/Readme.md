@@ -64,13 +64,14 @@ In seiner Grundform sieht das Muster wie folgt aus:
   * Komplexer Code - Es erfordert etwas Disziplin, um solche Klassen zu pflegen.
   * Debugging - Da die Klasse aufgeteilt ist, erkennt man Details bei der Fehlersuche nicht sofort.
 
-
 ---
 
 #### Ein Beispiel:
 
-[Quellcode *Car.h*](../Car.h)
-
+[Quellcode *Car.h*](../Car/Car.h)<br />
+[Quellcode *Car.cpp*](../Car/Car.cpp)<br />
+[Quellcode *Engine.h*](../Car/Engine.h)<br />
+[Quellcode *CarClient.cpp*](../Car/CarClient.cpp)
 
 ##### Grundlagen:
 
@@ -270,6 +271,15 @@ und der Anwender der Klasse in verschiedenen Dateien residieren!
 
 Damit haben einen ersten minimalistischen Durchlauf durch das *Pimpl*-Idiom beschritten!
 
+---
+
+#### Ein zweiter Beispiel:
+
+[Quellcode *User.h*](../User/User.h)<br />
+[Quellcode *User.cpp*](../User/User.cpp)<br />
+[Quellcode *UserClient.cpp*](../User/UserClient.cpp)
+
+---
 
 #### Struktur (UML):
 
