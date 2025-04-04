@@ -100,7 +100,6 @@ namespace ConceptualExample01
         std::unique_ptr<ProductBase> createProduct() const override {
 
             std::unique_ptr<ProductBase> product{ std::make_unique<ConcreteProductA>()};
-
             return product;
         }
     };
@@ -111,7 +110,6 @@ namespace ConceptualExample01
         std::unique_ptr<ProductBase> createProduct() const override {
 
             std::unique_ptr<ProductBase> product{ std::make_unique<ConcreteProductB>() };
-
             return product;
         }
     };
@@ -128,14 +126,12 @@ namespace ConceptualExample01
         std::println("Client: Not aware of the concrete creator's class (FactoryBase):");
 
         std::unique_ptr<ProductBase> product = factory.createProduct();
-
         std::println("Created {}", product->getName());
     }
 
     static void clientCode2(const FactoryBase& factory) {
 
         std::println("Client: Not aware of the concrete creator's class (FactoryBase):");
-
         std::println("{}", factory.someOperation());
     }
 }

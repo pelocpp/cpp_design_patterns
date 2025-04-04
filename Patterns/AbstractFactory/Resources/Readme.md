@@ -71,6 +71,35 @@ Working on Concrete Product B2
 
 ---
 
+#### &bdquo;Real-World&rdquo; Beispiel:
+
+Ein Klassiker für dieses Entwurfsmuster ist die Java Swing Oberflächenbibliothek und hier im
+Speziellen der Aspekt "*Look and Feel*".
+Für Oberflächensteuerelemente wie Listen, Comboboxen oder Eingabefelder gibt es hier verschiedene Varianten.
+Diese Varianten sind in ihrer Grundfunktionalität gleich, unterscheiden sich aber in ihrem Aussehen
+und teilweise auch in ihrem Verhalten.
+
+<img src="AbstractFactory.png" width="600" />
+
+*Abbildung* 1: Eine abstrakte Fabrik für die Hantierung unterschiedlicher graphischer Steuerelemente.
+
+Für jedes *Look and Feel* gibt es eine eigene Familie an graphischen Steuerelementen und damit
+eine eigenen Fabrik. Abstrahiert werden all diese Fabriken durch eine zentral definierte abstrakte Fabrik.
+Nur um einen Eindruck zu erhalten, finden Sie in Tabelle 1 eine - nicht vollständige - Auflistung
+der unterschiedlichen Bibliotheken, also sprich konkreten UI-Fabriken vor:
+
+| Plattform | Look and Feel |
+|:-------------- |----|
+| Cross Platform Look And Feel | Metal |
+| Solaris, Linux with GTK+ 2.2 or later | GTK+ |
+| Other Solaris, Linux | Motif | 
+| Classic Windows | Windows | 
+| HP UX | HP* | 
+
+Tabelle 1: Verfügbare *Look and Feel* UI-Fabriken.
+
+---
+
 #### Hinweis:
 
 Die beiden Entwurfsmuster *Abstract Factory* und *Factory Method* sind nicht 
@@ -112,96 +141,32 @@ Die Anregung zum konzeptionellen Beispiel finden Sie unter
 
 vor.
 
-#### &bdquo;Real-World&rdquo; Beispiel:
-
-Ein Klassiker für dieses Entwurfsmuster ist die Java Swing Oberflächenbibliothek und hier im
-Speziellen der Aspekt "*Look and Feel*".
-Für Oberflächensteuerelemente wie Listen, Comboboxen oder Eingabefelder gibt es hier verschiedene Varianten.
-Diese Varianten sind in ihrer Grundfunktionalität gleich, unterscheiden sich aber in ihrem Aussehen
-und teilweise auch in ihrem Verhalten.
-
-<img src="AbstractFactory.png" width="600" />
-
-*Abbildung* 1: Eine abstrakte Fabrik für die Hantierung unterschiedlicher graphischer Steuerelemente.
-
-Für jedes *Look and Feel* gibt es eine eigene Familie an graphischen Steuerelementen und damit
-eine eigenen Fabrik. Abstrahiert werden all diese Fabriken durch eine zentral definierte abstrakte Fabrik.
-Nur um einen Eindruck zu erhalten, finden Sie in Tabelle 1 eine - nicht vollständige - Auflistung
-der unterschiedlichen Bibliotheken, also sprich konkreten UI-Fabriken vor:
-
-| Plattform | Look and Feel |
-|:-------------- |----|
-| Cross Platform Look And Feel | Metal |
-| Solaris, Linux with GTK+ 2.2 or later | GTK+ |
-| Other Solaris, Linux | Motif | 
-| Classic Windows | Windows | 
-| HP UX | HP* | 
-
-Tabelle 1: Verfügbare *Look and Feel* UI-Fabriken.
-
+---
 
 #### Zweites &bdquo;Real-World&rdquo; Beispiel:
 
 Im &bdquo;Real-World&rdquo; Beispiel zu diesem Entwurfsmuster wird
 die Herstellung verschiedener Fahrzeugtypen verschiedener Hersteller betrachtet.
 Es gibt eine abstrakte Fabrikschnittstelle namens `IVehicleFactory` (*Abstract Factory*)
-und zwei konkrete Fabrikimplementierungen namens `FordFactory`  und `MitsubishiFactory`. 
-`IVehicleFactory` verfügt über drei Methoden `createEconomyCar`, `createRacingCar` und `createSUV`,
-mit denen `Vehicle`-Objekte zurückgegeben werden.
+und drei konkrete Fabrikimplementierungen namens `BikeFactory`, `CarFactory` und `TruckFactory`. 
+`IVehicleFactory` verfügt über eine Methode `create`,
+mit der `Vehicle`-Objekte zurückgegeben werden.
 Die Klasse `Vehicle` ist eine abstrakte Basisklasse für alle konkreten Produkte.
 
-Die Ausgaben des &bdquo;Real-World&rdquo;-Beispiels lauten:
+---
 
-```
-Model: Ford Focus
-  Engine: 1.0 L EcoBoost I3
-  Body: 5-door hatchback
-  Doors: 5
-  Transmission: 6-speed PowerShift automatic
-  Accessories:
-    Car Cover
-
-Model: Ford GT1
-  Engine: 5.4 L Supercharged Modular V8
-  Body: Roadster
-  Doors: 2
-  Transmission: 6-speed manual
-  Accessories:
-
-Model: Ford Explorer
-  Engine: 4.0 L Cologne V6
-  Body: SUV
-  Doors: 5
-  Transmission: 5-speed M50D-R1 manual
-  Accessories:
-    Car Cover
-    Sun Shade
-
-Model: Mitsubishi I
-  Engine: 659 cc DOHC MIVEC
-  Body: Kei car
-  Doors: 5
-  Transmission: 6-speed automatic
-  Accessories:
-
-Model: Mitsubishi Lancer Evo IX
-  Engine: 4B10 1.8 L DOHC I4
-  Body: 4-door sedar
-  Doors: 4
-  Transmission: 6-speed twin-clutch transmission
-  Accessories:
-
-Model: Mitsubishi Pajero Super Exceed
-  Engine: 6G75 3.8 V6
-  Body: SUV
-  Doors: 5
-  Transmission: 5-speed manual
-  Accessories:
-```
+## Literaturhinweise
 
 Das Beispiel ist portiert von C# nach C++ bzgl. der Vorlage unter
 
-[https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#AbstractFactory)
+[https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#AbstractFactory).
+
+Ein Beispiel zu verschiedenen Themes und grafischen Steuerelementen kann man
+[hier](https://medium.com/@lokeshbihani99/abstract-factory-pattern-in-c-f0ed420fc9fb)
+nachlesen.
+
+Das Beispiel zu Fahrrädern, Autos und Trucks stammt aus diesem [Artikel](https://medium.com/@kamresh485/abstract-factory-pattern-in-c-ddc98f547801).
+
 
 ---
 

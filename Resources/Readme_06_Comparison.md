@@ -11,6 +11,7 @@
   * [Vergleich Strategy Pattern vs. Adapter Pattern](#link3)
   * [Vergleich Strategy Pattern vs. Template Method Pattern](#link4)
   * [Vergleich Observer Pattern vs. Iterator Pattern](#link5)
+  * [Vergleich Factory Method Pattern vs. Abstract Factory Pattern](#link6)
 
 ---
 
@@ -118,6 +119,48 @@ während das Adapter Pattern inkompatibele Schnittstellen zusammenarbeiten lässt.
 
   * Verwendet einen Iterator, um einen Container zu durchlaufen und auf dessen Elemente zuzugreifen
   * Entkoppelt Algorithmen von Containern
+
+---
+
+## Vergleich Factory Method Pattern vs. Abstract Factory Pattern <a name="link6"></a>
+
+Das Factory Method Pattern und das Abstract Factory Pattern sind beides Entwurfsmuster für die Objekterstellung.
+Sie weisen jedoch einige wesentliche Unterschiede auf:
+
+#### Factory Method Pattern
+
+  * *Zweck*: Definiert eine Schnittstelle zur Objekterstellung, erlaubt aber Unterklassen, den Typ der zu erstellenden Objekte zu ändern.
+
+  * *Klassendiagramm*: In der Regel umfasst es eine einzelne Erstellerklasse und mehrere konkrete Produktklassen.
+
+  * *Anwendungsfall*: Nützlich, wenn eine Klasse die zu erstellende Objektklasse nicht vorhersehen kann oder wenn eine Klasse möchte, dass ihre Unterklassen die zu erstellenden Objekte festlegen.
+
+  * *Beispiel*: Ein Dokumenteditor, in dem verschiedene Dokumenttypen (z. B. Word, PDF) mithilfe der Methode `createDocument()` erstellt werden können, die in den Unterklassen unterschiedlich implementiert ist.
+
+#### Abstract Factory Pattern
+
+  * *Zweck*: Bietet eine Schnittstelle zum Erstellen von Familien verwandter oder abhängiger Objekte, ohne deren konkrete Klassen anzugeben.
+
+  * *Klassendiagramm*: Umfasst mehrere Factory-Klassen, die jeweils eine Familie verwandter Produkte erzeugen können.
+
+  * *Anwendungsfall*: Nützlich, wenn ein System unabhängig von der Erstellung, Zusammensetzung und Darstellung seiner Produkte sein muss oder mit mehreren Produktfamilien arbeiten muss.
+
+  * *Beispiel*: Ein UI-Toolkit, das mehrere Erscheinungsbilder unterstützt (z. B. Windows, macOS), wobei jedes Erscheinungsbild eine Familie verwandter Objekte wie Buttons, Checkboxes usw. darstellt.
+
+#### Vergleichszusammenfassung:
+
+  * *Umfang*:
+  * Die Factory-Methode befasst sich mit der Erstellung eines einzelnen Produkts.
+  * Die abstrakte Factory befasst sich mit der Erstellung von Familien verwandter Produkte.
+
+  * *Komplexität*:
+  * Die Factory-Methode ist einfacher und konzentriert sich auf ein einzelnes Produkt.
+  * Die abstrakte Factory ist komplexer, da sie mehrere Produkte verarbeitet.
+
+  * *Flexibilität*:
+  * Das Factory Method Pattern ermöglicht es Unterklassen, den genauen Typ des zu erstellenden Produkts zu bestimmen.
+  * Das Abstract Factory Pattern stellt sicher, dass die von einer Fabrik erstellten Produkte miteinander kompatibel sind.
+
 
 ---
 

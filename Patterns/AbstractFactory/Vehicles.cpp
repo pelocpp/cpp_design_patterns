@@ -3,222 +3,185 @@
 // ===========================================================================
 
 #include <iostream>
-#include <sstream>
-#include <string>
-#include <list>
+//#include <list>
+#include <map>
 #include <memory>
+//#include <sstream>
+#include <string>
+#include <print>
 
 // ===========================================================================
 // abstract product
 
+enum class VehicleType : int
+{
+    Bike,
+    Car,
+    Truck
+};
+
 class Vehicle
 {
-protected:
-    std::string            m_model;
-    std::string            m_engine;
-    std::string            m_transmission;
-    std::string            m_body;
-    int                    m_doors;
-    std::list<std::string> m_accessories;
-
 private:
-    // c'tors
-    Vehicle() = delete; // class shoud be abstract
+    int  m_numGears;
+    bool m_reverseGear;
+    int  m_numTires;
 
 public:
-    Vehicle(std::string model, std::string engine,
-        std::string transmission, std::string body, int doors) :
-        m_model{ model },
-        m_engine{ engine },
-        m_transmission{ transmission },
-        m_body{ body },
-        m_doors{ doors }
+    Vehicle(int numGears, bool reverseGear, int numTires) :
+        m_numGears{ numGears }, m_reverseGear{ reverseGear }, m_numTires{ numTires }
     {}
 
-    // public interface
-    void showInfo()
-    {
-        std::cout << (*this)() << std::endl;
+    virtual void moveForward() = 0;
+    virtual bool moveBackward() = 0;
+    virtual void turnLeft() = 0;
+    virtual void turnRight() = 0;
+};
+
+// ===========================================================================
+// concrete products
+
+class Bike : public Vehicle
+{
+public:
+    Bike(int numGears) : Vehicle{ numGears, false, 2 } {}
+
+    void moveForward() override {
+        std::cout << "accelerate using handle" << std::endl;
     }
 
-    std::string operator ()() {
-        std::ostringstream oss;
+    bool moveBackward() override {
+        std::cout << "moving slowly backwards using the first gear" << std::endl;
+        return false;
+    }
 
-        oss << "Model: " << m_model << '\n';
-        oss << "  Engine: " << m_engine << '\n';
-        oss << "  Body: " << m_body << '\n';
-        oss << "  Doors: " << m_doors << '\n';
-        oss << "  Transmission: " << m_transmission << '\n';
-        oss << "  Accessories: " << '\n';
+    void turnLeft() override {
+        std::cout << "move handle to 45 degrees clockwise" << std::endl;
+    }
 
-        for (std::string accessory : m_accessories) {
-            oss << "    " << accessory << '\n';
-        }
+    void turnRight() override {
+        std::cout << "move handle to 45 degrees anti-clockwise" << std::endl;
+    }
+};
 
-        return oss.str();
+class Car : public Vehicle
+{
+public:
+    Car(int numGears) : Vehicle{ numGears, true, 4 } {}
+
+    void moveForward() override {
+        std::cout << "accelerate using paddle" << std::endl;
+    }
+
+    bool moveBackward() override {
+        std::cout << "switch to reverse gear and accelerate" << std::endl;
+        return true;
+    }
+
+    void turnLeft() override {
+        std::cout << "move steering wheel to 45 degrees clockwise" << std::endl;
+    }
+
+    void turnRight() override {
+        std::cout << "move steering wheel to 45 degrees anti-clockwise" << std::endl;
+    }
+};
+
+class Truck : public Vehicle
+{
+public:
+    Truck(int numGears) : Vehicle{ numGears, true, 6 } {}
+
+    void moveForward() override {
+        std::cout << "accelerate using paddle" << std::endl;
+    }
+
+    bool moveBackward() override {
+        std::cout << "switch to reverse gear and accelerate" << std::endl;
+        return true;
+    }
+
+    void turnLeft() override {
+        std::cout << "move steering wheel to 45 degrees clockwise" << std::endl;
+    }
+
+    void turnRight() override {
+        std::cout << "move steering wheel to 45 degrees anti-clockwise" << std::endl;
     }
 };
 
 // ===========================================================================
-// abstract factory
+// abstract factory interface
 
 class IVehicleFactory
 {
 public:
     virtual ~IVehicleFactory() {}
 
-    virtual std::shared_ptr<Vehicle> createEconomyCar() = 0;
-    virtual std::shared_ptr<Vehicle> createRacingCar() = 0;
-    virtual std::shared_ptr<Vehicle> createSUV() = 0;
-};
-
-// ===========================================================================
-// concrete products
-
-class FordExplorer : public Vehicle
-{
-public:
-    FordExplorer() : Vehicle(
-        "Ford Explorer",
-        "4.0 L Cologne V6",
-        "5-speed M50D-R1 manual",
-        "SUV",
-        5
-    ) {
-        m_accessories.push_back("Car Cover");
-        m_accessories.push_back("Sun Shade");
-    }
-};
-
-class FordFocus : public Vehicle
-{
-public:
-    FordFocus() : Vehicle(
-        "Ford Focus",
-        "1.0 L EcoBoost I3",
-        "6-speed PowerShift automatic",
-        "5-door hatchback",
-        5
-    ) {
-        m_accessories.push_back("Car Cover");
-    }
-};
-
-class FordGT1 : public Vehicle
-{
-public:
-    FordGT1() : Vehicle(
-        "Ford GT1",
-        "5.4 L Supercharged Modular V8",
-        "6-speed manual",
-        "Roadster",
-        2
-    ) {
-    }
-};
-
-class MitsubishiPajero : public Vehicle
-{
-public:
-    MitsubishiPajero() : Vehicle(
-        "Mitsubishi Pajero Super Exceed",
-        "6G75 3.8 V6",
-        "5-speed manual",
-        "SUV",
-        5
-    ) {
-    }
-};
-
-class MitsubishiI : public Vehicle
-{
-public:
-    MitsubishiI() : Vehicle(
-        "Mitsubishi I",
-        "659 cc DOHC MIVEC",
-        "6-speed automatic",
-        "Kei car",
-        5
-    ) {
-    }
-};
-
-class MitsubishiLancerEvoIX : public Vehicle
-{
-public:
-    MitsubishiLancerEvoIX() : Vehicle(
-        "Mitsubishi Lancer Evo IX",
-        "4B10 1.8 L DOHC I4",
-        "6-speed twin-clutch transmission",
-        "4-door sedar",
-        4
-    ) {
-    }
+    virtual std::unique_ptr<Vehicle> create(int numGears) const = 0;
 };
 
 // ===========================================================================
 // concrete factories
 
-class FordFactory : public IVehicleFactory
-{
+class BikeFactory : public IVehicleFactory {
 public:
-    std::shared_ptr<Vehicle> createEconomyCar()
+    std::unique_ptr<Vehicle> create(int numGears) const override
     {
-        return std::make_shared<FordFocus>();
-    }
-
-    std::shared_ptr<Vehicle> createRacingCar()
-    {
-        return std::make_shared<FordGT1>();
-    }
-
-    std::shared_ptr<Vehicle> createSUV()
-    {
-        return std::make_shared<FordExplorer>();
+        return std::make_unique<Bike>(numGears);
     }
 };
 
-class MitsubishiFactory : public IVehicleFactory
-{
+class CarFactory : public IVehicleFactory {
 public:
-    std::shared_ptr<Vehicle> createEconomyCar()
+    std::unique_ptr<Vehicle> create(int numGears) const override
     {
-        return std::make_shared<MitsubishiI>();
+        return std::make_unique<Car>(numGears);
     }
+};
 
-    std::shared_ptr<Vehicle> createRacingCar()
+class TruckFactory : public IVehicleFactory {
+public:
+    std::unique_ptr<Vehicle> create(int numGears) const override
     {
-        return std::make_shared<MitsubishiLancerEvoIX>();
-    }
-
-    std::shared_ptr<Vehicle> createSUV()
-    {
-        return std::make_shared<MitsubishiPajero>();
+        return std::make_unique<Truck>(numGears);
     }
 };
 
 // ===========================================================================
 
-void test_vehicles() {
+class VehicleCreator
+{
+private:
+    std::map<VehicleType, std::unique_ptr<IVehicleFactory>> factories;
 
-    std::list<std::shared_ptr<IVehicleFactory>> factories{
-        std::make_shared<FordFactory>(),
-        std::make_shared<MitsubishiFactory>()
-    };
-
-    for (std::shared_ptr<IVehicleFactory> factory : factories) {
-
-        std::shared_ptr<Vehicle> vehicle;
-
-        vehicle = factory->createEconomyCar();
-        vehicle->showInfo();
-
-        vehicle = factory->createRacingCar();
-        vehicle->showInfo();
-
-        vehicle = factory->createSUV();
-        vehicle->showInfo();
+public:
+    VehicleCreator()
+    {
+        factories[VehicleType::Bike] = std::make_unique<BikeFactory>();
+        factories[VehicleType::Car] = std::make_unique<CarFactory>();
+        factories[VehicleType::Truck] = std::make_unique<TruckFactory>();
     }
+
+    std::unique_ptr<Vehicle> create(VehicleType type, int numGears) {
+        return factories[type]->create(numGears);
+    }
+};
+
+// ===========================================================================
+
+void test_vehicles()
+{
+    auto vehicleCreator{ std::make_unique<VehicleCreator>() };
+
+    std::unique_ptr<Vehicle> vehicle{ 
+        vehicleCreator->create(VehicleType::Bike, 5) 
+    };
+    
+    vehicle->moveForward();
+    vehicle->moveBackward();
+    vehicle->turnLeft();
+    vehicle->turnRight();
 }
 
 // ===========================================================================

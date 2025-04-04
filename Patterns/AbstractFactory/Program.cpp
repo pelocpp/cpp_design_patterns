@@ -10,8 +10,8 @@ void test_vehicles();
 
 int main()
 {
-    test_conceptual_example();
-    test_gui_factory();
+    //test_conceptual_example();
+    //test_gui_factory();
     test_vehicles();
     return 0;
 }
