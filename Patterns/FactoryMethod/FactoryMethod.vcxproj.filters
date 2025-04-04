@@ -35,11 +35,14 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample.cpp">
+    <ClCompile Include="ConceptualExample01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
     <ClCompile Include="RealWorldFactoryMethod.cpp">
       <Filter>Source Files\RealWorldFactoryMethod</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample02.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

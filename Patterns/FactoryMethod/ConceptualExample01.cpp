@@ -1,14 +1,13 @@
 // ===========================================================================
-// ConceptualExample02.cpp // Factory Method
+// ConceptualExample01.cpp // Factory Method
 // ===========================================================================
 
-// #include <iostream>
 #include <string>
 #include <memory>
 #include <print>
 
-namespace ConceptualExample02 {
-
+namespace ConceptualExample01
+{
     /**
      * Product Interface:
      * The Product Interface declares the operations
@@ -145,9 +144,9 @@ namespace ConceptualExample02 {
  * The Application picks a factory's type
  * depending on the configuration or environment.
  */
-static void test_conceptual_example_02_a() {
+static void test_conceptual_example_01_a() {
 
-    using namespace ConceptualExample02;
+    using namespace ConceptualExample01;
 
     std::println("Example: Launched with ConcreteFactory A:");
     ConcreteFactoryA factoryA;
@@ -160,9 +159,9 @@ static void test_conceptual_example_02_a() {
     std::println();
 }
 
-static void test_conceptual_example_02_b() {
+static void test_conceptual_example_01_b() {
 
-    using namespace ConceptualExample02;
+    using namespace ConceptualExample01;
 
     std::println("Example: Launched with ConcreteFactory A:");
     ConcreteFactoryA factoryA;
@@ -175,10 +174,10 @@ static void test_conceptual_example_02_b() {
     std::println();
 }
 
-void test_conceptual_example_02()
+void test_conceptual_example_01()
 {
-    test_conceptual_example_02_a();
-    test_conceptual_example_02_b();
+    test_conceptual_example_01_a();
+    test_conceptual_example_01_b();
 }
 
 // ===========================================================================

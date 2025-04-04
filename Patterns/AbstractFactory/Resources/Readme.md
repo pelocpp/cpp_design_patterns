@@ -19,7 +19,7 @@
 Das *Abstract Factory* Pattern ist ein Entwurfsmuster,
 mit dem Gruppen miteinander verwandter Objekte erstellt werden können,
 ohne dass die genauen konkreten Klassen angegeben werden müssen, die dabei verwendet werden.
-Eine von mehreren Factory-Klassen generiert die jeweiligen Objektmengen.
+Eine von mehreren Factory-Klassen generiert die jeweiligen Objekte.
 
 #### Problem:
 
@@ -61,12 +61,12 @@ Die Ausgaben des konzeptionellen Beispiels lauten:
 
 ```
 Client: Testing client code with the first factory type:
-The result of the product B1.
-The result of the B1 collaborating with ( The result of the product A1. )
+Working on Concrete Product A1
+Working on Concrete Product B1
 
 Client: Testing the same client code with the second factory type:
-The result of the product B2.
-The result of the B2 collaborating with ( The result of the product A2. )
+Working on Concrete Product A2
+Working on Concrete Product B2
 ```
 
 ---

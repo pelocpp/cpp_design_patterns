@@ -90,12 +90,12 @@ Es gibt also **zwei** Vererbungshierarchien:
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample.cpp) &ndash; Einfaches Beispiel.
+[Quellcode](../ConceptualExample01.cpp) &ndash; Einfaches Beispiel.<br />
+[Quellcode](../ConceptualExample02.cpp) &ndash; Beispiel zu heißen Getränken.
 
 ---
 
 #### Beispiele:
-
 
 Jeder Container der Standard Template Library verfügt über acht Factory-Funktionen zum Generieren verschiedener Iteratoren.
 
@@ -108,13 +108,12 @@ Die mit `c` beginnenden Fabrikfunktionen geben konstante Iteratoren zurück.
 
 ---
 
-
 #### &bdquo;Real-World&rdquo; Beispiel:
 
-[Quellcode 3](../RealWorldFactoryMethod.cpp) - *Real-World*-Beispiel (`ITelevision`), das exemplarisch mehrere *Factory Methods* betrachtet.<br/>
+[Quellcode](../RealWorldFactoryMethod.cpp) - *Real-World*-Beispiel (`ITelevision`), das exemplarisch mehrere *Factory Methods* betrachtet.<br/>
 
-In *Quellcode 3* findet sich ein Programm mit den Klassen `ITelevision`, `LEDTelevision`, `OledTelevision`,
-`AbstractTVFactory`, `LEDTVFactory` und `OledTVFactory` vor.
+Im &bdquo;Real-World&rdquo; Beispiel finden Sie ein Programm
+mit den Klassen `ITelevision`, `LEDTelevision`, `OledTelevision`, `AbstractTVFactory`, `LEDTVFactory` und `OledTVFactory` vor.
 Studieren Sie die Methoden `manufactureTelevision`, `assembleTelevision`, `shippingCharge` 
 und `productionCharge` der Klasse `AbstractTVFactory`.
 Beschreiben Sie, wie diese Methoden zur Namensgebung des *Factory Method Patterns* beitragen.
