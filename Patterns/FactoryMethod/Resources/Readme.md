@@ -19,7 +19,7 @@
 ###### In einem Satz:
 
 &bdquo;Erstellung von Objekten auf Basis einer Schnittstelle in einer Oberklasse,
-die es den Unterklassen aber erlaubt, den Typ der zu erstellenden Objekte zu ändern.&rdquo;
+die es den Unterklassen aber erlaubt, den Typ der zu erstellenden Objekte zu konkretisieren.&rdquo;
 
 Das *Factory Method Pattern* ist ein Entwurfsmuster, mit dem Objekte erstellt werden können,
 ohne den Objekttyp anzugeben, der hierzu verwendet werden soll.
@@ -30,8 +30,12 @@ Zum Erstellen des Objekts wird eine Schnittstelle benötigt.
 Die Unterklassen entscheiden, welche Klasse instanziiert werden soll.
 Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterklassen verschieben.
 
-**Konsequenz**: *Factory Methoden* verhindern, dass anwendungsspezifische Klassen
-in der Anwendung in Erscheinung treten. 
+**Konsequenz**:<br />
+  * *Factory Methoden* verhindern, dass anwendungsspezifische Klassen in der Anwendung in Erscheinung treten. 
+  * Das *Factory Method* Pattern ermöglicht es dem Clientcode, mit abstrakten Klassen und Schnittstellen zu arbeiten,
+  ohne die konkreten Klassen zu kennen, die diese Schnittstellen implementieren.
+  Dies fördert eine lose Kopplung und macht den Code flexibler und erweiterbar.
+
 
 #### Lösung:
 
@@ -86,9 +90,7 @@ Es gibt also **zwei** Vererbungshierarchien:
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfaches Beispiel
-
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Beispiel, das "konzeptionell" den Einsatz von *Factory Methods* aufzeigt.
+[Quellcode](../ConceptualExample.cpp) &ndash; Einfaches Beispiel.
 
 ---
 

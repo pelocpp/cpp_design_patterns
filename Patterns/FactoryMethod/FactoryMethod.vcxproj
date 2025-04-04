@@ -99,6 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,9 +144,8 @@
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConceptualExample02.cpp" />
+    <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Program.cpp" />
-    <ClCompile Include="ConceptualExample01.cpp" />
     <ClCompile Include="RealWorldFactoryMethod.cpp" />
   </ItemGroup>
   <ItemGroup>

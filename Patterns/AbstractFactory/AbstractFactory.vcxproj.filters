@@ -16,7 +16,10 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{022de622-adf2-4a00-a0fd-900455a37523}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\VehiclesFactory">
+    <Filter Include="Source Files\GUI_Factory">
+      <UniqueIdentifier>{37dd3066-9d4f-4219-9fd3-5fb8d2624931}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vehicles_Factory">
       <UniqueIdentifier>{64476307-df44-4216-866d-412c11d86c86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -33,10 +36,13 @@
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
     <ClCompile Include="Vehicles.cpp">
-      <Filter>Source Files\VehiclesFactory</Filter>
+      <Filter>Source Files\Vehicles_Factory</Filter>
     </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI_Factory.cpp">
+      <Filter>Source Files\GUI_Factory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
