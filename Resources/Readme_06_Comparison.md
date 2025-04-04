@@ -149,18 +149,22 @@ Sie weisen jedoch einige wesentliche Unterschiede auf:
 
 #### Vergleichszusammenfassung:
 
-  * *Umfang*:
-  * Die Factory-Methode befasst sich mit der Erstellung eines einzelnen Produkts.
-  * Die abstrakte Factory befasst sich mit der Erstellung von Familien verwandter Produkte.
+*Umfang*:<br />
+  * Das Factory Method Pattern befasst sich mit der Erstellung eines einzelnen Produkts.
+  * Das Abstract Factory Pattern befasst sich mit der Erstellung von Familien verwandter Produkte.
 
-  * *Komplexität*:
+*Komplexität*:<br />
   * Die Factory-Methode ist einfacher und konzentriert sich auf ein einzelnes Produkt.
   * Die abstrakte Factory ist komplexer, da sie mehrere Produkte verarbeitet.
 
-  * *Flexibilität*:
+*Flexibilität*:<br />
   * Das Factory Method Pattern ermöglicht es Unterklassen, den genauen Typ des zu erstellenden Produkts zu bestimmen.
   * Das Abstract Factory Pattern stellt sicher, dass die von einer Fabrik erstellten Produkte miteinander kompatibel sind.
 
+
+Diese Muster sind von grundlegender Bedeutung für das Verständnis,
+wie Systeme mit austauschbaren Komponenten entworfen und Objekte
+auf eine Weise erstellt werden, die Flexibilität und Wiederverwendbarkeit fördert.
 
 ---
 

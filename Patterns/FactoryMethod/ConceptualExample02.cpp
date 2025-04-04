@@ -11,8 +11,11 @@ namespace ConceptualExample02
     /**
      * Product Interface
      */
-    struct HotDrink
+    class HotDrink
     {
+    public:
+        virtual ~HotDrink() {}
+
         virtual void prepare(int volume) = 0;
         virtual void drink() = 0;
         virtual std::string name() = 0;
@@ -21,7 +24,7 @@ namespace ConceptualExample02
     /**
      * Concrete Products provide various implementations of the Product interface.
      */
-    struct Tea : HotDrink
+    class Tea : public HotDrink
     {
         void prepare(int volume) override
         {
@@ -39,7 +42,7 @@ namespace ConceptualExample02
         }
     };
 
-    struct Coffee : HotDrink
+    class Coffee : public HotDrink
     {
         void prepare(int volume) override
         {
@@ -85,8 +88,11 @@ namespace ConceptualExample02
      * The FactoryBase's subclasses usually provide the implementation of this method.
      */
 
-    struct HotDrinkFactory
+    class HotDrinkFactory
     {
+    public:
+        virtual ~HotDrinkFactory() {}
+
         virtual std::unique_ptr<HotDrink> makeDrink() const = 0;
     };
 
@@ -95,7 +101,7 @@ namespace ConceptualExample02
      * in order to change the resulting product's type.
      */
 
-    struct CoffeeFactory : HotDrinkFactory
+    class CoffeeFactory : public HotDrinkFactory
     {
         std::unique_ptr<HotDrink> makeDrink() const override
         {
@@ -103,7 +109,7 @@ namespace ConceptualExample02
         }
     };
 
-    struct TeaFactory : HotDrinkFactory
+    class TeaFactory : public HotDrinkFactory
     {
         std::unique_ptr<HotDrink> makeDrink() const override
         {
@@ -115,7 +121,7 @@ namespace ConceptualExample02
 
         std::println("Client: Not aware of the concrete creator's class (HotDrinkFactory):");
 
-        std::unique_ptr<HotDrink> beverage = factory.makeDrink();
+        std::unique_ptr<HotDrink> beverage{ factory.makeDrink() };
         std::println("Created {}", beverage->name());
         beverage->drink();
     }
@@ -132,11 +138,11 @@ void test_conceptual_example_02()
 
     std::println("Example: Launched with CoffeeFactory:");
 
-    CoffeeFactory coffeeFactory;
+    CoffeeFactory coffeeFactory{};
     clientCode(coffeeFactory);
     std::println();
 
-    TeaFactory teaFactory;
+    TeaFactory teaFactory{};
     clientCode(teaFactory);
     std::println();
 }

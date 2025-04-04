@@ -2,13 +2,10 @@
 // Abstract Factory // Example 'Vehicles'
 // ===========================================================================
 
-#include <iostream>
-//#include <list>
 #include <map>
 #include <memory>
-//#include <sstream>
-#include <string>
 #include <print>
+#include <string>
 
 // ===========================================================================
 // abstract product
@@ -47,20 +44,20 @@ public:
     Bike(int numGears) : Vehicle{ numGears, false, 2 } {}
 
     void moveForward() override {
-        std::cout << "accelerate using handle" << std::endl;
+        std::println("accelerate using handle");
     }
 
     bool moveBackward() override {
-        std::cout << "moving slowly backwards using the first gear" << std::endl;
+        std::println("moving slowly backwards using the first gear");
         return false;
     }
 
     void turnLeft() override {
-        std::cout << "move handle to 45 degrees clockwise" << std::endl;
+        std::println("move handle to 45 degrees clockwise");
     }
 
     void turnRight() override {
-        std::cout << "move handle to 45 degrees anti-clockwise" << std::endl;
+        std::println("move handle to 45 degrees anti-clockwise");
     }
 };
 
@@ -70,20 +67,20 @@ public:
     Car(int numGears) : Vehicle{ numGears, true, 4 } {}
 
     void moveForward() override {
-        std::cout << "accelerate using paddle" << std::endl;
+        std::println("accelerate using paddle");
     }
 
     bool moveBackward() override {
-        std::cout << "switch to reverse gear and accelerate" << std::endl;
+        std::println("switch to reverse gear and accelerate");
         return true;
     }
 
     void turnLeft() override {
-        std::cout << "move steering wheel to 45 degrees clockwise" << std::endl;
+        std::println("move steering wheel to 45 degrees clockwise");
     }
 
     void turnRight() override {
-        std::cout << "move steering wheel to 45 degrees anti-clockwise" << std::endl;
+        std::println("move steering wheel to 45 degrees anti-clockwise");
     }
 };
 
@@ -93,20 +90,20 @@ public:
     Truck(int numGears) : Vehicle{ numGears, true, 6 } {}
 
     void moveForward() override {
-        std::cout << "accelerate using paddle" << std::endl;
+        std::println("accelerate using paddle");
     }
 
     bool moveBackward() override {
-        std::cout << "switch to reverse gear and accelerate" << std::endl;
+        std::println("switch to reverse gear and accelerate");
         return true;
     }
 
     void turnLeft() override {
-        std::cout << "move steering wheel to 45 degrees clockwise" << std::endl;
+        std::println("move steering wheel to 45 degrees clockwise");
     }
 
     void turnRight() override {
-        std::cout << "move steering wheel to 45 degrees anti-clockwise" << std::endl;
+        std::println("move steering wheel to 45 degrees anti-clockwise");
     }
 };
 
