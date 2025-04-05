@@ -38,7 +38,7 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample.cpp">
+    <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
     <ClCompile Include="PaintBrush.cpp">
@@ -46,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="Trees.cpp">
       <Filter>Source Files\Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample01.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

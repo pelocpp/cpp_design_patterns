@@ -81,10 +81,8 @@ Das *Conceptual Example* liegt in drei Varianten vor:
   * Variante 2: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
   * Variante 3: Wie Variante 2, aber mit `std::enable_shared_from_this<>` Mechanismus.
 
-[Quellcode 1](../ConceptualExample01.cpp)
-
-[Quellcode 2](../ConceptualExample02.cpp)
-
+[Quellcode 1](../ConceptualExample01.cpp)<br />
+[Quellcode 2](../ConceptualExample02.cpp)<br />
 [Quellcode 3](../ConceptualExample03.cpp)
 
 ---

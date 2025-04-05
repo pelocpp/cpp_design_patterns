@@ -87,8 +87,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) - Variante mit "Raw"-Zeiger
-
+[Quellcode 1](../ConceptualExample01.cpp) - Variante mit "Raw"-Zeiger<br />
 [Quellcode 2](../ConceptualExample02.cpp) - Variante mit `std::shared_ptr`-Zeiger
 
 ---

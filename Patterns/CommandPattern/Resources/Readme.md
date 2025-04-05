@@ -67,11 +67,9 @@ ein praxisnahes Beispiel vor.
 
 ---
 
-
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample_01.cpp) &ndash; Sehr einfaches Beispiel
-
+[Quellcode 1](../ConceptualExample_01.cpp) &ndash; Sehr einfaches Beispiel<br />
 [Quellcode 2](../ConceptualExample_02.cpp) &ndash; Ein etwas ausführlicheres Beispiel
 
 ---

@@ -89,10 +89,8 @@ Das *Conceptual Example* liegt in drei Varianten vor:
   * Variante 3: Prinzipiell wie Variante 2, nur: Die Entscheidung, welche empfangende Komponente
     aufzurufen ist, wird dieses Mal über das Absenderobjekt getroffen (und nicht über eine Parameterkennung).
 
-[Quellcode 1](../ConceptualExample01.cpp)
-
-[Quellcode 2](../ConceptualExample02.cpp)
-
+[Quellcode 1](../ConceptualExample01.cpp)<br />
+[Quellcode 2](../ConceptualExample02.cpp)<br />
 [Quellcode 3](../ConceptualExample03.cpp)
 
 ---

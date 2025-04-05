@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Flyweight Pattern (using smart pointer)
+// ConceptualExample02.cpp // Flyweight Pattern (using smart pointer)
 // ===========================================================================
 
 #include <iostream>
@@ -7,9 +7,8 @@
 #include <string>
 #include <unordered_map>
 
-
-// very simple example of flyweight pattern
-namespace ConceptualExample {
+// Another simple example of flyweight pattern
+namespace ConceptualExample02 {
 
     /**
     * Flyweight Design Pattern
@@ -193,9 +192,9 @@ namespace ConceptualExample {
     }
 }
 
-static void test_conceptual_example_01() {
+static void test_conceptual_example_02_a() {
 
-    using namespace ConceptualExample;
+    using namespace ConceptualExample02;
 
     /**
      * client code usually creates a bunch of pre-populated flyweights
@@ -238,9 +237,9 @@ static void test_conceptual_example_01() {
     factory.listFlyweights();
 }
 
-static void test_conceptual_example_02() {
+static void test_conceptual_example_02_b() {
 
-    using namespace ConceptualExample;
+    using namespace ConceptualExample02;
 
     /**
      * client code usually creates a bunch of pre-populated flyweights
@@ -281,10 +280,10 @@ static void test_conceptual_example_02() {
     factory.listFlyweights();
 }
 
-void test_conceptual_example()
+void test_conceptual_example_02()
 {
-    test_conceptual_example_01();
-    test_conceptual_example_02();
+    test_conceptual_example_02_a();
+    test_conceptual_example_02_b();
 }
 
 // ===========================================================================

@@ -57,9 +57,8 @@ Es bestehen gewisse Ähnlichkeiten zum *Chain of Responsibility* Pattern.
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample01.cpp) &ndash; Standardvariante
-
-[Quellcode](../ConceptualExample02.cpp) &ndash; Siehe Weiterarbeit
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Standardvariante<br />
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; Siehe Weiterarbeit
 
 ---
 

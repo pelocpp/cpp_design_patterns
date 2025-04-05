@@ -319,10 +319,8 @@ ein Singleton-Objekt von *innen* verankert!
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version
-
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Mit *Double-Checked Locking*
-
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version<br />
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; Mit *Double-Checked Locking*<br />
 [Quellcode 3](../Singleton_vs_Dependency_Injection.cpp) &ndash; Eine Alternative zum Singleton Pattern: *Dependency Injection*
 
 ---

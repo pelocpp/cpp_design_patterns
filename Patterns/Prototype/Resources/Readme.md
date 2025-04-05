@@ -135,12 +135,9 @@ Man spricht dabei auch von der so genannten &bdquo;*prototypischen Vererbung*&rd
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version &ndash; mit *raw*-Zeigern und Smart Pointern 
-
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Beispiel eines Schachbretts mit Spielfiguren unterschiedlichen Typs
-
-[Quellcode 3](../ConceptualExample03.cpp) &ndash; Ein Beispiel mit einer Factory für Prototypen
-
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version &ndash; mit *raw*-Zeigern und Smart Pointern<br />
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; Beispiel eines Schachbretts mit Spielfiguren unterschiedlichen Typs<br />
+[Quellcode 3](../ConceptualExample03.cpp) &ndash; Ein Beispiel mit einer Factory für Prototypen<br />
 [Quellcode 4](../ConceptualExample04.cpp) &ndash; Wie letztes Beispiel, nur mit Smart Pointern
 
 ---

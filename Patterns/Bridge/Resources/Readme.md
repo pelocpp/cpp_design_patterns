@@ -77,11 +77,9 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 ---
 
-
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version
-
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version<br />
 [Quellcode 2](../ConceptualExample02.cpp) &ndash; Ein etwas ausführlicheres Beispiel
 
 ---

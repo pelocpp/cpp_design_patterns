@@ -90,8 +90,8 @@ Es gibt also **zwei** Vererbungshierarchien:
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample01.cpp) &ndash; Einfaches Beispiel.<br />
-[Quellcode](../ConceptualExample02.cpp) &ndash; Beispiel zu heiﬂen Getr‰nken.
+[Quellcode 1](../ConceptualExample01.cpp) &ndash; Einfaches Beispiel.<br />
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; Beispiel zu heiﬂen Getr‰nken.
 
 ---
 
