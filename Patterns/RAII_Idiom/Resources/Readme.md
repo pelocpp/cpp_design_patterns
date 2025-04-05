@@ -6,7 +6,7 @@
 
 ## Wesentliche Merkmale
 
-#### Ziel / Absicht:
+#### Ziel / Absicht
 
 **RAII** (*Resource Acquisition Is Initialization*) ist ein Programmieridiom (Paradigma), das auf 
 Bjarne Stroustrup und Andrew Koenig zurückzuführen ist. Die Idee ist, eine Ressource
@@ -14,17 +14,34 @@ Bjarne Stroustrup und Andrew Koenig zurückzuführen ist. Die Idee ist, eine Resso
 und den Mechanismus der Objektkonstruktion und -destruktion  (Konstruktor, Destruktor) zu nutzen,
 um  Ressourcen in einem Programm automatisch zu verwalten.
 
-#### Prinzip:
+#### Prinzip
 
 Jedes Mal, wenn wir eine Ressource erwerben wollen, tun wir dies, indem wir ein Objekt erstellen,
 das diese Ressource besitzt. Wann immer das Objekt den Gültigkeitsbereich verlässt, wird die Ressource
 automatisch freigegeben.
 
-#### Lösung:
+#### Zur Namensgebung
+
+&bdquo;RAII&rdquo; steht für &bdquo;**Resource Acquisition is Initialization**&rdquo;
+und ist aus meiner Sicht eine Fehlbezeichnung:
+Es geht bei diesem Idiom weder um die Beschaffung von Ressourcen
+noch um die Initialisierung eines Objekts.
+
+Im Mittelpunkt steht die deterministische Freigabe der Ressource &ndash; und damit 
+in C++ die Destruktion eines Hüllenobjekts (Freigabe des dazugehörigen Speicherbereichs und Aufruf eines Destruktors).
+
+Eine bessere, verständlichere Bezeichnung für das Idiom
+wäre zum Beispiel &bdquo;**Scope-Bound Resource Management**&rdquo;.
+
+Der Name RAII ist allerdings gesetzt, es macht wenig Sinn,
+sich hierüber zu viele Gedanken zu machen.
+
+
+#### Lösung
 
 Wir betrachten das Prinzip einer RAII-verwalteten Ressource an Hand einer Folge von Code-Beispielen:
 
-##### 1. Eine RAII-konforme Klasse:
+##### 1. Eine RAII-konforme Klasse
 
 ```cpp
 template <typename T>
@@ -50,7 +67,7 @@ private:
 
 ---
 
-##### 2. Einfache Anwendung eines RAII-Objekts (*Compound-Statement* / *Block*):
+##### 2. Einfache Anwendung eines RAII-Objekts (*Compound-Statement* / *Block*)
 
 ```cpp
 void test() 
@@ -63,7 +80,7 @@ void test()
 }
 ```
 
-###### Ausgabe:
+###### Ausgabe
 
 ```
 c'tor Dummy [1]
@@ -73,7 +90,7 @@ Done.
 
 ---
 
-##### 3. Zugriff auf die Ressource (Überladener `->` und `&` Operator):
+##### 3. Zugriff auf die Ressource (Überladener `->` und `&` Operator)
 
 ```cpp
 void test() 
@@ -94,7 +111,7 @@ void test()
 }
 ```
 
-###### Ausgabe:
+###### Ausgabe
 
 ```
 c'tor Dummy [2]
@@ -108,7 +125,7 @@ Done.
 
 ---
 
-##### 4. Vorzeitiges Verlassen einer Wiederholungsschleife:
+##### 4. Vorzeitiges Verlassen einer Wiederholungsschleife
 
 ```cpp
 void test()
@@ -124,7 +141,7 @@ void test()
 }
 ```
 
-###### Ausgabe:
+###### Ausgabe
 
 ```
 c'tor Dummy [3]
@@ -134,7 +151,7 @@ Done.
 
 ---
 
-##### 5. Verhalten des RAII-Idioms bei Eintreten einer Ausnahme (*Exception*):
+##### 5. Verhalten des RAII-Idioms bei Eintreten einer Ausnahme (*Exception*)
 
 ```cpp
 void test_04()
@@ -153,7 +170,7 @@ void test_04()
 }
 ```
 
-###### Ausgabe:
+###### Ausgabe
 
 ```
 c'tor Dummy [4]
@@ -164,7 +181,7 @@ Done.
 
 ---
 
-##### 6. Reihenfolge bei der Freigabe mehrere RAII-verwalteter Ressourcen:
+##### 6. Reihenfolge bei der Freigabe mehrere RAII-verwalteter Ressourcen
 
 ```cpp
 void test_05() {
@@ -180,7 +197,7 @@ void test_05() {
 }
 ```
 
-###### Ausgabe:
+###### Ausgabe
 
 ```
 c'tor Dummy [1]
@@ -216,7 +233,7 @@ void test_06()
 
 ---
 
-###### Ausgabe:
+###### Ausgabe
 
 ```
 c'tor Dummy [5]
@@ -224,7 +241,7 @@ d'tor Dummy [5]
 Done.
 ```
 
-#### Struktur:
+#### Struktur
 
 Die folgenden beiden Abbildungen beschreiben konzeptionell die Allokation
 einer Ressource mit und ohne RAII-Idiom:
@@ -244,7 +261,7 @@ In *Abbildung* 2 können Sie erkennen, dass der Destruktor des RAII-Objekts den a
 
 ---
 
-#### &bdquo;Real-World&rdquo; Beispiel zu Windows Clipboard:
+#### &bdquo;Real-World&rdquo; Beispiel zu Windows Clipboard
 
 In der Datei *Clipboard.cpp* finden Sie mehrere Klassen und Methoden vor,
 die den schreibenden und lesenden Zugriff auf das Windows Clipboard in RAII-konformer Manier demonstrieren.
@@ -265,7 +282,7 @@ und
 * `GetClipboardData`
 
 
-#### &bdquo;Real-World&rdquo; Beispiel zu `std::ofstream`:
+#### &bdquo;Real-World&rdquo; Beispiel zu `std::ofstream`
 
 In der Datei *RAII_Ofstream.cpp* finden Sie eine Funktion `writeToFile` vor,
 die das RAII-Idiom verwendet.
@@ -283,7 +300,7 @@ und
 
 *"Note that any open file is automatically closed when the ofstream object is destroyed."*
 
-#### Weiterarbeit:
+#### Weiterarbeit
 
 Erstellen Sie eine RAII-konforme Klasse `RAIIFile`. Für den Anwender offenbart sich
 diese Klasse mit einer einzigen Methode `write`, um eine Zeichenkette in einer Datei zu schreiben.
@@ -293,7 +310,7 @@ Zum Zwecke des Übens verwenden Sie intern in der Klasse `RAIIFile` die Funktione
 Sinn und Zweck der Übung ist, dass die Funktion `fclose` **immer** zur Ausführung gelangt, also auch für den Fall,
 dass Fehlersituationen oder unerwartete Situationen eintreten.
 
-###### Beispiel:
+###### Beispiel
 
 ```cpp
 RAIIFile file("example.txt");
