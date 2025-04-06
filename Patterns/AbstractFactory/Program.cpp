@@ -7,7 +7,6 @@ void test_conceptual_example();
 void test_gui_factory();
 void test_vehicles();
 
-
 int main()
 {
     test_conceptual_example();

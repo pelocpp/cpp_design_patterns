@@ -7,6 +7,8 @@
 #include <map>
 #include <print>
 
+// ===========================================================================
+
 /**
  * Each distinct product of a product family (UI Elements) should have a base interface.
  * All variants of this product (UI Element) must implement this interface.
@@ -18,8 +20,18 @@ public:
     virtual std::string draw() const = 0;
 };
 
+class AbstractCheckbox {
+public:
+    virtual ~AbstractCheckbox() {}
+
+    virtual std::string draw() const = 0;
+};
+
+// ===========================================================================
+
 /**
- * Implementation of concrete UI Elements are created by corresponding Concrete Factories.
+ * Implementation of concrete UI Elements are created
+ * by corresponding Concrete Factories.
  */
 class LinuxButton : public AbstractButton
 {
@@ -47,6 +59,32 @@ public:
 
 // ===========================================================================
 
+class LinuxCheckbox : public AbstractCheckbox
+{
+public:
+    std::string draw() const override {
+        return "Drawing a Linux Checkbox";
+    }
+};
+
+class WinCheckbox : public AbstractCheckbox
+{
+public:
+    std::string draw() const override {
+        return "Drawing a Windows Checkbox";
+    }
+};
+
+class MacCheckbox : public AbstractCheckbox
+{
+public:
+    std::string draw() const override {
+        return "Drawing a Mac Checkbox";
+    }
+};
+
+// ===========================================================================
+
 /**
  * The Abstract Factory interface declares a set of methods that return
  * different abstract products. These products are called a family and are
@@ -64,6 +102,7 @@ class AbstractFactory
 {
 public:
     virtual std::shared_ptr<AbstractButton> createButton() const = 0;
+    virtual std::shared_ptr<AbstractCheckbox> createCheckbox() const = 0;
 };
 
 // ===================================================================================
@@ -74,28 +113,40 @@ public:
  *
  * NOTE: Signatures of the Concrete Factory's methods return an abstract product,
  *       while inside the method a concrete product is instantiated.
+ * 
+ *       There a similarities with the "Virtual Constructor" Pattern
+ *       a.k.a. "Prototype Pattern"
  */
 class LinuxFactory : public AbstractFactory {
 public:
     std::shared_ptr<AbstractButton> createButton() const override {
-        return std::make_shared<LinuxButton>();  // <== concrete button returned
+        return std::make_shared<LinuxButton>();      // <== concrete button returned
+    }
+
+    std::shared_ptr<AbstractCheckbox> createCheckbox() const override {
+        return std::make_shared<LinuxCheckbox>();    // <== concrete button returned
     }
 };
 
-/**
- * Each Concrete Factory has a corresponding product variant.
- */
 class WindowsFactory : public AbstractFactory {
 public:
     std::shared_ptr<AbstractButton> createButton() const override {
-        return std::make_shared<WinButton>();  // <== concrete button returned
+        return std::make_shared<WinButton>();        // <== concrete button returned
+    }
+
+    std::shared_ptr<AbstractCheckbox> createCheckbox() const override {
+        return std::make_shared<WinCheckbox>();      // <== concrete button returned
     }
 };
 
 class MacFactory : public AbstractFactory {
 public:
     std::shared_ptr<AbstractButton> createButton() const override {
-        return std::make_shared<MacButton>();  // <== concrete button returned
+        return std::make_shared<MacButton>();        // <== concrete button returned
+    }
+
+    std::shared_ptr<AbstractCheckbox> createCheckbox() const override {
+        return std::make_shared<MacCheckbox>();      // <== concrete button returned
     }
 };
 
@@ -114,10 +165,8 @@ public:
 
     const std::shared_ptr<AbstractButton> getButton(const std::string& name) {
 
-        std::shared_ptr<AbstractFactory>& factory = m_factories[name];
-
-        const std::shared_ptr<AbstractButton> button = factory->createButton();
-
+        std::shared_ptr<AbstractFactory>& factory{ m_factories[name] };
+        const std::shared_ptr<AbstractButton> button{ factory->createButton() };
         return button;
     }
 
@@ -138,30 +187,43 @@ private:
  * product subclass to the client code without breaking it.
  */
 
-static void clientCode(const std::shared_ptr<AbstractFactory>& factory)
-{
-    const std::shared_ptr<AbstractButton>& bp = factory->createButton();
-    std::string result = bp->draw();
-    std::println("Draw: {}", result);
-}
-
-// function prototypes
+// test functions without 'clientCode' abstraction
 static void test_gui_factory_example_01()
 {
-    GenericButtonFactory buttonFactory{};
-    const std::shared_ptr<AbstractButton> bp = buttonFactory.getButton("Mac");
-    std::string result = bp->draw();
+    MacFactory macFactory{};
+    const std::shared_ptr<AbstractButton> macButton{ macFactory.createButton() };
+    std::string result{ macButton->draw() };
     std::println("Draw: {}", result);
 }
 
 static void test_gui_factory_example_02()
 {
     GenericButtonFactory buttonFactory{};
+    const std::shared_ptr<AbstractButton> bp{ buttonFactory.getButton("Mac") };
+    std::string result = bp->draw();
+    std::println("Draw: {}", result);
+}
+
+static void clientCode(const std::shared_ptr<AbstractFactory>& factory)
+{
+    const std::shared_ptr<AbstractButton>& btn{ factory->createButton() };
+    std::string result{ btn->draw() };
+    std::println("Draw: {}", result);
+
+    const std::shared_ptr<AbstractCheckbox>& cb{ factory->createCheckbox() };
+    result = cb->draw();
+    std::println("Draw: {}", result);
+}
+
+// test functions using 'clientCode' abstraction
+static void test_gui_factory_example_03()
+{
+    GenericButtonFactory buttonFactory{};
 
     const std::shared_ptr<AbstractFactory> f1{ buttonFactory.getFactory("Win") };
     clientCode(f1);
 
-    const std::shared_ptr<AbstractFactory> f2 = { buttonFactory.getFactory("Mac") };
+    const std::shared_ptr<AbstractFactory> f2 { buttonFactory.getFactory("Mac") };
     clientCode(f2);
 }
 
@@ -169,6 +231,7 @@ void test_gui_factory()
 {
     test_gui_factory_example_01();
     test_gui_factory_example_02();
+    test_gui_factory_example_03();
 }
 
 // ===========================================================================
