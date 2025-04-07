@@ -1,12 +1,15 @@
 // ===========================================================================
-// ConceptualExample01.cpp // Factory Method
+// ConceptualExample02.cpp // Factory Method
 // ===========================================================================
 
-#include <string>
+#include <algorithm>
 #include <memory>
 #include <print>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
-namespace ConceptualExample01
+namespace ConceptualExample02
 {
     /**
      * Product Interface:
@@ -17,9 +20,7 @@ namespace ConceptualExample01
     {
     public:
         virtual ~ProductBase() {}
-
         virtual std::string getName() const = 0;
-
         virtual void anyOperation() = 0;
     };
 
@@ -80,13 +81,6 @@ namespace ConceptualExample01
             // call the factory method to create a Product object.
             std::unique_ptr<ProductBase> product{ createProduct() };  // <= abstract method (!)
 
-            // now, *use* the product:
-            product->anyOperation();
-
-            std::string name{ product->getName() };
-
-            std::println("FactoryBase: This factory's code has just created a {}", name);
-
             // increment the number of products produced and return the new product
             ++m_numberOfProductsProduced;
 
@@ -102,18 +96,45 @@ namespace ConceptualExample01
         size_t m_numberOfProductsProduced;
     };
 
+    class LeastBusyFactory final : public FactoryBase
+    {
+    public:
+        // constructs an instance, taking ownership of the given factories.
+        explicit LeastBusyFactory(std::vector<std::unique_ptr<FactoryBase>> factories) 
+            : m_factories{ std::move(factories) }
+        {
+            if (m_factories.empty()) {
+                throw std::runtime_error{ "No factories provided." };
+            }
+        }
+
+    private:
+        std::unique_ptr<ProductBase> createProduct() const override {
+
+            auto compareProducedProducts = [] (const auto& factory1, const auto& factory2) {
+                return factory1->getNumberOfProductsProduced() < factory2->getNumberOfProductsProduced(); 
+            };
+
+            auto leastBusyFactory { 
+                std::min_element(
+                    m_factories.begin(),
+                    m_factories.end(),
+                    compareProducedProducts
+                )
+            };
+
+            return (*leastBusyFactory)->requestProduct();
+        }
+
+        std::vector<std::unique_ptr<FactoryBase>> m_factories;
+    };
+
     /**
      * Concrete FactoryBase classes override the factory method
      * in order to change the resulting product's type.
      */
     class ConcreteFactoryA final : public FactoryBase 
     {
-        /**
-         * Note that the signature of the method still uses the abstract product type,
-         * even though the concrete product is actually returned from the method.
-         * This way the FactoryBase can stay independent of concrete product classes:
-         * ==> Compare with "Virtual Constructor" Pattern
-         */
     private:
         std::unique_ptr<ProductBase> createProduct() const override {
 
@@ -133,43 +154,35 @@ namespace ConceptualExample01
             return product;
         }
     };
-
-    /**
-     * The client code works with an instance of a concrete FactoryBase,
-     * albeit through its base interface. 
-     * As long as the client keeps working with the FactoryBase
-     * via the base interface, you can pass it any FactoryBase's subclass.
-     */
-
-    static void clientCode(FactoryBase& factory) {
-
-        std::println("Client: Not aware of the concrete creator's class (FactoryBase):");
-
-        std::unique_ptr<ProductBase> product{ factory.requestProduct() };
-
-        std::println("Created {}", product->getName());
-
-        std::println("Total Products: {}", factory.getNumberOfProductsProduced());
-    }
 }
 
-/**
- * The Application picks a factory's type
- * depending on the configuration or environment.
- */
-void test_conceptual_example_01()
+void test_conceptual_example_02()
 {
-    using namespace ConceptualExample01;
+    using namespace ConceptualExample02;
 
-    std::println("Example: Launched with ConcreteFactory A:");
-    ConcreteFactoryA factoryA;
-    clientCode(factoryA);
-    std::println();
+    std::vector<std::unique_ptr<FactoryBase>> factories;
 
-    std::println("Example: Launched with ConcreteFactory B:");
-    ConcreteFactoryB factoryB;
-    clientCode(factoryB);
-    std::println();
+    // create 2 factories: one of type 'A' and another 'B' factory:
+    factories.push_back(std::make_unique<ConcreteFactoryA>());
+    factories.push_back(std::make_unique<ConcreteFactoryB>());
+
+    // to get more interesting results,
+    // preorder some products from specific factories
+    for (size_t i : { 0, 0, 0, 0, 0, 1 }) {
+        factories[i]->requestProduct();
+    }
+
+    // create a factory that automatically selects the least busy
+    // factory from a list of given factories.
+    LeastBusyFactory leastBusyFactory{ std::move(factories) };
+
+    std::println("Starting a new production sequence ...");
+
+    // build 10 cars from the least busy factory.
+    for (size_t i{}; i != 10; ++i) {
+        auto product{ leastBusyFactory.requestProduct() };
+        std::println("{}", product->getName());
+    }
 }
 
 // ===========================================================================

@@ -44,6 +44,9 @@
     <ClCompile Include="ConceptualExample03.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
+    <ClCompile Include="ConceptualExample02.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_factory_pattern_intro.png">

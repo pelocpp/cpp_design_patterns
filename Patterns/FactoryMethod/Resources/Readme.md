@@ -114,6 +114,7 @@ Es gibt also **zwei** Vererbungshierarchien:
 #### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample01.cpp) &ndash; Einfaches Beispiel.<br />
+[Quellcode 2](../ConceptualExample02.cpp) &ndash; Erweiterung des einfachen Beispiels um eine Fabrik mit Lastausgleich.<br />
 [Quellcode 3](../ConceptualExample03.cpp) &ndash; Beispiel zu heiﬂen Getr‰nken.
 
 ---

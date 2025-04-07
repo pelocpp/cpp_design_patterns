@@ -94,6 +94,18 @@
 
 ---
 
+  * Marc Gregoire, &bdquo;*Professional C++ (6. Auflage)*&rdquo;.</br>
+    Wiley John + Sons (13. Februar 2024), 1326 Seiten. Sprache: Englisch. ISBN-13: 978-1394193172, ISBN-10: 1394193173.
+
+    Kein reines Buch zu Entwurfsmustern, für mich das derzeit beste C++&ndash;Buch am Markt.
+    Zugegeben, sehr umfangreich, aber dafür versteht es der Autor,
+    seine Leser mit einem jederzeit erkennbaren roten Faden durch alle Niederungen der Sprache C++ 
+    in verständlichen (englischen) Erklärungen zu führen. Großartig!
+
+    <img src="Buch_Marc_Gregoire.png" width="150">
+
+---
+
   * Christopher Alexander: &bdquo;A Pattern Language&rdquo;.</br>
     Oxford University Press (1977), 1171 Seiten. Sprache: Englisch. ISBN-10: 0195019199, ISBN-13: 978-0195019193.
 
