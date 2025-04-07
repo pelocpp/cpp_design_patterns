@@ -41,7 +41,7 @@
     <ClCompile Include="RealWorldFactoryMethod.cpp">
       <Filter>Source Files\RealWorldFactoryMethod</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample02.cpp">
+    <ClCompile Include="ConceptualExample03.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
   </ItemGroup>

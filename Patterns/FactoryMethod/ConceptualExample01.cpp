@@ -19,7 +19,8 @@ namespace ConceptualExample01
         virtual ~ProductBase() {}
 
         virtual std::string getName() const = 0;
-        virtual void operation() const = 0;
+
+        virtual void anyOperation() = 0;
     };
 
     /**
@@ -32,7 +33,7 @@ namespace ConceptualExample01
             return "ConcreteProductA";
         }
 
-        void operation() const override {
+        void anyOperation() override {
             std::println("Working with ConcreteProduct A");
         }
     };
@@ -44,7 +45,7 @@ namespace ConceptualExample01
             return "ConcreteProductB";
         }
 
-        void operation() const override {
+        void anyOperation() override {
             std::println("Working with ConcreteProduct B");
         }
     };
@@ -58,7 +59,9 @@ namespace ConceptualExample01
      */
     class FactoryBase {
     public:
-        virtual ~FactoryBase() {};
+        FactoryBase() : m_numberOfProductsProduced{} {}
+
+        virtual ~FactoryBase() {}       // always a virtual destructor
 
     private:
         virtual std::unique_ptr<ProductBase> createProduct() const = 0;
@@ -72,20 +75,31 @@ namespace ConceptualExample01
          * the factory method and returning a different type of product from it.
          */
     public:
-        std::unique_ptr<ProductBase> requestProduct() const {
+        std::unique_ptr<ProductBase> requestProduct() {
 
             // call the factory method to create a Product object.
             std::unique_ptr<ProductBase> product{ createProduct() };  // <= abstract method (!)
 
             // now, *use* the product:
-            product->operation();
+            product->anyOperation();
 
             std::string tmp{ product->getName() };
 
             std::string result{ "FactoryBase: This factory's code has just created a " + tmp };
 
+            // increment the number of products produced and return the new product
+            ++m_numberOfProductsProduced;
+
             return product;
         }
+
+        size_t getNumberOfProductsProduced() const {
+
+            return m_numberOfProductsProduced;
+        }
+
+    private:
+        size_t m_numberOfProductsProduced;
     };
 
     /**
@@ -104,6 +118,7 @@ namespace ConceptualExample01
         std::unique_ptr<ProductBase> createProduct() const override {
 
             std::unique_ptr<ProductBase> product{ std::make_unique<ConcreteProductA>()};
+
             return product;
         }
     };
@@ -114,6 +129,7 @@ namespace ConceptualExample01
         std::unique_ptr<ProductBase> createProduct() const override {
 
             std::unique_ptr<ProductBase> product{ std::make_unique<ConcreteProductB>() };
+
             return product;
         }
     };
@@ -125,13 +141,15 @@ namespace ConceptualExample01
      * via the base interface, you can pass it any FactoryBase's subclass.
      */
 
-    static void clientCode(const FactoryBase& factory) {
+    static void clientCode(FactoryBase& factory) {
 
         std::println("Client: Not aware of the concrete creator's class (FactoryBase):");
 
         std::unique_ptr<ProductBase> product{ factory.requestProduct() };
 
         std::println("Created {}", product->getName());
+
+        std::println("Total Products: {}", factory.getNumberOfProductsProduced());
     }
 }
 

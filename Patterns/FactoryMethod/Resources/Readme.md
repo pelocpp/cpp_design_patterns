@@ -86,10 +86,13 @@ um ein Objekt eines entsprechenden Produkttyps zurückzugeben.
 
 Die `FactoryBase`-Basisklasse selbst implementiert eine Methode `requestProduct()`,
 das nebenbei sich noch um andere Dinge kümmern kann
-wie zum Beispiel die Anzahl der produzierten Produkte aktualisieren.
+wie zum Beispiel die Anzahl der produzierten Produkte zu aktualisieren.
 
 Die Memberfunktion `requestProduct()` ist ein Beispiel für das
 *Template Method* Entwurfsmuster.
+
+Die Memberfunktion `createProduct()` ist ein Beispiel für das
+*Virtual Constructor* Entwurfsmuster (auch als *Prototype* Entwurfsmuster bezeichnet).
 
 ---
 
@@ -111,7 +114,7 @@ Es gibt also **zwei** Vererbungshierarchien:
 #### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample01.cpp) &ndash; Einfaches Beispiel.<br />
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Beispiel zu heißen Getränken.
+[Quellcode 3](../ConceptualExample03.cpp) &ndash; Beispiel zu heißen Getränken.
 
 ---
 

@@ -1,12 +1,12 @@
 // ===========================================================================
-// ConceptualExample02.cpp // Factory Method // Real-World Example
+// ConceptualExample03.cpp // Factory Method // Real-World Example
 // ===========================================================================
 
 #include <string>
 #include <memory>
 #include <print>
 
-namespace ConceptualExample02
+namespace ConceptualExample03
 {
     /**
      * Product Interface
@@ -132,9 +132,9 @@ namespace ConceptualExample02
  * depending on the configuration or environment.
  */
 
-void test_conceptual_example_02()
+void test_conceptual_example_03()
 {
-    using namespace ConceptualExample02;
+    using namespace ConceptualExample03;
 
     std::println("Example: Launched with CoffeeFactory:");
 
