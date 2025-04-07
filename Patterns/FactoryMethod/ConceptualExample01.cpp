@@ -60,28 +60,31 @@ namespace ConceptualExample01
     public:
         virtual ~FactoryBase() {};
 
+    private:
         virtual std::unique_ptr<ProductBase> createProduct() const = 0;
 
         /**
          * Note:
          * The FactoryBase's class primary responsibility is *not* creating products.
          * Usually, it contains some core business logic that relies on Product objects,
-         * returned by the factory method.
+         * returned by the underlying factory method.
          * Subclasses can indirectly change that business logic by overriding 
          * the factory method and returning a different type of product from it.
          */
-        std::string someOperation() const {
+    public:
+        std::unique_ptr<ProductBase> requestProduct() const {
 
             // call the factory method to create a Product object.
-            std::unique_ptr<ProductBase> product = createProduct();  // <= abstract method (!)
+            std::unique_ptr<ProductBase> product{ createProduct() };  // <= abstract method (!)
 
             // now, *use* the product:
             product->operation();
+
             std::string tmp{ product->getName() };
 
             std::string result{ "FactoryBase: This factory's code has just created a " + tmp };
 
-            return result;
+            return product;
         }
     };
 
@@ -89,14 +92,15 @@ namespace ConceptualExample01
      * Concrete FactoryBase classes override the factory method
      * in order to change the resulting product's type.
      */
-    class ConcreteFactoryA : public FactoryBase 
+    class ConcreteFactoryA final : public FactoryBase 
     {
         /**
          * Note that the signature of the method still uses the abstract product type,
          * even though the concrete product is actually returned from the method.
-         * This way the FactoryBase can stay independent of concrete product classes.
+         * This way the FactoryBase can stay independent of concrete product classes:
+         * ==> Compare with "Virtual Constructor" Pattern
          */
-    public:
+    private:
         std::unique_ptr<ProductBase> createProduct() const override {
 
             std::unique_ptr<ProductBase> product{ std::make_unique<ConcreteProductA>()};
@@ -104,9 +108,9 @@ namespace ConceptualExample01
         }
     };
 
-    class ConcreteFactoryB : public FactoryBase 
+    class ConcreteFactoryB final : public FactoryBase
     {
-    public:
+    private:
         std::unique_ptr<ProductBase> createProduct() const override {
 
             std::unique_ptr<ProductBase> product{ std::make_unique<ConcreteProductB>() };
@@ -121,18 +125,13 @@ namespace ConceptualExample01
      * via the base interface, you can pass it any FactoryBase's subclass.
      */
 
-    static void clientCode1(const FactoryBase& factory) {
+    static void clientCode(const FactoryBase& factory) {
 
         std::println("Client: Not aware of the concrete creator's class (FactoryBase):");
 
-        std::unique_ptr<ProductBase> product = factory.createProduct();
+        std::unique_ptr<ProductBase> product{ factory.requestProduct() };
+
         std::println("Created {}", product->getName());
-    }
-
-    static void clientCode2(const FactoryBase& factory) {
-
-        std::println("Client: Not aware of the concrete creator's class (FactoryBase):");
-        std::println("{}", factory.someOperation());
     }
 }
 
@@ -140,40 +139,19 @@ namespace ConceptualExample01
  * The Application picks a factory's type
  * depending on the configuration or environment.
  */
-static void test_conceptual_example_01_a() {
-
-    using namespace ConceptualExample01;
-
-    std::println("Example: Launched with ConcreteFactory A:");
-    ConcreteFactoryA factoryA;
-    clientCode1(factoryA);
-    std::println();
-
-    std::println("Example: Launched with ConcreteFactory B:");
-    ConcreteFactoryB factoryB;
-    clientCode1(factoryB);
-    std::println();
-}
-
-static void test_conceptual_example_01_b() {
-
-    using namespace ConceptualExample01;
-
-    std::println("Example: Launched with ConcreteFactory A:");
-    ConcreteFactoryA factoryA;
-    clientCode2(factoryA);
-    std::println();
-
-    std::println("Example: Launched with ConcreteFactory B:");
-    ConcreteFactoryB factoryB;
-    clientCode2(factoryB);
-    std::println();
-}
-
 void test_conceptual_example_01()
 {
-    test_conceptual_example_01_a();
-    test_conceptual_example_01_b();
+    using namespace ConceptualExample01;
+
+    std::println("Example: Launched with ConcreteFactory A:");
+    ConcreteFactoryA factoryA;
+    clientCode(factoryA);
+    std::println();
+
+    std::println("Example: Launched with ConcreteFactory B:");
+    ConcreteFactoryB factoryB;
+    clientCode(factoryB);
+    std::println();
 }
 
 // ===========================================================================

@@ -67,7 +67,7 @@ Es besteht im Wesentlichen aus vier Teilen:
     Funktionalitäten enthalten. Objekte des Typs `ConcreteProduct` werden von Methoden
     der *Factory*-Klassen erstellt.
 
-<img src="dp_factory_method_pattern.svg" width="500">
+<img src="dp_factory_method_pattern.svg" width="800">
 
 *Abbildung* 1: Schematische Darstellung des *Factory Method Patterns*.
 
