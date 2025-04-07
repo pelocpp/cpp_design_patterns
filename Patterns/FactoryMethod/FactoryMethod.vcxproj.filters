@@ -24,10 +24,10 @@
     <None Include="Resources\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\dp_factory_method_pattern.svg">
+    <None Include="Resources\dp_factory_method_pattern_television.svg">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\dp_factory_method_pattern_television.svg">
+    <None Include="Resources\dp_factory_method_pattern.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
