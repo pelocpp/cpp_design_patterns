@@ -71,6 +71,26 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Factory Method Patterns*.
 
+
+*Bemerkung*:<br />
+Die `FactoryBase`-Basisklasse ist interessant in Bezug auf ihren Entwurf:
+
+Wenn die öffentliche, nicht-virtuelle Memberfunktion `requestProduct()` aufgerufen wird,
+ruft diese intern die private, virtuelle Memberfunktion `createProduct()` auf,
+die ein neues konkretes Produkt erstellt und zurückgibt.
+
+Dieses Idiom wird auch als *nicht-virtuelles Schnittstellenidiom* (*NVI*) bezeichnet.
+
+Die Idee dahinter ist, dass einzelne Fabriken `createProduct()` überschreiben,
+um ein Objekt eines entsprechenden Produkttyps zurückzugeben.
+
+Die `FactoryBase`-Basisklasse selbst implementiert eine Methode `requestProduct()`,
+das nebenbei sich noch um andere Dinge kümmern kann
+wie zum Beispiel die Anzahl der produzierten Produkte aktualisieren.
+
+Die Memberfunktion `requestProduct()` ist ein Beispiel für das
+*Template Method* Entwurfsmuster.
+
 ---
 
 #### Einige Anmerkungen
