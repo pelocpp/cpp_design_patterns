@@ -1,18 +1,18 @@
 // ===========================================================================
-// ConceptualExample02.cpp // Iterator Pattern // C++ Variant
+// ConceptualExample02.cpp // Iterator Pattern // Standard Variant
 // ===========================================================================
 
 #include <iostream>
 #include <string>
 #include <vector>
 
-namespace IteratorPatternCpp {
+namespace IteratorPatternStandard {
 
     template <typename T>
     class IteratorBase
     {
     public:
-        virtual ~IteratorBase() {};
+        virtual ~IteratorBase() {}
 
         virtual void reset() = 0;
         virtual const T& getCurrent() const = 0;
@@ -25,7 +25,7 @@ namespace IteratorPatternCpp {
     class AggregateBase
     {
     public:
-        virtual ~AggregateBase() {}
+        virtual ~AggregateBase() {};
 
         virtual IteratorBase<T>* createForwardIterator() = 0;
         virtual IteratorBase<T>* createBackwardIterator() = 0;
@@ -33,88 +33,30 @@ namespace IteratorPatternCpp {
 
     // =======================================================================
 
-    /**
-     * C++ has its own implementation of iterators that work with
-     * different generics containers defined by the standard library.
-     */
+    template <typename T>
+    class ForwardIterator;
 
-    template <typename TElement, typename TContainer>
-    class Iterator : public IteratorBase<TElement> {
+    template <typename T>
+    class BackwardIterator;
 
-       using TIterator = typename std::vector<TElement>::iterator;
-       // using TIterator = typename TContainer::iterator;
-
+    template <typename T>
+    class ConcreteAggregate : public AggregateBase<T>
+    {
     private:
-        TContainer* m_container;
-        TIterator   m_iterator;
-        bool        m_reverse;
-        bool        m_notFirstAccess;
+        std::vector<T> m_vector;
 
     public:
-        Iterator(TContainer* p_data, bool reverse)
-            : m_container{ p_data }, m_reverse{ reverse }, m_notFirstAccess{ false }
-        {
-            m_iterator = (m_reverse)
-                ? std::prev(m_container->m_vector.end())
-                : m_container->m_vector.begin();
+        IteratorBase<T>* createForwardIterator() {
+            return new ForwardIterator<T>{ this };
         }
 
-        // interface 'IteratorBase'
-        void reset() override {
-            m_iterator = (m_reverse)
-                ? std::prev(m_container->m_vector.end())
-                : m_container->m_vector.begin();
+        IteratorBase<T>* createBackwardIterator() {
+            return new BackwardIterator<T>{ this };
+        }
 
-            m_notFirstAccess = false;
-        };
-
-        const TElement& getCurrent() const override {
-            return *m_iterator;
-        };
-
-        bool hasNext()  override {
-            bool result;
-            if (m_reverse) {
-                if (m_iterator == m_container->m_vector.begin()) {
-                    result = false;
-                }
-                else {
-                    result = true;
-                    if (m_notFirstAccess) {
-                        m_iterator--;
-                    }
-                    m_notFirstAccess = true;
-                }
-            }
-            else {
-                if (m_iterator == std::prev(m_container->m_vector.end())) {
-                    result = false;
-                }
-                else {
-                    result = true;
-                    if (m_notFirstAccess) {
-                        m_iterator++;
-                    }
-                    m_notFirstAccess = true;
-                }
-            }
-            return result;
-        };
-    };
-
-    // =======================================================================
-
-    template <class TElement>
-    class ConcreteAggregate : public AggregateBase<TElement> {
-
-        friend class Iterator<TElement, ConcreteAggregate>;
-
-    private:
-        std::vector<TElement> m_vector;
-
-    public:
-        void add(TElement a) {
-            m_vector.push_back(a);
+        void add(const T& content)
+        {
+            m_vector.push_back(content);
         }
 
         int size() const
@@ -122,32 +64,97 @@ namespace IteratorPatternCpp {
             return static_cast<int> (m_vector.size());
         }
 
-        TElement& get(int index)
+        T& get(int index)
         {
             return m_vector[index];
         }
 
-        const TElement& get(int index) const
+        const T& get(int index) const
         {
             return m_vector[index];
-        }
-
-        IteratorBase<TElement>* createForwardIterator() {
-            return new Iterator<TElement, ConcreteAggregate>(this, false);
-        }
-
-        IteratorBase<TElement>* createBackwardIterator() {
-            return new Iterator<TElement, ConcreteAggregate>(this, true);
         }
     };
+
+    // =======================================================================
+
+    template <typename T>
+    class ForwardIterator : public IteratorBase<T>
+    {
+    private:
+        const ConcreteAggregate<T>* m_aggregate;
+        int                         m_pos;
+
+    public:
+        ForwardIterator(const ConcreteAggregate<T>* agg)
+            : m_aggregate{ agg }, m_pos{ -1 }
+        {}
+
+        void reset() override
+        {
+            m_pos = -1;
+        }
+
+        const T& getCurrent() const override
+        {
+            return m_aggregate->get(m_pos);
+        }
+
+        bool hasNext() override
+        {
+            bool erg{ false };
+            if (m_pos < m_aggregate->size() - 1)
+            {
+                m_pos++;
+                erg = true;
+            }
+            return erg;
+        }
+    };
+
+    template <typename T>
+    class BackwardIterator : public IteratorBase<T>
+    {
+    private:
+        const ConcreteAggregate<T>* m_aggregate;
+        int                         m_pos;
+
+    public:
+        BackwardIterator(const ConcreteAggregate<T>* agg)
+            : m_aggregate{ agg }, m_pos{ agg->size() } 
+        {}
+
+        void reset() override
+        {
+            m_pos = m_aggregate->size();
+        }
+
+        const T& getCurrent() const override
+        {
+            return m_aggregate->get(m_pos);
+        }
+
+        bool hasNext() override
+        {
+            bool erg{ false };
+            if (m_pos > 0)
+            {
+                m_pos--;
+                erg = true;
+            }
+            return erg;
+        }
+    };
+
+    // =======================================================================
 }
 
-void test_conceptual_example_03() {
+void test_conceptual_example_02() {
 
-    using namespace IteratorPatternCpp;
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+    using namespace IteratorPatternStandard;
 
     ConcreteAggregate<int> intContainer{};
-
     for (int i = 0; i < 3; ++i) {
         intContainer.add(i);
     }
@@ -188,6 +195,47 @@ void test_conceptual_example_03() {
         std::cout << it->getCurrent() << std::endl;
     }
     delete it;
+}
+
+void test_conceptual_example_03() {
+
+    using namespace IteratorPatternStandard;
+
+    ConcreteAggregate<int> intContainer{};
+
+    for (int i = 0; i < 10; ++i) {
+        intContainer.add(i);
+    }
+
+    IteratorBase<int>* intIter1{ intContainer.createForwardIterator() };
+    IteratorBase<int>* intIter2{ intContainer.createForwardIterator() };
+
+    // using first iterator three times
+    if (intIter1->hasNext()) {
+        std::cout << "First Iterator:  " << intIter1->getCurrent() << std::endl;
+    }
+    if (intIter1->hasNext()) {
+        std::cout << "First Iterator:  " << intIter1->getCurrent() << std::endl;
+    }
+    if (intIter1->hasNext()) {
+        std::cout << "First Iterator:  " << intIter1->getCurrent() << std::endl;
+    }
+    std::cout << std::endl;
+
+    // now using second iterator three times
+    if (intIter2->hasNext()) {
+        std::cout << "Second Iterator: " << intIter2->getCurrent() << std::endl;
+    }
+    if (intIter2->hasNext()) {
+        std::cout << "Second Iterator: " << intIter2->getCurrent() << std::endl;
+    }
+    if (intIter2->hasNext()) {
+        std::cout << "Second Iterator: " << intIter2->getCurrent() << std::endl;
+    }
+
+    delete intIter1;
+    delete intIter2;
+    std::cout << std::endl;
 }
 
 // ===========================================================================

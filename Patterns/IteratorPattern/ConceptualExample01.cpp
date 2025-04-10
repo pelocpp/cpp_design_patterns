@@ -1,241 +1,85 @@
 // ===========================================================================
-// ConceptualExample01.cpp // Iterator Pattern // Standard Variant
+// ConceptualExample01.cpp // Iterator Pattern // Standard C++ 
 // ===========================================================================
 
 #include <iostream>
-#include <string>
 #include <vector>
+#include <print>
 
-namespace IteratorPatternStandard {
+class MyContainer
+{
+public:
+    using value_type = int;
+    using difference_type = std::ptrdiff_t;
+    using iterator_category = std::vector<int>::iterator;
+    using pointer = const value_type*;
+    using reference = const value_type&;
 
-    template <typename T>
-    class IteratorBase
-    {
-    public:
-        virtual ~IteratorBase() {}
+    using iterator = std::vector<int>::iterator;
+    using const_iterator = std::vector<int>::const_iterator;
 
-        virtual void reset() = 0;
-        virtual const T& getCurrent() const = 0;
-        virtual bool hasNext() = 0;
-    };
+private:
+    std::vector<int> m_data;
 
-    // =======================================================================
+public:
+    MyContainer(const std::initializer_list<int>& values) : m_data(values) {}
 
-    template <typename T>
-    class AggregateBase
-    {
-    public:
-        virtual ~AggregateBase() {};
-
-        virtual IteratorBase<T>* createForwardIterator() = 0;
-        virtual IteratorBase<T>* createBackwardIterator() = 0;
-    };
-
-    // =======================================================================
-
-    template <typename T>
-    class ForwardIterator;
-
-    template <typename T>
-    class BackwardIterator;
-
-    template <typename T>
-    class ConcreteAggregate : public AggregateBase<T>
-    {
+    // nested Iterator class
+    class Iterator {
     private:
-        std::vector<T> m_vector;
+        std::vector<int>::iterator m_iter;
 
     public:
-        IteratorBase<T>* createForwardIterator() {
-            return new ForwardIterator<T>{ this };
+        // Constructor
+        Iterator(std::vector<int>::iterator it) : m_iter(it) {}
+
+        // Dereference operator
+        int& operator*() { return *m_iter; }
+
+        // Pre-increment operator
+        Iterator& operator++() {
+            ++m_iter;
+            return *this;
         }
 
-        IteratorBase<T>* createBackwardIterator() {
-            return new BackwardIterator<T>{ this };
+        // Post-increment operator
+        Iterator operator++(int) {
+            Iterator temp = *this;
+            ++(*this);
+            return temp;
         }
 
-        void add(const T& content)
-        {
-            m_vector.push_back(content);
+        // Equality comparison
+        bool operator==(const Iterator& other) const {
+            return m_iter == other.m_iter;
         }
 
-        int size() const
-        {
-            return static_cast<int> (m_vector.size());
-        }
-
-        T& get(int index)
-        {
-            return m_vector[index];
-        }
-
-        const T& get(int index) const
-        {
-            return m_vector[index];
+        // Inequality comparison
+        bool operator!=(const Iterator& other) const {
+            return !(*this == other);
         }
     };
 
-    // =======================================================================
+public:
+    // begin iterator
+    Iterator begin() { return Iterator(m_data.begin()); }
 
-    template <typename T>
-    class ForwardIterator : public IteratorBase<T>
-    {
-    private:
-        const ConcreteAggregate<T>* m_aggregate;
-        int                         m_pos;
+    // end iterator
+    Iterator end() { return Iterator(m_data.end()); }
+};
 
-    public:
-        ForwardIterator(const ConcreteAggregate<T>* agg)
-            : m_aggregate{ agg }, m_pos{ -1 }
-        {}
+void test_conceptual_example_01()
+{
+    MyContainer container { 1, 2, 3, 4, 5 };
 
-        void reset() override
-        {
-            m_pos = -1;
-        }
-
-        const T& getCurrent() const override
-        {
-            return m_aggregate->get(m_pos);
-        }
-
-        bool hasNext() override
-        {
-            bool erg{ false };
-            if (m_pos < m_aggregate->size() - 1)
-            {
-                m_pos++;
-                erg = true;
-            }
-            return erg;
-        }
-    };
-
-    template <typename T>
-    class BackwardIterator : public IteratorBase<T>
-    {
-    private:
-        const ConcreteAggregate<T>* m_aggregate;
-        int                         m_pos;
-
-    public:
-        BackwardIterator(const ConcreteAggregate<T>* agg)
-            : m_aggregate{ agg }, m_pos{ agg->size() } 
-        {}
-
-        void reset() override
-        {
-            m_pos = m_aggregate->size();
-        }
-
-        const T& getCurrent() const override
-        {
-            return m_aggregate->get(m_pos);
-        }
-
-        bool hasNext() override
-        {
-            bool erg{ false };
-            if (m_pos > 0)
-            {
-                m_pos--;
-                erg = true;
-            }
-            return erg;
-        }
-    };
-
-    // =======================================================================
-}
-
-void test_conceptual_example_01() {
-
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
-    using namespace IteratorPatternStandard;
-
-    ConcreteAggregate<int> intContainer{};
-    for (int i = 0; i < 3; ++i) {
-        intContainer.add(i);
+    for (MyContainer::Iterator it = container.begin(); it != container.end(); ++it) {
+        std::print("{} ", *it);
     }
+    std::println();
 
-    IteratorBase<int>* iter{ intContainer.createForwardIterator() };
-    while (iter->hasNext())
-    {
-        std::cout << iter->getCurrent() << std::endl;
+    for (auto elem : container) {
+        std::print("{} ", elem);
     }
-    delete iter;
-    std::cout << std::endl;
-
-    ConcreteAggregate<std::string> stringContainer{};
-    stringContainer.add("123");
-    stringContainer.add("456");
-    stringContainer.add("789");
-    std::cout << "Size: " << stringContainer.size() << std::endl;
-    std::cout << "[1]:  " << stringContainer.get(1) << std::endl;
-
-    IteratorBase<std::string>* it{ stringContainer.createForwardIterator() };
-    while (it->hasNext())
-    {
-        std::cout << it->getCurrent() << std::endl;
-    }
-    delete it;
-    std::cout << std::endl;
-
-    it = stringContainer.createBackwardIterator();
-    while (it->hasNext())
-    {
-        std::cout << it->getCurrent() << std::endl;
-    }
-    std::cout << std::endl;
-
-    it->reset();
-    while (it->hasNext())
-    {
-        std::cout << it->getCurrent() << std::endl;
-    }
-    delete it;
-}
-
-void test_conceptual_example_02() {
-
-    using namespace IteratorPatternStandard;
-
-    ConcreteAggregate<int> intContainer{};
-
-    for (int i = 0; i < 10; ++i) {
-        intContainer.add(i);
-    }
-
-    IteratorBase<int>* intIter1{ intContainer.createForwardIterator() };
-    IteratorBase<int>* intIter2{ intContainer.createForwardIterator() };
-
-    // using first iterator three times
-    if (intIter1->hasNext()) {
-        std::cout << "First Iterator:  " << intIter1->getCurrent() << std::endl;
-    }
-    if (intIter1->hasNext()) {
-        std::cout << "First Iterator:  " << intIter1->getCurrent() << std::endl;
-    }
-    if (intIter1->hasNext()) {
-        std::cout << "First Iterator:  " << intIter1->getCurrent() << std::endl;
-    }
-    std::cout << std::endl;
-
-    // now using second iterator three times
-    if (intIter2->hasNext()) {
-        std::cout << "Second Iterator: " << intIter2->getCurrent() << std::endl;
-    }
-    if (intIter2->hasNext()) {
-        std::cout << "Second Iterator: " << intIter2->getCurrent() << std::endl;
-    }
-    if (intIter2->hasNext()) {
-        std::cout << "Second Iterator: " << intIter2->getCurrent() << std::endl;
-    }
-
-    delete intIter1;
-    delete intIter2;
-    std::cout << std::endl;
 }
 
 // ===========================================================================
