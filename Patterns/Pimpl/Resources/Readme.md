@@ -115,7 +115,7 @@ Dies bedeutet, dass bei Änderungen an der Klasse `Engine` alle Benutzer von `car
 eben auch für den Fall, dass an der Klasse `Car` überhaupt nichts geändert wurde. Und zum Zweiten vor dem Hintergrund,
 dass diese Clients sich möglicherweise der Abhängigkeit zur Klasse `Engine` gar nicht bewusst sind.
 
-Das *Piml*-Idiom (*Pointer to Implementation*) löst diese Abhängigkeit durch das Hinzufügen
+Das *Pimpl*-Idiom (*Pointer to Implementation*) löst diese Abhängigkeit durch das Hinzufügen
 einer Indirektionsstufe in Gestalt einer zusätzlichen Klasse - nennen wir sie `CarImpl` - auf.
 Aufgabe der Klasse `CarImpl` ist es, die Präsenz der Klasse `Engine` zu verdecken.
 

@@ -16,7 +16,7 @@ namespace ApdaterPatternClassicalApproach {
     public:
         virtual ~IMediaPlayer() {}
 
-        virtual void play(std::string audioType, std::string fileName) = 0;
+        virtual void play(const std::string& audioType, const std::string& fileName) = 0;
     };
 
     // ---------------------------------------------------------------------------
@@ -27,7 +27,7 @@ namespace ApdaterPatternClassicalApproach {
     public:
         virtual ~IVlcMediaPlayer() {}
 
-        virtual void playVlc(std::string fileName) = 0;
+        virtual void playVlc(const std::string& fileName) = 0;
     };
 
     // interface IMp4MediaPlayer
@@ -36,7 +36,7 @@ namespace ApdaterPatternClassicalApproach {
     public:
         virtual ~IMp4MediaPlayer() {}
 
-        virtual void playMp4(std::string fileName) = 0;
+        virtual void playMp4(const std::string& fileName) = 0;
     };
 
     // ===========================================================================
@@ -47,10 +47,10 @@ namespace ApdaterPatternClassicalApproach {
     class AudioPlayer : public IMediaPlayer
     {
     public:
-        void play(std::string audioType, std::string fileName) override;
+        void play(const std::string& audioType, const std::string& fileName) override;
     };
 
-    void AudioPlayer::play(std::string audioType, std::string fileName)
+    void AudioPlayer::play(const std::string& audioType, const std::string& fileName)
     {
         // inbuilt support to play mp3 music files
         if (audioType == std::string("mp3")) {
@@ -67,7 +67,7 @@ namespace ApdaterPatternClassicalApproach {
     class VlcPlayer : public IVlcMediaPlayer
     {
     public:
-        virtual void playVlc(std::string fileName) override
+        virtual void playVlc(const std::string& fileName) override
         {
             std::cout << "Playing vlc file: name = " << fileName << std::endl;
         }
@@ -77,7 +77,7 @@ namespace ApdaterPatternClassicalApproach {
     class Mp4Player : public IMp4MediaPlayer
     {
     public:
-        virtual void playMp4(std::string fileName) override
+        virtual void playMp4(const std::string& fileName) override
         {
             std::cout << "Playing mp4 file: name = " << fileName << std::endl;
         }
@@ -96,27 +96,27 @@ namespace ApdaterPatternClassicalApproach {
 
     public:
         // c'tor
-        MediaAdapter(std::string audioType);
+        MediaAdapter(const std::string& audioType);
 
-        void play(std::string audioType, std::string fileName) override;
+        void play(const std::string& audioType, const std::string& fileName) override;
     };
 
-    MediaAdapter::MediaAdapter(std::string audioType) 
+    MediaAdapter::MediaAdapter(const std::string& audioType) 
     {
-        if (audioType == std::string("vlc")) {
+        if (audioType == std::string{ "vlc" }) {
             m_vlcPlayer = std::make_shared<VlcPlayer>();
         }
-        else if (audioType == std::string("mp4")) {
+        else if (audioType == std::string{ "mp4" }) {
             m_mp4Player = std::make_shared<Mp4Player>();
         }
     }
 
-    void MediaAdapter::play(std::string audioType, std::string fileName)
+    void MediaAdapter::play(const std::string& audioType, const std::string& fileName)
     {
-        if (audioType == std::string("vlc")) {
+        if (audioType == std::string{ "vlc" }) {
             m_vlcPlayer->playVlc(fileName);
         }
-        else if (audioType == std::string("mp4")) {
+        else if (audioType == std::string{ "mp4" }) {
             m_mp4Player->playMp4(fileName);
         }
     }
@@ -124,7 +124,7 @@ namespace ApdaterPatternClassicalApproach {
     // ===========================================================================
 
     // create class 'AudioPlayerExtended'
-    // implementing 'MediaPlayer' interface with adapter addition;
+    // implementing 'MediaPlayer' interface with adapter addition:
     // target media objects are created on demand
     class AudioPlayerExtended : public IMediaPlayer
     {
@@ -132,23 +132,23 @@ namespace ApdaterPatternClassicalApproach {
         std::shared_ptr<IMediaPlayer> m_mediaAdapter;
 
     public:
-        void play(std::string audioType, std::string fileName) override;
+        void play(const std::string& audioType, const std::string& fileName) override;
     };
 
-    void AudioPlayerExtended::play(std::string audioType, std::string fileName)
+    void AudioPlayerExtended::play(const std::string& audioType, const std::string& fileName)
     {
         if (audioType == std::string("mp3")) {
 
             // inbuilt support to play mp3 music files
             std::cout << "Playing mp3 file: name = " << fileName << std::endl;
         }
-        else if (audioType == std::string("vlc")) {
+        else if (audioType == std::string{ "vlc" }) {
 
             // use m_mediaAdapter support to play other file format
             m_mediaAdapter = std::make_shared<MediaAdapter>(audioType);
             m_mediaAdapter->play(audioType, fileName);
         }
-        else if (audioType == std::string("mp4")) {
+        else if (audioType == std::string{ "mp4" }) {
 
             // use of m_mediaAdapter to play other file format
             m_mediaAdapter = std::make_shared<MediaAdapter>(audioType);
