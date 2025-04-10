@@ -14,12 +14,23 @@
 
 ---
 
+  * Klaus Iglberger: &bdquo;C++ Software Design&rdquo;.</br>
+    O'Reilly Media (25. Oktober 2022), 435 Seiten. Sprache: Englisch. ISBN-10: 1098113160, ISBN-13: 978-1098113162.
+
+    Das Buch ist das einzige Buch am Markt, das die Brücke von der klassischen Realisierung gängiger Entwurfsmuster
+    hin zu einer modernen Umsetzung schlägt. Es ist gut gegliedert, übersichtlich aufgebaut und liest sich angenehm.
+    Es werden zahlreiche Techniken für einen performanten und gleichzeitig wartbaren Quellcode vorgestellt.
+
+    <img src="Buch_Klaus_Iglberger_Cpp_Software_Design.png" width="150">
+
+---
+
   * Fedor G. Pikus: &bdquo;Hands-On Design Patterns with C++&rdquo;.</br>
     Packt Publishing (30. Januar 2019), 512 Seiten. Sprache: Englisch. ISBN-10: 1788832566, ISBN-13: 978-1788832564.
 
     Ein vergleichsweise anspruchsvolles Buch zu Entwurfsmustern in C++. Neben Klassikern wir *Singleton*, *Factory* und *Adapter*
     werden moderne C++-Konzepte wie RAII, SFINAE, CRTP und Type Erasure betrachtet. Sehr gut geschrieben,
-    möglicherweise nichts für den Einsteiger in diese Thematik.
+    möglicherweise nichts für einen Einsteiger in diese Thematik.
 
     <img src="Buch_Fedor_Pikus_Design_Pattern.png" width="150">
 
