@@ -22,6 +22,15 @@
     <Filter Include="Source Files\StaticStrategy">
       <UniqueIdentifier>{bd140613-cfd0-4ac0-92d6-d401e92766a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ConceptualExampleModern">
+      <UniqueIdentifier>{c31b88d7-7b0b-40bb-a650-44df4f5dd5f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RealWorldExample">
+      <UniqueIdentifier>{c4bb58fa-6991-443c-8b73-51b7c7fcc232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RealWorldExampleModern">
+      <UniqueIdentifier>{f3527d25-57e1-4a7f-9475-13a569464351}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -47,6 +56,15 @@
     </ClCompile>
     <ClCompile Include="StaticStrategyExample.cpp">
       <Filter>Source Files\StaticStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExampleModern.cpp">
+      <Filter>Source Files\ConceptualExampleModern</Filter>
+    </ClCompile>
+    <ClCompile Include="RealWorldExample.cpp">
+      <Filter>Source Files\RealWorldExample</Filter>
+    </ClCompile>
+    <ClCompile Include="RealWorldExampleModern.cpp">
+      <Filter>Source Files\RealWorldExampleModern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

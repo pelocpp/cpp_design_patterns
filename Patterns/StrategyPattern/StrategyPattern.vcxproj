@@ -140,12 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
+    <ClCompile Include="ConceptualExampleModern.cpp" />
     <ClCompile Include="CreditCard.cpp" />
     <ClCompile Include="ECommerceApp.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="PayByCreditCard.cpp" />
     <ClCompile Include="PayByPayPal.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="RealWorldExample.cpp" />
+    <ClCompile Include="RealWorldExampleModern.cpp" />
     <ClCompile Include="StaticStrategyExample.cpp" />
   </ItemGroup>
   <ItemGroup>

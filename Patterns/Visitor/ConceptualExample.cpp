@@ -196,7 +196,7 @@ namespace ConceptualExample {
      * figuring out their concrete classes. The accept operation directs a call to
      * the appropriate operation in the visitor object.
      */
-    void clientCode(
+    static void clientCode(
         std::array<std::shared_ptr<ElementBase>, 3> components,
         std::shared_ptr<VisitorBase> visitor) 
     {
