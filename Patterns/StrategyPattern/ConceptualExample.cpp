@@ -96,8 +96,8 @@ namespace StrategyConceptualExample {
     };
 
     /**
- * The Context defines the interface of interest to clients.
- */
+     * The Context uses the strategy interface
+     */
     class Context
     {
         /**
@@ -105,6 +105,7 @@ namespace StrategyConceptualExample {
          * The Context does not know the concrete class of a strategy.
          * It should work with all strategies via the 'Strategy' interface.
          */
+
     private:
         std::unique_ptr<StrategyBase> m_strategy;
 
@@ -115,8 +116,7 @@ namespace StrategyConceptualExample {
     public:
         Context(std::unique_ptr<StrategyBase> strategy)
             : m_strategy{ std::move(strategy) }
-        {
-        }
+        {}
 
         ~Context() {}
 

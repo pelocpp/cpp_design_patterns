@@ -8,21 +8,6 @@
 #include <print>
 #include <string>
 #include <vector>
-//
-//WEITER:
-//
-//a) Absturz
-//
-//b) DFS // BFS
-//
-//https ://medium.com/@sabergholami72/strategy-design-pattern-when-and-how-to-use-it-60d5983f8ce2
-//
-//
-//https://stackoverflow.com/questions/29031782/how-to-implement-strategy-pattern-in-c-with-stdfunction
-//
-//
-//2. Biuld für Strategy Pattern --- evtl. siehe Iglberger
-
 
 namespace StrategyConceptualExampleModern {
 
@@ -33,24 +18,15 @@ namespace StrategyConceptualExampleModern {
      * The Context uses this interface to call the algorithm
      * defined by Concrete Strategies.
      *
-     * In Modern C++ the Strategy Interface is defined througs a std::function type.   // TBD
+     * In Modern C++ the Strategy Interface may be defined through a std::function type.
      */
-
-    class StrategyBase
-    {
-    public:
-        virtual ~StrategyBase() {}
-
-        virtual std::string doAlgorithm(const std::vector<std::string>& data) const = 0;
-        // virtual std::string getName() const = 0;
-    };
 
     using Strategy = std::function<std::string(const std::vector<std::string>&)>;
 
     /**
      * Concrete strategies implement the algorithm
-     * while following the base Strategy interface.
-     * The interface makes them interchangeable in the Context.
+     * based upon the std::function type definition.
+     * The definition makes them interchangeable in the Context.
      */
 
     static std::string doAlgorithmA(const std::vector<std::string>& data)
@@ -99,7 +75,7 @@ namespace StrategyConceptualExampleModern {
     }
 
     /**
-     * The Context defines the interface of interest to clients.
+     * The Context uses the strategy interface
      */
     class Context
     {
@@ -114,12 +90,13 @@ namespace StrategyConceptualExampleModern {
 
         /**
          * Usually, the Context accepts a strategy through the constructor,
-         * but also provides setter metzhods to change the strategy at runtime.
+         * but also provides setter methods to change the strategy at runtime.
          */
     public:
         // c'tor(s), d'tor
         Context(Strategy&& strategy) : m_strategy{ std::move(strategy) } {}
         Context(Strategy& strategy) : m_strategy{ strategy } {}
+
         ~Context() {}
 
         /**
@@ -152,7 +129,7 @@ namespace StrategyConceptualExampleModern {
     };
 
     /**
-     * The client code picks a concrete strategy and passes it to the context.
+     * The client code picks a concrete strategy and passes it to the Context.
      * The client should be aware of the differences between strategies
      * in order to make the right choice.
      */
