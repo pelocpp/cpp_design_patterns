@@ -161,6 +161,7 @@
   <ItemGroup>
     <None Include="Resources\dp_strategy_pattern.svg" />
     <None Include="Resources\dp_strategy_pattern_shapes.svg" />
+    <None Include="Resources\dp_strategy_pattern_shapes_modern.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>

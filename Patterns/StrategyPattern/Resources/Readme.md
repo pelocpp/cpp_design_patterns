@@ -81,14 +81,19 @@ In *Abbildung* 2 kann man zwei Hierarchien erkennen:
 *Abbildung* 2: Anwendung des Strategy Design Patterns in einer Klassenhierarchie.
 
 
-## Umsetzung des Patterns in Modern C++
+## Umsetzung des Strategy Design Patterns in Modern C++
 
+In einer Umsetzung des Strategy Design Patterns mit Modern C++ Sprachmitteln
+kommt das Klassentemplate `std::function` zum Einsatz.
 
+`std::function` ist ein universeller polymorpher Funktionswrapper, der zum Beispiel Lambda Objekte, freie Funktionen
+und andere aufrufbare Objekte kapseln kann.
 
+Mit Hilfe von `std::function` fallen in dieser Variante alle Klassen weg, die mit Strategien zu tun haben.
 
+<img src="dp_strategy_pattern_shapes.svg" width="700">
 
-
-
+*Abbildung* 3: Umsetzung des Strategy Design Patterns in Modern C++ mit `std::function`.
 
 
 
@@ -144,6 +149,12 @@ vor.
 Das Beispiel zu der Auswahl der Bezahlungsmethode in einer E-Commerce App orierentiert sich an
 
 [https://refactoring.guru/design-patterns/strategy](https://refactoring.guru/design-patterns/strategy/java/example)
+
+
+Ein weiteres interessantes Beispiel zum Strategy Pattern widmet sich der Suche nach Knoten in einem gerichteten Graphen.
+Die Art der Suche (Depth First Search / DFS, Breadth First Search / BFS)
+wird als [Strategie](https://medium.com/@sabergholami72/strategy-design-pattern-when-and-how-to-use-it-60d5983f8ce2) realisiert.
+
 
 ---
 

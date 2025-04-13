@@ -2,8 +2,8 @@
 // RealWorldExampleModern.cpp // Strategy Pattern
 // ===========================================================================
 
-//#include <memory>
 #include <functional>
+#include <memory>
 #include <print>
 #include <string>
 #include <vector>
@@ -137,7 +137,6 @@ namespace StrategyRealWorldExampleModern {
             shape->draw();
         }
     }
-
 }
 
 void test_realworld_example_modern()
