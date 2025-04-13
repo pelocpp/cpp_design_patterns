@@ -114,16 +114,6 @@ Im Verzeichnis *ECommerceApp* ist ein Beispiel gezeigt, dass Bezahlvorgänge in e
 
 ---
 
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp) &ndash; Einfaches konzeptionelles Beispiel<br />
-[Quellcode](../ConceptualExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit `std::function`<br />
-[Quellcode](../RealWorldExample.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen<br />
-[Quellcode](../RealWorldExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen und `std::function`<br />
-[Quellcode](../StaticStrategyExample.cpp) &ndash; Statische Umsetzung des Strategy Design Patterns (Templates)
-
----
-
 ## Statisches Strategy Design Pattern mit Template Klassen
 
 [Quellcode &bdquo;Statische Shapes&rdquo;](../StaticStrategyExample.cpp)
@@ -138,6 +128,17 @@ sondern als C++&ndash;Template-Parameter übergibt.
 Dies bedeutet,
 dass der Algorithmus/die Strategie zur Laufzeit nicht änderbar ist.
 Der Methodenaufruf selbst erfolgt dann direkt, was eine verbesserte Laufzeit zur Folge hat!
+
+[Quellcode](../StaticStrategyExample.cpp) &ndash; Statische Umsetzung des Strategy Design Patterns (Templates)
+
+---
+
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp) &ndash; Einfaches konzeptionelles Beispiel<br />
+[Quellcode](../ConceptualExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit `std::function`<br />
+[Quellcode](../RealWorldExample.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen<br />
+[Quellcode](../RealWorldExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen und `std::function`<br />
 
 ---
 
