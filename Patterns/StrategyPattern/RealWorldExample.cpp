@@ -13,7 +13,7 @@ namespace StrategyRealWorldExample {
 
     /**
      * Common Base Interface for all visual widgets. 
-     * This interface is not related to the Strategy Design Pattern.
+     * This interface is not related directly to the Strategy Design Pattern.
      */
     
     class Shape
@@ -62,11 +62,12 @@ namespace StrategyRealWorldExample {
     public:
         explicit Circle(double radius, std::unique_ptr<DrawCircleStrategy> drawer)
             : m_radius{ radius }, m_drawer{ std::move(drawer) }
-        {}
-
-        void setDrawCircleStrategy(std::unique_ptr<DrawCircleStrategy> strategy)
         {
-            m_drawer = std::move(strategy);
+        }
+
+        void setDrawCircleStrategy(std::unique_ptr<DrawCircleStrategy> drawer)
+        {
+            m_drawer = std::move(drawer);
         }
 
         void draw() const override
@@ -86,7 +87,8 @@ namespace StrategyRealWorldExample {
     public:
         explicit Rectangle(double width, double height, std::unique_ptr<DrawRectangleStrategy> drawer)
             : m_width{ width }, m_height{ height }, m_drawer{ std::move(drawer) }
-        {}
+        {
+        }
 
         void setDrawRectangleStrategy(std::unique_ptr<DrawRectangleStrategy> strategy)
         {
@@ -167,29 +169,29 @@ void test_realworld_example()
     Shapes shapes{};
 
     // creating strategy objects based upon the according Win32 drawing strategy
-    std::unique_ptr<DrawCircleStrategy> cs{
+    std::unique_ptr<DrawCircleStrategy> strategy1 {
         std::make_unique<Win32CircleStrategy>() 
     };
 
-    std::unique_ptr<Win32RectangleStrategy> rs{
+    std::unique_ptr<DrawRectangleStrategy> strategy2{
         std::make_unique<Win32RectangleStrategy>() 
     };
 
-    std::unique_ptr<DrawCircleStrategy> cs2{
+    std::unique_ptr<DrawCircleStrategy> strategy3{
         std::make_unique<Win32CircleStrategy>()
     };
 
     // creating visual widgets using strategy objects
     std::unique_ptr<Circle> upc{ std::make_unique<Circle>(
-        3.0, std::move(cs))
+        3.0, std::move(strategy1))
     };
 
     std::unique_ptr<Rectangle> upr{ std::make_unique<Rectangle>(
-        4.0, 5.0, std::move(rs)) 
+        4.0, 5.0, std::move(strategy2))
     };
 
     std::unique_ptr<Circle> upc2{ std::make_unique<Circle>(
-        6.0, std::move(cs2))
+        6.0, std::move(strategy3))
     };
 
     // filling container with visual widgets

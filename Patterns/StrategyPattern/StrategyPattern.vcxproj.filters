@@ -91,6 +91,9 @@
     <None Include="Resources\dp_strategy_pattern.svg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_strategy_pattern_shapes.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_strategy_pattern_intro.png">

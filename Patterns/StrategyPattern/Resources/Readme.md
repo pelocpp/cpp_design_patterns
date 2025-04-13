@@ -62,6 +62,36 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Strategy Patterns*.
 
+## Umsetzung des Patterns in einer Klassenhierarchie
+
+Wir betrachten die Anwendung des Strategy Design Patterns in einer Hiearchie von Klassen.
+
+In *Abbildung* 2 kann man zwei Hierarchien erkennen:
+
+  * Eine Hierarchie von anwendungsorientierten Klassen. Hier werden in einer Vaterklasse zentrale Methoden
+  virtuell definiert (z.B. Methode `draw`), diese sind in den Kindklassen geeignet zu überschreiben.
+
+  * Die überschriebene Methoden könnten eine Realisierung umsetzen, wollen dies aber vermeiden,
+  um für unterschiedliche Technologien (Strategien) anpassbar zu sein. Dazu benötigt man eine zweite Hierarchie von Klassen,
+  die unterschiedliche Strategien realisieren.
+
+
+<img src="dp_strategy_pattern_shapes.svg" width="700">
+
+*Abbildung* 2: Anwendung des Strategy Design Patterns in einer Klassenhierarchie.
+
+
+## Umsetzung des Patterns in Modern C++
+
+
+
+
+
+
+
+
+
+
 ## Anwendungen des Design Pattern in der STL:
 
   * `std::sort`: Im optionalen dritten Parameter kann ein *callable* übergeben werden, dass die Strategie des Sortierens implementiert.
