@@ -71,9 +71,9 @@ In *Abbildung* 2 kann man zwei Hierarchien erkennen:
   * Eine Hierarchie von anwendungsorientierten Klassen. Hier werden in einer Vaterklasse zentrale Methoden
   virtuell definiert (z.B. Methode `draw`), diese sind in den Kindklassen geeignet zu überschreiben.
 
-  * Die überschriebene Methoden könnten eine Realisierung umsetzen, wollen dies aber vermeiden,
+  * Die überschriebenen Methoden könnten eine Realisierung umsetzen, wollen dies aber vermeiden,
   um für unterschiedliche Technologien (Strategien) anpassbar zu sein. Dazu benötigt man eine zweite Hierarchie von Klassen,
-  die unterschiedliche Strategien realisieren.
+  die unterschiedliche Implementierungen bereitstellen.
 
 
 <img src="dp_strategy_pattern_shapes.svg" width="700">
@@ -85,21 +85,19 @@ In *Abbildung* 2 kann man zwei Hierarchien erkennen:
 
 In einer Umsetzung des Strategy Design Patterns mit Modern C++ Sprachmitteln
 kommt das Klassentemplate `std::function` zum Einsatz.
-
 `std::function` ist ein universeller polymorpher Funktionswrapper, der zum Beispiel Lambda Objekte, freie Funktionen
 und andere aufrufbare Objekte kapseln kann.
 
 Mit Hilfe von `std::function` fallen in dieser Variante alle Klassen weg, die mit Strategien zu tun haben.
 
-<img src="dp_strategy_pattern_shapes.svg" width="700">
+<img src="dp_strategy_pattern_shapes_modern.svg" width="700">
 
 *Abbildung* 3: Umsetzung des Strategy Design Patterns in Modern C++ mit `std::function`.
 
 
+## Einsatz des Strategy Design Pattern in der STL:
 
-## Anwendungen des Design Pattern in der STL:
-
-  * `std::sort`: Im optionalen dritten Parameter kann ein *callable* übergeben werden, dass die Strategie des Sortierens implementiert.
+  * `std::sort`: Im optionalen dritten Parameter kann ein *Callable* übergeben werden, dass die Strategie des Sortierens implementiert.
 
 ## Hinweis:
 
@@ -110,9 +108,19 @@ die zur Laufzeit austauschbar sind.
 
 ---
 
+&bdquo;Real-World&rdquo; Beispiel
+
+Im Verzeichnis *ECommerceApp* ist ein Beispiel gezeigt, dass Bezahlvorgänge in einer ECommerce-Anwendung auf Strategien umsetzt.
+
+---
+
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample.cpp)
+[Quellcode](../ConceptualExample.cpp) &ndash; Einfaches konzeptionelles Beispiel<br />
+[Quellcode](../ConceptualExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit `std::function`<br />
+[Quellcode](../RealWorldExample.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen<br />
+[Quellcode](../RealWorldExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen und `std::function`<br />
+[Quellcode](../StaticStrategyExample.cpp) &ndash; Statische Umsetzung des Strategy Design Patterns (Templates)
 
 ---
 
@@ -154,7 +162,6 @@ Das Beispiel zu der Auswahl der Bezahlungsmethode in einer E-Commerce App oriere
 Ein weiteres interessantes Beispiel zum Strategy Pattern widmet sich der Suche nach Knoten in einem gerichteten Graphen.
 Die Art der Suche (Depth First Search / DFS, Breadth First Search / BFS)
 wird als [Strategie](https://medium.com/@sabergholami72/strategy-design-pattern-when-and-how-to-use-it-60d5983f8ce2) realisiert.
-
 
 ---
 
