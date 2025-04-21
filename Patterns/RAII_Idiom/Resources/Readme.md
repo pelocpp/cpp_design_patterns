@@ -36,6 +36,7 @@ wäre zum Beispiel &bdquo;**Scope-Bound Resource Management**&rdquo;.
 Der Name RAII ist allerdings gesetzt, es macht wenig Sinn,
 sich hierüber zu viele Gedanken zu machen.
 
+---
 
 #### Lösung
 
@@ -231,6 +232,15 @@ c'tor Dummy [1]
 d'tor Dummy [1]
 Done.
 ```
+
+---
+
+#### Conceptual Example:
+
+[ConceptualExample](../ConceptualExample.cpp) &ndash; Das Beispiel aus dieser Unterlage<br />
+[Windows Clipboard](../Clipboard.cpp) &ndash; Ein Beispiel zum Windows Clipboard
+
+---
 
 #### Struktur
 
