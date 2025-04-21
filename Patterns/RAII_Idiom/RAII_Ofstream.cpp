@@ -13,7 +13,7 @@
 
 namespace RAIIDemoOfstream {
 
-    void writeToFile(const std::string& message)
+    static void writeToFile(const std::string& message)
     {
         // mutex to protect file access (shared across threads)
         static std::mutex mtex;
@@ -39,7 +39,7 @@ namespace RAIIDemoOfstream {
         // when closing at the end of the scope is sufficient.
     }
 
-    void test () {
+    static void test () {
         writeToFile("Dies ist eine Zeile");
     }
 }

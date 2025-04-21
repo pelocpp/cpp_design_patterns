@@ -8,68 +8,68 @@
 
 namespace RAIIDemo {
 
-    template <typename T>
+    template <class TFinalizer>
     class RAII {
     public:
-        explicit RAII(T* p) : m_p(p) {}
-        ~RAII() { delete m_p; };
+        // c'tor
+        explicit RAII(TFinalizer finalizer)
+            : m_finalizer{ finalizer }
+        {}
+
+        // d'tor
+        ~RAII() {
+            m_finalizer();
+        }
 
         // prevent copy semantics
         RAII(const RAII&) = delete;
-        RAII& operator=(const RAII&) = delete;
-
-        // grant access to pointer inside RAII object
-        T* operator->() { return m_p; }
-        const T* operator->() const { return m_p; }
-        T& operator&() { return *m_p; }
-        const T* operator&() const { return *m_p; }
+        RAII& operator= (const RAII&) = delete;
 
     private:
-        T* m_p;
+        TFinalizer m_finalizer;
     };
 
-    void test_01() 
+    static void test_01()
     {
         {
-            RAII<Dummy> p(new Dummy(1));
+            Dummy* ptr = new Dummy{ 1 };
+            if (ptr == nullptr) {
+                return;
+            }
+
+            RAII raii{ [&] () { delete ptr; } };
         }
 
         std::cout << "Done." << std::endl;
     }
 
-    void test_02() 
-    {
-        {
-            RAII<Dummy> p(new Dummy(2));
-            p->sayHello();
-            int value = p->getValue();
-            std::cout << "Value " << value << " inside Dummy object." << std::endl;
-
-            Dummy& dRef = p.operator&();
-            dRef.sayHello();
-            value = dRef.getValue();
-            std::cout << "Value " << value << " inside Dummy object." << std::endl;
-        }
-
-        std::cout << "Done." << std::endl;
-    }
-
-    void test_03()
+    static void test_02()
     {
         // test RAII idiom upon a loop break
         do {
-            RAII<Dummy> p(new Dummy(3));
+            Dummy* ptr = new Dummy{ 1 };
+            if (ptr == nullptr) {
+                break;
+            }
+
+            RAII raii{ [&] () { delete ptr; } };
             break;
-        } while (false);
+        }
+        while (false);
 
         std::cout << "Done." << std::endl;
     }
 
-    void test_04()
+    static void test_03()
     {
         // test RAII idiom upon exception being thrown
         try {
-            RAII<Dummy> p(new Dummy(4));
+            Dummy* ptr = new Dummy{ 1 };
+            if (ptr == nullptr) {
+                return;
+            }
+
+            RAII raii{ [&]() { delete ptr; } };
             throw 99;
         }
         catch (int n) {
@@ -79,31 +79,41 @@ namespace RAIIDemo {
         std::cout << "Done." << std::endl;
     }
 
-    void test_05() 
+    static void test_04()
     {
         // test RAII idiom with two encapsulated resources:
         // Note order of destructor calls
 
-        RAII<Dummy> p1(new Dummy(1));
+        {
+            Dummy* ptr1 = new Dummy{ 1 };
+            Dummy* ptr2 = new Dummy{ 2 };
 
-        RAII<Dummy> p2(new Dummy(2));
+            RAII raii1{ [&]() { delete ptr1; } };
+            RAII raii2{ [&]() { delete ptr2; } };
+        }
 
         std::cout << "Done." << std::endl;
     }
 
+    template <class TFinalizer>
     class RAIIContainer
     {
     public:
-        RAIIContainer(Dummy* p) : m_rp(p) {}
+        RAIIContainer(TFinalizer&& finalizer) : m_raii{ finalizer } {}
 
     private:
-        RAII<Dummy> m_rp;
+        RAII<TFinalizer> m_raii;
     };
 
-    void test_06()
+    static void test_05()
     {
+        Dummy* ptr = new Dummy{ 1 };
+        if (ptr == nullptr) {
+            return;
+        }
+
         {
-            RAIIContainer cont(new Dummy(5));
+            RAIIContainer cont{ [&]() { delete ptr; } };
         }
 
         std::cout << "Done." << std::endl;
@@ -113,12 +123,11 @@ namespace RAIIDemo {
 void test_conceptual_example() {
 
     using namespace RAIIDemo;
-    //test_01();
-    //test_02();
-    //test_03();
-    //test_04();
-    //test_05();
-    test_06();
+    test_01();
+    test_02();
+    test_03();
+    test_04();
+    test_05();
 }
 
 // ===========================================================================

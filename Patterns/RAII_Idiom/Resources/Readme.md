@@ -44,25 +44,26 @@ Wir betrachten das Prinzip einer RAII-verwalteten Ressource an Hand einer Folge 
 ##### 1. Eine RAII-konforme Klasse
 
 ```cpp
-template <typename T>
-class RAII {
-public:
-    explicit RAII(T* p) : m_p(p) {}
-    ~RAII() { delete m_p; };
-
-    // prevent copy semantics
-    RAII(const RAII&) = delete;
-    RAII& operator=(const RAII&) = delete;
-
-    // grant access to pointer inside RAII object
-    T* operator->() { return m_p; }
-    const T* operator->() const { return m_p; }
-    T& operator&() { return *m_p; }
-    const T* operator&() const { return *m_p; }
-
-private:
-    T* m_p;
-};
+01: template <class TFinalizer>
+02: class RAII {
+03: public:
+04:     // c'tor
+05:     explicit RAII(TFinalizer finalizer)
+06:         : m_finalizer{ finalizer }
+07:     {}
+08: 
+09:     // d'tor
+10:     ~RAII() {
+11:         m_finalizer();
+12:     }
+13: 
+14:     // prevent copy semantics
+15:     RAII(const RAII&) = delete;
+16:     RAII& operator= (const RAII&) = delete;
+17: 
+18: private:
+19:     TFinalizer m_finalizer;
+20: };
 ```
 
 ---
@@ -70,14 +71,19 @@ private:
 ##### 2. Einfache Anwendung eines RAII-Objekts (*Compound-Statement* / *Block*)
 
 ```cpp
-void test() 
-{
-    {
-        RAII<Dummy> p(new Dummy(1));
-    }
-
-    std::cout << "Done." << std::endl;
-}
+01: void test()
+02: {
+03:     {
+04:         Dummy* ptr = new Dummy{ 1 };
+05:         if (ptr == nullptr) {
+06:             return;
+07:         }
+08: 
+09:         RAII raii{ [&] () { delete ptr; } };
+10:     }
+11: 
+12:     std::cout << "Done." << std::endl;
+13: }
 ```
 
 ###### Ausgabe
@@ -90,111 +96,89 @@ Done.
 
 ---
 
-##### 3. Zugriff auf die Ressource (Überladener `->` und `&` Operator)
+##### 3. Vorzeitiges Verlassen einer Wiederholungsschleife
 
 ```cpp
-void test() 
-{
-    {
-        RAII<Dummy> p(new Dummy(2));
-        p->sayHello();
-        int value = p->getValue();
-        std::cout << "Value " << value << " inside Dummy object." << std::endl;
-
-        Dummy& dRef = p.operator&();
-        dRef.sayHello();
-        value = dRef.getValue();
-        std::cout << "Value " << value << " inside Dummy object." << std::endl;
-    }
-
-    std::cout << "Done." << std::endl;
-}
+01: void test()
+02: {
+03:     // test RAII idiom upon a loop break
+04:     do {
+05:         Dummy* ptr = new Dummy{ 1 };
+06:         if (ptr == nullptr) {
+07:             break;
+08:         }
+09: 
+10:         RAII raii{ [&] () { delete ptr; } };
+11:         break;
+12:     }
+13:     while (false);
+14: 
+15:     std::cout << "Done." << std::endl;
+16: }
 ```
 
 ###### Ausgabe
 
 ```
-c'tor Dummy [2]
-Hello Dummy [2]
-Value 2 inside Dummy object.
-Hello Dummy [2]
-Value 2 inside Dummy object.
-d'tor Dummy [2]
+c'tor Dummy [1]
+d'tor Dummy [1]
 Done.
 ```
 
 ---
 
-##### 4. Vorzeitiges Verlassen einer Wiederholungsschleife
+##### 4. Verhalten des RAII-Idioms bei Eintreten einer Ausnahme (*Exception*)
 
 ```cpp
-void test()
-{
-
-    // test RAII idiom upon a loop break
-    do {
-        RAII<Dummy> p(new Dummy(3));
-        break;
-    } while (false);
-
-    std::cout << "Done." << std::endl;
-}
+01: void test()
+02: {
+03:     // test RAII idiom upon exception being thrown
+04:     try {
+05:         Dummy* ptr = new Dummy{ 1 };
+06:         if (ptr == nullptr) {
+07:             return;
+08:         }
+09: 
+10:         RAII raii{ [&]() { delete ptr; } };
+11:         throw 99;
+12:     }
+13:     catch (int n) {
+14:         std::cout << "Exception " << n << " occurred!" << std::endl;
+15:     }
+16: 
+17:     std::cout << "Done." << std::endl;
+18: }
 ```
 
 ###### Ausgabe
 
 ```
-c'tor Dummy [3]
-d'tor Dummy [3]
-Done.
-```
-
----
-
-##### 5. Verhalten des RAII-Idioms bei Eintreten einer Ausnahme (*Exception*)
-
-```cpp
-void test_04()
-{
-
-    // test RAII idiom upon exception being thrown
-    try {
-        RAII<Dummy> p(new Dummy(4));
-        throw 99;
-    }
-    catch (int n) {
-        std::cout << "Exception " << n << " occurred!" << std::endl;
-    }
-
-    std::cout << "Done." << std::endl;
-}
-```
-
-###### Ausgabe
-
-```
-c'tor Dummy [4]
-d'tor Dummy [4]
+c'tor Dummy [1]
+d'tor Dummy [1]
 Exception 99 occurred!
 Done.
 ```
 
 ---
 
-##### 6. Reihenfolge bei der Freigabe mehrere RAII-verwalteter Ressourcen
+##### 5. Reihenfolge bei der Freigabe mehrere RAII-verwalteter Ressourcen
 
 ```cpp
-void test_05() {
-
-    // test RAII idiom with two encapsulated resources:
-    // Note order of destructor calls
-
-    RAII<Dummy> p1(new Dummy(1));
-
-    RAII<Dummy> p2(new Dummy(2));
-
-    std::cout << "Done." << std::endl;
-}
+01: void test()
+02: {
+03:     // test RAII idiom with two encapsulated resources:
+04:     // Note order of destructor calls
+05: 
+06:     {
+07:         Dummy* ptr1 = new Dummy{ 1 };
+08:         Dummy* ptr2 = new Dummy{ 2 };
+09: 
+10:         RAII raii1{ [&]() { delete ptr1; } };
+11:         RAII raii2{ [&]() { delete ptr2; } };
+12:     }
+13: 
+14:     std::cout << "Done." << std::endl;
+15: }
 ```
 
 ###### Ausgabe
@@ -202,33 +186,40 @@ void test_05() {
 ```
 c'tor Dummy [1]
 c'tor Dummy [2]
-Done.
 d'tor Dummy [2]
 d'tor Dummy [1]
+Done.
 ```
 
 ---
 
-##### 7. RAII-verwalteter Ressource als Instanzvariable eines Objekts
+##### 6. RAII-verwalteter Ressource als Instanzvariable eines Objekts
 
 ```cpp
-class RAIIContainer
-{
-public:
-    RAIIContainer(Dummy* p) : m_rp(p) {}
+01: template <class TFinalizer>
+02: class RAIIContainer
+03: {
+04: public:
+05:     RAIIContainer(TFinalizer&& finalizer) : m_raii{ finalizer } {}
+06: 
+07: private:
+08:     RAII<TFinalizer> m_raii;
+09: };
+10: 
+11: void test()
+12: {
+13:     Dummy* ptr = new Dummy{ 1 };
+14:     if (ptr == nullptr) {
+15:         return;
+16:     }
+17: 
+18:     {
+19:         RAIIContainer cont{ [&]() { delete ptr; } };
+20:     }
+21: 
+22:     std::cout << "Done." << std::endl;
+23: }
 
-private:
-    RAII<Dummy> m_rp;
-};
-
-void test_06()
-{
-    {
-        RAIIContainer cont(new Dummy(5));
-    }
-
-    std::cout << "Done." << std::endl;
-}
 ```
 
 ---
@@ -236,8 +227,8 @@ void test_06()
 ###### Ausgabe
 
 ```
-c'tor Dummy [5]
-d'tor Dummy [5]
+c'tor Dummy [1]
+d'tor Dummy [1]
 Done.
 ```
 
