@@ -122,6 +122,12 @@ Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdqu
 
 ---
 
+#### Conceptual Example:
+
+[Quellcode](../SRP.cpp)
+
+---
+
 ## Literaturhinweise
 
 Die Anregungen zu diesem Beispiel finden Sie in

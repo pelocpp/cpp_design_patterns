@@ -386,6 +386,12 @@ Sehen Sie hierzu eine Realisierung im Quellcode der Klasse `GenericSpecification
 
 ---
 
+#### Conceptual Example:
+
+[Quellcode](../OCP.cpp)
+
+---
+
 ## Literaturhinweise
 
 Die Anregungen zu diesem Beispiel finden Sie in

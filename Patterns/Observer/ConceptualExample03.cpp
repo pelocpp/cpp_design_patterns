@@ -83,7 +83,7 @@ namespace ObserverDesignPatternSmartPointerEx {
     private:
         void notify() {
             howManyObservers();
-            for (std::weak_ptr<IObserver>& weakPtr : m_observers) {
+            for (const std::weak_ptr<IObserver>& weakPtr : m_observers) {
                 std::shared_ptr<IObserver> sharedPtr{ weakPtr.lock() };
                 if (sharedPtr != nullptr) {
                     sharedPtr->update(m_message);

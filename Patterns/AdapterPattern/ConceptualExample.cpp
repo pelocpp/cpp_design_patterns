@@ -15,7 +15,7 @@ class ITarget
 public:
     virtual ~ITarget() {}
 
-    virtual std::string getRequest() const = 0;
+    virtual std::string request() const = 0;
 };
 
 /**
@@ -26,7 +26,7 @@ class Target : public ITarget
 public:
     Target() {}
 
-    virtual std::string getRequest() const override
+    virtual std::string request() const override
     {
         return std::string{ "Target: The target's default behavior." };
     }
@@ -42,7 +42,7 @@ class Adaptee
 public:
     Adaptee() {}
 
-    std::string getSpecificRequest() const
+    std::string specificRequest() const
     {
         return std::string{ ".eetpadA eht fo roivaheb laicepS" };
     }
@@ -55,16 +55,16 @@ public:
 class Adapter : public ITarget
 {
 private:
-    std::shared_ptr<Adaptee> m_adaptee;
+    std::unique_ptr<Adaptee> m_adaptee;
 
 public:
-    Adapter(const std::shared_ptr<Adaptee>& adaptee) 
-        : m_adaptee{ adaptee }
+    Adapter(std::unique_ptr<Adaptee> adaptee)
+        : m_adaptee{ std::move(adaptee) }
     {}
 
-    std::string getRequest() const override {
+    std::string request() const override {
 
-        std::string toReverse{ m_adaptee->getSpecificRequest() };
+        std::string toReverse{ m_adaptee->specificRequest() };
 
         std::reverse(
             toReverse.begin(),
@@ -78,35 +78,35 @@ public:
 /**
  * The client code supports all classes that follow the Target interface
  */
-static void clientCode(std::shared_ptr<ITarget> target) {
+static void clientCode(std::unique_ptr<ITarget> target) {
 
-    std::string request{ target->getRequest() };
-    std::cout << request << std::endl << std::endl;
+    std::string response{ target->request() };
+    std::cout << response << std::endl << std::endl;
 }
 
-void test_conceptual_example_01() {
+static void test_conceptual_example_01() {
 
-    std::shared_ptr<Adaptee> adaptee{ std::make_shared<Adaptee>() };
+    std::unique_ptr<Adaptee> adaptee{ std::make_unique<Adaptee>() };
 
-    std::shared_ptr<Adapter> adapter{ std::make_shared<Adapter>(adaptee) };
+    std::unique_ptr<Adapter> adapter{ std::make_unique<Adapter>(std::move(adaptee)) };
 
-    clientCode(adapter);
+    clientCode(std::move(adapter));
 }
 
-void test_conceptual_example_02() {
+static void test_conceptual_example_02() {
 
     std::cout << "Client: I can work fine with the Target object" << std::endl;
-    std::shared_ptr<ITarget> target{ std::make_shared<Target>() };
-    clientCode(target);
+    std::unique_ptr<ITarget> target{ std::make_unique<Target>() };
+    clientCode(std::move(target));
 
-    std::shared_ptr<Adaptee> adaptee{ std::make_shared<Adaptee>() };
+    std::unique_ptr<Adaptee> adaptee{ std::make_unique<Adaptee>() };
     std::cout << "Client: The Adaptee class has an incompatible interface:" << std::endl;
-    std::string specificRequest = adaptee->getSpecificRequest();
-    std::cout << "Adaptee: " << specificRequest << std::endl << std::endl;
+    std::string specificResponse = adaptee->specificRequest();
+    std::cout << "Adaptee: " << specificResponse << std::endl << std::endl;
 
     std::cout << "Client: But I can work with the Adaptee via the Adapter:" << std::endl;
-    std::shared_ptr<Adapter> adapter{ std::make_shared<Adapter>(adaptee) };
-    clientCode(adapter);
+    std::unique_ptr<Adapter> adapter{ std::make_unique<Adapter>(std::move(adaptee)) };
+    clientCode(std::move(adapter));
 }
 
 void test_conceptual_example() {

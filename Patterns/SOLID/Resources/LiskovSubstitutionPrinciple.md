@@ -173,6 +173,12 @@ eine so genannte &bdquo;*is-substitutable-for*&rdquo;-Beziehung zum geerbten Obj
 
 ---
 
+#### Conceptual Example:
+
+[Quellcode](../LSP.cpp)
+
+---
+
 ## Literaturhinweise
 
 Die Anregungen zu diesem Beispiel finden Sie in

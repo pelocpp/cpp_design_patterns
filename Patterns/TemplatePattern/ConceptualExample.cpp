@@ -18,14 +18,22 @@ public:
     /**
      * The template method defines the skeleton of an algorithm:
      */
-    void TemplateMethod() const {
-        BaseOperation1();         // may be overriden, but it's not mandatory
-        RequiredOperations1();    // MUST be overriden
-        BaseOperation2();         // may be overriden, but it's not mandatory
-        Hook1();                  // may be overriden, but it's not mandatory
-        RequiredOperation2();     // MUST be overriden
-        BaseOperation3();         // may be overriden, but it's not mandatory
-        Hook2();                  // may be overriden, but it's not mandatory
+
+    void TemplateMethod() const
+    {
+        BaseOperation1();             // may be overriden, but it's not mandatory
+
+        if (RequiredOperations1()) {
+
+            BaseOperation2();         // may be overriden, but it's not mandatory
+            Hook1();                  // may be overriden, but it's not mandatory
+        }
+        else
+        {
+            RequiredOperation2();     // MUST be overriden
+            BaseOperation3();         // may be overriden, but it's not mandatory
+            Hook2();                  // may be overriden, but it's not mandatory
+        }
     }
 
     /**
@@ -55,8 +63,8 @@ protected:
     /**
      * These operations have to be implemented in subclasses.
      */
-    virtual void RequiredOperations1() const = 0;
-    virtual void RequiredOperation2() const = 0;
+    virtual bool RequiredOperations1() const = 0;
+    virtual bool RequiredOperation2() const = 0;
 
     /**
      * These are "hooks." Subclasses may override them, but it's not mandatory
@@ -74,12 +82,14 @@ protected:
  */
 class ConcreteClass1 : public AbstractClass {
 protected:
-    virtual void RequiredOperations1() const override {
+    virtual bool RequiredOperations1() const override {
         std::cout << "ConcreteClass1 says: Implemented Operation1" << std::endl;
+        return false;
     }
 
-    virtual void RequiredOperation2() const override {
+    virtual bool RequiredOperation2() const override {
         std::cout << "ConcreteClass1 says: Implemented Operation2" << std::endl;
+        return false;
     }
 };
 
@@ -88,12 +98,14 @@ protected:
  */
 class ConcreteClass2 : public AbstractClass {
 protected:
-    virtual void RequiredOperations1() const override {
+    virtual bool RequiredOperations1() const override {
         std::cout << "ConcreteClass2 says: Implemented Operation1" << std::endl;
+        return true;
     }
 
-    virtual void RequiredOperation2() const override {
+    virtual bool RequiredOperation2() const override {
         std::cout << "ConcreteClass2 says: Implemented Operation2" << std::endl;
+        return true;
     }
 
     virtual void BaseOperation1() const override {
