@@ -86,9 +86,15 @@ namespace RAIIDemo {
 
         {
             Dummy* ptr1 = new Dummy{ 1 };
-            Dummy* ptr2 = new Dummy{ 2 };
-
+            if (ptr1 == nullptr) {
+                return;
+            }
             RAII raii1{ [&]() { delete ptr1; } };
+
+            Dummy* ptr2 = new Dummy{ 2 };
+            if (ptr2 == nullptr) {
+                return;
+            }
             RAII raii2{ [&]() { delete ptr2; } };
         }
 

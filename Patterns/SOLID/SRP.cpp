@@ -13,16 +13,16 @@ namespace AntiConceptualExampleSRP {
     private:
         std::string              m_title;
         std::vector<std::string> m_entries;
+        std::size_t              m_count;
 
     public:
         Journal(const std::string& title) 
-            : m_title{ title } 
+            : m_title{ title }, m_count{}
         {}
 
         void addEntry(const std::string& entry) {
-            static size_t count {};
-            count++;
-            std::string text { std::to_string(count) + ": " + entry };
+            m_count++;
+            std::string text { std::to_string(m_count) + ": " + entry };
             m_entries.push_back(text);
         }
 
@@ -44,16 +44,16 @@ namespace ConceptualExampleSRP
     private:
         std::string              m_title;
         std::vector<std::string> m_entries;
+        std::size_t              m_count;
 
     public:
         Journal(const std::string& title)
-            : m_title{ title }
+            : m_title{ title }, m_count{}
         {}
 
         void addEntry(const std::string& entry) {
-            static uint32_t count {};
-            count++;
-            std::string text { std::to_string(count) + ": " + entry };
+            m_count++;
+            std::string text { std::to_string(m_count) + ": " + entry };
             m_entries.push_back(text);
         }
 

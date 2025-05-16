@@ -33,16 +33,16 @@ ein komplexes Objekt in kleinere und einfachere Komponenten zu zerlegen.
 03: private:
 04:     std::string              m_title;
 05:     std::vector<std::string> m_entries;
-06: 
-07: public:
-08:     Journal(const std::string& title) 
-09:         : m_title{ title } 
-10:     {}
-11: 
-12:     void addEntry(const std::string& entry) {
-13:         static size_t count {};
-14:         count++;
-15:         std::string text { std::to_string(count) + ": " + entry };
+06:     std::size_t              m_count;
+07: 
+08: public:
+09:     Journal(const std::string& title) 
+10:         : m_title{ title }, m_count{}
+11:     {}
+12: 
+13:     void addEntry(const std::string& entry) {
+14:         m_count++;
+15:         std::string text { std::to_string(m_count) + ": " + entry };
 16:         m_entries.push_back(text);
 17:     }
 18: 
@@ -82,16 +82,16 @@ Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdqu
 03: private:
 04:     std::string              m_title;
 05:     std::vector<std::string> m_entries;
-06: 
-07: public:
-08:     Journal(const std::string& title)
-09:         : m_title{ title }
-10:     {}
-11: 
-12:     void addEntry(const std::string& entry) {
-13:         static size_t count {};
-14:         count++;
-15:         std::string text { std::to_string(count) + ": " + entry };
+06:     std::size_t              m_count;
+07: 
+08: public:
+09:     Journal(const std::string& title)
+10:         : m_title{ title }, m_count{}
+11:     {}
+12: 
+13:     void addEntry(const std::string& entry) {
+14:         m_count++;
+15:         std::string text { std::to_string(m_count) + ": " + entry };
 16:         m_entries.push_back(text);
 17:     }
 18: 

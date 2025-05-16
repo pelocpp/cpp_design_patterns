@@ -201,13 +201,10 @@ namespace Clipboard {
                     std::string line{ m_text.substr(first, len) };
                     m_code.push_back(line);
                     first = index + 2; // skipping '\r' and '\n'
-                    // std::cout << "Found: " << line << std::endl;
                 }
 
                 // retrieve last line
                 std::string line{ m_text.substr(first) };
-                // std::cout << "Last:  " << line << std::endl;
-
                 if (!line.empty()) {
                     m_code.push_back(line);
                 }

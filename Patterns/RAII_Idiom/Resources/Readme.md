@@ -172,14 +172,20 @@ Done.
 05: 
 06:     {
 07:         Dummy* ptr1 = new Dummy{ 1 };
-08:         Dummy* ptr2 = new Dummy{ 2 };
-09: 
-10:         RAII raii1{ [&]() { delete ptr1; } };
-11:         RAII raii2{ [&]() { delete ptr2; } };
-12:     }
-13: 
-14:     std::cout << "Done." << std::endl;
-15: }
+08:         if (ptr1 == nullptr) {
+09:             return;
+10:         }
+11:         RAII raii1{ [&]() { delete ptr1; } };
+12: 
+13:         Dummy* ptr2 = new Dummy{ 2 };
+14:         if (ptr2 == nullptr) {
+15:             return;
+16:         }
+17:         RAII raii2{ [&]() { delete ptr2; } };
+18:     }
+19: 
+20:     std::cout << "Done." << std::endl;
+21: }
 ```
 
 ###### Ausgabe
