@@ -30,7 +30,7 @@
     <None Include="Resources\dp_abstract_factory_pattern.svg">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="dp_abstract_factory_pattern_ui_factory.svg">
+    <None Include="Resources\dp_abstract_factory_pattern_ui_factory.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
