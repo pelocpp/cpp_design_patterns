@@ -45,6 +45,8 @@ namespace ConceptualExampleBridge02 {
         }
     };
 
+    // ===========================================================================
+        
     /**
      * The Abstraction defines the interface for the "control" part
      * of the two class hierarchies. It maintains a reference to an object
@@ -53,16 +55,16 @@ namespace ConceptualExampleBridge02 {
     class Abstraction
     {
     protected:
-        std::shared_ptr<Implementor> m_implementor;
+        std::unique_ptr<Implementor> m_implementor;
 
     public:
-        Abstraction(std::shared_ptr<Implementor> implementor)
-            : m_implementor{ implementor }
+        Abstraction(std::unique_ptr<Implementor>& implementor)
+            : m_implementor{ std::move(implementor) }
         {}
 
         virtual ~Abstraction() {}
 
-        virtual std::string Operation() const
+        virtual std::string operation() const
         {
             return "Abstraction: Base operation with:\n" +
                 m_implementor->operationImplementation();
@@ -75,10 +77,11 @@ namespace ConceptualExampleBridge02 {
     class ExtendedAbstraction : public Abstraction
     {
     public:
-        ExtendedAbstraction(std::shared_ptr<Implementor> implementor)
-            : Abstraction{ implementor } {}
+        ExtendedAbstraction(std::unique_ptr<Implementor>& implementor)
+            : Abstraction{ implementor }
+        {}
 
-        virtual std::string Operation() const override
+        virtual std::string operation() const override
         {
             return "ExtendedAbstraction: Extended operation with:\n" +
                 m_implementor->operationImplementation();
@@ -91,10 +94,10 @@ namespace ConceptualExampleBridge02 {
      * the Abstraction class. This way the client code can support any abstraction-
      * implementation combination.
      */
-    static void clientCode(std::shared_ptr<Abstraction> abstraction)
+    static void clientCode(std::unique_ptr<Abstraction>& abstraction)
     {
         // ...
-        std::cout << abstraction->Operation() << std::endl;
+        std::cout << abstraction->operation() << std::endl;
         // ...
     }
 }
@@ -107,13 +110,13 @@ void test_conceptual_example_02()
      * The client code should be able to work with any pre-configured
      * abstraction-implementation combination.
      */
-    std::shared_ptr<Implementor> implementor1{ std::make_shared<ConcreteImplementationA>() };
-    std::shared_ptr<Abstraction> abstraction1{ std::make_shared<Abstraction>(implementor1) };
+    std::unique_ptr<Implementor> implementor1{ std::make_unique<ConcreteImplementationA>() };
+    std::unique_ptr<Abstraction> abstraction1{ std::make_unique<Abstraction>(implementor1) };
     clientCode(abstraction1);
     std::cout << std::endl;
 
-    std::shared_ptr<Implementor> implementor2{ std::make_shared<ConcreteImplementationB>() };
-    std::shared_ptr<Abstraction> abstraction2{ std::make_shared<ExtendedAbstraction>(implementor2) };
+    std::unique_ptr<Implementor> implementor2{ std::make_unique<ConcreteImplementationB>() };
+    std::unique_ptr<Abstraction> abstraction2{ std::make_unique<ExtendedAbstraction>(implementor2) };
     clientCode(abstraction2);
 }
 
