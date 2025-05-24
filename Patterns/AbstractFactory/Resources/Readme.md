@@ -79,7 +79,7 @@ Für Oberflächensteuerelemente wie Listen, Comboboxen oder Eingabefelder gibt es 
 Diese Varianten sind in ihrer Grundfunktionalität gleich, unterscheiden sich aber in ihrem Aussehen
 und teilweise auch in ihrem Verhalten.
 
-<img src="AbstractFactory.png" width="600" />
+<img src="dp_abstract_factory_pattern_ui_factory.svg" width="700" />
 
 *Abbildung* 1: Eine abstrakte Fabrik für die Hantierung unterschiedlicher graphischer Steuerelemente.
 

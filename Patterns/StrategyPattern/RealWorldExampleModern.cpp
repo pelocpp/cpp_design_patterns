@@ -34,9 +34,10 @@ namespace StrategyRealWorldExampleModern {
 
     class Circle : public Shape
     {
-    public:
+    private:
         using DrawStrategy = std::function<void(const Circle&)>;
 
+    public:
         explicit Circle(double radius, DrawStrategy drawer)
             : m_radius{ radius }, m_drawer{ std::move(drawer) }
         {
@@ -61,9 +62,10 @@ namespace StrategyRealWorldExampleModern {
 
     class Rectangle : public Shape
     {
-    public:
+    private:
         using DrawStrategy = std::function<void(const Rectangle&)>;
 
+    public:
         explicit Rectangle(double width, double height, DrawStrategy drawer)
             : m_width{ width }, m_height{ height }, m_drawer{ std::move(drawer) }
         {
@@ -96,7 +98,7 @@ namespace StrategyRealWorldExampleModern {
      * The interface makes them interchangeable in the clients (Visual Widgets).
      */
 
-    class Win32CircleStrategy //: public DrawCircleStrategy
+    class Win32CircleStrategy
     {
     public:
         explicit Win32CircleStrategy() {};
@@ -109,7 +111,7 @@ namespace StrategyRealWorldExampleModern {
         /* Drawing related data members, e.g. colors, textures, ... */
     };
 
-    class Win32RectangleStrategy //: public DrawRectangleStrategy
+    class Win32RectangleStrategy
     {
     public:
         explicit Win32RectangleStrategy() {};

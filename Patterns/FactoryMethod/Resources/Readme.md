@@ -85,8 +85,8 @@ Die Idee dahinter ist, dass einzelne Fabriken `createProduct()` überschreiben,
 um ein Objekt eines entsprechenden Produkttyps zurückzugeben.
 
 Die `FactoryBase`-Basisklasse selbst implementiert eine Methode `requestProduct()`,
-das nebenbei sich noch um andere Dinge kümmern kann
-wie zum Beispiel die Anzahl der produzierten Produkte zu aktualisieren.
+die sich nebenbei noch um andere Dinge kümmern kann,
+wie zum Beispiel die Anzahl der produzierten Produkte zu verwalten.
 
 Die Memberfunktion `requestProduct()` ist ein Beispiel für das
 *Template Method* Entwurfsmuster.

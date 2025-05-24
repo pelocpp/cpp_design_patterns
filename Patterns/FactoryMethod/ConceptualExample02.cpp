@@ -20,6 +20,7 @@ namespace ConceptualExample02
     {
     public:
         virtual ~ProductBase() {}
+
         virtual std::string getName() const = 0;
         virtual void anyOperation() = 0;
     };
@@ -96,10 +97,15 @@ namespace ConceptualExample02
         size_t m_numberOfProductsProduced;
     };
 
+    // =======================================================================
+    // Constructs an instance, taking ownership of the given factories.
+
     class LeastBusyFactory final : public FactoryBase
     {
+    private:
+        std::vector<std::unique_ptr<FactoryBase>> m_factories;
+
     public:
-        // constructs an instance, taking ownership of the given factories.
         explicit LeastBusyFactory(std::vector<std::unique_ptr<FactoryBase>> factories) 
             : m_factories{ std::move(factories) }
         {
@@ -125,8 +131,6 @@ namespace ConceptualExample02
 
             return (*leastBusyFactory)->requestProduct();
         }
-
-        std::vector<std::unique_ptr<FactoryBase>> m_factories;
     };
 
     /**

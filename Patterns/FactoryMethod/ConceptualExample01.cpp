@@ -19,7 +19,6 @@ namespace ConceptualExample01
         virtual ~ProductBase() {}
 
         virtual std::string getName() const = 0;
-
         virtual void anyOperation() = 0;
     };
 

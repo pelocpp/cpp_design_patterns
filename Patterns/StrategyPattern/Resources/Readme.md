@@ -95,7 +95,7 @@ Mit Hilfe von `std::function` fallen in dieser Variante alle Klassen weg, die mi
 *Abbildung* 3: Umsetzung des Strategy Design Patterns in Modern C++ mit `std::function`.
 
 
-## Einsatz des Strategy Design Pattern in der STL:
+## Einsatz des Strategy Design Pattern in der STL
 
   * `std::sort`: Im optionalen dritten Parameter kann ein *Callable* übergeben werden, dass die Strategie des Sortierens implementiert.
 
@@ -135,10 +135,10 @@ Der Methodenaufruf selbst erfolgt dann direkt, was eine verbesserte Laufzeit zur
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample.cpp) &ndash; Einfaches konzeptionelles Beispiel<br />
-[Quellcode](../ConceptualExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit `std::function`<br />
-[Quellcode](../RealWorldExample.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen<br />
-[Quellcode](../RealWorldExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen und `std::function`<br />
+[Quellcode 1](../ConceptualExample.cpp) &ndash; Einfaches konzeptionelles Beispiel<br />
+[Quellcode 2](../ConceptualExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit `std::function`<br />
+[Quellcode 3](../RealWorldExample.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen<br />
+[Quellcode 4](../RealWorldExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen und `std::function`<br />
 
 ---
 

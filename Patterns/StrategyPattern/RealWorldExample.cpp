@@ -168,7 +168,7 @@ void test_realworld_example()
 
     Shapes shapes{};
 
-    // creating strategy objects based upon the according Win32 drawing strategy
+    // creating strategy objects based upon the Win32 drawing strategy
     std::unique_ptr<DrawCircleStrategy> strategy1 {
         std::make_unique<Win32CircleStrategy>() 
     };

@@ -7,6 +7,8 @@
 #include <memory>
 #include <map>
 
+// =======================================================================
+
 /**
  * Each distinct product of a product family should have a base interface.
  * All variants of this product must implement this interface.
@@ -17,6 +19,8 @@ public:
 
     virtual std::string usefulFunctionA() const = 0;
 };
+
+// =======================================================================
 
 /**
  * Concrete Products are created by corresponding Concrete Factories.
@@ -36,6 +40,8 @@ public:
         return "Working on Concrete Product A2";
     }
 };
+
+// =======================================================================
 
 /**
  * Here's the the base interface of another product. All products can interact
@@ -115,6 +121,8 @@ public:
         return std::make_shared<ConcreteProductB2>();  // <== concrete product returned
     }
 };
+
+// ===========================================================================
 
 /**
  * The client code works with factories and products only through abstract types:
