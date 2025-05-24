@@ -12,6 +12,7 @@
   * [Vergleich Strategy Pattern vs. Template Method Pattern](#link4)
   * [Vergleich Observer Pattern vs. Iterator Pattern](#link5)
   * [Vergleich Factory Method Pattern vs. Abstract Factory Pattern](#link6)
+  * [Vergleich Bridge Pattern vs. Adapter Pattern](#link7)
 
 ---
 
@@ -165,6 +166,30 @@ Sie weisen jedoch einige wesentliche Unterschiede auf:
 Diese Muster sind von grundlegender Bedeutung für das Verständnis,
 wie Systeme mit austauschbaren Komponenten entworfen und Objekte
 auf eine Weise erstellt werden, die Flexibilität und Wiederverwendbarkeit fördert.
+
+---
+
+## Vergleich Bridge Pattern vs. Adapter Pattern <a name="link7"></a>
+
+Wir beginnen unseren Vergleich mit dem Bridge Pattern:
+
+
+### Vorteile des Bridge-Pattern
+
+  * Der Code verfolgt durch die Extraktion der Abstraktion mehr das DRY Prinzip (*Don't Repeat Yourself*).
+  * Der Code  ist erweiterbarer, da zwei separate Abstraktionen erstellt werden, die unabhängig voneinander variieren können.
+  * Die einzelnen Klassen sind kleiner und daher leichter zu testen und zu verstehen.
+
+### Ähnlichkeiten mit dem Adapter-Pattern
+
+Der Grund, warum der Unterschied zwischen dem Bridge-Pattern und dem Adapter-Pattern nicht so leicht zu verstehen, ist,
+dass der verbindende Teil der &bdquo;Brücke&rdquo; tatsächlich wie ein Adapter aussieht.
+
+  * Ein Client kann als Abstraktion betrachtet werden, da er auch an eine Schnittstelle delegiert.
+  * Ein Ziel kann als Implementierer betrachtet werden, da es ebenfalls eine Schnittstelle definiert, an die sich der Code halten muss.
+  * Ein Adapter kann als verfeinerter Implementierer betrachtet werden, da er die Schnittstelle implementiert und die Anforderungen erfüllt.
+
+Siehe auch die Beispiele [hier](https://doeken.org/blog/adapter-vs-bridge-pattern).
 
 ---
 
