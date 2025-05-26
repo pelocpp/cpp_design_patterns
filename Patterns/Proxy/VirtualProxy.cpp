@@ -2,9 +2,9 @@
 // VirtualProxy.cpp // Proxy Pattern
 // ===========================================================================
 
-#include <iostream>
-#include <string>
 #include <memory>
+#include <print>
+#include <string>
 
 struct Image {
     virtual void draw() = 0;
@@ -19,12 +19,12 @@ public:
     EagerBitmap(const std::string& filename) 
         : m_filename{ filename } 
     {
-        std::cout << "loading image from " << m_filename << std::endl;
+        std::println("loading image from {}", m_filename);
         // steps to load the image ...
     }
 
     void draw() { 
-        std::cout << "drawing image " << m_filename << std::endl;
+        std::println("drawing image {}", m_filename);
     }
 };
 
@@ -48,7 +48,7 @@ public:
     }
 };
 
-void test_virtual_proxy_eager()
+static void test_virtual_proxy_eager()
 {
     EagerBitmap img_1{ "image_1.png" };
     EagerBitmap img_2{ "image_2.png" };
@@ -57,7 +57,7 @@ void test_virtual_proxy_eager()
     (choice) ? img_1.draw() : img_2.draw();
 }
 
-void test_virtual_proxy_lazy()
+static void test_virtual_proxy_lazy()
 {
     LazyBitmap img_1{ "image_1.png" };
     LazyBitmap img_2{ "image_2.png" };

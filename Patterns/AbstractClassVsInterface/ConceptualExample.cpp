@@ -7,32 +7,42 @@
 
 namespace AbstractClassVsInterface {
 
-    /* interface declaration */
+    // interface declaration 
     class Interface
     {
     public:
+        virtual ~Interface() {};
+
         virtual void method_first() = 0;             // only 'abstract' methods
         virtual void method_second() = 0;            // only 'abstract' methods
     };
 
-    /* abstract class declaration */
+    // abstract class declaration 
     class AbstractClass 
     {
     public:
-        AbstractClass(std::string message) : m_message{ message } {}
+        virtual ~AbstractClass() {}
 
-        virtual void method_third() = 0;             // another 'abstract' method
+        AbstractClass(std::string message)
+            : m_message{ message }
+        {}
 
-        virtual void method_fourth()                 // method with implementation
+        virtual void method_third() = 0;             // 'abstract' method
+
+        virtual void method_fourth()                 // (virtual) method with implementation
         { 
             std::cout << m_message << std::endl;
         }
 
-    private:
+        void method_fifth() const                    // (final) method
+        {
+        }
+
+    protected:
         std::string m_message;                       // some data
     };
 
-    /* abstract class inheriting from an interface */
+    // abstract class inheriting from an interface 
     class AnotherAbstractClass : public Interface
     {
     public:
@@ -47,7 +57,7 @@ namespace AbstractClassVsInterface {
         double m_value;
     };
 
-    /* concrete class inheriting from an abstract class */
+    // concrete class inheriting from an abstract class 
     class ConcreteClass : public AnotherAbstractClass
     {
     public:
@@ -68,7 +78,7 @@ namespace AbstractClassVsInterface {
         double m_anotherValue;
     };
 
-    /* concrete class inheriting directly from an interface */
+    // concrete class inheriting directly from an interface 
     class AnotherConcreteClass : public Interface
     {
     public:
@@ -86,6 +96,10 @@ namespace AbstractClassVsInterface {
             method_first();
         }
 
+        void my_method()
+        {
+        }
+
     private:
         double m_oneMoreValue;
     };
@@ -94,19 +108,18 @@ namespace AbstractClassVsInterface {
 
     static Interface* getInterface()
     {
-        AnotherConcreteClass* obj = new AnotherConcreteClass();
+        AnotherConcreteClass* impl = new AnotherConcreteClass();
         // or
         // Interface* obj = new AnotherConcreteClass();
 
-        return obj;
+        return impl;
     }
 
     // =======================================================================
 
     static void client()
     {
-        Interface* ip;
-        ip = getInterface();
+        Interface* ip = getInterface();
         ip->method_first();
     }
 }
