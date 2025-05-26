@@ -60,7 +60,7 @@ namespace ConceptualExample {
             None
         };
 
-        std::shared_ptr<IShape> getShape(ShapeKind shapeType)
+        static std::shared_ptr<IShape> getShape(ShapeKind shapeType)
         {
             std::shared_ptr<IShape> shapePtr;
 
@@ -91,13 +91,13 @@ namespace ConceptualExample {
     {
         // using classes explicitely
         //
-        Rectangle* rect{ new Rectangle{} };
+        std::shared_ptr<Rectangle> rect{ std::make_shared<Rectangle>() };
         rect->draw();
 
-        Circle* circle{ new Circle{} };
+        std::shared_ptr<Circle> circle{ std::make_shared<Circle>() };
         circle->draw();
 
-        Square* square{ new Square{} };
+        std::shared_ptr<Square> square{ std::make_shared<Square>() };
         square->draw();
     }
 
@@ -106,17 +106,15 @@ namespace ConceptualExample {
         // using classes indirectly with factory
         // (knowledge about explicit classes not necessary)
         // 
-        ShapeFactory shapeFactory;
-
         std::shared_ptr<IShape> shape{};
 
-        shape = shapeFactory.getShape(ShapeFactory::ShapeKind::Circle);
+        shape = ShapeFactory::getShape(ShapeFactory::ShapeKind::Circle);
         shape->draw();
 
-        shape = shapeFactory.getShape(ShapeFactory::ShapeKind::Rectangle);
+        shape = ShapeFactory::getShape(ShapeFactory::ShapeKind::Rectangle);
         shape->draw();
 
-        shape = shapeFactory.getShape(ShapeFactory::ShapeKind::Square);
+        shape = ShapeFactory::getShape(ShapeFactory::ShapeKind::Square);
         shape->draw();
     }
 }

@@ -37,14 +37,6 @@ public:
     }
 
     /**
-     * or
-     * (Note: order of keywords 'const' and 'final' is significant)
-     */
-    virtual void TemplateMethodEx() const final {
-        // ...
-    }
-
-    /**
      * These operations already have implementations.
      */
 protected:

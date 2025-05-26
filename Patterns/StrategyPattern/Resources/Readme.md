@@ -64,7 +64,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ## Umsetzung des Patterns in einer Klassenhierarchie
 
-Wir betrachten die Anwendung des Strategy Design Patterns in einer Hiearchie von Klassen.
+Wir betrachten die Anwendung des Strategy Design Patterns in einer Hierarchie von Klassen.
 
 In *Abbildung* 2 kann man zwei Hierarchien erkennen:
 
