@@ -59,7 +59,8 @@ namespace ConceptualExample02
      * that is supposed to return an object of a Product class.
      * The FactoryBase's subclasses usually provide the implementation of this method.
      */
-    class FactoryBase {
+    class FactoryBase
+    {
     public:
         FactoryBase() : m_numberOfProductsProduced{} {}
 

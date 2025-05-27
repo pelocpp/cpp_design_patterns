@@ -2,9 +2,9 @@
 // RealWorldFactoryMethod.cpp // Factory Method
 // ===========================================================================
 
-#include <iostream>
-#include <string>
 #include <memory>
+#include <print>
+#include <string>
 
 namespace RealWorldFactoryMethod {
 
@@ -28,11 +28,11 @@ namespace RealWorldFactoryMethod {
         }
 
         virtual void switchOn() override {
-            std::cout << "Switched on my LED TV" << std::endl;
+            std::println("Switched on my LED TV");
         };
 
         virtual void switchOff() override {
-            std::cout << "Switched off my LED TV" << std::endl;
+            std::println("Switched on my LED TV");
         };
     };
 
@@ -44,11 +44,11 @@ namespace RealWorldFactoryMethod {
         }
 
         virtual void switchOn() override {
-            std::cout << "Switched on my OLED TV" << std::endl;
+            std::println("Switched on my OLED TV");
         };
 
         virtual void switchOff() override {
-            std::cout << "Switched off my OLED TV" << std::endl;
+            std::println("Switched off my OLED TV");
         };
     };
 
@@ -56,47 +56,34 @@ namespace RealWorldFactoryMethod {
 
     class AbstractTVFactory
     {
-        // Protected Interface: protected virtual methods
-        // these methods have to be provided by concrete factory classes.
-        // These methods are NOT seen by any client
-
+    /**
+    * Note that the FactoryBase's class primary responsibility is not only creating products.
+    * Usually, it contains some core business logic that relies on concrete product objects,
+    * returned by the factory method.
+    *
+    * Subclasses can indirectly change that business logic by overriding the factory method and
+    * returning a different type of product from it.
+    */
+         
+    // Protected Interface: protected virtual methods
+    // these methods have to be provided by concrete factory classes.
+    // These methods are NOT seen by any client
     protected:
         virtual bool manufactureTelevision() = 0;                        // take order, create order number, create invoice
         virtual std::unique_ptr<ITelevision> assembleTelevision() = 0;   // produce concrete television device
         virtual float shippingCharge() const = 0;
         virtual float productionCharge() const = 0;
 
-    private:
-
     public:
         virtual ~AbstractTVFactory() {}
 
-        /**
-         * Note that the FactoryBase's class primary responsibility is not only creating products. 
-         * Usually, it contains some core business logic that relies on concrete product objects, 
-         * returned by the factory method.
-         * 
-         * Subclasses can indirectly change that business logic by overriding the factory method and
-         * returning a different type of product from it.
-         */
-
-        // Public Interface: public virtual methods (albeit final)
+        // Public Interface:
         // These methods are available for clients
+        // Three so called "Factory Methods" do exist in this example
 
-        virtual void getOrderInformation() final {                  // <= final method (!)
+        std::unique_ptr<ITelevision> orderTV() {
 
-            float costsOfShippingCharge{ shippingCharge() };        // <= abstract method (!)
-            std::cout << "Shipping charge: " 
-                << costsOfShippingCharge << " Euro" << std::endl;
-            
-            float costsOfProduction{ productionCharge() };          // <= abstract method (!)
-            std::cout << "Production charge: " 
-                << costsOfProduction << " Euro" << std::endl;
-        }
-
-        virtual std::unique_ptr<ITelevision> orderTV() final {               // <= final method (!)
-
-            if (manufactureTelevision()) {
+            if (manufactureTelevision()) {                                   // <= abstract method (!)
 
                 // Note: client receives 'ITelevision' pointer
                 std::unique_ptr<ITelevision> tvup{ assembleTelevision() };   // <= abstract method (!)
@@ -107,28 +94,38 @@ namespace RealWorldFactoryMethod {
             std::unique_ptr<ITelevision> empty{};
             return empty;
         }
+        
+        void getOrderInformation() {
 
-        virtual float totalCharge() final {   // <= final method (!)
+            float costsOfShippingCharge{ shippingCharge() };        // <= abstract method (!)
+            std::println("Shipping charge: {} Euro", costsOfShippingCharge);
+
+
+            float costsOfProduction{ productionCharge() };          // <= abstract method (!)
+            std::println("Production charge: {} Euro", costsOfProduction);
+        }
+
+        float totalCharge() {
 
             float total{
                 shippingCharge() +            // <= abstract method (!)
                 productionCharge()            // <= abstract method (!)
-            };          
+            };
 
             return total;
         }
     };
 
-
-    class LEDTVFactory : public AbstractTVFactory {
+    class LEDTVFactory : public AbstractTVFactory
+    {
     protected:
         virtual bool manufactureTelevision() override {
-            std::cout << "Manufacturing LED TV" << std::endl;
+            std::println("Manufacturing LED TV");
             return true;
         }
 
         virtual std::unique_ptr<ITelevision> assembleTelevision() override {
-            std::cout << "Assembling LED TV" << std::endl;
+            std::println("Assembling LED TV");
             return std::make_unique<LEDTelevision>();
         }
 
@@ -144,12 +141,12 @@ namespace RealWorldFactoryMethod {
     class OledTVFactory : public AbstractTVFactory {
     protected:
         virtual bool manufactureTelevision() override {
-            std::cout << "Manufacturing Oled TV" << std::endl;
+            std::println("Manufacturing Oled TV");
             return true;
         }
 
         virtual std::unique_ptr<ITelevision> assembleTelevision() override {
-            std::cout << "Assembling Oled TV" << std::endl;
+            std::println("Assembling Oled TV");
             return std::make_unique<OledTelevision>();
         }
 
@@ -166,20 +163,16 @@ namespace RealWorldFactoryMethod {
 
         factory->getOrderInformation();
 
-        std::cout
-            << "My new television receiver costs me "
-            << factory->totalCharge()
-            << std::endl;
+        std::println("My new television receiver costs me {} ", factory->totalCharge());
 
         std::unique_ptr<ITelevision> tvPtr{ factory->orderTV() };
 
-        tvPtr->switchOn();
+        if (tvPtr != nullptr) {
 
-        std::cout
-            << "My new TV is a "
-            << tvPtr->getManufacturer()
-            << " device."
-            << std::endl;
+            tvPtr->switchOn();
+
+            std::println("My new TV is a {} device.", tvPtr->getManufacturer());
+        }
     }
 }
 
@@ -187,20 +180,22 @@ void test_real_world_example_televisions() {
 
     using namespace RealWorldFactoryMethod;
 
-    std::cout << "Example launched with the LEDTVFactory." << std::endl;
+    std::println("Example launched with the LEDTVFactory.");
+
     std::shared_ptr<AbstractTVFactory> ledFactory{
         std::make_shared<LEDTVFactory>()
     };
 
     clientCode(ledFactory);
-    std::cout << std::endl;
+    std::println();
 
-    std::cout << "Example launched with the OledTVFactory." << std::endl;
+    std::println("Example launched with the OledTVFactory.");
+
     std::shared_ptr<AbstractTVFactory> oledFactory{
         std::make_shared<OledTVFactory>()
     };
 
-    std::cout << std::endl;
+    std::println();
     clientCode(oledFactory);
 }
 
