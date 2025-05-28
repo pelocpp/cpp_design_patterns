@@ -12,9 +12,9 @@
  * The base Component interface defines operations
  * that can be altered by decorators.
  */
-class Component {
+class IComponent {
 public:
-    virtual ~Component() {}
+    virtual ~IComponent() {}
 
     virtual std::string operation() const = 0;
 };
@@ -23,9 +23,9 @@ public:
  * Concrete Components provide default implementations of the operation(s).
  * There might be several variations of these classes.
  */
-class ConcreteComponent final : public Component {
+class ConcreteComponent final : public IComponent {
 public:
-    virtual std::string operation() const override {
+    std::string operation() const override {
         return "CONCRETE COMPONENT";
     }
 };
@@ -38,19 +38,19 @@ public:
  * concrete decorators. The default implementation of the wrapping code might
  * include a field for storing a wrapped component and the means to initialize it.
  */
-class DecoratorBase : public Component {
+class DecoratorBase : public IComponent {
 protected:
-   std::shared_ptr<Component> m_component;
+   std::shared_ptr<IComponent> m_component;
 
 public:
-    DecoratorBase(const std::shared_ptr<Component>& component) 
+    DecoratorBase(const std::shared_ptr<IComponent>& component)
         : m_component{ component }
     {}
 
     /**
      * The Decorator delegates all work to the wrapped component.
      */
-    virtual std::string operation() const override {
+    std::string operation() const override {
         return m_component->operation();
     }
 };
@@ -67,11 +67,11 @@ class ConcreteDecoratorA final : public DecoratorBase {
      * decorator classes.
      */
 public:
-    ConcreteDecoratorA(const std::shared_ptr<Component>& component)
+    ConcreteDecoratorA(const std::shared_ptr<IComponent>& component)
         : DecoratorBase{ component } 
     {}
 
-    virtual std::string operation() const override {
+    std::string operation() const override {
         std::string parentResult{ DecoratorBase::operation() };
         std::string decoratedResult{ "ConcreteDecoratorA ( " + parentResult + " )" };
         return decoratedResult;
@@ -84,11 +84,11 @@ public:
  */
 class ConcreteDecoratorB final : public DecoratorBase {
 public:
-    ConcreteDecoratorB(const std::shared_ptr<Component>& component) 
+    ConcreteDecoratorB(const std::shared_ptr<IComponent>& component)
         : DecoratorBase{ component }
     {}
 
-    virtual std::string operation() const override {
+    std::string operation() const override {
         std::string parentResult{ DecoratorBase::operation() };
         std::string decoratedResult{ "ConcreteDecoratorB [ " + parentResult + " ]" };
         return decoratedResult;
@@ -100,7 +100,7 @@ public:
  */
 class ConcreteDecoratorC final : public DecoratorBase {
 public:
-    ConcreteDecoratorC(const std::shared_ptr<Component>& component) 
+    ConcreteDecoratorC(const std::shared_ptr<IComponent>& component)
         : DecoratorBase{ component }
     {}
 
@@ -118,7 +118,7 @@ public:
  * This way it can stay independent of the concrete classes of components
  * it works with.
  */
-static void clientCode(std::shared_ptr<Component> component) {
+static void clientCode(std::shared_ptr<IComponent> component) {
     // ...
     std::cout << "Result: " << component->operation();
     // ...
@@ -128,7 +128,7 @@ void test_conceptual_example_01() {
     /**
      * This way the client code can support both simple components ...
      */
-    std::shared_ptr<Component> component{
+    std::shared_ptr<IComponent> component{
         std::make_shared<ConcreteComponent>()
     };
 
@@ -146,15 +146,15 @@ void test_conceptual_example_02() {
      * but the other decorators as well.
      */
 
-    std::shared_ptr<Component> component{ 
+    std::shared_ptr<IComponent> component{
         std::make_shared<ConcreteComponent>()
     };
 
-    std::shared_ptr<Component> decorator1{
+    std::shared_ptr<IComponent> decorator1{
         std::make_shared<ConcreteDecoratorA>(component)
     };
 
-    std::shared_ptr<Component> decorator2{
+    std::shared_ptr<IComponent> decorator2{
         std::make_shared<ConcreteDecoratorB>(decorator1)
     };
 
@@ -169,7 +169,7 @@ void test_conceptual_example_02() {
     * Nested usage of decorator objects
     */
 
-    std::shared_ptr<Component> decorator {
+    std::shared_ptr<IComponent> decorator {
     std::make_shared<ConcreteDecoratorB>(
         std::make_shared<ConcreteDecoratorA>(component))
     };
@@ -216,20 +216,20 @@ void test_conceptual_example_03() {
      */
 
     // component which is going to be decorated
-    std::shared_ptr<Component> component{ std::make_shared<ConcreteComponent>() };
+    std::shared_ptr<IComponent> component{ std::make_shared<ConcreteComponent>() };
 
     // run-time dependent decorator
-    std::shared_ptr<Component> decorator;
+    std::shared_ptr<IComponent> decorator;
 
     if (true)   // <== change 'true' to 'false'
     {
-        std::shared_ptr<Component> decorator1{ std::make_shared<ConcreteDecoratorA>(component) };
+        std::shared_ptr<IComponent> decorator1{ std::make_shared<ConcreteDecoratorA>(component) };
         decorator = std::make_shared<ConcreteDecoratorB>(decorator1);
 
         std::cout << "Client: Now I've this decorated component (if):" << std::endl;
     }
     else {
-        std::shared_ptr<Component> decorator1 {std::make_shared<ConcreteDecoratorB>(component)};
+        std::shared_ptr<IComponent> decorator1 {std::make_shared<ConcreteDecoratorB>(component)};
         decorator = std::make_shared<ConcreteDecoratorA>(decorator1);
 
         std::cout << "Client: Now I've that decorated component (else):" << std::endl;

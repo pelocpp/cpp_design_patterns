@@ -23,15 +23,15 @@ namespace RealWorldFactoryMethod {
     class LEDTelevision : public ITelevision
     {
     public:
-        virtual std::string getManufacturer() const final {
+        std::string getManufacturer() const final {
             return "LED TV";
         }
 
-        virtual void switchOn() override {
+        void switchOn() override {
             std::println("Switched on my LED TV");
         };
 
-        virtual void switchOff() override {
+        void switchOff() override {
             std::println("Switched on my LED TV");
         };
     };
@@ -39,15 +39,15 @@ namespace RealWorldFactoryMethod {
     class OledTelevision : public ITelevision
     {
     public:
-        virtual std::string getManufacturer() const final {
+        std::string getManufacturer() const final {
             return "Oled TV";
         }
 
-        virtual void switchOn() override {
+        void switchOn() override {
             std::println("Switched on my OLED TV");
         };
 
-        virtual void switchOff() override {
+        void switchOff() override {
             std::println("Switched off my OLED TV");
         };
     };
@@ -119,42 +119,42 @@ namespace RealWorldFactoryMethod {
     class LEDTVFactory : public AbstractTVFactory
     {
     protected:
-        virtual bool manufactureTelevision() override {
+        bool manufactureTelevision() override {
             std::println("Manufacturing LED TV");
             return true;
         }
 
-        virtual std::unique_ptr<ITelevision> assembleTelevision() override {
+        std::unique_ptr<ITelevision> assembleTelevision() override {
             std::println("Assembling LED TV");
             return std::make_unique<LEDTelevision>();
         }
 
-        virtual float shippingCharge() const override {
+        float shippingCharge() const override {
             return 1000.0F;
         }
 
-        virtual float productionCharge() const override {
+        float productionCharge() const override {
             return 1500.0F;
         }
     };
 
     class OledTVFactory : public AbstractTVFactory {
     protected:
-        virtual bool manufactureTelevision() override {
+        bool manufactureTelevision() override {
             std::println("Manufacturing Oled TV");
             return true;
         }
 
-        virtual std::unique_ptr<ITelevision> assembleTelevision() override {
+        std::unique_ptr<ITelevision> assembleTelevision() override {
             std::println("Assembling Oled TV");
             return std::make_unique<OledTelevision>();
         }
 
-        virtual float shippingCharge() const override {
+        float shippingCharge() const override {
             return 2000.0F;
         }
 
-        virtual float productionCharge() const override {
+        float productionCharge() const override {
             return 2500.0F;
         }
     };

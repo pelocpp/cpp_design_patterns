@@ -84,15 +84,15 @@ public:
     /**
      * All production steps work with the same product instance.
      */
-    virtual void createProducePartA() const override {
+    void createProducePartA() const override {
         m_product->addPart(std::string("Part A1"));
     }
 
-    virtual void createProducePartB() const override {
+    void createProducePartB() const override {
         m_product->addPart(std::string("Part B1"));
     }
 
-    virtual void createProducePartC() const override {
+    void createProducePartC() const override {
         m_product->addPart(std::string("Part C1"));
     }
 

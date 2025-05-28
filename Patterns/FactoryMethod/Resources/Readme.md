@@ -53,12 +53,12 @@ Das folgende UML-Diagramm beschreibt eine Implementierung des *Factory Method Pa
 Es besteht im Wesentlichen aus vier Teilen:
 
   * **FactoryBase**: Abstrakte Klasse (oder Schnittstelle) für konkrete *Factory*-Klassen,
-    die die gesuchten Objekte zurückgeben.
+    die die gesuchten Objekte erzeugen.
     Wichtigste Aufgabe dieser Klasse ist die Bereitstellung (Definition) der *Fabrikmethode*: 
-    Die Signatur der Methode `FactoryMethod` wird festgelegt, die ein `ProductBase`-Objekt zurückliefert.
+    Die Signatur der Methode `requestProduct` wird festgelegt, die `ProductBase`-Objekte zurückliefert.
   * **ConcreteFactory**: Repräsentiert eine konkrete Umsetzung der `FactoryBase`-Klasse.
-    Normalerweise überschreibt diese Klasse die generierende Methode
-    `FactoryMethod` und gibt ein `ConcreteProduct`-Objekt zurück.
+    Normalerweise überschreibt diese Klasse eine private, virtuelle Memberfunktion `createProduct()`,
+    die von `ProductBase` abgeleitete Objekte zurück gibt.
   * **ProductBase**: Basisklasse (oder Schnittstelle) für alle Produkte,
     die von konkreten *Factory*-Klassen hergestellt werden.
   * **ConcreteProduct**: Konkrete Implementierung der Klasse `ProductBase`.
@@ -70,7 +70,6 @@ Es besteht im Wesentlichen aus vier Teilen:
 <img src="dp_factory_method_pattern.svg" width="800">
 
 *Abbildung* 1: Schematische Darstellung des *Factory Method Patterns*.
-
 
 *Bemerkung*:<br />
 Die `FactoryBase`-Basisklasse ist interessant in Bezug auf ihren Entwurf:

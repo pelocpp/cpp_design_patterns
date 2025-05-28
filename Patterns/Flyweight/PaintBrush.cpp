@@ -29,17 +29,17 @@ namespace PaintBrushFlyweight {
     public:
         ThickPen() : m_brushSize{ BrushSize::Thick } {}
 
-        virtual void setColor(std::string color) override {
+        void setColor(std::string color) override {
             m_color = color;
         }
 
-        virtual void draw(std::string content) override {
+        void draw(std::string content) override {
             std::cout 
                 << "Drawing THICK content in color : " << m_color 
                 << " - " << content << std::endl;
         }
 
-        virtual void print() override {
+        void print() override {
             std::cout << this << std::endl;
         }
     };
@@ -53,17 +53,17 @@ namespace PaintBrushFlyweight {
     public:
         ThinPen() : m_brushSize{ BrushSize::Thin } {}
 
-        virtual void setColor(std::string color) override {
+        void setColor(std::string color) override {
             m_color = color;
         }
 
-        virtual void draw(std::string content) override {
+        void draw(std::string content) override {
             std::cout 
                 << "Drawing THIN content in color : " << m_color 
                 << " - " << content << std::endl;
         }
 
-        virtual void print() override {
+        void print() override {
             std::cout << this << std::endl;
         }
     };

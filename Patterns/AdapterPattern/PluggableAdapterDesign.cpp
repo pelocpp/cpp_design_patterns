@@ -26,7 +26,7 @@ namespace PluggableAdapterDesignApproach {
             std::cout << "brewing coffee" << std::endl;
         }
 
-        virtual void getBeverage() override {
+        void getBeverage() override {
             brew(); 
         }
     };
@@ -63,7 +63,7 @@ namespace PluggableAdapterDesignApproach {
             : m_request{ [&] () -> void { jm->squeeze(); } }
         {}
 
-        virtual void getBeverage() override { 
+        void getBeverage() override { 
             m_request();
         }
     };
@@ -86,7 +86,7 @@ namespace PluggableAdapterDesignApproach {
             m_request = [this] { m_juiceMaker->squeeze(); };
         }
 
-        virtual void getBeverage() override {
+        void getBeverage() override {
             m_request();
         }
     };

@@ -30,7 +30,7 @@ namespace StaticDecoration {
 
         void resize(double factor) { m_radius *= factor; }
 
-        virtual std::string draw() const override {
+        std::string draw() const override {
             std::ostringstream oss;
             oss << "A circle of radius " << std::setprecision(5) << m_radius;
             return oss.str();
@@ -49,7 +49,7 @@ namespace StaticDecoration {
 
         void setSide(double side) { m_side = side; }
 
-        virtual std::string draw() const override {
+        std::string draw() const override {
             std::ostringstream oss;
             oss << "A square with side " << m_side;
             return oss.str();
@@ -71,7 +71,7 @@ namespace StaticDecoration {
         void setWidth(double width) { m_width = width; }
         void setHeight(double height) { m_height = height; }
 
-        virtual std::string draw() const override {
+        std::string draw() const override {
             std::ostringstream oss;
             oss << "A Rectangle with width " << m_width << " and height " << m_height;
             return oss.str();
@@ -103,7 +103,7 @@ namespace StaticDecoration {
 
         void setColor(const std::string& color) { m_color = color; }
 
-        virtual std::string draw() const override {
+        std::string draw() const override {
             std::ostringstream oss;
             std::string s{ T::draw() };
             oss << s << " has color " << m_color;
@@ -126,7 +126,7 @@ namespace StaticDecoration {
         TransparentShape(uint8_t transparency, TARGS&& ...args)
             : T{ std::forward<TARGS>(args)... }, m_transparency{ transparency } {}
 
-        virtual std::string draw() const override {
+        std::string draw() const override {
             std::ostringstream oss;
             std::string s{ T::draw() };
             oss << s << " has "

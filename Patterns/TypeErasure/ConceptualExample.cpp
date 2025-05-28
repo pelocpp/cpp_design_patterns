@@ -21,22 +21,22 @@ namespace ConceptualExample
         class Cow : public IAnimal
         {
         public:
-            virtual std::string see() const override { return "cow"; }
-            virtual std::string say() const override { return "moo"; }
+            std::string see() const override { return "cow"; }
+            std::string say() const override { return "moo"; }
         };
 
         class Pig : public IAnimal
         {
         public:
-            virtual std::string see() const override { return "pig"; }
-            virtual std::string say() const override { return "oink"; }
+            std::string see() const override { return "pig"; }
+            std::string say() const override { return "oink"; }
         };
 
         class Dog : public IAnimal
         {
         public:
-            virtual std::string see() const override { return "dog"; }
-            virtual std::string say() const override { return "woof"; }
+            std::string see() const override { return "dog"; }
+            std::string say() const override { return "woof"; }
         };
 
         void seeAndSay(const std::shared_ptr<IAnimal>& animal)
@@ -118,8 +118,8 @@ namespace ConceptualExample
             Cow m_cow;
 
         public:
-            virtual std::string see() const override { return m_cow.see(); }
-            virtual std::string say() const override { return m_cow.say(); }
+            std::string see() const override { return m_cow.see(); }
+            std::string say() const override { return m_cow.say(); }
         };
 
         class MyPig : public MyAnimal
@@ -128,8 +128,8 @@ namespace ConceptualExample
             Pig m_pig;
 
         public:
-            virtual std::string see() const override { return m_pig.see(); }
-            virtual std::string say() const override { return m_pig.say(); }
+            std::string see() const override { return m_pig.see(); }
+            std::string say() const override { return m_pig.say(); }
         };
 
         class MyDog : public MyAnimal
@@ -138,8 +138,8 @@ namespace ConceptualExample
             Dog m_dog;
 
         public:
-            virtual std::string see() const override { return m_dog.see(); }
-            virtual std::string say() const override { return m_dog.say(); }
+            std::string see() const override { return m_dog.see(); }
+            std::string say() const override { return m_dog.say(); }
         };
 
         void seeAndSay(const std::shared_ptr<MyAnimal>& animal)
@@ -202,8 +202,8 @@ namespace ConceptualExample
         public:
             AnimalWrapper(const T& animal) : m_animal{ animal } {}
 
-            virtual std::string see() const override { return m_animal.see(); }
-            virtual std::string say() const override { return m_animal.say(); }
+            std::string see() const override { return m_animal.see(); }
+            std::string say() const override { return m_animal.say(); }
         };
 
         void seeAndSay(const std::shared_ptr<MyAnimal>& animal)
@@ -270,8 +270,8 @@ namespace ConceptualExample
             public:
                 AnimalWrapper(const T& animal) : m_animal{ animal } {}
 
-                virtual std::string see() const override { return m_animal->see(); }
-                virtual std::string say() const override { return m_animal->say(); }
+                std::string see() const override { return m_animal->see(); }
+                std::string say() const override { return m_animal->say(); }
             };
 
             // registered animals
@@ -356,8 +356,8 @@ namespace ConceptualExample
             public:
                 AnimalModel(const T& animal) : m_animal{ animal } {}
 
-                virtual std::string see() const override { return m_animal->see(); }
-                virtual std::string say() const override { return m_animal->say(); }
+                std::string see() const override { return m_animal->see(); }
+                std::string say() const override { return m_animal->say(); }
             };
 
             // registered animals
@@ -442,8 +442,8 @@ namespace ConceptualExample
             public:
                 AnimalModel(const T& animal) : m_animal{ animal } {}
 
-                virtual std::string see() const override { return m_animal.see(); }
-                virtual std::string say() const override { return m_animal.say(); }
+                std::string see() const override { return m_animal.see(); }
+                std::string say() const override { return m_animal.say(); }
             };
 
             // registered animals

@@ -68,7 +68,7 @@ Nehmen wir an, wir haben eine Hierarchie von Dokumentenobjekten der folgenden Ge
 13: public:
 14:     Markdown() : m_start{ "* " } {}
 15: 
-16:     virtual void addToList(const std::string& line) override {
+16:     void addToList(const std::string& line) override {
 17:         m_content.push_back(line);
 18:     }
 19: };
@@ -83,7 +83,7 @@ Nehmen wir an, wir haben eine Hierarchie von Dokumentenobjekten der folgenden Ge
 28: public:
 29:     HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 30: 
-31:     virtual void addToList(const std::string& line) override {
+31:     void addToList(const std::string& line) override {
 32:         m_content.push_back(line);
 33:     }
 34: };
@@ -123,11 +123,11 @@ könnten wir folgende Realisierung betrachten:
 10: public:
 11:     Markdown() : m_start{ "* " } {}
 12: 
-13:     virtual void addToList(const std::string& line) override {
+13:     void addToList(const std::string& line) override {
 14:         m_content.push_back(line);
 15:     }
 16: 
-17:     virtual void print() override {
+17:     void print() override {
 18:         for (const std::string& item : m_content) {
 19:             std::cout << m_start << item << std::endl;
 20:         }
@@ -143,11 +143,11 @@ könnten wir folgende Realisierung betrachten:
 30: public:
 31:     HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 32: 
-33:     virtual void addToList(const std::string& line) override {
+33:     void addToList(const std::string& line) override {
 34:         m_content.push_back(line);
 35:     }
 36: 
-37:     virtual void print() override {
+37:     void print() override {
 38:         std::cout << "<ul>" << std::endl;
 39:         for (const std::string& item : m_content) {
 40:             std::cout << "    " << m_start << item << m_end << std::endl;
@@ -203,7 +203,7 @@ um vor allem das *Single*-*Responsibility*-Prinzips zu beachten.
 11: public:
 12:     Markdown() : m_start{ "* " } {}
 13: 
-14:     virtual void addToList(const std::string& line) override {
+14:     void addToList(const std::string& line) override {
 15:         m_content.push_back(line);
 16:     }
 17: 
@@ -219,7 +219,7 @@ um vor allem das *Single*-*Responsibility*-Prinzips zu beachten.
 27: public:
 28:     HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 29: 
-30:     virtual void addToList(const std::string& line) override {
+30:     void addToList(const std::string& line) override {
 31:         m_content.push_back(line);
 32:     }
 33: 
@@ -305,11 +305,11 @@ Diese wird weiter unten noch näher erläutert werden (begleitender Text und UML-D
 22: public:
 23:     Markdown() : m_start{ "* " } {}
 24: 
-25:     virtual void addToList(const std::string& line) override { 
+25:     void addToList(const std::string& line) override { 
 26:         m_content.push_back(line);
 27:     }
 28: 
-29:     virtual void accept(DocumentVisitor* dv) override {  // <<<<<
+29:     void accept(DocumentVisitor* dv) override {  // <<<<<
 30:         dv->visit(this);
 31:     } 
 32: 
@@ -322,11 +322,11 @@ Diese wird weiter unten noch näher erläutert werden (begleitender Text und UML-D
 39: public:
 40:     HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 41: 
-42:     virtual void addToList(const std::string& line) override {
+42:     void addToList(const std::string& line) override {
 43:         m_content.push_back(line);
 44:     }
 45: 
-46:     virtual void accept(DocumentVisitor* dv) override {    // <<<<<
+46:     void accept(DocumentVisitor* dv) override {    // <<<<<
 47:         dv->visit(this);
 48:     } 
 49: 
@@ -340,8 +340,8 @@ Diese wird weiter unten noch näher erläutert werden (begleitender Text und UML-D
 57: class DocumentPrinter : public DocumentVisitor
 58: {
 59: public:
-60:     virtual void visit(Markdown* md) override;
-61:     virtual void visit(HTML* hd) override;
+60:     void visit(Markdown* md) override;
+61:     void visit(HTML* hd) override;
 62: };
 63: 
 64: void DocumentPrinter::visit(Markdown* md) {

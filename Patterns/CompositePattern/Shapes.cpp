@@ -22,7 +22,7 @@ private:
 public:
     Circle(const std::string& name) : m_name { name } {}
 
-    virtual void draw() const override {
+    void draw() const override {
         std::cout << "Circle: " << m_name;
     }
 };
@@ -36,7 +36,7 @@ private:
 public:
     Group(const std::string& name) : m_name{ name } {}
         
-    virtual void draw() const override {
+    void draw() const override {
 
         m_indentation += 2;
 

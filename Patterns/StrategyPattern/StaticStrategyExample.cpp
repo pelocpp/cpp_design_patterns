@@ -27,26 +27,26 @@ namespace DynamicStrategyPatternExample {
 
     struct MarkdownListStrategy : public IListStrategy
     {
-        virtual void start(std::ostringstream& oss) override {};
+        void start(std::ostringstream& oss) override {};
 
-        virtual void end(std::ostringstream& oss) override {};
+        void end(std::ostringstream& oss) override {};
 
-        virtual void add_item(std::ostringstream& oss, const std::string& item) override {
+        void add_item(std::ostringstream& oss, const std::string& item) override {
             oss << " - " << item << std::endl;
         }
     };
 
     struct HtmlListStrategy : public IListStrategy
     {
-        virtual void start(std::ostringstream& oss) override {
+        void start(std::ostringstream& oss) override {
             oss << "<ul>" << std::endl;
         }
 
-        virtual void end(std::ostringstream& oss) override {
+        void end(std::ostringstream& oss) override {
             oss << "</ul>" << std::endl;
         }
 
-        virtual void add_item(std::ostringstream& oss, const std::string& item) override {
+        void add_item(std::ostringstream& oss, const std::string& item) override {
             oss << "\t<li>" << item << "</li>" << std::endl;
         }
     };
@@ -113,7 +113,7 @@ void test_dynamic_strategy_example ()
 namespace StaticStrategyPatternExample {
 
     template <typename TList>
-    concept TextProcessorRequirements = requires(TList& list, std::ostringstream& oss, const std::string& item)
+    concept ListRequirements = requires(TList& list, std::ostringstream& oss, const std::string& item)
     {
         { list.start(oss) } -> std::same_as<void>;
         { list.end(oss) } -> std::same_as<void>;
@@ -121,7 +121,7 @@ namespace StaticStrategyPatternExample {
     };
 
     template<typename TList>
-        requires TextProcessorRequirements<TList>
+        requires ListRequirements<TList>
     class TextProcessorEx
     {
     private:

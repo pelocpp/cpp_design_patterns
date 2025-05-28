@@ -39,7 +39,7 @@ namespace ConceptualExample02 {
 
         void handle(std::shared_ptr<Context> context) override;
 
-        virtual std::string getDescription()  const override {
+        std::string getDescription()  const override {
             return m_description;
         }
     };
@@ -53,7 +53,7 @@ namespace ConceptualExample02 {
 
         void handle(std::shared_ptr<Context> context) override;
 
-        virtual std::string getDescription() const override {
+        std::string getDescription() const override {
             return m_description;
         }
     };

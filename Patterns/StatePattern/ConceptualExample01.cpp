@@ -40,7 +40,7 @@ namespace ConceptualExample01 {
         std::cout << "Current state: " << m_state->getDescription() << std::endl;
     }
 
-    void ConcreteStateA::handle(Context* context) 
+    void ConcreteStateA::handle(Context* context)
     {
         StateBase* base{ new ConcreteStateB() };
         context->setState(base);

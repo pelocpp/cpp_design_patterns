@@ -61,22 +61,22 @@ eine Unterklasse, die von der Basisklasse (Schnittstellenklasse) erbt und ihre M
 08: class Cow : public IAnimal
 09: {
 10: public:
-11:     virtual std::string see() const override { return "cow"; }
-12:     virtual std::string say() const override { return "moo"; }
+11:     std::string see() const override { return "cow"; }
+12:     std::string say() const override { return "moo"; }
 13: };
 14: 
 15: class Pig : public IAnimal
 16: {
 17: public:
-18:     virtual std::string see() const override { return "pig"; }
-19:     virtual std::string say() const override { return "oink"; }
+18:     std::string see() const override { return "pig"; }
+19:     std::string say() const override { return "oink"; }
 20: };
 21: 
 22: class Dog : public IAnimal
 23: {
 24: public:
-25:     virtual std::string see() const override { return "dog"; }
-26:     virtual std::string say() const override { return "woof"; }
+25:     std::string see() const override { return "dog"; }
+26:     std::string say() const override { return "woof"; }
 27: };
 28: 
 29: void seeAndSay(const std::shared_ptr<IAnimal>& animal)
@@ -206,8 +206,8 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 32:     Cow m_cow;
 33: 
 34: public:
-35:     virtual std::string see() const override { return m_cow.see(); }
-36:     virtual std::string say() const override { return m_cow.say(); }
+35:     std::string see() const override { return m_cow.see(); }
+36:     std::string say() const override { return m_cow.say(); }
 37: };
 38: 
 39: class MyPig : public MyAnimal
@@ -216,8 +216,8 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 42:     Pig m_pig;
 43: 
 44: public:
-45:     virtual std::string see() const override { return m_pig.see(); }
-46:     virtual std::string say() const override { return m_pig.say(); }
+45:     std::string see() const override { return m_pig.see(); }
+46:     std::string say() const override { return m_pig.say(); }
 47: };
 48: 
 49: class MyDog : public MyAnimal
@@ -226,8 +226,8 @@ Jetzt können wir mit Instanzen von `MyAnimal` arbeiten, die jeweils ein `Cow`-, 
 52:     Dog m_dog;
 53: 
 54: public:
-55:     virtual std::string see() const override { return m_dog.see(); }
-56:     virtual std::string say() const override { return m_dog.say(); }
+55:     std::string see() const override { return m_dog.see(); }
+56:     std::string say() const override { return m_dog.say(); }
 57: };
 58: 
 59: void seeAndSay(const std::shared_ptr<MyAnimal>& animal)
@@ -268,8 +268,8 @@ Durch die Verwendung von Templates:
 07: public:
 08:     AnimalWrapper(const T& animal) : m_animal{ animal } {}
 09: 
-10:     virtual std::string see() const override { return m_animal.see(); }
-11:     virtual std::string say() const override { return m_animal.say(); }
+10:     std::string see() const override { return m_animal.see(); }
+11:     std::string say() const override { return m_animal.say(); }
 12: };
 ```
 
@@ -300,8 +300,8 @@ damit ein Aufrufer sich nicht mit diesen benutzerdefinierten Schnittstellen und 
 18:     public:
 19:         AnimalWrapper(const T& animal) : m_animal{ animal } {}
 20: 
-21:         virtual std::string see() const override { return m_animal->see(); }
-22:         virtual std::string say() const override { return m_animal->say(); }
+21:         std::string see() const override { return m_animal->see(); }
+22:         std::string say() const override { return m_animal->say(); }
 23:     };
 24: 
 25:     // registered animals
@@ -379,8 +379,8 @@ Wir formulieren das letzte Beispiel entsprechend der *Type Erasure* Namensgebung
 18:     public:
 19:         AnimalModel (const T& animal) : m_animal{ animal } {}
 20: 
-21:         virtual std::string see() const override { return m_animal->see(); }
-22:         virtual std::string say() const override { return m_animal->say(); }
+21:         std::string see() const override { return m_animal->see(); }
+22:         std::string say() const override { return m_animal->say(); }
 23:     };
 24: 
 25:     // registered animals
@@ -457,8 +457,8 @@ den Instanzvariablen verwalten sie eine Referenz des umhüllten Objekts:
 18:     public:
 19:         AnimalModel(const T& animal) : m_animal{ animal } {}
 20: 
-21:         virtual std::string see() const override { return m_animal.see(); }
-22:         virtual std::string say() const override { return m_animal.say(); }
+21:         std::string see() const override { return m_animal.see(); }
+22:         std::string say() const override { return m_animal.say(); }
 23:     };
 24: 
 25:     // registered animals

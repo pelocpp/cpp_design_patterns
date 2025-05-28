@@ -20,15 +20,15 @@ namespace InterfaceSegregationPrinciple01
     // ok
     class MultiFunctionPrinter : public IMachine {
     public:
-        virtual void print(Document& doc) override {
+        void print(Document& doc) override {
             // do printing ...
         }
 
-        virtual void fax(Document& doc) override {
+        void fax(Document& doc) override {
             // do faxing ...
         }
 
-        virtual void scan(Document& doc) override {
+        void scan(Document& doc) override {
             // do scanning ...
         }
     };
@@ -36,15 +36,15 @@ namespace InterfaceSegregationPrinciple01
     // Not ok
     class Scanner : public IMachine {
     public:
-        virtual void print(Document& doc) override {
+        void print(Document& doc) override {
             throw std::runtime_error("printing not supported");
         }
 
-        virtual void fax(Document& doc) override {
+        void fax(Document& doc) override {
             throw std::runtime_error("faxing not supported");
         }
 
-        virtual void scan(Document& doc) override {
+        void scan(Document& doc) override {
             // do scanning ...
         }
     };
@@ -75,17 +75,17 @@ namespace InterfaceSegregationPrinciple02
     /*  ---------------------- Implementation ------------------- */
     class Printer : public IPrinter {
     public:
-        virtual void print(Document& doc) override { };
+        void print(Document& doc) override { };
     };
 
     class Scanner : public IScanner {
     public:
-        virtual void scan(Document& doc) override { };
+        void scan(Document& doc) override { };
     };
 
     class FaxMachine : public IFaxMachine {
     public:
-        virtual void fax(Document& doc) override { };
+        void fax(Document& doc) override { };
     };
 
     class Machine : public IMachine {
@@ -97,15 +97,15 @@ namespace InterfaceSegregationPrinciple02
         Machine(IPrinter& printer, IScanner& scanner, IFaxMachine& faxmachine)
             : m_printer{ printer }, m_scanner{ scanner }, m_faxmachine{ faxmachine } {}
 
-        virtual void print(Document& doc) override {
+        void print(Document& doc) override {
             m_printer.print(doc);
         }
 
-        virtual void scan(Document& doc) override {
+        void scan(Document& doc) override {
             m_scanner.scan(doc);
         }
 
-        virtual void fax(Document& doc) override {
+        void fax(Document& doc) override {
             m_faxmachine.fax(doc);
         }
     };

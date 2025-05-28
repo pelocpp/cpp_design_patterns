@@ -109,7 +109,7 @@ Das Beispiel demonstriert das klassische *Composite Pattern* mit Kreisen und Gru
 10: 
 11: public:
 12:     ...
-13:     virtual void draw() const override {
+13:     void draw() const override {
 14:         std::cout << "Circle: " << m_name;
 15:     }
 16: };
@@ -122,7 +122,7 @@ Das Beispiel demonstriert das klassische *Composite Pattern* mit Kreisen und Gru
 23: 
 24: public:
 25:     ...
-26:     virtual void draw() const override {
+26:     void draw() const override {
 27:         std::cout << "Group " << m_name << " contains:" << std::endl;
 28:         for (const std::shared_ptr<IShape> shape : m_objects) {
 29:             shape->draw();

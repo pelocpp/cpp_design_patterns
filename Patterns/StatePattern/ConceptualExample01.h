@@ -38,8 +38,10 @@ namespace ConceptualExample01 {
 
     public:
         ConcreteStateA() : m_description{"State A"} {}
-        virtual void handle(Context* context) override;
-        virtual std::string getDescription() override {
+
+        void handle(Context* context) override;
+
+        std::string getDescription() override {
             return m_description;
         }
     };
@@ -51,8 +53,10 @@ namespace ConceptualExample01 {
 
     public:
         ConcreteStateB() : m_description{ "State B" } {}
-        virtual void handle(Context* context) override;
-        virtual std::string getDescription() override {
+
+        void handle(Context* context) override;
+
+        std::string getDescription() override {
             return m_description;
         }
     };

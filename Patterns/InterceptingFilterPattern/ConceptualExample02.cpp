@@ -24,7 +24,7 @@ namespace ConceptualExample02 {
     class PreDebugFilter : public IFilter
     {
     public:
-        virtual void execute(const std::string& request) override {
+        void execute(const std::string& request) override {
             std::cout << ">>>: " << request << std::endl;
         }
     };
@@ -32,7 +32,7 @@ namespace ConceptualExample02 {
     class PostDebugFilter : public IFilter
     {
     public:
-        virtual void execute(const std::string& request) override {
+        void execute(const std::string& request) override {
             std::cout << "<<<: " << request << std::endl;
         }
     };
@@ -40,7 +40,7 @@ namespace ConceptualExample02 {
     class DebugFilter : public IFilter
     {
     public:
-        virtual void execute(const std::string& request) override {
+        void execute(const std::string& request) override {
             std::cout << "[Log Request: " << request << "]" << std::endl;
         }
     };
@@ -48,7 +48,7 @@ namespace ConceptualExample02 {
     class AuthenticationFilter : public IFilter
     {
     public:
-        virtual void execute(const std::string& request) override {
+        void execute(const std::string& request) override {
             std::cout << "[Authenticating Request: " << request << "]" << std::endl;
         }
     };

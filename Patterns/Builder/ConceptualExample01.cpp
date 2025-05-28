@@ -41,7 +41,7 @@ namespace ConceptualExampleBuilder01 {
     class Director
     {
     public:
-        void construct(std::shared_ptr<Builder> builder) 
+        void construct(std::shared_ptr<Builder>& builder) 
         {
             builder->buildPartA();
             builder->buildPartB();
@@ -58,34 +58,30 @@ namespace ConceptualExampleBuilder01 {
             : m_product{ std::make_shared<Product>() }
         {}
 
-        virtual ~ConcreteBuilder() override {}
+        virtual ~ConcreteBuilder() {}
 
-        virtual void buildPartA() override {
+        void buildPartA() override {
             m_product->add("Part A");
         }
 
-        virtual void buildPartB() override {
+        void buildPartB() override {
             m_product->add("Part B");
         }
 
-        virtual std::shared_ptr<Product> getProduct() override {
-            return m_product;
+        std::shared_ptr<Product> getProduct() override {
+            return std::move(m_product);
         }
     };
 
     static void clientCode(Director& director)
     {
-        // Product is created through the builder - here: ConcreteBuilder
-        std::shared_ptr<Builder> builder{ 
-            std::make_shared<ConcreteBuilder>()
-        };
+        // 'Product' is created through the builder - here: ConcreteBuilder
+        std::shared_ptr<Builder> builder{ std::make_shared<ConcreteBuilder>() };
 
         // the builder is handed over to the director - including the product
         director.construct(builder);
         
-        std::shared_ptr<Product> product{ 
-            builder->getProduct() 
-        };
+        std::shared_ptr<Product> product{ builder->getProduct() };
         
         product->show();
     }

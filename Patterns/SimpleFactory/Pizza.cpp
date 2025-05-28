@@ -20,10 +20,10 @@ namespace PizzasExample {
     // helper class, to prevent compiler errors
     class Pizza : public IPizza
     {
-        virtual void prepare() override {};
-        virtual void bake() override {};
-        virtual void cut() override {};
-        virtual void box() override {};
+        void prepare() override {};
+        void bake() override {};
+        void cut() override {};
+        void box() override {};
     };
 
     class CheesePizza : public Pizza {};

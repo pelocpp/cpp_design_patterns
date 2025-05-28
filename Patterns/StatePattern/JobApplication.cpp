@@ -24,63 +24,63 @@ namespace JobApplicationExample {
     class Refused : public State
     {
     public:
-        virtual void inform() override {}
-        virtual void process() override {}
-        virtual std::string to_string() override { return "Refused"; }
+        void inform() override {}
+        void process() override {}
+        std::string to_string() override { return "Refused"; }
     };
 
     // Eingegangen
     class Received : public State
     {
     public:
-        virtual void inform() override {}
-        virtual void process() override {}
-        virtual std::string to_string() override { return "Received"; }
+        void inform() override {}
+        void process() override {}
+        std::string to_string() override { return "Received"; }
     };
 
     // Eingeladen
     class Invited : public State
     {
     public:
-        virtual void inform() override {}
-        virtual void process() override {}
-        virtual std::string to_string() override { return "Invited"; }
+        void inform() override {}
+        void process() override {}
+        std::string to_string() override { return "Invited"; }
     };
 
     // Eingestellt
     class Hired : public State
     {
     public:
-        virtual void inform() override {}
-        virtual void process() override {}
-        virtual std::string to_string() override { return "Hired"; }
+        void inform() override {}
+        void process() override {}
+        std::string to_string() override { return "Hired"; }
     };
 
     // Interviewt
     class Interviewed : public State
     {
     public:
-        virtual void inform() override {}
-        virtual void process() override {}
-        virtual std::string to_string() override { return "Interviewed"; }
+        void inform() override {}
+        void process() override {}
+        std::string to_string() override { return "Interviewed"; }
     };
 
     // Talentpool
     class Talentpool : public State
     {
     public:
-        virtual void inform() override {}
-        virtual void process() override {}
-        virtual std::string to_string() override { return "Talentpool"; }
+        void inform() override {}
+        void process() override {}
+        std::string to_string() override { return "Talentpool"; }
     };
 
     // Unvollstaendig
     class Incomplete : public State
     {
     public:
-        virtual void inform() override {}
-        virtual void process() override {}
-        virtual std::string to_string() override { return "Incomplete"; }
+        void inform() override {}
+        void process() override {}
+        std::string to_string() override { return "Incomplete"; }
     };
 
     // =======================================================================

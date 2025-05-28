@@ -37,11 +37,11 @@ namespace StrategyConceptualExample {
     class ConcreteStrategyA : public StrategyBase
     {
     public:
-        virtual std::string getName() const override {
+        std::string getName() const override {
             return { "Normal Sorting" };
         }
 
-        virtual std::string doAlgorithm(const std::vector<std::string>& data) const override
+        std::string doAlgorithm(const std::vector<std::string>& data) const override
         {
             std::string result{};
 
@@ -65,11 +65,11 @@ namespace StrategyConceptualExample {
     class ConcreteStrategyB : public StrategyBase
     {
     public:
-        virtual std::string getName() const override {
+        std::string getName() const override {
             return { "Reverse Sorting" };
         }
 
-        virtual std::string doAlgorithm(const std::vector<std::string>& data) const override
+        std::string doAlgorithm(const std::vector<std::string>& data) const override
         {
             std::string result;
 

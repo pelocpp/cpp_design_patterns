@@ -33,7 +33,7 @@ namespace ChainofResponsibilityExample
         // c'tor(s)
         AuthenticateUserName(std::string name) : m_name{ name } {}
 
-        virtual bool authenticate() override {
+        bool authenticate() override {
 
             if (!is_valid_user_name()) {
                 std::cout << "Invalid user name" << std::endl;
@@ -63,7 +63,7 @@ namespace ChainofResponsibilityExample
         // c'tor(s)
         AuthenticatePassword(std::string password) : m_password{ password } {}
 
-        virtual bool authenticate() override {
+        bool authenticate() override {
 
             if (!is_valid_password()) {
                 std::cout << "Invalid password" << std::endl;

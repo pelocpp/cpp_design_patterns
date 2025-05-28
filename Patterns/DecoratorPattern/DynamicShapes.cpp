@@ -31,7 +31,7 @@ namespace DynamicDecoration {
 
         void resize(double factor) { m_radius *= factor; }
 
-        virtual std::string draw() const override {
+        std::string draw() const override {
             std::ostringstream oss;
             oss << "A circle of radius " << std::fixed << m_radius;
             return oss.str();
@@ -70,7 +70,7 @@ namespace DynamicDecoration {
         {}
 
         // base decorator class delegates all work to the wrapped component
-        virtual std::string draw() const override {
+        std::string draw() const override {
 
             return m_component->draw();
         }

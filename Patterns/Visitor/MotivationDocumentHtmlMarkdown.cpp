@@ -25,7 +25,7 @@ namespace MotivationVisitor_01_Starting_Point
     public:
         Markdown() : m_start{ "* " } {}
 
-        virtual void addToList(const std::string& line) override {
+        void addToList(const std::string& line) override {
             m_content.push_back(line);
         }
     };
@@ -40,7 +40,7 @@ namespace MotivationVisitor_01_Starting_Point
     public:
         HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 
-        virtual void addToList(const std::string& line) override {
+        void addToList(const std::string& line) override {
             m_content.push_back(line);
         }
     };
@@ -60,11 +60,11 @@ namespace MotivationVisitor_02_Intrusive
     public:
         Markdown() : m_start{ "* " } {}
 
-        virtual void addToList(const std::string& line) override {
+        void addToList(const std::string& line) override {
             m_content.push_back(line);
         }
 
-        virtual void print() override {
+        void print() override {
             for (const std::string& item : m_content) {
                 std::cout << m_start << item << std::endl;
             }
@@ -80,11 +80,11 @@ namespace MotivationVisitor_02_Intrusive
     public:
         HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 
-        virtual void addToList(const std::string& line) override {
+        void addToList(const std::string& line) override {
             m_content.push_back(line);
         }
 
-        virtual void print() override {
+        void print() override {
             std::cout << "<ul>" << std::endl;
             for (const std::string& item : m_content) {
                 std::cout << "    " << m_start << item << m_end << std::endl;
@@ -128,7 +128,7 @@ namespace MotivationVisitor_03_Reflective
     public:
         Markdown() : m_start{ "* " } {}
 
-        virtual void addToList(const std::string& line) override {
+        void addToList(const std::string& line) override {
             m_content.push_back(line);
         }
 
@@ -144,7 +144,7 @@ namespace MotivationVisitor_03_Reflective
     public:
         HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 
-        virtual void addToList(const std::string& line) override {
+        void addToList(const std::string& line) override {
             m_content.push_back(line);
         }
 
@@ -217,11 +217,11 @@ namespace MotivationVisitor_04_Classical_Visitor_Pattern
     public:
         Markdown() : m_start{ "* " } {}
 
-        virtual void addToList(const std::string& line) override { 
+        void addToList(const std::string& line) override { 
             m_content.push_back(line);
         }
 
-        virtual void accept(DocumentVisitor* dv) override {  // <<<<<
+        void accept(DocumentVisitor* dv) override {  // <<<<<
             dv->visit(this);
         } 
 
@@ -234,11 +234,11 @@ namespace MotivationVisitor_04_Classical_Visitor_Pattern
     public:
         HTML() : m_start{ "<li>" }, m_end{ "</li>" } {}
 
-        virtual void addToList(const std::string& line) override {
+        void addToList(const std::string& line) override {
             m_content.push_back(line);
         }
 
-        virtual void accept(DocumentVisitor* dv) override {    // <<<<<
+        void accept(DocumentVisitor* dv) override {    // <<<<<
             dv->visit(this);
         } 
 
@@ -253,8 +253,8 @@ namespace MotivationVisitor_04_Classical_Visitor_Pattern
     class DocumentPrinter : public DocumentVisitor
     {
     public:
-        virtual void visit(Markdown* md) override;
-        virtual void visit(HTML* hd) override;
+        void visit(Markdown* md) override;
+        void visit(HTML* hd) override;
     };
 
     void DocumentPrinter::visit(Markdown* md) {

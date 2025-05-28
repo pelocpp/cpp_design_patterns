@@ -257,9 +257,9 @@ namespace Clipboard {
             conv.parseInput();
             conv.addLineNumbers();
             conv.printStats();
+            std::string convertedText{ conv.getText() };
 
             {
-                std::string convertedText{ conv.getText() };
                 RAIIClipboardWriter writer{ convertedText };
             }
 

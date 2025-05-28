@@ -74,12 +74,12 @@ protected:
  */
 class ConcreteClass1 : public AbstractClass {
 protected:
-    virtual bool RequiredOperations1() const override {
+    bool RequiredOperations1() const override {
         std::cout << "ConcreteClass1 says: Implemented Operation1" << std::endl;
         return false;
     }
 
-    virtual bool RequiredOperation2() const override {
+    bool RequiredOperation2() const override {
         std::cout << "ConcreteClass1 says: Implemented Operation2" << std::endl;
         return false;
     }
@@ -90,21 +90,21 @@ protected:
  */
 class ConcreteClass2 : public AbstractClass {
 protected:
-    virtual bool RequiredOperations1() const override {
+    bool RequiredOperations1() const override {
         std::cout << "ConcreteClass2 says: Implemented Operation1" << std::endl;
         return true;
     }
 
-    virtual bool RequiredOperation2() const override {
+    bool RequiredOperation2() const override {
         std::cout << "ConcreteClass2 says: Implemented Operation2" << std::endl;
         return true;
     }
 
-    virtual void BaseOperation1() const override {
+    void BaseOperation1() const override {
         std::cout << "ConcreteClass2 says: Overridden BaseOperation1" << std::endl;
     }
 
-    virtual void Hook1() const override {
+    void Hook1() const override {
         std::cout << "ConcreteClass2 says: Overridden Hook1" << std::endl;
     }
 };

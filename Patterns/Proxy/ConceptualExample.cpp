@@ -26,7 +26,7 @@ public:
 class RealSubject : public SubjectBase
 {
 public:
-    virtual void request() const override {
+    void request() const override {
         std::println("RealSubject: Handling request.");
     }
 };
@@ -64,7 +64,7 @@ public:
      * these things and then, depending on the result, pass the execution to the
      * same method in a linked RealSubject object.
      */
-    virtual void request() const override {
+    void request() const override {
         if (checkAccess()) {
             m_realSubject->request();
             logAccess();

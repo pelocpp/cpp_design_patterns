@@ -42,19 +42,19 @@ namespace DepartmentStoreExample {
         struct Discontinued {};
     }
 
-    State onEvent(States::Available available, Events::DeliveryArrived delivered) {
+    static State onEvent(States::Available available, Events::DeliveryArrived delivered) {
         available.m_count += delivered.m_count;
         return available;
     }
 
-    State onEvent(States::Available available, Events::Purchased purchased) {
+    static State onEvent(States::Available available, Events::Purchased purchased) {
         available.m_count -= purchased.m_count;
         if (available.m_count > 0)
             return available;
         return States::OutOfStock{};
     }
 
-    State onEvent(States::OutOfStock depleted, Events::DeliveryArrived delivered) {
+    static State onEvent(States::OutOfStock depleted, Events::DeliveryArrived delivered) {
         return States::Available{ delivered.m_count };
     }
 
