@@ -19,7 +19,7 @@
 ###### In einem Satz:
 
 &bdquo;Erstellung von Objekten auf Basis einer Schnittstelle in einer Oberklasse,
-die es den Unterklassen aber erlaubt, den Typ der zu erstellenden Objekte zu konkretisieren.&rdquo;
+die es den Unterklassen erlaubt, den Typ der zu erstellenden Objekte zu konkretisieren.&rdquo;
 
 Das *Factory Method Pattern* ist ein Entwurfsmuster, mit dem Objekte erstellt werden können,
 ohne den Objekttyp anzugeben, der hierzu verwendet werden soll.

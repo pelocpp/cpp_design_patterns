@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&bdquo;Bietet die Möglichkeit, eine Anfrage von mehr als einem Objekt/einer Komponente zu bearbeiten.&rdquo;
+&bdquo;Bietet die Möglichkeit, eine Anfrage von mehr als einem Objekt/einer Komponente bearbeiten zu lassen.&rdquo;
 
 Das *Chain of Responsibility Pattern* ist ein Entwurfsmuster,
 das eine verkettete Liste von Methoden (*Handlern*) definiert,

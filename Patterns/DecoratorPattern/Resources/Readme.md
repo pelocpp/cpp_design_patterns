@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&bdquo;Erleichtert das Hinzufügen zusätzlicher Funktionalität zu Objekten.&rdquo;
+&bdquo;Ermöglicht das Hinzufügen zusätzlicher Funktionalitäten zu Objekten zur Laufzeit.&rdquo;
 
 Das *Decorator Pattern* ist ein strukturelles Entwurfsmuster, das die Funktionalität eines Objekts erweitert,
 indem es dieses mit einer oder mehreren Dekorationsklassen &bdquo;umhüllt&rdquo;, oder gewissermaßen &bdquo;dekoriert&rdquo;.

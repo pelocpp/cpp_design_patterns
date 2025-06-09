@@ -43,12 +43,12 @@ oder die Komplexität des Codes erhöhen.
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| [Simple Factory](../Patterns/SimpleFactory/Resources/Readme.md) | Ein **Simple Factory** Objekt wird typischerweise vom Client über eine statische Methode aufgerufen. |
-| [Factory Method](../Patterns/FactoryMethod/Resources/Readme.md) | Das **Factory Method** Entwurfsmuster dient dem Zweck, alle Schritte zur Erzeugung eines Objekts kontrollieren zu wollen. Die Klasse des erstellten Objekts kann elegant ausgetauscht werden. |
+| [Simple Factory](../Patterns/SimpleFactory/Resources/Readme.md) | Das **Simple Factory Pattern** ist eine Vorgehensweise, Objekte zu erstellen, ohne die Erstellungslogik dem Client zur Verfügung zu stellen. |
+| [Factory Method](../Patterns/FactoryMethod/Resources/Readme.md) | Das **Factory Method** Entwurfsmuster ermöglicht die Erstellung von Objekten auf Basis einer Schnittstelle in einer Oberklasse, die es den Unterklassen erlaubt, den Typ der zu erstellenden Objekte zu konkretisieren. |
 | [Abstract Factory](../Patterns/AbstractFactory/Resources/Readme.md) | Das **Abstract Factory** Design Pattern dient der Definition einer zusammenhängenden Familie aus Produkten. Die Familien können elegant ausgetauscht werden. |
 | [Builder](../Patterns/Builder/Resources/Readme.md) | Ermöglicht schrittweises Erstellen komplexer Objekte. |
 | [Prototype](../Patterns/Prototype/Resources/Readme.md) | Prototype Pattern &ndash; auch als *Virtueller Konstruktor* bezeichnet. |
-| [Singleton](../Patterns/Singleton/Resources/Readme.md) | Das **Singleton** Entwurfsmuster sorgt dafür, dass es von einer Klasse nur eine einzige Instanz gibt und diese global zugänglich ist. |
+| [Singleton](../Patterns/Singleton/Resources/Readme.md) | Das **Singleton** Entwurfsmuster sorgt dafür, dass es von einer Klasse nur eine einzige Instanz gibt. |
 
 *Tabelle* 1: Erzeugungsmuster (*Creational Design Pattern*).
 
@@ -60,11 +60,11 @@ ohne dabei einen Verlust an Flexibilität und Effizienz einzugehen.
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
 | [Adapter](../Patterns/AdapterPattern/Resources/Readme.md) | Ermöglicht die Interaktion von Objekten mit inkompatiblen Schnittstellen. |
-| [Bridge](../Patterns/Bridge/Resources/Readme.md) | Aufteilung einer größeren Klasse oder einer Reihe eng verwandter Klassen in zwei separate Hierarchien - Abstraktion und Implementierung. |
-| [Composite Pattern](../Patterns/CompositePattern/Resources/Readme.md) | Ermöglicht es, einzelne Objekte und Gruppen von Objekten einheitlich zu behandeln. |
+| [Bridge](../Patterns/Bridge/Resources/Readme.md) | Aufteilung einer Reihe eng verwandter Klassen in zwei separate Hierarchien - Abstraktion und Implementierung. |
+| [Composite Pattern](../Patterns/CompositePattern/Resources/Readme.md) | Ermöglicht es, einzelne Objekte und Gruppen von Objekten einheitlich zu betrachten und behandeln. |
 | [Decorator](../Patterns/DecoratorPattern/Resources/Readme.md) | Hinzufügen neuen Verhaltens zu Objekten, indem diese Objekte in speziellen Hüllen-Objekten platziert werden, die dieses Verhalten besitzen. |
-| [Facade](../Patterns/Facade/Resources/Readme.md) | Bereitstellung einer vereinfachten Schnittstelle zu einer Bibliothek, einem Framework oder einer Menge von Objekten. |
-| [Flyweight](../Patterns/Flyweight/Resources/Readme.md) | Ermöglicht es, Objekte ressourcenschonend anzulegen, indem diese gemeinsame Zustandsdaten zwischen mehreren Objekten teilen, anstatt derartige Zustandsdaten in jedem Objekt zu duplizieren. |
+| [Facade](../Patterns/Facade/Resources/Readme.md) | Bereitstellung einer vereinfachten Schnittstelle zu einer Bibliothek, einem Framework oder einer komplexen Menge von Objekten. |
+| [Flyweight](../Patterns/Flyweight/Resources/Readme.md) | Ermöglicht es, Objekte ressourcenschonend anzulegen, indem diese gemeinsame Zustandsdaten zwischen mehreren Objekten teilen, anstatt sie in jedem Objekt zu duplizieren. |
 | [Proxy](../Patterns/Proxy/Resources/Readme.md) | Bereitstellung eines Platzhalters (Stellvertreters) für ein anderes Objekt. |
 
 *Tabelle* 2: Strukturmuster (*Structural Design Pattern*).
@@ -76,16 +76,16 @@ Verhaltensentwurfsmuster betrachten Algorithmen und der Aufteilung von Verantwor
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
-| [Chain of Responsibility](../Patterns/ChainOfResponsibility/Resources/Readme.md) | Ermöglicht das Weiterleiten von Anforderungen entlang einer Kette von Handlern. |
-| [Command Pattern](../Patterns/CommandPattern/Resources/Readme.md) | Das **Command** Entwurfsmuster ermöglicht die Modularisierung von Befehlen und Aufrufen. Auf elegante Weise können Befehle rückgängig gemacht, protokolliert oder in einer Warteschlange gelegt werden. |
+| [Chain of Responsibility](../Patterns/ChainOfResponsibility/Resources/Readme.md) | Ermöglicht das Weiterleiten von Anforderungen entlang einer Kette von Objekten. |
+| [Command Pattern](../Patterns/CommandPattern/Resources/Readme.md) | Das **Command** Entwurfsmuster ermöglicht die Entkopplung von Befehlen und Aufrufen. Auf elegante Weise können Befehle rückgängig gemacht, protokolliert oder in einer Warteschlange abgelegt werden. |
 | [Interpreter](../Patterns/InterpreterPattern/Resources/Readme.md) | Das **Interpreter** Entwurfsmuster definiert eine Repräsentation für die Grammatik einer Sprache und die Möglichkeit, Sätze dieser Sprache zu interpretieren. |
-| [Iterator](../Patterns/IteratorPattern/Resources/Readme.md) | Ermöglicht das Traversieren (Durchlaufen) von Elementen einer listenartigen Datenstruktur, ohne die zugrunde liegende Darstellung (Liste, Array,  Stapel, Baum usw.) zu kennen. |
-| [Mediator](../Patterns/Mediator/Resources/Readme.md) | Das **Mediator** Muster dient zum Steuern des kooperativen Verhaltens von Objekten, wobei Objekte nicht direkt kooperieren, sondern über einen Vermittler. |
-| [Memento](../Patterns/Memento/Resources/Readme.md) | Das **Memento** Entwurfsmuster dient der Erfassung und Speicherung des internen Zustands eines Objektes. Hiermit kann man den vorherigen Status eines Objekts speichern und wiederherstellen, ohne Details der Implementierung preisgeben zu müssen. |
-| [Observer](../Patterns/Observer/Resources/Readme.md) | Das **Observer** Entwurfsmuster ist für Situation geeignet, in denen ein oder mehrere Objekte benachrichtigt werden müssen, sobald sich der Zustand eines bestimmten Objekts ändert. |
+| [Iterator](../Patterns/IteratorPattern/Resources/Readme.md) | Abstraktion des Traversierens (Durchlaufens) von Elementen einer Datenstruktur, ohne die zugrunde liegende Darstellung (Liste, Array, Stapel, Baum usw.) zu kennen. |
+| [Mediator](../Patterns/Mediator/Resources/Readme.md) | Das **Mediator** Muster ermöglicht ein kooperatives Verhalten von Objekten, wobei die beteiligten Objekte nicht direkt, sondern mit der Hilfe eines Vermittlers kooperieren. |
+| [Memento](../Patterns/Memento/Resources/Readme.md) | Das **Memento** Entwurfsmuster dient der Erfassung und Speicherung des internen Zustands eines Objektes. |
+| [Observer](../Patterns/Observer/Resources/Readme.md) | Das **Observer** Entwurfsmuster ist für Situationen geeignet, in denen ein oder mehrere Objekte benachrichtigt werden müssen, sobald sich der Zustand eines bestimmten Objekts ändert. |
 | [State](../Patterns/StatePattern/Resources/Readme.md) | 	Das **State** Entwurfsmuster ermöglicht die elegante Modellierung vom zustandsabhängigen Verhalten eines Objekts. Je nach internem Zustand ändert sich das Verhalten des Objekts, es scheint, als hätte das Objekt seine Klasse geändert. |
-| [Strategy Pattern](../Patterns/StrategyPattern/Resources/Readme.md) | Beschreibt eine Familie von Algorithmen, kapselt jeden einzelnen und macht sie austauschbar. Das Strategiemuster ermöglicht es, den Algorithmus unabhängig von ihn nutzenden Klienten zu variieren. |
-| [Template Method](../Patterns/TemplatePattern/Resources/Readme.md) | Definiert das Grundgerüst eines Algorithmus in einer Oberklasse, lässt Unterklassen bestimmte Schritte des Algorithmus überschreiben, ohne dabei Änderungen an der prinzipiellen Algorithmusstruktur zu gestatten. |
+| [Strategy Pattern](../Patterns/StrategyPattern/Resources/Readme.md) | Beschreibt eine Familie von Algorithmen und macht sie durch das **Strategiemuster** austauschbar. |
+| [Template Method](../Patterns/TemplatePattern/Resources/Readme.md) | Definiert das Grundgerüst eines Algorithmus in einer Oberklasse, lässt Unterklassen bestimmte Schritte des Algorithmus ausgestalten, ohne dabei Änderungen an der prinzipiellen Algorithmusstruktur zu gestatten. |
 | [Visitor Method](../Patterns/Visitor/Resources/Readme.md) | Befasst sich mit der Trennung von Algorithmen von den Objekten, mit denen sie arbeiten. |
 
 *Tabelle* 3: Verhaltensmuster (*Behavioral Design Pattern*).

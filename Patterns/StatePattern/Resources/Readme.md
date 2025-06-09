@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&bdquo;Um das durch seinen Zustand bestimmte Verhalten des Objekts zu implementieren.&rdquo;
+&bdquo;Um das durch seinen Zustand bestimmte Verhalten des Objekts darzustellen, aber auch zu ändern.&rdquo;
 
 Das Muster beschreibt, wie ein Objekt sein Verhalten in Abhängigkeit
 von seinem aktuellen internen Zustand vollständig ändern kann.

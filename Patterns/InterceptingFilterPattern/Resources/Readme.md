@@ -10,6 +10,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+&bdquo;Standardisiert die zusätzliche Vor- und Nachbearbeitung von Methodenaufrufen.&rdquo;
+
 Das *Intercepting Filter Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
 das sich der Vor- und Nachbearbeitung einer Anforderung (*&bdquo;Request&rdquo;*, typischerweise ein Methodenaufruf) zuwendet. 
 Die Vor- und Nachbearbeitung definiert Aktionen, die vor und nach der Kernverarbeitung der Anforderung ausgeführt werden.

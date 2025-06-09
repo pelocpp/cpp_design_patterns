@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&bdquo;Um das Durchlaufen (Traversieren) einer Datenstruktur zu erleichtern.&rdquo;
+&bdquo;Um das Durchlaufen (Traversieren) einer Datenstruktur zu standardisieren.&rdquo;
 
 Das *Iterator Pattern* ist ein Entwurfsmuster,
 das es ermöglicht, die Elemente eines Aggregatobjekts ohne Kenntnis seiner Struktur sequentiell

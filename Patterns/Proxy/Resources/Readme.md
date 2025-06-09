@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&bdquo;Eine Schnittstelle für den Zugriff auf eine bestimmte Ressource.&rdquo;
+&bdquo;Bereitstellung eines Platzhalters (Stellvertreters) für ein anderes Objekt..&rdquo;
 
 Das *Proxy Pattern* ist ein strukturelles Entwurfsmuster,
 das für ein anderes Objekt (Ressource) eine Art Ersatz oder Platzhalter bereitstellt.

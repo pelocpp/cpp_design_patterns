@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&bdquo;Um einzelne Objekte und Gruppen von Objekten einheitlich zu behandeln.&rdquo;
+&bdquo;Um einzelne Objekte und Gruppen von Objekten einheitlich zu betrachten und behandeln.&rdquo;
 
 Das *Composite Entwurfsmuster* ist ein strukturelles Entwurfsmuster,
 mit dem Sie Objekte zu Baumstrukturen zusammensetzen und dann mit diesen Strukturen arbeiten können,

@@ -16,6 +16,10 @@
 
 #### Ziel / Absicht:
 
+###### In einem Satz:
+
+Das **Abstract Factory** Design Pattern dient der Definition einer zusammenhängenden Familie aus Produkten.
+
 Das *Abstract Factory* Pattern ist ein Entwurfsmuster,
 mit dem Gruppen miteinander verwandter Objekte erstellt werden können,
 ohne dass die genauen konkreten Klassen angegeben werden müssen, die dabei verwendet werden.

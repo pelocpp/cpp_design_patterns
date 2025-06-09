@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&bdquo;Bereitstellung einer einheitlichen (vereinfachten) Schnittstelle durch Verbergen einer vorhandenen Systemkomplexität.&rdquo;
+&bdquo;Bereitstellung einer einheitlichen (vereinfachten) Schnittstelle durch Verbergen einer existierenden Systemkomplexität.&rdquo;
 
 Das *Facade Pattern* ist ein strukturelles Entwurfsmuster,
 das verwendet wird, um den Zugriff auf Funktionen in komplexen oder schlecht gestalteten Subsystemen/Bibliotheken
