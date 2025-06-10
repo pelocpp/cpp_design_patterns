@@ -31,8 +31,11 @@ namespace ConceptualExample01 {
         MediatorBase* m_mediator;
 
     public:
-        ColleagueBase(MediatorBase* mediator = nullptr) 
-            : m_mediator{ mediator } {}
+        ColleagueBase() : m_mediator{ nullptr } {}
+
+        ColleagueBase(MediatorBase* mediator) 
+            : m_mediator{ mediator }
+        {}
 
         void setMediator(MediatorBase* mediator) 
         {
@@ -50,13 +53,19 @@ namespace ConceptualExample01 {
         void operationA() 
         {
             std::cout << "Component 1 does operation A." << std::endl;
-            m_mediator->notify(this, "A");
+
+            if (m_mediator != nullptr) {
+                m_mediator->notify(this, "A");
+            }
         }
 
         void operationB()
         {
             std::cout << "Component 1 does operation B." << std::endl;
-            m_mediator->notify(this, "B");
+
+            if (m_mediator != nullptr) {
+                m_mediator->notify(this, "B");
+            }
         }
     };
 
@@ -66,13 +75,19 @@ namespace ConceptualExample01 {
         void operationC()
         {
             std::cout << "Component 2 does operation C." << std::endl;
-            m_mediator->notify(this, "C");
+
+            if (m_mediator != nullptr) {
+                m_mediator->notify(this, "C");
+            }
         }
 
         void operationD()
         {
             std::cout << "Component 2 does operation D." << std::endl;
-            m_mediator->notify(this, "D");
+
+            if (m_mediator != nullptr) {
+                m_mediator->notify(this, "D");
+            }
         }
     };
 
@@ -115,6 +130,7 @@ namespace ConceptualExample01 {
     {
         ConcreteColleagueA* c1{ new ConcreteColleagueA{} };
         ConcreteColleagueB* c2{ new ConcreteColleagueB{} };
+
         ConcreteMediator* mediator{ new ConcreteMediator(c1, c2) };
 
         std::cout << "Client triggers operation A." << std::endl;

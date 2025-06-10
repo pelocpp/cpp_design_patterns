@@ -10,15 +10,14 @@
 
 namespace ChatRoomMediatorPattern
 {
-    class ChatRoomBase     // MediatorBase
+    class ChatRoomBase                        // MediatorBase
     {
     public:
         virtual void broadcast(const std::string& from, const std::string& msg) = 0;                        // notify
         virtual void message(const std::string& from, const std::string& to, const std::string& msg) = 0;   // reactOn
     };
 
-
-    class PersonBase       // ColleagueBase
+    class PersonBase                          // ColleagueBase
     {
     protected:
         std::weak_ptr<ChatRoomBase> m_room;
@@ -29,10 +28,10 @@ namespace ChatRoomMediatorPattern
 
     // -----------------------------------------------------------------------
 
-    class Person : public PersonBase  // Concrete Colleague
+    class Person : public PersonBase          // Concrete Colleague
     {
     private:
-        std::string m_name;
+        std::string              m_name;
         std::vector<std::string> m_log;
 
     public:
@@ -116,8 +115,9 @@ namespace ChatRoomMediatorPattern
     void ChatRoom::broadcast(const std::string& from, const std::string& msg) {
         for (const auto& person : m_people) {
             // send message to all chat room members - excluding the sender
-            if (person->getName() != from)
+            if (person->getName() != from) {
                 person->receive(from, msg);
+            }
         }
     }
 

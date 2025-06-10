@@ -48,7 +48,7 @@ namespace AbstractClassVsInterface {
     public:
         AnotherAbstractClass(double value) : m_value { value } {}
 
-        virtual void method_first() override
+        void method_first() override
         {
             std::cout << m_value << std::endl;
         }
@@ -69,7 +69,7 @@ namespace AbstractClassVsInterface {
         ConcreteClass(double value1, double value2)
             : AnotherAbstractClass{ value1 }, m_anotherValue{ value2 } {}
 
-        virtual void method_second() override
+        void method_second() override
         {
             std::cout << m_value << ", " << m_anotherValue << std::endl;
         }
@@ -86,12 +86,12 @@ namespace AbstractClassVsInterface {
 
         AnotherConcreteClass(double value) : m_oneMoreValue{ value } {}
 
-        virtual void method_first() override
+        void method_first() override
         {
             std::cout << m_oneMoreValue << std::endl;
         }
 
-        virtual void method_second() override
+        void method_second() override
         {
             method_first();
         }
@@ -117,10 +117,13 @@ namespace AbstractClassVsInterface {
 
     // =======================================================================
 
-    static void client()
+    static void test_client_of_interface()
     {
         Interface* ip = getInterface();
+
         ip->method_first();
+
+        delete ip;
     }
 }
 
@@ -173,6 +176,10 @@ void test_conceptual_example()
     AnotherConcreteClass* obj005{ &obj5 };
     obj005->method_first();
     obj005->method_second();
+
+    // ---------------------------------------------
+
+    test_client_of_interface();
 }
 
 // ===========================================================================

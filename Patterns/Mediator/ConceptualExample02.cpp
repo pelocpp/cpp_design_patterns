@@ -19,7 +19,7 @@ namespace ConceptualExample02 {
     public:
         virtual ~MediatorBase() {}
 
-        virtual void notify(std::shared_ptr<ColleagueBase> sender, const std::string& event) const = 0;
+        virtual void notify(const std::shared_ptr<ColleagueBase>& sender, const std::string& event) const = 0;
     };
 
     /**
@@ -34,10 +34,11 @@ namespace ConceptualExample02 {
     public:
         ColleagueBase() {}
 
-        ColleagueBase(std::shared_ptr<MediatorBase> mediator) 
-            : m_mediator{ mediator } {}
+        ColleagueBase(const std::shared_ptr<MediatorBase>& mediator) 
+            : m_mediator{ mediator } 
+        {}
 
-        void setMediator(std::shared_ptr<MediatorBase> mediator) 
+        void setMediator(const std::shared_ptr<MediatorBase>& mediator)
         {
             m_mediator = mediator;
         }
@@ -55,15 +56,17 @@ namespace ConceptualExample02 {
         void operationA()
         {
             std::cout << "Component Colleague A does operation A." << std::endl;
+            
             std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
             if (sp != nullptr) {
-                sp->notify(shared_from_this(), "operation A");
+                sp->notify(shared_from_this(), "A");
             }
         }
 
         void operationB()
         {
             std::cout << "Component Colleague A does operation B." << std::endl;
+
             std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
             if (sp != nullptr) {
                 sp->notify(shared_from_this(), "B");
@@ -76,6 +79,7 @@ namespace ConceptualExample02 {
         void operationC()
         {
             std::cout << "Component Colleague B does operation C." << std::endl;
+
             std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
             if (sp != nullptr) {
                 sp->notify(shared_from_this(), "C");
@@ -85,6 +89,7 @@ namespace ConceptualExample02 {
         void operationD()
         {
             std::cout << "Component Colleague B does operation D." << std::endl;
+
             std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
             if (sp != nullptr) {
                 sp->notify(shared_from_this(), "D");
@@ -106,9 +111,10 @@ namespace ConceptualExample02 {
 
     public:
         ConcreteMediator(
-            std::shared_ptr<ConcreteColleagueA> colleagueA,
-            std::shared_ptr<ConcreteColleagueB> colleagueB)
-            : m_componentA{ colleagueA }, m_componentB{ colleagueB } {}
+            const std::shared_ptr<ConcreteColleagueA>& colleagueA,
+            const std::shared_ptr<ConcreteColleagueB>& colleagueB)
+            : m_componentA{ colleagueA }, m_componentB{ colleagueB }
+        {}
 
         ~ConcreteMediator() {}
 
@@ -128,14 +134,13 @@ namespace ConceptualExample02 {
             m_componentB->setMediator(shared_from_this());
         }
 
-        void notify(std::shared_ptr<ColleagueBase> sender, const std::string& event) const override
+        void notify(const std::shared_ptr<ColleagueBase>& sender, const std::string& event) const override
         {
             if (event == "A") {
                 std::cout << "Mediator reacts on A and triggers following operations:" << std::endl;
                 m_componentB->operationC();
             }
-
-            if (event == "D") {
+            else if (event == "D") {
                 std::cout << "Mediator reacts on D and triggers following operations:" << std::endl;
                 m_componentA->operationB();
                 m_componentB->operationC();
@@ -145,13 +150,9 @@ namespace ConceptualExample02 {
 
     static void clientCode()
     {
-        std::shared_ptr<ConcreteColleagueA> cA{ 
-            new ConcreteColleagueA()
-        };
+        std::shared_ptr<ConcreteColleagueA> cA{ new ConcreteColleagueA() };
 
-        std::shared_ptr<ConcreteColleagueB> cB{ 
-            new ConcreteColleagueB()
-        };
+        std::shared_ptr<ConcreteColleagueB> cB{ new ConcreteColleagueB() };
 
         std::shared_ptr<ConcreteMediator> mediator{ 
             std::make_shared<ConcreteMediator>(cA, cB)
