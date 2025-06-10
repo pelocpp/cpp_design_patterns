@@ -17,7 +17,7 @@ namespace ConceptualExample01 {
     class Receiver
     {
     public:
-        void action(std::string message)
+        void action(const std::string& message)
         {
             std::cout << "Action called with message " << message << std::endl;
         }
@@ -50,11 +50,11 @@ namespace ConceptualExample01 {
         std::string m_data;
 
     public:
-        ConcreteCommand(std::shared_ptr<Receiver> receiver)
+        ConcreteCommand(std::shared_ptr<Receiver>& receiver)
             : CommandBase{ receiver }
         {}
 
-        void setData(std::string data)
+        void setData(const std::string& data)
         {
             m_data = data;
         }
@@ -74,7 +74,7 @@ namespace ConceptualExample01 {
         std::shared_ptr<CommandBase> m_command;
 
     public:
-        void setCommand(std::shared_ptr<CommandBase> command)
+        void setCommand(const std::shared_ptr<CommandBase>& command)
         {
             m_command = command;
         }

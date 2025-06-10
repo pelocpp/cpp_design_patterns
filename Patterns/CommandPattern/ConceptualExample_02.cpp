@@ -27,7 +27,7 @@ namespace ConceptualExample02 {
         std::string m_payLoad;
 
     public:
-        SimpleCommand(std::string pay_load) : m_payLoad{ pay_load } {}
+        SimpleCommand(const std::string& pay_load) : m_payLoad{ pay_load } {}
 
         ~SimpleCommand() {}
 
@@ -39,10 +39,9 @@ namespace ConceptualExample02 {
     /**
      * Receiver class with 'business logic'
      */
-    class Receiver {
+    class Receiver
+    {
     public:
-        ~Receiver() {}
-
         void doSomething(const std::string& data) {
             std::cout << "Receiver: Working on (" << data << ".)" << std::endl;
         }
@@ -56,7 +55,8 @@ namespace ConceptualExample02 {
      * Mostly commands delegate more complex operations to other objects,
      * called "receivers"
      */
-    class ComplexCommand : public CommandBase {
+    class ComplexCommand : public CommandBase
+    {
     private:
         std::shared_ptr<Receiver> m_receiver;
 
@@ -71,7 +71,7 @@ namespace ConceptualExample02 {
          * along with any context data via the constructor
          */
     public:
-        ComplexCommand(std::shared_ptr<Receiver> receiver, std::string a, std::string b)
+        ComplexCommand(std::shared_ptr<Receiver> receiver, const std::string& a, const std::string& b)
             : m_receiver{ receiver }, m_a{ a }, m_b{ b } {}
 
         ~ComplexCommand() {}
