@@ -14,7 +14,7 @@ namespace BankAccountMemento
         friend std::ostream& operator<<(std::ostream& os, const BankAccount& ac);
 
     private:
-        int    m_balance;
+        int m_balance;
 
         struct Memento
         {
@@ -143,4 +143,3 @@ void test_bank_account_example()
 // ===========================================================================
 // End-of-File
 // ===========================================================================
-

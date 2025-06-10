@@ -31,12 +31,12 @@ namespace ConceptualExample02 {
 
     private:
         // private c'tor(s)
-        Memento(std::string state) : m_state{ state } {
+        Memento(const std::string& state) : m_state{ state } {
             m_date = currentTimeToString();
         }
 
     public:
-        // destructor is public, so CareTake can hold and release Memento objects
+        // destructor is public, so CareTaker can hold and release Memento objects
         ~Memento() {
             std::cout << "d'tor ConcreteMemento" << std::endl;
         }
@@ -45,17 +45,17 @@ namespace ConceptualExample02 {
         /**
          * The Originator uses this method when restoring its state.
          */
-        std::string getState() {
+        const std::string& getState() const {
             return m_state;
         }
 
-        std::string getDate() {
+        const std::string& getDate() const {
             return m_date;
         }
 
     private:
         // helper method
-        std::string currentTimeToString() {
+        std::string currentTimeToString() const {
             char str[32];
             std::time_t now{ std::time(0) };
             ctime_s(str, sizeof str, &now);
@@ -92,7 +92,7 @@ namespace ConceptualExample02 {
         /**
          * Saves the current state inside a memento.
          */
-        std::shared_ptr<Memento>  save() {
+        std::shared_ptr<Memento> save() const {
 
             Memento* mp = new Memento{ m_state };
             std::shared_ptr sp = std::shared_ptr<Memento>{ mp };
@@ -102,7 +102,7 @@ namespace ConceptualExample02 {
         /**
          * Restores the Originator's state from a memento object.
          */
-        void restore(std::shared_ptr<Memento>& memento) {
+        void restore(const std::shared_ptr<Memento>& memento) {
             m_state = memento->getState();
             std::cout << "Originator: state has changed to: " << m_state << std::endl;
         }
@@ -135,10 +135,11 @@ namespace ConceptualExample02 {
 
     private:
         std::vector<std::shared_ptr<Memento>> m_mementos;
+
         std::shared_ptr<Originator> m_originator;
 
     public:
-        CareTaker(std::shared_ptr<Originator> originator)
+        CareTaker(const std::shared_ptr<Originator>& originator)
             : m_originator{ originator }
         {
         }
@@ -203,9 +204,10 @@ namespace ConceptualExample02 {
     }
 }
 
-void test_conceptual_example_02() {
-
+void test_conceptual_example_02()
+{
     using namespace ConceptualExample02;
+
     std::srand(static_cast<unsigned int>(std::time(NULL)));
     clientCode();
 }
