@@ -244,6 +244,7 @@ namespace SecondConceptualExampleOCP {
     };
 
     template <typename T>
+        requires ProductRequirements<T>
     struct ProductFilter : public IFilter<T>
     {
         virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const override
@@ -277,12 +278,14 @@ namespace SecondConceptualExampleOCP {
 
     // combining logical specifications - with logical 'and' using operator notation
     template <typename T>
+        requires ProductRequirements<T>
     AndSpecification<T> operator&& (const ISpecification<T>& first, const ISpecification<T>& second) {
         return AndSpecification<T>{ first, second };
     }
 
     // combining multiple logical specifications - with variadic templates
     template <typename T>
+        requires ProductRequirements<T>
     class GenericAndSpecification : public ISpecification<T>
     {
     private:

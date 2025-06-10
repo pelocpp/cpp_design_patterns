@@ -95,18 +95,20 @@ Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdqu
 16:         m_entries.push_back(text);
 17:     }
 18: 
-19:     auto get_entries() const { return m_entries; }
-20: };
-21: 
-22: struct SavingManager
-23: {
-24:     static void save(const Journal& journal, const std::string& filename, std::ostream& os) {
-25: 
-26:         for (const auto& entry : journal.get_entries()) {
-27:             os << entry << std::endl;
-28:         }
-29:     }
-30: };
+19:     auto getTitle() const { return m_title; }
+20:     auto getEntries() const { return m_entries; }
+21: };
+22: 
+23: struct SavingManager
+24: {
+25:     static void save(const Journal& journal, const std::string& filename, std::ostream& os) {
+26: 
+27:         os << journal.getTitle() << std::endl;
+28:         for (const auto& entry : journal.getEntries()) {
+29:             os << entry << std::endl;
+30:         }
+31:     }
+32: };
 ```
 
   * Die Klasse `Journal` kümmert sich jetzt nur um ihre Daten und Funktionen, die mit dem Journal zusammenhängen.

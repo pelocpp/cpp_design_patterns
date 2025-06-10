@@ -30,6 +30,7 @@ namespace AntiConceptualExampleSRP {
 
         void save(const std::string& filename, std::ostream& os) {
 
+            os << m_title << std::endl;
             for (const auto& entry : m_entries) {
                 os << entry << std::endl;
             }
@@ -57,14 +58,16 @@ namespace ConceptualExampleSRP
             m_entries.push_back(text);
         }
 
-        auto get_entries() const { return m_entries; }
+        auto getTitle() const { return m_title; }
+        auto getEntries() const { return m_entries; }
     };
 
     struct SavingManager
     {
         static void save(const Journal& journal, const std::string& filename, std::ostream& os) {
 
-            for (const auto& entry : journal.get_entries()) {
+            os << journal.getTitle() << std::endl;
+            for (const auto& entry : journal.getEntries()) {
                 os << entry << std::endl;
             }
         }
