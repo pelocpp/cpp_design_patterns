@@ -2,10 +2,21 @@
 // ConceptualExample.cpp // MVC
 // ===========================================================================
 
+#define _CRTDBG_MAP_ALLOC
+#include <cstdlib>
+#include <crtdbg.h>
+
+#ifdef _DEBUG
+#ifndef DBG_NEW
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#define new DBG_NEW
+#endif
+#endif  // _DEBUG
+
 #include <iostream>
-#include <string>
 #include <list>
 #include <memory>
+#include <string>
 
 namespace ConceptualExample {
 
@@ -29,8 +40,8 @@ namespace ConceptualExample {
         virtual void narrowOpening() = 0;
 
         // observer functionality
-        virtual void attach(std::shared_ptr<IValveObserver>) = 0;
-        virtual void detach(std::shared_ptr<IValveObserver>) = 0;
+        virtual void attach(const std::shared_ptr<IValveObserver>&) = 0;
+        virtual void detach(const std::shared_ptr<IValveObserver>&) = 0;
     };
 
     // implementation of model
@@ -45,7 +56,7 @@ namespace ConceptualExample {
         int m_value;
 
         // list of observers
-        std::list<std::shared_ptr<IValveObserver>> m_observers;
+        std::list<std::weak_ptr<IValveObserver>> m_observers;
 
     public:
         ValveModelImpl()
@@ -82,19 +93,26 @@ namespace ConceptualExample {
         }
 
         // subscription management methods
-        void attach(std::shared_ptr<IValveObserver> observer) override {
+        void attach(const std::shared_ptr<IValveObserver>& observer) override {
             m_observers.push_back(observer);
         }
 
-        void detach(std::shared_ptr<IValveObserver> observer) override {
-            m_observers.remove(observer);
+        void detach(const std::shared_ptr<IValveObserver>& observer) override {  
+            // https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs
+            m_observers.remove_if([&](std::weak_ptr<IValveObserver> wp) {
+                return !observer.owner_before(wp) && !wp.owner_before(observer);
+            });
         }
 
     private:
         void onValveValueChanged(int value)
         {
-            for (std::shared_ptr<IValveObserver> observer : m_observers) {
-                observer->valveValueChanged(value);
+            for (std::weak_ptr<IValveObserver> observer : m_observers) {
+
+                std::shared_ptr<IValveObserver> sp{ observer.lock() };
+                if (sp != nullptr) {
+                    sp->valveValueChanged(value);
+                }
             }
         }
     };
@@ -102,16 +120,11 @@ namespace ConceptualExample {
     // implementation of a view
     class ValveViewLabel : public IValveObserver, public std::enable_shared_from_this<ValveViewLabel>
     {
-    private:
-        std::shared_ptr<IValveModel> m_model{};
-
     public:
-
         ValveViewLabel() {}
 
         void attach(std::shared_ptr<IValveModel> model) {
-            m_model = model;
-            m_model->attach(shared_from_this());
+            model->attach(shared_from_this());
         }
 
         virtual void valveValueChanged(int value) override
@@ -164,6 +177,7 @@ namespace ConceptualExample {
         std::shared_ptr<ValveViewLabel> labelView{
             std::make_shared<ValveViewLabel>() 
         };
+
         labelView->attach(model);
 
         // create controller (being connected to the model)
@@ -193,10 +207,13 @@ namespace ConceptualExample {
                 break;
             }
         }
+
+        model->detach(labelView);
     }
 }
 
 void test_conceptual_example () {
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     using namespace ConceptualExample;
     clientCode();
 }

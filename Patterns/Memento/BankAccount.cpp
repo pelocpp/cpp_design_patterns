@@ -37,6 +37,7 @@ namespace BankAccountMemento
         void undo();
         void redo();
 
+    private:
         void restore(const std::shared_ptr<Memento>& memento);
     };
 
