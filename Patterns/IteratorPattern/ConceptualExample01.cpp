@@ -15,9 +15,6 @@ public:
     using pointer           = const value_type*;
     using reference         = const value_type&;
 
-    using iterator          = std::vector<int>::iterator;
-    using const_iterator    = std::vector<int>::const_iterator;
-
 private:
     std::vector<int> m_data;
 
@@ -60,24 +57,31 @@ public:
         }
     };
 
+    using iterator = Iterator;
+
 public:
     // begin iterator
-    Iterator begin() { return Iterator{ m_data.begin() }; }
+    Iterator begin() noexcept { return Iterator{ m_data.begin() }; }
 
     // end iterator
-    Iterator end() { return Iterator{ m_data.end() }; }
+    Iterator end() noexcept { return Iterator{ m_data.end() }; }
 };
 
 void test_conceptual_example_01()
 {
     MyContainer container { 1, 2, 3, 4, 5 };
 
-    for (MyContainer::Iterator it = container.begin(); it != container.end(); ++it) {
+    for (MyContainer::iterator it = container.begin(); it != container.end(); ++it) {
         std::print("{} ", *it);
     }
     std::println();
 
     for (auto elem : container) {
+        std::print("{} ", elem);
+    }
+    std::println();
+
+    for (const auto& elem : container) {
         std::print("{} ", elem);
     }
 }
