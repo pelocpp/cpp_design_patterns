@@ -43,7 +43,7 @@ namespace ConceptualExample01
 
         // Note: Return Type = Type of base class - 
         // but 'virtual ConcretePrototype* clone()' compiles too
-        virtual Prototype* clone() const override
+        Prototype* clone() const override
         {
             return new ConcretePrototype{ *this };
         }

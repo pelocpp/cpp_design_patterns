@@ -64,7 +64,7 @@ namespace OnlineShopExample {
         void setAuthor(std::string author) { m_author = author; }
         void setPublisher(std::string publisher) { m_publisher = publisher; }
 
-        virtual void accept(Visitor& visitor) const override
+        void accept(Visitor& visitor) const override
         {
             visitor.visit(this);
         }
@@ -94,7 +94,7 @@ namespace OnlineShopExample {
         void setIsHD(bool isHD) { m_isHD = isHD; }
         void setDirector(std::string director) { m_director = director; }
 
-        virtual void accept(Visitor& visitor) const override
+        void accept(Visitor& visitor) const override
         {
             visitor.visit(this);
         }
@@ -120,7 +120,7 @@ namespace OnlineShopExample {
         void setConsoleType(int consoleType) { m_consoleType = consoleType; }
         void setLicenseKey(std::string licenseKey) { m_licenseKey = licenseKey; }
 
-        virtual void accept(Visitor& visitor) const override
+        void accept(Visitor& visitor) const override
         {
             visitor.visit(this);
         }
@@ -142,17 +142,17 @@ namespace OnlineShopExample {
 
         double getTotalPrice() { return m_totalPrice; }
 
-        virtual void visit(const Book* book) override
+        void visit(const Book* book) override
         {
             m_totalPrice += book->getPrice() * book->getCount();
         }
 
-        virtual void visit(const Movie* movie) override
+        void visit(const Movie* movie) override
         {
             m_totalPrice += movie->getPrice() * movie->getCount();
         }
 
-        virtual void visit(const Game* game) override
+        void visit(const Game* game) override
         {
             m_totalPrice += game->getPrice() * game->getCount();
         }
@@ -168,17 +168,17 @@ namespace OnlineShopExample {
 
         std::string getHTML() { return m_html; }
 
-        virtual void visit(const Book* book) override
+        void visit(const Book* book) override
         {
             m_html = "<b>" + book->getTitle() + "</b> Author: " + book->getAuthor();
         }
 
-        virtual void visit(const Movie* movie) override
+        void visit(const Movie* movie) override
         {
             m_html = "<b>" + movie->getTitle() + "</b> Director: " + movie->getDirector();
         }
 
-        virtual void visit(const Game* game) override
+        void visit(const Game* game) override
         {
             m_html = "<b>" + game->getTitle() + "</b> License Key: " + game->getLicenseKey();
         }

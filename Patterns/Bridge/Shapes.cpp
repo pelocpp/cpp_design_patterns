@@ -24,7 +24,7 @@ namespace ShapesExample {
     class RedCircleDrawer : public IDrawAPI
     {
     public:
-        virtual void drawCircle(int radius, int x, int y) override
+        void drawCircle(int radius, int x, int y) override
         {
             std::cout
                 << "Drawing Circle[ color: red, radius: "
@@ -35,7 +35,7 @@ namespace ShapesExample {
     class GreenCircleDrawer : public IDrawAPI
     {
     public:
-        virtual void drawCircle(int radius, int x, int y) override
+        void drawCircle(int radius, int x, int y) override
         {
             std::cout 
                 << "Drawing Circle[ color: green, radius: " 
@@ -77,7 +77,7 @@ namespace ShapesExample {
         Circle(int x, int y, int radius, std::unique_ptr<IDrawAPI> api)
             : Shape{ std::move(api) }, m_x{ x }, m_y{ y }, m_radius{ radius } { }
 
-        virtual void draw() override
+        void draw() override
         {
             m_api->drawCircle(m_radius, m_x, m_y);
         }

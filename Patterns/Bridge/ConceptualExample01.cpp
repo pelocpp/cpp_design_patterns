@@ -34,7 +34,7 @@ namespace ConceptualExampleBridge01 {
     class RefinedAbstraction : public Abstraction
     {
     public:
-        virtual void operation() override
+        void operation() override
         {
             m_implementor->concreteOperation();
         }
@@ -43,7 +43,7 @@ namespace ConceptualExampleBridge01 {
     class ConcreteImplementor : public Implementor
     {
     public:
-        virtual void concreteOperation() override
+        void concreteOperation() override
         {
             std::cout << "Concrete Implementor's Operation" << std::endl;
         }

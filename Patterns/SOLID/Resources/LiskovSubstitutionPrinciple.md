@@ -58,11 +58,11 @@ erkennen können:
 23:     Square(size_t size) : Rectangle{ size, size } {}
 24: 
 25:     // getter / setter
-26:     virtual void setWidth(size_t width) override {
+26:     void setWidth(size_t width) override {
 27:         m_width = m_height = width;
 28:     }
 29: 
-30:     virtual void setHeight(size_t height) override {
+30:     void setHeight(size_t height) override {
 31:         m_height = m_width = height;
 32:     }
 33: };

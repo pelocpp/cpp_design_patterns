@@ -92,12 +92,12 @@ public:
 class FlowLayoutManager : public LayoutManager
 {
 public:
-    virtual void addWidget(std::shared_ptr<Widget> widget) override
+    void addWidget(std::shared_ptr<Widget> widget) override
     {
         getHtmlPage().getWidgets().push_back(widget);
     }
 
-    virtual void render() override
+    void render() override
     {
         std::string html = renderHtmlFromWidgets();
         getHtmlPage().setHtmlCode(html);
@@ -113,12 +113,12 @@ private:
 class BorderLayoutManager : public LayoutManager
 {
 public:
-    virtual void addWidget(std::shared_ptr<Widget> widget) override
+    void addWidget(std::shared_ptr<Widget> widget) override
     {
         getHtmlPage().getWidgets().push_back(widget);
     }
 
-    virtual void render() override
+    void render() override
     {
         std::string html = renderHtmlFromWidgets();
         getHtmlPage().setHtmlCode(html);
@@ -134,12 +134,12 @@ private:
 class BoxLayoutManager : public LayoutManager
 {
 public:
-    virtual void addWidget(std::shared_ptr<Widget> widget) override
+    void addWidget(std::shared_ptr<Widget> widget) override
     {
         getHtmlPage().getWidgets().push_back(widget);
     }
 
-    virtual void render() override
+    void render() override
     {
         std::string html = renderHtmlFromWidgets();
         getHtmlPage().setHtmlCode(html);

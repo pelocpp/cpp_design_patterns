@@ -64,17 +64,17 @@ namespace ConceptualExample {
             m_value = (getMaximum() - getMinimum()) / 2;
         }
 
-        virtual int getMinimum() override
+        int getMinimum() override
         {
             return Minimum;
         }
 
-        virtual int getMaximum() override
+        int getMaximum() override
         {
             return Maximum;
         }
 
-        virtual void widenOpening() override
+        void widenOpening() override
         {
             if (m_value < getMaximum()) {
 
@@ -83,7 +83,7 @@ namespace ConceptualExample {
             }
         }
 
-        virtual void narrowOpening() override
+        void narrowOpening() override
         {
             if (m_value > getMinimum()) {
 
@@ -127,7 +127,7 @@ namespace ConceptualExample {
             model->attach(shared_from_this());
         }
 
-        virtual void valveValueChanged(int value) override
+        void valveValueChanged(int value) override
         {
             std::cout << "Label: " << value << std::endl;
         }

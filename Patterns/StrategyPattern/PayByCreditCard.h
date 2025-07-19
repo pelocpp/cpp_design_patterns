@@ -15,8 +15,8 @@ public:
     PayByCreditCard();
     ~PayByCreditCard() {}
 
-    virtual bool pay(int paymentAmount) override;
-    virtual void collectPaymentDetails() override;
+    bool pay(int paymentAmount) override;
+    void collectPaymentDetails() override;
 
 private:
     bool cardIsPresent();

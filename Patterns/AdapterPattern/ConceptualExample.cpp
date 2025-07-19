@@ -26,7 +26,7 @@ class Target : public ITarget
 public:
     Target() {}
 
-    virtual std::string request() const override
+    std::string request() const override
     {
         return std::string{ "Target: The target's default behavior." };
     }

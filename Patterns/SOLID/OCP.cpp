@@ -217,7 +217,7 @@ namespace SecondConceptualExampleOCP {
     public:
         ColorSpecification(Color color) : m_color{ color } {}
 
-        virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
+        bool isSatisfied(const std::shared_ptr<T>& product) const override {
             return product->m_color == m_color; 
         }
     };
@@ -231,7 +231,7 @@ namespace SecondConceptualExampleOCP {
     public:
         SizeSpecification(Size size) : m_size{ size } {}
         
-        virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
+        bool isSatisfied(const std::shared_ptr<T>& product) const override {
             return product->m_size == m_size;
         }
     };
@@ -247,7 +247,7 @@ namespace SecondConceptualExampleOCP {
         requires ProductRequirements<T>
     struct ProductFilter : public IFilter<T>
     {
-        virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const override
+        Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const override
         {
             Products<T> result{};
             for (const auto& product : products) {
@@ -271,7 +271,7 @@ namespace SecondConceptualExampleOCP {
         AndSpecification(const ISpecification<T>& first, const ISpecification<T>& second)
             : m_first{ first }, m_second{ second } {}
 
-        virtual bool isSatisfied(const std::shared_ptr<Product>& product) const override {
+        bool isSatisfied(const std::shared_ptr<Product>& product) const override {
             return m_first.isSatisfied(product) && m_second.isSatisfied(product);
         }
     };
@@ -298,7 +298,7 @@ namespace SecondConceptualExampleOCP {
             m_vec = { args ... };
         }
 
-        virtual bool isSatisfied(const std::shared_ptr<T>& product) const override {
+        bool isSatisfied(const std::shared_ptr<T>& product) const override {
 
             bool result{ 
                 std::accumulate(
@@ -332,7 +332,7 @@ namespace SecondConceptualExampleOCP {
     public:
         PriceSpecification(double price) : m_price{ price } {}
 
-        virtual bool isSatisfied(const std::shared_ptr<ProductEx>& product) const override {
+        bool isSatisfied(const std::shared_ptr<ProductEx>& product) const override {
             return product->m_price == m_price;
         }
     };

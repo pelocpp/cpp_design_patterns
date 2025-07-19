@@ -67,7 +67,7 @@ namespace ApdaterPatternClassicalApproach {
     class VlcPlayer : public IVlcMediaPlayer
     {
     public:
-        virtual void playVlc(const std::string& fileName) override
+        void playVlc(const std::string& fileName) override
         {
             std::cout << "Playing vlc file: name = " << fileName << std::endl;
         }
@@ -77,7 +77,7 @@ namespace ApdaterPatternClassicalApproach {
     class Mp4Player : public IMp4MediaPlayer
     {
     public:
-        virtual void playMp4(const std::string& fileName) override
+        void playMp4(const std::string& fileName) override
         {
             std::cout << "Playing mp4 file: name = " << fileName << std::endl;
         }

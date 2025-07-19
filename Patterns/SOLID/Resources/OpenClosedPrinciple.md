@@ -258,7 +258,7 @@ sind die am meisten verbreitete Vorgehensweise:
 070: template <typename T>
 071: struct ProductFilter : public IFilter<T>
 072: {
-073:     virtual Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const override
+073:     Products<T> filter(const Products<T>& products, const ISpecification<T>& spec) const override
 074:     {
 075:         Products<T> result{};
 076:         for (const auto& product : products) {

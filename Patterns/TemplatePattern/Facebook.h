@@ -7,9 +7,9 @@ class Facebook : public SocialNetwork
 public:
     Facebook(const std::string& username, const std::string& password);
 
-    virtual bool logIn() override;
-    virtual bool sendData(const std::string& data) override;
-    virtual void logOut() const override;
+    bool logIn() override;
+    bool sendData(const std::string& data) override;
+    void logOut() const override;
 
 private:
     void simulateNetworkLatency();

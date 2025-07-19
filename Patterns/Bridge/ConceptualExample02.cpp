@@ -30,7 +30,7 @@ namespace ConceptualExampleBridge02 {
     class ConcreteImplementationA : public Implementor
     {
     public:
-        virtual std::string operationImplementation() const override
+        std::string operationImplementation() const override
         {
             return "ConcreteImplementationA: Here's the result on the platform A.";
         }
@@ -39,7 +39,7 @@ namespace ConceptualExampleBridge02 {
     class ConcreteImplementationB : public Implementor
     {
     public:
-        virtual std::string operationImplementation() const override
+        std::string operationImplementation() const override
         {
             return "ConcreteImplementationB: Here's the result on the platform B.";
         }
@@ -81,7 +81,7 @@ namespace ConceptualExampleBridge02 {
             : Abstraction{ implementor }
         {}
 
-        virtual std::string operation() const override
+        std::string operation() const override
         {
             return "ExtendedAbstraction: Extended operation with:\n" +
                 m_implementor->operationImplementation();

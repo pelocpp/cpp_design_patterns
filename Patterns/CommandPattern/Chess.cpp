@@ -74,7 +74,7 @@ namespace ChessExample {
         Tower(bool isComputer, Position position) : ChessPiece(isComputer, position) {}
 
     protected:
-        virtual void validateMove(const Position& newPosition) const override
+        void validateMove(const Position& newPosition) const override
         {
             ChessPiece::validateMove(newPosition);
 

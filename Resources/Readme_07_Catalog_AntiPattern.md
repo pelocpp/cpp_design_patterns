@@ -195,7 +195,7 @@ public:
 class FileLogger : public ILog
 {
 public:
-    virtual void Log(std::string message) override
+    void Log(std::string message) override
     {
         // code to log to a file           
     }
@@ -209,17 +209,17 @@ public:
 class DBLogger : public ILog
 {
 public:
-    virtual void Log(std::string message) override
+    void Log(std::string message) override
     {
         // code to log data to a database
     }
 
-    virtual void OpenConnection() override
+    void OpenConnection() override
     {
         // opens database connection
     }
 
-    virtual void CloseConnection() override
+    void CloseConnection() override
     {
         // closes the database connection
     }
@@ -238,17 +238,17 @@ public:
 class FileLogger2 : public ILog
 {
 public:
-    virtual void Log(std::string message) override
+    void Log(std::string message) override
     {
         // code to log to a file           
     }
 
-    virtual void CloseConnection() override
+    void CloseConnection() override
     {
         throw std::exception("not implemented");
     }
 
-    virtual void OpenConnection() override
+    void OpenConnection() override
     {
         throw std::exception("not implemented");
     }
@@ -296,17 +296,17 @@ public:
 class FileLoggerEx : IFileLogEx
 {
 public:
-    virtual void CheckFileSize() override
+    void CheckFileSize() override
     {
         // code to check log file size
     }
 
-    virtual void GenerateFileName() override
+    void GenerateFileName() override
     {
         // code to generate a new file name
     }
 
-    virtual void Log(std::string message) override
+    void Log(std::string message) override
     {
         // code to log data to the log file
     }
@@ -315,17 +315,17 @@ public:
 class DBLoggerEx : public IDBLogEx
 {
 public:
-    virtual void Log(std::string message) override
+    void Log(std::string message) override
     {
         // code to log data to the database
     }
 
-    virtual void OpenConnection() override
+    void OpenConnection() override
     {
         // code to open database connection
     }
 
-    virtual void CloseConnection() override
+    void CloseConnection() override
     {
         // code to close database connection
     }

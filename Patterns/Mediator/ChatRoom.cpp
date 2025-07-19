@@ -56,8 +56,8 @@ namespace ChatRoomMediatorPattern
         std::vector<std::shared_ptr<Person>> m_people;
 
     public:
-        virtual void broadcast(const std::string& from, const std::string& msg) override;
-        virtual void message(const std::string& from, const std::string& to, const std::string& msg) override;
+        void broadcast(const std::string& from, const std::string& msg) override;
+        void message(const std::string& from, const std::string& to, const std::string& msg) override;
 
         void join(const std::shared_ptr<Person>& person);
     };

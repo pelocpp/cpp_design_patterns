@@ -33,11 +33,11 @@ namespace LiskovSubstitutionPrinciple01
         Square(size_t size) : Rectangle{ size, size } {}
 
         // getter / setter
-        virtual void setWidth(size_t width) override {
+        void setWidth(size_t width) override {
             m_width = m_height = width;
         }
 
-        virtual void setHeight(size_t height) override {
+        void setHeight(size_t height) override {
             m_height = m_width = height;
         }
     };
@@ -82,7 +82,7 @@ namespace LiskovSubstitutionPrinciple02
         virtual void setHeight(size_t height) { m_height = height; }
 
         // public interface
-        virtual size_t area() const override { return m_width * m_height; }
+        size_t area() const override { return m_width * m_height; }
     };
 
     struct Square : public IShape
@@ -98,7 +98,7 @@ namespace LiskovSubstitutionPrinciple02
         void setSize(size_t size) { m_size = size; }
 
         // public interface
-        virtual size_t area() const override { return m_size * m_size; }
+        size_t area() const override { return m_size * m_size; }
     };
 
     static void process(IShape& s)
