@@ -63,7 +63,7 @@ namespace ObserverDesignPatternClassic {
             m_observers.remove(observer);
         }
 
-        void createMessage(std::string message = "<empty>") {
+        void createMessage(const std::string& message) {
             m_message = message;
             notify();
         }
@@ -87,7 +87,7 @@ namespace ObserverDesignPatternClassic {
     private:
         void notify() {
             howManyObservers();
-            for (const auto& observer : m_observers) {
+            for (IObserver* observer : m_observers) {
                 observer->update(m_message);
             }
         }

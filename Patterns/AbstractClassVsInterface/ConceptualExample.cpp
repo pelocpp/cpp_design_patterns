@@ -110,7 +110,7 @@ namespace AbstractClassVsInterface {
     {
         AnotherConcreteClass* impl = new AnotherConcreteClass();
         // or
-        // Interface* obj = new AnotherConcreteClass();
+        // Interface* impl = new AnotherConcreteClass();
 
         return impl;
     }

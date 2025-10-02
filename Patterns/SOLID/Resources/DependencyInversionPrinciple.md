@@ -77,7 +77,7 @@ Erkennen Sie die Nachteile dieser Implementierung?
     zu `std::set` oder einen anderen Container geändert wird, kann dies Auswirkungen auf die Klasse `FamilyTree` haben:
     Dies stellt definitiv kein gutes Design dar!
 
-  * &bdquo;Low-Level&rdquo;-Module, z.B. Klasse `Relationships` hängen direkt vom &bdquo;High-Level&rdquo;-Modul ab (hier: Klasse `FamilyTree`).
+  * &bdquo;Low-Level&rdquo;-Module, z.B. Klasse `Relationships` sind direkt mit dem &bdquo;High-Level&rdquo;-Modul gekoppelt (hier: Klasse `FamilyTree`).
     Dies stellt eine Verletzung des *Dependency Inversion Prinzips* dar.
 
 Stattdessen sollten wir vom &bdquo;Low-Level&rdquo;-Modul eine Abstraktion erstellen und &bdquo;Low-Level&rdquo;- und &bdquo;High-Level&rdquo;-Module an diese Abstraktion binden.

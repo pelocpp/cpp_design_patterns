@@ -59,7 +59,7 @@ namespace ObserverDesignPatternSmartPointerEx {
             );
         }
 
-        void createMessage(std::string message = "<empty>") {
+        void createMessage(const std::string& message) {
             m_message = message;
             notify();
         }
