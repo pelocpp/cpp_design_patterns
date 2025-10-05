@@ -2,12 +2,13 @@
 // OCP.cpp // Open Closed Principle
 // ===========================================================================
 
+#include <algorithm>
+#include <concepts>
 #include <iostream>
-#include <string>
-#include <vector>
 #include <memory>
 #include <numeric>
-#include <concepts>
+#include <string>
+#include <vector>
 
 namespace AntiFirstExampleOCP {
 
@@ -300,17 +301,25 @@ namespace SecondConceptualExampleOCP {
 
         bool isSatisfied(const std::shared_ptr<T>& product) const override {
 
-            bool result{ 
-                std::accumulate(
-                    m_vec.begin(),
-                    m_vec.end(),
-                    true,
-                    [product](bool last, const auto& next) -> bool {
-                        bool tmp = next->isSatisfied(product);
-                        return last && tmp;
-                    }
-                ) 
-            };
+            //bool result{ 
+            //    std::accumulate(
+            //        m_vec.begin(),
+            //        m_vec.end(),
+            //        true,
+            //        [product](bool last, const auto& next) -> bool {
+            //            bool tmp = next->isSatisfied(product);
+            //            return last && tmp;
+            //        }
+            //    ) 
+            //};
+
+            auto result = std::all_of(
+                m_vec.cbegin(),
+                m_vec.cend(),
+                [product](const auto& next) {
+                    return next->isSatisfied(product);
+                }
+            );
 
             return result;
         }

@@ -67,11 +67,11 @@ namespace ChessExample {
         }
     };
 
-    class Tower : public ChessPiece
+    class Rook : public ChessPiece          // Rook == Tower
     {
     public:
         // c'tor(s)
-        Tower(bool isComputer, Position position) : ChessPiece(isComputer, position) {}
+        Rook(bool isComputer, Position position) : ChessPiece(isComputer, position) {}
 
     protected:
         void validateMove(const Position& newPosition) const override
@@ -236,7 +236,7 @@ namespace ChessExample {
         ChessGame game{};
 
         std::shared_ptr<ChessPiece> tower {
-            std::make_shared<Tower>(false, Position{ 1, 1 })
+            std::make_shared<Rook>(false, Position{ 1, 1 })
         };
 
         game.enqueue(tower, Position{ 4, 1 });
