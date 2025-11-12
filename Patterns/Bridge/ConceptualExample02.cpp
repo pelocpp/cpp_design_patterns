@@ -58,7 +58,7 @@ namespace ConceptualExampleBridge02 {
         std::unique_ptr<Implementor> m_implementor;
 
     public:
-        Abstraction(std::unique_ptr<Implementor>& implementor)
+        Abstraction(std::unique_ptr<Implementor> implementor)
             : m_implementor{ std::move(implementor) }
         {}
 
@@ -77,8 +77,8 @@ namespace ConceptualExampleBridge02 {
     class ExtendedAbstraction : public Abstraction
     {
     public:
-        ExtendedAbstraction(std::unique_ptr<Implementor>& implementor)
-            : Abstraction{ implementor }
+        ExtendedAbstraction(std::unique_ptr<Implementor> implementor)
+            : Abstraction{ std::move(implementor) }
         {}
 
         std::string operation() const override
@@ -111,12 +111,12 @@ void test_conceptual_example_02()
      * abstraction-implementation combination.
      */
     std::unique_ptr<Implementor> implementor1{ std::make_unique<ConcreteImplementationA>() };
-    std::unique_ptr<Abstraction> abstraction1{ std::make_unique<Abstraction>(implementor1) };
+    std::unique_ptr<Abstraction> abstraction1{ std::make_unique<Abstraction>(std::move(implementor1)) };
     clientCode(abstraction1);
     std::cout << std::endl;
 
     std::unique_ptr<Implementor> implementor2{ std::make_unique<ConcreteImplementationB>() };
-    std::unique_ptr<Abstraction> abstraction2{ std::make_unique<ExtendedAbstraction>(implementor2) };
+    std::unique_ptr<Abstraction> abstraction2{ std::make_unique<ExtendedAbstraction>(std::move(implementor2)) };
     clientCode(abstraction2);
 }
 

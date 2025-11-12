@@ -96,9 +96,9 @@ namespace StaticDecoration {
 
     public:
         // c'tor
-        template <typename ... TARGS>
-        ColoredShape(const std::string& color, TARGS&& ...args) :
-            T{ std::forward<TARGS>(args) ... }, m_color{ color } 
+        template <typename ... TArgs>
+        ColoredShape(const std::string& color, TArgs&& ...args) :
+            T{ std::forward<TArgs>(args) ... }, m_color{ color } 
         {}
 
         void setColor(const std::string& color) { m_color = color; }
@@ -122,9 +122,9 @@ namespace StaticDecoration {
 
     public:
         // c'tor
-        template<typename ... TARGS>
-        TransparentShape(uint8_t transparency, TARGS&& ...args)
-            : T{ std::forward<TARGS>(args)... }, m_transparency{ transparency } {}
+        template<typename ... TArgs>
+        TransparentShape(uint8_t transparency, TArgs&& ...args)
+            : T{ std::forward<TArgs>(args)... }, m_transparency{ transparency } {}
 
         std::string draw() const override {
             std::ostringstream oss;
