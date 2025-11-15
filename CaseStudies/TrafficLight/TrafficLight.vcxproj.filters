@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\TrafficLight01">
+      <UniqueIdentifier>{a4d1c5e0-5206-4fef-8dcb-6bc93272fe06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TrafficLight02">
+      <UniqueIdentifier>{af3da6ac-260b-486b-bee5-c8d6b64e9e0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TrafficLight03">
+      <UniqueIdentifier>{5de3ee6a-d1f7-4ec8-aeb2-6faa334d745e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight01\Main01.cpp">
+      <Filter>Source Files\TrafficLight01</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight02\Main02.cpp">
+      <Filter>Source Files\TrafficLight02</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight03\Main03.cpp">
+      <Filter>Source Files\TrafficLight03</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight01\GreenLight01.cpp">
+      <Filter>Source Files\TrafficLight01</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight01\RedLight01.cpp">
+      <Filter>Source Files\TrafficLight01</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight01\TrafficLight01.cpp">
+      <Filter>Source Files\TrafficLight01</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight01\YellowLight01.cpp">
+      <Filter>Source Files\TrafficLight01</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight02\GreenLight02.cpp">
+      <Filter>Source Files\TrafficLight02</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight02\RedLight02.cpp">
+      <Filter>Source Files\TrafficLight02</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight02\TrafficLight02.cpp">
+      <Filter>Source Files\TrafficLight02</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight02\YellowLight02.cpp">
+      <Filter>Source Files\TrafficLight02</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight03\GreenLight03.cpp">
+      <Filter>Source Files\TrafficLight03</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight03\RedLight03.cpp">
+      <Filter>Source Files\TrafficLight03</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight03\TrafficLight03.cpp">
+      <Filter>Source Files\TrafficLight03</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLight03\YellowLight03.cpp">
+      <Filter>Source Files\TrafficLight03</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TrafficLight01\GreenLight.h">
+      <Filter>Source Files\TrafficLight01</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight01\RedLight.h">
+      <Filter>Source Files\TrafficLight01</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight01\TrafficLight.h">
+      <Filter>Source Files\TrafficLight01</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight01\YellowLight.h">
+      <Filter>Source Files\TrafficLight01</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight02\GreenLight.h">
+      <Filter>Source Files\TrafficLight02</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight02\RedLight.h">
+      <Filter>Source Files\TrafficLight02</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight02\TrafficLight.h">
+      <Filter>Source Files\TrafficLight02</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight02\YellowLight.h">
+      <Filter>Source Files\TrafficLight02</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight03\GreenLight.h">
+      <Filter>Source Files\TrafficLight03</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight03\RedLight.h">
+      <Filter>Source Files\TrafficLight03</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight03\TrafficLight.h">
+      <Filter>Source Files\TrafficLight03</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight03\YellowLight.h">
+      <Filter>Source Files\TrafficLight03</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight01\ITrafficLightState.h">
+      <Filter>Source Files\TrafficLight01</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight02\ITrafficLightState.h">
+      <Filter>Source Files\TrafficLight02</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLight03\ITrafficLightState.h">
+      <Filter>Source Files\TrafficLight03</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Readme.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Solution.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_traffic_light.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
