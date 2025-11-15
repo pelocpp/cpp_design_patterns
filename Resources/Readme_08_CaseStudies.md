@@ -9,27 +9,27 @@ Themenbereich &ldquo;C++ Design Patterns&rdquo;.
 
 ### [Passwort Validierer](../CaseStudies/ValidatingPasswords/Resources/Readme.md)
 
-### [Password Generator](Examples/GeneratingPasswords/Resources/Readme.md)
+### [Password Generator](../CaseStudies/GeneratingPasswords/Resources/Readme.md)
 
-### [Genehmigungssystem](Examples/ApprovalSystem/Resources/Readme.md)
+### [Genehmigungssystem](../CaseStudies/ApprovalSystem/Resources/Readme.md)
 
-### [Simulation einer Verkehrsampel (*TrafficLight*)](Examples/TrafficLight/Resources/Readme.md)
+### [Simulation einer Verkehrsampel (*TrafficLight*)](../CaseStudies/TrafficLight/Resources/Readme.md)
 
-### [Versenden von Benachrichtigungen](Examples/NotificationSender/Resources/Readme.md)
+### [Versenden von Benachrichtigungen](../CaseStudies/NotificationSender/Resources/Readme.md)
 
-### [Pointer to Implementation (*Pimpl*)](Examples/Pimpl/Resources/Readme.md)
+### [Pointer to Implementation (*Pimpl*)](../CaseStudies/Pimpl/Resources/Readme.md)
 
-### [Observable Vector](Examples/ObservableVector/Resources/Readme.md)
+### [Observable Vector](../CaseStudies/ObservableVector/Resources/Readme.md)
 
-### [Semigraphisches Videospiel](Examples/Semigraphics/Resources/Readme.md)
+### [Semigraphisches Videospiel](../CaseStudies/Semigraphics/Resources/Readme.md)
 
-### [Anzahl der Objekte einer baumartigen Struktur bestimmen](Examples/CountingObjects/Resources/Readme.md)
+### [Anzahl der Objekte einer baumartigen Struktur bestimmen](../CaseStudies/CountingObjects/Resources/Readme.md)
 
-### [Ein Textprozessor mit mehreren Formaten](Examples/TextProcessor/Resources/Readme.md)
+### [Ein Textprozessor mit mehreren Formaten](../CaseStudies/TextProcessor/Resources/Readme.md)
 
-### [Bankkonten eines Bankinstituts](Examples/BankAccount/Resources/Readme.md)
+### [Bankkonten eines Bankinstituts](../CaseStudies/BankAccount/Resources/Readme.md)
 
-### [Das &ldquo;Dependency Inversion Principle&rdquo;](Examples/DependencyInversionPrinciple/Resources/Readme.md)
+### [Das &ldquo;Dependency Inversion Principle&rdquo;](../CaseStudies/DependencyInversionPrinciple/Resources/Readme.md)
 
 ---
 

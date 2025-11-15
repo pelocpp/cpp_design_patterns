@@ -1,5 +1,11 @@
 # Genehmigungssystem
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Aufgabe
 
 Schreiben Sie ein C++-Programm für die Einkaufsabteilung eines Unternehmens,
@@ -13,6 +19,8 @@ Jeder noch höhere Betrag muss explizit von der Firmenleitung bewilligt werden.
 Welches klassische Entwurfsmuster bietet sich zur Realisierung an?
 
 Schreiben Sie eine Testfunktion, die alle in Frage kommenden Beträge verifiziert.
+
+---
 
 #### Lösung
 

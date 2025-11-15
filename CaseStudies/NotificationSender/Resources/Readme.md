@@ -1,5 +1,11 @@
 # Versenden von Benachrichtigungen
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Aufgabe
 
 Wir betrachten ein C++-Programm, das das Versenden von Benachrichtigungen auf 
@@ -41,6 +47,8 @@ zu realisieren.
 
 Beachten Sie bei einer SMS: Im klassischen *Short Message Service Protocol* kann eine Nachricht
 nicht länger als 160 Zeichen sein.
+
+---
 
 #### Lösung
 

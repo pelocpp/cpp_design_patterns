@@ -1,5 +1,11 @@
 # Semigraphisches Videospiel
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Motivation
 
 Stellen wir uns vor, dass wir ein retro-basiertes Videospiel auf semigraphischer Basis programmieren,
@@ -47,7 +53,7 @@ verwaltet die *intrinsischen* Zustände aller Charaktere.
 Schreiben Sie eine Testfunktion, die ein oder mehrere konkrete Charaktere erzeugt und mit `render` 
 auf dem Spielfeld &ldquo;zeichnet&rdquo;.
 
-
+---
 
 #### Lösung
 

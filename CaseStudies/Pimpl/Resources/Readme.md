@@ -1,5 +1,11 @@
 # Pointer to Implementation (*Pimpl*)
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Einleitung
 
 *Pimpl* steht für *Pointer to Implementation* und ist eine Technik, die es ermöglicht,
@@ -162,6 +168,8 @@ Es gibt aber auch einige Nachteile bei Betrachtung des *Pimpl*-Idioms:
     sie Methoden einer Basisklasse überschreiben oder weil sie zum Überschreiben in einer abgeleiteten Klasse
     verfügbar sein müssen.
 
+
+---
 
 #### Lösung
 

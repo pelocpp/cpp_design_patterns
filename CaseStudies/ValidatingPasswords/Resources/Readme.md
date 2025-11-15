@@ -1,5 +1,11 @@
 # Passwortcheck
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Aufgabe
 
 Schreiben Sie ein Programm, das die Passwortstärke anhand vordefinierter Regeln überprüft.
@@ -20,6 +26,7 @@ Ergänzen Sie die vorhandene Lösung um eine Klasse `PinValidator`.
 Unter einer Pin verstehen wir ein Passwort der Länge 4, das ausschließlich
 aus den Ziffern 1 bis 6 besteht.
 
+---
 
 #### Lösung
 

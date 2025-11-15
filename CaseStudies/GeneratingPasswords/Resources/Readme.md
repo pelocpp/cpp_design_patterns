@@ -1,5 +1,11 @@
 # Password-Generator
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Aufgabe
 
 Schreiben Sie ein Programm,
@@ -22,6 +28,8 @@ Unter einer Pin verstehen wir ein Passwort der Länge 4, das ausschließlich
 aus den Ziffern 1 bis 6 besteht. Testen Sie die Klasse sowohl an Hand 
 eines selbständigen Objekts (also Instanz der Klasse `PinGenerator`)
 als auch unter der Regie eines `CompositePasswordGenerator`-Objekts.
+
+---
 
 #### Lösung
 

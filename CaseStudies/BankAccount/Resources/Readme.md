@@ -1,5 +1,11 @@
 # Bankkonten eines Bankinstituts
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Aufgabe
 
 Schreiben Sie ein C++-Programm, das ein Konto eines Bankinstituts simuliert.
@@ -17,6 +23,8 @@ zwischenspeichern und damit verzögert ausführen lassen.
 Welches klassische Entwurfsmuster bietet sich zur Realisierung an?
 
 Schreiben Sie eine Testfunktion, die ein entsprechendes Szenario verifiziert.
+
+---
 
 #### Lösung
 

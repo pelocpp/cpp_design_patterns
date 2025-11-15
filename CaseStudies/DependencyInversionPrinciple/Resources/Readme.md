@@ -1,5 +1,11 @@
 # Dependency Inversion Principle
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Motivation
 
 Das &ldquo;Dependency Inversion Principle&rdquo; beschreibt ein Idiom, das zum Entkoppeln von Abhängigkeiten nützlich ist.
@@ -67,6 +73,7 @@ mit dem virtuellen Methodenaufrufmechnismus ist zur Laufzeit mit Kosten verbunde
 Es gibt eine andere Möglichkeit, Abhängigkeiten umzukehren, die diese Nachteile nicht hat.
 Diese Variante verwendet variadische Templates, generische Lambdas (oder Funktoren) sowie `std::variant` und `std::visit`.
 
+---
 
 #### Lösung
 

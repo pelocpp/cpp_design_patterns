@@ -67,6 +67,7 @@ Randy Miller approved expense 'Conference costs', cost=50000
 Marvin Shwarz approved expense 'New Truck', cost=200000
 ```
 
+---
 
 #### Quellcode
 

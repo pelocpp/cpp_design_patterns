@@ -1,5 +1,11 @@
 # Observable Vector Container
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Aufgabe
 
 Schreiben Sie eine Klassenschablone, die sich wie die Standardklasse `std::vector` verhält,
@@ -22,6 +28,8 @@ den Index des Elements enthalten, das geändert wurde (z.B. Element hinzugefügt o
 Welches klassische Entwurfsmuster bietet sich zur Realisierung an?
 
 Schreiben Sie eine Testfunktion, die alle beschriebenen Methoden und Operatoren testet.
+
+---
 
 #### Lösung
 

@@ -1,5 +1,11 @@
 # Simulation einer Verkehrsampel (*TrafficLight*)
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Aufgabe
 
 Schreiben Sie ein C++-Programm, dass die drei Phasen einer Verkehrsampel (Rot, Grün, Gelb)
@@ -37,6 +43,8 @@ Realisierung ein zweites Entwurfsmuster an: Das *Singleton* Muster.
 
 Erstellen Sie eine zweite Realisierung, die die erste Implementierung
 um die Integration des *Singleton* Musters ergänzt.
+
+---
 
 #### Lösung
 

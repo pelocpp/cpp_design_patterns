@@ -1,5 +1,11 @@
 # Ein Textprozessor
 
+---
+
+[Zurück](../../../Resources/Readme_08_CaseStudies.md)
+
+---
+
 #### Aufgabe
 
 Wir betrachten in dieser Aufgabe die Implementierung eines Textprozessors,
@@ -82,6 +88,7 @@ Die Methode `outputList` nimmt eine Liste von Zeichenketten entgegen,
 die eine Aufzählung bilden. `print` schließlich gibt den Text
 auf der Konsole aus. 
 
+---
 
 #### Lösung
 
