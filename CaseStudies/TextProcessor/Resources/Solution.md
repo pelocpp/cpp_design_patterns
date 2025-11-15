@@ -1,5 +1,11 @@
 #  Ein Textprozessor
 
+---
+
+[Zurück](Readme.md)
+
+---
+
 #### Lösung
 
 Das hier beschriebene Problem ist ein typischer Anwendungsfall des *Strategy* Entwurfsmusters.

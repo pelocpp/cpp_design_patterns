@@ -1,5 +1,11 @@
 # Dependency Inversion Principle
 
+---
+
+[Zurück](Readme.md)
+
+---
+
 #### Lösung
 
 Das hier beschriebene Problem ist ein typischer Anwendungsfall des &ldquo;Dependency Inversion Principle&rdquo;-Idioms.

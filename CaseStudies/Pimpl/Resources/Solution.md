@@ -1,5 +1,11 @@
 # Pointer to Implementation (*Pimpl*)
 
+---
+
+[Zurück](Readme.md)
+
+---
+
 #### Lösung
 
 ###### Verfahrensanweisung zur Umstrukturierung von Klasse `Control`

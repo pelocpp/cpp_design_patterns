@@ -1,5 +1,11 @@
 # Anzahl der Objekte einer baumartigen Struktur bestimmen
 
+---
+
+[Zurück](Readme.md)
+
+---
+
 #### Lösung
 
 Das hier beschriebene Problem ist ein typischer Anwendungsfall des *Composite* Entwurfsmusters

@@ -1,5 +1,11 @@
 # Simulation einer Verkehrsampel (*TrafficLight*)
 
+---
+
+[Zurück](Readme.md)
+
+---
+
 #### Lösung
 
 Das hier beschriebene Problem ist ein typischer Anwendungsfall des *State* Entwurfsmusters.

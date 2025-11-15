@@ -1,5 +1,11 @@
 # Genehmigungssystem
 
+---
+
+[Zurück](Readme.md)
+
+---
+
 #### Lösung
 
 Das hier beschriebene Problem ist ein typischer Anwendungsfall des *Chain of Responsibility* Entwurfsmusters.
