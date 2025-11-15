@@ -75,7 +75,7 @@
   * Erich Gamma, John Vlissides, Ralph Johnson, Richard Helm: &bdquo;Design Patterns: Entwurfsmuster als Elemente wiederverwendbarer objektorientierter Software&rdquo;.</br>
     MITP Verlag (1. Februar 2015), 480 Seiten. Sprache: Deutsch. ISBN-13: 978-3826697005, ISBN-10: 3826697006.
 
-    Deutsche Version des Bestsellers von Gamma und Co., siehe Abschitt zuvor.
+    Deutsche Version des Bestsellers von Gamma und Co., siehe Abschnitt zuvor.
 
     <img src="Buch_Gamma_Vlissides_GoF_Design_Pattern_Übersetzung.png" width="150">
 

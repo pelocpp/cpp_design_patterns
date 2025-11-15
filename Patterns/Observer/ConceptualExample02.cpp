@@ -6,11 +6,11 @@
  * Observer Design Pattern
  */
 
-#include <iostream>
 #include <list>
 #include <map>
-#include <string>
 #include <memory>
+#include <print>
+#include <string>
 
 namespace ObserverDesignPatternSmartPointer {
 
@@ -43,7 +43,7 @@ namespace ObserverDesignPatternSmartPointer {
 
     public:
         virtual ~Subject() {
-            std::cout << "Goodbye, I was the Subject.\n";
+            std::println("d'tor Subject");
         }
 
         /**
@@ -68,10 +68,6 @@ namespace ObserverDesignPatternSmartPointer {
             notify();
         }
 
-        void howManyObservers() {
-            std::cout << "There are " << m_observers.size() << " observers in the list.\n";
-        }
-
         /**
          * Usually, the subscription logic is only a fraction of what a Subject can
          * really do. Subjects commonly hold some important business logic, that
@@ -79,14 +75,13 @@ namespace ObserverDesignPatternSmartPointer {
          * happen (or after it).
          */
         void someBusinessLogic() {
+            std::println("Subject: changing state ...");
             m_message = "changing this message";
             notify();
-            std::cout << "I'm about to do some important things" << std::endl;
         }
 
     private:
-        void notify() {
-            howManyObservers();
+        void notify() const {
             for (const std::weak_ptr<IObserver>& weakPtr : m_observers) {
                 std::shared_ptr<IObserver> sharedPtr{ weakPtr.lock() };
                 if (sharedPtr != nullptr) {
@@ -101,19 +96,20 @@ namespace ObserverDesignPatternSmartPointer {
     class Observer : public IObserver {
     private:
         std::string m_messageFromSubject;
-        static int m_static_number;
-        int m_number;
+        static int  m_count;
+        int         m_number;
 
     public:
         Observer() 
         {
-            std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
-            m_number = Observer::m_static_number;
+            ++Observer::m_count;
+            std::println("Observer: {}", Observer::m_count);
+            m_number = Observer::m_count;
         }
 
         virtual ~Observer() 
         {
-            std::cout << "Goodbye, I was the Observer \"" << m_number << "\".\n";
+            std::println("d'tor Observer ({})", m_number);
         }
 
         void update(const std::string& messageFromSubject) override
@@ -122,16 +118,12 @@ namespace ObserverDesignPatternSmartPointer {
             printInfo();
         }
 
-        void printInfo() const
-        {
-            std::cout 
-                << "Observer \"" << m_number 
-                << "\": a new message is available --> " 
-                << m_messageFromSubject << "\n";
+        void printInfo() const {
+            std::println("Observer: new message is available --> \"{}\"", m_messageFromSubject);
         }
     };
 
-    int Observer::m_static_number = 0;
+    int Observer::m_count = 0;
 
     static void clientCode_01() {
 

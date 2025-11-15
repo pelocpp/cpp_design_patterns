@@ -16,6 +16,9 @@
     <Filter Include="Source Files\ConceptualExample">
       <UniqueIdentifier>{616cd07e-d09a-4a83-a8e9-6ccfb5a03901}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ConceptualExampleModern">
+      <UniqueIdentifier>{931078fd-1de6-47c2-83a6-6c0a1c50607d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="ConceptualExample03.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
+    <ClCompile Include="ConceptualExample04.cpp">
+      <Filter>Source Files\ConceptualExampleModern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
