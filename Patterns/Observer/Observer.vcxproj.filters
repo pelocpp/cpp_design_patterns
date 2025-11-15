@@ -50,6 +50,9 @@
     <None Include="Resources\dp_observer_03.svg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\dp_observer_04.svg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_observer-pattern_intro.png">

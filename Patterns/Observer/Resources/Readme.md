@@ -67,7 +67,7 @@ um *Subscriber* zu dieser Liste hinzuzufügen und aus dieser wieder zu entfernen.
 
 *Abbildung* 2: Schematische Darstellung des *Observer Pattern Musters*: Benachrichtigungen.
 
-<img src="dp_observer_03.svg" width="700">
+<img src="dp_observer_04.svg" width="700">
 
 *Abbildung* 3: Schematische Darstellung des *Observer Pattern Musters*: Abstraktion des Observers mittels Schnittstelle `IObserver`. 
 

@@ -149,6 +149,7 @@
     <None Include="Resources\dp_observer_01.svg" />
     <None Include="Resources\dp_observer_02.svg" />
     <None Include="Resources\dp_observer_03.svg" />
+    <None Include="Resources\dp_observer_04.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
