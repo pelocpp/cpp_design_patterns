@@ -99,6 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,12 +142,14 @@
     <ClCompile Include="ConceptualExample01.cpp" />
     <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="ConceptualExample03.cpp" />
+    <ClCompile Include="ConceptualExample04.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dp_observer_01.svg" />
     <None Include="Resources\dp_observer_02.svg" />
     <None Include="Resources\dp_observer_03.svg" />
+    <None Include="Resources\dp_observer_04.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>

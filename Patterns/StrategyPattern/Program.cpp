@@ -18,9 +18,12 @@ int main()
 {
     test_conceptual_example();
     test_conceptual_example_modern();
+
     test_realworld_example();
     test_realworld_example_modern();
+    
     test_ecommerce_app();
+    
     test_dynamic_strategy_example();
     test_static_strategy_example();
 

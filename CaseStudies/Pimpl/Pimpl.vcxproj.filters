@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Control01">
+      <UniqueIdentifier>{6faa5998-74e8-4ae2-b2e8-c0121cf7d873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Control02">
+      <UniqueIdentifier>{456cdb84-5719-4b52-b748-0bd30e36621a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Control03">
+      <UniqueIdentifier>{15d1dbce-0b3b-4094-aa47-a657c0ac3a91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Control04">
+      <UniqueIdentifier>{716b3753-43f8-45d1-b0d0-a0cf46cbc695}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Readme.md">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Solution.md">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Pimpl01\Client01.cpp">
+      <Filter>Source Files\Control01</Filter>
+    </ClCompile>
+    <ClCompile Include="Pimpl01\Control01.cpp">
+      <Filter>Source Files\Control01</Filter>
+    </ClCompile>
+    <ClCompile Include="Program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pimpl02\Client02.cpp">
+      <Filter>Source Files\Control02</Filter>
+    </ClCompile>
+    <ClCompile Include="Pimpl02\Control02.cpp">
+      <Filter>Source Files\Control02</Filter>
+    </ClCompile>
+    <ClCompile Include="Pimpl03\Client03.cpp">
+      <Filter>Source Files\Control03</Filter>
+    </ClCompile>
+    <ClCompile Include="Pimpl03\Control03.cpp">
+      <Filter>Source Files\Control03</Filter>
+    </ClCompile>
+    <ClCompile Include="Pimpl04\Client04.cpp">
+      <Filter>Source Files\Control04</Filter>
+    </ClCompile>
+    <ClCompile Include="Pimpl04\Control04.cpp">
+      <Filter>Source Files\Control04</Filter>
+    </ClCompile>
+    <ClCompile Include="Pimpl04\ControlPimpl04.cpp">
+      <Filter>Source Files\Control04</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Pimpl01\Control.h">
+      <Filter>Source Files\Control01</Filter>
+    </ClInclude>
+    <ClInclude Include="Pimpl02\Control.h">
+      <Filter>Source Files\Control02</Filter>
+    </ClInclude>
+    <ClInclude Include="Pimpl03\Control.h">
+      <Filter>Source Files\Control03</Filter>
+    </ClInclude>
+    <ClInclude Include="Pimpl04\Control.h">
+      <Filter>Source Files\Control04</Filter>
+    </ClInclude>
+    <ClInclude Include="Pimpl04\ControlPimpl.h">
+      <Filter>Source Files\Control04</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

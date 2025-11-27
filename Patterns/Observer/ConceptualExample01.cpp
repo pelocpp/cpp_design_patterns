@@ -14,8 +14,8 @@
  * Also the verbs "observe", "listen" or "track" usually mean the same thing.
  */
 
-#include <iostream>
 #include <list>
+#include <print>
 #include <string>
 
 namespace ObserverDesignPatternClassic {
@@ -49,7 +49,7 @@ namespace ObserverDesignPatternClassic {
 
     public:
         virtual ~Subject() {
-            std::cout << "Goodbye, I was the Subject.\n";
+            std::println("d'tor Subject");
         }
 
         /**
@@ -68,10 +68,6 @@ namespace ObserverDesignPatternClassic {
             notify();
         }
 
-        void howManyObservers() {
-            std::cout << "There are " << m_observers.size() << " observers in the list.\n";
-        }
-
         /**
          * Usually, the subscription logic is only a fraction of what a Subject can
          * really do. Subjects commonly hold some important business logic, that
@@ -79,14 +75,13 @@ namespace ObserverDesignPatternClassic {
          * happen (or after it).
          */
         void someBusinessLogic() {
+            std::println("Subject: changing state ...");
             m_message = "changing this message";
             notify();
-            std::cout << "I'm about to do some important things" << std::endl;
         }
 
     private:
-        void notify() {
-            howManyObservers();
+        void notify() const {
             for (IObserver* observer : m_observers) {
                 observer->update(m_message);
             }
@@ -100,13 +95,14 @@ namespace ObserverDesignPatternClassic {
         Subject*    m_subject;
         std::string m_messageFromSubject;
         int         m_number;
-        static int  m_static_number;
+        static int  m_count;
 
     public:
         Observer() {
             m_subject = nullptr;
-            std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
-            m_number = Observer::m_static_number;
+            ++Observer::m_count;
+            std::println("Observer: {}", Observer::m_count);
+            m_number = Observer::m_count;
         }
 
         // Information of 'subject' needed
@@ -114,13 +110,14 @@ namespace ObserverDesignPatternClassic {
 
         Observer(Subject* subject) : m_subject{ subject } {
             m_subject->attach(this);
-            std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
-            m_number = Observer::m_static_number;
+            ++Observer::m_count;
+            std::println("Observer: {}", Observer::m_count);
+            m_number = Observer::m_count;
         }
 
         virtual ~Observer() 
         {
-            std::cout << "Goodbye, I was the Observer \"" << m_number << "\".\n";
+            std::println("d'tor Observer ({})", m_number);
         }
 
         void update(const std::string& messageFromSubject) override
@@ -133,22 +130,16 @@ namespace ObserverDesignPatternClassic {
         {
             if (m_subject != nullptr) {
                 m_subject->detach(this);
-                std::cout
-                    << "Observer \"" << m_number
-                    << "\" removed from the list.\n";
+                std::println("Observer {} removed from the list.", m_number);
             }
         }
 
-        void printInfo() 
-        {
-            std::cout 
-                << "Observer \"" << m_number 
-                << "\": a new message is available --> " 
-                << m_messageFromSubject << "\n";
+        void printInfo() const {
+            std::println("Observer: new message is available --> \"{}\"", m_messageFromSubject);
         }
     };
 
-    int Observer::m_static_number = 0;
+    int Observer::m_count = 0;
 
     static void clientCode_01()
     {
@@ -197,7 +188,10 @@ namespace ObserverDesignPatternClassic {
     }
 }
 
-void test_conceptual_example_01() {
+// ===========================================================================
+
+void test_conceptual_example_01()
+{
     ObserverDesignPatternClassic::clientCode_01();
     ObserverDesignPatternClassic::clientCode_02();
 }

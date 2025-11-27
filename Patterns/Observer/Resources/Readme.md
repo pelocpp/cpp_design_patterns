@@ -67,7 +67,7 @@ um *Subscriber* zu dieser Liste hinzuzufügen und aus dieser wieder zu entfernen.
 
 *Abbildung* 2: Schematische Darstellung des *Observer Pattern Musters*: Benachrichtigungen.
 
-<img src="dp_observer_03.svg" width="700">
+<img src="dp_observer_04.svg" width="700">
 
 *Abbildung* 3: Schematische Darstellung des *Observer Pattern Musters*: Abstraktion des Observers mittels Schnittstelle `IObserver`. 
 
@@ -80,14 +80,17 @@ Das *Conceptual Example* liegt in drei Varianten vor:
   * Variante 1: klassisch - d.h. mit &bdquo;raw&rdquo;-Zeigern.
   * Variante 2: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
   * Variante 3: Wie Variante 2, aber mit `std::enable_shared_from_this<>` Mechanismus.
+  * Variante 4: Mit `std::function<>`.
+
 
 [Quellcode 1](../ConceptualExample01.cpp)<br />
 [Quellcode 2](../ConceptualExample02.cpp)<br />
-[Quellcode 3](../ConceptualExample03.cpp)
+[Quellcode 3](../ConceptualExample03.cpp)<br />
+[Quellcode 4](../ConceptualExample04.cpp)
 
 ---
 
-#### Realisierung mit Smart-Pointern
+### Realisierung mit Smart-Pointern
 
 Im &bdquo;*Subject*&rdquo; ist &ndash; wie beschrieben &ndash; eine Liste mit
 den *Beobachtern* zu verwalten. Hier sollte man beachten,
@@ -96,7 +99,7 @@ im Vergleich zu `std::shared_ptr`-Objekten ist.
 
 ---
 
-#### `std::weak_ptr`-Objekte in einem `std::list`-Container
+### `std::weak_ptr`-Objekte in einem `std::list`-Container
 
 Verwaltet man `std::weak_ptr`-Objekte in einem `std::list`-Container,
 kann es zu extrem unverständlichen Übersetzungsfehlern kommen,
@@ -129,6 +132,17 @@ die eine Eigentümer-basierte Reihenfolge von `std::weak_ptr`-Zeigern implementie
 Eine detailliertere Beschreibung kann man unter
 &bdquo;[Removing item from list of weak_ptrs](https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs) &rdquo;
 nachlesen.
+
+---
+
+### Realisierung mit `std::function`
+
+Das Pattern kann alternativ auf der Basis von Schnittstellen auch mit dem Modern C++ Sprachelement `std::function` realisiert werden.
+
+Auf diese Weise umgeht man die Anforderung, dass sich alle *Observer*-Klassen von einer gemeinsamen Schnittstelle ableiten,
+die die `update`-Methode realisiert.
+
+Siehe hierzu die Datei [ConceptualExample04.cpp](../ConceptualExample04.cpp).
 
 ---
 

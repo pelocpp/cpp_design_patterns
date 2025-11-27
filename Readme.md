@@ -29,6 +29,8 @@ Zeitgleich schulen Design Pattern die Fähigkeit zur effektiven objektorientierte
 
 ## [Katalog der Anti-Pattern](Resources/Readme_07_Catalog_AntiPattern.md)
 
-## [Literatur](Resources/Readme_08_Literature.md)
+## [Fallstudien / Beispiele](Resources/Readme_08_CaseStudies.md)
+
+## [Literatur](Resources/Readme_09_Literature.md)
 
 ---

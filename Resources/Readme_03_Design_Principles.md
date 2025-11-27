@@ -4,7 +4,6 @@
 
 ---
 
-
 #### Grundlagen 
 
 *Abstrakte Klassen* und *Schnittstellen* werden beide verwendet,
@@ -98,7 +97,6 @@ Tabelle 1. Weitere Entwurfsprinzipien.
 ---
 
 ## Literaturhinweise
-
 
 [My 5 Favorite Software Design Principles](https://dev.to/pluralsight/my-5-favorite-software-design-principles-4ech)
 

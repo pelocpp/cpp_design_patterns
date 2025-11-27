@@ -6,10 +6,10 @@
  * Observer Design Pattern
  */
 
-#include <iostream>
 #include <list>
-#include <string>
 #include <memory>
+#include <print>
+#include <string>
 
 namespace ObserverDesignPatternSmartPointerEx {
 
@@ -42,7 +42,7 @@ namespace ObserverDesignPatternSmartPointerEx {
 
     public:
         virtual ~Subject() {
-            std::cout << "Goodbye, I was the Subject.\n";
+            std::println("d'tor Subject");
         }
 
         /**
@@ -64,10 +64,6 @@ namespace ObserverDesignPatternSmartPointerEx {
             notify();
         }
 
-        void howManyObservers() {
-            std::cout << "There are " << m_observers.size() << " observers in the list.\n";
-        }
-
         /**
          * Usually, the subscription logic is only a fraction of what a Subject can
          * really do. Subjects commonly hold some important business logic, that
@@ -75,14 +71,13 @@ namespace ObserverDesignPatternSmartPointerEx {
          * happen (or after it).
          */
         void someBusinessLogic() {
+            std::println("Subject: changing state ...");
             m_message = "changing this message";
             notify();
-            std::cout << "I'm about to do some important things" << std::endl;
         }
 
     private:
-        void notify() {
-            howManyObservers();
+        void notify() const {
             for (const std::weak_ptr<IObserver>& weakPtr : m_observers) {
                 std::shared_ptr<IObserver> sharedPtr{ weakPtr.lock() };
                 if (sharedPtr != nullptr) {
@@ -97,26 +92,28 @@ namespace ObserverDesignPatternSmartPointerEx {
     class Observer : public IObserver, public std::enable_shared_from_this<Observer> {
     private:
         std::shared_ptr<Subject> m_subject;
-        std::string m_messageFromSubject;
-        static int m_static_number;
-        int m_number;
+        std::string              m_messageFromSubject;
+        static int               m_count;
+        int                      m_number;
 
     public:
         Observer() : m_subject{ nullptr }
         {
-            std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
-            m_number = Observer::m_static_number;
+            ++Observer::m_count;
+            std::println("Observer: {}", Observer::m_count);
+            m_number = Observer::m_count;
         }
 
         Observer(std::shared_ptr<Subject> subject) : m_subject{ subject } 
         {
-            std::cout << "Hi, I'm the Observer \"" << ++Observer::m_static_number << "\".\n";
-            m_number = Observer::m_static_number;
+            ++Observer::m_count;
+            std::println("Observer: {}", Observer::m_count);
+            m_number = Observer::m_count;
         }
 
         virtual ~Observer()
         {
-            std::cout << "Goodbye, I was the Observer \"" << m_number << "\".\n";
+            std::println("d'tor Observer ({})", m_number);
         }
 
         void update(const std::string& messageFromSubject) override
@@ -131,25 +128,20 @@ namespace ObserverDesignPatternSmartPointerEx {
                 try {
                     std::shared_ptr<Observer> me{ shared_from_this() };
                     m_subject->detach(me);
-                    std::cout
-                        << "Observer \"" << m_number
-                        << "\" removed from the list.\n";
+                    std::println("Observer {} removed from the list.", m_number);
                 }
                 catch (const std::exception& ex) {
-                    std::cout << "exception: " << ex.what() << "\".\n";
+                    std::println("Exception: {}", ex.what());
                 }
             }
         }
 
-        void printInfo() {
-            std::cout 
-                << "Observer \"" << m_number 
-                << "\": a new message is available --> " 
-                << m_messageFromSubject << "\n";
+        void printInfo() const {
+            std::println("Observer: new message is available --> \"{}\"", m_messageFromSubject);
         }
     };
 
-    int Observer::m_static_number = 0;
+    int Observer::m_count = 0;
 
     static void clientCode_01() {
 
