@@ -166,6 +166,33 @@ Wir betrachten das Redesign in *Abbildung* 1:
 
 ---
 
+## Zur Namensgebung des Idioms
+
+Der Name &bdquo;*Dependency Inversion*&rdquo; wirkt zunächst widersprüchlich, ergibt aber Sinn, wenn man versteht,
+welche Art von Abhängigkeiten &bdquo;umgedreht&rdquo; wird.
+
+Normalerweise hängen in klassischen Programmen höhere Module (z.B. Geschäftslogik) von niedrigeren Modulen
+(z.B. konkreten Implementierungen, Datenbanken, Dateisystemen) ab.
+
+> **Traditionelle Richtung der Abhängigkeit**: High-Level &rightarrow; Low-Level
+
+Das ist problematisch, weil es das System hart koppelt und Änderungen in Details weit oben Auswirkungen haben.
+
+Dependency Inversion kehrt diese Richtung um:
+
+> **Neue Richtung**: Low-Level &rightarrow; High-Level (über gemeinsame Abstraktionen)
+
+Das bedeutet:
+
+  * Hohe Module hängen nicht mehr direkt von Details ab.
+  * Sowohl die oberen als auch die unteren Module hängen von Abstraktionen (Interfaces, abstrakten Klassen) ab.
+  * Die Details implementieren die Abstraktion &rightarrow; sie hängen also von der Abstraktion der höheren Logik ab, nicht umgekehrt.
+
+Das ist die so genannte &bdquo;Inversion&rdquo;.
+
+---
+
+
 #### Conceptual Example:
 
 [Quellcode](../DIP.cpp)
