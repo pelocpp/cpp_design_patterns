@@ -23,7 +23,7 @@ public:
     {
         BaseOperation1();             // may be overriden, but it's not mandatory
 
-        if (RequiredOperations1()) {
+        if (RequiredOperations1()) {  // MUST be overriden
 
             BaseOperation2();         // may be overriden, but it's not mandatory
             Hook1();                  // may be overriden, but it's not mandatory
