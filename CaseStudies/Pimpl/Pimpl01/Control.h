@@ -18,7 +18,7 @@ namespace NoPimplVariant {
     public:
         // public class interface
         Control();
-        void setText(std::string);
+        void setText(const std::string&);
         void resize(const int width, const int height);
         void show();
         void hide();

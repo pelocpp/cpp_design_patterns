@@ -21,7 +21,7 @@ namespace PimplVariantWithCopyMoveSemantics {
         Control(const Control&);                  // copy semantics
         Control& operator=(const Control&);       // copy semantics
 
-        void setText(std::string);
+        void setText(const std::string&);
         void resize(const int width, const int height);
         void show();
         void hide();

@@ -2,14 +2,6 @@
 // FolderStrategy.cpp
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-#include <map>
-#include <list>
-#include <iterator>
-#include <filesystem>
-#include <memory>
-
 #include "IExplorationObserver.h"
 #include "IExplorationStrategy.h"
 #include "ExplorationObserver.h"
@@ -17,11 +9,19 @@
 #include "ExplorationStrategy.h"
 #include "FolderStrategy.h"
 
+#include <iostream>
+//#include <string>
+//#include <map>
+//#include <list>
+//#include <iterator>
+#include <filesystem>
+//#include <memory>
+
 // ===========================================================================
 
 // function prototypes
-static inline bool endsWith(std::string const& value, std::string const& ending);
-static long getFolderSize(std::string path);
+static inline bool endsWith(const std::string& value, const std::string& ending);
+static long getFolderSize(const std::string& path);
 
 // ===========================================================================
 
@@ -47,7 +47,7 @@ void FolderStrategy::exploreHelper(const std::string& path)
 
             // skip - at least for the moment - .git and .vs sub directories
             // const std::filesystem::path ext = entry.path().extension();
-            std::string s = entry.path().string();
+            const std::string& s = entry.path().string();
             if (endsWith(s, ".git") or endsWith(s, ".vs")) {
                 return;
             }
@@ -83,13 +83,13 @@ void FolderStrategy::printResults()
     );
 }
 
-inline bool endsWith(std::string const& value, std::string const& ending)
+inline bool endsWith(const std::string& value, const std::string& ending)
 {
     if (ending.size() > value.size()) return false;
     return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
 }
 
-long getFolderSize(std::string path)
+long getFolderSize(const std::string& path)
 {
     uintmax_t r = 0;
     try {

@@ -2,14 +2,6 @@
 // ListViewAdapter.cpp
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-#include <map>
-#include <list>
-#include <iterator>
-#include <filesystem>
-#include <memory>
-
 #include "IExplorationObserver.h"
 #include "IExplorationStrategy.h"
 #include "ExplorationObserver.h"
@@ -18,6 +10,14 @@
 
 #include "ListView.h"
 #include "ListViewAdapter.h"
+
+#include <iostream>
+//#include <string>
+//#include <map>
+//#include <list>
+//#include <iterator>
+//#include <filesystem>
+//#include <memory>
 
 // ===========================================================================
 

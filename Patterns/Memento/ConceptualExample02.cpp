@@ -74,7 +74,7 @@ namespace ConceptualExample02 {
         std::string m_state;  // originator's state
 
     public:
-        Originator(std::string state) : m_state{ state } {
+        Originator(const std::string& state) : m_state{ state } {
             std::cout << "Originator: initial state: " << m_state << std::endl;
         }
 

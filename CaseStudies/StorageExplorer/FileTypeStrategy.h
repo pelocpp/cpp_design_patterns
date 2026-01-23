@@ -2,6 +2,8 @@
 // FileTypeStrategy.h
 // ===========================================================================
 
+#include <string>
+
 /* This class retrieves total file size under a given path then fill
  * ExplorationResult hash table containing file type and the total size
  * of each file type.

@@ -2,6 +2,9 @@
 // ListViewAdapter.h
 // ===========================================================================
 
+#include <string>
+#include <map>
+
 class ListViewAdapter : public IExplorationObserver
 {
 private:

@@ -31,7 +31,7 @@ namespace ChainofResponsibilityExample
 
     public:
         // c'tor(s)
-        AuthenticateUserName(std::string name) : m_name{ name } {}
+        AuthenticateUserName(const std::string& name) : m_name{ name } {}
 
         bool authenticate() override {
 
@@ -61,7 +61,7 @@ namespace ChainofResponsibilityExample
 
     public:
         // c'tor(s)
-        AuthenticatePassword(std::string password) : m_password{ password } {}
+        AuthenticatePassword(const std::string& password) : m_password{ password } {}
 
         bool authenticate() override {
 

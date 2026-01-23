@@ -35,7 +35,7 @@ namespace ExamplesPrototypePattern {
         std::string m_name;
 
     protected:
-        ChessPiece(std::string name) : m_name{ name } {}
+        ChessPiece(const std::string& name) : m_name{ name } {}
 
     public:
         std::string name() const override final {

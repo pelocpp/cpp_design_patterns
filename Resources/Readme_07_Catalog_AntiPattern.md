@@ -183,7 +183,7 @@ ISP ist eines der fünf SOLID-Prinzipien des objektorientierten Designs!
 class ILog
 {
 public:
-    virtual void Log(std::string message) = 0;
+    virtual void Log(const std::string& message) = 0;
     virtual void OpenConnection() = 0;
     virtual void CloseConnection() = 0;
 };
@@ -195,7 +195,7 @@ public:
 class FileLogger : public ILog
 {
 public:
-    void Log(std::string message) override
+    void Log(const std::string& message) override
     {
         // code to log to a file           
     }
@@ -209,7 +209,7 @@ public:
 class DBLogger : public ILog
 {
 public:
-    void Log(std::string message) override
+    void Log(const std::string& message) override
     {
         // code to log data to a database
     }
@@ -238,7 +238,7 @@ public:
 class FileLogger2 : public ILog
 {
 public:
-    void Log(std::string message) override
+    void Log(const std::string& message) override
     {
         // code to log to a file           
     }
@@ -264,7 +264,7 @@ public:
 class ILogEx
 {
 public:
-    virtual void Log(std::string message) = 0;
+    virtual void Log(const std::string& message) = 0;
 };
 
 class IDBLogEx : public ILogEx
@@ -306,7 +306,7 @@ public:
         // code to generate a new file name
     }
 
-    void Log(std::string message) override
+    void Log(const std::string& message) override
     {
         // code to log data to the log file
     }
@@ -315,7 +315,7 @@ public:
 class DBLoggerEx : public IDBLogEx
 {
 public:
-    void Log(std::string message) override
+    void Log(const std::string& message) override
     {
         // code to log data to the database
     }

@@ -72,7 +72,7 @@ namespace CompositePatternSmartPointer {
         std::string m_description;
     public:
         Leaf() = delete;
-        Leaf(std::string description) : m_description{ description } {}
+        Leaf(const std::string& description) : m_description{ description } {}
         std::string operation() const override {
             return m_description;
         }

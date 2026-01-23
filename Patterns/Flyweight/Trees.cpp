@@ -19,10 +19,10 @@ namespace TreesFlyweight {
 
     public:
         // c'tor(s)
-        Tree(std::string style) : m_style{ style }, m_height{ 6 } {}
+        Tree(const std::string& style) : m_style{ style }, m_height{ 6 } {}
 
         // getter
-        std::string getStyle() { return m_style; }
+        const std::string& getStyle() { return m_style; }
         int getHeight() { return m_height; }
     };
 
@@ -52,7 +52,7 @@ namespace TreesFlyweight {
     public:
         TreeFactory() {};
 
-        std::shared_ptr<Tree> getTree(std::string style)
+        std::shared_ptr<Tree> getTree(const std::string style)
         {
             // palm, cypress, garden
             if (!(style.compare("palm") == 0 || style.compare("cypress") == 0 || style.compare("garden") == 0))
@@ -87,7 +87,7 @@ namespace TreesFlyweight {
     public:
         Game() {};
 
-        void addTree(int x, int y, std::string style)
+        void addTree(int x, int y, const std::string style)
         {
             std::shared_ptr<Tree> tree{ m_treeFactory.getTree(style) };
 
@@ -108,7 +108,7 @@ namespace TreesFlyweight {
             int x{ position->getX() };
             int y{ position->getY() };
 
-            std::string style{ tree->getStyle() };
+            const std::string& style{ tree->getStyle() };
 
             std::cout
                 << "Tree with " << style << " style"

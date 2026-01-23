@@ -165,7 +165,7 @@ in nahezu idealerweise geeignet:
 11:     std::string m_name;
 12: 
 13: protected:
-14:     ChessPiece(std::string name) : m_name{ name } {}
+14:     ChessPiece(const std::string& name) : m_name{ name } {}
 15: 
 16: public:
 17:     std::string str() const override final {

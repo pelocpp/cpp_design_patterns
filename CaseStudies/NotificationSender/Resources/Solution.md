@@ -13,7 +13,7 @@ Die `notify`-Methode ist einer Basisklasse zuzuordnen, wir nennen sie `Notificat
 Die einzelnen Schritte könnten in dieser Methode so abgehandelt werden:
 
 ```cpp
-01: void notify(std::string text)
+01: void notify(const std::string& text)
 02: {
 03:     std::string header = getNotificationHeader();
 04:     sendText(header);
@@ -73,7 +73,7 @@ protected:
         return std::string("Server: FROM <") + sender + std::string(">");
     }
 
-    void sendText(std::string text) override
+    void sendText(const std::string& text) override
     {
         std::cout << text;
     }

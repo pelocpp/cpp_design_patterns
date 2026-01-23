@@ -160,7 +160,7 @@ unübersichtlich werden:
 13:     std::string m_company_name;
 14:     std::string m_position;
 15: 
-16:     Person(std::string name) : m_name{ name } {}
+16:     Person(const std::string& name) : m_name{ name } {}
 17: };
 ```
 
@@ -172,7 +172,7 @@ Studieren Sie den Quellcode der Klasse `PersonBuilder` genau:
 Indem der Konstruktor der Klasse `Person` privat deklariert ist,
 zwingen wir Benutzer der Klasse `Person`, die
 `PersonBuilder`-Klasse zu verwenden.
-Es ist nur die `create(std::string name)`-Schnittstellenmethode an der Klasse
+Es ist nur die `create(const std::string& name)`-Schnittstellenmethode an der Klasse
 `Person` verfügbar.
 
 Betrachten Sie den folgenden Quellcode:

@@ -16,7 +16,7 @@ Der eigentliche Vorgang des Versendens einer Benachrichtigung soll dabei in sein
 bzw. in seinen Teilfunktionalitäten immer derselbe sein. Wir nennen diese Methode `notify`:
 
 ```cpp
-void notify(std::string text);
+void notify(const std::string& text);
 ```
 
 In unserer Beispielanwendung sollen für das Versenden einer Benachrichtigung prinzipiell
@@ -27,7 +27,7 @@ betrachtet werden. Die jeweiligen Methoden, die diese Werte bereitstellen, könnt
 virtual std::string getNotificationHeader() = 0;
 virtual std::string getNotificationTrailer() = 0;
 virtual std::string getProtocolDetails() = 0;
-virtual void sendText(std::string) = 0;
+virtual void sendText(const std::string&) = 0;
 ```
 
 Welches klassische Entwurfsmuster bietet sich zur Realisierung an?

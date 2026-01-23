@@ -72,7 +72,7 @@ private:
     std::weak_ptr<Employee> m_directManager;
 
 public:
-    explicit Employee(std::string name, std::unique_ptr<Role> ownrole)
+    explicit Employee(const std::string& name, std::unique_ptr<Role> ownrole)
         : m_name{ name }, m_ownRole{ std::move(ownrole) } {}
 
     void setDirectManager(std::shared_ptr<Employee> manager)

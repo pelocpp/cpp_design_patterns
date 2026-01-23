@@ -13,8 +13,8 @@ namespace PaintBrushFlyweight {
     public:
         ~Pen() {}
 
-        virtual void setColor(std::string color) = 0;
-        virtual void draw(std::string content) = 0;
+        virtual void setColor(const std::string& color) = 0;
+        virtual void draw(const std::string& content) = 0;
         virtual void print() = 0;
     };
 
@@ -29,11 +29,11 @@ namespace PaintBrushFlyweight {
     public:
         ThickPen() : m_brushSize{ BrushSize::Thick } {}
 
-        void setColor(std::string color) override {
+        void setColor(const std::string& color) override {
             m_color = color;
         }
 
-        void draw(std::string content) override {
+        void draw(const std::string& content) override {
             std::cout 
                 << "Drawing THICK content in color : " << m_color 
                 << " - " << content << std::endl;
@@ -53,11 +53,11 @@ namespace PaintBrushFlyweight {
     public:
         ThinPen() : m_brushSize{ BrushSize::Thin } {}
 
-        void setColor(std::string color) override {
+        void setColor(const std::string& color) override {
             m_color = color;
         }
 
-        void draw(std::string content) override {
+        void draw(const std::string& content) override {
             std::cout 
                 << "Drawing THIN content in color : " << m_color 
                 << " - " << content << std::endl;
@@ -74,7 +74,7 @@ namespace PaintBrushFlyweight {
         static std::unordered_map<std::string, std::shared_ptr<Pen>> pensMap;
 
     public:
-        static std::shared_ptr<Pen> getThickPen(std::string color)
+        static std::shared_ptr<Pen> getThickPen(const std::string& color)
         {
             std::string key{ color + "-THICK" };
 
@@ -92,7 +92,7 @@ namespace PaintBrushFlyweight {
             return pen;
         }
 
-        static std::shared_ptr<Pen> getThinPen(std::string color)
+        static std::shared_ptr<Pen> getThinPen(const std::string& color)
         {
             std::string key{ color + "-THIN" };
 

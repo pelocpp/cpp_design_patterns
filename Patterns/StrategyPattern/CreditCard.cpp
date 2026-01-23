@@ -16,7 +16,7 @@ CreditCard::CreditCard() : m_number{ }, m_date{ }, m_cvv{ }
     m_amount = 0;
 }
 
-CreditCard::CreditCard(std::string number, std::string date, std::string cvv) 
+CreditCard::CreditCard(const std::string& number, const std::string& date, const std::string& cvv)
     : m_number{ number }, m_date{ date }, m_cvv{ cvv }
 {
     m_amount = 5'000;  // maximum balance per month

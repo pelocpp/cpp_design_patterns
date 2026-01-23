@@ -2,12 +2,6 @@
 // ExplorationObserver.cpp
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-#include <map>
-#include <list>
-#include <memory>
-
 #include "IExplorationObserver.h"
 #include "IExplorationStrategy.h"
 #include "ExplorationObserver.h"
@@ -15,6 +9,12 @@
 #include "ExplorationStrategy.h"
 #include "FileTypeStrategy.h"
 #include "FolderStrategy.h"
+
+#include <iostream>
+//#include <string>
+//#include <map>
+//#include <list>
+//#include <memory>
 
 // ===========================================================================
 

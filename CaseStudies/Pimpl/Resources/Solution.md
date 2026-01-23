@@ -65,7 +65,7 @@ private:
 public:
     ControlPimpl() : m_text(""), m_width(0), m_height(0), m_visible(true) {}
 
-    void setText(std::string text);
+    void setText(const std::string& text);
     void resize(const int width, const int height);
     void show();
     void hide();
@@ -76,7 +76,7 @@ public:
     um so gewissermaßen die öffentliche Schnittstelle (`public`) der Ausgangsklasse an die *Pimpl*-Klasse durchzuschleusen.
 
 ```cpp
-void Control::setText(std::string text)
+void Control::setText(const std::string& text)
 {
     m_pimpl->setText(text);
 }

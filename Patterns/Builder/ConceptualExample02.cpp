@@ -23,7 +23,7 @@ private:
     std::vector<std::string> m_parts;
 
 public:
-    void addPart(std::string part) {
+    void addPart(const std::string& part) {
         m_parts.push_back(part);
     }
 

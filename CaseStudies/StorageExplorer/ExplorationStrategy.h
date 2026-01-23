@@ -2,6 +2,11 @@
 // ExplorationStrategy.h
 // ===========================================================================
 
+#include <list>
+#include <map>
+#include <memory>
+#include <string>
+
 /* This class is the base class for the concrete strategy classes:
  * 1. FolderStrategy (obtain file size grouped by folder)
  * 2. FileTypeStrategy (obtain file size grouped by file type)

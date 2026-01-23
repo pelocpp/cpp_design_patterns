@@ -152,7 +152,7 @@ Damit legen wir folgende Realisierung im Beispiel zu Grunde:
 
   * *Flyweight*-Klasse `Tree` mit den intrinsischen Zuständen *Stil* und *Höhe*.
   * Klasse `TreePosition`, um den extrinsischen Zustand *Position* eines *Flyweight*-Objekts zu speichern.
-  * Klasse `TreeFactory` mit einer einzigen Methode `getTree(std::string style)`, die das `Tree`-Objekt
+  * Klasse `TreeFactory` mit einer einzigen Methode `getTree(const std::string& style)`, die das `Tree`-Objekt
     mit dem angegebenen Stil erstellt. Die `TreeFactory`-Klasse verwaltet intern einen Cache,
     um die erstellten *Flyweight*-Objekte zu speichern.
   * Kontextklasse `Game`, die die *Flyweight*-Objekte und ihren extrinsischen Zustand verwaltet.

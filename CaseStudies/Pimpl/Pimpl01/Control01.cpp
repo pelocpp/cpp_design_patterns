@@ -32,7 +32,7 @@ namespace NoPimplVariant {
     // implementation of public interface
     Control::Control() : m_text(""), m_width(0), m_height(0), m_visible(true) {}
 
-    void Control::setText(std::string text)
+    void Control::setText(const std::string& text)
     {
         m_text = text;
         draw();

@@ -2,6 +2,9 @@
 // IExplorationStrategy.h
 // ===========================================================================
 
+#include <string>
+#include <memory>
+
 class IExplorationStrategy {
 public:
     // exploration methods

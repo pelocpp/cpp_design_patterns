@@ -108,7 +108,7 @@ namespace ConceptualExample02 {
             m_target = target;
         }
 
-        void executeRequest(std::string request)
+        void executeRequest(const std::string& request)
         {
             std::shared_ptr<Target> target = m_target.lock();
             if (target == nullptr) {
@@ -149,7 +149,7 @@ namespace ConceptualExample02 {
             m_chain = chain;
         }
 
-        void request(std::string request)
+        void request(const std::string& request)
         {
             std::shared_ptr<FilterChain> chain = m_chain.lock();
             if (chain != nullptr) {

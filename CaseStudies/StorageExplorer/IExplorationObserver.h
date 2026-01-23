@@ -2,6 +2,9 @@
 // IExplorationObserver.h
 // ===========================================================================
 
+#include <string>
+#include <map>
+
 class IExplorationObserver {
 public:
     virtual ~IExplorationObserver() {};

@@ -20,7 +20,7 @@ namespace AntiFirstExampleOCP {
         double      m_weight;
 
     public:
-        Product (std::string name, double price, double weight) 
+        Product (const std::string& name, double price, double weight)
             : m_name{ name}, m_price{ price }, m_weight{ weight }
         {}
 
@@ -44,7 +44,7 @@ namespace FirstExampleOCP {
         double      m_price;
 
     public:
-        Product(std::string name, double price)
+        Product(const std::string& name, double price)
             : m_name{ name }, m_price{ price }
         {}
 
@@ -61,7 +61,7 @@ namespace FirstExampleOCP {
         double m_weight;
 
     public:
-        PhysicalProduct(std::string name, double price, double weight)
+        PhysicalProduct(const std::string& name, double price, double weight)
             : Product{ name , price }, m_weight{ weight }
         {}
 
@@ -75,7 +75,7 @@ namespace FirstExampleOCP {
         std::string m_filePath;
 
     public:
-        DigitalProduct(std::string name, double price, std::string path)
+        DigitalProduct(const std::string& name, double price, const std::string& path)
             : Product{ name , price }, m_filePath{ path }
         {}
 

@@ -2,14 +2,14 @@
 // ListView.h
 // ===========================================================================
 
+#include "ListView.h"
+
 #include <iostream>
 #include <sstream>
 #include <algorithm>
-#include <string>
-#include <vector>
-#include <stdexcept>
-
-#include "ListView.h"
+//#include <string>
+//#include <vector>
+//#include <stdexcept>
 
 ListView::ListView() : m_cols{ 0 } {}
 

@@ -23,7 +23,7 @@ namespace AbstractClassVsInterface {
     public:
         virtual ~AbstractClass() {}
 
-        AbstractClass(std::string message)
+        AbstractClass(const std::string& message)
             : m_message{ message }
         {}
 

@@ -2,6 +2,10 @@
 // ListView.h
 // ===========================================================================
 
+#include <initializer_list>
+#include <string>
+#include <vector>
+
 /* 
  * Simple console based ListView control
  */

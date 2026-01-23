@@ -16,7 +16,7 @@ namespace PimplVariantWithSeparateHeaderFile {
     public:
         ControlPimpl() : m_text(""), m_width(0), m_height(0), m_visible(true) {}
 
-        void setText(std::string text);
+        void setText(const std::string& text);
         void resize(const int width, const int height);
         void show();
         void hide();

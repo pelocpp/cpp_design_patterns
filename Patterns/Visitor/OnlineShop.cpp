@@ -57,12 +57,13 @@ namespace OnlineShopExample {
             : Element{ count, price, title } { }
 
         // getter / setter
-        std::string getISBN() const { return m_ISBN; }
-        std::string getAuthor() const { return m_author; }
-        std::string getPublisher() const { return m_publisher; }
-        void setISBN(std::string isbn) { m_ISBN = isbn; }
-        void setAuthor(std::string author) { m_author = author; }
-        void setPublisher(std::string publisher) { m_publisher = publisher; }
+        const std::string& getISBN() const { return m_ISBN; }
+        const std::string& getAuthor() const { return m_author; }
+        const std::string& getPublisher() const { return m_publisher; }
+
+        void setISBN(const std::string& isbn) { m_ISBN = isbn; }
+        void setAuthor(const std::string& author) { m_author = author; }
+        void setPublisher(const std::string& publisher) { m_publisher = publisher; }
 
         void accept(Visitor& visitor) const override
         {
@@ -89,10 +90,11 @@ namespace OnlineShopExample {
         // getter / setter
         long getLength() const { return m_length; }
         double getIsHD() const { return m_isHD; }
-        std::string getDirector() const { return m_director; }
+        const std::string& getDirector() const { return m_director; }
+
         void setLength(long length) { m_length = length; }
         void setIsHD(bool isHD) { m_isHD = isHD; }
-        void setDirector(std::string director) { m_director = director; }
+        void setDirector(const std::string& director) { m_director = director; }
 
         void accept(Visitor& visitor) const override
         {
@@ -107,7 +109,7 @@ namespace OnlineShopExample {
         std::string m_licenseKey;
 
     public:
-        Game(int count, double price, std::string title)
+        Game(int count, double price, const std::string& title)
             : Element{ count, price, title }
         {
             m_consoleType = 0;
@@ -116,9 +118,10 @@ namespace OnlineShopExample {
 
         // getter / setter
         int getConsoleType() const { return m_consoleType; }
-        std::string getLicenseKey() const { return m_licenseKey; }
+        const std::string& getLicenseKey() const { return m_licenseKey; }
+
         void setConsoleType(int consoleType) { m_consoleType = consoleType; }
-        void setLicenseKey(std::string licenseKey) { m_licenseKey = licenseKey; }
+        void setLicenseKey(const std::string& licenseKey) { m_licenseKey = licenseKey; }
 
         void accept(Visitor& visitor) const override
         {

@@ -286,7 +286,7 @@ Das liest sich nicht schlecht, nur es gibt doch
 mehrere Arten von Pizzas:
 
 ```cpp
-01: static std::shared_ptr<IPizza> orderPizza(std::string type)
+01: static std::shared_ptr<IPizza> orderPizza(const std::string& type)
 02: {
 03:     std::shared_ptr<IPizza> pizza{ nullptr };
 04: 
@@ -330,7 +330,7 @@ zu platzieren:
 01: class PizzaFactory
 02: {
 03: public:
-04:     static std::shared_ptr<IPizza> createPizza(std::string type) {
+04:     static std::shared_ptr<IPizza> createPizza(const std::string& type) {
 05: 
 06:         std::shared_ptr<IPizza> pizza{ nullptr };
 07: 
@@ -359,7 +359,7 @@ fällt in die Rubrik *Simple Factory*.
 Damit sieht unsere `orderPizza`-Methode nun so aus:
 
 ```cpp
-01: std::shared_ptr<IPizza> orderPizzaEx(std::string type)
+01: std::shared_ptr<IPizza> orderPizzaEx(const std::string& type)
 02: {
 03:     std::shared_ptr<IPizza> pizza{ PizzaFactory::createPizza(type) };
 04: 
@@ -405,7 +405,7 @@ in dem es um Dokumente unterschiedlichen Formats geht:
 
 ```cpp
 // non recommendable implementation
-std::unique_ptr<IDocument> open(std::string path) 
+std::unique_ptr<IDocument> open(const std::string& path) 
 {
     if (path.ends_with(".pdf"))
         return std::make_unique<PdfDocument>(path);
@@ -438,7 +438,7 @@ Dokumenttypen ist eine Registrierungsfunktionen, die es gestattet, eigene Typen 
 10:     std::string m_path;
 11: 
 12: public:
-13:     PdfDocument(std::string path) : m_path{ path } {}
+13:     PdfDocument(const std::string& path) : m_path{ path } {}
 14: 
 15:     std::vector<std::string> getText() override {
 16:         return { "Text from PDF" };
@@ -468,7 +468,7 @@ Dokumenttypen ist eine Registrierungsfunktionen, die es gestattet, eigene Typen 
 40:         m_readers.emplace(extension, reader);
 41:     }
 42: 
-43:     Document open(std::string path) {
+43:     Document open(const std::string& path) {
 44:         auto lastDot = path.find_last_of('.');
 45:         if (lastDot != std::string::npos) {
 46:             std::string extension = path.substr(lastDot + 1);

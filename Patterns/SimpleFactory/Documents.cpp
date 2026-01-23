@@ -24,7 +24,7 @@ namespace DocumentsExample {
         std::string m_path;
 
     public:
-        PdfDocument(std::string path) : m_path{ path } {}
+        PdfDocument(const std::string& path) : m_path{ path } {}
 
         std::vector<std::string> getText() override {
             return { "Text from PDF" };
@@ -37,7 +37,7 @@ namespace DocumentsExample {
         std::string m_path;
 
     public:
-        HtmlDocument(std::string path) : m_path{ path } {}
+        HtmlDocument(const std::string& path) : m_path{ path } {}
 
         std::vector<std::string> getText() override {
             return { "Text from HTML" };
@@ -50,7 +50,7 @@ namespace DocumentsExample {
         std::string m_path;
 
     public:
-        OdtDocument(std::string path) : m_path{ path } {}
+        OdtDocument(const std::string& path) : m_path{ path } {}
 
         std::vector<std::string> getText() override { 
             return { "Text from ODT" }; 
@@ -58,7 +58,7 @@ namespace DocumentsExample {
     };
 
     // non recommendable implementation
-    static std::unique_ptr<IDocument> open(std::string path)
+    static std::unique_ptr<IDocument> open(const std::string& path)
     {
         if (path.ends_with(".pdf"))
             return std::make_unique<PdfDocument>(path);
@@ -86,7 +86,7 @@ namespace DocumentsExample {
             m_readers.emplace(extension, reader);
         }
 
-        Document open(std::string path) {
+        Document open(const std::string& path) {
 
             auto lastDot{ path.find_last_of('.') };
 

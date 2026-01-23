@@ -25,7 +25,7 @@ namespace PimplVariant {
     public:
         ControlPimpl() : m_text(""), m_width(0), m_height(0), m_visible(true) {}
 
-        void setText(std::string text);
+        void setText(const std::string& text);
         void resize(const int width, const int height);
         void show();
         void hide();
@@ -54,7 +54,7 @@ namespace PimplVariant {
             << std::endl;
     }
 
-    void ControlPimpl::setText(std::string text)
+    void ControlPimpl::setText(const std::string& text)
     {
         m_text = text;
         draw();
@@ -84,7 +84,7 @@ namespace PimplVariant {
 
     Control::~Control() = default;  // due to 'can't delete an incomplete type'
 
-    void Control::setText(std::string text)
+    void Control::setText(const std::string& text)
     {
         m_pimpl->setText(text);
     }

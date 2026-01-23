@@ -52,7 +52,7 @@ namespace MobilePhonesExample {
         // getType method will return IMobile object creation  
         // according to the parameter passsed
         //
-        std::shared_ptr<IMobile> getType(std::string str) 
+        std::shared_ptr<IMobile> getType(const std::string& str)
         {
 
             if (str == std::string("Samsung")) {

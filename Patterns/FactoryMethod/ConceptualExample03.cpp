@@ -64,7 +64,7 @@ namespace ConceptualExample03
      * More hypothetical make_drink() function that would take the name of a drink
      * and make that drink. Given a discrete set of cases, this can look rather tedious:
      */
-    static std::unique_ptr<HotDrink> make_drink(std::string type)
+    static std::unique_ptr<HotDrink> makeDrink(const std::string& type)
     {
         std::unique_ptr<HotDrink> drink;
 

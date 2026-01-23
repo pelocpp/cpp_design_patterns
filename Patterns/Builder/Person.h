@@ -28,7 +28,7 @@ private:
     std::string m_company_name;
     std::string m_position;
 
-    Person(std::string name) : m_name{ name } {}
+    Person(const std::string& name) : m_name{ name } {}
 
 public:
     static PersonBuilder create(const std::string& name);

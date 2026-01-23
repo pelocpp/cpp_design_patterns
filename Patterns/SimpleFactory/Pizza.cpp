@@ -44,7 +44,7 @@ namespace PizzasExample {
         return pizza;
     }
 
-    static std::shared_ptr<IPizza> orderPizza(std::string type)
+    static std::shared_ptr<IPizza> orderPizza(const std::string& type)
     {
         std::shared_ptr<IPizza> pizza{ nullptr };
 
@@ -77,7 +77,7 @@ namespace PizzasExample {
     class PizzaFactory
     {
     public:
-        static std::shared_ptr<IPizza> createPizza(std::string type) {
+        static std::shared_ptr<IPizza> createPizza(const std::string& type) {
 
             std::shared_ptr<IPizza> pizza{ nullptr };
 
@@ -98,7 +98,7 @@ namespace PizzasExample {
         }
     };
 
-    std::shared_ptr<IPizza> orderPizzaEx(std::string type)
+    std::shared_ptr<IPizza> orderPizzaEx(const std::string& type)
     {
         std::shared_ptr<IPizza> pizza{ PizzaFactory::createPizza(type) };
 

@@ -18,7 +18,7 @@ private:
 public:
     // c'tors
     CreditCard();
-    CreditCard(std::string number, std::string date, std::string cvv);
+    CreditCard(const std::string& number, const std::string& date, const std::string& cvv);
 
     // public interface
     bool charge(int amount);

@@ -34,7 +34,7 @@ namespace PimplVariantWithSeparateHeaderFile {
     }
 
     // remaining member functions
-    void Control::setText(std::string text)
+    void Control::setText(const std::string& text)
     {
         m_pimpl->setText(text);
     }

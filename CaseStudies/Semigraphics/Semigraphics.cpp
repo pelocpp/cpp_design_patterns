@@ -184,7 +184,7 @@ void initSmallFactory(CharacterFactory& factory)
         std::string{ "Blue" }
     };
 
-    for (std::string color : colors) {
+    for (const std::string& color : colors) {
         factory.addCharacter(color, std::string{ "Arial" });
     }
 }
@@ -205,8 +205,8 @@ void initLargeFactory(CharacterFactory& factory)
         std::string{ "Roboto" }
     };
 
-    for (std::string color : colors) {
-        for (std::string font : fonts) {
+    for (const std::string& color : colors) {
+        for (const std::string& font : fonts) {
             factory.addCharacter(color, font);
         }
     }

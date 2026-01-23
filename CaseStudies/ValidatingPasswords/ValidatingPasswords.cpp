@@ -12,7 +12,7 @@ class PasswordValidator
 {
 public:
     virtual ~PasswordValidator() {}
-    virtual bool validate(std::string password) const = 0;
+    virtual bool validate(const std::string& password) const = 0;
 };
 
 // corresponds to 'ConcreteComponent'
@@ -24,7 +24,7 @@ private:
 public:
     LengthValidator(size_t minLength) : m_length{ minLength } {}
 
-    bool validate(std::string password) const override 
+    bool validate(const std::string& password) const override
     {
         return password.length() >= m_length;
     }
@@ -40,7 +40,7 @@ public:
     explicit PasswordValidatorDecorator(std::unique_ptr<PasswordValidator> validator)
         : m_component{ std::move(validator) } {}
 
-    bool validate(std::string password) const override
+    bool validate(const std::string& password) const override
     {
         return m_component->validate(password);
     }
@@ -53,7 +53,7 @@ public:
     explicit DigitPasswordValidator(std::unique_ptr<PasswordValidator> validator) 
         : PasswordValidatorDecorator{ std::move(validator) } {}
 
-    bool validate(std::string password) const override {
+    bool validate(const std::string& password) const override {
         if (!PasswordValidatorDecorator::validate(password))
             return false;
 
@@ -68,7 +68,7 @@ public:
     explicit CasePasswordValidator(std::unique_ptr<PasswordValidator> validator)
         : PasswordValidatorDecorator{ std::move(validator) } {}
 
-    bool validate(std::string password) const override {
+    bool validate(const std::string& password) const override {
         if (!PasswordValidatorDecorator::validate(password))
             return false;
 
@@ -94,7 +94,7 @@ public:
     explicit SymbolPasswordValidator(std::unique_ptr<PasswordValidator> validator)
         : PasswordValidatorDecorator{ std::move(validator) } {}
 
-    bool validate(std::string password) const override {
+    bool validate(const std::string& password) const override {
         if (!PasswordValidatorDecorator::validate(password)) {
             return false;
         }

@@ -2,6 +2,9 @@
 // ExplorationObserver.h
 // ===========================================================================
 
+#include <string>
+#include <map>
+
 class ExplorationObserver : public IExplorationObserver {
 public:
     void update(std::map<std::string, long>) override;

@@ -2,6 +2,8 @@
 // ASyncTestStrategy.h
 // ===========================================================================
 
+#include <string>
+
 class ASyncTestStrategy : public ExplorationStrategy
 {
 public:

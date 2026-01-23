@@ -2,6 +2,8 @@
 // FolderStrategy.h
 // ===========================================================================
 
+#include <string>
+
 class FolderStrategy : public ExplorationStrategy
 {
 public:

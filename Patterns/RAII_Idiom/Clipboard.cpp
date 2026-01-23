@@ -173,7 +173,7 @@ namespace Clipboard {
     public:
         CodeConverter() = delete;
 
-        explicit CodeConverter(std::string text) : m_text(text) {};
+        explicit CodeConverter(const std::string& text) : m_text(text) {};
 
         // public interface
         void setText(const std::string& text) { m_text = text; }
