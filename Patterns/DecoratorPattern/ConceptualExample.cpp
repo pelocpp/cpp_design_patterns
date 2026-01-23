@@ -170,8 +170,9 @@ void test_conceptual_example_02() {
     */
 
     std::shared_ptr<IComponent> decorator {
-    std::make_shared<ConcreteDecoratorB>(
-        std::make_shared<ConcreteDecoratorA>(component))
+        std::make_shared<ConcreteDecoratorB>(
+            std::make_shared<ConcreteDecoratorA>(component)
+        )
     };
 
     std::cout << "Client: Same decorated component - written in a more compact syntax:" << std::endl;

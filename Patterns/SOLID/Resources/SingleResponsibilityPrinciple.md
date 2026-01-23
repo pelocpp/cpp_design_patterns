@@ -24,7 +24,6 @@ ein komplexes Objekt in kleinere und einfachere Komponenten zu zerlegen.
   * Es geht folglich nicht darum, nur eine Methode in einer Klasse zu haben &ndash; es geht darum, eine Klasse für eine Sache verantwortlich zu machen.
 
 
-
 #### Beispiel: Violating the Single Responsibility Principle
 
 ```cpp
@@ -46,7 +45,7 @@ ein komplexes Objekt in kleinere und einfachere Komponenten zu zerlegen.
 16:         m_entries.push_back(text);
 17:     }
 18: 
-19:     auto getEntries() const { return m_entries; }
+19:     const auto& getEntries() const { return m_entries; }
 20: 
 21:     void save(const std::string& filename, std::ostream& os) {
 22: 
@@ -95,8 +94,8 @@ Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdqu
 16:         m_entries.push_back(text);
 17:     }
 18: 
-19:     auto getTitle() const { return m_title; }
-20:     auto getEntries() const { return m_entries; }
+19:     const auto& getTitle() const { return m_title; }
+20:     const auto& getEntries() const { return m_entries; }
 21: };
 22: 
 23: struct SavingManager

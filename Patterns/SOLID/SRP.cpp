@@ -26,7 +26,7 @@ namespace AntiConceptualExampleSRP {
             m_entries.push_back(text);
         }
 
-        auto getEntries() const { return m_entries; }
+        const auto& getEntries() const { return m_entries; }
 
         void save(const std::string& filename, std::ostream& os) {
 
@@ -58,8 +58,8 @@ namespace ConceptualExampleSRP
             m_entries.push_back(text);
         }
 
-        auto getTitle() const { return m_title; }
-        auto getEntries() const { return m_entries; }
+        const auto& getTitle() const { return m_title; }
+        const auto& getEntries() const { return m_entries; }
     };
 
     struct SavingManager
