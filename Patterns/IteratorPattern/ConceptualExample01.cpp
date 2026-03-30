@@ -12,8 +12,8 @@ public:
     using value_type        = int;
     using difference_type   = std::ptrdiff_t;
     using iterator_category = std::vector<int>::iterator;
-    using pointer           = const value_type*;
-    using reference         = const value_type&;
+    using pointer           = value_type*;
+    using reference         = value_type&;
 
 private:
     std::vector<int> m_data;
