@@ -132,15 +132,98 @@ Diese kann man möglicherweise mit einfachen Strukturen zusammenfassen und auf di
 
 
 
-### Regel &bdquo;&rdquo;
+### Regel &bdquo;Verwenden Sie Ausnahmen, um das Fehlschlagen einer Methode zu signalisieren&rdquo;
+
+
+Warum? &bdquo;Es sollte nicht möglich sein, einen Fehler zu ignorieren,
+da dies das Programm oder eine Berechnung in einen undefinierten (oder unerwarteten) Zustand versetzen könnte.&bdquo;
+
+*Beispiel*:
+
+```cpp
+01: // Bad design: returns negative number if output fails.
+02: // The return value can be ignored by the caller.
+03: // Hint: Attribute [[nodiscard]] helps, but generates only a warning
+04: static int someImportantMethod()
+05: {
+06:     // ...
+07:     return -1;
+08: }
+```
+
+*Beispiel*:
+
+```cpp
+01: // Good design:
+02: // Throws std::system_error if the thread could not be started.
+03: class thread
+04: {
+05:     template <typename TFunc, typename ... TArgs>
+06:     explicit thread(TFunc&& func, TArgs&&... args) {};
+07: };
+```
+
+### Regel &bdquo;Dokumentieren Sie die Parameter eines Funktions-/Methodentemplates mit *Concepts*&rdquo;
+
+Wenn eine Methode ein Funktions-/Methodentemplate ist, dokumentieren Sie ihre Parameter mit der Hilfe von *Concepts*.
+
+*Concepts* (Schlüsselwörter `concept` und `requires`) sind Prädikate für Templateparameter,
+die zur Übersetzungszeit ausgewertet werden.
+
+Ein *Concept* kann die Menge der als Templateparameter akzeptierten Argumente einschränken.
+
+*Beispiel*:
+
+```cpp
+01: template<typename Iter, typename Val>
+02: requires InputIterator<Iter> && EqualityComparable<ValueType<Iter>>, Val>
+03: Iter find(Iter first, Iter last, Val v)
+04: {
+05:     // ...
+06: }
+```
+
+### Regel &bdquo;Übertrage niemals die *Ownership* (Eigentümerschaft) durch einen *Raw Pointer* (T*).&rdquo;
+
+
+Dieser Code weist ein konzeptionelles Problem auf.
+
+```cpp
+01: class X {};
+02: 
+03: static X* compute(int args)
+04: {
+05:     X* res = new X{};
+06:     // ...
+07:     return res;
+08: }
+09: 
+10: static void core_guideline_use_exceptions()
+11: {
+12:     X* result = compute(123);
+13: }
+```
+
+Wer löscht den Zeiger auf `X`? Es gibt mindestens zwei Alternativen,
+um das Besitzproblem zu lösen:
+
+  * Den Wert zurückgeben, falls möglich (Wertsemantik).
+  * Einen Smartpointer verwenden.
+
+
 
 
 ### Regel &bdquo;&rdquo;
 
+### Regel &bdquo;&rdquo;
 
 ### Regel &bdquo;&rdquo;
 
+### Regel &bdquo;&rdquo;
 
+### Regel &bdquo;&rdquo;
+
+### Regel &bdquo;&rdquo;
 
 
 ---
