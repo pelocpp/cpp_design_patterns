@@ -3,10 +3,10 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
-void test_motivation_example();
-void test_onlineshop_example();
-void test_bookstore_example();
+extern void test_conceptual_example();
+extern void test_motivation_example();
+extern void test_onlineshop_example();
+extern void test_bookstore_example();
 
 int main()
 {

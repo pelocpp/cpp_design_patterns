@@ -3,10 +3,10 @@
 // ===========================================================================
 
 // function prototypes
-void test_singleton_01();
-void test_singleton_02();
-void test_singleton_03();
-void test_singleton_vs_di();
+extern void test_singleton_01();
+extern void test_singleton_02();
+extern void test_singleton_03();
+extern void test_singleton_vs_di();
 
 int main()
 {

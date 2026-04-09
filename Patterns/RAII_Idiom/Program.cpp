@@ -3,10 +3,10 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
-void test_ofstream_example();
-void test_file_example();
-void code_converter();
+extern void test_conceptual_example();
+extern void test_ofstream_example();
+extern void test_file_example();
+extern void code_converter();
 
 int main()
 {

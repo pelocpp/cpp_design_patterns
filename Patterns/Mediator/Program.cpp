@@ -3,10 +3,10 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example01();
-void test_conceptual_example02();
-void test_conceptual_example03();
-void test_chatroom_example();
+extern void test_conceptual_example01();
+extern void test_conceptual_example02();
+extern void test_conceptual_example03();
+extern void test_chatroom_example();
 
 int main()
 {

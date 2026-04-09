@@ -14,12 +14,12 @@
 #endif  // _DEBUG
 
 // function prototypes
-void test_conceptual_example_01();
-void test_conceptual_example_02();
-void test_conceptual_example_03();
+extern void test_conceptual_example_01();
+extern void test_conceptual_example_02();
+extern void test_conceptual_example_03();
 
-void test_prototype_pattern_chess_01();
-void test_prototype_pattern_chess_02();
+extern void test_prototype_pattern_chess_01();
+extern void test_prototype_pattern_chess_02();
 
 int main()
 {

@@ -3,10 +3,10 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example_01();
-void test_conceptual_example_02();
-void test_layout_manager_example();
-void test_person_builder_example();
+extern void test_conceptual_example_01();
+extern void test_conceptual_example_02();
+extern void test_layout_manager_example();
+extern void test_person_builder_example();
 
 int main()
 {

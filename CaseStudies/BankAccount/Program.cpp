@@ -3,7 +3,7 @@
 // ===========================================================================
 
 // function prototypes
-void testBankAccounts();
+extern void testBankAccounts();
 
 int main() {
     testBankAccounts();

@@ -3,8 +3,8 @@
 // ===========================================================================
 
 // function prototypes
-void testSemigraphics01();
-void testSemigraphics02();
+extern void testSemigraphics01();
+extern void testSemigraphics02();
 
 int main() {
     // testSemigraphics01();

@@ -10,12 +10,7 @@
 #include "FolderStrategy.h"
 
 #include <iostream>
-//#include <string>
-//#include <map>
-//#include <list>
-//#include <iterator>
 #include <filesystem>
-//#include <memory>
 
 // ===========================================================================
 

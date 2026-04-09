@@ -14,11 +14,11 @@
 #endif  // _DEBUG
 
 // function prototypes
-void test_conceptual_example_01();
-void test_conceptual_example_02();
-void test_shapes();
-void test_filesystem_01();
-void test_filesystem_02();
+extern void test_conceptual_example_01();
+extern void test_conceptual_example_02();
+extern void test_shapes();
+extern void test_filesystem_01();
+extern void test_filesystem_02();
 
 int main()
 {

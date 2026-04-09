@@ -3,11 +3,11 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
-void test_real_world_example_points();
-void test_mobile_phones_01();
-void test_mobile_phones_02();
-void test_documents();
+extern void test_conceptual_example();
+extern void test_real_world_example_points();
+extern void test_mobile_phones_01();
+extern void test_mobile_phones_02();
+extern void test_documents();
 
 int main()
 {

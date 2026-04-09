@@ -6,7 +6,7 @@
 
 ## Wesentliche Merkmale
 
-##### Grundlagen
+#### Grundlagen
 
 Vergleichen wir zunächst die beiden Konzepte von *abstrakten Klassen* und *Schnittstellen*:
 
@@ -61,6 +61,87 @@ Eine **Schnittstelle** (*interface*) in C++
   2. hat keine Variablendeklarationen.
 
 Siehe Beispiele im Quelltext hierzu.
+
+---
+
+## C++ Core Guidelines: Regeln für die Definition von Schnittstellen
+
+### Regel &bdquo;Definiere eine Schnittstelle exakt&rdquo;
+
+In dieser Regel geht es das Verständnis und damit um die Korrektheit einer Schnittstelle.
+Annahmen &ndash; damit sind Vorraussetzungen gemeint &ndash; über die Funktionalität einer Funktion in einer Schnittstelle
+müssen zum Ausdruck gebracht werden.
+
+Falls das nicht geschieht, können diese Vorraussetzungen leicht übersehen werden.
+
+*Beispiel*:
+
+```cpp
+01: class IMath
+02: {
+03: public:
+04:     virtual ~IMath() = default;
+05: 
+06:     virtual double round(double d) = 0;
+07: };
+```
+
+Wie arbeitet die Funktion `round`? Mit Auf- und abrunden oder mit abschneiden?
+Bessere Namen für die Funktion `round` wären dann `roundUp`, `roundDown` oder `truncate`.
+
+
+
+### Regel &bdquo;Gestalte Schnittstellen präzise und stark typisiert&rdquo;
+
+Datentypen sind die einfachste und expliziteste Dokumentation,
+besitzen eine wohldefinierte Semantik und werden durch den Compiler automatisch geprüft.
+
+
+*Beispiel*:
+
+```cpp
+01: // Bad design: what do these four parameters mean? Great opportunities for making mistakes
+02: // What do 10, 20 mean?
+03: Point p{};
+04: void draw_rect(int, int, int, int);
+05: draw_rect(p.m_x, p.m_y, 10, 20);
+06: 
+07: // --------------------------------------------------
+08: 
+09: // Better design:
+10: void draw_rectangle(Point top_left, Point bottom_right);
+11: void draw_rectangle(Point top_left, Size height_width);
+12: 
+13: draw_rectangle(p, Point{ 10, 20 });  // Two corners
+14: draw_rectangle(p, Size{ 10, 20 });   // One corner and one size specification
+```
+
+
+Es kann leicht passieren, die Funktion draw_rect falsch zu verwenden?
+
+Vergleiche die Funktion mit der Funktion draw_rectangle.
+Der Compiler sichert zu, dass diese nur mit Point- oder Size-Objekten verwendet werden kann.
+
+*Hinweis*:<br />
+Suche im Quellcode nach Funktionen, die viele eingebaute Datentypen als Argument verwenden:
+Diese kann man möglicherweise mit einfachen Strukturen zusammenfassen und auf diese Weise besser typisieren.
+
+
+### Regel &bdquo;Vor- und Nachbedingungen angeben (falls möglich bzw. vorhanden)&rdquo;
+
+
+
+
+### Regel &bdquo;&rdquo;
+
+
+### Regel &bdquo;&rdquo;
+
+
+### Regel &bdquo;&rdquo;
+
+
+
 
 ---
 

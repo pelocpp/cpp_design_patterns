@@ -3,8 +3,8 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
-void test_social_networking();
+extern void test_conceptual_example();
+extern void test_social_networking();
 
 int main()
 {

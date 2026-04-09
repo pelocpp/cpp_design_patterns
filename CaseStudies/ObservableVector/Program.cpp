@@ -3,7 +3,7 @@
 // ===========================================================================
 
 // function prototypes
-void testObservableVector();
+extern void testObservableVector();
 
 int main() {
     testObservableVector();

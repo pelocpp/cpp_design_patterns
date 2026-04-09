@@ -3,7 +3,7 @@
 // ===========================================================================
 
 // function prototypes
-void test_notification_sender();
+extern void test_notification_sender();
 
 int main() {
     test_notification_sender();

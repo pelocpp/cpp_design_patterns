@@ -3,7 +3,7 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
+extern void test_conceptual_example();
 
 int main()
 {

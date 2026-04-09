@@ -3,8 +3,8 @@
 // ===========================================================================
 
 // function prototypes
-extern void test_user();
-extern void test_car();
+extern extern void test_user();
+extern extern void test_car();
 
 int main()
 {

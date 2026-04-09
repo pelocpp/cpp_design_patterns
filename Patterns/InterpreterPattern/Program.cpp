@@ -2,8 +2,6 @@
 // Program.cpp // Interpreter Pattern
 // ===========================================================================
 
-// function prototypes
-
 int main()
 {
     return 0;

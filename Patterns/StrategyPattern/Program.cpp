@@ -3,16 +3,16 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
-void test_conceptual_example_modern();
+extern void test_conceptual_example();
+extern void test_conceptual_example_modern();
 
-void test_realworld_example();
-void test_realworld_example_modern();
+extern void test_realworld_example();
+extern void test_realworld_example_modern();
 
-void test_ecommerce_app();
+extern void test_ecommerce_app();
 
-void test_static_strategy_example();
-void test_dynamic_strategy_example();
+extern void test_static_strategy_example();
+extern void test_dynamic_strategy_example();
 
 int main()
 {

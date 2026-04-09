@@ -3,7 +3,7 @@
 // ===========================================================================
 
 // function prototypes
-void validating_passwords();
+extern void validating_passwords();
 
 int main() {
     validating_passwords();

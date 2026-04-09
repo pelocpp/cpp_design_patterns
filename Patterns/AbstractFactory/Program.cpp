@@ -3,9 +3,9 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
-void test_gui_factory();
-void test_vehicles();
+extern void test_conceptual_example();
+extern void test_gui_factory();
+extern void test_vehicles();
 
 int main()
 {

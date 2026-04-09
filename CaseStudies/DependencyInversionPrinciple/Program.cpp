@@ -3,7 +3,7 @@
 // ===========================================================================
 
 // function prototypes
-void testDependencyInversionPrinciple();
+extern void testDependencyInversionPrinciple();
 
 int main() {
     testDependencyInversionPrinciple();

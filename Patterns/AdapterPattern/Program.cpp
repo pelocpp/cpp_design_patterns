@@ -3,10 +3,10 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
-void test_media_player_01();
-void test_media_player_02();
-void test_pluggable_adapter_design();
+extern void test_conceptual_example();
+extern void test_media_player_01();
+extern void test_media_player_02();
+extern void test_pluggable_adapter_design();
 
 int main() 
 {

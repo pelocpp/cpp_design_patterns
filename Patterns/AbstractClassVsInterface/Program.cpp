@@ -3,11 +3,13 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
+extern void test_conceptual_example();
+extern void test_core_guidelines_interfaces();
 
 int main()
 {
     test_conceptual_example();
+    test_core_guidelines_interfaces();
     return 0;
 }
 

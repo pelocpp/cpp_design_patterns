@@ -3,8 +3,8 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
-void test_authentication_example();
+extern void test_conceptual_example();
+extern void test_authentication_example();
 
 int main()
 {

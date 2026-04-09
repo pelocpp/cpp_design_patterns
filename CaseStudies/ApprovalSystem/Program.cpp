@@ -3,7 +3,7 @@
 // ===========================================================================
 
 // function prototypes
-void approval_system();
+extern void approval_system();
 
 int main() {
     approval_system();

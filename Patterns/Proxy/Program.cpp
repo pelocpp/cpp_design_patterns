@@ -3,9 +3,9 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
-void test_property_proxy();
-void test_virtual_proxy();
+extern void test_conceptual_example();
+extern void test_property_proxy();
+extern void test_virtual_proxy();
 
 int main()
 {

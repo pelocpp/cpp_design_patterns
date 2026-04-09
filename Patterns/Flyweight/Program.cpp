@@ -3,10 +3,10 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example_01();
-void test_conceptual_example_02();
-void test_trees_game();
-void test_paint_brush();
+extern void test_conceptual_example_01();
+extern void test_conceptual_example_02();
+extern void test_trees_game();
+extern void test_paint_brush();
 
 int main()
 {

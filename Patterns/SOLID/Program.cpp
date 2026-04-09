@@ -3,11 +3,11 @@
 // ===========================================================================
 
 // function prototypes
-void test_srp();
-void test_ocp();
-void test_lsp();
-void test_isp();
-void test_dip();
+extern void test_srp();
+extern void test_ocp();
+extern void test_lsp();
+extern void test_isp();
+extern void test_dip();
 
 int main()
 {

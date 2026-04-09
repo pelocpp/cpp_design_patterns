@@ -3,8 +3,8 @@
 // ===========================================================================
 
 // function prototypes
-void test_conceptual_example();
-void test_bank_account();
+extern void test_conceptual_example();
+extern void test_bank_account();
 
 int main()
 {

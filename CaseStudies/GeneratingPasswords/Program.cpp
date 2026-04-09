@@ -3,7 +3,7 @@
 // ===========================================================================
 
 // function prototypes
-void generating_passwords();
+extern void generating_passwords();
 
 int main() {
     generating_passwords();
