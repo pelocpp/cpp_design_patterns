@@ -131,7 +131,7 @@ Weitere Aspekte, die zur Definition einer Schnittstelle zählen:
 
 Ein Interface ist ein Versprechen. Es ist daher genau zu überlegen, wie die Methoden definiert werden:
 
-  * Darf die Methode nullptr zurückgeben?
+  * Darf die Methode `nullptr` zurückgeben?
   * Welche Exceptions sind erlaubt?
   * Ist die Methode `const`? Interfaces sollten so oft wie möglich `const` sein, auf diese Weise können Seiteneffekte minimiert werden.
 
