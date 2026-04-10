@@ -2,13 +2,11 @@
 // CoreGuidelinesInterfaces.cpp // Abstract Classes vs Interfaces in C++
 // ===========================================================================
 
-//#include <iostream>
-//#include <string>
-
+#include <algorithm>
 #include <cstddef>
 #include <iterator>
 #include <span>
-
+#include <stdexcept>
 
 
 //https://www.heise.de/blog/C-Core-Guidelines-Interfaces-I-3767608.html
@@ -18,34 +16,11 @@
 //https://www.modernescpp.com/index.php/c-core-guidelines-interfaces-ii
 
 #include <cmath>
+#include <cassert>
 
 namespace CoreGuidelinesInterfaces {
 
     // =======================================================================
-
-    // Make interfaces precise
-    static void core_guideline_precise_interface()
-    {
-        class IMath
-        {
-        public:
-            virtual ~IMath() = default;
-
-            virtual double round(double d) = 0;
-        };
-
-        class IMathImpl : public IMath
-        {
-        public:
-            double round(double d) override
-            {
-                return (m_roundUp) ? std::ceil(d) : d;    // don't: "invisible" dependency
-            }
-
-        private:
-            bool m_roundUp;
-        };
-    }
 
     struct Point
     {
@@ -82,10 +57,16 @@ namespace CoreGuidelinesInterfaces {
 
     // =======================================================================
 
-    // Make interfaces precise
-    static void core_guideline_State_preconditions()
-    {
+    // State preconditions (if any)
+    static double sqrt(double x) {
+        //Expects(x >= 0); /* ... */
+        assert(x >= 0);  //  "x may not be negative"
+        return 0.0;
+    };
 
+    static void core_guideline_state_preconditions()
+    {
+        sqrt(-1.0);
     }
 
     // =======================================================================
@@ -142,10 +123,23 @@ namespace CoreGuidelinesInterfaces {
     // =======================================================================
     // Do not pass an array as a single pointer
 
+    static void copy_n(const int* from, int* to, int n)
+    {
+        for (int i = 0; i < n; ++i) {
+            to[i] = from[i];
+        }
+    }
 
-    void copy_n(const int* source, int* dest, int count);     // copy from [p:p+n) to [q:q+n)
+    static void copy(std::span<const int> from, std::span<int> to) {
 
-    void copy(std::span<const int> r, std::span<int> r2); // copy r to r2
+        // Safety check: Are both spans the same size?
+        if (from.size() != to.size()) {
+            throw std::invalid_argument("Spans must be the same size!");
+        }
+
+        // Efficient data copying
+        std::copy(from.begin(), from.end(), to.begin());
+    }
 
     static void core_guideline_passing_arrays()
     {
@@ -156,11 +150,7 @@ namespace CoreGuidelinesInterfaces {
 
         copy(std::span<int>{numbers}, std::span<int>{target});
     }
-
-WEITER: Safe Implementierung mit copy  // Chat GPT ....
-
-WEITER: Unsafe selbst programmieren ....
-    
+ 
     // =======================================================================
 
 
