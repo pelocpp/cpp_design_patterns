@@ -4,6 +4,13 @@
 
 ---
 
+#### Quelltext
+
+[ConceptualExample.cpp](../ConceptualExample.cpp)<br />
+[CoreGuidelinesInterfaces](../CoreGuidelinesInterfaces.cpp)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Grundlagen
@@ -64,8 +71,7 @@ Siehe Beispiele im Quelltext hierzu.
 
 ---
 
-## C++ Core Guidelines: Regeln für die Definition von Schnittstellen
-
+## Regeln für die Definition von Schnittstellen
 
 ### Regel &bdquo;Gestalte Schnittstellen präzise und stark typisiert&rdquo;
 
@@ -92,7 +98,6 @@ besitzen eine wohldefinierte Semantik und werden durch den Compiler automatisch 
 14: draw_rectangle(p, Size{ 10, 20 });   // One corner and one size specification
 ```
 
-
 Es kann leicht passieren, die Funktion `draw_rect` falsch zu verwenden?
 
 Vergleiche die Funktion mit der Funktion `draw_rectangle`.
@@ -102,136 +107,7 @@ Der Compiler sichert zu, dass diese nur mit `Point`- oder `Size`-Objekten verwen
 Suche im Quellcode nach Funktionen, die viele elementare Datentypen als Argument verwenden:
 Diese kann man möglicherweise mit einfachen Strukturen zusammenfassen und auf diese Weise besser typisieren.
 
-
-### Regel &bdquo;Vor- und Nachbedingungen angeben (falls möglich bzw. vorhanden)&rdquo;
-
-
-
-
-### Regel &bdquo;Verwenden Sie Ausnahmen, um das Fehlschlagen einer Methode zu signalisieren&rdquo;
-
-
-Warum? Es sollte nicht möglich sein, einen Fehler zu ignorieren,
-da dies das Programm oder eine Berechnung in einen undefinierten (oder unerwarteten) Zustand versetzen könnte.
-
-*Beispiel*:
-
-```cpp
-01: // Bad design: returns negative number if output fails.
-02: // The return value can be ignored by the caller.
-03: // Hint: Attribute [[nodiscard]] helps, but generates only a warning
-04: static int someImportantMethod()
-05: {
-06:     // ...
-07:     return -1;
-08: }
-```
-
-*Beispiel*:
-
-```cpp
-01: // Good design:
-02: // Throws std::system_error if the thread could not be started.
-03: class thread
-04: {
-05:     template <typename TFunc, typename ... TArgs>
-06:     explicit thread(TFunc&& func, TArgs&&... args) {};
-07: };
-```
-
-### Regel &bdquo;Dokumentieren Sie die Parameter eines Funktions-/Methodentemplates mit *Concepts*&rdquo;
-
-Wenn eine Methode ein Funktions- oder Methodentemplate ist, dokumentieren Sie ihre Parameter mit Hilfe von *Concepts*.
-
-*Concepts* (Schlüsselwörter `concept` und `requires`) sind Prädikate für Templateparameter,
-die zur Übersetzungszeit ausgewertet werden.
-
-Ein *Concept* kann die Menge der als Templateparameter akzeptierten Argumente einschränken.
-
-*Beispiel*:
-
-```cpp
-01: template<typename Iter, typename Val>
-02: requires InputIterator<Iter> && EqualityComparable<ValueType<Iter>>, Val>
-03: Iter find(Iter first, Iter last, Val v)
-04: {
-05:     // ...
-06: }
-```
-
-### Regel &bdquo;Übertrage niemals die *Ownership* (Eigentümerschaft) durch einen *Raw Pointer* (`T*`)&rdquo;
-
-
-Dieser Code weist ein konzeptionelles Problem auf.
-
-```cpp
-01: class X {};
-02: 
-03: static X* compute(int args)
-04: {
-05:     X* res = new X{};
-06:     // ...
-07:     return res;
-08: }
-09: 
-10: static void core_guideline_transferring_ownership()
-11: {
-12:     X* result = compute(123);
-13: }
-```
-
-Wer löscht den Zeiger auf `X`? Es gibt mindestens zwei Alternativen,
-um das Besitzproblem zu lösen:
-
-  * Den Wert zurückgeben, falls möglich (Wertsemantik).
-  * Einen Smartpointer verwenden.
-
-
-### Regel &bdquo;Übergebe kein Array durch einen einzelnen Zeiger.&rdquo;
-
-Das Übergeben von Arrays durch einen einzelnen Zeiger ist recht fehleranfällig:
-
-```cpp
-void copy_n(const T* from, T* to, int n);
-```
-
-Was passiert, wenn `n` zu groß ist? Undefined Behavior (UB).
-
-Die Lösung für solche Probleme ist eine Utility-Klasse `std::span`:
-
-```cpp
-void copy(span<const T> r, span<T> r2);
-```
-
-Jedes `std::span` besitzt eine Längenangabe!
-
-```cpp
-01: void copy(std::span<const int> from, std::span<int> to) {
-02: 
-03:     // Safety check: Are both spans the same size?
-04:     if (from.size() != to.size()) {
-05:         throw std::invalid_argument("spans must be the same size!");
-06:     }
-07: 
-08:     // Efficient data copying
-09:     std::copy(from.begin(), from.end(), to.begin());
-10: }
-```
-
-
-
-### Regel &bdquo;Halte die Anzahl der Funktionsargumente gering&rdquo;
-
-Die Anzahl der Funktionsargumente sollte gering gehalten werden.
-Es gilt eine einfache Regel: Eine Funktion sollte genau eine Aufgabe erfüllen (*Single Responsibility Rule*).
-In diesem Fall reduziert sich die Anzahl der Funktionsargumente automatisch,
-was die Verwendung der Funktion vereinfacht.
-
-*Bemerkung*:<br />
-Nicht immer wird sich auch von professionellen Entwicklern an diese Regel gehalten.
-Die neuen parallelen Algorithmen der Standard Template Library, wie beispielsweise `std::transform_reduce`,
-verstoßen häufig gegen diese Regel.
-
+---
 
 ### Regel &bdquo;Vorbedingungen angeben&rdquo;
 
@@ -255,6 +131,8 @@ mit `assert` bekommt man es hin:
 Verträge (*Contracts*), bestehend aus Vorbedingungen (*Preconditions*), Nachbedingungen(*Postconditions*) und Zusicherungen(*Assertions*),
 sind Teil des nächsten C++26-Standards.
 
+
+---
 
 ### Regel &bdquo;Nachbedingungen angeben&rdquo;
 
@@ -299,6 +177,142 @@ Die Schnittstelle gibt nun klar an:
   * Was sich ändert (`v.size()` verringert sich)
   * Was das Ergebnis darstellt (letztes Element)
   * Worauf sich der Aufrufer anschließend verlassen kann
+
+---
+
+### Regel &bdquo;Verwenden Sie Ausnahmen, um das Fehlschlagen einer Methode zu signalisieren&rdquo;
+
+Warum? Es sollte nicht möglich sein, einen Fehler zu ignorieren,
+da dies das Programm oder eine Berechnung in einen undefinierten (oder unerwarteten) Zustand versetzen könnte.
+
+*Beispiel*:
+
+```cpp
+01: // Bad design: returns negative number if output fails.
+02: // The return value can be ignored by the caller.
+03: // Hint: Attribute [[nodiscard]] helps, but generates only a warning
+04: static int someImportantMethod()
+05: {
+06:     // ...
+07:     return -1;
+08: }
+```
+
+*Beispiel*:
+
+```cpp
+01: // Good design:
+02: // Throws std::system_error if the thread could not be started.
+03: class thread
+04: {
+05:     template <typename TFunc, typename ... TArgs>
+06:     explicit thread(TFunc&& func, TArgs&&... args) {};
+07: };
+```
+
+---
+
+### Regel &bdquo;Dokumentieren Sie die Parameter eines Funktions-/Methodentemplates mit *Concepts*&rdquo;
+
+Wenn eine Methode ein Funktions- oder Methodentemplate ist, dokumentieren Sie ihre Parameter mit Hilfe von *Concepts*.
+
+*Concepts* (Schlüsselwörter `concept` und `requires`) sind Prädikate für Templateparameter,
+die zur Übersetzungszeit ausgewertet werden.
+
+Ein *Concept* kann die Menge der als Templateparameter akzeptierten Argumente einschränken.
+
+*Beispiel*:
+
+```cpp
+01: template<typename Iter, typename Val>
+02: requires InputIterator<Iter> && EqualityComparable<ValueType<Iter>>, Val>
+03: Iter find(Iter first, Iter last, Val v)
+04: {
+05:     // ...
+06: }
+```
+
+---
+
+### Regel &bdquo;Übertrage niemals die *Ownership* (Eigentümerschaft) durch einen *Raw Pointer* (`T*`)&rdquo;
+
+Dieser Code weist ein konzeptionelles Problem auf.
+
+```cpp
+01: class X {};
+02: 
+03: static X* compute(int args)
+04: {
+05:     X* res = new X{};
+06:     // ...
+07:     return res;
+08: }
+09: 
+10: static void core_guideline_transferring_ownership()
+11: {
+12:     X* result = compute(123);
+13: }
+```
+
+Wer löscht den Zeiger auf `X`? Es gibt mindestens zwei Alternativen,
+um das Besitzproblem zu lösen:
+
+  * Den Wert zurückgeben, falls möglich (Wertsemantik).
+  * Einen Smartpointer verwenden.
+
+
+---
+
+### Regel &bdquo;Übergebe kein Array durch einen einzelnen Zeiger.&rdquo;
+
+Das Übergeben von Arrays durch einen einzelnen Zeiger ist recht fehleranfällig:
+
+```cpp
+void copy_n(const T* from, T* to, int n);
+```
+
+Was passiert, wenn `n` zu groß ist? Undefined Behavior (UB).
+
+Die Lösung für solche Probleme ist eine Utility-Klasse `std::span`:
+
+```cpp
+void copy(span<const T> r, span<T> r2);
+```
+
+Jedes `std::span` besitzt eine Längenangabe!
+
+```cpp
+01: void copy(std::span<const int> from, std::span<int> to) {
+02: 
+03:     // Safety check: Are both spans the same size?
+04:     if (from.size() != to.size()) {
+05:         throw std::invalid_argument("spans must be the same size!");
+06:     }
+07: 
+08:     // Efficient data copying
+09:     std::copy(from.begin(), from.end(), to.begin());
+10: }
+```
+
+
+### Regel &bdquo;Halte die Anzahl der Funktionsargumente gering&rdquo;
+
+Die Anzahl der Funktionsargumente sollte gering gehalten werden.
+Es gilt eine einfache Regel: Eine Funktion sollte genau eine Aufgabe erfüllen (*Single Responsibility Rule*).
+In diesem Fall reduziert sich die Anzahl der Funktionsargumente automatisch,
+was die Verwendung der Funktion vereinfacht.
+
+*Bemerkung*:<br />
+Nicht immer wird sich auch von professionellen Entwicklern an diese Regel gehalten.
+Die neuen parallelen Algorithmen der Standard Template Library, wie beispielsweise `std::transform_reduce`,
+verstoßen häufig gegen diese Regel.
+
+
+
+
+
+
+
 
 
 ### Regel &bdquo;&rdquo;

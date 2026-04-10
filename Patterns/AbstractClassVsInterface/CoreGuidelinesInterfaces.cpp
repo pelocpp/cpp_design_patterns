@@ -18,9 +18,10 @@
 #include <cmath>
 #include <cassert>
 
-namespace CoreGuidelinesInterfaces {
+namespace GuidelinesInterfaces {
 
     // =======================================================================
+    // Make interfaces precise
 
     struct Point
     {
@@ -34,9 +35,6 @@ namespace CoreGuidelinesInterfaces {
         int m_width;
     };
 
-    // =======================================================================
-
-    // Make interfaces precise
     static void core_guideline_precise_interface_02()
     {
         // Bad design: what do these four parameters mean? Great opportunities for making mistakes
@@ -94,15 +92,6 @@ namespace CoreGuidelinesInterfaces {
     {}
 
     // =======================================================================
-
-    //template<typename TIter, typename TValue>
-    //    requires std::input_iterator<TIter> && std::equality_comparable<TIter, TValue >>
-    //    std::input_iterator<TIter> find(std::input_iterator<TIter> first, std::input_iterator<TIter> last, TValue v)
-    //    {
-    //        // ...
-    //    }
-
-    // =======================================================================
     // Never transfer ownership by a raw pointer (T*)
 
     class X {};
@@ -137,7 +126,7 @@ namespace CoreGuidelinesInterfaces {
             throw std::invalid_argument("Spans must be the same size!");
         }
 
-        // Efficient data copying
+        // efficient data copying
         std::copy(from.begin(), from.end(), to.begin());
     }
 
