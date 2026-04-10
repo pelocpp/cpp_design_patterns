@@ -26,7 +26,7 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoreGuidelinesInterfaces.cpp">
+    <ClCompile Include="GuidelinesInterfaces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
