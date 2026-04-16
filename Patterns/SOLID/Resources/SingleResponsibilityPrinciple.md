@@ -47,7 +47,7 @@ ein komplexes Objekt in kleinere und einfachere Komponenten zu zerlegen.
 18: 
 19:     const auto& getEntries() const { return m_entries; }
 20: 
-21:     void save(const std::string& filename, std::ostream& os) {
+21:     void save(std::ostream& os) {
 22: 
 23:         for (const auto& entry : m_entries) {
 24:             os << entry << std::endl;
@@ -100,7 +100,7 @@ Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdqu
 22: 
 23: struct SavingManager
 24: {
-25:     static void save(const Journal& journal, const std::string& filename, std::ostream& os) {
+25:     static void save(const Journal& journal, std::ostream& os) {
 26: 
 27:         os << journal.getTitle() << std::endl;
 28:         for (const auto& entry : journal.getEntries()) {
