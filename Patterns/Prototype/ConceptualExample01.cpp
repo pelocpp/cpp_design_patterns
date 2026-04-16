@@ -13,33 +13,32 @@
 #endif
 #endif  // _DEBUG
 
-#include <iostream>
-#include <string>
 #include <memory>
+#include <print>
 
 namespace ConceptualExample01
 {
     class Prototype
     {
     private:
-        int m_id;
+        std::size_t m_id;
 
     public:
-        Prototype(int id) : m_id{ id } {}
+        Prototype(std::size_t id) : m_id{ id } {}
 
         virtual ~Prototype() {}
         
         virtual Prototype* clone() const = 0;
 
     public:
-        int getId() const { return m_id; }
-        void setId(int id) { m_id = id; }
+        std::size_t getId() const { return m_id; }
+        void setId(std::size_t id) { m_id = id; }
     };
 
     class ConcretePrototype : public Prototype
     {
     public:
-        ConcretePrototype(int id) : Prototype{ id } {}
+        ConcretePrototype(std::size_t id) : Prototype{ id } {}
 
         // Note: Return Type = Type of base class - 
         // but 'virtual ConcretePrototype* clone()' compiles too
@@ -53,7 +52,8 @@ namespace ConceptualExample01
     {
         Prototype* copy{ original->clone() };
 
-        std::cout << "Copy: " << copy->getId() << std::endl;
+        // std::cout << "Copy: " << copy->getId() << std::endl;
+        std::println("Copy: {}", copy->getId());
 
         delete copy;
     }
@@ -64,14 +64,14 @@ namespace ConceptualExample02
     class Prototype
     {
     private:
-        int m_id;
+        std::size_t m_id;
 
     protected:
-        Prototype(int id) : m_id{ id } {}
+        Prototype(std::size_t id) : m_id{ id } {}
 
     public:
-        int getId() const { return m_id; }
-        void setId(int id) { m_id = id; }
+        std::size_t getId() const { return m_id; }
+        void setId(std::size_t id) { m_id = id; }
 
     public:
         virtual std::shared_ptr<Prototype> clone() const = 0;
@@ -80,14 +80,16 @@ namespace ConceptualExample02
     class ConcretePrototype : public Prototype
     {
     public:
-        ConcretePrototype(int id) : Prototype{ id } {}
+        ConcretePrototype(std::size_t id) : Prototype{ id } {}
 
         // Note: Return Type = Type of base class - 
         // 'std::shared_ptr<ConcretePrototype> clone() const override' doesn't compile !!!
         std::shared_ptr<Prototype> clone() const override
         {
+            // Preserve full object state by copying *this instead of
+            // reconstructing from a single property (getId()).
             std::shared_ptr<Prototype> copy {
-                std::make_shared<ConcretePrototype>(getId()) 
+                std::make_shared<ConcretePrototype>(*this)
             };
 
             return copy;
@@ -114,13 +116,13 @@ void test_conceptual_example_02()
         
     Prototype* clone{  prototype->clone() };
 
-    std::cout << "Prototype: " << prototype->getId() << std::endl;
-    std::cout << "Clone:     " << clone->getId() << std::endl;
+    std::println("Prototype: {}", prototype->getId());
+    std::println("Clone:     {}", clone->getId());
 
     clone->setId(456);
 
-    std::cout << "Prototype: " << prototype->getId() << std::endl;
-    std::cout << "Clone:     " << clone->getId() << std::endl;
+    std::println("Prototype: {}", prototype->getId());
+    std::println("Clone:     {}", clone->getId());
 
     delete prototype;
     delete clone;
@@ -138,13 +140,13 @@ void test_conceptual_example_03()
         prototype->clone() 
     };
 
-    std::cout << "Prototype: " << prototype->getId() << std::endl;
-    std::cout << "Clone:     " << clone->getId() << std::endl;
+    std::println("Prototype: {}", prototype->getId());
+    std::println("Clone:     {}", clone->getId());
 
     clone->setId(456);
 
-    std::cout << "Prototype: " << prototype->getId() << std::endl;
-    std::cout << "Clone:     " << clone->getId() << std::endl;
+    std::println("Prototype: {}", prototype->getId());
+    std::println("Clone:     {}", clone->getId());
 }
 
 // ===========================================================================

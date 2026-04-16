@@ -24,7 +24,7 @@ namespace ExamplesPrototypePattern {
         virtual ~IChessPiece() {}
 
         virtual std::unique_ptr<IChessPiece> clone() const = 0;
-        virtual std::string name() const = 0;
+        virtual const std::string& name() const = 0;
     };
 
     // -----------------------------------------------------------------------
@@ -38,7 +38,7 @@ namespace ExamplesPrototypePattern {
         ChessPiece(const std::string& name) : m_name{ name } {}
 
     public:
-        std::string name() const override final {
+        const std::string& name() const override final {
             return m_name;
         }
     };
@@ -87,9 +87,7 @@ namespace ExamplesPrototypePattern {
 
     public:
         GameBoard();                       // default c'tor
-
         GameBoard(const GameBoard&);       // copy c'tor
-
         virtual ~GameBoard() {}            // virtual defaulted d'tor
 
         GameBoard& operator=(const GameBoard&);   // assignment operator
@@ -172,14 +170,14 @@ namespace ExamplesPrototypePattern {
         for (const auto& row : board.m_cells) {
             for (const auto& cell : row) {
                 if (cell != nullptr) {
-                    std::cout << std::setw(8) << std::left << cell->name();
+                    os << std::setw(8) << std::left << cell->name();
                 }
                 else {
-                    std::cout << std::setw(8) << std::left << "<empty>";
+                    os << std::setw(8) << std::left << "<empty>";
                 }
 
             }
-            std::cout << std::endl;
+            os << std::endl;
         }
 
         return os;

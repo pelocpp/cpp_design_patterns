@@ -1,5 +1,5 @@
 // ===========================================================================
-// Program.cpp // Dependency Inversion Principle
+// Program.cpp - Dependency Inversion Principle
 // ===========================================================================
 
 // function prototypes

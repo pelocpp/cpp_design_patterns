@@ -1,5 +1,5 @@
 // ===========================================================================
-// Program.cpp // Factory a.k.a. Simple Factory
+// Program.cpp - Factory a.k.a. Simple Factory
 // ===========================================================================
 
 // function prototypes

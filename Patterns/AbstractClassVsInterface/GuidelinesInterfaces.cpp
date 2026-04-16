@@ -225,13 +225,13 @@ void test_guidelines_interfaces()
 {
     using namespace GuidelinesInterfaces;
 
-    //guideline_precise_interface();
-    //guideline_state_preconditions();
+    guideline_precise_interface();
+    guideline_state_preconditions();
     guideline_virtual_base_class_destructor();
-    //guideline_non_virtual_interface_pattern();
-    //guideline_use_exceptions();
-    //guideline_transferring_ownership();
-    //guideline_passing_arrays();
+    guideline_non_virtual_interface_pattern();
+    guideline_use_exceptions();
+    guideline_transferring_ownership();
+    guideline_passing_arrays();
 }
 
 // ===========================================================================

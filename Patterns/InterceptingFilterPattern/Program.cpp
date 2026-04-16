@@ -1,5 +1,5 @@
 // ===========================================================================
-// Program.cpp // Intercepting Filter Pattern
+// Program.cpp - Intercepting Filter Pattern
 // ===========================================================================
 
 // function prototypes

@@ -1,5 +1,5 @@
 // ===========================================================================
-// Program.cpp // Factory Method Pattern
+// Program.cpp - Factory Method Pattern
 // ===========================================================================
 
 // function prototypes

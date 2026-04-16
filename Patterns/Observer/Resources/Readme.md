@@ -129,6 +129,24 @@ void detach(std::weak_ptr<IObserver> observer) override {
 Die Klasse `std::weak_ptr` besitzt eine `owner_before` Methode,
 die eine Eigentümer-basierte Reihenfolge von `std::weak_ptr`-Zeigern implementiert.
 
+Der Vergleich funktioniert so:
+
+```cpp
+return !observer.owner_before(wp) && !wp.owner_before(observer);
+```
+
+Dies entspricht der Frage: &bdquo;Zeigen die beiden Zeiger nicht voreinander?&rdquo;,
+was bedeutet: &bdquo;Zeigen sie auf dasselbe Objekt?&rdquo;
+
+Aufgeschlüsselt:
+
+| Ausdruck | Bedeutung |
+|:-|:-|
+| `observer.owner_before(wp)` | Zeigt `observer` auf ein Objekt, das vor dem Objekt von `wp` liegt? |
+| `observer.owner_before(wp)` | Liegt `observer` nicht vor `wp`? |
+| `observer.owner_before(wp)` | Liegt `wp` nicht vor `observer`? | 
+| `Both true` | Es muss sich um dasselbe Objekt handeln. | 
+
 Eine detailliertere Beschreibung kann man unter
 &bdquo;[Removing item from list of weak_ptrs](https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs) &rdquo;
 nachlesen.

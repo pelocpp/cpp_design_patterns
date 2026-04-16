@@ -1,5 +1,5 @@
 // ===========================================================================
-// Program.cpp // Observable Vector Container
+// Program.cpp - Observable Vector Container
 // ===========================================================================
 
 // function prototypes

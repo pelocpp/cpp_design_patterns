@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample02.cpp // Flyweight Pattern (using smart pointer)
+// ConceptualExample02.cpp - Flyweight Pattern (using smart pointer)
 // ===========================================================================
 
 #include <iostream>
@@ -150,7 +150,7 @@ namespace ConceptualExample02 {
             size_t count = m_flyweights.size();
             std::cout << "FlyweightFactory: " << count << " flyweights:" << std::endl;
 
-            for (std::pair<std::string, std::shared_ptr<Flyweight>> pair : m_flyweights)
+            for (const std::pair<std::string, std::shared_ptr<Flyweight>>& pair : m_flyweights)
             {
                 std::cout << pair.first << std::endl;
             }

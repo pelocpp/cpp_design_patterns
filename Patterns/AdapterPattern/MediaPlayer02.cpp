@@ -133,7 +133,7 @@ namespace ApdaterPatternClassAdapterApproach {
 /**
 * The client code supports all classes that follow the MediaPlayer interface.
 */
-static void clientCode(std::shared_ptr<ApdaterPatternClassAdapterApproach::IMediaPlayer>& player)
+static void clientCode(const std::shared_ptr<ApdaterPatternClassAdapterApproach::IMediaPlayer>& player)
 {
     player->play("mp3", "beyond the horizon.mp3");
     player->play("mp4", "alone again.mp4");

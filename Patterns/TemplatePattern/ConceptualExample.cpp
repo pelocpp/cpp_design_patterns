@@ -114,7 +114,7 @@ protected:
  * code does not have to know the concrete class of an object it works with, as
  * long as it works with objects through the interface of their base class.
  */
-static void clientCode(std::shared_ptr<AbstractClass> obj) {
+static void clientCode(const std::shared_ptr<AbstractClass>& obj) {
     // ...
     obj->TemplateMethod();
     // ...

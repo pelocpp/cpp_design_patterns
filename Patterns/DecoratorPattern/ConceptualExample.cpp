@@ -1,12 +1,10 @@
 // ===========================================================================
-// ConceptualExample.cpp // Decorator Pattern
+// ConceptualExample.cpp - Decorator Pattern
 // ===========================================================================
 
 #include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
 #include <memory>
+#include <string>
 
 /**
  * The base Component interface defines operations
@@ -14,7 +12,7 @@
  */
 class IComponent {
 public:
-    virtual ~IComponent() {}
+    virtual ~IComponent() = default;
 
     virtual std::string operation() const = 0;
 };
@@ -51,6 +49,9 @@ public:
      * The Decorator delegates all work to the wrapped component.
      */
     std::string operation() const override {
+        if (!m_component) {
+            return std::string{};
+        }
         return m_component->operation();
     }
 };
@@ -118,7 +119,7 @@ public:
  * This way it can stay independent of the concrete classes of components
  * it works with.
  */
-static void clientCode(std::shared_ptr<IComponent> component) {
+static void clientCode(const std::shared_ptr<IComponent>& component) {
     // ...
     std::cout << "Result: " << component->operation();
     // ...

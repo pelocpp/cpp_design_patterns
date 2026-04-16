@@ -56,7 +56,9 @@ namespace ObserverDesignPatternClassic {
          * The subscription management methods.
          */
         void attach(IObserver* observer) override {
-            m_observers.push_back(observer);
+            if (observer != nullptr) {
+                m_observers.push_back(observer);
+            }
         }
 
         void detach(IObserver* observer) override {
@@ -83,7 +85,9 @@ namespace ObserverDesignPatternClassic {
     private:
         void notify() const {
             for (IObserver* observer : m_observers) {
-                observer->update(m_message);
+                if (observer != nullptr) {
+                    observer->update(m_message);
+                }
             }
         }
     };
@@ -98,8 +102,7 @@ namespace ObserverDesignPatternClassic {
         static int  m_count;
 
     public:
-        Observer() {
-            m_subject = nullptr;
+        Observer() : m_subject{ nullptr } {
             ++Observer::m_count;
             std::println("Observer: {}", Observer::m_count);
             m_number = Observer::m_count;
@@ -109,7 +112,9 @@ namespace ObserverDesignPatternClassic {
         // to demonstrate 'removeMeFromTheList' method
 
         Observer(Subject* subject) : m_subject{ subject } {
-            m_subject->attach(this);
+            if (m_subject != nullptr) {
+                m_subject->attach(this);
+            }
             ++Observer::m_count;
             std::println("Observer: {}", Observer::m_count);
             m_number = Observer::m_count;

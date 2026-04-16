@@ -3,6 +3,7 @@
 // ===========================================================================
 
 #include <concepts>
+#include <cstdint>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -118,20 +119,20 @@ namespace StaticDecoration {
     struct TransparentShape : public T
     {
     private:
-        uint8_t m_transparency;
+        std::uint8_t m_transparency;
 
     public:
         // c'tor
         template<typename ... TArgs>
-        TransparentShape(uint8_t transparency, TArgs&& ...args)
+        TransparentShape(std::uint8_t transparency, TArgs&& ...args)
             : T{ std::forward<TArgs>(args)... }, m_transparency{ transparency } {}
 
         std::string draw() const override {
             std::ostringstream oss;
             std::string s{ T::draw() };
-            oss << s << " has "
-                << (static_cast<double>(m_transparency) / 255.0) * 100.0
-                << "% transparency";
+            // present transparency as percentage with two decimals
+            double pct = (static_cast<double>(m_transparency) / 255.0) * 100.0;
+            oss << s << " has " << std::fixed << std::setprecision(2) << pct << "% transparency";
             return oss.str();
         }
     };
@@ -161,7 +162,7 @@ void test_static_decoration_01()
     std::cout << greenCircle.draw() << std::endl;
 
     TransparentShape<Square> transparentSquare{ 
-        static_cast<uint8_t>(0), 0.0 
+        static_cast<std::uint8_t>(0), 0.0 
     };
     std::cout << transparentSquare.draw() << std::endl;
 
@@ -178,7 +179,7 @@ void test_static_decoration_01()
     std::cout << blueTransparentSquare.draw() << std::endl;
 
     ColoredShape<TransparentShape<Square>> redOpaqueSquare{
-        std::string{ "red" }, static_cast<uint8_t>(0), 255.0
+        std::string{ "red" }, static_cast<std::uint8_t>(0), 255.0
     };
     redOpaqueSquare.setColor("red");
     redOpaqueSquare.setSide(300);

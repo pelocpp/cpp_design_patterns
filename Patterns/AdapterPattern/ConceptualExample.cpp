@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Adapter Pattern
+// ConceptualExample.cpp - Adapter Pattern
 // ===========================================================================
 
 #include <iostream>

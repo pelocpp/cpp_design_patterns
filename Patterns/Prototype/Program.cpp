@@ -1,5 +1,5 @@
 // ===========================================================================
-// Program.cpp // Prototype Pattern
+// Program.cpp - Prototype Pattern
 // ===========================================================================
 
 #define _CRTDBG_MAP_ALLOC
@@ -29,8 +29,8 @@ int main()
     test_conceptual_example_02();
     test_conceptual_example_03();
 
-    test_prototype_pattern_chess_01();
-    test_prototype_pattern_chess_02();
+    //test_prototype_pattern_chess_01();
+    //test_prototype_pattern_chess_02();
     return 0;
 }
 

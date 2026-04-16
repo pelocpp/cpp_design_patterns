@@ -42,7 +42,7 @@ namespace ObserverDesignPatternSmartPointer {
         std::string                         m_message;
 
     public:
-        virtual ~Subject() {
+        virtual ~Subject() noexcept {
             std::println("d'tor Subject");
         }
 
@@ -57,7 +57,12 @@ namespace ObserverDesignPatternSmartPointer {
 
             // https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs
 
-            m_observers.remove_if([&](std::weak_ptr<IObserver> wp) {
+            m_observers.remove_if([observer](std::weak_ptr<IObserver> wp) {
+                return !observer.owner_before(wp) && !wp.owner_before(observer);
+                }
+            );
+
+            m_observers.remove_if([observer](const std::weak_ptr<IObserver>& wp) {
                 return !observer.owner_before(wp) && !wp.owner_before(observer);
                 }
             );
@@ -81,7 +86,13 @@ namespace ObserverDesignPatternSmartPointer {
         }
 
     private:
-        void notify() const {
+        void notify() {
+            // clean up expired weak pointers while notifying active observers
+            m_observers.remove_if([](const std::weak_ptr<IObserver>& wp) {
+                return wp.expired();
+                }
+            );
+
             for (const std::weak_ptr<IObserver>& weakPtr : m_observers) {
                 std::shared_ptr<IObserver> sharedPtr{ weakPtr.lock() };
                 if (sharedPtr != nullptr) {
@@ -96,18 +107,17 @@ namespace ObserverDesignPatternSmartPointer {
     class Observer : public IObserver {
     private:
         std::string m_messageFromSubject;
-        static int  m_count;
-        int         m_number;
+        std::size_t m_number;
 
     public:
         Observer() 
         {
-            ++Observer::m_count;
-            std::println("Observer: {}", Observer::m_count);
-            m_number = Observer::m_count;
+            static std::size_t nextNumber = 0;
+            m_number = nextNumber++;
+            std::println("Observer: {}", m_number);
         }
 
-        virtual ~Observer() 
+        virtual ~Observer() noexcept
         {
             std::println("d'tor Observer ({})", m_number);
         }
@@ -122,8 +132,6 @@ namespace ObserverDesignPatternSmartPointer {
             std::println("Observer: new message is available --> \"{}\"", m_messageFromSubject);
         }
     };
-
-    int Observer::m_count = 0;
 
     static void clientCode_01() {
 
@@ -162,6 +170,7 @@ namespace ObserverDesignPatternSmartPointer {
         }
 
         // Note: Watch contents of 'm_observers' list
+        // Expired weak_ptr will be cleaned up on next notify()
 
         subject->createMessage("Hello World Again");
 
