@@ -75,7 +75,7 @@ um *Subscriber* zu dieser Liste hinzuzufügen und aus dieser wieder zu entfernen.
 
 #### Conceptual Example:
 
-Das *Conceptual Example* liegt in drei Varianten vor:
+Das *Conceptual Example* liegt in vier Varianten vor:
 
   * Variante 1: klassisch - d.h. mit &bdquo;raw&rdquo;-Zeigern.
   * Variante 2: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
