@@ -19,9 +19,129 @@ In anderen Worten:
 Auf den ersten Blick mag das *Open-Closed-Prinzip* etwas seltsam erscheinen und die Frage aufwerfen,
 wie man das Verhalten einer Klasse &bdquo;erweitern&rdquo; können soll, ohne diese dabei zu &bdquo;verändern&rdquo;?
 
-Wir betrachten das *Open-Closed-Prinzip* an zwei Beispielen.
+Wir betrachten das *Open-Closed-Prinzip* an drei Beispielen.
 
 ### 1. Beispiel
+
+Ein klassisches und überzeugendes Beispiel für das Open-Closed Principle (OCP) ist ein Benachrichtigungssystem (*Messenger*).
+
+Das Prinzip besagt:<vr />
+Klassen sollten offen für Erweiterungen (neue Methoden), aber geschlossen für Modifikationen &ndash; bestehenden Code ändern &ndash; sein.
+
+Hier ist der direkte Vergleich zwischen schlechtem und korrekt umgesetztem *Open-Closed-Prinzip* in modernem C++:
+
+
+#### Beispiel: Violating the Open Closed Principle
+
+Wenn Sie eine neue Benachrichtigungsart (z. B. SMS) hinzufügen möchten, müssen Sie die bestehende Klasse `NotificationManager`
+und den Aufzählungstyp `enum` ändern. Das birgt das Risiko, Fehler in funktionierenden Code einzuschleusen:
+
+```cpp
+01: enum class NotificationType { Email, WhatsApp };
+02: 
+03: class NotificationManager
+04: {
+05: public:
+06:     void send(NotificationType type, const std::string& msg) {
+07: 
+08:         if (type == NotificationType::Email) {
+09:             std::println("Email: {}", msg);
+10:         }
+11:         else if (type == NotificationType::WhatsApp) {
+12:             std::println("WhatsApp: {}", msg);
+13:         }
+14: 
+15:         // Every new messenger requires a new 'else if' modification here!
+16:     }
+17: };
+```
+
+
+#### Beispiel: Respecting the Open Closed Principle
+
+Wir nutzen Polymorphie (Schnittstellen). Der `NotificationManager` bleibt komplett unberührt, wenn neue Benachrichtigungskanäle hinzukommen:
+
+##### 1. Die Abstraktion (Geschlossen für Modifikation)
+
+```cpp
+01: // interface 'INotifier'
+02: class INotifier {
+03: public:
+04:     virtual ~INotifier() = default;
+05:     virtual void send(const std::string& msg) const = 0;
+06: };
+07: 
+08: // manager uses only the interface
+09: class NotificationManager {
+10: public:
+11:     void sendAll(const std::string& msg) const {
+12:         for (const auto& notifier : notifiers) {
+13:             notifier->send(msg);
+14:         }
+15:     }
+16: 
+17:     void addNotifier(std::unique_ptr<INotifier> notifier) {
+18:         notifiers.push_back(std::move(notifier));
+19:     }
+20: 
+21: private:
+22:     std::vector<std::unique_ptr<INotifier>> notifiers;
+23: };
+```
+
+##### 2. Die Erweiterung (Offen für Erweiterung)
+
+Wir erstellen bestehende Kanäle und können jederzeit neue Kanäle hinzufügen,
+ohne die vorhandenen Klassen auch nur anzufassen zu müssen:
+
+```cpp
+01: class EmailNotifier : public INotifier {
+02: public:
+03:     void send(const std::string& msg) const override {
+04:         std::println("Email: {}", msg);
+05:     }
+06: };
+07: 
+08: class WhatsAppNotifier : public INotifier {
+09: public:
+10:     void send(const std::string& msg) const override {
+11:         std::println("WhatsApp: {}", msg);
+12:     }
+13: };
+14: 
+15: // NEW: Simply add a new class via inheritance without modifying legacy code!
+16: class SMSNotifier : public INotifier {
+17: public:
+18:     void send(const std::string& msg) const override {
+19:         std::println("SMS: {}", msg);
+20:     }
+21: };
+```
+
+##### 3. Die Nutzung
+
+```cpp
+01: void test() {
+02: 
+03:     NotificationManager manager;
+04: 
+05:     manager.addNotifier(std::make_unique<EmailNotifier>());
+06:     manager.addNotifier(std::make_unique<WhatsAppNotifier>());
+07: 
+08:     manager.addNotifier(std::make_unique<SMSNotifier>()); // Seamlessly integrable
+09: 
+10:     manager.sendAll("System update successful!");
+11: }
+```
+
+*Zusammenfassung OCP*:
+
+  * Stabilität: Wir können `SMSNotifier` schreiben und testen, ohne die Befürchtung zu haben, den `EmailNotifier` zu korrumpieren.
+  * Wiederverwendbarkeit: Der `NotificationManager` ist universell und muss nie wieder kompiliert werden, wenn sich Anforderungen ändern.
+  * Erweiterbarkeit: Neue Entwickler im Team können eigene Benachrichtigungsdienste schreiben, ohne den Kern-Code überhaupt zu kennen.
+
+
+### 2. Beispiel
 
 Wir legen im Folgenden eine Klasse `Product` für Produkte eines E-Commerce Warenhauses zu Grunde.
 In UML-Notation könnte ein einfaches UML-Diagramm für die Klasse `Product` so aussehen:
@@ -85,7 +205,7 @@ in der internen Datenhaltung des E-Commerce Warenhauses steht.
 Das Ziel des *Open-Closed-Prinzips* wurde mit dem Konzept der *Vererbung* umgesetzt.
 
 
-### 2. Beispiel
+### 3. Beispiel
 
 Das zweite Beispiel beschäftigt sich ebenfalls mit einer Reihe von Produkten (Klasse `Product`).
 Wie beim ersten Beispiel betrachten wir den Umstand, dass an der Klasse `Product` Änderungen

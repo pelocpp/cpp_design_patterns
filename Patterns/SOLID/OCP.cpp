@@ -7,10 +7,97 @@
 #include <iostream>
 #include <memory>
 #include <numeric>
+#include <print>
 #include <string>
 #include <vector>
 
 namespace AntiFirstExampleOCP {
+
+    enum class NotificationType { Email, WhatsApp };
+
+    class NotificationManager
+    {
+    public:
+        void send(NotificationType type, const std::string& msg) {
+
+            if (type == NotificationType::Email) {
+                std::println("Email: {}", msg);
+            }
+            else if (type == NotificationType::WhatsApp) {
+                std::println("WhatsApp: {}", msg);
+            }
+
+            // Every new messenger requires a new 'else if' modification here!
+        }
+    };
+}
+
+namespace FirstExampleOCP {
+
+    // interface 'INotifier'
+    class INotifier {
+    public:
+        virtual ~INotifier() = default;
+        virtual void send(const std::string& msg) const = 0;
+    };
+
+    // manager uses only the interface
+    class NotificationManager {
+    public:
+        void sendAll(const std::string& msg) const {
+            for (const auto& notifier : notifiers) {
+                notifier->send(msg);
+            }
+        }
+
+        void addNotifier(std::unique_ptr<INotifier> notifier) {
+            notifiers.push_back(std::move(notifier));
+        }
+
+    private:
+        std::vector<std::unique_ptr<INotifier>> notifiers;
+    };
+
+    class EmailNotifier : public INotifier {
+    public:
+        void send(const std::string& msg) const override {
+            std::println("Email: {}", msg);
+        }
+    };
+
+    class WhatsAppNotifier : public INotifier {
+    public:
+        void send(const std::string& msg) const override {
+            std::println("WhatsApp: {}", msg);
+        }
+    };
+
+    // NEW: Simply add a new class via inheritance without modifying legacy code!
+    class SMSNotifier : public INotifier {
+    public:
+        void send(const std::string& msg) const override {
+            std::println("SMS: {}", msg);
+        }
+    };
+}
+
+static void test_first_conceptual_example_ocp() {
+
+    using namespace FirstExampleOCP;
+
+    NotificationManager manager;
+
+    manager.addNotifier(std::make_unique<EmailNotifier>());
+    manager.addNotifier(std::make_unique<WhatsAppNotifier>());
+
+    manager.addNotifier(std::make_unique<SMSNotifier>()); // Seamlessly integrable
+
+    manager.sendAll("System update successful!");
+}
+
+// ===========================================================================
+
+namespace AntiSecondExampleOCP {
 
     class Product
     {
@@ -35,7 +122,7 @@ namespace AntiFirstExampleOCP {
     };
 }
 
-namespace FirstExampleOCP {
+namespace SecondExampleOCP {
 
     class Product
     {
@@ -84,16 +171,16 @@ namespace FirstExampleOCP {
     };
 }
 
-static void test_anti_simple_conceptual_example_ocp()
+static void test_anti_second_conceptual_example_ocp()
 {
-    using namespace AntiFirstExampleOCP;
+    using namespace AntiSecondExampleOCP;
 
     Product p{ "Computer", 999.90, 5.0 };
 }
 
-static void test_simple_conceptual_example_ocp()
+static void test_second_conceptual_example_ocp()
 {
-    using namespace FirstExampleOCP;
+    using namespace SecondExampleOCP;
 
     PhysicalProduct p1 { "Computer", 999.90, 5.0 };
     DigitalProduct p2 { "Mp3 Stream", 19.90, "Beatles/Best of" };
@@ -101,7 +188,7 @@ static void test_simple_conceptual_example_ocp()
 
 // ===========================================================================
 
-namespace SecondExampleOCP {
+namespace ThirdExampleOCP {
 
     enum class Color { Red, Green, Black, Gray };
 
@@ -158,9 +245,9 @@ namespace SecondExampleOCP {
     }
 }
 
-namespace AntiSecondConceptualExampleOCP {
+namespace AntiThirdConceptualExampleOCP {
 
-    using namespace SecondExampleOCP;
+    using namespace ThirdExampleOCP;
 
     struct ProductFilter 
     {
@@ -199,9 +286,9 @@ namespace AntiSecondConceptualExampleOCP {
     };
 }
 
-namespace SecondConceptualExampleOCP {
+namespace ThirdConceptualExampleOCP {
 
-    using namespace SecondExampleOCP;
+    using namespace ThirdExampleOCP;
 
     template <typename T>
         requires ProductRequirements<T>
@@ -349,8 +436,7 @@ namespace SecondConceptualExampleOCP {
 
 static void test_anti_conceptual_example_ocp ()
 {
-    using namespace SecondExampleOCP;
-    using namespace AntiSecondConceptualExampleOCP;
+    using namespace AntiThirdConceptualExampleOCP;
 
     Products<Product> products
     {
@@ -368,8 +454,8 @@ static void test_anti_conceptual_example_ocp ()
 
 static void test_conceptual_example_ocp_01()
 {
-    using namespace SecondExampleOCP;
-    using namespace SecondConceptualExampleOCP;
+    using namespace ThirdExampleOCP;
+    using namespace ThirdConceptualExampleOCP;
 
     Products<Product> products
     {
@@ -389,8 +475,8 @@ static void test_conceptual_example_ocp_01()
 
 static void test_conceptual_example_ocp_02()
 {
-    using namespace SecondExampleOCP;
-    using namespace SecondConceptualExampleOCP;
+    using namespace ThirdExampleOCP;
+    using namespace ThirdConceptualExampleOCP;
 
     Products<Product> products
     {
@@ -412,8 +498,8 @@ static void test_conceptual_example_ocp_02()
 
 static void test_conceptual_example_ocp_03()
 {
-    using namespace SecondExampleOCP;
-    using namespace SecondConceptualExampleOCP;
+    using namespace ThirdExampleOCP;
+    using namespace ThirdConceptualExampleOCP;
 
     // combined specification
     AndSpecification<Product> specification {
@@ -451,8 +537,8 @@ static void test_conceptual_example_ocp_03()
 
 static void test_conceptual_example_ocp_04()
 {
-    using namespace SecondExampleOCP;
-    using namespace SecondConceptualExampleOCP;
+    using namespace ThirdExampleOCP;
+    using namespace ThirdConceptualExampleOCP;
 
     Products<Product> products
     {
@@ -497,8 +583,8 @@ static void test_conceptual_example_ocp_04()
 
 static void test_conceptual_example_ocp_05()
 {
-    using namespace SecondExampleOCP;
-    using namespace SecondConceptualExampleOCP;
+    using namespace ThirdExampleOCP;
+    using namespace ThirdConceptualExampleOCP;
 
     Products<ProductEx> products
     {
@@ -545,7 +631,11 @@ static void test_conceptual_example_ocp_05()
 
 void test_ocp()
 {
-    test_anti_conceptual_example_ocp();
+    test_first_conceptual_example_ocp();
+
+    test_anti_second_conceptual_example_ocp();
+    test_second_conceptual_example_ocp();
+
     test_conceptual_example_ocp_01();
     test_conceptual_example_ocp_02();
     test_conceptual_example_ocp_03();
