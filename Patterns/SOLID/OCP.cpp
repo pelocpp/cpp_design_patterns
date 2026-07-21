@@ -359,7 +359,7 @@ namespace ThirdConceptualExampleOCP {
         AndSpecification(const ISpecification<T>& first, const ISpecification<T>& second)
             : m_first{ first }, m_second{ second } {}
 
-        bool isSatisfied(const std::shared_ptr<Product>& product) const override {
+        bool isSatisfied(const std::shared_ptr<T>& product) const override {
             return m_first.isSatisfied(product) && m_second.isSatisfied(product);
         }
     };
@@ -381,30 +381,18 @@ namespace ThirdConceptualExampleOCP {
 
     public:
         template <typename ... TArgs>
-        GenericAndSpecification(const TArgs& ... args)
+        GenericAndSpecification(std::shared_ptr<TArgs> ... args)
         {
-            m_vec = { args ... };
+            (m_vec.push_back(args), ...);
         }
 
         bool isSatisfied(const std::shared_ptr<T>& product) const override {
 
-            //bool result{ 
-            //    std::accumulate(
-            //        m_vec.begin(),
-            //        m_vec.end(),
-            //        true,
-            //        [product](bool last, const auto& next) -> bool {
-            //            bool tmp = next->isSatisfied(product);
-            //            return last && tmp;
-            //        }
-            //    ) 
-            //};
-
             auto result = std::all_of(
                 m_vec.cbegin(),
                 m_vec.cend(),
-                [product](const auto& next) {
-                    return next->isSatisfied(product);
+                [product](const auto& spec) {
+                    return spec->isSatisfied(product);
                 }
             );
 

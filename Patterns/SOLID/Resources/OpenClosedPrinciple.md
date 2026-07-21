@@ -23,9 +23,9 @@ Wir betrachten das *Open-Closed-Prinzip* an drei Beispielen.
 
 ### 1. Beispiel
 
-Ein klassisches und überzeugendes Beispiel für das Open-Closed Principle (OCP) ist ein Benachrichtigungssystem (*Messenger*).
+Ein klassisches Beispiel für das *Open-Closed Principle* (OCP) ist ein Benachrichtigungssystem (*Messenger*).
 
-Das Prinzip besagt:<vr />
+Das Prinzip besagt:<br />
 Klassen sollten offen für Erweiterungen (neue Methoden), aber geschlossen für Modifikationen &ndash; bestehenden Code ändern &ndash; sein.
 
 Hier ist der direkte Vergleich zwischen schlechtem und korrekt umgesetztem *Open-Closed-Prinzip* in modernem C++:
@@ -34,7 +34,7 @@ Hier ist der direkte Vergleich zwischen schlechtem und korrekt umgesetztem *Open
 #### Beispiel: Violating the Open Closed Principle
 
 Wenn Sie eine neue Benachrichtigungsart (z. B. SMS) hinzufügen möchten, müssen Sie die bestehende Klasse `NotificationManager`
-und den Aufzählungstyp `enum` ändern. Das birgt das Risiko, Fehler in funktionierenden Code einzuschleusen:
+und den Aufzählungstyp `NotificationType` ändern. Das birgt das Risiko, Fehler in funktionierendem Code einzuschleusen:
 
 ```cpp
 01: enum class NotificationType { Email, WhatsApp };
