@@ -50,7 +50,7 @@ namespace ConceptualExample01 {
         std::string m_data;
 
     public:
-        ConcreteCommand(std::shared_ptr<Receiver>& receiver)
+        ConcreteCommand(const std::shared_ptr<Receiver>& receiver)
             : CommandBase{ receiver }
         {}
 

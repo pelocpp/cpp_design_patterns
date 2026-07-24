@@ -69,7 +69,7 @@ namespace ConceptualExampleBuilder01 {
         }
 
         std::shared_ptr<Product> getProduct() override {
-            return std::move(m_product);
+            return m_product;
         }
     };
 

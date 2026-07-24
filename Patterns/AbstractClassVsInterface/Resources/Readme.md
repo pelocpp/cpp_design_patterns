@@ -208,10 +208,9 @@ Die Schnittstelle gibt nun klar an:
 
 ---
 
-
 ### Regel &bdquo;Virtueller Basisklassendestruktor&rdquo; <a name="link8"></a>
 
-Das ist eine der wichtigsten Regel: Ein Interface benötigt immer einen Eintrag
+Das ist eine der wichtigsten Regeln: Ein Interface benötigt immer einen Eintrag
 
 ```cpp
 virtual ~IMyInterface() = default;

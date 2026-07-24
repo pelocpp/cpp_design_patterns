@@ -8,10 +8,10 @@
 
 namespace JobApplicationExample {
 
-    class State
+    class IState
     {
     public:
-        virtual ~State() {}
+        virtual ~IState() {}
 
         virtual void inform() = 0;             // inform applicant
         virtual void process() = 0;            // process job application
@@ -21,7 +21,7 @@ namespace JobApplicationExample {
     // =======================================================================
 
     // Abgesagt
-    class Refused : public State
+    class Refused : public IState
     {
     public:
         void inform() override {}
@@ -30,7 +30,7 @@ namespace JobApplicationExample {
     };
 
     // Eingegangen
-    class Received : public State
+    class Received : public IState
     {
     public:
         void inform() override {}
@@ -39,7 +39,7 @@ namespace JobApplicationExample {
     };
 
     // Eingeladen
-    class Invited : public State
+    class Invited : public IState
     {
     public:
         void inform() override {}
@@ -48,7 +48,7 @@ namespace JobApplicationExample {
     };
 
     // Eingestellt
-    class Hired : public State
+    class Hired : public IState
     {
     public:
         void inform() override {}
@@ -57,7 +57,7 @@ namespace JobApplicationExample {
     };
 
     // Interviewt
-    class Interviewed : public State
+    class Interviewed : public IState
     {
     public:
         void inform() override {}
@@ -66,7 +66,7 @@ namespace JobApplicationExample {
     };
 
     // Talentpool
-    class Talentpool : public State
+    class Talentpool : public IState
     {
     public:
         void inform() override {}
@@ -75,7 +75,7 @@ namespace JobApplicationExample {
     };
 
     // Unvollstaendig
-    class Incomplete : public State
+    class Incomplete : public IState
     {
     public:
         void inform() override {}
@@ -88,7 +88,7 @@ namespace JobApplicationExample {
     class JobApplication
     {
     private:
-        std::shared_ptr<State> m_state;
+        std::shared_ptr<IState> m_state;
 
     public:
         JobApplication()
@@ -96,12 +96,12 @@ namespace JobApplicationExample {
             m_state = std::make_shared<Received>();
         }
 
-        std::shared_ptr<State> getState()
+        std::shared_ptr<IState> getState()
         {
             return m_state;
         }
 
-        void setState(std::shared_ptr<State> nextState)
+        void setState(std::shared_ptr<IState> nextState)
         {
             if (nextState != m_state)
             {
@@ -130,7 +130,7 @@ namespace JobApplicationExample {
         }
 
     private:
-        bool isStateAccepted(std::shared_ptr<State> nextState)
+        bool isStateAccepted(std::shared_ptr<IState> nextState)
         {
             if (typeid(*m_state) == typeid(Received)) {
                 return

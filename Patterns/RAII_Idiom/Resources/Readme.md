@@ -49,7 +49,7 @@ Wir betrachten das Prinzip einer RAII-verwalteten Ressource an Hand einer Folge 
 02: class RAII {
 03: public:
 04:     // c'tor
-05:     explicit RAII(TFinalizer finalizer)
+05:     explicit RAII(const TFinalizer finalizer)
 06:         : m_finalizer{ finalizer }
 07:     {}
 08: 
@@ -162,7 +162,7 @@ Done.
 
 ---
 
-##### 5. Reihenfolge bei der Freigabe mehrere RAII-verwalteter Ressourcen
+##### 5. Reihenfolge bei der Freigabe mehrerer RAII-verwalteter Ressourcen
 
 ```cpp
 01: void test()

@@ -119,7 +119,8 @@ public:
       */
 
     std::unique_ptr<Product> getProduct() {
-        std::unique_ptr<Product> result = std::move(m_product);
+
+        std::unique_ptr<Product> result{ std::move(m_product) };
         reset();
         return result;
     }

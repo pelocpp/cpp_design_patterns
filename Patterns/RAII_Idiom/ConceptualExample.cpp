@@ -12,7 +12,7 @@ namespace RAIIDemo {
     class RAII {
     public:
         // c'tor
-        explicit RAII(TFinalizer finalizer)
+        explicit RAII(const TFinalizer finalizer)
             : m_finalizer{ finalizer }
         {}
 

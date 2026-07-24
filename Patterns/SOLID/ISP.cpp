@@ -12,23 +12,23 @@ namespace InterfaceSegregationPrinciple01
 
     class IMachine {
     public:
-        virtual void print(Document& doc) = 0;
-        virtual void fax(Document& doc) = 0;
-        virtual void scan(Document& doc) = 0;
+        virtual void print(const Document& doc) = 0;
+        virtual void fax(const Document& doc) = 0;
+        virtual void scan(const Document& doc) = 0;
     };
 
     // ok
     class MultiFunctionPrinter : public IMachine {
     public:
-        void print(Document& doc) override {
+        void print(const Document& doc) override {
             // do printing ...
         }
 
-        void fax(Document& doc) override {
+        void fax(const Document& doc) override {
             // do faxing ...
         }
 
-        void scan(Document& doc) override {
+        void scan(const Document& doc) override {
             // do scanning ...
         }
     };
@@ -36,15 +36,15 @@ namespace InterfaceSegregationPrinciple01
     // Not ok
     class Scanner : public IMachine {
     public:
-        void print(Document& doc) override {
+        void print(const Document& doc) override {
             throw std::runtime_error("printing not supported");
         }
 
-        void fax(Document& doc) override {
+        void fax(const Document& doc) override {
             throw std::runtime_error("faxing not supported");
         }
 
-        void scan(Document& doc) override {
+        void scan(const Document& doc) override {
             // do scanning ...
         }
     };
@@ -57,17 +57,17 @@ namespace InterfaceSegregationPrinciple02
     /* ---------------------- Interfaces ------------------- */
     class IPrinter {
     public:
-        virtual void print(Document& doc) = 0;
+        virtual void print(const Document& doc) = 0;
     };
 
     class IScanner {
     public:
-        virtual void scan(Document& doc) = 0;
+        virtual void scan(const Document& doc) = 0;
     };
 
     class IFaxMachine {
     public:
-        virtual void fax(Document& doc) = 0;
+        virtual void fax(const Document& doc) = 0;
     };
 
     class IMachine : public IPrinter, public IScanner, public IFaxMachine {};
@@ -75,17 +75,17 @@ namespace InterfaceSegregationPrinciple02
     /*  ---------------------- Implementation ------------------- */
     class Printer : public IPrinter {
     public:
-        void print(Document& doc) override { };
+        void print(const Document& doc) override { };
     };
 
     class Scanner : public IScanner {
     public:
-        void scan(Document& doc) override { };
+        void scan(const Document& doc) override { };
     };
 
     class FaxMachine : public IFaxMachine {
     public:
-        void fax(Document& doc) override { };
+        void fax(const Document& doc) override { };
     };
 
     class Machine : public IMachine {
@@ -97,15 +97,15 @@ namespace InterfaceSegregationPrinciple02
         Machine(IPrinter& printer, IScanner& scanner, IFaxMachine& faxmachine)
             : m_printer{ printer }, m_scanner{ scanner }, m_faxmachine{ faxmachine } {}
 
-        void print(Document& doc) override {
+        void print(const Document& doc) override {
             m_printer.print(doc);
         }
 
-        void scan(Document& doc) override {
+        void scan(const Document& doc) override {
             m_scanner.scan(doc);
         }
 
-        void fax(Document& doc) override {
+        void fax(const Document& doc) override {
             m_faxmachine.fax(doc);
         }
     };

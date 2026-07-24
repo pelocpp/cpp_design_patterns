@@ -28,7 +28,6 @@ namespace GuidelinesInterfaces {
         int m_width;
     };
 
-
     static void draw_rect(int, int, int, int) {}
     static void draw_rectangle(Point top_left, Point bottom_right) {}
     static void draw_rectangle(Point top_left, Size height_width) {}

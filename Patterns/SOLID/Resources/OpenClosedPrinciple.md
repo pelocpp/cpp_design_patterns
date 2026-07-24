@@ -92,7 +92,7 @@ Wir nutzen Polymorphie (Schnittstellen). Der `NotificationManager` bleibt komple
 ##### 2. Die Erweiterung (Offen für Erweiterung)
 
 Wir erstellen bestehende Kanäle und können jederzeit neue Kanäle hinzufügen,
-ohne die vorhandenen Klassen auch nur anzufassen zu müssen:
+ohne die vorhandenen Klassen anfassen zu müssen:
 
 ```cpp
 01: class EmailNotifier : public INotifier {
