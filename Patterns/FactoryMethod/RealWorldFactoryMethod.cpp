@@ -12,7 +12,7 @@ namespace RealWorldFactoryMethod {
     class ITelevision
     {
     public:
-        virtual ~ITelevision() {}
+        virtual ~ITelevision() = default;
 
         virtual std::string getManufacturer() const = 0;
         virtual void switchOn() = 0;

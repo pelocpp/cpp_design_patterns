@@ -11,7 +11,7 @@
 class PasswordValidator
 {
 public:
-    virtual ~PasswordValidator() {}
+    virtual ~PasswordValidator() = default;
     virtual bool validate(const std::string& password) const = 0;
 };
 

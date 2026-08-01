@@ -16,7 +16,7 @@ namespace ObserverDesignPatternSmartPointer {
 
     class IObserver {
     public:
-        virtual ~IObserver() {}
+        virtual ~IObserver() = default;
 
         virtual void update(const std::string&) = 0;
     };

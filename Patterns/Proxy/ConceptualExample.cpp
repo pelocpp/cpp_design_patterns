@@ -14,7 +14,7 @@
 class SubjectBase 
 {
 public:
-    virtual ~SubjectBase() {};
+    virtual ~SubjectBase() = default;
 
     virtual void request() const = 0;
 };

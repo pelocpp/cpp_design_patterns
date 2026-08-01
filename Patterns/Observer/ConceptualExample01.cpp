@@ -22,14 +22,14 @@ namespace ObserverDesignPatternClassic {
 
     class IObserver {
     public:
-        virtual ~IObserver() {};
+        virtual ~IObserver() = default;
 
         virtual void update(const std::string& messageFromSubject) = 0;
     };
 
     class ISubject {
     public:
-        virtual ~ISubject() {}
+        virtual ~ISubject() = default;
 
         virtual void attach(IObserver* observer) = 0;
         virtual void detach(IObserver* observer) = 0;

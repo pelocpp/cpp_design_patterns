@@ -17,7 +17,7 @@ namespace ConceptualExample02 {
 
     class MediatorBase {
     public:
-        virtual ~MediatorBase() {}
+        virtual ~MediatorBase() = default;
 
         virtual void notify(const std::shared_ptr<ColleagueBase>& sender, const std::string& event) const = 0;
     };

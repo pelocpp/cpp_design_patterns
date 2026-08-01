@@ -26,7 +26,7 @@ namespace ConceptualExample01
     public:
         Prototype(std::size_t id) : m_id{ id } {}
 
-        virtual ~Prototype() {}
+        virtual ~Prototype() = default;
         
         virtual Prototype* clone() const = 0;
 

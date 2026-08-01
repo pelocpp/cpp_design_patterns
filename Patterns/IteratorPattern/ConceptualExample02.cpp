@@ -25,7 +25,7 @@ namespace IteratorPatternStandard {
     class AggregateBase
     {
     public:
-        virtual ~AggregateBase() {};
+        virtual ~AggregateBase() = default;
 
         virtual IteratorBase<T>* createForwardIterator() = 0;
         virtual IteratorBase<T>* createBackwardIterator() = 0;

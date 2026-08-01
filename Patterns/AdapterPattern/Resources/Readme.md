@@ -113,6 +113,38 @@ in einen Container einfügen.
 
 ---
 
+#### Das Addapter Pattern in Modern C++
+
+Ein Compile-Time-Adapter (auch statischer Adapter genannt) verzichtet komplett auf Laufzeit-Polymorphie (virtual-Funktionen, vtables)
+und Heap-Allokationen (std::unique_ptr).
+
+Anstatt ein gemeinsames Interface über Vererbung zu erzwingen, nutzen wir in Modern C++ (C++20) sogenannte Concepts,
+um die Schnittstellen-Bedingungen zur Compile-Zeit zu prüfen.
+
+Der Compiler generiert dann exakt den passenden, hochoptimierten Maschinencode für die jeweilige Kombination.
+
+```cpp
+TBD
+```
+
+
+##### Warum ist das echtes Modern C++?
+
+Zero-Cost Abstraction: Es gibt keine virtuelle Funktionstabelle (vtable) mehr.
+Der Compiler weiß beim Compilieren ganz genau, welche Funktion aufgerufen wird (static dispatch), und kann den Code extrem aggressiv optimieren und inlinen.
+
+Keine Heap-Allokation: Der Adapter hält den Adaptee als direktes Memberobjekt. Wenn Sie CompileTimeAdapter auf dem Stack anlegen, wird kein einziges Byte Speicher vom Betriebssystem angefordert.
+
+Duck Typing mit Typ-Sicherheit: Über das C++ 20 Concept wird sichergestellt, dass der Client nur Typen übergeben bekommt, die auch wirklich request() unterstützen. Die Fehlermeldungen des Compilers bei Inkompatibilität sind dank Concepts glasklar (anders als bei alten C++98-Templates).
+
+##### Wann nutzt man was?
+
+Laufzeit-Adapter (Ihr vorheriger Code): Wenn Sie zur Compile-Zeit noch nicht wissen, ob Sie ein Target oder einen Adapter nutzen (z.B. weil die Entscheidung auf User-Input oder einer Konfigurationsdatei basiert und Sie die Objekte in einem gemeinsamen std::vector speichern wollen).
+
+Compile-Zeit-Adapter (dieser Code): Wenn die Struktur der Software feststeht und die Typen zur Compile-Zeit bekannt sind. Das ist der Standardweg in modernen, performance-kritischen C++ Bibliotheken.
+
+
+---
 
 **Hinweis**: Prinzipiell gibt es für das Adapter Pattern zwei Vorgehensweisen in der Umsetzung mit einer realen Programmiersprache:
 

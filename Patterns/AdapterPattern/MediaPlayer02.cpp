@@ -13,7 +13,7 @@ namespace ApdaterPatternClassAdapterApproach {
     // interface MediaPlayer
     class IMediaPlayer {
     public:
-        virtual ~IMediaPlayer() {}
+        virtual ~IMediaPlayer() = default;
 
         virtual void play(const std::string& audioType, const std::string& fileName) = 0;
     };

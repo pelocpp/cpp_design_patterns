@@ -12,7 +12,7 @@ namespace OnlineShopExample {
     class Visitor
     {
     public:
-        virtual ~Visitor() {}
+        virtual ~Visitor() = default;
 
         // note: implicit forward declarations
         virtual void visit(const class Book*) = 0;

@@ -12,7 +12,7 @@ namespace IteratorPatternCpp {
     class IteratorBase
     {
     public:
-        virtual ~IteratorBase() {};
+        virtual ~IteratorBase() = default;
 
         virtual void reset() = 0;
         virtual const T& getCurrent() const = 0;
@@ -25,7 +25,7 @@ namespace IteratorPatternCpp {
     class AggregateBase
     {
     public:
-        virtual ~AggregateBase() {}
+        virtual ~AggregateBase() = default;
 
         virtual IteratorBase<T>* createForwardIterator() = 0;
         virtual IteratorBase<T>* createBackwardIterator() = 0;

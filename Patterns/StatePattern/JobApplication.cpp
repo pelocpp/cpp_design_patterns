@@ -11,7 +11,7 @@ namespace JobApplicationExample {
     class IState
     {
     public:
-        virtual ~IState() {}
+        virtual ~IState() = default;
 
         virtual void inform() = 0;             // inform applicant
         virtual void process() = 0;            // process job application

@@ -116,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,6 +145,7 @@
     <ClCompile Include="MediaPlayer02.cpp" />
     <ClCompile Include="PluggableAdapterDesign.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="StaticConceptualExample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dp_adapter_01.svg" />

@@ -16,7 +16,7 @@ namespace ConceptualExample01
     class ProductBase
     {
     public:
-        virtual ~ProductBase() {}
+        virtual ~ProductBase() = default;
 
         virtual std::string getName() const = 0;
         virtual void anyOperation() = 0;
@@ -61,7 +61,7 @@ namespace ConceptualExample01
     public:
         FactoryBase() : m_numberOfProductsProduced{} {}
 
-        virtual ~FactoryBase() {}       // always a virtual destructor
+        virtual ~FactoryBase() = default;       // always a virtual destructor
 
     private:
         virtual std::unique_ptr<ProductBase> createProduct() const = 0;

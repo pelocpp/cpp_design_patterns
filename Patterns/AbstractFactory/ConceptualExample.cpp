@@ -15,7 +15,7 @@
  */
 class AbstractProductA {
 public:
-    virtual ~AbstractProductA() {}
+    virtual ~AbstractProductA() = default;
 
     virtual std::string usefulFunctionA() const = 0;
 };
@@ -53,7 +53,7 @@ class AbstractProductB {
      * Product B is able to do its own thing...
      */
 public:
-    virtual ~AbstractProductB() {}
+    virtual ~AbstractProductB() = default;
 
     virtual std::string usefulFunctionB() const = 0;
 };

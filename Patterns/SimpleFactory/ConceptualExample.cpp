@@ -11,7 +11,7 @@ namespace ConceptualExample {
     class IShape
     {
     public:
-        virtual ~IShape() {}
+        virtual ~IShape() = default;
 
         virtual void draw() = 0;
     };

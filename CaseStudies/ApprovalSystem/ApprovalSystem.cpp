@@ -10,7 +10,8 @@
 class Role
 {
 public:
-    virtual ~Role() {}
+    virtual ~Role() = default;
+
     virtual double getApprovalLimit() const = 0;
 };
 

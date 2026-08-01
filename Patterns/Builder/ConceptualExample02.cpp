@@ -50,7 +50,7 @@ public:
  */
 class Builder {
 public:
-    virtual ~Builder() {}
+    virtual ~Builder() = default;
 
     virtual void createProducePartA() const = 0;
     virtual void createProducePartB() const = 0;

@@ -14,7 +14,7 @@ namespace ConceptualExample03
     class HotDrink
     {
     public:
-        virtual ~HotDrink() {}
+        virtual ~HotDrink() = default;
 
         virtual void prepare(int volume) = 0;
         virtual void drink() = 0;
@@ -91,7 +91,7 @@ namespace ConceptualExample03
     class HotDrinkFactory
     {
     public:
-        virtual ~HotDrinkFactory() {}
+        virtual ~HotDrinkFactory() = default;
 
         virtual std::unique_ptr<HotDrink> makeDrink() const = 0;
     };

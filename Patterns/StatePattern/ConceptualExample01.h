@@ -9,7 +9,7 @@ namespace ConceptualExample01 {
     class StateBase
     {
     public:
-        virtual ~StateBase() {}
+        virtual ~StateBase() = default;
 
         virtual void handle(Context* context) = 0;
         virtual std::string getDescription() = 0;

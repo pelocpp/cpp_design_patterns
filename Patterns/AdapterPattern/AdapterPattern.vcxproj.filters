@@ -22,6 +22,9 @@
     <Filter Include="Source Files\PluggableAdapterDesign">
       <UniqueIdentifier>{e647b368-eb3e-4952-a4b2-cb0c69af0602}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\StaticAdapter">
+      <UniqueIdentifier>{9617b3c9-ba58-4e8b-87d7-8fe98d81431a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp">
@@ -38,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="PluggableAdapterDesign.cpp">
       <Filter>Source Files\PluggableAdapterDesign</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticConceptualExample.cpp">
+      <Filter>Source Files\StaticAdapter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

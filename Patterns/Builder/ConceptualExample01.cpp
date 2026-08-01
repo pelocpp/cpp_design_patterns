@@ -31,7 +31,7 @@ namespace ConceptualExampleBuilder01 {
     class Builder
     {
     public:
-        virtual ~Builder() {}
+        virtual ~Builder() = default;
 
         virtual void buildPartA() = 0;
         virtual void buildPartB() = 0;
@@ -58,7 +58,7 @@ namespace ConceptualExampleBuilder01 {
             : m_product{ std::make_shared<Product>() }
         {}
 
-        virtual ~ConcreteBuilder() {}
+        virtual ~ConcreteBuilder() = default;
 
         void buildPartA() override {
             m_product->add("Part A");

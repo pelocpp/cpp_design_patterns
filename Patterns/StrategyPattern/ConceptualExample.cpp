@@ -21,7 +21,7 @@ namespace StrategyConceptualExample {
     class StrategyBase
     {
     public:
-        virtual ~StrategyBase() {}
+        virtual ~StrategyBase() = default;
 
         virtual std::string doAlgorithm(const std::vector<std::string>& data) const = 0;
         virtual std::string getName() const = 0;

@@ -59,7 +59,7 @@ namespace StaticDecoration_Example_02 {
     class IShape
     {
     public:
-        virtual ~IShape() {}
+        virtual ~IShape() = default;
 
         virtual std::string draw() const = 0;
     };

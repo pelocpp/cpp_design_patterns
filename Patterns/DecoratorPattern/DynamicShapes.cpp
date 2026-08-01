@@ -14,7 +14,7 @@ namespace DynamicDecoration {
     class IShape
     {
     public:
-        virtual ~IShape() {}
+        virtual ~IShape() = default;
 
         virtual std::string draw() const = 0;
     };

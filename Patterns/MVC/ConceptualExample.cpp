@@ -23,7 +23,7 @@ namespace ConceptualExample {
     // interface observer
     struct IValveObserver
     {
-        virtual ~IValveObserver() {}
+        virtual ~IValveObserver() = default;
 
         virtual void valveValueChanged(int) = 0;
     };

@@ -24,7 +24,7 @@ namespace ConceptualExample03 {
         Context* m_context;
 
     public:
-        virtual ~State() {}
+        virtual ~State() = default;
 
         void setContext(Context* context) {
             m_context = context;

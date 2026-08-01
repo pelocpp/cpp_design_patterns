@@ -18,7 +18,7 @@ namespace DynamicStrategyPatternExample {
 
     struct IListStrategy
     {
-        virtual ~IListStrategy() {}
+        virtual ~IListStrategy() = default;
 
         virtual void start(std::ostringstream& oss) = 0;
         virtual void end(std::ostringstream& oss) = 0;

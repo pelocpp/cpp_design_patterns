@@ -9,7 +9,7 @@ namespace ConceptualExample02 {
     class StateBase
     {
     public:
-        virtual ~StateBase() {}
+        virtual ~StateBase() = default;
 
         virtual void handle(std::shared_ptr<Context> context) = 0;
 

@@ -15,14 +15,14 @@
  */
 class AbstractButton {
 public:
-    virtual ~AbstractButton() {}
+    virtual ~AbstractButton() = default;
 
     virtual std::string draw() const = 0;
 };
 
 class AbstractCheckbox {
 public:
-    virtual ~AbstractCheckbox() {}
+    virtual ~AbstractCheckbox() = default;
 
     virtual std::string draw() const = 0;
 };

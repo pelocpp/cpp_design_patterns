@@ -14,7 +14,7 @@ namespace ApdaterPatternClassicalApproach {
     class IMediaPlayer 
     {
     public:
-        virtual ~IMediaPlayer() {}
+        virtual ~IMediaPlayer() = default;
 
         virtual void play(const std::string& audioType, const std::string& fileName) = 0;
     };
@@ -25,7 +25,7 @@ namespace ApdaterPatternClassicalApproach {
     class IVlcMediaPlayer
     {
     public:
-        virtual ~IVlcMediaPlayer() {}
+        virtual ~IVlcMediaPlayer() = default;
 
         virtual void playVlc(const std::string& fileName) = 0;
     };
@@ -34,7 +34,7 @@ namespace ApdaterPatternClassicalApproach {
     class IMp4MediaPlayer
     {
     public:
-        virtual ~IMp4MediaPlayer() {}
+        virtual ~IMp4MediaPlayer() = default;
 
         virtual void playMp4(const std::string& fileName) = 0;
     };

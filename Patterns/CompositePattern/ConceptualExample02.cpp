@@ -20,7 +20,7 @@ namespace CompositePatternSmartPointer {
     public:
         Component() : m_parent(nullptr) {}
 
-        virtual ~Component() {}
+        virtual ~Component() = default;
 
         /**
          * Optionally, the 'Component' class can declare an interface for setting and

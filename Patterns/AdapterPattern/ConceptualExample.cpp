@@ -2,10 +2,11 @@
 // ConceptualExample.cpp - Adapter Pattern
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-#include <memory>
 #include <algorithm>
+#include <format>
+#include <memory>
+#include <print>
+#include <string>
 
 /**
  * ITarget defines the domain-specific interface used by the client code
@@ -13,7 +14,7 @@
 class ITarget
 {
 public:
-    virtual ~ITarget() {}
+    virtual ~ITarget() = default;
 
     virtual std::string request() const = 0;
 };
@@ -21,14 +22,12 @@ public:
 /**
  * Target implements ITarget - implementation usable by the client code
  */
-class Target : public ITarget
+class Target final : public ITarget
 {
 public:
-    Target() {}
-
     std::string request() const override
     {
-        return std::string{ "Target: The target's default behavior." };
+        return "Target: The target's default behavior.";
     }
 };
 
@@ -44,7 +43,7 @@ public:
 
     std::string specificRequest() const
     {
-        return std::string{ ".eetpadA eht fo roivaheb laicepS" };
+        return ".eetpadA eht fo roivaheb laicepS";
     }
 };
 
@@ -52,36 +51,39 @@ public:
  * The Adapter makes the Adaptee's interface
  * compatible with the ITarget's interface.
  */
-class Adapter : public ITarget
+class Adapter final : public ITarget
 {
 private:
     std::unique_ptr<Adaptee> m_adaptee;
 
 public:
-    Adapter(std::unique_ptr<Adaptee> adaptee)
+    explicit Adapter(std::unique_ptr<Adaptee> adaptee)
         : m_adaptee{ std::move(adaptee) }
     {}
 
     std::string request() const override {
 
-        std::string toReverse{ m_adaptee->specificRequest() };
+        if (!m_adaptee) {
+            return {};
+        }
 
-        std::reverse(
-            toReverse.begin(),
-            toReverse.end()
-        );
+        std::string original{ m_adaptee->specificRequest() };
 
-        return std::string{ "Adapter: (TRANSLATED) " + toReverse };
+        std::reverse(original.begin(), original.end());
+
+        return std::format("Adapter: (TRANSLATED) {}", original);
     }
 };
 
 /**
- * The client code supports all classes that follow the Target interface
+ * The client code supports all classes that follow the Target interface.
+ * Passed as a const reference, since the client does not need to own the object.
  */
-static void clientCode(std::unique_ptr<ITarget> target) {
+static void clientCode(const ITarget& target) {
 
-    std::string response{ target->request() };
-    std::cout << response << std::endl << std::endl;
+    std::string response{ target.request() };
+
+    std::println("{}", response);
 }
 
 static void test_conceptual_example_01() {
@@ -90,23 +92,23 @@ static void test_conceptual_example_01() {
 
     std::unique_ptr<Adapter> adapter{ std::make_unique<Adapter>(std::move(adaptee)) };
 
-    clientCode(std::move(adapter));
+    clientCode(*adapter);
 }
 
 static void test_conceptual_example_02() {
 
-    std::cout << "Client: I can work fine with the Target object" << std::endl;
-    std::unique_ptr<ITarget> target{ std::make_unique<Target>() };
-    clientCode(std::move(target));
+    std::println("Client: I can work fine with the Target object:");
+    auto target = std::make_unique<Target>();
+    clientCode(*target);
 
-    std::unique_ptr<Adaptee> adaptee{ std::make_unique<Adaptee>() };
-    std::cout << "Client: The Adaptee class has an incompatible interface:" << std::endl;
+    auto adaptee = std::make_unique<Adaptee>();
+    std::println("Client: The Adaptee class has an incompatible interface:");
     std::string specificResponse = adaptee->specificRequest();
-    std::cout << "Adaptee: " << specificResponse << std::endl << std::endl;
+    std::println("Adaptee: {}", specificResponse);
 
-    std::cout << "Client: But I can work with the Adaptee via the Adapter:" << std::endl;
-    std::unique_ptr<Adapter> adapter{ std::make_unique<Adapter>(std::move(adaptee)) };
-    clientCode(std::move(adapter));
+    std::println("Client: But I can work with the Adaptee via the Adapter:"); 
+    auto adapter = std::make_unique<Adapter>(std::move(adaptee));
+    clientCode(*adapter);
 }
 
 void test_conceptual_example() {

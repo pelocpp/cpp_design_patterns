@@ -37,7 +37,7 @@ namespace StrategyRealWorldExample {
     class DrawCircleStrategy
     {
     public:
-        virtual ~DrawCircleStrategy() {}
+        virtual ~DrawCircleStrategy() = default;
 
         virtual void draw(const Circle&) const = 0;
     };
@@ -45,7 +45,7 @@ namespace StrategyRealWorldExample {
     class DrawRectangleStrategy
     {
     public:
-        virtual ~DrawRectangleStrategy() {}
+        virtual ~DrawRectangleStrategy() = default;
 
         virtual void draw(const Rectangle&) const = 0;
     };

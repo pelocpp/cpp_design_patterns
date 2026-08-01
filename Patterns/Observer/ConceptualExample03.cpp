@@ -22,7 +22,7 @@ namespace ObserverDesignPatternSmartPointerEx {
 
     class ISubject {
     public:
-        virtual ~ISubject() {}
+        virtual ~ISubject() = default;
 
         virtual void attach(std::weak_ptr<IObserver>) = 0;
         virtual void detach(std::weak_ptr<IObserver>) = 0;

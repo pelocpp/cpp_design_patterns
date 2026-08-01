@@ -10,7 +10,7 @@
 class PasswordGenerator
 {
 public:
-    virtual ~PasswordGenerator() {}
+    virtual ~PasswordGenerator() = default;
 
     virtual std::string generate(std::default_random_engine&) const = 0;
     virtual std::string allowedChars() const = 0;

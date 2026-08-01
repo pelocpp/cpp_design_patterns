@@ -113,7 +113,7 @@ public:
 class IVehicleFactory
 {
 public:
-    virtual ~IVehicleFactory() {}
+    virtual ~IVehicleFactory() = default;
 
     virtual std::unique_ptr<Vehicle> create(int numGears) const = 0;
 };

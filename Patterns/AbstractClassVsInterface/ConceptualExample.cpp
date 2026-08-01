@@ -11,7 +11,7 @@ namespace AbstractClassVsInterface {
     class Interface
     {
     public:
-        virtual ~Interface() {};
+        virtual ~Interface() = default;
 
         virtual void method_first() = 0;             // only 'abstract' methods
         virtual void method_second() = 0;            // only 'abstract' methods
@@ -21,7 +21,7 @@ namespace AbstractClassVsInterface {
     class AbstractClass 
     {
     public:
-        virtual ~AbstractClass() {}
+        virtual ~AbstractClass() = default;
 
         AbstractClass(const std::string& message)
             : m_message{ message }

@@ -428,7 +428,7 @@ Dokumenttypen ist eine Registrierungsfunktionen, die es gestattet, eigene Typen 
 ```cpp
 01: struct IDocument 
 02: {
-03:     virtual ~IDocument() {}
+03:     virtual ~IDocument() = default;
 04:     virtual std::vector<std::string> getText() = 0;
 05: };
 06: 

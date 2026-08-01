@@ -9,7 +9,8 @@
 
 class Visitor {
 public:
-    virtual ~Visitor();
+    virtual ~Visitor() = default;
+
     virtual void visit(class Composite&) = 0;
     virtual void visit(class Leaf1&) = 0;
     virtual void visit(class Leaf2&) = 0;
@@ -22,7 +23,8 @@ Visitor::~Visitor() {}
 
 class Component {
 public:
-    virtual ~Component();
+    virtual ~Component() = default;
+
     virtual void accept(Visitor&) = 0;
 };
 

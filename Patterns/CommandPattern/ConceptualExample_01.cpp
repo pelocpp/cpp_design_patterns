@@ -32,7 +32,7 @@ namespace ConceptualExample01 {
         std::shared_ptr<Receiver> m_receiver;
 
     public:
-        virtual ~CommandBase() {}
+        virtual ~CommandBase() = default;
 
         CommandBase(std::shared_ptr<Receiver> receiver)
             : m_receiver{ receiver }

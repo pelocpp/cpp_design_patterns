@@ -13,7 +13,7 @@ namespace ConceptualExample02 {
      */
     class CommandBase {
     public:
-        virtual ~CommandBase() {}
+        virtual ~CommandBase() = default;
         virtual void execute() const = 0;
     };
 

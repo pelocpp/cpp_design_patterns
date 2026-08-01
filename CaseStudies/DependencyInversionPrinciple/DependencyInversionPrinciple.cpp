@@ -53,6 +53,7 @@ namespace Dependency_Inversion_Principle_Respecting_01 {
     class Developer {
     public:
         virtual ~Developer() = default;
+
         virtual void develop() = 0;
     };
 

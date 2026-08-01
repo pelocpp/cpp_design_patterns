@@ -10,7 +10,7 @@
 class Logger
 {
 public:
-    virtual ~Logger() {}
+    virtual ~Logger() = default;
 
     virtual void info(const std::string&) = 0;
     virtual void warn(const std::string&) = 0;

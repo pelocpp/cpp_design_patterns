@@ -13,7 +13,7 @@ namespace DocumentsExample {
 
     struct IDocument 
     {
-        virtual ~IDocument() {}
+        virtual ~IDocument() = default;
 
         virtual std::vector<std::string> getText() = 0;
     };

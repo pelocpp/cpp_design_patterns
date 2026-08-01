@@ -18,7 +18,7 @@ namespace ConceptualExampleBridge02 {
     class Implementor
     {
     public:
-        virtual ~Implementor() {}
+        virtual ~Implementor() = default;
 
         virtual std::string operationImplementation() const = 0;
     };
@@ -62,7 +62,7 @@ namespace ConceptualExampleBridge02 {
             : m_implementor{ std::move(implementor) }
         {}
 
-        virtual ~Abstraction() {}
+        virtual ~Abstraction() = default;
 
         virtual std::string operation() const
         {
