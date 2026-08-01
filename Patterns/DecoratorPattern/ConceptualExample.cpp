@@ -2,8 +2,9 @@
 // ConceptualExample.cpp - Decorator Pattern
 // ===========================================================================
 
-#include <iostream>
+#include <format>
 #include <memory>
+#include <print>
 #include <string>
 
 /**
@@ -38,11 +39,12 @@ public:
  */
 class DecoratorBase : public IComponent {
 protected:
-   std::shared_ptr<IComponent> m_component;
+   std::unique_ptr<IComponent> m_component;
 
 public:
-    DecoratorBase(const std::shared_ptr<IComponent>& component)
-        : m_component{ component }
+    DecoratorBase(std::unique_ptr<IComponent> component)
+        // exclusive ownership saves reference-counting overhead
+        : m_component{ std::move(component) }
     {}
 
     /**
@@ -68,16 +70,17 @@ class ConcreteDecoratorA final : public DecoratorBase {
      * decorator classes.
      */
 public:
-    ConcreteDecoratorA(const std::shared_ptr<IComponent>& component)
-        : DecoratorBase{ component } 
+    ConcreteDecoratorA(std::unique_ptr<IComponent> component)
+        : DecoratorBase{ std::move(component) }
     {}
 
     std::string operation() const override {
-        std::string parentResult{ DecoratorBase::operation() };
-        std::string decoratedResult{ "ConcreteDecoratorA ( " + parentResult + " )" };
-        return decoratedResult;
+        return std::format("ConcreteDecoratorA ( {} )", DecoratorBase::operation());
+
     }
 };
+
+// ---------------------------------------------------------------------------
 
 /**
  * Decorators can execute their behavior either before or after
@@ -85,30 +88,28 @@ public:
  */
 class ConcreteDecoratorB final : public DecoratorBase {
 public:
-    ConcreteDecoratorB(const std::shared_ptr<IComponent>& component)
-        : DecoratorBase{ component }
+    ConcreteDecoratorB(std::unique_ptr<IComponent> component)
+        : DecoratorBase{ std::move(component) }
     {}
 
     std::string operation() const override {
-        std::string parentResult{ DecoratorBase::operation() };
-        std::string decoratedResult{ "ConcreteDecoratorB [ " + parentResult + " ]" };
-        return decoratedResult;
+        return std::format("ConcreteDecoratorB [ {} ]", DecoratorBase::operation());
     }
 };
+
+// ---------------------------------------------------------------------------
 
 /**
  * Need one more Decorator class to demonstrate nested execution of decorator objects
  */
 class ConcreteDecoratorC final : public DecoratorBase {
 public:
-    ConcreteDecoratorC(const std::shared_ptr<IComponent>& component)
-        : DecoratorBase{ component }
+    ConcreteDecoratorC(std::unique_ptr<IComponent> component)
+        : DecoratorBase{ std::move(component) }
     {}
 
     std::string operation() const override {
-        std::string parentResult{ DecoratorBase::operation() };
-        std::string decoratedResult{ "ConcreteDecoratorC { " + parentResult + " }" };
-        return decoratedResult;
+        return std::format("ConcreteDecoratorC {{ {} }}", DecoratorBase::operation());
     }
 };
 
@@ -119,26 +120,29 @@ public:
  * This way it can stay independent of the concrete classes of components
  * it works with.
  */
-static void clientCode(const std::shared_ptr<IComponent>& component) {
+static void clientCode(const IComponent& component) {
     // ...
-    std::cout << "Result: " << component->operation();
+    std::println("Result: {}", component.operation());
     // ...
 }
 
-void test_conceptual_example_01() {
+static void test_conceptual_example_01() {
+
     /**
      * This way the client code can support both simple components ...
      */
-    std::shared_ptr<IComponent> component{
-        std::make_shared<ConcreteComponent>()
+    std::unique_ptr<IComponent> component{
+        std::make_unique<ConcreteComponent>()
     };
 
-    std::cout << "Client: I've got a simple component:\n";
-    clientCode(component);
-    std::cout << std::endl << std::endl;
+    std::print("Client: I've got a simple component:");
+    clientCode(*component);
+    std::println();
 }
 
-void test_conceptual_example_02() {
+// ---------------------------------------------------------------------------
+
+static void test_conceptual_example_02() {
 
     /**
      * ...as well as decorated ones ...
@@ -147,98 +151,130 @@ void test_conceptual_example_02() {
      * but the other decorators as well.
      */
 
-    std::shared_ptr<IComponent> component{
-        std::make_shared<ConcreteComponent>()
+    std::unique_ptr<IComponent> component{
+        std::make_unique<ConcreteComponent>()
     };
 
-    std::shared_ptr<IComponent> decorator1{
-        std::make_shared<ConcreteDecoratorA>(component)
+    std::unique_ptr<IComponent> decorator1{
+        std::make_unique<ConcreteDecoratorA>(std::move(component))
     };
 
-    std::shared_ptr<IComponent> decorator2{
-        std::make_shared<ConcreteDecoratorB>(decorator1)
+    std::unique_ptr<IComponent> decorator2{
+        std::make_unique<ConcreteDecoratorB>(std::move(decorator1))
     };
 
-    std::cout << "Client: Decorated component:" << std::endl;
-    clientCode(decorator2);
-    std::cout << std::endl << std::endl;
+    std::println("Client: Decorated component:");
+    clientCode(*decorator2);
+    std::println();
+}
 
-    // --------------------------------------------------------------
+// ---------------------------------------------------------------------------
 
-    /**
-    * Same as before - written in a more compact syntax:
-    * Nested usage of decorator objects
-    */
+/**
+* Same as before - written in a more compact syntax:
+* Nested usage of decorator objects
+*/
 
-    std::shared_ptr<IComponent> decorator {
-        std::make_shared<ConcreteDecoratorB>(
-            std::make_shared<ConcreteDecoratorA>(component)
+static void test_conceptual_example_03() {
+
+    std::unique_ptr<IComponent> component{
+        std::make_unique<ConcreteComponent>()
+    };
+
+    std::unique_ptr<IComponent> decorator{
+        std::make_unique<ConcreteDecoratorB>(
+            std::make_unique<ConcreteDecoratorA>(std::move(component))
         )
     };
 
-    std::cout << "Client: Same decorated component - written in a more compact syntax:" << std::endl;
-    clientCode(decorator);
-    std::cout << std::endl << std::endl;
-
-    // --------------------------------------------------------------
-
-    /**
-     * One more Demonstration of nested use of decorator objects
-     */
-
-    decorator =
-        std::make_shared<ConcreteDecoratorA>(
-            std::make_shared<ConcreteDecoratorB>(
-                std::make_shared<ConcreteDecoratorC>(component)));
-
-    std::cout << "Client: Decorated component using three decorator objects:" << std::endl;
-    clientCode(decorator);
-    std::cout << std::endl << std::endl;
-
-    // --------------------------------------------------------------
-
-    /**
-     * Demonstrate reverse Decoration
-     */
-
-    decorator =
-        std::make_shared<ConcreteDecoratorC>(
-            std::make_shared<ConcreteDecoratorB>(
-                std::make_shared<ConcreteDecoratorA>(component)));
-
-    std::cout << "Client: Reverse Decoration:" << std::endl;
-    clientCode(decorator);
-    std::cout << std::endl;
+    std::println("Client: Same decorated component - written in a more compact syntax:");
+    clientCode(*decorator);
+    std::println();
 }
 
-void test_conceptual_example_03() {
+// --------------------------------------------------------------
 
-    /**
-     * ... and at the very end: changing decorators at runtime
-     */
+/**
+ * One more Demonstration of nested use of decorator objects
+ */
+
+static void test_conceptual_example_04() {
+
+    std::unique_ptr<IComponent> component{
+        std::make_unique<ConcreteComponent>()
+    };
+
+    std::unique_ptr<IComponent> decorator{
+        std::make_unique<ConcreteDecoratorA>(
+            std::make_unique<ConcreteDecoratorB>(
+                std::make_unique<ConcreteDecoratorC>(std::move(component))))
+    };
+
+    std::println("Client: Decorated component using three decorator objects:");
+    clientCode(*decorator);
+    std::println();
+}
+
+// --------------------------------------------------------------
+
+/**
+ * Demonstrate reverse Decoration
+ */
+
+static void test_conceptual_example_05() {
+
+    std::unique_ptr<IComponent> component{
+        std::make_unique<ConcreteComponent>()
+    };
+
+    std::unique_ptr<IComponent> decorator{
+        std::make_unique<ConcreteDecoratorC>(
+            std::make_unique<ConcreteDecoratorB>(
+                std::make_unique<ConcreteDecoratorA>(std::move(component)))) 
+    };
+
+    std::println("Client: Reverse Decoration:");
+    clientCode(*decorator);
+    std::println();
+}
+
+// --------------------------------------------------------------
+
+/**
+ * ... and at the very end: changing decorators at runtime
+ */
+
+static void test_conceptual_example_06() {
 
     // component which is going to be decorated
-    std::shared_ptr<IComponent> component{ std::make_shared<ConcreteComponent>() };
+    std::unique_ptr<IComponent> component{ std::make_unique<ConcreteComponent>() };
 
     // run-time dependent decorator
-    std::shared_ptr<IComponent> decorator;
+    std::unique_ptr<IComponent> decorator;
 
     if (true)   // <== change 'true' to 'false'
     {
-        std::shared_ptr<IComponent> decorator1{ std::make_shared<ConcreteDecoratorA>(component) };
-        decorator = std::make_shared<ConcreteDecoratorB>(decorator1);
-
-        std::cout << "Client: Now I've this decorated component (if):" << std::endl;
+        std::unique_ptr<IComponent> decorator1{ std::make_unique<ConcreteDecoratorA>(std::move(component)) };
+        decorator = std::move(std::make_unique<ConcreteDecoratorB>(std::move(decorator1)));
+        std::println("Client: Now I've this decorated component (if):");
     }
     else {
-        std::shared_ptr<IComponent> decorator1 {std::make_shared<ConcreteDecoratorB>(component)};
-        decorator = std::make_shared<ConcreteDecoratorA>(decorator1);
-
-        std::cout << "Client: Now I've that decorated component (else):" << std::endl;
+        std::unique_ptr<IComponent> decorator1 {std::make_unique<ConcreteDecoratorB>(std::move(component))};
+        decorator = std::move(std::make_unique<ConcreteDecoratorA>(std::move(decorator1)));
+        std::println("Client: Now I've that decorated component (else):");
     }
 
-    clientCode(decorator);
-    std::cout << std::endl << std::endl;
+    clientCode(*decorator);
+}
+
+void test_conceptual_example()
+{
+    test_conceptual_example_01();
+    test_conceptual_example_02();
+    test_conceptual_example_03();
+    test_conceptual_example_04();
+    test_conceptual_example_05();
+    test_conceptual_example_06();
 }
 
 // ===========================================================================

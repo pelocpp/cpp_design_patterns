@@ -9,7 +9,52 @@
 #include <sstream>
 #include <string>
 
-namespace StaticDecoration {
+namespace StaticDecoration_Example_01 {
+
+    // C++20 Concept erzwingt die Schnittstelle zur Compile-Zeit
+    template<typename T>
+    concept Component = requires(T c)
+    {
+        { c.operation() } -> std::same_as<std::string>;
+    };
+
+    class ConcreteComponent {
+    public:
+        std::string operation() const { return "CONCRETE COMPONENT"; }
+    };
+
+    // Template-Decorator (Mixin)
+    template <Component Wrapped>
+    class ConcreteDecoratorA {
+        Wrapped m_component;
+    public:
+        std::string operation() const {
+            return "ConcreteDecoratorA ( " + m_component.operation() + " )";
+        }
+    };
+
+    template <Component Wrapped>
+    class ConcreteDecoratorB {
+        Wrapped m_component;
+    public:
+        std::string operation() const {
+            return "ConcreteDecoratorB [ " + m_component.operation() + " ]";
+        }
+    };
+}
+
+
+void test_static_decoration_01() {
+ 
+    using namespace StaticDecoration_Example_01;
+
+    // Komplett auf dem Stack, voll optimierbar durch den Compiler, kein virtual!
+    ConcreteDecoratorB<ConcreteDecoratorA<ConcreteComponent>> decorator;
+
+    std::cout << decorator.operation() << "\n";
+}
+
+namespace StaticDecoration_Example_02 {
 
     class IShape
     {
@@ -140,9 +185,9 @@ namespace StaticDecoration {
 
 class NonConformantCircle {};
 
-void test_static_decoration_01()
+static void test_static_decoration_02()
 {
-    using namespace StaticDecoration;
+    using namespace StaticDecoration_Example_02;
 
     Circle circle{ 3.0 };
     std::cout << circle.draw() << std::endl;
@@ -189,6 +234,12 @@ void test_static_decoration_01()
         127, std::string{ "white" }, 70.0, 80.0,
     };
     std::cout << whiteNonTransparentRectangle.draw() << std::endl;
+}
+
+void test_static_decoration()
+{
+    test_static_decoration_01();
+    test_static_decoration_02();
 }
 
 // ===========================================================================

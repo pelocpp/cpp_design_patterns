@@ -2,11 +2,11 @@
 // DynamicShapes.cpp // Decorator Pattern
 // ===========================================================================
 
-#include <iostream>
 #include <iomanip>
-#include <string>
-#include <sstream>
+#include <iostream>
 #include <memory>
+#include <sstream>
+#include <string>
 
 namespace DynamicDecoration {
 
@@ -117,7 +117,7 @@ namespace DynamicDecoration {
     };
 }
 
-void test_dynamic_decoration_00() {
+static void test_real_world_example_01() {
 
     using namespace DynamicDecoration;
 
@@ -129,7 +129,7 @@ void test_dynamic_decoration_00() {
     // "A circle of radius 0.5"
 }
 
-void test_dynamic_decoration_01() {
+static void test_real_world_example_02() {
 
     using namespace DynamicDecoration;
 
@@ -145,7 +145,7 @@ void test_dynamic_decoration_01() {
     // "A circle of radius 0.500000 has color red"
 }
 
-void test_dynamic_decoration_02() {
+static void test_real_world_example_03() {
 
     using namespace DynamicDecoration;
 
@@ -161,7 +161,7 @@ void test_dynamic_decoration_02() {
     // "A square with side 3 has 33.3333% transparency"
 }
 
-void test_dynamic_decoration_03() {
+static void test_real_world_example_04() {
 
     using namespace DynamicDecoration;
 
@@ -179,6 +179,14 @@ void test_dynamic_decoration_03() {
 
     std::cout << greenTransparentCircle->draw() << std::endl;
     // "A circle of radius 15.000000 has color green has 19.6078% transparency"
+}
+
+void test_real_world_example()
+{
+    test_real_world_example_01();
+    test_real_world_example_02();
+    test_real_world_example_03();
+    test_real_world_example_04();
 }
 
 // ===========================================================================
