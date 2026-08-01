@@ -17,8 +17,6 @@ public:
     virtual void leave(class Composite&) = 0;  // extended variant
 };
 
-Visitor::~Visitor() {}
-
 // ===========================================================================
 
 class Component {
@@ -27,8 +25,6 @@ public:
 
     virtual void accept(Visitor&) = 0;
 };
-
-Component::~Component() {}
 
 // ===========================================================================
 

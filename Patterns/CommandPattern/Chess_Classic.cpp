@@ -1,5 +1,5 @@
 // ===========================================================================
-// Chess.cpp // Command Pattern
+// Chess_Classic.cpp // Command Pattern using "Gang of Four" Style
 // ===========================================================================
 
 #include <iostream>
@@ -8,7 +8,7 @@
 #include <stdexcept>
 #include <memory>
 
-namespace ChessExample {
+namespace ChessExample_Classic {
 
     class Position
     {
@@ -157,15 +157,15 @@ namespace ChessExample {
     class Board
     {
     private:
-        std::queue<std::shared_ptr<Move>> m_moves;
-        std::stack<std::shared_ptr<Move>> m_undos;
+        std::queue<std::unique_ptr<Move>> m_moves;
+        std::stack<std::unique_ptr<Move>> m_undos;
 
     public:
         Board() {}
 
-        void enqueue(const std::shared_ptr<Move>& spielzug)
+        void enqueue(std::unique_ptr<Move> spielzug)
         {
-            m_moves.push(spielzug);
+            m_moves.push(std::move(spielzug));
         }
 
         void play()
@@ -174,11 +174,11 @@ namespace ChessExample {
 
             while (!m_moves.empty())
             {
-                std::shared_ptr<Move> move{ m_moves.front() };
+                std::unique_ptr<Move> move = std::move(m_moves.front());
                 m_moves.pop();
 
                 move->doMove();
-                m_undos.push(move);
+                m_undos.push(std::move(move));  // // push further onto the undo stack
             }
 
             std::cout << "Done." << std::endl;
@@ -190,7 +190,7 @@ namespace ChessExample {
 
             if (!m_undos.empty())
             {
-                std::shared_ptr<Move> move = m_undos.top();
+                std::unique_ptr<Move> move = std::move(m_undos.top());
                 m_undos.pop();
 
                 move->undoMove();
@@ -209,15 +209,23 @@ namespace ChessExample {
 
         void play(const std::shared_ptr<ChessPiece>& piece, const Position& position)
         {
-            std::shared_ptr<Move> move{ std::make_shared<SimpleMove>(piece, position) };
-            m_board.enqueue(move);
+            // make_unique statt make_shared für das Command
+            //m_board.enqueue(std::make_unique<SimpleMove>(piece, std::move(position)));
+            //m_board.play();
+
+
+            std::unique_ptr<Move> move{ std::make_unique<SimpleMove>(piece, position) };
+            m_board.enqueue(std::move(move));
             m_board.play();
         }
 
         void enqueue(const std::shared_ptr<ChessPiece>& piece, const Position& position)
         {
-            std::shared_ptr<Move> move{ std::make_shared<SimpleMove>(piece, position) };
-            m_board.enqueue(move);
+            std::unique_ptr<Move> move{ std::make_unique<SimpleMove>(piece, position) };
+            m_board.enqueue(std::move(move));
+
+          //  m_board.enqueue(std::make_unique<SimpleMove>(piece, std::move(position)));
+
         }
 
         void undo()
@@ -233,11 +241,10 @@ namespace ChessExample {
 
     static void clientCode()
     {
-        ChessGame game{};
+        ChessGame game;
 
-        std::shared_ptr<ChessPiece> tower {
-            std::make_shared<Rook>(false, Position{ 1, 1 })
-        };
+        // The figure itself remains shared, as it exists across multiple turns
+        auto tower = std::make_shared<Rook>(false, Position{ 1, 1 });
 
         game.enqueue(tower, Position{ 4, 1 });
         game.enqueue(tower, Position{ 6, 1 });
@@ -249,9 +256,10 @@ namespace ChessExample {
     }
 }
 
-void test_chess_example() {
+void test_chess_example_classic() {
 
-    using namespace ChessExample;
+    using namespace ChessExample_Classic;
+
     clientCode();
 }
 

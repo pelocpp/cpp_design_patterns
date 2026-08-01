@@ -70,7 +70,15 @@ ein praxisnahes Beispiel vor.
 #### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample_01.cpp) &ndash; Sehr einfaches Beispiel<br />
-[Quellcode 2](../ConceptualExample_02.cpp) &ndash; Ein etwas ausführlicheres Beispiel
+[Quellcode 2](../ConceptualExample_02.cpp) &ndash; Dasselbe Beispiel mit zusätzlichen Modern C++ Sprachkonstrukten
+[Quellcode 3](../ConceptualExample_03.cpp) &ndash; Ein etwas ausführlicheres Beispiel
+
+*Bemerkung*:<br />
+Mit Modernen C++ Sprachmitteln benötigen Sie oft überhaupt keine `CommandBase`-Basisklasse und keine `ConcreteCommand`-Klassen mehr.
+Jedes aufrufbare Objekt (*Callable*), wie eine Lambda-Funktion, kann als Kommando dienen.
+
+Mithilfe von `std::move_only_function` (C++23) oder `std::function` (C++11) kapseln wir das Verhalten direkt zur Laufzeit.
+Das reduziert den "Boilerplate-Code" (Rahmencode) drastisch, siehe dazu [Quellcode 2](../ConceptualExample_02.cpp).
 
 ---
 
@@ -99,6 +107,25 @@ Für die konkrete Ausführung eines Spielzugs ist die Klasse `ChessPiece` verantwo
   * Bringen Sie das Beispiel auf Ihrem Rechner zum Laufen.
   * Überlegen Sie, welche Beteiligten des allgemeinen Musters (*Receiver*, *CommandBase*, etc.) welchen Klassen des Schachspiels zuzuordnen sind. 
   * Ergänzen Sie eine Klasse `PromotePawn` und integrieren Sie das Kommando "Umwandlung des Bauern" in das Spiel.
+
+Beachten Sie folgende Überlegungen:
+
+  * Da beim Schach mehrere Züge dieselbe Spielfigur betreffen können
+	ist der Einsatz von `std::shared_ptr` für die `ChessPiece`-Objekte architektonisch korrekt.
+  * Für die *Command*-Klasse (Klasse `Move`) und die internen Container auf dem Spielebrett sollten ` std::unique_ptr`-Variablen zum Einsatz kommen.
+	Das *Command*-Objekt repräsentiert einen konkreten Befehl in der Historie; dieser sollte exklusiv vom Spielfeld verwaltet werden.
+
+##### Anpassungen an Modern C++
+
+Eigentumslogik (Ownership):<br />
+Durch `std::unique_ptr<Move>` ist nun klar geregelt, wer für den Lebenszyklus des Zuges verantwortlich ist. Das Board &bdquo;besitzt&rdquo; die Historie.
+Da `std::unique_ptr` keinen Referenzzähler verwalten muss, ist es zudem spürbar schneller und speichereffizienter als `std::shared_ptr`.
+
+Keine Kopien von Positionen:<br />
+Da Position nun mittels `std::move` durchgereicht wird, entfallen unnötige Kopierprozesse bei der Übergabe.
+
+Typ-Sicherheit und Lesbarkeit:<br />
+`std::println` formatiert Variablen direkt über `{}`. Es kann nicht mehr passieren, dass man ein `<<` vergisst oder den Typ falsch konvertiert.
 
 ---
 

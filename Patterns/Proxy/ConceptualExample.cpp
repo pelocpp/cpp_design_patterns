@@ -15,7 +15,6 @@ class SubjectBase
 {
 public:
     virtual ~SubjectBase() = default;
-
     virtual void request() const = 0;
 };
 
@@ -25,7 +24,7 @@ public:
  * e.g. correcting input data. A Proxy can solve these issues without any
  * changes to the RealSubject's code.
  */
-class RealSubject : public SubjectBase
+class RealSubject final : public SubjectBase
 {
 public:
     void request() const override {
@@ -36,10 +35,10 @@ public:
 /**
  * The Proxy has an interface identical to the RealSubject.
  */
-class Proxy : public SubjectBase
+class Proxy final : public SubjectBase
 {
 private:
-    std::unique_ptr<RealSubject> m_realSubject;
+    mutable std::unique_ptr<SubjectBase> m_realSubject;
 
     bool checkAccess() const {
         // some real checks should go here.
@@ -51,23 +50,43 @@ private:
         std::println("Proxy: Logging the time of request.");
     }
 
+public:
     /**
      * The Proxy maintains a reference to an object of the RealSubject class. It
      * can be either lazy-loaded or passed to the Proxy by the client.
      */
-public:
-    Proxy(std::unique_ptr<RealSubject> realSubject)
-        : m_realSubject{ std::move(realSubject) }
+
+    // Option 1: The object is passed in from the outside (kind of dependency injection).
+    // Flexible Variant: Accepts any SubjectBase, not just RealSubject
+
+    explicit Proxy(std::unique_ptr<SubjectBase> subject)
+        : m_realSubject{ std::move(subject) }
     {}
 
-    /**
-     * The most common applications of the Proxy pattern are lazy loading,
-     * caching, controlling the access, logging, etc. A Proxy can perform one of
-     * these things and then, depending on the result, pass the execution to the
-     * same method in a linked RealSubject object.
-     */
+    // Option 2: Lazy-loading constructor
+    // The actual object does not exist initially, this is saving resources.
+
+    Proxy() : m_realSubject{ nullptr } {}
+
     void request() const override {
+
         if (checkAccess()) {
+
+            /**
+             * True lazy-loading implementation:
+             * We create the heavy RealSubject object only when request() is called:
+             */
+            if (!m_realSubject) {
+                std::println("Proxy: RealSubject is null. Creating it now (Lazy Loading) ...");
+                m_realSubject = std::make_unique<RealSubject>();
+            }
+
+            /**
+             * The most common applications of the Proxy pattern are lazy loading,
+             * caching, controlling the access, logging, etc. A Proxy can perform one of
+             * these things and then, depending on the result, pass the execution to the
+             * same method in a linked RealSubject object.
+             */
             m_realSubject->request();
             logAccess();
         }
@@ -76,38 +95,33 @@ public:
 
 /**
  * The client code is supposed to work with all objects (both subjects and
- * proxies) via the SubjectBase interface in order to support both real subjects and
- * proxies. In real life, however, clients mostly work with their real subjects
+ * proxies) via the SubjectBase interface in order to support both real subjects and proxies. 
+ * In real life, however, clients mostly work with their real subjects
  * directly. In this case, to implement the pattern more easily, you can extend
  * your proxy from the real subject's class.
  */
-static void clientCode(std::unique_ptr<SubjectBase> subject) {
+static void clientCode(const SubjectBase& subject) {
 
-    subject->request();
+    subject.request();
 }
 
 void test_conceptual_example()
 {
-    std::println("Client: Executing the client code with a real subject:");
-    
-    std::unique_ptr<RealSubject> realSubject{
-        std::make_unique<RealSubject>() 
-    };
-
-    clientCode(std::move(realSubject));
+    std::println("Client: Executing the client code with a real subject:");    
+    // no std::move, no forced heap allocation in the test code
+    RealSubject realSubject;
+    clientCode(realSubject);
     std::println();
 
-    std::println("Client: Executing the same client code with a proxy:");
-    
-    std::unique_ptr<RealSubject> secondRealSubject{
-        std::make_unique<RealSubject>()
-    }; 
-    
-    std::unique_ptr<Proxy> proxy{
-        std::make_unique<Proxy>(std::move(secondRealSubject))
-    };
+    std::println("Client: Executing with a proxy (Injected Subject):");
+    auto dynamicRealSubject = std::make_unique<RealSubject>();
+    Proxy proxyWithInjection{ std::move(dynamicRealSubject) };
+    clientCode(proxyWithInjection);
+    std::println();
 
-    clientCode(std::move(proxy));
+    std::println("Client: Executing with a lazy proxy (No initial subject):");
+    Proxy lazyProxy;         // RealSubject is not yet created!
+    clientCode(lazyProxy);   // Only here is the RealSubject created in the background.
 }
 
 // ===========================================================================

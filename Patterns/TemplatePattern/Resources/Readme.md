@@ -57,6 +57,12 @@ Das *Template Method Pattern* ermöglicht die Realisierung von variierenden Teils
 
 *Abbildung* 1: Schematische Darstellung des *Template Method Patterns*.
 
+*Bemerkung*:<br />
+Die *Template Methode* (Steuerungsfunktion) sollte `public` und nicht-virtuell sein.
+
+Die überschreibbaren Methoden sollten idealerweise `private` sein. Abgeleitete Klassen in C++ können
+private, virtualle Methoden problemlos überschreiben. Das kapselt die Erweiterungspunkte noch besser.
+
 
 ## Anwendungsbeispiel:
 

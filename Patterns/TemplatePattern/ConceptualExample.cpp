@@ -2,8 +2,9 @@
 // ConceptualExample.cpp // Template Method
 // ===========================================================================
 
-#include <iostream>
 #include <memory>
+#include <print>
+
 
 /**
  * The Abstract Class defines a template method that contains a skeleton of some
@@ -15,6 +16,8 @@
 class AbstractClass {
 
 public:
+    virtual ~AbstractClass() = default;
+
     /**
      * The template method defines the skeleton of an algorithm:
      */
@@ -39,17 +42,18 @@ public:
     /**
      * These operations already have implementations.
      */
-protected:
+private:
     virtual void BaseOperation1() const {
-        std::cout << "AbstractClass says: I am doing the bulk of the work" << std::endl;
+        // std::cout << "AbstractClass says: I am doing the bulk of the work" << std::endl;
+        std::println("AbstractClass says: I am doing the bulk of the work");
     }
 
     virtual void BaseOperation2() const {
-        std::cout << "AbstractClass says: But I let subclasses override some operations" << std::endl;
+        std::println("AbstractClass says: But I let subclasses override some operations");
     }
 
     virtual void BaseOperation3() const {
-        std::cout << "AbstractClass says: But I am doing the bulk of the work anyway" << std::endl;
+        std::println("AbstractClass says: But I am doing the bulk of the work anyway");
     }
 
     /**
@@ -72,15 +76,15 @@ protected:
  * Concrete classes have to implement all abstract operations of the base class.
  * They can also override some operations with a default implementation.
  */
-class ConcreteClass1 : public AbstractClass {
-protected:
+class ConcreteClass1 final : public AbstractClass {
+private:
     bool RequiredOperations1() const override {
-        std::cout << "ConcreteClass1 says: Implemented Operation1" << std::endl;
+        std::println("ConcreteClass1 says: Implemented Operation1");
         return false;
     }
 
     bool RequiredOperation2() const override {
-        std::cout << "ConcreteClass1 says: Implemented Operation2" << std::endl;
+        std::println("ConcreteClass1 says: Implemented Operation2");
         return false;
     }
 };
@@ -88,24 +92,24 @@ protected:
 /**
  * Usually, concrete classes override only a fraction of base class' operations.
  */
-class ConcreteClass2 : public AbstractClass {
-protected:
+class ConcreteClass2 final : public AbstractClass {
+private:
     bool RequiredOperations1() const override {
-        std::cout << "ConcreteClass2 says: Implemented Operation1" << std::endl;
+        std::println("ConcreteClass2 says: Implemented Operation1");
         return true;
     }
 
     bool RequiredOperation2() const override {
-        std::cout << "ConcreteClass2 says: Implemented Operation2" << std::endl;
+        std::println("ConcreteClass2 says: Implemented Operation2");
         return true;
     }
 
     void BaseOperation1() const override {
-        std::cout << "ConcreteClass2 says: Overridden BaseOperation1" << std::endl;
+        std::println("ConcreteClass2 says: Overridden BaseOperation1");
     }
 
     void Hook1() const override {
-        std::cout << "ConcreteClass2 says: Overridden Hook1" << std::endl;
+        std::println("ConcreteClass2 says: Overridden Hook1");
     }
 };
 
@@ -114,28 +118,22 @@ protected:
  * code does not have to know the concrete class of an object it works with, as
  * long as it works with objects through the interface of their base class.
  */
-static void clientCode(const std::shared_ptr<AbstractClass>& obj) {
+static void clientCode(const AbstractClass& obj) {
     // ...
-    obj->TemplateMethod();
+    obj.TemplateMethod();
     // ...
 }
 
 void test_conceptual_example() {
-    std::cout << "Same client code can work with different subclasses (1):" << std::endl;
-    std::shared_ptr<AbstractClass> concreteClass1
-    { 
-        std::make_shared<ConcreteClass1>()
-    };
-    clientCode(concreteClass1);
-    std::cout << std::endl;
+    std::println("Same client code can work with different subclasses (1):");
+    auto concreteObject1 = std::make_unique<ConcreteClass1>();
+    clientCode(*concreteObject1);
+    std::println();
 
-    std::cout << "Same client code can work with different subclasses (2):" << std::endl;
-    std::shared_ptr<AbstractClass> concreteClass2
-    {
-        std::make_shared<ConcreteClass2>() 
-    };
-    clientCode(concreteClass2);
-    std::cout << std::endl;
+    std::println("Same client code can work with different subclasses (2):");
+    auto concreteObject2 = std::make_unique<ConcreteClass1>();
+    clientCode(*concreteObject2);
+    std::println();
 }
 
 // ===========================================================================

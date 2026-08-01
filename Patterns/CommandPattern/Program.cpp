@@ -5,13 +5,20 @@
 // function prototypes
 extern void test_conceptual_example_01();
 extern void test_conceptual_example_02();
-extern void test_chess_example();
+extern void test_conceptual_example_03();
+
+extern void test_chess_example_classic();
+extern void test_chess_example_modern();
 
 int main()
 {
     test_conceptual_example_01();
     test_conceptual_example_02();
-    test_chess_example();
+    test_conceptual_example_03();
+
+    test_chess_example_classic();
+    test_chess_example_modern();
+
     return 0;
 }
 
