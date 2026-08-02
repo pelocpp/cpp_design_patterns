@@ -63,7 +63,7 @@ Das Proxy Pattern hat zwei Beziehungen:
 
   2. Nach innen (Implementierung):
 
-  Der Proxy delegiert seine Arbeit an das &bdquo;echte&rdquo; Objekt, also an ein `RealSubject`-Objekt.
+  Das Proxy-Objekt delegiert seine Arbeit an das &bdquo;echte&rdquo; Objekt, also an ein `RealSubject`-Objekt.
   Dies hat nichts mit Polymorphie zu tun, der Proxy weiﬂ genau, welches Objekt er repr‰sentiert.
   Deshalb besitzt er eine Variable `m_realSubject` des Typs `std::unique_ptr<RealSubject>`.
 

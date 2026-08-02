@@ -39,6 +39,13 @@ namespace ConceptualExample02 {
 
 void test_conceptual_example_02() {
 
+    /**
+     * Variant 1:
+     * => idiomatic Modern C++
+     * => command represented by a callable
+     * => usually preferred unless polymorphic commands are required
+     */
+
     using namespace ConceptualExample02;
 
     auto receiver = std::make_shared<Receiver>();
@@ -47,8 +54,11 @@ void test_conceptual_example_02() {
 
     std::string data{ "Hello from Lambda!" };
 
-    // The "command" is a lambda expression that captures both the receiver and the data.
-    // Note the use of the "Generalized Lambda Capture"
+    /**
+     * The "command" is a lambda expression that captures both the receiver and the data.
+     * Note the use of the "Generalized Lambda Capture"
+     */
+    
     invoker.setCommand(
         [receiver, data = std::move(data)]() {
             receiver->action(data);

@@ -5,7 +5,6 @@
 #include <memory>
 #include <print>
 
-
 /**
  * The Abstract Class defines a template method that contains a skeleton of some
  * algorithm, composed of calls to (usually) abstract primitive operations.
@@ -20,31 +19,33 @@ public:
 
     /**
      * The template method defines the skeleton of an algorithm:
+     * Non-virtual: Subclasses must not redefine the algorithm.
      */
 
     void TemplateMethod() const
     {
-        BaseOperation1();             // may be overriden, but it's not mandatory
+        BaseOperation1();             // overriden, but it's not mandatory
 
-        if (RequiredOperations1()) {  // MUST be overriden
+        RequiredOperation1();         // MUST be overriden
 
-            BaseOperation2();         // may be overriden, but it's not mandatory
-            Hook1();                  // may be overriden, but it's not mandatory
+        if (ShouldExecuteBranch()) {  // MUST be overriden
+
+            BaseOperation2();         // overriden, but it's not mandatory
+            Hook1();                  // overriden, but it's not mandatory
         }
         else
         {
             RequiredOperation2();     // MUST be overriden
-            BaseOperation3();         // may be overriden, but it's not mandatory
-            Hook2();                  // may be overriden, but it's not mandatory
+            BaseOperation3();         // overriden, but it's not mandatory
+            Hook2();                  // overriden, but it's not mandatory
         }
     }
 
     /**
      * These operations already have implementations.
      */
-private:
+protected:
     virtual void BaseOperation1() const {
-        // std::cout << "AbstractClass says: I am doing the bulk of the work" << std::endl;
         std::println("AbstractClass says: I am doing the bulk of the work");
     }
 
@@ -59,8 +60,9 @@ private:
     /**
      * These operations have to be implemented in subclasses.
      */
-    virtual bool RequiredOperations1() const = 0;
-    virtual bool RequiredOperation2() const = 0;
+    virtual bool ShouldExecuteBranch() const = 0;
+    virtual void RequiredOperation1() const = 0;
+    virtual void RequiredOperation2() const = 0;
 
     /**
      * These are "hooks." Subclasses may override them, but it's not mandatory
@@ -68,8 +70,8 @@ private:
      * Hooks provide additional extension points in some crucial places of the
      * algorithm.
      */
-    virtual void Hook1() const {}
-    virtual void Hook2() const {}
+    virtual void Hook1() const {}  // default: do nothing
+    virtual void Hook2() const {}  // default: do nothing
 };
 
 /**
@@ -77,15 +79,18 @@ private:
  * They can also override some operations with a default implementation.
  */
 class ConcreteClass1 final : public AbstractClass {
-private:
-    bool RequiredOperations1() const override {
-        std::println("ConcreteClass1 says: Implemented Operation1");
-        return false;
+protected:
+    bool ShouldExecuteBranch() const override {
+        std::println("ConcreteClass1 says: Implemented ShouldExecuteBranch decision");
+        return true;
     }
 
-    bool RequiredOperation2() const override {
-        std::println("ConcreteClass1 says: Implemented Operation2");
-        return false;
+    void RequiredOperation1() const override {
+        std::println("ConcreteClass1 says: Implemented required Operation1");
+    }
+
+    void RequiredOperation2() const override {
+        std::println("ConcreteClass1 says: Implemented required Operation2");
     }
 };
 
@@ -93,15 +98,18 @@ private:
  * Usually, concrete classes override only a fraction of base class' operations.
  */
 class ConcreteClass2 final : public AbstractClass {
-private:
-    bool RequiredOperations1() const override {
-        std::println("ConcreteClass2 says: Implemented Operation1");
-        return true;
+protected:
+    bool ShouldExecuteBranch() const override {
+        std::println("ConcreteClass2 says: Implemented ShouldExecuteBranch decision");
+        return false;
     }
 
-    bool RequiredOperation2() const override {
-        std::println("ConcreteClass2 says: Implemented Operation2");
-        return true;
+    void RequiredOperation1() const override {
+        std::println("ConcreteClass2 says: Implemented required Operation1");
+    }
+
+    void RequiredOperation2() const override {
+        std::println("ConcreteClass2 says: Implemented required Operation2");
     }
 
     void BaseOperation1() const override {
@@ -125,14 +133,15 @@ static void clientCode(const AbstractClass& obj) {
 }
 
 void test_conceptual_example() {
+
     std::println("Same client code can work with different subclasses (1):");
-    auto concreteObject1 = std::make_unique<ConcreteClass1>();
-    clientCode(*concreteObject1);
+    ConcreteClass1 concreteObject1;
+    clientCode(concreteObject1);
     std::println();
 
     std::println("Same client code can work with different subclasses (2):");
-    auto concreteObject2 = std::make_unique<ConcreteClass1>();
-    clientCode(*concreteObject2);
+    ConcreteClass2 concreteObject2;
+    clientCode(concreteObject2);
     std::println();
 }
 

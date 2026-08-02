@@ -63,7 +63,7 @@ namespace ConceptualExample01 {
             m_data = std::move(data);
         }
 
-        virtual void execute() const override
+        void execute() const override
         {
             if (m_receiver) {
                 m_receiver->action(m_data);
@@ -96,6 +96,13 @@ namespace ConceptualExample01 {
 }
 
 void test_conceptual_example_01() {
+
+    /**
+     * Variant 1:
+     * => classical Gang-of-Four implementation
+     * => explicit Command hierarchy
+     * => ideal for explaining the design pattern
+     */
 
     using namespace ConceptualExample01;
 

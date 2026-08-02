@@ -2,6 +2,7 @@
 // ConceptualExample.cpp - Decorator Pattern
 // ===========================================================================
 
+#include <cassert>
 #include <format>
 #include <memory>
 #include <print>
@@ -15,6 +16,7 @@ class IComponent {
 public:
     virtual ~IComponent() = default;
 
+    [[nodiscard]]
     virtual std::string operation() const = 0;
 };
 
@@ -36,24 +38,29 @@ public:
  * The primary purpose of this class is to define the wrapping interface for all
  * concrete decorators. The default implementation of the wrapping code might
  * include a field for storing a wrapped component and the means to initialize it.
+ * 
+ * Note: DecoratorBase should not be instantiable: Therefore the constructor is protected.
  */
 class DecoratorBase : public IComponent {
-protected:
+private:
    std::unique_ptr<IComponent> m_component;
 
-public:
-    DecoratorBase(std::unique_ptr<IComponent> component)
+protected:
+    explicit DecoratorBase(std::unique_ptr<IComponent> component)
         // exclusive ownership saves reference-counting overhead
         : m_component{ std::move(component) }
-    {}
+    {
+        // I would prefer to safeguard the constructor:
+        // A decorator cannot meaningfully exist without a component!
+        assert(m_component);
+    }
 
+public:
     /**
-     * The Decorator delegates all work to the wrapped component.
+     * The Decorator delegates all work to the wrapped component
+     * (nullptr in an existing DecoratorBase object cannot exist!).
      */
     std::string operation() const override {
-        if (!m_component) {
-            return std::string{};
-        }
         return m_component->operation();
     }
 };
@@ -70,7 +77,7 @@ class ConcreteDecoratorA final : public DecoratorBase {
      * decorator classes.
      */
 public:
-    ConcreteDecoratorA(std::unique_ptr<IComponent> component)
+    explicit ConcreteDecoratorA(std::unique_ptr<IComponent> component)
         : DecoratorBase{ std::move(component) }
     {}
 
@@ -88,7 +95,7 @@ public:
  */
 class ConcreteDecoratorB final : public DecoratorBase {
 public:
-    ConcreteDecoratorB(std::unique_ptr<IComponent> component)
+    explicit ConcreteDecoratorB(std::unique_ptr<IComponent> component)
         : DecoratorBase{ std::move(component) }
     {}
 
@@ -104,7 +111,7 @@ public:
  */
 class ConcreteDecoratorC final : public DecoratorBase {
 public:
-    ConcreteDecoratorC(std::unique_ptr<IComponent> component)
+    explicit ConcreteDecoratorC(std::unique_ptr<IComponent> component)
         : DecoratorBase{ std::move(component) }
     {}
 
@@ -252,15 +259,17 @@ static void test_conceptual_example_06() {
     // run-time dependent decorator
     std::unique_ptr<IComponent> decorator;
 
-    if (true)   // <== change 'true' to 'false'
+    constexpr bool useVariantA = true;  // <== change 'true' to 'false'
+
+    if (useVariantA)
     {
         std::unique_ptr<IComponent> decorator1{ std::make_unique<ConcreteDecoratorA>(std::move(component)) };
-        decorator = std::move(std::make_unique<ConcreteDecoratorB>(std::move(decorator1)));
+        decorator = std::make_unique<ConcreteDecoratorB>(std::move(decorator1));
         std::println("Client: Now I've this decorated component (if):");
     }
     else {
         std::unique_ptr<IComponent> decorator1 {std::make_unique<ConcreteDecoratorB>(std::move(component))};
-        decorator = std::move(std::make_unique<ConcreteDecoratorA>(std::move(decorator1)));
+        decorator = std::make_unique<ConcreteDecoratorA>(std::move(decorator1));
         std::println("Client: Now I've that decorated component (else):");
     }
 
