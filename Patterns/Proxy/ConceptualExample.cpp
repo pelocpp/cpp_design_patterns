@@ -38,28 +38,20 @@ public:
 class Proxy final : public SubjectBase
 {
 private:
-    mutable std::unique_ptr<SubjectBase> m_realSubject;
-
-    bool checkAccess() const {
-        // some real checks should go here.
-        std::println("Proxy: Checking access prior to executing a real request."); 
-        return true;
-    }
-
-    void logAccess() const {
-        std::println("Proxy: Logging the time of request.");
-    }
+    // the proxy typically represents exactly one concrete type
+    mutable std::unique_ptr<RealSubject> m_realSubject;
+    // mutable because lazy initialization happens in a logically const operation
 
 public:
     /**
-     * The Proxy maintains a reference to an object of the RealSubject class. It
-     * can be either lazy-loaded or passed to the Proxy by the client.
+     * The Proxy maintains a reference to an object of the RealSubject class.
+     * It can be either lazy-loaded or passed to the Proxy by the client.
      */
 
     // Option 1: The object is passed in from the outside (kind of dependency injection).
     // Flexible Variant: Accepts any SubjectBase, not just RealSubject
 
-    explicit Proxy(std::unique_ptr<SubjectBase> subject)
+    explicit Proxy(std::unique_ptr<RealSubject> subject)
         : m_realSubject{ std::move(subject) }
     {}
 
@@ -70,26 +62,39 @@ public:
 
     void request() const override {
 
-        if (checkAccess()) {
-
-            /**
-             * True lazy-loading implementation:
-             * We create the heavy RealSubject object only when request() is called:
-             */
-            if (!m_realSubject) {
-                std::println("Proxy: RealSubject is null. Creating it now (Lazy Loading) ...");
-                m_realSubject = std::make_unique<RealSubject>();
-            }
-
-            /**
-             * The most common applications of the Proxy pattern are lazy loading,
-             * caching, controlling the access, logging, etc. A Proxy can perform one of
-             * these things and then, depending on the result, pass the execution to the
-             * same method in a linked RealSubject object.
-             */
-            m_realSubject->request();
-            logAccess();
+        if (!checkAccess()) {
+            return;
         }
+
+        /**
+        * True lazy-loading implementation:
+        * We create the heavy RealSubject object only when request() is called:
+        */
+        if (!m_realSubject) {
+            std::println("Proxy: RealSubject is null - creating it now (Lazy Loading) ...");
+            m_realSubject = std::make_unique<RealSubject>();
+        }
+
+        /**
+        * The most common applications of the Proxy pattern are lazy loading,
+        * caching, controlling the access, logging, etc. A Proxy can perform one of
+        * these things and then, depending on the result, pass the execution to the
+        * same method in a linked RealSubject object.
+        */
+        m_realSubject->request();
+        logAccess();
+    }
+
+private:
+    [[nodiscard]]
+    bool checkAccess() const noexcept {
+        // some real checks should go here.
+        std::println("Proxy: Checking access prior to executing a real request.");
+        return true;
+    }
+
+    void logAccess() const noexcept {
+        std::println("Proxy: Logging the time of request.");
     }
 };
 
@@ -121,7 +126,7 @@ void test_conceptual_example()
 
     std::println("Client: Executing with a lazy proxy (No initial subject):");
     Proxy lazyProxy;         // RealSubject is not yet created!
-    clientCode(lazyProxy);   // Only here is the RealSubject created in the background.
+    clientCode(lazyProxy);   // only here is the RealSubject created in the background.
 }
 
 // ===========================================================================

@@ -15,51 +15,145 @@
 
 #include <memory>
 #include <print>
+//
+//namespace ConceptualExample01
+//{
+//    class Prototype
+//    {
+//    private:
+//        std::size_t m_id;
+//
+//    public:
+//        Prototype(std::size_t id) : m_id{ id } {}
+//
+//        virtual ~Prototype() = default;
+//        
+//        virtual Prototype* clone() const = 0;
+//
+//    public:
+//        std::size_t getId() const { return m_id; }
+//        void setId(std::size_t id) { m_id = id; }
+//    };
+//
+//    class ConcretePrototype : public Prototype
+//    {
+//    public:
+//        ConcretePrototype(std::size_t id) : Prototype{ id } {}
+//
+//        // Note: Return Type = Type of base class - 
+//        // but 'virtual ConcretePrototype* clone()' compiles too
+//        Prototype* clone() const override
+//        {
+//            return new ConcretePrototype{ *this };
+//        }
+//    };
+//
+//    static void clientCode(Prototype* original)
+//    {
+//        Prototype* copy{ original->clone() };
+//
+//        // std::cout << "Copy: " << copy->getId() << std::endl;
+//        std::println("Copy: {}", copy->getId());
+//
+//        delete copy;
+//    }
+//}
+//
+//namespace ConceptualExample02
+//{
+//    class Prototype
+//    {
+//    private:
+//        std::size_t m_id;
+//
+//    protected:
+//        Prototype(std::size_t id) : m_id{ id } {}
+//
+//    public:
+//        std::size_t getId() const { return m_id; }
+//        void setId(std::size_t id) { m_id = id; }
+//
+//    public:
+//        virtual std::shared_ptr<Prototype> clone() const = 0;
+//    };
+//
+//    class ConcretePrototype : public Prototype
+//    {
+//    public:
+//        ConcretePrototype(std::size_t id) : Prototype{ id } {}
+//
+//        // Note: Return Type = Type of base class - 
+//        // 'std::shared_ptr<ConcretePrototype> clone() const override' doesn't compile !!!
+//        std::shared_ptr<Prototype> clone() const override
+//        {
+//            // Preserve full object state by copying *this instead of
+//            // reconstructing from a single property (getId()).
+//            std::shared_ptr<Prototype> copy {
+//                std::make_shared<ConcretePrototype>(*this)
+//            };
+//
+//            return copy;
+//        }
+//    };
+//}
+//
+//void test_conceptual_example_01_a()
+//{
+//    using namespace ConceptualExample01;
+//
+//    Prototype* prototype{ new ConcretePrototype { 123 } };
+//
+//    clientCode(prototype);
+//
+//    delete prototype;
+//}
+//
+//void test_conceptual_example_01_b()
+//{
+//    using namespace ConceptualExample01;
+//
+//    Prototype* prototype{ new ConcretePrototype { 123 } };
+//        
+//    Prototype* clone{  prototype->clone() };
+//
+//    std::println("Prototype: {}", prototype->getId());
+//    std::println("Clone:     {}", clone->getId());
+//
+//    clone->setId(456);
+//
+//    std::println("Prototype: {}", prototype->getId());
+//    std::println("Clone:     {}", clone->getId());
+//
+//    delete prototype;
+//    delete clone;
+//}
+//
+//void test_conceptual_example_02()
+//{
+//    using namespace ConceptualExample02;
+//
+//    std::shared_ptr<Prototype> prototype {
+//        std::make_shared<ConcretePrototype>(123) 
+//    };
+//
+//    std::shared_ptr<Prototype> clone { 
+//        prototype->clone() 
+//    };
+//
+//    std::println("Prototype: {}", prototype->getId());
+//    std::println("Clone:     {}", clone->getId());
+//
+//    clone->setId(456);
+//
+//    std::println("Prototype: {}", prototype->getId());
+//    std::println("Clone:     {}", clone->getId());
+//}
 
-namespace ConceptualExample01
-{
-    class Prototype
-    {
-    private:
-        std::size_t m_id;
+// ===========================================================================
+// End-of-File
+// ===========================================================================
 
-    public:
-        Prototype(std::size_t id) : m_id{ id } {}
-
-        virtual ~Prototype() = default;
-        
-        virtual Prototype* clone() const = 0;
-
-    public:
-        std::size_t getId() const { return m_id; }
-        void setId(std::size_t id) { m_id = id; }
-    };
-
-    class ConcretePrototype : public Prototype
-    {
-    public:
-        ConcretePrototype(std::size_t id) : Prototype{ id } {}
-
-        // Note: Return Type = Type of base class - 
-        // but 'virtual ConcretePrototype* clone()' compiles too
-        Prototype* clone() const override
-        {
-            return new ConcretePrototype{ *this };
-        }
-    };
-
-    static void clientCode(Prototype* original)
-    {
-        Prototype* copy{ original->clone() };
-
-        // std::cout << "Copy: " << copy->getId() << std::endl;
-        std::println("Copy: {}", copy->getId());
-
-        delete copy;
-    }
-}
-
-namespace ConceptualExample02
+namespace ConceptualExample_New_Delete
 {
     class Prototype
     {
@@ -67,88 +161,112 @@ namespace ConceptualExample02
         std::size_t m_id;
 
     protected:
-        Prototype(std::size_t id) : m_id{ id } {}
+        explicit Prototype(std::size_t id) : m_id{ id } {}
+
+    public:    
+        virtual ~Prototype() = default;
+
+        [[nodiscard]]
+        virtual Prototype* clone() const = 0;
 
     public:
-        std::size_t getId() const { return m_id; }
-        void setId(std::size_t id) { m_id = id; }
-
-    public:
-        virtual std::shared_ptr<Prototype> clone() const = 0;
+        std::size_t getId() const noexcept { return m_id; }
+        void setId(std::size_t id) noexcept { m_id = id; }
     };
 
-    class ConcretePrototype : public Prototype
+    class ConcretePrototype final : public Prototype
     {
     public:
-        ConcretePrototype(std::size_t id) : Prototype{ id } {}
+        explicit ConcretePrototype(std::size_t id) : Prototype{ id } {}
+
+        ConcretePrototype(const ConcretePrototype&) = default;
 
         // Note: Return Type = Type of base class - 
-        // 'std::shared_ptr<ConcretePrototype> clone() const override' doesn't compile !!!
-        std::shared_ptr<Prototype> clone() const override
+        // but 'virtual ConcretePrototype* clone()' compiles too:
+        // Covariant return types are supported for raw pointers.
+        Prototype* clone() const override
         {
-            // Preserve full object state by copying *this instead of
-            // reconstructing from a single property (getId()).
-            std::shared_ptr<Prototype> copy {
-                std::make_shared<ConcretePrototype>(*this)
-            };
+            return new ConcretePrototype{ *this };
+        }
+    };
 
-            return copy;
+    static void clientCode(const Prototype& original)
+    {
+        auto* copy{ original.clone() };
+
+        std::println("Copy: {}", copy->getId());
+
+        delete copy;
+    }
+}
+
+namespace ConceptualExample_UniquePtr
+{
+    class Prototype
+    {
+    private:
+        std::size_t m_id;
+
+    protected:
+        explicit Prototype(std::size_t id) : m_id{ id } {}
+
+    public:
+        virtual ~Prototype() = default;
+
+        std::size_t getId() const noexcept { return m_id; }
+        void setId(std::size_t id) noexcept { m_id = id; }
+
+    public:
+        [[nodiscard]]
+        virtual std::unique_ptr<Prototype> clone() const = 0;
+    };
+
+    class ConcretePrototype final : public Prototype
+    {
+    public:
+        explicit ConcretePrototype(std::size_t id) : Prototype{ id } {}
+
+        ConcretePrototype(const ConcretePrototype&) = default;
+
+        // Note: Return Type = Type of base class - 
+        // 'std::unique_ptr<ConcretePrototype> clone() const override' doesn't compile:
+        // Covariant return types are NOT supported for std::unique_ptr.
+        std::unique_ptr<Prototype> clone() const override
+        {
+            // preserve the complete object state by invoking the copy constructor.
+            return std::make_unique<ConcretePrototype>(*this);
         }
     };
 }
 
-void test_conceptual_example_01()
+void test_conceptual_example_new_delete()
 {
-    using namespace ConceptualExample01;
+    using namespace ConceptualExample_New_Delete;
 
     Prototype* prototype{ new ConcretePrototype { 123 } };
 
-    clientCode(prototype);
+    clientCode(*prototype);
 
     delete prototype;
 }
 
-void test_conceptual_example_02()
+void test_conceptual_example_unique_ptr()
 {
-    using namespace ConceptualExample01;
+    using namespace ConceptualExample_UniquePtr;
 
-    Prototype* prototype{ new ConcretePrototype(123) };
-        
-    Prototype* clone{  prototype->clone() };
-
-    std::println("Prototype: {}", prototype->getId());
-    std::println("Clone:     {}", clone->getId());
-
-    clone->setId(456);
-
-    std::println("Prototype: {}", prototype->getId());
-    std::println("Clone:     {}", clone->getId());
-
-    delete prototype;
-    delete clone;
-}
-
-void test_conceptual_example_03()
-{
-    using namespace ConceptualExample02;
-
-    std::shared_ptr<Prototype> prototype {
-        std::make_shared<ConcretePrototype>(123) 
+    std::unique_ptr<Prototype> object{
+        std::make_unique<ConcretePrototype>(123)
     };
 
-    std::shared_ptr<Prototype> clone { 
-        prototype->clone() 
+    std::unique_ptr<Prototype> copy{
+        object->clone()
     };
 
-    std::println("Prototype: {}", prototype->getId());
-    std::println("Clone:     {}", clone->getId());
+    std::println("Prototype: {}", object->getId());
+    std::println("Clone:     {}", copy->getId());
 
-    clone->setId(456);
+    copy->setId(456);
 
-    std::println("Prototype: {}", prototype->getId());
-    std::println("Clone:     {}", clone->getId());
+    std::println("Prototype: {}", object->getId());
+    std::println("Clone:     {}", copy->getId());
 }
-
-// ===========================================================================
-// End-of-File
-// ===========================================================================

@@ -52,6 +52,21 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 *Abbildung* 1: Schematische Darstellung des *Proxy Patterns*.
 
+*Bemerkung*:<br />
+
+Das Proxy Pattern hat zwei Beziehungen:
+
+  1. Nach außen (Polymorphie):
+
+  Der Client soll nicht unterscheiden können, ob er mit dem echten Objekt oder dem Proxy arbeitet.
+  Deshalb müssen beide Klassen dieselbe Schnittstelle `SubjectBase` implementieren.
+
+  2. Nach innen (Implementierung):
+
+  Der Proxy delegiert seine Arbeit an das &bdquo;echte&rdquo; Objekt, also an ein `RealSubject`-Objekt.
+  Dies hat nichts mit Polymorphie zu tun, der Proxy weiß genau, welches Objekt er repräsentiert.
+  Deshalb besitzt er eine Variable `m_realSubject` des Typs `std::unique_ptr<RealSubject>`.
+
 ---
 
 #### Conceptual Example:

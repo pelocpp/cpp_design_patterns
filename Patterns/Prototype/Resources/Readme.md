@@ -116,12 +116,39 @@ Es besteht im Wesentlichen aus zwei Teilen:
 #### Hinweis:
 
 Es ist **nicht** möglich, das &bdquo;*Virtueller Konstruktor*&rdquo;-Idiom unverändert &ndash; so wie im
-ersten konzeptionellen Beispiel gezeigt &ndash; für *Smart Pointer* (`std::shared_ptr`, `std::unique_ptr`) zu implementieren.
+ersten konzeptionellen Beispiel gezeigt &ndash; für *Smart Pointer* (`std::unique_ptr`) zu implementieren.
 Der Grund besteht darin, dass abgeleitete, virtuelle Methoden **kovariante** Rückgabetypen haben müssen.
-Bei den beiden Datentypen `std::shared_ptr<Prototype>` und `std::shared_ptr<ConcretePrototype>` ist dies **nicht** der Fall.
+Bei den beiden Datentypen `std::unique_ptr<Prototype>` und `std::unique_ptr<ConcretePrototype>` ist dies **nicht** der Fall.
 
 Eine pragmatische Umgehung dieses Problems besteht darin,
 dass die Methode `ConcretePrototype::clone` stattdessen einen `Prototype`-Zeiger zurückgibt.
+
+
+#### Hinweis:
+
+Um es noch einmal auf den Punkt zu bringen. Das *Prototype Pattern* bedeutet
+
+  * &bdquo;erzeuge mir ein neues Objekt&rdquo;
+
+und nicht
+
+  * &bdquo;erzeuge ein gemeinsam besessenes Objekt&rdquo;
+
+Deshalb sollte bei Verwendung von Smart Pointern die Schnittstelle
+
+```cpp
+class Prototype
+{
+public:
+    virtual ~Prototype() = default;
+
+    [[nodiscard]]
+    virtual std::unique_ptr<Prototype> clone() const = 0;
+};
+```
+
+lauten.
+
 
 #### Hinweis:
 
@@ -137,8 +164,6 @@ Man spricht dabei auch von der so genannten &bdquo;*prototypischen Vererbung*&rd
 
 [Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version &ndash; mit *raw*-Zeigern und Smart Pointern<br />
 [Quellcode 2](../ConceptualExample02.cpp) &ndash; Beispiel eines Schachbretts mit Spielfiguren unterschiedlichen Typs<br />
-[Quellcode 3](../ConceptualExample03.cpp) &ndash; Ein Beispiel mit einer Factory für Prototypen<br />
-[Quellcode 4](../ConceptualExample04.cpp) &ndash; Wie letztes Beispiel, nur mit Smart Pointern
 
 ---
 
