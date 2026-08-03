@@ -21,7 +21,6 @@ namespace ConceptualExample01 {
     public:
         void action(std::string_view message)
         {
-           // std::cout << "Action called with message " << message << std::endl;
             std::println("Action called with message {}", message);
         }
     };
