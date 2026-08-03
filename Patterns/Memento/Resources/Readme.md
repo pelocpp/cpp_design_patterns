@@ -94,7 +94,7 @@ Dies ist auch eine Möglichkeit, um der `BankAccount`-Klasse den vollen Zugriff a
 
 Das `BankAccount`-Beispiel demonstriert die Realisierung einer *Undo*/*Redo*-Funktionalität.
 
-[Quellcode 3](../BankAccount.cpp) &ndash; Ein Bankkonto mit *Undo*/*Redo*-Funktionalität.
+[Quellcode](../BankAccount.cpp) &ndash; Ein Bankkonto mit *Undo*/*Redo*-Funktionalität.
 
 ---
 
