@@ -58,20 +58,17 @@ public:
 // Der Compiler optimiert diesen Aufruf oft so weit, dass er komplett "inlined" wird.
 template <TargetConcept T>
 static void clientCode(const T& target) {
-    //std::cout << target.request() << "\n\n";
     std::println("{}", target.request());
 }
 
 void test_static_conceptual_example() {
 
     // Beispiel 1: Direktes Arbeiten mit dem Target
-    //std::cout << "Client: Working with standard Target:\n";
     std::println("Client: Working with standard Target");
     Target normalTarget;
     clientCode(normalTarget); // Erfüllt TargetConcept
 
     // Beispiel 2: Arbeiten mit dem Adaptee über den Compile-Time Adapter
-    //std::cout << "Client: Working with Adaptee via CompileTimeAdapter:\n";
     std::println("Client: Working with Adaptee via CompileTimeAdapter:");
     Adaptee oldAdaptee;
 
