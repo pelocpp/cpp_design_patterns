@@ -8,12 +8,12 @@
 
 namespace RAIIDemo {
 
-    template <class TFinalizer>
+    template <typename TFinalizer>
     class RAII {
     public:
         // c'tor
-        explicit RAII(const TFinalizer finalizer)
-            : m_finalizer{ finalizer }
+        explicit RAII(TFinalizer&& finalizer)
+            : m_finalizer{ std::forward<TFinalizer>(finalizer) }
         {}
 
         // d'tor
@@ -101,11 +101,13 @@ namespace RAIIDemo {
         std::cout << "Done." << std::endl;
     }
 
-    template <class TFinalizer>
+    template <typename TFinalizer>
     class RAIIContainer
     {
     public:
-        RAIIContainer(TFinalizer&& finalizer) : m_raii{ finalizer } {}
+        RAIIContainer(TFinalizer&& finalizer)
+            : m_raii{ std::forward<TFinalizer>(finalizer) }
+        {}
 
     private:
         RAII<TFinalizer> m_raii;

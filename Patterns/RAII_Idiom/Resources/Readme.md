@@ -45,12 +45,12 @@ Wir betrachten das Prinzip einer RAII-verwalteten Ressource an Hand einer Folge 
 ##### 1. Eine RAII-konforme Klasse
 
 ```cpp
-01: template <class TFinalizer>
+01: template <typename TFinalizer>
 02: class RAII {
 03: public:
 04:     // c'tor
-05:     explicit RAII(const TFinalizer finalizer)
-06:         : m_finalizer{ finalizer }
+05:     explicit RAII(TFinalizer&& finalizer)
+06:         : m_finalizer{ std::forward<TFinalizer>(finalizer) }
 07:     {}
 08: 
 09:     // d'tor
@@ -203,30 +203,31 @@ Done.
 ##### 6. RAII-verwalteter Ressource als Instanzvariable eines Objekts
 
 ```cpp
-01: template <class TFinalizer>
+01: template <typename TFinalizer>
 02: class RAIIContainer
 03: {
 04: public:
-05:     RAIIContainer(TFinalizer&& finalizer) : m_raii{ finalizer } {}
-06: 
-07: private:
-08:     RAII<TFinalizer> m_raii;
-09: };
-10: 
-11: void test()
-12: {
-13:     Dummy* ptr = new Dummy{ 1 };
-14:     if (ptr == nullptr) {
-15:         return;
-16:     }
-17: 
-18:     {
-19:         RAIIContainer cont{ [&]() { delete ptr; } };
-20:     }
-21: 
-22:     std::cout << "Done." << std::endl;
-23: }
-
+05:     RAIIContainer(TFinalizer&& finalizer)
+06:         : m_raii{ std::forward<TFinalizer>(finalizer) }
+07:     {}
+08: 
+09: private:
+10:     RAII<TFinalizer> m_raii;
+11: };
+12: 
+13: static void test_05()
+14: {
+15:     Dummy* ptr = new Dummy{ 1 };
+16:     if (ptr == nullptr) {
+17:         return;
+18:     }
+19: 
+20:     {
+21:         RAIIContainer cont{ [&]() { delete ptr; } };
+22:     }
+23: 
+24:     std::cout << "Done." << std::endl;
+25: }
 ```
 
 ---
