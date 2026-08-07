@@ -15,12 +15,12 @@ namespace ConceptualExampleChainOfResponsibility {
     class Request
     {
     private:
-        std::size_t m_type;
-        std::string m_param;
+        std::size_t      m_type;
+        std::string_view m_param;
 
     public:
-        Request(std::size_t type, std::string param) noexcept
-            : m_type{ type }, m_param{ std::move(param) } 
+        Request(std::size_t type, std::string_view param) noexcept
+            : m_type{ type }, m_param{ param }
         {}
 
         std::size_t getType() const noexcept { return m_type; }
@@ -38,27 +38,33 @@ namespace ConceptualExampleChainOfResponsibility {
     public:
         HandlerBase() noexcept = default;
 
+        virtual ~HandlerBase() = default;
+
         // Template Method Pattern: Centrally manages the control flow of the chain.
+
+        // Chain of Responsibility: determines *who* handles.
+        // Template Method:         determines *how* the chain is traversed.
         [[nodiscard]]
         std::optional<bool> handleRequest(const Request& req) const noexcept {
 
-            // 1.) Own attempt
-            if (auto result = handle(req); result.has_value()) {
+            // own attempt
+            if (auto result = handle(req)) {
                 return result;
             }
 
-            // 2.) Chaining, if a successor exists
-            if (m_successor) {
-                return m_successor->handleRequest(req);
+            // no successor, quit
+            if (!m_successor) {
+                return std::nullopt;
             }
 
-            return std::nullopt;
+            // chain, if a successor exists
+            return m_successor->handleRequest(req);
         }
 
-        // returns the old successor (standard C++ interface design)
-        std::unique_ptr<HandlerBase> setSuccessor(std::unique_ptr<HandlerBase> next) noexcept {
-            std::swap(m_successor, next);
-            return next;
+        HandlerBase& setSuccessor(std::unique_ptr<HandlerBase> successor) noexcept
+        {
+            m_successor = std::move(successor);
+            return *m_successor;
         }
     };
 
@@ -117,7 +123,7 @@ namespace ConceptualExampleChainOfResponsibility {
         [[nodiscard]]
         std::optional<bool> handle(const Request& req) const noexcept override
         {
-            std::println("Default Handler: Unhandled request type {}", req.getParam());
+            std::println("Default Handler: Unhandled: {}", req.getParam());
             return false;
         }
     };
@@ -130,14 +136,14 @@ namespace ConceptualExampleChainOfResponsibility {
     {
         std::array requests =
         {
-            Request{ 7, std::string{ "Req. No.  7"} },
-            Request{25, std::string{ "Req. No. 25"} },
-            Request{17, std::string{ "Req. No. 17"} },
-            Request{21, std::string{ "Req. No. 21"} },
-            Request{18, std::string{ "Req. No. 18"} },
-            Request{ 3, std::string{ "Req. No. 03"} },
-            Request{19, std::string{ "Req. No. 19"} },
-            Request{20, std::string{ "Req. No. 20"} }
+            Request{  7, "Req. No.  7" },
+            Request{ 25, "Req. No. 25" },
+            Request{ 17, "Req. No. 17" },
+            Request{ 21, "Req. No. 21" },
+            Request{ 18, "Req. No. 18" },
+            Request{  3, "Req. No. 03" },
+            Request{ 19, "Req. No. 19" },
+            Request{ 20, "Req. No. 20" }
         };
 
         for (const Request& request : requests) {
@@ -153,9 +159,9 @@ namespace ConceptualExampleChainOfResponsibility {
     {
         std::array requests =
         {
-            Request{ 7, std::string{ "Req. No.  7"} },
-            Request{99, std::string{ "Req. No. 99"} },
-            Request{20, std::string{ "Req. No. 20"} }
+            Request{  7, "Req. No.  7" },
+            Request{ 99, "Req. No. 99" },
+            Request{ 20, "Req. No. 20" }
         };
 
         for (const Request& request : requests) {
@@ -172,15 +178,12 @@ void test_conceptual_example() {
 
     using namespace ConceptualExampleChainOfResponsibility;
 
-    auto chain          = std::make_unique<ConcreteHandlerA>();
-    auto handler2       = std::make_unique<ConcreteHandlerB>();
-    auto handler3       = std::make_unique<ConcreteHandlerC>();
-    auto defaultHandler = std::make_unique<DefaultHandler>();
+    auto chain = std::make_unique<ConcreteHandlerA>();
 
-    // building the chain from back to front using unique_ptr (very safe)
-    handler3->setSuccessor(std::move(defaultHandler));
-    handler2->setSuccessor(std::move(handler3));
-    chain->setSuccessor(std::move(handler2));
+    chain
+        ->setSuccessor(std::make_unique<ConcreteHandlerB>())
+        .setSuccessor(std::make_unique<ConcreteHandlerC>())
+        .setSuccessor(std::make_unique<DefaultHandler>());
 
     clientCode_01(*chain);
 

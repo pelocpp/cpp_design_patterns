@@ -3,56 +3,86 @@
 // ===========================================================================
 
 #include <iostream>
-#include <vector>
-#include <string>
 #include <memory>
+#include <string>
+#include <vector>
 
 namespace CompositePatternSmartPointer {
     /**
      * The base Component class declares common operations for both
      * simple and complex objects of a composition.
      */
-    class Component {
 
+    class Component : public std::enable_shared_from_this<Component> {
     protected:
-        std::shared_ptr<Component> m_parent;
+        // A child does not own its parents -> weak_ptr prevents cycles.
+        std::weak_ptr<Component> m_parent;
 
     public:
-        Component() : m_parent(nullptr) {}
+        Component() = default;
 
         virtual ~Component() = default;
 
-        /**
-         * Optionally, the 'Component' class can declare an interface for setting and
-         * accessing a parent of the component in a tree structure.
-         * It can also provide some default implementation for these methods.
-         */
-        void setParent(std::shared_ptr<Component> parent) { m_parent = parent; }
-        std::shared_ptr<Component> getParent() const { return m_parent; }
+        // Kopieren/Verschieben explizit regeln bei polymorphen Basisklassen
+        Component(const Component&) = delete;
+        Component& operator=(const Component&) = delete;
+        Component(Component&&) = default;
+        Component& operator=(Component&&) = default;
 
-        /**
-         * In some cases, it would be beneficial to define the child-management
-         * operations right in the base Component class. This way, you won't need to
-         * expose any concrete component classes to the client code, even during the
-         * object tree assembly. The downside is that these methods will be empty for
-         * the leaf-level components.
-         */
+        // Übergabe als shared_ptr, da wir das Eigentum (weak) registrieren
+        void setParent(std::shared_ptr<Component> parent) { m_parent = parent; }
+        std::shared_ptr<Component> getParent() const { return m_parent.lock(); }
+
         virtual void add(std::shared_ptr<Component> component) {}
         virtual void remove(std::shared_ptr<Component> component) {}
-
-        /**
-         * You can provide a method that lets the client code figure out whether
-         * a component can bear children.
-         */
         virtual bool isComposite() const { return false; }
-
-        /**
-         * The base Component may implement some default behavior or leave it to
-         * concrete classes (by declaring the method containing the behavior as
-         * "abstract").
-         */
         virtual std::string operation() const = 0;
     };
+
+
+
+    //class Component {
+
+    //protected:
+    //    // A child does not own its parents -> weak_ptr prevents cycles.
+    //    std::shared_ptr<Component> m_parent;
+
+    //public:
+    //    Component() : m_parent(nullptr) {}
+
+    //    virtual ~Component() = default;
+
+    //    /**
+    //     * Optionally, the 'Component' class can declare an interface for setting and
+    //     * accessing a parent of the component in a tree structure.
+    //     * It can also provide some default implementation for these methods.
+    //     */
+    //    void setParent(std::shared_ptr<Component> parent) { m_parent = parent; }
+    //    std::shared_ptr<Component> getParent() const { return m_parent; }
+
+    //    /**
+    //     * In some cases, it would be beneficial to define the child-management
+    //     * operations right in the base Component class. This way, you won't need to
+    //     * expose any concrete component classes to the client code, even during the
+    //     * object tree assembly. The downside is that these methods will be empty for
+    //     * the leaf-level components.
+    //     */
+    //    virtual void add(std::shared_ptr<Component> component) {}
+    //    virtual void remove(std::shared_ptr<Component> component) {}
+
+    //    /**
+    //     * You can provide a method that lets the client code figure out whether
+    //     * a component can bear children.
+    //     */
+    //    virtual bool isComposite() const { return false; }
+
+    //    /**
+    //     * The base Component may implement some default behavior or leave it to
+    //     * concrete classes (by declaring the method containing the behavior as
+    //     * "abstract").
+    //     */
+    //    virtual std::string operation() const = 0;
+    //};
 
     /**
      * The Leaf class represents the end objects of a composition.
@@ -67,16 +97,31 @@ namespace CompositePatternSmartPointer {
     //        return "Leaf";
     //    }
     //};
+    //class Leaf : public Component {
+    //private:
+    //    std::string m_description;
+    //public:
+    //    Leaf() = delete;
+    //    Leaf(const std::string& description) : m_description{ description } {}
+    //    std::string operation() const override {
+    //        return m_description;
+    //    }
+    //};
+
     class Leaf : public Component {
     private:
         std::string m_description;
     public:
-        Leaf() = delete;
-        Leaf(const std::string& description) : m_description{ description } {}
+        // C++17 string_view für effiziente String-Übergabe
+        explicit Leaf(std::string_view description) : m_description{ description } {}
+
         std::string operation() const override {
             return m_description;
         }
     };
+
+
+
 
     /**
      * The Composite class represents the complex components that may have children.
