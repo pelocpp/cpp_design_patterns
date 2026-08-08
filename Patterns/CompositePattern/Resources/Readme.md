@@ -108,6 +108,7 @@ unterschiedliche Ansätze gezeigt:
 
 ##### Variante 1 &ndash; Baumstruktur mit Parent-Navigation
 
+<pre>
 Composite
     │
     ├── shared_ptr ──→ Child
@@ -115,6 +116,7 @@ Composite
     │                     └── weak_ptr ──→ Parent
     │
     └── ...
+</pre>
 
 
 Hier wurde `std::shared_ptr` bewusst gewählt, um die Lebenszeitbeziehung in beide Richtungen darstellen zu können
@@ -123,6 +125,7 @@ und um mit dem Gebrauch von `std::weak_ptr` Zyklen zu verhindern.
 
 ##### Variante 2 &ndash; Ein reiner Ownership-Baum
 
+<pre>
 Group
  │
  ├── unique_ptr → Shape
@@ -132,7 +135,7 @@ Group
  └── unique_ptr → Group
                     │
                     └── unique_ptr → Shape
-
+</pre>
 
 Hier gibt es keine Rückwärtsreferenz.
 
