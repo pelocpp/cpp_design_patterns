@@ -1,6 +1,6 @@
-# Composite Pattern
+ï»¿# Composite Pattern
 
-[Zurück](../../../Resources/Readme_05_Catalog.md)
+[ZurÃ¼ck](../../../Resources/Readme_05_Catalog.md)
 
 ---
 
@@ -21,60 +21,60 @@
 &bdquo;Um einzelne Objekte und Gruppen von Objekten einheitlich zu betrachten und behandeln.&rdquo;
 
 Das *Composite Entwurfsmuster* ist ein strukturelles Entwurfsmuster,
-mit dem Sie Objekte zu Baumstrukturen zusammensetzen und dann mit diesen Strukturen arbeiten können,
-als würde es sich um einzelne Objekte handeln.
+mit dem Sie Objekte zu Baumstrukturen zusammensetzen und dann mit diesen Strukturen arbeiten kÃ¶nnen,
+als wÃ¼rde es sich um einzelne Objekte handeln.
 
 #### Problem:
 
 Der Einsatz des *Composite Entwurfsmuster* ist dann sinnvoll,
-wenn sich die Kernstruktur der Daten einer Anwendung als baumartige Struktur darstellen lässt.
+wenn sich die Kernstruktur der Daten einer Anwendung als baumartige Struktur darstellen lÃ¤sst.
 
 Stellen Sie sich beispielsweise vor, Sie haben zwei Arten von Objekten:
 Produkte und Kartons. Ein Karton kann mehrere Produkte sowie mehrere kleinere Kartons enthalten.
-Diese kleineren Kartons können wiederum Produkte oder sogar noch kleinere Kartons aufnehmen usw.
+Diese kleineren Kartons kÃ¶nnen wiederum Produkte oder sogar noch kleinere Kartons aufnehmen usw.
 
 Betrachten wir nun ein Bestellsystem, das diese Klassen verwendet.
-Bestellungen können einfache Produkte ohne Verpackung sowie mit Produkten gefüllte Kartons und andere Produkte enthalten.
-Wie würden Sie den Gesamtpreis einer solchen Bestellung bestimmen?
+Bestellungen kÃ¶nnen einfache Produkte ohne Verpackung sowie mit Produkten gefÃ¼llte Kartons und andere Produkte enthalten.
+Wie wÃ¼rden Sie den Gesamtpreis einer solchen Bestellung bestimmen?
 
-Sie können den direkten Ansatz ausprobieren:
+Sie kÃ¶nnen den direkten Ansatz ausprobieren:
 Packen Sie alle Kartons aus, gehen Sie alle Produkte durch und berechnen Sie dann die Gesamtsumme.
-Das wäre in der realen Welt machbar.
-In einem Programm ist es jedoch nicht so einfach wie das Ausführen einer Wiederholungsschleife.
-Sie müssen die Klassen der Produkte und Schachteln, die Sie durchlaufen,
+Das wÃ¤re in der realen Welt machbar.
+In einem Programm ist es jedoch nicht so einfach wie das AusfÃ¼hren einer Wiederholungsschleife.
+Sie mÃ¼ssen die Klassen der Produkte und Schachteln, die Sie durchlaufen,
 die Verschachtelungsebenen der Schachteln und andere unangenehme Details kennen.
-All dies macht den direkten Ansatz entweder sehr umständlich oder sogar unmöglich.
+All dies macht den direkten Ansatz entweder sehr umstÃ¤ndlich oder sogar unmÃ¶glich.
 
-#### Lösung:
+#### LÃ¶sung:
 
 Die zentrale Idee des *Composite Entwurfsmusters* ist es, mit einer gemeinsamen Schnittstelle sowohl
-für Produkte als auch für Kartons zu arbeiten. Aufgabe dieser Schnittstelle wäre es an dem betrachteten Beispiel,
+fÃ¼r Produkte als auch fÃ¼r Kartons zu arbeiten. Aufgabe dieser Schnittstelle wÃ¤re es an dem betrachteten Beispiel,
 eine Methode zur Berechnung des Gesamtpreises zu deklarieren.
 
-Wie könnte eine derartige Methode aussehen?
-Für ein Produkt wird einfach der Produktpreis zurückgegeben.
-Bei einer Schachtel wird jeder Artikel in der Schachtel überprüft, der Preis abgefragt und eine Gesamtsumme für die Schachtel zurückgegeben.
+Wie kÃ¶nnte eine derartige Methode aussehen?
+FÃ¼r ein Produkt wird einfach der Produktpreis zurÃ¼ckgegeben.
+Bei einer Schachtel wird jeder Artikel in der Schachtel Ã¼berprÃ¼ft, der Preis abgefragt und eine Gesamtsumme fÃ¼r die Schachtel zurÃ¼ckgegeben.
 
-Wenn eines dieser Elemente eine kleinere Schachtel wäre, würde diese Schachtel auch ihren Inhalt durchgehen, solange, bis die Preise aller inneren Komponenten berechnet wurden.
-Eine Schachtel kann sogar zusätzliche Kosten zum Endpreis hinzufügen, wie z.B. Verpackungskosten oder ähnliches.
+Wenn eines dieser Elemente eine kleinere Schachtel wÃ¤re, wÃ¼rde diese Schachtel auch ihren Inhalt durchgehen, solange, bis die Preise aller inneren Komponenten berechnet wurden.
+Eine Schachtel kann sogar zusÃ¤tzliche Kosten zum Endpreis hinzufÃ¼gen, wie z.B. Verpackungskosten oder Ã¤hnliches.
 
-Der große Vorteil dieses Ansatzes besteht darin, dass Sie sich nicht um die konkreten Objekte kümmern müssen (Produkt oder Karton),
-aus denen der Baum besteht. Sie müssen nicht wissen, ob es sich bei einem Objekt um ein einfaches Produkt oder eine Schachtel mit Einzelteilen handelt.
-Sie können die Objekte alle gleich über eine gemeinsame Schnittstelle behandeln.
-Wenn Sie eine Methode aufrufen, übergeben die Objekte selbst die Anforderung an den Baum.
+Der groÃŸe Vorteil dieses Ansatzes besteht darin, dass Sie sich nicht um die konkreten Objekte kÃ¼mmern mÃ¼ssen (Produkt oder Karton),
+aus denen der Baum besteht. Sie mÃ¼ssen nicht wissen, ob es sich bei einem Objekt um ein einfaches Produkt oder eine Schachtel mit Einzelteilen handelt.
+Sie kÃ¶nnen die Objekte alle gleich Ã¼ber eine gemeinsame Schnittstelle behandeln.
+Wenn Sie eine Methode aufrufen, Ã¼bergeben die Objekte selbst die Anforderung an den Baum.
 
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Composite Patterns*.
 Es besteht im Wesentlichen aus drei Teilen:
 
-  * **Component**: Stellt eine Abstraktion (abstrakte Klasse, Interface) für alle Komponenten dar (elementare und zusammengesetzte).
-    Manchmal werden neben den eigentlichen Methoden der Komponente auch zusätzlich Methoden für den Zugriff
-    auf das übergeordnete Element einer Komponente in der rekursiven Struktur definiert.
-  * **Composite**: Kernstück des Entwurfsmusters. Es handelt sich gewissermaßen um eine *zusammengesetzte Komponente*.
-    Das heißt, dass ein `Composite`-Objekt eine Liste für die Kind-Elemente verwaltet.
-    Das Objekt stellt Methoden zum Hinzufügen und Entfernen von Kind-Elementen bereit.
-    Zusätzlich werden die Methoden der `Component`-Klasse implementiert. Typischerweise wird deren
+  * **Component**: Stellt eine Abstraktion (abstrakte Klasse, Interface) fÃ¼r alle Komponenten dar (elementare und zusammengesetzte).
+    Manchmal werden neben den eigentlichen Methoden der Komponente auch zusÃ¤tzlich Methoden fÃ¼r den Zugriff
+    auf das Ã¼bergeordnete Element einer Komponente in der rekursiven Struktur definiert.
+  * **Composite**: KernstÃ¼ck des Entwurfsmusters. Es handelt sich gewissermaÃŸen um eine *zusammengesetzte Komponente*.
+    Das heiÃŸt, dass ein `Composite`-Objekt eine Liste fÃ¼r die Kind-Elemente verwaltet.
+    Das Objekt stellt Methoden zum HinzufÃ¼gen und Entfernen von Kind-Elementen bereit.
+    ZusÃ¤tzlich werden die Methoden der `Component`-Klasse implementiert. Typischerweise wird deren
     Realisierung an die entsprechende Methode des Kind-Elements delegiert.
   * **Leaf**: 
     Stellt ein "Blatt"-Objekt in der Komposition (Baumstruktur) dar. Es werden alle Methoden der `Component`-Klasse implementiert.
@@ -91,24 +91,63 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 Beachte in dem Quellcode:
 
-Es wird das Problem möglicher Zyklen betrachtet:
+Es wird das Problem mÃ¶glicher Zyklen betrachtet:
 
   * Ein `Composite`-Objekt kennt seine `Component`-Objekte.
   * Ein `Component`-Objekt kennt sein zugeordnetes `Composite`-Objekt.
 
-Wir lösen dieses Problem geschickt mit dem Einsatz von `std::shared_ptr`- und `std::weak_ptr`-Zeigern.
+Wir lÃ¶sen dieses Problem geschickt mit dem Einsatz von `std::shared_ptr`- und `std::weak_ptr`-Zeigern.
 
 
 ---
 
-#### Beginners Example:
+#### Unterschied &bdquo;Baumstruktur mit Parent-Navigation&rdquo; versus &bdquo;reiner Ownership-Baum&rdquo;
+
+Im konzeptionellen Beispiel und im ersten &bdquo;Real-World&rdquo; Beispiel (*Shapes*) werden zwei
+unterschiedliche AnsÃ¤tze gezeigt:
+
+##### Variante 1 &ndash; Baumstruktur mit Parent-Navigation
+
+Composite
+    â”‚
+    â”œâ”€â”€ shared_ptr â”€â”€â†’ Child
+    â”‚                     â”‚
+    â”‚                     â””â”€â”€ weak_ptr â”€â”€â†’ Parent
+    â”‚
+    â””â”€â”€ ...
+
+
+Hier wurde `std::shared_ptr` bewusst gewÃ¤hlt, um die Lebenszeitbeziehung in beide Richtungen darstellen zu kÃ¶nnen
+und um mit dem Gebrauch von `std::weak_ptr` Zyklen zu verhindern.
+
+
+##### Variante 2 &ndash; Ein reiner Ownership-Baum
+
+Group
+ â”‚
+ â”œâ”€â”€ unique_ptr â†’ Shape
+ â”‚
+ â”œâ”€â”€ unique_ptr â†’ Shape
+ â”‚
+ â””â”€â”€ unique_ptr â†’ Group
+                    â”‚
+                    â””â”€â”€ unique_ptr â†’ Shape
+
+
+Hier gibt es keine RÃ¼ckwÃ¤rtsreferenz.
+
+Deshalb ist `std::unique_ptr` die natÃ¼rliche Wahl.
+
+---
+
+#### &bdquo;Real-World&rdquo; Beispiel:
 
 Das Beispiel demonstriert das klassische *Composite Pattern* mit Kreisen und Gruppen von Kreisen.
 
-Beachte: In diesem Beispiel gibt es keine Rückverweise.
+Beachte: In diesem Beispiel gibt es keine RÃ¼ckverweise.
 
-Die Gruppe (*Composite*) besitzt ihre Kinder über ein `std::vector<std::shared_ptr<IShape>>`.
-Da es hier keine Rückverweise auf die Eltern gibt, entstehen auch keine Zyklen.
+Die Gruppe (*Composite*) besitzt ihre Kinder Ã¼ber ein `std::vector<std::shared_ptr<IShape>>`.
+Da es hier keine RÃ¼ckverweise auf die Eltern gibt, entstehen auch keine Zyklen.
 
 
 ```cpp
@@ -176,11 +215,11 @@ Da es hier keine Rückverweise auf die Eltern gibt, entstehen auch keine Zyklen.
 62: }
 ```
 
-Betrachten Sie die Schlüsselstellen in dem Code-Fragment:
+Betrachten Sie die SchlÃ¼sselstellen in dem Code-Fragment:
 
   * Zeile 20: Klasse `Group` leitet sich von Klasse `IShape` ab.
-  * Zeile 58: Auch `Group`-Objekte können mit `add` einer Gruppe hinzugefügt werden, also nicht nur `Circle`-Objekte.
-  * Zeilen 15 und 29: Die `draw`-Methode agiert für Kreise und Kreisgruppen unterschiedlich.
+  * Zeile 58: Auch `Group`-Objekte kÃ¶nnen mit `add` einer Gruppe hinzugefÃ¼gt werden, also nicht nur `Circle`-Objekte.
+  * Zeilen 15 und 29: Die `draw`-Methode agiert fÃ¼r Kreise und Kreisgruppen unterschiedlich.
  
 ---
 
@@ -198,7 +237,7 @@ Das *Conceptual Example* liegt in der Variante
 
 vor. Dabei stellt sich aber eine Frage:
 Wie erhalte ich von einem Objekt einen `std::shared_ptr`, desses Objekterzeugung
-außerhalb meines Wirkungskreises liegt. Die Frage lautet also gewissermaßen:
+auÃŸerhalb meines Wirkungskreises liegt. Die Frage lautet also gewissermaÃŸen:
 
 ```cpp
 component->setParent((std::shared_ptr<Component>) this);
@@ -220,37 +259,37 @@ Damit vererbt sie eine Methode `shared_from_this` an die Kindklasse:
 component->setParent(shared_from_this());
 ```
 
-**Achtung**: Der Aufruf `shared_from_this` ist aber nur dann zulässig,
+**Achtung**: Der Aufruf `shared_from_this` ist aber nur dann zulÃ¤ssig,
 wenn es von dem Objekt (hier: Klasse `Composite`) bereits einen Shared Pointer gibt!
 Das muss nicht immer der Fall sein!
 Weitere Details der Realisierung entnehmen Sie bitte der zweiten Variante des *Conceptual Example*.
 
 Noch ein zweiter **Hinweis**:
 In der zweiten Variante gibt es in der Klasse `Composite` einen STL_Container (typischerweise `std::list` oder `std::vector`)
-zur Verwaltung der Kind-Elemente. Beim Gebrauch von `std::shared_ptr`-Objekten können hier zirkuläre Referenzen 
+zur Verwaltung der Kind-Elemente. Beim Gebrauch von `std::shared_ptr`-Objekten kÃ¶nnen hier zirkulÃ¤re Referenzen 
 entstehen - der Container in meinem Beispiel wurde deshalb als
 
 ```cpp
 std::vector<std::weak_ptr<Component>> m_children;
 ```
 
-definiert! Dies löst das Problem zirkulärer Referenzen, generiert gleichzeitig aber ein zweites Problem:
-Für `std::weak_ptr`-Objekte ist kein `==`-Operator definiert! Damit kommt es bei der Anwendung vieler STL-Algorithmen,
-sei es explizit oder implizit (z.B. in einer *range-based loop*), zu Übersetzungsfehlern!
+definiert! Dies lÃ¶st das Problem zirkulÃ¤rer Referenzen, generiert gleichzeitig aber ein zweites Problem:
+FÃ¼r `std::weak_ptr`-Objekte ist kein `==`-Operator definiert! Damit kommt es bei der Anwendung vieler STL-Algorithmen,
+sei es explizit oder implizit (z.B. in einer *range-based loop*), zu Ãœbersetzungsfehlern!
 Aus diesem Grund habe ich in der zweiten Variante die Methode `remove` weggelassen,
-da sie intern den `==`-Operator benötigen würde. Wer ebenfalls diese Methode implementieren
-möchte, findet unter dem Stichwort *"removing an item from a list of weak_ptrs"*
-Lösungsmöglichkeiten im Netz angeboten (Stichwort *Custom Deleter*), die ich aus Aufwandsgründen
+da sie intern den `==`-Operator benÃ¶tigen wÃ¼rde. Wer ebenfalls diese Methode implementieren
+mÃ¶chte, findet unter dem Stichwort *"removing an item from a list of weak_ptrs"*
+LÃ¶sungsmÃ¶glichkeiten im Netz angeboten (Stichwort *Custom Deleter*), die ich aus AufwandsgrÃ¼nden
 in diesem Beispiel nicht umsetzen wollte.
 
+#### Noch ein &bdquo;Real-World&rdquo; Beispiel:
 
-#### Ein zweites 'Beginners Example':
 
-Ein typisches Beispiel für das *Composite Entwurfsmuster* ist ein Dateisystem mit Ordnern und Dateien:
-Ordner können Dateien oder andere Ordner enthalten oder leer sein. Andererseits enthalten Dateien keine Ordner oder andere Dateien!
+Ein typisches Beispiel fÃ¼r das *Composite Entwurfsmuster* ist ein Dateisystem mit Ordnern und Dateien:
+Ordner kÃ¶nnen Dateien oder andere Ordner enthalten oder leer sein. Andererseits enthalten Dateien keine Ordner oder andere Dateien!
 
 Um eine Analogie zur *Abbildung* 1 herzustellen, stellen wir die drei relevanten Header-Dateien kurz vor.
-Die Schnittstelle für die Beschreibung der übergreifenden Komponente könnte so aussehen:
+Die Schnittstelle fÃ¼r die Beschreibung der Ã¼bergreifenden Komponente kÃ¶nnte so aussehen:
 
 ```cpp
 class FileComponent {
@@ -259,7 +298,7 @@ public:
 };
 ```
 
-Davon leiten wir nun zwei Klassen für Dateien (Klasse `File`) und Ordner (Klasse `Directory`) ab:
+Davon leiten wir nun zwei Klassen fÃ¼r Dateien (Klasse `File`) und Ordner (Klasse `Directory`) ab:
 
 ```cpp
 class File : public FileComponent {
@@ -292,7 +331,7 @@ private:
 };
 ```
 
-Ein Testrahmen zur Veranschaulichung der Funktionalität könnte so aussehen:
+Ein Testrahmen zur Veranschaulichung der FunktionalitÃ¤t kÃ¶nnte so aussehen:
 
 ```cpp
 void main() {
@@ -315,7 +354,7 @@ void main() {
 ```
 
   * *Pros*:
-    * Funktionalität des *Composite Entwurfsmusters* erkennbar.
+    * FunktionalitÃ¤t des *Composite Entwurfsmusters* erkennbar.
 
   * *Kontras*
     * Ein Raw-Pointer (hier: `std::vector<FileComponent*>`) sollte in Produktsoftware vermieden werden
@@ -327,7 +366,7 @@ der Klasse `std::shared_ptr<FileComponent>` vor.
 #### &bdquo;Real-World&rdquo; Beispiel:
 
 In den Beispielen zu diesem Entwurfsmuster (siehe Klasse `DirectoryEx` und Datei `FileSystemAdvanced.cpp`)
-können Sie die Umsetzung des *Composite Entwurfsmusters* am realen Dateisystem betrachten.
+kÃ¶nnen Sie die Umsetzung des *Composite Entwurfsmusters* am realen Dateisystem betrachten.
 
 Auf meinem Rechner sieht die Ausgabe des Programms so aus, wenn wir als Root-Verzeichnis das Projektverzeichnis
 dieses Beispiels eingeben. Weitere Details zur Realisierung entnehmen Sie bitte dem Beispielcode.
@@ -384,7 +423,7 @@ C:\Development\GitRepositoryCPlusPlus\Cpp_DesignPatterns\CompositePattern
 
 ## Weitere Beispiele
 
-Ein weiterer Anwendungsfall für das *Composite Entwurfsmuster* sind arithmetische Ausdrücke.
+Ein weiterer Anwendungsfall fÃ¼r das *Composite Entwurfsmuster* sind arithmetische AusdrÃ¼cke.
 Anregungen finden sich zum Beispiel unter
 
 [https://stackoverflow.com/questions](https://stackoverflow.com/questions/57942934/composite-design-pattern-how-to-create-calculator)<br>(abgerufen am 11.05.2020).
@@ -411,7 +450,7 @@ Anregungen finden sich zum Beispiel unter
 
   * Das *Decorator*-Pattern bewirkt eine Verfeinerung in der Ausgestaltung einer Schnittstelle.
 
-  * Das *Composite*-Pattern zieht eine Vereinheitlichung von Schnittstellen für einzelne Objekte und Gruppen von Objekten nach sich.
+  * Das *Composite*-Pattern zieht eine Vereinheitlichung von Schnittstellen fÃ¼r einzelne Objekte und Gruppen von Objekten nach sich.
 
 ---
 
@@ -431,6 +470,6 @@ Das &bdquo;*Beginners Example*&rdquo;-Beispiel kann [hier](https://vishalchovati
 
 ---
 
-[Zurück](../../../Resources/Readme_05_Catalog.md)
+[ZurÃ¼ck](../../../Resources/Readme_05_Catalog.md)
 
 ---
