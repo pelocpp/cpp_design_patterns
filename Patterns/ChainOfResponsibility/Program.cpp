@@ -9,7 +9,7 @@ extern void test_authentication_example();
 int main()
 {
     test_conceptual_example();
-    test_authentication_example();
+  //  test_authentication_example();
     return 0;
 }
 

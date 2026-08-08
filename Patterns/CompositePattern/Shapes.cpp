@@ -2,92 +2,81 @@
 // Shapes.cpp
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-#include <vector>
+#include <cstddef>
 #include <memory>
+#include <print>
+#include <string>
+#include <string_view>
+#include <vector>
 
 struct IShape
 {
     virtual ~IShape() = default;
 
-    virtual void draw() const = 0;
+    virtual void draw(std::size_t indent) const = 0;
 };
 
-class Circle : public IShape
+class Circle final : public IShape
 {
 private:
     std::string m_name;
 
 public:
-    Circle(const std::string& name) : m_name { name } {}
+    explicit Circle(std::string_view name) : m_name{ name } {}
 
-    void draw() const override {
-        std::cout << "Circle: " << m_name;
+    void draw(std::size_t indent) const override {
+        std::println("{}Circle: {}", std::string(indent, ' '), m_name);
     }
 };
 
-class Group : public IShape
+class Group final : public IShape
 {
 private:
     std::string m_name;
-    std::vector<std::shared_ptr<IShape>> m_objects;
+
+    std::vector<std::unique_ptr<IShape>> m_objects;
 
 public:
-    Group(const std::string& name) : m_name{ name } {}
-        
-    void draw() const override {
+    explicit Group(std::string_view name) : m_name{ name } {}
 
-        m_indentation += 2;
+    void draw(std::size_t indent) const override {
+       
+        std::println("{}Group: {}", std::string(indent, ' '), m_name);
 
-        std::cout << "Group " << m_name << " contains:" << std::endl;
-        for (const std::shared_ptr<IShape> shape : m_objects) {
-
-            std::string ident( m_indentation, ' ' );
-            std::cout << ident;
-            shape->draw();
-            std::cout << std::endl;
+        for (const auto& shape : m_objects) {
+            shape->draw(indent + 2);
         }
-
-        m_indentation -= 2;
     }
 
-    void push(std::shared_ptr<IShape> shape) {
-        m_objects.push_back(shape);
+    void add(std::unique_ptr<IShape> shape) {
+        m_objects.push_back(std::move(shape));
     }
-
-private:
-    static size_t m_indentation;
 };
-
-size_t Group::m_indentation = 0;
 
 void test_shapes()
 {
-    // root node for composite component
-    std::shared_ptr<Group> root{ std::make_shared<Group>("Root") };
+    // create a top-level group - on the stack
+    Group root{ "Root" };
 
-    // top level circle
-    std::shared_ptr<IShape> circle{
-        std::make_shared<Circle>("Top Level Circle") 
-    };
-    root->push(circle);
+    // add a shape to the group
+    root.add(std::make_unique<Circle>("Top Level Circle"));
 
-    // creating sub group with another two circles
-    std::shared_ptr<Group> subgroup = std::make_shared<Group>("Subgroup");
-    std::shared_ptr<IShape> secondLevelcircle{ 
-        std::make_shared<Circle>("First Second Level Circle")
-    };
-    std::shared_ptr<IShape> anotherSecondLevelcircle{ 
-        std::make_shared<Circle>("Another Second Level Circle") 
-    };
-    subgroup->push(secondLevelcircle);
-    subgroup->push(anotherSecondLevelcircle);
+    // create a subgroup
+    auto subgroup = std::make_unique<Group>("Subgroup");
 
-    // adding sub group to root
-    root->push(subgroup);
+    subgroup->add(
+        std::make_unique<Circle>("First Second Level Circle")
+    );
+    
+    subgroup->add(
+        std::make_unique<Circle>("Another Second Level Circle")
+    );
 
-    root->draw();
+    // transfer ownership of the subgroup to root
+    root.add(std::move(subgroup));
+
+    // start drawing
+    root.draw(0);
 }
 
 // ===========================================================================

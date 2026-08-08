@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <array>
 #include <memory>
-#include <optional>
 #include <print>
 #include <string>
 #include <string_view>
@@ -27,13 +26,20 @@ namespace ConceptualExampleChainOfResponsibility {
         std::string_view getParam() const noexcept { return m_param; }
     };
 
+    enum class HandleResult
+    {
+        NotHandled,   // Not responsible
+        Accepted,     // Processed
+        Rejected      // Processed, but negative
+    };
+
     class HandlerBase
     {
     private:
         std::unique_ptr<HandlerBase> m_successor{ nullptr };
 
     protected:
-        virtual std::optional<bool> handle(const Request& req) const noexcept = 0;
+        virtual HandleResult handle(const Request& req) const noexcept = 0;
 
     public:
         HandlerBase() noexcept = default;
@@ -45,16 +51,17 @@ namespace ConceptualExampleChainOfResponsibility {
         // Chain of Responsibility: determines *who* handles.
         // Template Method:         determines *how* the chain is traversed.
         [[nodiscard]]
-        std::optional<bool> handleRequest(const Request& req) const noexcept {
+        HandleResult handleRequest(const Request& req) const noexcept {
 
             // own attempt
-            if (auto result = handle(req)) {
+            if (auto result = handle(req); result != HandleResult::Rejected)
+            {
                 return result;
             }
 
             // no successor, quit
             if (!m_successor) {
-                return std::nullopt;
+                return HandleResult::NotHandled;
             }
 
             // chain, if a successor exists
@@ -72,14 +79,14 @@ namespace ConceptualExampleChainOfResponsibility {
     {
     public:
         [[nodiscard]]
-        std::optional<bool> handle(const Request& req) const noexcept override
+        HandleResult handle(const Request& req) const noexcept override
         {
             if (req.getType() < 10) {
                 std::println("Concrete Handler A handles: {}", req.getParam());
-                return true;
+                return HandleResult::Accepted;
             }
 
-            return std::nullopt;  // That is not my responsibility
+            return HandleResult::Rejected;  // That is not my responsibility
         }
     };
 
@@ -87,14 +94,14 @@ namespace ConceptualExampleChainOfResponsibility {
     {
     public:
         [[nodiscard]]
-        std::optional<bool> handle(const Request& req) const noexcept override
+        HandleResult  handle(const Request& req) const noexcept override
         {
             if (req.getType() >= 10 && req.getType() < 20) {
                 std::println("Concrete Handler B handles: {}", req.getParam());
-                return true;
+                return HandleResult::Accepted;
             }
 
-            return std::nullopt;
+            return HandleResult::Rejected;
         }
     };
 
@@ -102,14 +109,14 @@ namespace ConceptualExampleChainOfResponsibility {
     {
     public:
         [[nodiscard]]
-        std::optional<bool> handle(const Request& req) const noexcept override
+        HandleResult  handle(const Request& req) const noexcept override
         {
             if (req.getType() >= 20 && req.getType() < 30) {
                 std::println("Concrete Handler C handles: {}", req.getParam());
-                return true;
+                return HandleResult::Accepted;
             }
 
-            return std::nullopt;
+            return HandleResult::Rejected;
         }
     };
 
@@ -121,10 +128,10 @@ namespace ConceptualExampleChainOfResponsibility {
     {
     public:
         [[nodiscard]]
-        std::optional<bool> handle(const Request& req) const noexcept override
+        HandleResult  handle(const Request& req) const noexcept override
         {
             std::println("Default Handler: Unhandled: {}", req.getParam());
-            return false;
+            return HandleResult::Rejected;
         }
     };
 
@@ -148,7 +155,7 @@ namespace ConceptualExampleChainOfResponsibility {
 
         for (const Request& request : requests) {
             auto result = handler.handleRequest(request);
-            if (!result.has_value()) {
+            if (result == HandleResult::Rejected) {
                 std::println("  (Request type {} was not handled)", request.getType());
             }
         }
@@ -166,7 +173,7 @@ namespace ConceptualExampleChainOfResponsibility {
 
         for (const Request& request : requests) {
             auto result = handler.handleRequest(request);
-            if (!result.has_value()) {
+            if (result == HandleResult::Rejected) {
                 std::println("  (Request type {} was not handled)", request.getType());
             }
         }

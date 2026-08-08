@@ -87,71 +87,100 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) - Variante mit "Raw"-Zeiger<br />
-[Quellcode 2](../ConceptualExample02.cpp) - Variante mit `std::shared_ptr`-Zeiger
+[Quellcode](../ConceptualExample.cpp) - Modern C++: Variante mit `std::shared_ptr`-Zeiger.
+
+Beachte in dem Quellcode:
+
+Es wird das Problem möglicher Zyklen betrachtet:
+
+  * Ein `Composite`-Objekt kennt seine `Component`-Objekte.
+  * Ein `Component`-Objekt kennt sein zugeordnetes `Composite`-Objekt.
+
+Wir lösen dieses Problem geschickt mit dem Einsatz von `std::shared_ptr`- und `std::weak_ptr`-Zeigern.
+
 
 ---
 
-#### 'Beginners Example':
+#### Beginners Example:
 
-Das Beispiel demonstriert das klassische *Composite Pattern* mit Kreisen und Gruppen von Kreisen:
+Das Beispiel demonstriert das klassische *Composite Pattern* mit Kreisen und Gruppen von Kreisen.
+
+Beachte: In diesem Beispiel gibt es keine Rückverweise.
+
+Die Gruppe (*Composite*) besitzt ihre Kinder über ein `std::vector<std::shared_ptr<IShape>>`.
+Da es hier keine Rückverweise auf die Eltern gibt, entstehen auch keine Zyklen.
+
 
 ```cpp
 01: struct IShape
 02: {
-03:     virtual void draw() const = 0;
-04: };
-05: 
-06: class Circle : public IShape
-07: {
-08: private:
-09:     std::string m_name;
-10: 
-11: public:
-12:     ...
-13:     void draw() const override {
-14:         std::cout << "Circle: " << m_name;
-15:     }
-16: };
-17: 
-18: class Group : public IShape
-19: {
-20: private:
-21:     std::string m_name;
-22:     std::vector<std::shared_ptr<IShape>> m_objects;
-23: 
-24: public:
-25:     ...
-26:     void draw() const override {
-27:         std::cout << "Group " << m_name << " contains:" << std::endl;
-28:         for (const std::shared_ptr<IShape> shape : m_objects) {
-29:             shape->draw();
-30:         }
-31:     }
-32:     ...
-33: };
-34: 
-35: void test_shapes()
-36: {
-37:     Group root("Root");
-38: 
-39:     std::shared_ptr<IShape> circle = std::make_shared<Circle>("Top Level Circle");
-40:     root.push(circle);
-41: 
-42:     std::shared_ptr<Group> subgroup = std::make_shared<Group>("Subgroup");
-43:     subgroup->push(std::make_shared<Circle>("First Second Level Circle"));
-44:     subgroup->push(std::make_shared<Circle>("Another Second Level Circle"));
-45:     root.push(subgroup);
-46: 
-47:     root.draw();
-48: }
+03:     virtual ~IShape() = default;
+04:     virtual void draw(std::size_t indent) const = 0;
+05: };
+06: 
+07: class Circle : public IShape
+08: {
+09: private:
+10:     std::string m_name;
+11: 
+12: public:
+13:     explicit Circle(std::string_view name) : m_name{ name } {}
+14: 
+15:     void draw(size_t indent) const override {
+16:         std::println("{}Circle: {}", std::string(indent, ' '), m_name);
+17:     }
+18: };
+19: 
+20: class Group : public IShape
+21: {
+22: private:
+23:     std::string m_name;
+24:     std::vector<std::shared_ptr<IShape>> m_objects;
+25: 
+26: public:
+27:     explicit Group(std::string_view name) : m_name{ name } {}
+28: 
+29:     void draw(size_t indent) const override {
+30:        
+31:         std::println("{}Group: {}", std::string(indent, ' '), m_name);
+32: 
+33:         for (const auto& shape : m_objects) {
+34:             shape->draw(indent + 2);
+35:         }
+36:     }
+37: 
+38:     void add(std::shared_ptr<IShape> shape) {
+39:         m_objects.push_back(std::move(shape));
+40:     }
+41: };
+42: 
+43: void test_shapes()
+44: {
+45:     // create a top-level group
+46:     auto root = std::make_shared<Group>("Root");
+47: 
+48:     // add lead to this group
+49:     root->add(std::make_shared<Circle>("Top Level Circle"));
+50: 
+51:     // create a subgroup
+52:     auto subgroup = std::make_shared<Group>("Subgroup");
+53:     subgroup->add(std::make_shared<Circle>("First Second Level Circle"));
+54:     subgroup->add(std::make_shared<Circle>("Another Second Level Circle"));
+55: 
+56:     // pass subgroup to root (using std::move,
+57:     // since subgroup is no longer needed afterwards)
+58:     root->add(std::move(subgroup));
+59: 
+60:     // Zeichnen starten
+61:     root->draw(0);
+62: }
 ```
 
 Betrachten Sie die Schlüsselstellen in dem Code-Fragment:
 
-  * Zeile 18: Klasse `Group` leitet sich von Klasse `IShape` ab.
-  * Zeile 45: Auch `Group`-Objekte können mit `push` einer Gruppe hinzugefügt werden, also nicht nur `Circle`-Objekte.
-  * Zeilen 26 und 29: Die `draw`-Methode agiert für Kreise und Kreisgruppen unterschiedlich.
+  * Zeile 20: Klasse `Group` leitet sich von Klasse `IShape` ab.
+  * Zeile 58: Auch `Group`-Objekte können mit `add` einer Gruppe hinzugefügt werden, also nicht nur `Circle`-Objekte.
+  * Zeilen 15 und 29: Die `draw`-Methode agiert für Kreise und Kreisgruppen unterschiedlich.
  
 ---
 
@@ -163,13 +192,11 @@ vor.
 
 **Hinweis**:
 
-Das *Conceptual Example* liegt in zwei Varianten vor:
+Das *Conceptual Example* liegt in der Variante
 
-  * Variante 1: klassisch - d.h. mit "raw"-Zeigern.
-  * Variante 2: Wie Variante 1, aber mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
+  * Mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
 
-In Variante 2 wird prinzipiell ohne "raw"-Zeiger gearbeitet, also so,
-wie man es der "reinen Lehre" nach machen sollte. Dabei stellt sich aber eine Frage:
+vor. Dabei stellt sich aber eine Frage:
 Wie erhalte ich von einem Objekt einen `std::shared_ptr`, desses Objekterzeugung
 außerhalb meines Wirkungskreises liegt. Die Frage lautet also gewissermaßen:
 
