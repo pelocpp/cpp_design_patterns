@@ -24,16 +24,13 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample02.cpp">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClCompile>
     <ClCompile Include="ConceptualExample01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample03.cpp">
+    <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample04.cpp">
+    <ClCompile Include="ConceptualExample03.cpp">
       <Filter>Source Files\ConceptualExampleModern</Filter>
     </ClCompile>
   </ItemGroup>

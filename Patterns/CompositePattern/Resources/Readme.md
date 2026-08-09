@@ -157,72 +157,79 @@ Da es hier keine Rückverweise auf die Eltern gibt, entstehen auch keine Zyklen.
 01: struct IShape
 02: {
 03:     virtual ~IShape() = default;
-04:     virtual void draw(std::size_t indent) const = 0;
-05: };
-06: 
-07: class Circle : public IShape
-08: {
-09: private:
-10:     std::string m_name;
-11: 
-12: public:
-13:     explicit Circle(std::string_view name) : m_name{ name } {}
-14: 
-15:     void draw(size_t indent) const override {
-16:         std::println("{}Circle: {}", std::string(indent, ' '), m_name);
-17:     }
-18: };
-19: 
-20: class Group : public IShape
-21: {
-22: private:
-23:     std::string m_name;
-24:     std::vector<std::shared_ptr<IShape>> m_objects;
+04: 
+05:     virtual void draw(std::size_t indent) const = 0;
+06: };
+07: 
+08: class Circle final : public IShape
+09: {
+10: private:
+11:     std::string m_name;
+12: 
+13: public:
+14:     explicit Circle(std::string_view name) : m_name{ name } {}
+15: 
+16:     void draw(std::size_t indent) const override {
+17:         std::println("{}Circle: {}", std::string(indent, ' '), m_name);
+18:     }
+19: };
+20: 
+21: class Group final : public IShape
+22: {
+23: private:
+24:     std::string m_name;
 25: 
-26: public:
-27:     explicit Group(std::string_view name) : m_name{ name } {}
-28: 
-29:     void draw(size_t indent) const override {
-30:        
-31:         std::println("{}Group: {}", std::string(indent, ' '), m_name);
-32: 
-33:         for (const auto& shape : m_objects) {
-34:             shape->draw(indent + 2);
-35:         }
-36:     }
-37: 
-38:     void add(std::shared_ptr<IShape> shape) {
-39:         m_objects.push_back(std::move(shape));
-40:     }
-41: };
-42: 
-43: void test_shapes()
-44: {
-45:     // create a top-level group
-46:     auto root = std::make_shared<Group>("Root");
-47: 
-48:     // add lead to this group
-49:     root->add(std::make_shared<Circle>("Top Level Circle"));
-50: 
-51:     // create a subgroup
-52:     auto subgroup = std::make_shared<Group>("Subgroup");
-53:     subgroup->add(std::make_shared<Circle>("First Second Level Circle"));
-54:     subgroup->add(std::make_shared<Circle>("Another Second Level Circle"));
+26:     std::vector<std::unique_ptr<IShape>> m_objects;
+27: 
+28: public:
+29:     explicit Group(std::string_view name) : m_name{ name } {}
+30: 
+31:     void draw(std::size_t indent) const override {
+32:        
+33:         std::println("{}Group: {}", std::string(indent, ' '), m_name);
+34: 
+35:         for (const auto& shape : m_objects) {
+36:             shape->draw(indent + 2);
+37:         }
+38:     }
+39: 
+40:     void add(std::unique_ptr<IShape> shape) {
+41:         m_objects.push_back(std::move(shape));
+42:     }
+43: };
+44: 
+45: void test_shapes()
+46: {
+47:     // create a top-level group - on the stack
+48:     Group root{ "Root" };
+49: 
+50:     // add a shape to the group
+51:     root.add(std::make_unique<Circle>("Top Level Circle"));
+52: 
+53:     // create a subgroup
+54:     auto subgroup = std::make_unique<Group>("Subgroup");
 55: 
-56:     // pass subgroup to root (using std::move,
-57:     // since subgroup is no longer needed afterwards)
-58:     root->add(std::move(subgroup));
-59: 
-60:     // Zeichnen starten
-61:     root->draw(0);
-62: }
+56:     subgroup->add(
+57:         std::make_unique<Circle>("First Second Level Circle")
+58:     );
+59:     
+60:     subgroup->add(
+61:         std::make_unique<Circle>("Another Second Level Circle")
+62:     );
+63: 
+64:     // transfer ownership of the subgroup to root
+65:     root.add(std::move(subgroup));
+66: 
+67:     // start drawing
+68:     root.draw(0);
+69: }
 ```
 
 Betrachten Sie die Schlüsselstellen in dem Code-Fragment:
 
-  * Zeile 20: Klasse `Group` leitet sich von Klasse `IShape` ab.
-  * Zeile 58: Auch `Group`-Objekte können mit `add` einer Gruppe hinzugefügt werden, also nicht nur `Circle`-Objekte.
-  * Zeilen 15 und 29: Die `draw`-Methode agiert für Kreise und Kreisgruppen unterschiedlich.
+  * Zeile 21: Klasse `Group` leitet sich von Klasse `IShape` ab.
+  * Zeile 65: Auch `Group`-Objekte können mit `add` einer Gruppe hinzugefügt werden, also nicht nur `Circle`-Objekte.
+  * Zeilen 16 und 31: Die `draw`-Methode agiert für Kreise und Kreisgruppen unterschiedlich.
  
 ---
 

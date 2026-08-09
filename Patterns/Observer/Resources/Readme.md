@@ -77,16 +77,13 @@ um *Subscriber* zu dieser Liste hinzuzufügen und aus dieser wieder zu entfernen.
 
 Das *Conceptual Example* liegt in vier Varianten vor:
 
-  * Variante 1: klassisch - d.h. mit &bdquo;raw&rdquo;-Zeigern.
-  * Variante 2: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
-  * Variante 3: Wie Variante 2, aber mit `std::enable_shared_from_this<>` Mechanismus.
-  * Variante 4: Mit `std::function<>`.
-
+  * Variante 1: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
+  * Variante 2: Wie Variante 1, aber mit `std::enable_shared_from_this<>` Mechanismus.
+  * Variante 3: Mit `std::function<>`.
 
 [Quellcode 1](../ConceptualExample01.cpp)<br />
 [Quellcode 2](../ConceptualExample02.cpp)<br />
-[Quellcode 3](../ConceptualExample03.cpp)<br />
-[Quellcode 4](../ConceptualExample04.cpp)
+[Quellcode 3](../ConceptualExample03.cpp)
 
 ---
 

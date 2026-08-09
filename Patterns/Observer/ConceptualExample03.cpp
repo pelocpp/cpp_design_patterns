@@ -1,62 +1,61 @@
 // ===========================================================================
-// ConceptualExample03.cpp // Observer // Variant 3
+// ConceptualExample03.cpp // Observer // Variant 3 // std::function
 // ===========================================================================
 
 /**
  * Observer Design Pattern
  */
 
-#include <list>
+#include <cstddef>
+#include <functional>
 #include <memory>
 #include <print>
 #include <string>
+#include <string_view>
+#include <unordered_map>
 
-namespace ObserverDesignPatternSmartPointerEx {
+ /**
 
-    class IObserver {
-    public:
-        virtual ~IObserver() {}
+    Lebenszeit - Sicherheit(std::weak_ptr Capture) :
+    Im Lambda wird weakObs = std::weak_ptr<Observer>(observer1) gefangen.
+    Das Lambda blockiert das Sterben des Observers nicht mehr.
+    Vor dem Aufruf wird mit if (auto obs = weakObs.lock()) geprüft, ob das Objekt noch existiert.
+    Das verhindert sowohl Speicherlecks als auch "Dangling Pointer" - Abstürze.
+*/
 
-        virtual void update(const std::string&) = 0;
-    };
-
-    class ISubject {
-    public:
-        virtual ~ISubject() = default;
-
-        virtual void attach(std::weak_ptr<IObserver>) = 0;
-        virtual void detach(std::weak_ptr<IObserver>) = 0;
-    };
-
-    // =======================================================================
-
+namespace ObserverDesignPattern_StdFunction
+{
     /**
-     * The Subject owns some important state and notifies observers
-     * when the state changes.
+     * The Subject owns some important state
+     * and notifies observers when the state changes.
      */
 
-    class Subject : public ISubject {
+    class Subject
+    {
     private:
-        std::list<std::weak_ptr<IObserver>> m_observers;
-        std::string                         m_message;
+        std::unordered_map<std::size_t, std::move_only_function<void(std::string_view) const>> m_observers;
+        std::string m_message;
+        std::size_t m_nextId;
 
     public:
-        virtual ~Subject() {
+        Subject() noexcept : m_nextId{} {}
+
+        ~Subject() noexcept {
             std::println("d'tor Subject");
         }
 
         /**
          * subscription management methods.
          */
-        void attach(std::weak_ptr<IObserver> observer) override {
-            m_observers.push_back(observer);
+
+        std::size_t attach(std::move_only_function<void(std::string_view) const> observer) {
+            std::size_t id = m_nextId++;
+            m_observers.emplace(id, std::move(observer));
+            return id;
         }
 
-        void detach(std::weak_ptr<IObserver> observer) override {
-            m_observers.remove_if([&](std::weak_ptr<IObserver> wp) {
-                return !observer.owner_before(wp) && !wp.owner_before(observer);
-                }
-            );
+        void detach(std::size_t id) {
+            m_observers.erase(id);
         }
 
         void createMessage(const std::string& message) {
@@ -70,6 +69,7 @@ namespace ObserverDesignPatternSmartPointerEx {
          * triggers a notification method whenever something important is about to
          * happen (or after it).
          */
+
         void someBusinessLogic() {
             std::println("Subject: changing state ...");
             m_message = "changing this message";
@@ -78,118 +78,87 @@ namespace ObserverDesignPatternSmartPointerEx {
 
     private:
         void notify() const {
-            for (const std::weak_ptr<IObserver>& weakPtr : m_observers) {
-                std::shared_ptr<IObserver> sharedPtr{ weakPtr.lock() };
-                if (sharedPtr != nullptr) {
-                    sharedPtr->update(m_message);
-                }
+            for (const auto& [id, callback] : m_observers) {
+                callback(m_message);
             }
         }
     };
 
     // ===========================================================================
 
-    class Observer : public IObserver, public std::enable_shared_from_this<Observer> {
+    class Observer {
     private:
-        std::shared_ptr<Subject> m_subject;
-        std::string              m_messageFromSubject;
-        static int               m_count;
-        int                      m_number;
+        std::string m_messageFromSubject;
+        std::size_t m_number;
 
     public:
-        Observer() : m_subject{ nullptr }
-        {
-            ++Observer::m_count;
-            std::println("Observer: {}", Observer::m_count);
-            m_number = Observer::m_count;
+        Observer() {
+            static std::size_t nextNumber = 0;
+            m_number = nextNumber++;
+            std::println("Observer: {}", m_number);
         }
 
-        Observer(std::shared_ptr<Subject> subject) : m_subject{ subject } 
-        {
-            ++Observer::m_count;
-            std::println("Observer: {}", Observer::m_count);
-            m_number = Observer::m_count;
-        }
-
-        virtual ~Observer()
-        {
+        ~Observer() noexcept {
             std::println("d'tor Observer ({})", m_number);
         }
 
-        void update(const std::string& messageFromSubject) override
-        {
+        void update(std::string_view  messageFromSubject) {
             m_messageFromSubject = messageFromSubject;
             printInfo();
         }
 
-        void removeMeFromTheList() 
-        {
-            if (m_subject != nullptr) {
-                try {
-                    std::shared_ptr<Observer> me{ shared_from_this() };
-                    m_subject->detach(me);
-                    std::println("Observer {} removed from the list.", m_number);
-                }
-                catch (const std::exception& ex) {
-                    std::println("Exception: {}", ex.what());
-                }
-            }
-        }
-
         void printInfo() const {
-            std::println("Observer: new message is available --> \"{}\"", m_messageFromSubject);
+            std::println("Observer ({}): new message is available --> \"{}\"",
+                m_number, m_messageFromSubject);
         }
     };
-
-    int Observer::m_count = 0;
-
-    static void clientCode_01() {
-
-        std::shared_ptr<Subject> subject{ std::make_shared<Subject>() };
-
-        std::shared_ptr<IObserver> observer1{ std::make_shared<Observer>() };
-        std::shared_ptr<IObserver> observer2{ std::make_shared<Observer>() };
-        std::shared_ptr<IObserver> observer3{ std::make_shared<Observer>() };
-
-        subject->attach(observer1);
-        subject->attach(observer2);
-        subject->attach(observer3);
-
-        subject->createMessage("Hello World!");
-        subject->createMessage("Hello World Again");
-
-        subject->detach(observer1);
-        subject->detach(observer2);
-        subject->detach(observer3);
-    }
-
-    static void clientCode_02()
-    {
-        std::shared_ptr<Subject> subject{ std::make_shared<Subject>() };
-
-        std::shared_ptr<Observer> observer1{ std::make_shared<Observer>(subject) };
-        std::shared_ptr<Observer> observer2{ std::make_shared<Observer>(subject) };
-        std::shared_ptr<Observer> observer3{ std::make_shared<Observer>(subject) };
-
-        subject->attach(observer1);
-        subject->attach(observer2);
-        subject->attach(observer3);
-
-        subject->createMessage("Hello World!");
-        subject->createMessage("Hello World Again");
-
-        observer1->removeMeFromTheList();
-        observer2->removeMeFromTheList();
-        observer3->removeMeFromTheList();
-    }
 }
 
-// ===========================================================================
+void test_conceptual_example_03() {
 
-void test_conceptual_example_03()
-{
-    ObserverDesignPatternSmartPointerEx::clientCode_01();
-    ObserverDesignPatternSmartPointerEx::clientCode_02();
+    using namespace ObserverDesignPattern_StdFunction;
+
+    auto subject = std::make_shared<Subject>();
+
+    auto observer1 = std::make_shared<Observer>();
+    auto observer2 = std::make_shared<Observer>();
+    auto observer3 = std::make_shared<Observer>();
+
+    // Clean C++ solution for the lifetime problem:
+    // We convert the shared_ptr into a weak_ptr and capture *that* in the lambda.
+    auto id1 = subject->attach([weakObs = std::weak_ptr<Observer>(observer1)](std::string_view msg) {
+        if (auto obs = weakObs.lock()) {
+            obs->update(msg);
+        }
+        }
+    );
+
+    // Ab C++20/C++23 schreibt man das noch kürzer mit Lambda-Init-Captures:
+    auto id2 = subject->attach([weakObs = observer2.get()](std::string_view msg) {
+        // Hinweis: .get() holt den rohen Zeiger. Nur sicher, wenn die Lebenszeit garantiert ist.
+        // Die sicherste Variante bleibt der weak_ptr wie bei id1:
+        });
+
+    // Wir überschreiben id2 hier direkt mit der sicheren weak_ptr Variante:
+    subject->detach(id2);
+    id2 = subject->attach([weakObs = std::weak_ptr<Observer>(observer2)](std::string_view msg) {
+        if (auto obs = weakObs.lock()) {
+            obs->update(msg);
+        }
+        });
+
+    subject->createMessage("Hello Modern C++!");
+
+    // Test des Lebenszeit-Schutzes:
+    std::println("\n--- Observer 2 stirbt jetzt ---");
+    observer2.reset();
+
+    // Nachricht senden. Es stürzt nicht ab! Das Lambda von id2 merkt, 
+    // dass observer2 tot ist und überspringt den Aufruf geräuschlos.
+    subject->createMessage("Hello World Again");
+
+    subject->detach(id1);
+    subject->detach(id2);
 }
 
 // ===========================================================================

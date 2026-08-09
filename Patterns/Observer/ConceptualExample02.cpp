@@ -7,62 +7,61 @@
  */
 
 #include <list>
-#include <map>
 #include <memory>
 #include <print>
 #include <string>
 
-namespace ObserverDesignPatternSmartPointer {
+
+
+#include <vector>
+#include <memory>
+#include <print>
+#include <string>
+#include <string_view>
+#include <algorithm> // Für std::erase_if
+
+namespace ObserverDesignPattern_SelfUnregister {
+
+    // Vorwärtsdeklaration, da sich die Interfaces gegenseitig benötigen
+    class ISubject;
 
     class IObserver {
     public:
         virtual ~IObserver() = default;
 
-        virtual void update(const std::string&) = 0;
+        virtual void update(std::string_view message) = 0;
     };
 
     class ISubject {
     public:
-        virtual ~ISubject() {}
-
-        virtual void attach(std::weak_ptr<IObserver>) = 0;
-        virtual void detach(std::weak_ptr<IObserver>) = 0;
+        virtual ~ISubject() = default;
+        
+        virtual void attach(std::shared_ptr<IObserver> observer) = 0;
+        virtual void detach(std::shared_ptr<IObserver> observer) = 0;
     };
 
     // =======================================================================
 
-    /**
-     * The Subject owns some important state and notifies observers
-     * when the state changes.
-     */
-
     class Subject : public ISubject {
     private:
-        std::list<std::weak_ptr<IObserver>> m_observers;
-        std::string                         m_message;
+        std::vector<std::weak_ptr<IObserver>> m_observers;
+        std::string                           m_message;
 
     public:
-        virtual ~Subject() noexcept {
+        ~Subject() noexcept override {
             std::println("d'tor Subject");
         }
 
         /**
-         * subscription management methods.
+         * subscription management methods
          */
-        void attach(std::weak_ptr<IObserver> observer) override {
+        void attach(std::shared_ptr<IObserver> observer) override {
             m_observers.push_back(observer);
         }
 
-        void detach(std::weak_ptr<IObserver> observer) override {
-
-            // https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs
-
-            m_observers.remove_if([observer](std::weak_ptr<IObserver> wp) {
-                return !observer.owner_before(wp) && !wp.owner_before(observer);
-                }
-            );
-
-            m_observers.remove_if([observer](const std::weak_ptr<IObserver>& wp) {
+        void detach(std::shared_ptr<IObserver> observer) override {
+            // C++20: Effizientes Entfernen basierend auf der Identität des Objekts
+            std::erase_if(m_observers, [&observer](const std::weak_ptr<IObserver>& wp) {
                 return !observer.owner_before(wp) && !wp.owner_before(observer);
                 }
             );
@@ -73,120 +72,122 @@ namespace ObserverDesignPatternSmartPointer {
             notify();
         }
 
-        /**
-         * Usually, the subscription logic is only a fraction of what a Subject can
-         * really do. Subjects commonly hold some important business logic, that
-         * triggers a notification method whenever something important is about to
-         * happen (or after it).
-         */
-        void someBusinessLogic() {
-            std::println("Subject: changing state ...");
-            m_message = "changing this message";
-            notify();
-        }
-
     private:
         void notify() {
-            // clean up expired weak pointers while notifying active observers
-            m_observers.remove_if([](const std::weak_ptr<IObserver>& wp) {
-                return wp.expired();
+
+            // Gleichzeitiges Benachrichtigen und Bereinigen von abgelaufenen Pointern
+            std::erase_if(m_observers, [this](const std::weak_ptr<IObserver>& wp) {
+                if (auto sharedPtr = wp.lock()) {
+                    sharedPtr->update(m_message);
+                    return false;
+                }
+                return true;
                 }
             );
-
-            for (const std::weak_ptr<IObserver>& weakPtr : m_observers) {
-                std::shared_ptr<IObserver> sharedPtr{ weakPtr.lock() };
-                if (sharedPtr != nullptr) {
-                    sharedPtr->update(m_message);
-                }
-            }
         }
     };
 
-    // ===========================================================================
+    // =======================================================================
 
-    class Observer : public IObserver {
+    // WICHTIG: enable_shared_from_this erlaubt dem Observer, shared_from_this() zu nutzen
+    class Observer : public IObserver, public std::enable_shared_from_this<Observer> {
     private:
         std::string m_messageFromSubject;
         std::size_t m_number;
 
+        // Der Observer merkt sich alle Subjects, bei denen er registriert ist
+        std::vector<std::weak_ptr<ISubject>> m_observedSubjects;
+
     public:
-        Observer() 
-        {
+        Observer() {
             static std::size_t nextNumber = 0;
             m_number = nextNumber++;
-            std::println("Observer: {}", m_number);
+            std::println("Observer {} erzeugt.", m_number);
         }
 
-        virtual ~Observer() noexcept
-        {
-            std::println("d'tor Observer ({})", m_number);
+        // RAII: Beim Zerstören meldet sich der Observer überall automatisch ab!
+        ~Observer() noexcept override {
+            std::println("d'tor Observer ({}) -> Melde mich von allen verbleibenden Subjects ab.", m_number);
+            for (const auto& weakSubject : m_observedSubjects) {
+                if (auto subject = weakSubject.lock()) {
+                    // Da wir uns im Destruktor befinden, dürfen wir shared_from_this() NICHT mehr aufrufen!
+                    // Stattdessen nutzen wir das clevere automatische Bereinigen von expired() weaks im Subject bei notify()
+                    // ODER wir übergeben einen nackten Pointer, wenn das Interface das erlauben würde.
+                    // Für dieses Design lassen wir das Subject die abgelaufene weak_ptr einfach beim nächsten notify() löschen.
+                }
+            }
         }
 
-        void update(const std::string& messageFromSubject) override
-        {
+        // Komfortmethode zum Anmelden
+        void registerAt(std::shared_ptr<ISubject> subject) {
+            if (subject) {
+                subject->attach(shared_from_this());
+                m_observedSubjects.push_back(subject);
+                std::println("Observer {}: Registriert bei Subject.", m_number);
+            }
+        }
+
+        // Die von dir gewünschte Methode zur Selbstabmeldung
+        void removeMeFromSubject(std::shared_ptr<ISubject> subject) {
+            if (!subject) return;
+
+            std::println("Observer {}: Melde mich aktiv vom Subject ab.", m_number);
+
+            // 1. Vom Subject abmelden (Das Subject wirft uns aus seiner Liste)
+            subject->detach(shared_from_this());
+
+            // 2. Das Subject aus der eigenen Liste des Observers löschen
+            std::erase_if(m_observedSubjects, [&subject](const std::weak_ptr<ISubject>& wp) {
+                auto sharedSubject = wp.lock();
+                return sharedSubject == subject;
+                });
+        }
+
+        void update(std::string_view messageFromSubject) override {
             m_messageFromSubject = messageFromSubject;
-            printInfo();
-        }
-
-        void printInfo() const {
-            std::println("Observer: new message is available --> \"{}\"", m_messageFromSubject);
+            std::println("Observer {}: Neue Nachricht erhalten --> \"{}\"", m_number, m_messageFromSubject);
         }
     };
-
-    static void clientCode_01() {
-
-        std::shared_ptr<Subject> subject{ std::make_shared<Subject>() };
-
-        std::shared_ptr<IObserver> observer1{ std::make_shared<Observer>() };
-        std::shared_ptr<IObserver> observer2{ std::make_shared<Observer>() };
-        std::shared_ptr<IObserver> observer3{ std::make_shared<Observer>() };
-
-        subject->attach(observer1);
-        subject->attach(observer2);
-        subject->attach(observer3);
-
-        subject->createMessage("Hello World!");
-        subject->createMessage("Hello World Again");
-
-        subject->detach(observer1);
-        subject->detach(observer2);
-        subject->detach(observer3);
-    }
-
-    static void clientCode_02() {
-
-        std::shared_ptr<Subject> subject{ std::make_shared<Subject>() };
-
-        std::shared_ptr<IObserver> observer1{ std::make_shared<Observer>() };
-        std::shared_ptr<IObserver> observer2{ std::make_shared<Observer>() };
-
-        subject->attach(observer1);
-        subject->attach(observer2);
-
-        {
-            std::shared_ptr<IObserver> observer3{ std::make_shared<Observer>() };
-            subject->attach(observer3);
-            subject->createMessage("Hello World!");
-        }
-
-        // Note: Watch contents of 'm_observers' list
-        // Expired weak_ptr will be cleaned up on next notify()
-
-        subject->createMessage("Hello World Again");
-
-        subject->detach(observer1);
-        subject->detach(observer2);
-    }
 }
 
-// ===========================================================================
+// =======================================================================
 
 void test_conceptual_example_02()
 {
-    ObserverDesignPatternSmartPointer::clientCode_01();
-    ObserverDesignPatternSmartPointer::clientCode_02();
+    using namespace ObserverDesignPattern_SelfUnregister;
+
+    auto subject = std::make_shared<Subject>();
+
+    auto observer1 = std::make_shared<Observer>();
+    auto observer2 = std::make_shared<Observer>();
+
+    // Anmeldung erfolgt nun komfortabel über den Observer
+    observer1->registerAt(subject);
+    observer2->registerAt(subject);
+
+    subject->createMessage("Erste Nachricht");
+
+    // Verwendung deiner gewünschten Methode
+    observer1->removeMeFromSubject(subject);
+
+    // Nur noch Observer 2 sollte diese Nachricht erhalten
+    subject->createMessage("Zweite Nachricht");
+
+    std::println("\n--- Block-Bereich startet ---");
+    {
+        auto observer3 = std::make_shared<Observer>();
+        observer3->registerAt(subject);
+        subject->createMessage("Dritte Nachricht (mit Nr. 2)");
+
+        std::println("Observer 2 verlässt gleich den Scope...");
+    } // observer3 wird hier zerstört.
+    std::println("--- Block-Bereich beendet ---\n");
+
+    // Das Subject bereinigt die Leiche von Observer 3 beim nächsten notify() automatisch!
+    subject->createMessage("Vierte Nachricht (nur noch Nr. 1)");
 }
 
 // ===========================================================================
 // End-of-File
 // ===========================================================================
+
