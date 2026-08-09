@@ -2,9 +2,11 @@
 // ConceptualExample01.cpp // Factory Method
 // ===========================================================================
 
-#include <string>
+#include <cstddef>
 #include <memory>
 #include <print>
+#include <string>
+#include <string_view>
 
 namespace ConceptualExample01
 {
@@ -18,33 +20,37 @@ namespace ConceptualExample01
     public:
         virtual ~ProductBase() = default;
 
-        virtual std::string getName() const = 0;
-        virtual void anyOperation() = 0;
+        [[nodiscard]]
+        virtual std::string_view getName() const = 0;
+        
+        virtual void anyOperation() const = 0;
     };
 
     /**
      * Concrete Products provide various implementations of the Product interface.
      */
-    class ConcreteProductA : public ProductBase 
+    class ConcreteProductA final : public ProductBase 
     {
     public:
-        std::string getName() const override {
+        [[nodiscard]]
+        std::string_view getName() const override {
             return "ConcreteProductA";
         }
 
-        void anyOperation() override {
+        void anyOperation() const override {
             std::println("Working with ConcreteProduct A");
         }
     };
 
-    class ConcreteProductB : public ProductBase 
+    class ConcreteProductB final : public ProductBase
     {
     public:
-        std::string getName() const override {
+        [[nodiscard]]
+        std::string_view getName() const override {
             return "ConcreteProductB";
         }
 
-        void anyOperation() override {
+        void anyOperation() const override {
             std::println("Working with ConcreteProduct B");
         }
     };
@@ -56,50 +62,59 @@ namespace ConceptualExample01
      * that is supposed to return an object of a Product class.
      * The FactoryBase's subclasses usually provide the implementation of this method.
      */
+
     class FactoryBase
     {
     public:
         FactoryBase() : m_numberOfProductsProduced{} {}
 
-        virtual ~FactoryBase() = default;       // always a virtual destructor
+        virtual ~FactoryBase() = default;
 
-    private:
-        virtual std::unique_ptr<ProductBase> createProduct() const = 0;
+    protected:
+        /**
+         * Factory Method.
+         *
+         * Derived factories override this method to decide
+         * which concrete Product is created.
+         */
+        [[nodiscard]]
+        virtual std::unique_ptr<ProductBase> createProduct() = 0;
 
         /**
          * Note:
          * The FactoryBase's class primary responsibility is *not* creating products.
          * Usually, it contains some core business logic that relies on Product objects,
          * returned by the underlying factory method.
-         * Subclasses can indirectly change that business logic by overriding 
-         * the factory method and returning a different type of product from it.
          */
+
     public:
+        [[nodiscard]]
         std::unique_ptr<ProductBase> requestProduct() {
 
-            // call the factory method to create a Product object.
-            std::unique_ptr<ProductBase> product{ createProduct() };  // <= abstract method (!)
+            // Factory Method:
+            // Call the factory method to create a Product object.
+            std::unique_ptr<ProductBase> product = createProduct();  // <= abstract method (!)
 
-            // now, *use* the product:
+            // Core business logic:
             product->anyOperation();
 
-            std::string name{ product->getName() };
+            std::println("FactoryBase: This factory's code has just created a {}", product->getName());
 
-            std::println("FactoryBase: This factory's code has just created a {}", name);
-
-            // increment the number of products produced and return the new product
+            // Increment the number of products produced
             ++m_numberOfProductsProduced;
 
+            // Return the new product
             return product;
         }
 
-        size_t getNumberOfProductsProduced() const {
+        [[nodiscard]]
+        std::size_t getNumberOfProductsProduced() const noexcept {
 
             return m_numberOfProductsProduced;
         }
 
     private:
-        size_t m_numberOfProductsProduced;
+        std::size_t m_numberOfProductsProduced;
     };
 
     /**
@@ -112,25 +127,25 @@ namespace ConceptualExample01
          * Note that the signature of the method still uses the abstract product type,
          * even though the concrete product is actually returned from the method.
          * This way the FactoryBase can stay independent of concrete product classes:
-         * ==> Compare with "Virtual Constructor" Pattern
+         * 
+         * The example demonstrates that the factory method can return a polymorphic ownership type:
+         * ==> Compare with "Virtual Constructor" Pattern!
          */
     private:
-        std::unique_ptr<ProductBase> createProduct() const override {
+        [[nodiscard]]
+        std::unique_ptr<ProductBase> createProduct() override {
 
-            std::unique_ptr<ProductBase> product{ std::make_unique<ConcreteProductA>()};
-
-            return product;
+            return std::make_unique<ConcreteProductA>();
         }
     };
 
     class ConcreteFactoryB final : public FactoryBase
     {
     private:
-        std::unique_ptr<ProductBase> createProduct() const override {
+        [[nodiscard]]
+        std::unique_ptr<ProductBase> createProduct() override {
 
-            std::unique_ptr<ProductBase> product{ std::make_unique<ConcreteProductB>() };
-
-            return product;
+            return std::make_unique<ConcreteProductB>();;
         }
     };
 
@@ -145,7 +160,7 @@ namespace ConceptualExample01
 
         std::println("Client: Not aware of the concrete creator's class (FactoryBase):");
 
-        std::unique_ptr<ProductBase> product{ factory.requestProduct() };
+        auto product = factory.requestProduct();
 
         std::println("Created {}", product->getName());
 

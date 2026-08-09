@@ -1,150 +1,86 @@
 // ===========================================================================
-// ConceptualExample03.cpp // Factory Method // Real-World Example
+// ConceptualExample03.cpp // Factory Method / No Inheritance
 // ===========================================================================
 
-#include <string>
+#include <string_view>
 #include <memory>
 #include <print>
+#include <unordered_map>
+#include <functional>
 
 namespace ConceptualExample03
 {
-    /**
-     * Product Interface
-     */
-    class HotDrink
+    // We describe the products still as an interface to allow for client-side polymorphism.
+    class ProductBase
     {
     public:
-        virtual ~HotDrink() = default;
+        virtual ~ProductBase() = default;
 
-        virtual void prepare(int volume) = 0;
-        virtual void drink() = 0;
-        virtual std::string name() = 0;
+        [[nodiscard]]
+        virtual std::string_view getName() const = 0;
     };
 
-    /**
-     * Concrete Products provide various implementations of the Product interface.
-     */
-    class Tea : public HotDrink
-    {
-        void prepare(int volume) override
-        {
-            std::print("Take tea bag, boil water, pour {} ml, add some lemon", volume);
-        }
-
-        void drink() override
-        {
-            std::print("Hmmm, what a delicious tea :)");
-        }
-
-        std::string name () override
-        {
-            return "Tea";
-        }
-    };
-
-    class Coffee : public HotDrink
-    {
-        void prepare(int volume) override
-        {
-            std::print("Coffee {} ml, add some milk and sugar", volume);
-        }
-
-        void drink() override
-        {
-            std::print("Hmmm, what a delicious coffee :)");
-        }
-
-        std::string name() override
-        {
-            return "Coffee";
-        }
-    };
-
-    /**
-     * More hypothetical make_drink() function that would take the name of a drink
-     * and make that drink. Given a discrete set of cases, this can look rather tedious:
-     */
-    static std::unique_ptr<HotDrink> makeDrink(const std::string& type)
-    {
-        std::unique_ptr<HotDrink> drink;
-
-        if (type == "tea")
-        {
-            drink = std::make_unique<Tea>();
-            drink->prepare(200);
-        }
-        else
-        {
-            drink = std::make_unique<Coffee>();
-            drink->prepare(50);
-        }
-
-        return drink;
-    }
-
-    /**
-     * The FactoryBase class declares the factory method
-     * that is supposed to return an object of a Product class.
-     * The FactoryBase's subclasses usually provide the implementation of this method.
-     */
-
-    class HotDrinkFactory
+    class ConcreteProductA : public ProductBase
     {
     public:
-        virtual ~HotDrinkFactory() = default;
-
-        virtual std::unique_ptr<HotDrink> makeDrink() const = 0;
+        [[nodiscard]]
+        std::string_view getName() const override { return "Product A"; }
     };
 
-    /**
-     * Concrete HotDrinkFactory classes override the factory method 'makeDrink'
-     * in order to change the resulting product's type.
-     */
-
-    class CoffeeFactory : public HotDrinkFactory
+    class ConcreteProductB : public ProductBase
     {
-        std::unique_ptr<HotDrink> makeDrink() const override
-        {
-            return std::make_unique<Coffee>();
-        }
+    public:
+        [[nodiscard]]
+        std::string_view getName() const override { return "Product B"; }
     };
 
-    class TeaFactory : public HotDrinkFactory
+    // =======================================================================
+
+    class FunctionalFactory
     {
-        std::unique_ptr<HotDrink> makeDrink() const override
-        {
-            return std::make_unique<Tea>();
+    public:
+        // We register function objects (lambdas) instead of factory classes.
+        using CreatorMethod = std::function<std::unique_ptr<ProductBase>()>;
+
+        void registerType(std::string_view typeName, CreatorMethod creator) {
+            m_registry[std::string(typeName)] = std::move(creator);
         }
+
+        [[nodiscard]]
+        std::unique_ptr<ProductBase> createProduct(std::string_view typeName) const {
+            auto it = m_registry.find(std::string(typeName));
+            if (it != m_registry.end()) {
+                return it->second(); // Calls the lambda
+            }
+            return nullptr;
+        }
+
+    private:
+        std::unordered_map<std::string, CreatorMethod> m_registry;
     };
-
-    static void clientCode(const HotDrinkFactory& factory) {
-
-        std::println("Client: Not aware of the concrete creator's class (HotDrinkFactory):");
-
-        std::unique_ptr<HotDrink> beverage{ factory.makeDrink() };
-        std::println("Created {}", beverage->name());
-        beverage->drink();
-    }
 }
-
-/**
- * The Application picks a factory's type
- * depending on the configuration or environment.
- */
 
 void test_conceptual_example_03()
 {
     using namespace ConceptualExample03;
 
-    std::println("Example: Launched with CoffeeFactory:");
+    FunctionalFactory factory;
 
-    CoffeeFactory coffeeFactory{};
-    clientCode(coffeeFactory);
-    std::println();
+    // registration takes place inline via lambda – no "FactoryA" class required!
+    factory.registerType("A", []() { return std::make_unique<ConcreteProductA>(); });
+    factory.registerType("B", []() { return std::make_unique<ConcreteProductB>(); });
 
-    TeaFactory teaFactory{};
-    clientCode(teaFactory);
-    std::println();
+    // client code simply uses the factory via ID/string.
+    auto prod1 = factory.createProduct("A");
+    auto prod2 = factory.createProduct("B");
+
+    if (prod1) { 
+        std::println("Created: {}", prod1->getName()); 
+    }
+
+    if (prod2) { 
+        std::println("Created: {}", prod2->getName()); 
+    }
 }
 
 // ===========================================================================

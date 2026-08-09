@@ -1,6 +1,6 @@
-# Factory Method Pattern
+﻿# Factory Method Pattern
 
-[Zur�ck](../../../Resources/Readme_05_Catalog.md)
+[Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---
 
@@ -21,50 +21,50 @@
 &bdquo;Erstellung von Objekten auf Basis einer Schnittstelle in einer Oberklasse,
 die es den Unterklassen erlaubt, den Typ der zu erstellenden Objekte zu konkretisieren.&rdquo;
 
-Das *Factory Method Pattern* ist ein Entwurfsmuster, mit dem Objekte erstellt werden k�nnen,
+Das *Factory Method Pattern* ist ein Entwurfsmuster, mit dem Objekte erstellt werden können,
 ohne den Objekttyp anzugeben, der hierzu verwendet werden soll.
 Das Entwurfsmuster definiert zuallererst eine Methode, die ein Objekt erzeugt.
 Welche Klasse hierbei herangezogen wird, entscheidet die konkrete Klasse, die diese Methode implementiert.
 
-Zum Erstellen des Objekts wird eine Schnittstelle ben�tigt.
+Zum Erstellen des Objekts wird eine Schnittstelle benötigt.
 Die Unterklassen entscheiden, welche Klasse instanziiert werden soll.
 Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterklassen verschieben.
 
 **Konsequenz**:<br />
   * *Factory Methoden* verhindern, dass anwendungsspezifische Klassen in der Anwendung in Erscheinung treten. 
-  * Das *Factory Method* Pattern erm�glicht es dem Clientcode, mit abstrakten Klassen und Schnittstellen zu arbeiten,
+  * Das *Factory Method* Pattern ermöglicht es dem Clientcode, mit abstrakten Klassen und Schnittstellen zu arbeiten,
   ohne die konkreten Klassen zu kennen, die diese Schnittstellen implementieren.
-  Dies f�rdert eine lose Kopplung und macht den Code flexibler und erweiterbar.
+  Dies fördert eine lose Kopplung und macht den Code flexibler und erweiterbar.
 
 
-#### L�sung:
+#### Lösung:
 
 Das *Factory*-Entwurfsmuster definiert eine Schnittstelle zum Erstellen eines Objekts
-und �berl�sst die Auswahl des konkreten Klassentyps den Unterklassen.
-Das Entwurfsmuster macht ein Software-Design leichter anpassbar und weniger abh�ngig 
+und überlässt die Auswahl des konkreten Klassentyps den Unterklassen.
+Das Entwurfsmuster macht ein Software-Design leichter anpassbar und weniger abhängig 
 von anderen Klassen.
 
 In dem Muster kommen zwei Vererbungshierarchien vor: eine mit den *Factory*-Klassen und
-eine zweite mit den zu erzeugenden Objekten. Diese werden in dem Muster h�ufig als *Produkte* bezeichnet.
+eine zweite mit den zu erzeugenden Objekten. Diese werden in dem Muster häufig als *Produkte* bezeichnet.
 
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Factory Method Patterns*.
 Es besteht im Wesentlichen aus vier Teilen:
 
-  * **FactoryBase**: Abstrakte Klasse (oder Schnittstelle) f�r konkrete *Factory*-Klassen,
+  * **FactoryBase**: Abstrakte Klasse (oder Schnittstelle) für konkrete *Factory*-Klassen,
     die die gesuchten Objekte erzeugen.
     Wichtigste Aufgabe dieser Klasse ist die Bereitstellung (Definition) der *Fabrikmethode*: 
-    Die Signatur der Methode `requestProduct` wird festgelegt, die `ProductBase`-Objekte zur�ckliefert.
-  * **ConcreteFactory**: Repr�sentiert eine konkrete Umsetzung der `FactoryBase`-Klasse.
-    Normalerweise �berschreibt diese Klasse eine private, virtuelle Memberfunktion `createProduct()`,
-    die von `ProductBase` abgeleitete Objekte zur�ck gibt.
-  * **ProductBase**: Basisklasse (oder Schnittstelle) f�r alle Produkte,
+    Die Signatur der Methode `requestProduct` wird festgelegt, die `ProductBase`-Objekte zurückliefert.
+  * **ConcreteFactory**: Repräsentiert eine konkrete Umsetzung der `FactoryBase`-Klasse.
+    Normalerweise überschreibt diese Klasse eine private, virtuelle Memberfunktion `createProduct()`,
+    die von `ProductBase` abgeleitete Objekte zurück gibt.
+  * **ProductBase**: Basisklasse (oder Schnittstelle) für alle Produkte,
     die von konkreten *Factory*-Klassen hergestellt werden.
   * **ConcreteProduct**: Konkrete Implementierung der Klasse `ProductBase`.
-    Einfacher formuliert: Eine Klasse f�r ein konkret zu erstellendes Produkt.
+    Einfacher formuliert: Eine Klasse für ein konkret zu erstellendes Produkt.
     Konkrete `ProductBase`-Klassen sollten produktspezifische
-    Funktionalit�ten enthalten. Objekte des Typs `ConcreteProduct` werden von Methoden
+    Funktionalitäten enthalten. Objekte des Typs `ConcreteProduct` werden von Methoden
     der *Factory*-Klassen erstellt.
 
 <img src="dp_factory_method_pattern.svg" width="800">
@@ -74,30 +74,30 @@ Es besteht im Wesentlichen aus vier Teilen:
 *Bemerkung*:<br />
 Die `FactoryBase`-Basisklasse ist interessant in Bezug auf ihren Entwurf:
 
-Wenn die �ffentliche, nicht-virtuelle Memberfunktion `requestProduct()` aufgerufen wird,
+Wenn die öffentliche, nicht-virtuelle Memberfunktion `requestProduct()` aufgerufen wird,
 ruft diese intern die private, virtuelle Memberfunktion `createProduct()` auf,
-die ein neues konkretes Produkt erstellt und zur�ckgibt.
+die ein neues konkretes Produkt erstellt und zurückgibt.
 
 Dieses Idiom wird auch als *nicht-virtuelles Schnittstellenidiom* (*NVI*) bezeichnet.
 
-Die Idee dahinter ist, dass einzelne Fabriken `createProduct()` �berschreiben,
-um ein Objekt eines entsprechenden Produkttyps zur�ckzugeben.
+Die Idee dahinter ist, dass einzelne Fabriken `createProduct()` überschreiben,
+um ein Objekt eines entsprechenden Produkttyps zurückzugeben.
 
 Die `FactoryBase`-Basisklasse selbst implementiert eine Methode `requestProduct()`,
-die sich nebenbei noch um andere Dinge k�mmern kann,
+die sich nebenbei noch um andere Dinge kümmern kann,
 wie zum Beispiel die Anzahl der produzierten Produkte zu verwalten.
 
-Die Memberfunktion `requestProduct()` ist ein Beispiel f�r das
+Die Memberfunktion `requestProduct()` ist ein Beispiel für das
 *Template Method* Entwurfsmuster.
 
-Die Memberfunktion `createProduct()` ist ein Beispiel f�r das
+Die Memberfunktion `createProduct()` ist ein Beispiel für das
 *Virtual Constructor* Entwurfsmuster (auch als *Prototype* Entwurfsmuster bezeichnet).
 
 ---
 
 #### Einige Anmerkungen
 
-Der Begriff &bdquo;*Factory* (*Fabrik*)&rdquo; tritt in der Software als auch in der Literatur etwas inflation�r in Erscheinung.
+Der Begriff &bdquo;*Factory* (*Fabrik*)&rdquo; tritt in der Software als auch in der Literatur etwas inflationär in Erscheinung.
 Nicht immer wird dieses Konzept einheitlich verwendet.
  
 Das &bdquo;Factory Method Pattern&rdquo; definiert zuallererst eine Methode, die ein Objekt erzeugt.
@@ -110,24 +110,96 @@ Es gibt also **zwei** Vererbungshierarchien:
 
 ---
 
+#### Das Wesentliche des Factory Method Patterns
+
+Im Mittelpunkt des Patterns steht die Methode `requestProduct` an der `FactoryBase`-Klasse:
+
+`requestProduct()` kennt keinen konkreten Produkttyp.
+
+<pre>
+                 FactoryBase
+                     │
+          requestProduct()
+                     │
+             createProduct()
+                     │
+          ┌──────────┴──────────┐
+          ▼                     ▼
+ ConcreteFactoryA       ConcreteFactoryB
+          │                     │
+          ▼                     ▼
+ ConcreteProductA       ConcreteProductB
+</pre>
+
+Was ist das Wesentliche am Factory Method Pattern?
+
+&bdquo;*Die Basisklasse definiert einen Algorithmus, der ein Produkt benötigt,
+überlässt aber den konkreten Produkttyp einer virtuellen Factory Method.*&rdquo;
+
+Also:
+
+<pre>
+                    FactoryBase
+                         │
+                         │ defines
+                         ▼
+                 requestProduct()
+                         │
+             ┌───────────┴───────────┐
+             │                       │
+             ▼                       ▼
+       createProduct()         other business logic
+             │
+       virtual call
+             │
+      ┌──────┴──────┐
+      ▼             ▼
+ FactoryA        FactoryB
+      │             │
+      ▼             ▼
+ ProductA        ProductB
+ </pre>
+
+
+---
+
+#### Eine Factory ohne Vererbung
+
+In modernem C++ versucht man oft, tiefe Vererbungshierarchien, *vtables* (virtuelle Funktionsaufrufe)
+und das ständige Instanziieren von Klassen auf dem Heap (`std::make_unique`) zu vermeiden,
+wenn es um Performance geht.
+
+Zwei populäre Alternativen ersetzen das klassische Pattern:
+
+  * Value Semantics mit std::variant (wenn die Typen zur Kompilierzeit bekannt sind).
+  * Funktionale Factories mit `std::function` / Lambdas (vollkommen dynamisch, aber ohne Klassenhierarchie).
+
+
+Im Beispiel zu dem &bdquo;Quellcode 3&rdquo; findet man eine funktionale, schlanke Factory,
+die komplett ohne Fabrik-Klassen auskommt. Jede &bdquo;Fabrik&rdquo; ist einfach ein registriertes Lambda.
+
+
+---
+
 #### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample01.cpp) &ndash; Einfaches Beispiel.<br />
 [Quellcode 2](../ConceptualExample02.cpp) &ndash; Erweiterung des einfachen Beispiels um eine Fabrik mit Lastausgleich.<br />
-[Quellcode 3](../ConceptualExample03.cpp) &ndash; Beispiel zu hei�en Getr�nken.
+[Quellcode 3](../ConceptualExample03.cpp) &ndash; Eine Fabrik ohne Vererbung.<br />
+[Quellcode 4](../ConceptualExample04.cpp) &ndash; Beispiel zu heißen Getränken.
 
 ---
 
 #### Beispiele:
 
-Jeder Container der Standard Template Library verf�gt �ber acht Factory-Funktionen zum Generieren verschiedener Iteratoren.
+Jeder Container der Standard Template Library verfügt über acht Factory-Funktionen zum Generieren verschiedener Iteratoren.
 
-  * `begin`, `cbegin`: Gibt einen Iterator bzgl. des Anfangs des Containers zur�ck.
-  * `end`, `cend`: Gibt einen Iterator bzgl. des Endes des Containers zur�ck.
-  * `rbegin`, `crbegin`: Gibt einen Reverse-Iterator bzgl. des Anfangs des Containers zur�ck.
-  * `rend`, `crend`: Gibt einen Reverse-Iterator bzgl. des Endes des Containers zur�ck.
+  * `begin`, `cbegin`: Gibt einen Iterator bzgl. des Anfangs des Containers zurück.
+  * `end`, `cend`: Gibt einen Iterator bzgl. des Endes des Containers zurück.
+  * `rbegin`, `crbegin`: Gibt einen Reverse-Iterator bzgl. des Anfangs des Containers zurück.
+  * `rend`, `crend`: Gibt einen Reverse-Iterator bzgl. des Endes des Containers zurück.
 
-Die mit `c` beginnenden Fabrikfunktionen geben konstante Iteratoren zur�ck.
+Die mit `c` beginnenden Fabrikfunktionen geben konstante Iteratoren zurück.
 
 ---
 
@@ -143,7 +215,7 @@ Beschreiben Sie, wie diese Methoden zur Namensgebung des *Factory Method Pattern
 
 <img src="dp_factory_method_pattern_television.svg" width="900">
 
-*Abbildung* 2: Das *Factory Method Pattern* am Beispiel der Produktion von Fernsehger�ten.
+*Abbildung* 2: Das *Factory Method Pattern* am Beispiel der Produktion von Fernsehgeräten.
 
 ---
 
@@ -154,16 +226,16 @@ miteinander zu verwechseln.
 
 **Simple Factory**<br/>
   * Mit dem *Simple Factory* Pattern versuchen wir, die Details in der Erstellung eines Objekts vor dem Aufrufer (Client) zu abstrahieren.
-    Das einzige, was der Client wei�, indem er eine Methode aufruft und den gew�nschten Parameter �bergibt, ist,
-    dass er ein Objekt eines bestimmten Typs erh�lt. Aber wie dieses Objekt erstellt wird, wei� der Client-Code nicht.
+    Das einzige, was der Client weiß, indem er eine Methode aufruft und den gewünschten Parameter übergibt, ist,
+    dass er ein Objekt eines bestimmten Typs erhält. Aber wie dieses Objekt erstellt wird, weiß der Client-Code nicht.
 
 **Factory Method**<br/>
   * Das *Factory Method* Pattern bietet sich an, wenn die Anforderungen an die Erstellung eines Objekts mehr als nur der Aufruf des `new`-Operators sind.
-    Sind zur Erzeugung des Objekts mehrere Schritte notwendig, m�chte man diese Schritte ggf. anpassen k�nnen
+    Sind zur Erzeugung des Objekts mehrere Schritte notwendig, möchte man diese Schritte ggf. anpassen können
     oder sind diese Schritte bei verschiedenen Objekten unterschiedlich, verwendet man das *Factory Method* Pattern.
-  * Oder anders ausgedr�ckt: 
+  * Oder anders ausgedrückt: 
     Gibt es einen Algorithmus / eine Strategie, um die Erzeugung einer Produktfamilie zu steuern,
-    dann kommt das *Factory Method* Pattern in Betracht. Dieses l�sst sich gut mit dem *Template Pattern*, oder auch *Strategy Pattern* kombinieren,
+    dann kommt das *Factory Method* Pattern in Betracht. Dieses lässt sich gut mit dem *Template Pattern*, oder auch *Strategy Pattern* kombinieren,
     da man mit einer Schablone (Template) die Schritte zum Erstellen des untergeordneten Elements abstrahieren kann.
 
 ---
@@ -182,6 +254,6 @@ vor.
 
 ---
 
-[Zur�ck](../../../Resources/Readme_05_Catalog.md)
+[Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---

@@ -1,12 +1,14 @@
 // ===========================================================================
-// ConceptualExample02.cpp // Factory Method
+// ConceptualExample02.cpp // Factory Method & LeastBusyFactory
 // ===========================================================================
 
 #include <algorithm>
+#include <cstddef>
 #include <memory>
 #include <print>
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace ConceptualExample02
@@ -21,7 +23,7 @@ namespace ConceptualExample02
     public:
         virtual ~ProductBase() = default;
 
-        virtual std::string getName() const = 0;
+        virtual std::string_view getName() const = 0;
         virtual void anyOperation() = 0;
     };
 
@@ -31,7 +33,7 @@ namespace ConceptualExample02
     class ConcreteProductA : public ProductBase 
     {
     public:
-        std::string getName() const override {
+        std::string_view getName() const override {
             return "ConcreteProductA";
         }
 
@@ -43,7 +45,7 @@ namespace ConceptualExample02
     class ConcreteProductB : public ProductBase 
     {
     public:
-        std::string getName() const override {
+        std::string_view getName() const override {
             return "ConcreteProductB";
         }
 
@@ -64,10 +66,11 @@ namespace ConceptualExample02
     public:
         FactoryBase() : m_numberOfProductsProduced{} {}
 
-        virtual ~FactoryBase() = default;       // always a virtual destructor
+        virtual ~FactoryBase() = default;
 
     private:
-        virtual std::unique_ptr<ProductBase> createProduct() const = 0;
+        [[nodiscard]]
+        virtual std::unique_ptr<ProductBase> createProduct() = 0;
 
         /**
          * Note:
@@ -78,10 +81,11 @@ namespace ConceptualExample02
          * the factory method and returning a different type of product from it.
          */
     public:
+        [[nodiscard]]
         std::unique_ptr<ProductBase> requestProduct() {
 
             // call the factory method to create a Product object.
-            std::unique_ptr<ProductBase> product{ createProduct() };  // <= abstract method (!)
+            auto product = createProduct();  // <= abstract method (!)
 
             // increment the number of products produced and return the new product
             ++m_numberOfProductsProduced;
@@ -89,7 +93,8 @@ namespace ConceptualExample02
             return product;
         }
 
-        size_t getNumberOfProductsProduced() const {
+        [[nodiscard]]
+        size_t getNumberOfProductsProduced() const noexcept {
 
             return m_numberOfProductsProduced;
         }
@@ -116,7 +121,7 @@ namespace ConceptualExample02
         }
 
     private:
-        std::unique_ptr<ProductBase> createProduct() const override {
+        std::unique_ptr<ProductBase> createProduct() override {
 
             auto compareProducedProducts = [] (const auto& factory1, const auto& factory2) {
                 return factory1->getNumberOfProductsProduced() < factory2->getNumberOfProductsProduced(); 
@@ -141,7 +146,7 @@ namespace ConceptualExample02
     class ConcreteFactoryA final : public FactoryBase 
     {
     private:
-        std::unique_ptr<ProductBase> createProduct() const override {
+        std::unique_ptr<ProductBase> createProduct() override {
 
             std::unique_ptr<ProductBase> product{ std::make_unique<ConcreteProductA>()};
 
@@ -152,7 +157,7 @@ namespace ConceptualExample02
     class ConcreteFactoryB final : public FactoryBase
     {
     private:
-        std::unique_ptr<ProductBase> createProduct() const override {
+        std::unique_ptr<ProductBase> createProduct() override {
 
             std::unique_ptr<ProductBase> product{ std::make_unique<ConcreteProductB>() };
 
