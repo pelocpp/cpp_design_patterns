@@ -93,7 +93,7 @@ namespace ConceptualExample01
 
             // Factory Method:
             // Call the factory method to create a Product object.
-            std::unique_ptr<ProductBase> product = createProduct();  // <= abstract method (!)
+            std::unique_ptr<ProductBase> product = createProduct();  // <= abstract method (!) // shorter: auto product = createProduct();
 
             // Core business logic:
             product->anyOperation();
