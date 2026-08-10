@@ -1,5 +1,5 @@
 // ===========================================================================
-// ConceptualExample.cpp // Factory a.k.a. Simple Factory
+// ConceptualExample02.cpp // Simple Factory
 // ===========================================================================
 
 #include <iostream>
@@ -119,7 +119,7 @@ namespace ConceptualExample {
     }
 }
 
-void test_conceptual_example ()
+void test_conceptual_example_02()
 {
     using namespace ConceptualExample;
     test_without_factory();

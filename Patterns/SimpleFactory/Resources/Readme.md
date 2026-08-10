@@ -1,6 +1,6 @@
-# Simple Factory Pattern
+﻿# Simple Factory Pattern
 
-[Zur�ck](../../../Resources/Readme_05_Catalog.md)
+[Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---
 
@@ -18,10 +18,10 @@
 
 ###### In einem Satz:
 
-&bdquo;Erstellung von Objekten, ohne dem Client die Erstellungslogik zur Verf�gung zu stellen.&rdquo;
+&bdquo;Erstellung von Objekten, ohne dem Client die Erstellungslogik zur Verfügung zu stellen.&rdquo;
 
 Das *Simple Factory Pattern* ist eine Vorgehensweise, Objekte zu erstellen,
-ohne die Erstellungslogik dem Client zur Verf�gung zu stellen.
+ohne die Erstellungslogik dem Client zur Verfügung zu stellen.
 Das *Simple Factory Pattern* wird im eigentlichen Sinne *nicht* als Entwurfsmuster bezeichnet.
 
 ---
@@ -31,15 +31,15 @@ Das *Simple Factory Pattern* wird im eigentlichen Sinne *nicht* als Entwurfsmust
 *Bemerkung*:<br />
 
 Nach dem *Separation of Concerns*-Prinzip sollte die Objekterstellung bzw. -beschaffung
-von den dom�nenspezifischen Aufgaben, die ein Objekt hat, getrennt werden.
+von den domänenspezifischen Aufgaben, die ein Objekt hat, getrennt werden.
 
 Eigentlich haben wir hierzu schon eine Vorgehensweise kennen gelernt:
 
 Das Prinzip der *Dependency Injection*.
 
 *Dependency Injection* folgt diesem Prinzip in der Gestalt,
-dass der gesamte Objekterstellungs- und Abh�ngigkeitsaufl�sungsprozess
-in einem Infrastrukturelement zentralisiert ist und sich die Objekte selbst nicht darum k�mmern m�ssen.
+dass der gesamte Objekterstellungs- und Abhängigkeitsauflösungsprozess
+in einem Infrastrukturelement zentralisiert ist und sich die Objekte selbst nicht darum kümmern müssen.
 
 *Vorsicht*:<br />
 Was tun wir, wenn ein Objekt irgendwann zur Laufzeit dynamisch erstellt werden muss?
@@ -49,20 +49,209 @@ An dieser Stelle kommen Objektfabriken ins Spiel!
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Simple Factory Patterns*.
 Es besteht im Wesentlichen aus drei Teilen:
 
-  * **ProductBase**: Basisklasse (oder Schnittstelle) f�r alle Produkte,
+  * **ProductBase**: Basisklasse (oder Schnittstelle) für alle Produkte,
     die von der *Factory*-Klasse hergestellt werden sollen. Die Schnittstelle beschreibt eine oder mehrere Methoden,
     die von den konkreten Ableitungen der Klasse implementiert werden.
   * **ConcreteProduct**: Konkrete Implementierung der Klasse `ProductBase`.
     Objekte des Typs `ConcreteProduct` werden von der Klasse *Factory* erzeugt.
   * **Factory**: Diese Klasse besitzt eine Methode `getProduct`,
-    die Objekte zur�ckliefert, die die `ProductBase`-Schnittstelle implementieren.
-    �ber einen Parameter der `getProduct`-Methode wird typischerweise gesteuert, welches `ConcreteProduct` Objekt zu erzeugen ist.
+    die Objekte zurückliefert, die die `ProductBase`-Schnittstelle implementieren.
+    Über einen Parameter der `getProduct`-Methode wird typischerweise gesteuert, welches `ConcreteProduct` Objekt zu erzeugen ist.
 
 <img src="dp_factory_pattern.svg" width="700">
 
 *Abbildung* 1: Schematische Darstellung des *Factory Patterns*.
 
 ---
+
+#### Architektur des Simple Factory Patterns
+
+Die Architektur des Simple Factory Patterns lässt sich an einer einzigen Frage festmachen:
+
+> Wer entscheidet, welches konkrete Produkt erzeugt wird?
+
+ * Bei der Simple Factory entscheidet eine zentrale Factory-Funktion/-Klasse anhand eines Parameters über die Erzeugung eines Zielobjekts.
+ * Bei der Factory Method wird die Entscheidung durch Polymorphie in eine konkrete Factory-Klasse verlagert.
+
+---
+
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample01.cpp) &ndash; Einfaches Beispiel<br />
+
+```cpp
+01: // =======================================================================
+02: // Product
+03: // =======================================================================
+04: 
+05: class ProductBase
+06: {
+07: public:
+08:     virtual ~ProductBase() = default;
+09: 
+10:     [[nodiscard]]
+11:     virtual std::string_view getName() const = 0;
+12: 
+13:     virtual void anyOperation() const = 0;
+14: };
+15: 
+16: class ConcreteProductA final : public ProductBase
+17: {
+18: public:
+19:     [[nodiscard]]
+20:     std::string_view getName() const override
+21:     {
+22:         return "ConcreteProductA";
+23:     }
+24: 
+25:     void anyOperation() const override
+26:     {
+27:         std::println("Working with ConcreteProduct A");
+28:     }
+29: };
+30: 
+31: class ConcreteProductB final : public ProductBase
+32: {
+33: public:
+34:     [[nodiscard]]
+35:     std::string_view getName() const override
+36:     {
+37:         return "ConcreteProductB";
+38:     }
+39: 
+40:     void anyOperation() const override
+41:     {
+42:         std::println("Working with ConcreteProduct B");
+43:     }
+44: };
+45: 
+46: // =======================================================================
+47: // Simple Factory
+48: // =======================================================================
+49: 
+50: enum class ProductType
+51: {
+52:     Variant_A,
+53:     Variant_B
+54: };
+55: 
+56: class ProductFactory final
+57: {
+58: public:
+59:     [[nodiscard]]
+60:     static std::unique_ptr<ProductBase>
+61:         createProduct(ProductType type)
+62:     {
+63:         switch (type)
+64:         {
+65:         case ProductType::Variant_A:
+66:             return std::make_unique<ConcreteProductA>();
+67: 
+68:         case ProductType::Variant_B:
+69:             return std::make_unique<ConcreteProductB>();
+70:         }
+71: 
+72:         // Should be unreachable for a valid ProductType.
+73:         std::unreachable();
+74:     }
+75: };
+76: 
+77: // =======================================================================
+78: // Client
+79: // =======================================================================
+80: 
+81: static void clientCode(ProductType type)
+82: {
+83:     auto product = ProductFactory::createProduct(type);
+84: 
+85:     product->anyOperation();
+86: 
+87:     std::println("Created {}", product->getName());
+88: }
+```
+
+---
+
+#### Abgrenzung Simple Factory und Factory Method Pattern
+
+Im Simple Factory Pattern entscheidet die Fabrik selbst:
+
+<pre>
+                  ProductFactory
+                       │
+                       │ createProduct(type)
+                       ▼
+                  ┌────┴────┐
+                  │ switch  │
+                  └────┬────┘
+                       │
+             ┌─────────┴─────────┐
+             ▼                   ▼
+       ConcreteProductA    ConcreteProductB
+</pre>
+
+Der Client sagt:
+
+```cpp
+ProductFactory::createProduct(ProductType::A);
+```
+
+
+Im Factory Method Pattern entscheidet eine abgeleitete, konkrete Fabrik:
+
+<pre>
+                    FactoryBase
+                         │
+                  requestProduct()
+                         │
+                         ▼
+                 createProduct()
+                  virtual method
+                         │
+              ┌──────────┴──────────┐
+              ▼                     ▼
+       ConcreteFactoryA      ConcreteFactoryB
+              │                     │
+              ▼                     ▼
+       ConcreteProductA      ConcreteProductB
+</pre>
+
+Der Client sagt:
+
+```cpp
+ConcreteFactoryA factory;
+clientCode(factory);
+```
+
+oder
+
+```cpp
+ConcreteFactoryB factory;
+clientCode(factory);
+```
+
+und damit nicht
+
+```cpp
+factory.createProduct(ProductType::A);
+```
+
+---
+
+#### Simple Factory und Factory Method Pattern im Vergleich
+
+|                               | Simple Factory              | Factory Method      |
+| ----------------------------- | --------------------------- | ------------------- |
+| Wer erzeugt das Produkt?      | Factory                     | konkrete Factory    |
+| Wer entscheidet über den Typ? | `switch` / zentrale Factory | virtuelle Methode   |
+| Polymorphie bei Factory?      | normalerweise nein          | **ja**              |
+| Neue Produktvariante          | Factory ändern              | neue Factory-Klasse |
+| Neue Concrete Factory         | nicht erforderlich          | erforderlich        |
+| Factory Method?               | **nein**                    | **ja**              |
+| GoF Pattern?                  | Nein, kein GoF-Pattern      | Ja                  |
+
+---
+
 
 *Hinweis*:
 
@@ -72,10 +261,10 @@ C++ ist &ndash; im Gegensatz zu vielen anderen Sprachen &ndash; konzeptionell
   * *Wert*- und
   * *Referenz*-basiert.
 
-Objekte in C++ k�nnen sowohl am Stack (direkt erreichbar / als *Wert*) als auch auf der Halde
-(indirekt erreichbar �ber einen *Zeiger*) liegen.
-Was bedeutet das: M�chte eine Fabrik-Methode ein Objekt per *Value* zur�ckgeben, ist dies nicht
-mit einer Umsetzung des Schnittstellenkonzepts m�glich. Siehe hierzu den folgenden Anwendungsfall.
+Objekte in C++ können sowohl am Stack (direkt erreichbar / als *Wert*) als auch auf der Halde
+(indirekt erreichbar über einen *Zeiger*) liegen.
+Was bedeutet das: Möchte eine Fabrik-Methode ein Objekt per *Value* zurückgeben, ist dies nicht
+mit einer Umsetzung des Schnittstellenkonzepts möglich. Siehe hierzu den folgenden Anwendungsfall.
 
 ---
 
@@ -84,7 +273,7 @@ mit einer Umsetzung des Schnittstellenkonzepts m�glich. Siehe hierzu den folgend
 
 Das *Simple Factory* Pattern kommt beispielsweise zum Zuge, wenn es
 
-  * viele unterschiedliche M�glichkeiten gibt, ein Objekt zu konstruieren und
+  * viele unterschiedliche Möglichkeiten gibt, ein Objekt zu konstruieren und
   * dies aber die Ursache von Fehlerquellen sein kann.
 
 *Beispiel*:
@@ -103,7 +292,7 @@ Das *Simple Factory* Pattern kommt beispielsweise zum Zuge, wenn es
 
 Zwei Konstruktoren in einer Klasse `Point` mit identischer Signatur,
 aber unterschiedlicher Bedeutung:
-Dies ist nicht m�glich, eine Abhilfe k�nnte so aussehen:
+Dies ist nicht möglich, eine Abhilfe könnte so aussehen:
 
 ```cpp
 01: enum class PointType { cartesian, polar };
@@ -129,7 +318,7 @@ Dies ist nicht m�glich, eine Abhilfe k�nnte so aussehen:
 21: };
 ```
 
-Dies ist jedoch keine sehr einfallsreiche Vorgehensweise, das Problem auf diese Weise zu l�sen.
+Dies ist jedoch keine sehr einfallsreiche Vorgehensweise, das Problem auf diese Weise zu lösen.
 Wir sollten vielmehr die jeweilige Instanziierung an separate Methoden delegieren:
 
 ```cpp
@@ -166,9 +355,9 @@ untersagt. Der Benutzer wird stattdessen gezwungen, statische Methoden (Klassenm
 Point p{ Point::NewPolar(5.0, M_PI / 4) };
 ```
 
-Jetzt haben wir die Funktionalit�ten zweier *Concerns* in eine Klasse gepackt:
+Jetzt haben wir die Funktionalitäten zweier *Concerns* in eine Klasse gepackt:
 Die von der Klasse `Point` als auch die ihrer Fabrik. Wir sollten den Codeanteil der Fabrik
-in eine dedizierte Klasse verlagern. So f�hlen wir uns auch besser, 
+in eine dedizierte Klasse verlagern. So fühlen wir uns auch besser, 
 was unsere Bedenken bzgl. des *Single Responsibility Principles* der SOLID-Designprinzipien anbelangt:
 
 ```cpp
@@ -196,18 +385,18 @@ was unsere Bedenken bzgl. des *Single Responsibility Principles* der SOLID-Desig
 22: };
 ```
 
-Auch hier gibt es noch die M�glichkeit einer Verfeinerung bzw. einer Stolperfalle:
-Der Gebrauch des `friend`-Schl�sselworts ist h�ufig ein Indikator,
-dass gegen das *Open-Closed-Prinzip* versto�en wird.
+Auch hier gibt es noch die Möglichkeit einer Verfeinerung bzw. einer Stolperfalle:
+Der Gebrauch des `friend`-Schlüsselworts ist häufig ein Indikator,
+dass gegen das *Open-Closed-Prinzip* verstoßen wird.
 
 
 #### *Inner Factory*:
 
-Wir machen eine kritische Beobachtung, die wir in unserer Factory-Klasse �bersehen haben:
+Wir machen eine kritische Beobachtung, die wir in unserer Factory-Klasse übersehen haben:
 Es gibt keine wirkliche Verbindung zwischen den beiden Klassen `PointFactory` und `Point`!
 
-Warum m�ssen wir eine Fabrik �berhaupt au�erhalb der betroffenen Klasse entwerfen?
-Wir k�nnten diese in die `Point`-Klasse integrieren (in einer so genannten *nested class*)
+Warum müssen wir eine Fabrik überhaupt außerhalb der betroffenen Klasse entwerfen?
+Wir könnten diese in die `Point`-Klasse integrieren (in einer so genannten *nested class*)
 und den Benutzer auf diese Weise ermutigen, die Fabrik (sog. *Inner Factory*) zu verwenden.
 
 ```cpp
@@ -253,7 +442,7 @@ Point p{ Point::Factory::NewCartesian(2, 3) };
 Technisch betrachtet ist mit `new` nichts falsch &ndash;
 in keinster Weise. Das Problem ist eher, dass im Falle
 einer Hierarchie von Klassen und Schnittstellen der 
-Anwender m�glicherweise mehr Kenntnisse der Schnittstellen hat &ndash;
+Anwender möglicherweise mehr Kenntnisse der Schnittstellen hat &ndash;
 und damit weniger von den realen Klassen, die diese
 Schnittstellen implementieren.
 
@@ -318,12 +507,12 @@ andere, weniger erfolgreiche Pizzavarianten aus dem Sortiment
 genommen werden. Dann wird die Wartung und Pflege dieser Methode
  `orderPizza` unangenehm.
 
-Wie w�re es, wenn wir die Objekterzeugung des `Pizza`-Objekts
+Wie wäre es, wenn wir die Objekterzeugung des `Pizza`-Objekts
 aus der Methode `orderPizza` herausnehmen?
 
 Moment! *Objekterzeugung*. Da sind wir doch beim `new`-Operator angekommen!
 Also machen wir die Beobachtung, dass es Sinn ergeben kann,
-den Aufruf des `new`-Operators f�r eine Pizza an &bdquo;anderer&rdquo; Stelle
+den Aufruf des `new`-Operators für eine Pizza an &bdquo;anderer&rdquo; Stelle
 zu platzieren:
 
 ```cpp
@@ -352,8 +541,8 @@ zu platzieren:
 23: };
 ```
 
-Here we are: Die `createPizza`-Methode samt zugeh�riger `PizzaFactory`-Klasse
-f�llt in die Rubrik *Simple Factory*.
+Here we are: Die `createPizza`-Methode samt zugehöriger `PizzaFactory`-Klasse
+fällt in die Rubrik *Simple Factory*.
 
 
 Damit sieht unsere `orderPizza`-Methode nun so aus:
@@ -375,26 +564,27 @@ Damit sieht unsere `orderPizza`-Methode nun so aus:
 14: }
 ```
 
-Diese �berlegungen sollen die Einf�hrung eines &bdquo;Fabrik&rdquo;-Gedankens motivieren.
+Diese Überlegungen sollen die Einführung eines &bdquo;Fabrik&rdquo;-Gedankens motivieren.
 
 ---
 
 #### Abgrenzung zu anderen Entwurfsmustern:
 
 > Das *Factory Pattern* erstellt seine Objekte im Ganzen im Gegensatz zur *Builder*-Vorgehensweise.
-  Hier werden die Objekte st�ckweise erstellt.  
+  Hier werden die Objekte stückweise erstellt.  
 
 ---
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample.cpp)
+[Quellcode](../ConceptualExample01.cpp)
+[Quellcode](../ConceptualExample02.cpp)
 
 ---
 
 #### Erstes &bdquo;Real-World&rdquo; Example:
 
-Im Quellcode finden Sie ein selbsterkl�rendes Beispiel: *Mobil Phones*
+Im Quellcode finden Sie ein selbsterklärendes Beispiel: *Mobil Phones*
 
 ---
 
@@ -420,9 +610,9 @@ std::unique_ptr<IDocument> open(const std::string& path)
 Wie gehen wir vor, wenn wir die `open`-Funktion um weitere Dokumentarten wie zum Beispiel
 *OdtDocument* erweitern wollen?
 
-Dabei sollten wir das *Open-Closed-Prinzip* nicht au�er Acht lassen!
+Dabei sollten wir das *Open-Closed-Prinzip* nicht außer Acht lassen!
 
-Eine Simple Factory-Klasse ist hier angesagt. Eine weitere Option vor dem Hintergrund sich st�ndig variierender
+Eine Simple Factory-Klasse ist hier angesagt. Eine weitere Option vor dem Hintergrund sich ständig variierender
 Dokumenttypen ist eine Registrierungsfunktionen, die es gestattet, eigene Typen zu registrieren:
 
 ```cpp
@@ -509,6 +699,6 @@ von Adrian Ostrowski und Piotr Gaczkowski.
 
 ---
 
-[Zur�ck](../../../Resources/Readme_05_Catalog.md)
+[Zurück](../../../Resources/Readme_05_Catalog.md)
 
 ---
