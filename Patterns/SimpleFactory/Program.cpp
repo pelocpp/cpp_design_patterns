@@ -11,8 +11,15 @@ extern void test_mobile_phones_01();
 extern void test_mobile_phones_02();
 extern void test_documents();
 
+#include <utility>
+
+
 int main()
 {
+    // Should be unreachable for a valid ProductType.
+    std::unreachable();
+
+
     test_conceptual_example_01();
     //test_conceptual_example_02();
 

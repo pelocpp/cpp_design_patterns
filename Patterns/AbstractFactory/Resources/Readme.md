@@ -104,12 +104,30 @@ Tabelle 1: Verfügbare *Look and Feel* UI-Fabriken.
 
 ---
 
-#### Hinweis:
+#### Ein Vergleich
 
-Die beiden Entwurfsmuster *Abstract Factory* und *Factory Method* sind nicht 
-miteinander zu verwechseln.
 
-Sie haben zumindest gemeinsam, dass sie beide den Client von konkreten Typen entkoppeln.
+|                     | Simple Factory        | Factory Method            | Abstract Factory                       |
+| ------------------- | --------------------- | ------------------------- | -------------------------------------- |
+| Ziel                | Objekt erzeugen       | Erzeugung variabel machen | Produktfamilie erzeugen                |
+| Anzahl Produktarten | typischerweise eine   | typischerweise eine       | **mehrere**                            |
+| Factory-Hierarchie  | nein                  | **ja**                    | **ja**                                 |
+| Polymorphe Factory  | nein                  | ja                        | ja                                     |
+| Auswahlmechanismus  | z. B. `switch`        | virtuelle Factory Method  | virtuelle Factory Methods              |
+| Beispiel            | `createProduct(type)` | `createProduct()`         | `createButton()`, `createCheckbox()`   |
+| Hauptidee           | zentrale Erzeugung    | Erzeugung delegieren      | **kompatible Produktfamilie erzeugen** |
+
+
+Man kann die Unterscheidung der drei Muster auch durch die Formulierung einer Frage hervorheben:
+
+  * Simple Factory: Welches Produkt soll ich erzeugen?
+  * Factory Method: Welche konkrete Factory soll die Erzeugung übernehmen?
+  * Abstract Factory: Welche zusammengehörige Produktfamilie soll ich erzeugen?
+
+
+Noch ein paar Aussagen zu den beiden Mustern *Abstract Factory* und *Factory Method*:
+
+Sie haben gemeinsam, dass sie beide den Client von konkreten Typen entkoppeln.
 Der Client kennt nur die Schnittstelle zur *Factory* und den Produkten. Welche Produkte konkret erstellt werden,
 entscheidet die Unterklasse/Implementierung der Schnittstelle. Der Client stützt sich allein auf Abstraktion.
 

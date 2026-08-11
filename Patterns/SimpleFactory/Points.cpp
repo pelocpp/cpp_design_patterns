@@ -52,7 +52,7 @@ namespace Factory02 {
 
 namespace Factory03 {
 
-    // 3.) factory approach (within a single class)
+    // 3.) Approach "Named Constructors" / Factory Functions
 
     class Point
     {
@@ -63,7 +63,8 @@ namespace Factory03 {
 
         // private constructor, so that object can't be created directly
         Point(const double x, const double y, PointType t) 
-            : m_x{ x }, m_y{ y }, m_type{ t } {}
+            : m_x{ x }, m_y{ y }, m_type{ t } 
+        {}
 
     public:
         static Point NewCartesian(double x, double y) {
@@ -91,7 +92,10 @@ namespace Factory03 {
 
 namespace Factory04 {
 
-    // 4.) factory approach with distinct classes (using undesired friendships)
+    // 4.) Approach Simple Factory: distinct classes (using undesired friendships)
+
+    // The Example uses a separate factory class with static factory functions.
+    // This can be classified as a Simple Factory.
 
     class Point
     {
@@ -136,7 +140,7 @@ namespace Factory04 {
 
 namespace Factory05 {
 
-    // 5.) factory approach, so called 'inner factory'
+    // 5.) Approach Simple Factory: distinct classes (using so called 'inner factory')
 
     class Point
     {
@@ -149,11 +153,11 @@ namespace Factory05 {
     public:
         struct Factory
         {
-            static Point NewCartesian(double x, double y) { 
+            static Point NewCartesian(double x, double y) {
                 return { x,y };
             }
 
-            static Point NewPolar(double r, double theta) { 
+            static Point NewPolar(double r, double theta) {
                 return{ r * cos(theta), r * sin(theta) };
             }
         };
@@ -164,11 +168,59 @@ namespace Factory05 {
     }
 }
 
+namespace Factory06 {
+
+    // 6.) Approach Simple Factory: classical Simple Factory implementation
+
+    class Point
+    {
+    public:
+        double m_x;
+        double m_y;
+    };
+
+    enum class PointType
+    {
+        Cartesian,
+        Polar
+    };
+
+    class PointFactory
+    {
+    public:
+        [[nodiscard]]
+        static Point create(
+            double a,
+            double b,
+            PointType type)
+        {
+            switch (type)
+            {
+            case PointType::Cartesian:
+                return Point{ a, b };
+
+            case PointType::Polar:
+                return Point{
+                    a * std::cos(b),
+                    a * std::sin(b)
+                };
+            }
+
+            std::unreachable();
+        }
+    };
+
+    static void test() {
+        Point p{ PointFactory::create(2, 3, PointType::Cartesian) };
+    }
+}
+
 void test_real_world_example_points()
 {
     Factory03::test();
     Factory04::test();
     Factory05::test();
+    Factory06::test();
 }
 
 // ===========================================================================

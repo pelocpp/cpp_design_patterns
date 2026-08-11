@@ -428,143 +428,53 @@ Anwendung:
 Point p{ Point::Factory::NewCartesian(2, 3) };
 ```
 
+#### *Simple Factory*:
+
+```cpp
+01: enum class PointType
+02: {
+03:     Cartesian,
+04:     Polar
+05: };
+06: 
+07: class PointFactory
+08: {
+09: public:
+10:     [[nodiscard]]
+11:     static Point create(
+12:         double a,
+13:         double b,
+14:         PointType type)
+15:     {
+16:         switch (type)
+17:         {
+18:         case PointType::Cartesian:
+19:             return Point{ a, b };
+20: 
+21:         case PointType::Polar:
+22:             return Point{
+23:                 a * std::cos(b),
+24:                 a * std::sin(b)
+25:             };
+26:         }
+27: 
+28:         std::unreachable();
+29:     }
+30: };
+```
+
+Anwendung:
+
+```cpp
+Point p{ PointFactory::create(2, 3, PointType::Cartesian) };
+```
+
+
 ---
 
 #### Die Essenz des *Simple Factory* Patterns:
 
 > Umstellung auf private Konstruktoren und Bereitstellung von Klassenmethoden.
-
----
-
-
-#### Zweiter Anwendungsfall des *Simple Factory* Patterns: &bdquo;What's wrong with `new`?&rdquo;
-  
-Technisch betrachtet ist mit `new` nichts falsch &ndash;
-in keinster Weise. Das Problem ist eher, dass im Falle
-einer Hierarchie von Klassen und Schnittstellen der 
-Anwender möglicherweise mehr Kenntnisse der Schnittstellen hat &ndash;
-und damit weniger von den realen Klassen, die diese
-Schnittstellen implementieren.
-
-Ein Beispiel hierzu:
-
-```cpp
-01: class IPizza
-02: {
-03: public:
-04:     virtual void prepare() = 0;
-05:     virtual void bake() = 0;
-06:     virtual void cut() = 0;
-07:     virtual void box() = 0;
-08: };
-09: 
-10: static std::shared_ptr<IPizza> orderPizza()
-11: {
-12:     std::shared_ptr<IPizza> pizza{ std::make_shared<Pizza>()};
-13: 
-14:     pizza->prepare();
-15:     pizza->bake();
-16:     pizza->cut();
-17:     pizza->box();
-18: 
-19:     return pizza;
-20: }
-```
-
-Das liest sich nicht schlecht, nur es gibt doch
-mehrere Arten von Pizzas:
-
-```cpp
-01: static std::shared_ptr<IPizza> orderPizza(const std::string& type)
-02: {
-03:     std::shared_ptr<IPizza> pizza{ nullptr };
-04: 
-05:     if (type == std::string{ "cheese" }) {
-06:         pizza = std::make_shared<CheesePizza>();
-07:     }
-08:     else if (type == std::string{ "greek" }) {
-09:         pizza = std::make_shared<GreekPizza>();
-10:     }
-11:     else if (type == std::string{ "pepperoni" }) {
-12:         pizza = std::make_shared<PepperoniPizza>();
-13:     }
-14: 
-15:     if (pizza != nullptr) {
-16: 
-17:         pizza->prepare();
-18:         pizza->bake();
-19:         pizza->cut();
-20:         pizza->box();
-21:     }
-22: 
-23:     return pizza;
-24: }
-```
-
-Das ist jetzt schon besser. Nur wie entwickelt sich die Funktion
-`orderPizza` weiter, wenn es neue Pizzavarianten gibt und 
-andere, weniger erfolgreiche Pizzavarianten aus dem Sortiment
-genommen werden. Dann wird die Wartung und Pflege dieser Methode
- `orderPizza` unangenehm.
-
-Wie wäre es, wenn wir die Objekterzeugung des `Pizza`-Objekts
-aus der Methode `orderPizza` herausnehmen?
-
-Moment! *Objekterzeugung*. Da sind wir doch beim `new`-Operator angekommen!
-Also machen wir die Beobachtung, dass es Sinn ergeben kann,
-den Aufruf des `new`-Operators für eine Pizza an &bdquo;anderer&rdquo; Stelle
-zu platzieren:
-
-```cpp
-01: class PizzaFactory
-02: {
-03: public:
-04:     static std::shared_ptr<IPizza> createPizza(const std::string& type) {
-05: 
-06:         std::shared_ptr<IPizza> pizza{ nullptr };
-07: 
-08:         if (type == std::string{ "cheese" }) {
-09:             pizza = std::make_shared<CheesePizza>();
-10:         }
-11:         else if (type == std::string{ "pepperoni" }) {
-12:             pizza = std::make_shared<PepperoniPizza>();
-13:         }
-14:         else if (type == std::string{ "clam" }) {
-15:             pizza = std::make_shared<ClamPizza>();
-16:         }
-17:         else if (type == std::string{ "veggie" }) {
-18:             pizza = std::make_shared<VeggiePizza>();
-19:         }
-20: 
-21:         return pizza;
-22:     }
-23: };
-```
-
-Here we are: Die `createPizza`-Methode samt zugehöriger `PizzaFactory`-Klasse
-fällt in die Rubrik *Simple Factory*.
-
-
-Damit sieht unsere `orderPizza`-Methode nun so aus:
-
-```cpp
-01: std::shared_ptr<IPizza> orderPizzaEx(const std::string& type)
-02: {
-03:     std::shared_ptr<IPizza> pizza{ PizzaFactory::createPizza(type) };
-04: 
-05:     if (pizza != nullptr) {
-06: 
-07:         pizza->prepare();
-08:         pizza->bake();
-09:         pizza->cut();
-10:         pizza->box();
-11:     }
-12: 
-13:     return pizza;
-14: }
-```
-
-Diese Überlegungen sollen die Einführung eines &bdquo;Fabrik&rdquo;-Gedankens motivieren.
 
 ---
 

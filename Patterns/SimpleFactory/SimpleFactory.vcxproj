@@ -132,7 +132,6 @@
     <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="Documents.cpp" />
     <ClCompile Include="MobilePhones.cpp" />
-    <ClCompile Include="Pizza.cpp" />
     <ClCompile Include="Points.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>

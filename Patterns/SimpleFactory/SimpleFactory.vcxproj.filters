@@ -24,9 +24,6 @@
     <ClCompile Include="MobilePhones.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pizza.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Points.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
