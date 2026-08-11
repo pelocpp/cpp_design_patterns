@@ -1,10 +1,16 @@
 // ===========================================================================
 // ConceptualExample01.cpp // Flyweight Pattern // First Simple Approach
 // ===========================================================================
+//
+//#include <memory>
+//#include <print>
+//#include <string>
+//#include <unordered_map>
 
 #include <memory>
 #include <print>
 #include <string>
+#include <string_view>
 #include <unordered_map>
 
 // First simple approach of the flyweight pattern
@@ -19,7 +25,7 @@ namespace ConceptualExample01 {
         std::string m_sharedState;
 
     public:
-        Flyweight(const std::string& sharedState)
+        Flyweight(std::string_view sharedState)
             : m_sharedState{ sharedState }
         {}
 
