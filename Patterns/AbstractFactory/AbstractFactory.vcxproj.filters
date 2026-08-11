@@ -30,9 +30,6 @@
     <None Include="Resources\dp_abstract_factory_pattern_ui_factory.svg">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\dp_abstract_factory_pattern.svg">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp">
