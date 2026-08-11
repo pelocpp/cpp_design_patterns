@@ -10,8 +10,8 @@ extern void test_chatroom_example();
 int main()
 {
     test_conceptual_example01();
-    test_conceptual_example02();
-    test_chatroom_example();
+    //test_conceptual_example02();
+    //test_chatroom_example();
 
     return 0;
 }

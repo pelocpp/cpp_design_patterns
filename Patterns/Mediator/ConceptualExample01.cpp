@@ -2,9 +2,21 @@
 // ConceptualExample01.cpp // Mediator
 // ===========================================================================
 
+#define _CRTDBG_MAP_ALLOC
+#include <cstdlib>
+#include <crtdbg.h>
+
+#ifdef _DEBUG
+#ifndef DBG_NEW
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#define new DBG_NEW
+#endif
+#endif  // _DEBUG
+
 #include <memory>
 #include <print>
 #include <string>
+#include <string_view>
 
 namespace ConceptualExample01 {
 
@@ -22,7 +34,7 @@ namespace ConceptualExample01 {
     public:
         virtual ~MediatorBase() = default;
 
-        virtual void notify(const std::shared_ptr<ColleagueBase>& sender, Event event) const = 0;
+        virtual void notify(const ColleagueBase& sender, Event event) = 0;
     };
 
     /**
@@ -31,30 +43,31 @@ namespace ConceptualExample01 {
      */
     class ColleagueBase 
     {
-    protected:
+    private:
         std::string                 m_name;
+
+    protected:
         std::weak_ptr<MediatorBase> m_mediator;
 
     public:
         ColleagueBase() = delete;
 
-        explicit ColleagueBase(const std::string& name) : m_name{ name } {}
+        explicit ColleagueBase(std::string name) : m_name{ std::move(name) } {}
 
-        void setMediator(const std::shared_ptr<MediatorBase>& mediator)
+        void setMediator(std::shared_ptr<MediatorBase> mediator)
         {
-            m_mediator = mediator;
+            m_mediator = std::move(mediator);
         }
 
-        const std::string& getName () const { return m_name; }
+        [[nodiscard]]
+        std::string_view getName () const { return m_name; }
     };
 
     /**
      * Concrete Components implement various functionality. They don't depend on
      * other components. They also don't depend on any concrete mediator classes.
      */
-    class ConcreteColleagueA 
-        : public ColleagueBase,
-          public std::enable_shared_from_this<ConcreteColleagueA> 
+    class ConcreteColleagueA : public ColleagueBase
     {
     public:
         explicit ConcreteColleagueA(const std::string& name) : ColleagueBase{ name } {}
@@ -65,7 +78,12 @@ namespace ConceptualExample01 {
             
             std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
             if (sp != nullptr) {
-                sp->notify(shared_from_this(), Event::A);
+                sp->notify(*this, Event::A);
+            }
+
+            if (auto mediator = m_mediator.lock())
+            {
+                mediator->notify(*this, Event::A);
             }
         }
 
@@ -75,14 +93,17 @@ namespace ConceptualExample01 {
 
             std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
             if (sp != nullptr) {
-                sp->notify(shared_from_this(), Event::B);
+                sp->notify(*this, Event::B);
+            }
+
+            if (auto mediator = m_mediator.lock())
+            {
+                mediator->notify(*this, Event::B);
             }
         }
     };
 
-    class ConcreteColleagueB 
-        : public ColleagueBase, 
-          public std::enable_shared_from_this<ConcreteColleagueB>
+    class ConcreteColleagueB : public ColleagueBase
     {
     public:
         explicit ConcreteColleagueB(const std::string& name) : ColleagueBase{ name } {}
@@ -93,7 +114,12 @@ namespace ConceptualExample01 {
 
             std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
             if (sp != nullptr) {
-                sp->notify(shared_from_this(), Event::C);
+                sp->notify(*this, Event::C);
+            }
+
+            if (auto mediator = m_mediator.lock())
+            {
+                mediator->notify(*this, Event::C);
             }
         }
 
@@ -103,7 +129,12 @@ namespace ConceptualExample01 {
 
             std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
             if (sp != nullptr) {
-                sp->notify(shared_from_this(), Event::D);
+                sp->notify(*this, Event::D);
+            }
+
+            if (auto mediator = m_mediator.lock())
+            {
+                mediator->notify(*this, Event::D);
             }
         }
     };
@@ -112,43 +143,40 @@ namespace ConceptualExample01 {
      * Concrete Mediators implement cooperative behavior
      * by coordinating several components.
      */
-    class ConcreteMediator 
-        : public MediatorBase,
-          public std::enable_shared_from_this<ConcreteMediator> 
+    class ConcreteMediator : public MediatorBase
     {
     private:
         std::shared_ptr<ConcreteColleagueA> m_componentA;
         std::shared_ptr<ConcreteColleagueB> m_componentB;
 
-        ConcreteMediator(
+    public:
+        explicit ConcreteMediator(
             std::shared_ptr<ConcreteColleagueA> colleagueA,
             std::shared_ptr<ConcreteColleagueB> colleagueB)
-            : m_componentA{ std::move(colleagueA) }, m_componentB{ std::move(colleagueB) }
+            : m_componentA{ std::move(colleagueA) }, 
+              m_componentB{ std::move(colleagueB) }
         {}
-
-        void setConcreteColleagues()
-        {
-            m_componentA->setMediator(shared_from_this());
-            m_componentB->setMediator(shared_from_this());
-        }
 
     public:
         // static Factory method to ensure proper initialization of this mediator
         static std::shared_ptr<ConcreteMediator> create(
-            std::shared_ptr<ConcreteColleagueA> a,
-            std::shared_ptr<ConcreteColleagueB> b)
+            std::shared_ptr<ConcreteColleagueA> cA,
+            std::shared_ptr<ConcreteColleagueB> cB)
         {
-            auto mediator = std::shared_ptr<ConcreteMediator>(new ConcreteMediator(std::move(a), std::move(b)));
-            mediator->setConcreteColleagues();
+            auto mediator = std::make_shared<ConcreteMediator>(cA, cB);
+
+            cA->setMediator(mediator);
+            cB->setMediator(mediator);
+
             return mediator;
         }
 
     public:
         ~ConcreteMediator() = default;
 
-        void notify(const std::shared_ptr<ColleagueBase>& sender, Event event) const override
+        void notify(const ColleagueBase& sender, Event event) override
         {
-            std::println("Notify => Sender: {}", sender->getName());
+            std::println("Notify => Sender: {}", sender.getName());
 
             switch (event) {
             case Event::A:
@@ -185,6 +213,7 @@ namespace ConceptualExample01 {
 
 void test_conceptual_example01()
 {
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     using namespace ConceptualExample01;
     clientCode();
 }

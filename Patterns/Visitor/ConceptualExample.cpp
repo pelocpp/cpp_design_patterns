@@ -22,14 +22,16 @@ namespace ConceptualExample {
 
     class VisitorBase {
     public:
+        virtual ~VisitorBase() = default;
+
         // using "raw" pointers
         virtual void visit(const class ConcreteComponentA* element) const = 0;
         virtual void visit(const class ConcreteComponentB* element) const = 0;
 
         // using shared pointers
-        virtual void visit2(const std::shared_ptr<const class ConcreteComponentA> element) const = 0;
-        virtual void visit2(const std::shared_ptr<const class ConcreteComponentB> element) const = 0;
-        virtual void visit2(const std::shared_ptr<const class ConcreteComponentC> element) const = 0;
+        virtual void visit2(const std::shared_ptr<const class ConcreteComponentA>& element) const = 0;
+        virtual void visit2(const std::shared_ptr<const class ConcreteComponentB>& element) const = 0;
+        virtual void visit2(const std::shared_ptr<const class ConcreteComponentC>& element) const = 0;
 
         // other names (e.g. no method overloading) is also possible
         // virtual void visitConcreteComponentA(const class ConcreteComponentA* element) const = 0;
@@ -50,7 +52,7 @@ namespace ConceptualExample {
     public:
         virtual ~ElementBase() = default;
 
-        virtual void accept(std::shared_ptr<VisitorBase> visitor) const = 0;
+        virtual void accept(const std::shared_ptr<VisitorBase>& visitor) const = 0;
     };
 
     /**
@@ -65,7 +67,7 @@ namespace ConceptualExample {
          * current class name. This way we let the visitor know the class of the
          * component it works with.
          */
-        void accept(std::shared_ptr<VisitorBase> visitor) const override {
+        void accept(const std::shared_ptr<VisitorBase>& visitor) const override {
             visitor->visit(this);
         }
 
@@ -83,7 +85,7 @@ namespace ConceptualExample {
         /**
          * Same here: visitConcreteComponentB => ConcreteComponentB
          */
-        void accept(std::shared_ptr<VisitorBase> visitor) const override {
+        void accept(const std::shared_ptr<VisitorBase>& visitor) const override {
             visitor->visit(this);
         }
 
@@ -94,7 +96,7 @@ namespace ConceptualExample {
     class ConcreteComponentC : public ElementBase, public std::enable_shared_from_this<ConcreteComponentC> 
     {
     public:
-        void accept(std::shared_ptr<VisitorBase> visitor) const override {
+        void accept(const std::shared_ptr<VisitorBase>& visitor) const override {
             const std::shared_ptr<const ConcreteComponentC> me = shared_from_this();
             visitor->visit2(me);
         }
@@ -132,21 +134,21 @@ namespace ConceptualExample {
                 << std::endl;
         }
 
-        void visit2(const std::shared_ptr<const class ConcreteComponentA> element) const override {
+        void visit2(const std::shared_ptr<const class ConcreteComponentA>& element) const override {
             std::cout
                 << element->ExclusiveMethodOfConcreteComponentA()
                 << " + ConcreteVisitor1"
                 << std::endl;
         }
 
-        void visit2(const std::shared_ptr<const class ConcreteComponentB> element) const override {
+        void visit2(const std::shared_ptr<const class ConcreteComponentB>& element) const override {
             std::cout
                 << element->SpecialMethodOfConcreteComponentB()
                 << " + ConcreteVisitor1"
                 << std::endl;
         }
 
-        void visit2(const std::shared_ptr<const class ConcreteComponentC> element)  const override {
+        void visit2(const std::shared_ptr<const class ConcreteComponentC>& element)  const override {
             std::cout
                 << "C + ConcreteVisitor1"
                 << std::endl;
@@ -170,21 +172,21 @@ namespace ConceptualExample {
                 << std::endl;
         }
 
-        void visit2(const std::shared_ptr<const class ConcreteComponentA> element) const override {
+        void visit2(const std::shared_ptr<const class ConcreteComponentA>& element) const override {
             std::cout
                 << element->ExclusiveMethodOfConcreteComponentA()
                 << " + ConcreteVisitor2"
                 << std::endl;
         }
 
-        void visit2(const std::shared_ptr<const class ConcreteComponentB> element) const override {
+        void visit2(const std::shared_ptr<const class ConcreteComponentB>& element) const override {
             std::cout
                 << element->SpecialMethodOfConcreteComponentB()
                 << " + ConcreteVisitor2"
                 << std::endl;
         }
 
-        void visit2(const std::shared_ptr<const class ConcreteComponentC> element) const override {
+        void visit2(const std::shared_ptr<const class ConcreteComponentC>& element) const override {
             std::cout
                 << "C + ConcreteVisitor2"
                 << std::endl;
@@ -197,10 +199,10 @@ namespace ConceptualExample {
      * the appropriate operation in the visitor object.
      */
     static void clientCode(
-        std::array<std::shared_ptr<ElementBase>, 3> components,
-        std::shared_ptr<VisitorBase> visitor) 
+        std::array<std::shared_ptr<ElementBase>, 3>& components,
+        std::shared_ptr<VisitorBase>& visitor) 
     {
-        for (std::shared_ptr<ElementBase> comp : components) {
+        for (const auto& comp : components) {
             comp->accept(visitor);
         }
     }
