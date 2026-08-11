@@ -52,6 +52,8 @@ namespace ConceptualExample01 {
     public:
         ColleagueBase() = delete;
 
+        virtual ~ColleagueBase() = default;
+
         explicit ColleagueBase(std::string name) : m_name{ std::move(name) } {}
 
         void setMediator(std::shared_ptr<MediatorBase> mediator)
@@ -70,17 +72,12 @@ namespace ConceptualExample01 {
     class ConcreteColleagueA : public ColleagueBase
     {
     public:
-        explicit ConcreteColleagueA(const std::string& name) : ColleagueBase{ name } {}
+        explicit ConcreteColleagueA(std::string name) : ColleagueBase{ std::move(name) } {}
 
         void operationA()
         {
             std::println("Component {} does operation A.", getName());
             
-            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
-            if (sp != nullptr) {
-                sp->notify(*this, Event::A);
-            }
-
             if (auto mediator = m_mediator.lock())
             {
                 mediator->notify(*this, Event::A);
@@ -90,11 +87,6 @@ namespace ConceptualExample01 {
         void operationB()
         {
             std::println("Component {} does operation B.", getName());
-
-            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
-            if (sp != nullptr) {
-                sp->notify(*this, Event::B);
-            }
 
             if (auto mediator = m_mediator.lock())
             {
@@ -106,16 +98,11 @@ namespace ConceptualExample01 {
     class ConcreteColleagueB : public ColleagueBase
     {
     public:
-        explicit ConcreteColleagueB(const std::string& name) : ColleagueBase{ name } {}
+        explicit ConcreteColleagueB(std::string name) : ColleagueBase{ std::move(name) } {}
 
         void operationC()
         {
             std::println("Component {} does operation C.", getName());
-
-            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
-            if (sp != nullptr) {
-                sp->notify(*this, Event::C);
-            }
 
             if (auto mediator = m_mediator.lock())
             {
@@ -126,11 +113,6 @@ namespace ConceptualExample01 {
         void operationD()
         {
             std::println("Component {} does operation D.", getName());
-
-            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
-            if (sp != nullptr) {
-                sp->notify(*this, Event::D);
-            }
 
             if (auto mediator = m_mediator.lock())
             {
