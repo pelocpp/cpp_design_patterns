@@ -38,9 +38,6 @@
     <ClCompile Include="ConceptualExample02.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample03.cpp">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClCompile>
     <ClCompile Include="ChatRoom.cpp">
       <Filter>Source Files\ChatRoom</Filter>
     </ClCompile>

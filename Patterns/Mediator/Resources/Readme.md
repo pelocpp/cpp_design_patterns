@@ -84,14 +84,12 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 Das *Conceptual Example* liegt in drei Varianten vor:
 
-  * Variante 1: klassisch &ndash; d.h. mit "raw"-Zeigern.
-  * Variante 2: Wie Variante 1, aber mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
-  * Variante 3: Prinzipiell wie Variante 2, nur: Die Entscheidung, welche empfangende Komponente
+  * Variante 1: Modern C++, mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
+  * Variante 2: Prinzipiell wie Variante 1, nur: Die Entscheidung, welche empfangende Komponente
     aufzurufen ist, wird dieses Mal über das Absenderobjekt getroffen (und nicht über eine Parameterkennung).
 
 [Quellcode 1](../ConceptualExample01.cpp)<br />
-[Quellcode 2](../ConceptualExample02.cpp)<br />
-[Quellcode 3](../ConceptualExample03.cpp)
+[Quellcode 2](../ConceptualExample02.cpp)
 
 ---
 

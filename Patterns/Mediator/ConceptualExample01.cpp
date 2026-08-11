@@ -2,9 +2,9 @@
 // ConceptualExample01.cpp // Mediator
 // ===========================================================================
 
-#include <iostream>
-#include <string>
 #include <memory>
+#include <print>
+#include <string>
 
 namespace ConceptualExample01 {
 
@@ -13,80 +13,94 @@ namespace ConceptualExample01 {
      * mediator about various events. The Mediator may react to these events and
      * pass the execution to other components.
      */
+
+    enum class Event { A, B, C, D };
+
     class ColleagueBase;
 
-    class MediatorBase 
-    {
+    class MediatorBase {
     public:
-        virtual void notify(ColleagueBase* sender, const std::string& event) const = 0;
+        virtual ~MediatorBase() = default;
+
+        virtual void notify(const std::shared_ptr<ColleagueBase>& sender, Event event) const = 0;
     };
 
     /**
-     * The Base Component provides the basic functionality
-     * of storing a mediator's instance inside component objects.
+     * The Base Component provides the basic functionality of storing a mediator's
+     * instance inside component objects.
      */
     class ColleagueBase 
     {
     protected:
-        MediatorBase* m_mediator;
+        std::string                 m_name;
+        std::weak_ptr<MediatorBase> m_mediator;
 
     public:
-        ColleagueBase() : m_mediator{ nullptr } {}
+        ColleagueBase() = default;
 
-        ColleagueBase(MediatorBase* mediator) 
-            : m_mediator{ mediator }
-        {}
+        ColleagueBase(const std::string& name) : m_name{ name } {}
 
-        void setMediator(MediatorBase* mediator) 
+        void setMediator(const std::shared_ptr<MediatorBase>& mediator)
         {
             m_mediator = mediator;
         }
+
+        const std::string& getName () const { return m_name; }
     };
 
     /**
      * Concrete Components implement various functionality. They don't depend on
      * other components. They also don't depend on any concrete mediator classes.
      */
-    class ConcreteColleagueA : public ColleagueBase 
+    class ConcreteColleagueA 
+        : public ColleagueBase,
+          public std::enable_shared_from_this<ConcreteColleagueA> 
     {
     public:
-        void operationA() 
-        {
-            std::cout << "Component 1 does operation A." << std::endl;
+        ConcreteColleagueA(const std::string& name) : ColleagueBase{ name } {}
 
-            if (m_mediator != nullptr) {
-                m_mediator->notify(this, "A");
+        void operationA()
+        {
+            std::println("Component {} does operation A.", getName());
+            
+            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
+            if (sp != nullptr) {
+                sp->notify(shared_from_this(), Event::A);
             }
         }
 
         void operationB()
         {
-            std::cout << "Component 1 does operation B." << std::endl;
+            std::println("Component {} does operation B.", getName());
 
-            if (m_mediator != nullptr) {
-                m_mediator->notify(this, "B");
+            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
+            if (sp != nullptr) {
+                sp->notify(shared_from_this(), Event::B);
             }
         }
     };
 
-    class ConcreteColleagueB : public ColleagueBase 
-    {
+    class ConcreteColleagueB : public ColleagueBase, public std::enable_shared_from_this<ConcreteColleagueB> {
     public:
+        ConcreteColleagueB(const std::string& name) : ColleagueBase{ name } {}
+
         void operationC()
         {
-            std::cout << "Component 2 does operation C." << std::endl;
+            std::println("Component {} does operation C.", getName());
 
-            if (m_mediator != nullptr) {
-                m_mediator->notify(this, "C");
+            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
+            if (sp != nullptr) {
+                sp->notify(shared_from_this(), Event::C);
             }
         }
 
         void operationD()
         {
-            std::cout << "Component 2 does operation D." << std::endl;
+            std::println("Component {} does operation D.", getName());
 
-            if (m_mediator != nullptr) {
-                m_mediator->notify(this, "D");
+            std::shared_ptr<MediatorBase> sp{ m_mediator.lock() };
+            if (sp != nullptr) {
+                sp->notify(shared_from_this(), Event::D);
             }
         }
     };
@@ -95,53 +109,70 @@ namespace ConceptualExample01 {
      * Concrete Mediators implement cooperative behavior
      * by coordinating several components.
      */
-    class ConcreteMediator : public MediatorBase 
+    class ConcreteMediator 
+        : public MediatorBase,
+          public std::enable_shared_from_this<ConcreteMediator> 
     {
     private:
-        ConcreteColleagueA* m_component1;
-        ConcreteColleagueB* m_component2;
+        std::shared_ptr<ConcreteColleagueA> m_componentA;
+        std::shared_ptr<ConcreteColleagueB> m_componentB;
 
     public:
-        ConcreteMediator(ConcreteColleagueA* c1, ConcreteColleagueB* c2) 
-            : m_component1{ c1 }, m_component2{ c2 }
+        // static Factory method to ensure proper initialization of this mediator
+        static std::shared_ptr<ConcreteMediator> create(
+            std::shared_ptr<ConcreteColleagueA> a,
+            std::shared_ptr<ConcreteColleagueB> b)
         {
-            m_component1->setMediator(this);
-            m_component2->setMediator(this);
+            auto mediator = std::shared_ptr<ConcreteMediator>(new ConcreteMediator(std::move(a), std::move(b)));
+            mediator->setConcreteColleagues();
+            return mediator;
         }
 
-        void notify(ColleagueBase* sender, const std::string& event) const override
-        {
-            if (event == "A")
-            {
-                std::cout << "Mediator reacts on operation A and triggers following operations:" << std::endl;
-                m_component2->operationC();
-            }
+    private:
+        ConcreteMediator(
+            std::shared_ptr<ConcreteColleagueA> colleagueA,
+            std::shared_ptr<ConcreteColleagueB> colleagueB)
+            : m_componentA{ std::move(colleagueA) }, m_componentB{ std::move(colleagueB) }
+        {}
 
-            if (event == "D")
-            {
-                std::cout << "Mediator reacts on operation D and triggers following operations:" << std::endl;
-                m_component1->operationB();
-                m_component2->operationC();
+        void setConcreteColleagues()
+        {
+            m_componentA->setMediator(shared_from_this());
+            m_componentB->setMediator(shared_from_this());
+        }
+
+    public:
+        ~ConcreteMediator() {}
+
+        void notify(const std::shared_ptr<ColleagueBase>& sender, Event event) const override
+        {
+            std::println("Notify => Sender: {}", sender->getName());
+
+            if (event == Event::A) {
+                std::println("Mediator reacts on A and triggers following operations:");
+                m_componentB->operationC();
+            }
+            else if (event == Event::D) {
+                std::println("Mediator reacts on D and triggers following operations:");
+                m_componentA->operationB();
+                m_componentB->operationC();
             }
         }
     };
 
     static void clientCode()
     {
-        ConcreteColleagueA* c1{ new ConcreteColleagueA{} };
-        ConcreteColleagueB* c2{ new ConcreteColleagueB{} };
+        auto cA = std::make_shared<ConcreteColleagueA>("Colleague A");
+        auto cB = std::make_shared<ConcreteColleagueB>("Colleague B");
 
-        ConcreteMediator* mediator{ new ConcreteMediator(c1, c2) };
+        auto mediator = ConcreteMediator::create(cA, cB);
 
-        std::cout << "Client triggers operation A." << std::endl;
-        c1->operationA();
-        std::cout << std::endl;
-        std::cout << "Client triggers operation D." << std::endl;
-        c2->operationD();
+        std::println("Client triggers operation A.");
+        cA->operationA();
+        std::println();
 
-        delete c1;
-        delete c2;
-        delete mediator;
+        std::println("Client triggers operation D.");
+        cB->operationD();
     }
 }
 
