@@ -36,9 +36,9 @@ namespace ConceptualExample01 {
         std::weak_ptr<MediatorBase> m_mediator;
 
     public:
-        ColleagueBase() = default;
+        ColleagueBase() = delete;
 
-        ColleagueBase(const std::string& name) : m_name{ name } {}
+        explicit ColleagueBase(const std::string& name) : m_name{ name } {}
 
         void setMediator(const std::shared_ptr<MediatorBase>& mediator)
         {
@@ -57,7 +57,7 @@ namespace ConceptualExample01 {
           public std::enable_shared_from_this<ConcreteColleagueA> 
     {
     public:
-        ConcreteColleagueA(const std::string& name) : ColleagueBase{ name } {}
+        explicit ConcreteColleagueA(const std::string& name) : ColleagueBase{ name } {}
 
         void operationA()
         {
@@ -80,9 +80,12 @@ namespace ConceptualExample01 {
         }
     };
 
-    class ConcreteColleagueB : public ColleagueBase, public std::enable_shared_from_this<ConcreteColleagueB> {
+    class ConcreteColleagueB 
+        : public ColleagueBase, 
+          public std::enable_shared_from_this<ConcreteColleagueB>
+    {
     public:
-        ConcreteColleagueB(const std::string& name) : ColleagueBase{ name } {}
+        explicit ConcreteColleagueB(const std::string& name) : ColleagueBase{ name } {}
 
         void operationC()
         {
@@ -117,18 +120,6 @@ namespace ConceptualExample01 {
         std::shared_ptr<ConcreteColleagueA> m_componentA;
         std::shared_ptr<ConcreteColleagueB> m_componentB;
 
-    public:
-        // static Factory method to ensure proper initialization of this mediator
-        static std::shared_ptr<ConcreteMediator> create(
-            std::shared_ptr<ConcreteColleagueA> a,
-            std::shared_ptr<ConcreteColleagueB> b)
-        {
-            auto mediator = std::shared_ptr<ConcreteMediator>(new ConcreteMediator(std::move(a), std::move(b)));
-            mediator->setConcreteColleagues();
-            return mediator;
-        }
-
-    private:
         ConcreteMediator(
             std::shared_ptr<ConcreteColleagueA> colleagueA,
             std::shared_ptr<ConcreteColleagueB> colleagueB)
@@ -142,20 +133,36 @@ namespace ConceptualExample01 {
         }
 
     public:
-        ~ConcreteMediator() {}
+        // static Factory method to ensure proper initialization of this mediator
+        static std::shared_ptr<ConcreteMediator> create(
+            std::shared_ptr<ConcreteColleagueA> a,
+            std::shared_ptr<ConcreteColleagueB> b)
+        {
+            auto mediator = std::shared_ptr<ConcreteMediator>(new ConcreteMediator(std::move(a), std::move(b)));
+            mediator->setConcreteColleagues();
+            return mediator;
+        }
+
+    public:
+        ~ConcreteMediator() = default;
 
         void notify(const std::shared_ptr<ColleagueBase>& sender, Event event) const override
         {
             std::println("Notify => Sender: {}", sender->getName());
 
-            if (event == Event::A) {
+            switch (event) {
+            case Event::A:
                 std::println("Mediator reacts on A and triggers following operations:");
                 m_componentB->operationC();
-            }
-            else if (event == Event::D) {
+                break;
+            case Event::D:
                 std::println("Mediator reacts on D and triggers following operations:");
                 m_componentA->operationB();
                 m_componentB->operationC();
+                break;
+            case Event::B:
+            case Event::C:
+                break;
             }
         }
     };
