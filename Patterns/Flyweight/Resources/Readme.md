@@ -95,6 +95,26 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 ---
 
+#### Hinweise zu Modern C++
+
+  * `std::string_view` für zeigerbasierte Parameter:<br />
+  Übergibt man `const std::string&` an `getFlyweight` und weitere Methoden. Wenn man Literale wie `"SharedState1"` übergibt,
+  wird implizit ein temporärer `std::string` (C++ 17) auf dem Heap erzeugt. `std::string_view` vermeidet diese Allokationen komplett.
+
+  * Heterogene Lookups in `std::unordered_map` (C++ 20):<br />
+   Standardmäßig sucht `std::unordered_map<std::string, ...>` bei `find()` mit einem `std::string_view` nach einer impliziten Konvertierung (Heap-Allokation).
+   Mit `std::hash<void>` (*transparentes Hashing*) kann man direkt mit einem `std::string_view` in der Map suchen, ohne einen `std::string` zu kopieren.
+
+  * Effizientes Einfügen mit `try_emplace` (C++ 17):<br />
+    In getFlyweight suchst du zuerst mit find() und greifst danach doppelt mit m_flyweights[sharedState] zu. Das durchsucht die Map mehrfach. Mit try_emplace geschieht die Suche, Entscheidung und das Einfügen in einem einzigen Schritt.
+
+  * Speicher-Overhead durch `std::shared_ptr` minimieren:<br />
+	Ein `std::shared_ptr`-Objekt verwaltet einen Kontrollblock (ca. 16 Byte) und den Zeiger. Da die Factory die Lebensdauer der Flyweights besitzt,
+	reicht es oft, die Objekte per `std::unique_ptr` in der Map zu speichern und dem Client nur eine Referenz (`const Flyweight&`) oder sogar
+	einen Rohzeiger (`const Flyweight*`) zurückzugeben. Das spart Speicher und erhöht die Cache-Lokalität.
+
+---
+
 #### Conceptual Example:
 
 [Quellcode 1](../ConceptualExample01.cpp)<br />

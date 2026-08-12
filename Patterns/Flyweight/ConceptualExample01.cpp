@@ -1,12 +1,8 @@
 // ===========================================================================
 // ConceptualExample01.cpp // Flyweight Pattern // First Simple Approach
 // ===========================================================================
-//
-//#include <memory>
-//#include <print>
-//#include <string>
-//#include <unordered_map>
 
+#include <cstddef>
 #include <memory>
 #include <print>
 #include <string>
@@ -19,7 +15,7 @@ namespace ConceptualExample01 {
     /**
      * Flyweight class
      */
-    class Flyweight
+    class Flyweight final
     {
     private:
         std::string m_sharedState;
@@ -29,7 +25,7 @@ namespace ConceptualExample01 {
             : m_sharedState{ sharedState }
         {}
 
-        void operation(const std::string& uniqueState) const {
+        void operation(std::string_view uniqueState) const {
 
             std::println("Flyweight: Displaying shared ({}) and unique ({}) state.",
                 m_sharedState, uniqueState);
@@ -39,38 +35,59 @@ namespace ConceptualExample01 {
     /**
      * Flyweight Factory
      */
-    class FlyweightFactory
+    class FlyweightFactory final
     {
     private:
-    std::unordered_map<std::string, std::shared_ptr<Flyweight>> m_flyweights;
+        // transparent hashing allows searching the map using `std::string_view` without copying.
+        struct StringHash
+        {
+            using is_transparent = void; // enables heterogeneous lookups
+
+            std::size_t operator()(std::string_view sv) const noexcept { 
+                return std::hash<std::string_view>{}(sv);
+            }
+            
+            std::size_t operator()(const std::string& s) const noexcept 
+            {
+                return std::hash<std::string>{}(s); 
+            }
+        };
+
+        std::unordered_map<std::string, Flyweight, StringHash, std::equal_to<>> m_flyweights;
 
     public:
-        std::shared_ptr<Flyweight> getFlyweight(const std::string& sharedState)
+        // returns a const reference: The client does not own the flyweight
+        [[nodiscard]]
+        const Flyweight& getFlyweight(std::string_view sharedState)
         {
-            if (m_flyweights.find(sharedState) == m_flyweights.end()) {
-
-                std::println("FlyweightFactory: Creating new flyweight ({}).", sharedState);
-
-                std::shared_ptr<Flyweight> flyweight{ std::make_shared<Flyweight>(sharedState) };
-
-                m_flyweights[sharedState] = flyweight;
-            }
-            else {
-                std::println("FlyweightFactory: Reusing existing flyweight ({}).", sharedState);
+            // efficient lookup without `std::string` allocation (transparent hash/compare)
+            if (auto it = m_flyweights.find(sharedState); it != m_flyweights.end()) {
+                std::println("FlyweightFactory: reusing existing flyweight ({}).", sharedState);
+                return it->second;
             }
 
-            return m_flyweights[sharedState];
+            std::println("FlyweightFactory: creating new flyweight ({}).", sharedState);
+            auto [it, inserted] = m_flyweights.emplace(
+                std::string{ sharedState },   // allocation is okay/necessary here – only in the failure case
+                Flyweight{ sharedState }
+            );
+
+            return it->second;
         }
+
+        std::size_t flyweightCount() const noexcept { return m_flyweights.size(); }
     };
 
     /**
      * Client code
      */
-    static void addFlyweight(FlyweightFactory& factory, const std::string& sharedState, const std::string& uniqueState) {
 
-        std::shared_ptr<Flyweight> flyweight{ factory.getFlyweight(sharedState) };
+    // passing the factory as a reference, states as `std::string_view`
+    static void addFlyweight(FlyweightFactory& factory, std::string_view sharedState, std::string_view uniqueState) {
 
-        flyweight->operation(uniqueState);
+        const Flyweight& flyweight = factory.getFlyweight(sharedState);
+
+        flyweight.operation(uniqueState);
     }
 }
 
@@ -78,7 +95,7 @@ void test_conceptual_example_01() {
 
     using namespace ConceptualExample01;
 
-    FlyweightFactory factory{};
+    FlyweightFactory factory;
 
     addFlyweight(factory, "SharedState1", "UniqueStateA");
     addFlyweight(factory, "SharedState1", "UniqueStateB");

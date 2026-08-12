@@ -1,13 +1,15 @@
 // ===========================================================================
-// ConceptualExample02.cpp - Flyweight Pattern (using smart pointer)
+// ConceptualExample02.cpp - Flyweight Pattern
 // ===========================================================================
 
-#include <iostream>
+#include <cstddef>
 #include <memory>
+#include <print>
 #include <string>
+#include <string_view>
 #include <unordered_map>
 
-// Another simple example of flyweight pattern
+// Another example of the flyweight pattern
 namespace ConceptualExample02 {
 
     /**
@@ -25,16 +27,10 @@ namespace ConceptualExample02 {
         std::string m_model;
         std::string m_color;
 
-        SharedState(const std::string& brand, const std::string& model, const std::string& color)
-            : m_brand{ brand }, m_model{ model }, m_color{ color } {}
-
-        friend std::ostream& operator<<(std::ostream& os, const SharedState& ss);
+        SharedState(std::string brand, std::string model, std::string color)
+            : m_brand{ std::move(brand) }, m_model{ std::move(model) }, m_color{ std::move(color) }
+        {}
     };
-
-    std::ostream& operator<<(std::ostream& os, const SharedState& ss)
-    {
-        return os << "[ " << ss.m_brand << " , " << ss.m_model << " , " << ss.m_color << " ]";
-    }
 
     class UniqueState
     {
@@ -42,18 +38,46 @@ namespace ConceptualExample02 {
         std::string m_owner;
         std::string m_plates;
 
-        UniqueState(const std::string& owner, const std::string& plates)
-            : m_owner{ owner }, m_plates{ plates }
+        UniqueState(std::string owner, std::string plates)
+            : m_owner{ std::move(owner) }, m_plates{ std::move(plates) }
         {}
+    };
+}
 
-        friend std::ostream& operator<<(std::ostream& os, const UniqueState& us);
+namespace std
+{
+    using namespace ConceptualExample02;
+
+    template<>
+    struct formatter<SharedState>
+    {
+        // parse the format string for this type
+        constexpr auto parse(std::format_parse_context& ctx) {
+            return ctx.begin(); // should return position of '}' (hopefully)
+        }
+
+        // format by always writing its value:
+        auto format(const SharedState& obj, std::format_context& ctx) const {
+            return std::format_to(ctx.out(), "{}-{}-{}", obj.m_brand, obj.m_model, obj.m_color);
+        }
     };
 
-    std::ostream& operator<<(std::ostream& os, const UniqueState& us)
+    template<>
+    struct formatter<UniqueState>
     {
-        return os << "[ " << us.m_owner << " , " << us.m_plates << " ]";
-    }
+        // parse the format string for this type
+        constexpr auto parse(std::format_parse_context& ctx) {
+            return ctx.begin(); // should return position of '}' (hopefully)
+        }
 
+        // format by always writing its value:
+        auto format(const UniqueState& obj, std::format_context& ctx) const {
+            return std::format_to(ctx.out(), "{}-{}", obj.m_owner, obj.m_plates);
+        }
+    };
+}
+
+namespace ConceptualExample02 {
     /**
      * The Flyweight stores a common portion of the state (also called intrinsic
      * state) that belongs to multiple real business entities. The Flyweight accepts
@@ -63,32 +87,25 @@ namespace ConceptualExample02 {
     class Flyweight // contains shared State + unique state via method parameters
     {
     private:
-        std::shared_ptr<SharedState> m_sharedState;
+        SharedState m_sharedState;
 
     public:
-        Flyweight(const SharedState& state)
-        {
-            m_sharedState = std::make_shared<SharedState>(state);
-        }
+        explicit Flyweight(SharedState state) : m_sharedState{ std::move(state) } {}
 
-        ~Flyweight() {}
-
-        std::shared_ptr<SharedState> getSharedState() const
-        {
+        const SharedState& getSharedState() const noexcept {
             return m_sharedState;
         }
 
-        void operation(const UniqueState& unique_state) const
+        void operation(const UniqueState& uniqueState) const
         {
-            std::cout
-                << "Flyweight: Displaying shared ("
-                << *m_sharedState
-                << ") and unique ("
-                << unique_state
-                << ") state."
-                << std::endl;
+            std::print("Flyweight: Displaying shared [{}, {}, {}] and unique [{}, {}] state.\n",
+                m_sharedState.m_brand, m_sharedState.m_model, m_sharedState.m_color,
+                uniqueState.m_owner, uniqueState.m_plates);
         }
     };
+}
+
+namespace ConceptualExample02 {
 
     /**
      * The Flyweight Factory creates and manages the Flyweight objects. It ensures
@@ -99,60 +116,51 @@ namespace ConceptualExample02 {
     class FlyweightFactory
     {
     private:
-        std::unordered_map<std::string, std::shared_ptr<Flyweight>> m_flyweights;
+        std::unordered_map<std::string, Flyweight> m_flyweights;
 
-        /**
-         * Returns a Flyweight's string hash for a given state.
-         */
-        std::string getKey(const SharedState& ss) const
-        {
+        // generates the key as a string for comparisons
+        static std::string getKey(const SharedState& ss) {
             return ss.m_brand + "_" + ss.m_model + "_" + ss.m_color;
         }
 
     public:
-        FlyweightFactory(std::initializer_list<SharedState> share_states)
-        {
-            for (const SharedState& state : share_states)
-            {
-                std::string key = getKey(state);
-                std::shared_ptr<Flyweight> flyweight = std::make_shared<Flyweight>(state);
-                std::pair<std::string, std::shared_ptr<Flyweight>> pair = std::make_pair<>(key, flyweight);
-                m_flyweights.insert(pair);
+        FlyweightFactory(std::initializer_list<SharedState> share_states) {
+            for (const auto& state : share_states) {
+                auto key = getKey(state);
+                m_flyweights.try_emplace(std::move(key), state);
             }
         }
 
         /**
-         * Returns an existing Flyweight with a given state or creates a new one.
+         * Returns an existing Flyweight with a given state or creates a new one (using a const reference)
          */
-        std::shared_ptr<Flyweight> getFlyweight(const SharedState& sharedState)
-        {
-            std::string key{ getKey(sharedState) };
 
-            if (m_flyweights.find(key) == m_flyweights.end())
-            {
-                std::cout << "FlyweightFactory: Can't find a flyweight, creating new one." << std::endl;
-                std::shared_ptr<Flyweight> flyweight{ std::make_shared<Flyweight>(sharedState) };
-                std::pair<std::string, std::shared_ptr<Flyweight>> pair = std::make_pair<>(key, flyweight);
-                m_flyweights.insert(pair);
-                // or
-                // m_flyweights[key] = flyweight;
+        const Flyweight& getFlyweight(const SharedState& sharedState) {
+
+            auto key = getKey(sharedState);
+
+            auto [it, inserted] = m_flyweights.try_emplace(key, sharedState);
+
+            if (inserted) {
+                std::println(
+                    "FlyweightFactory: creating new flyweight ({}).",
+                    sharedState);
             }
-            else
-            {
-                std::cout << "FlyweightFactory: Reusing existing flyweight." << std::endl;
+            else {
+                std::println(
+                    "FlyweightFactory: reusing existing flyweight ({}).",
+                    sharedState);
             }
 
-            return m_flyweights.at(key);
+            return it->second;
         }
 
-        void listFlyweights() const
-        {
-            size_t count = m_flyweights.size();
-            std::cout << "FlyweightFactory: " << count << " flyweights:" << std::endl;
+        std::size_t flyweightCount() const noexcept { return m_flyweights.size(); }
 
-            for (const std::pair<std::string, std::shared_ptr<Flyweight>>& pair : m_flyweights)
-            {
-                std::cout << pair.first << std::endl;
+        void listFlyweights() const {
+            std::println("FlyweightFactory: {} flyweights:", m_flyweights.size());
+            for (const auto& [key, _] : m_flyweights) { // C++ 17 Structured Binding
+                std::println("{}", key);
             }
         }
     };
@@ -165,17 +173,18 @@ namespace ConceptualExample02 {
         const std::string& model,
         const std::string& color)
     {
-        std::cout << std::endl << "Client: Adding a car to database." << std::endl;
+        std::println();
+        std::println("Client: Adding a car to database.");
 
         SharedState sharedState{ brand, model, color };
 
-        std::shared_ptr<Flyweight> flyweight = factory.getFlyweight(sharedState);
+        const Flyweight& flyweight = factory.getFlyweight(sharedState);
 
         // client code passes unique state to the Flyweight's methods
 
         UniqueState uniqueState{ owner, plates };
 
-        flyweight->operation(uniqueState);
+        flyweight.operation(uniqueState);
     }
 
     static void addCarToDatabase(
@@ -183,12 +192,13 @@ namespace ConceptualExample02 {
         const SharedState& sharedState,
         const UniqueState& uniqueState)
     {
-        std::cout << std::endl << "Client: Adding a car to database." << std::endl;
+        std::println();
+        std::println("Client: Adding a car to database.");
 
-        std::shared_ptr<Flyweight> flyweight = factory.getFlyweight(sharedState);
+        const Flyweight& flyweight = factory.getFlyweight(sharedState);
 
         // client code passes unique state to the Flyweight's methods
-        flyweight->operation(uniqueState);
+        flyweight.operation(uniqueState);
     }
 }
 
@@ -205,11 +215,11 @@ static void test_conceptual_example_02_a() {
     {
         /* std::initializer_list of SharedState-objects
         */
-        {"Chevrolet", "Camaro2018", "pink"},
-        {"Mercedes Benz", "C300", "black"},
-        {"Mercedes Benz", "C500", "red"},
-        {"BMW", "M5", "red"},
-        {"BMW", "X6", "white"}
+        { "Chevrolet", "Camaro2018", "pink" },
+        { "Mercedes Benz", "C300", "black" },
+        { "Mercedes Benz", "C500", "red" },
+        { "BMW", "M5", "red" },
+        { "BMW", "X6", "white" }
     };
 
     factory.listFlyweights();
@@ -232,7 +242,7 @@ static void test_conceptual_example_02_a() {
         anotherUniqueState
     );
 
-    std::cout << std::endl;
+    std::println();
 
     factory.listFlyweights();
 }
@@ -250,11 +260,11 @@ static void test_conceptual_example_02_b() {
     {
         /* std::initializer_list of Shared State objects
         */
-        {"Chevrolet", "Camaro2018", "pink"},
-        {"Mercedes Benz", "C300", "black"},
-        {"Mercedes Benz", "C500", "red"},
-        {"BMW", "M5", "red"},
-        {"BMW", "X6", "white"}
+        { "Chevrolet", "Camaro2018", "pink" },
+        { "Mercedes Benz", "C300", "black" },
+        { "Mercedes Benz", "C500", "red" },
+        { "BMW", "M5", "red" },
+        { "BMW", "X6", "white" }
     };
 
     factory.listFlyweights();
@@ -275,7 +285,7 @@ static void test_conceptual_example_02_b() {
         "X1",         // <== this car variant doesn't exist
         "red");
 
-    std::cout << std::endl;
+    std::println();
 
     factory.listFlyweights();
 }
