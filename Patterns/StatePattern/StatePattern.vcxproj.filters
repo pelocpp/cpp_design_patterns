@@ -27,16 +27,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConceptualExample01.cpp">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample02.cpp">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClCompile>
-    <ClCompile Include="ConceptualExample03.cpp">
+    <ClCompile Include="ConceptualExample.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
     <ClCompile Include="JobApplication.cpp">
@@ -70,10 +64,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConceptualExample01.h">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClInclude>
-    <ClInclude Include="ConceptualExample02.h">
+    <ClInclude Include="ConceptualExample.h">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClInclude>
     <ClInclude Include="FiniteStateMachine_LightSwitch\ConcreteLightStates.h">

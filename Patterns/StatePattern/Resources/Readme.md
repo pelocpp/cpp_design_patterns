@@ -76,25 +76,28 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 *Abbildung* 3: Schematische Darstellung des *State Patterns*.
 
+
+---
+
+#### Hinweise zu Modern C++
+
+  * Nutze std::unique_ptr für den Zustand im Context<br />
+  Der Context ist der alleinige Besitzer des aktuellen Zustands.
+
+  * Übergib den Context als Referenz (`Context&`)<br />
+  Zustände benötigen den Context nur für die Dauer der Funktion `handle()`. Eine einfache (nicht-konstante) Referenz reicht völlig aus. Dadurch entfällt std::enable_shared_from_this komplett. Der Context kann nun auf dem Stack, als Member oder via Smart Pointer angelegt werden – maximale Flexibilität.
+
+  * Kapselung der Zustandsübergänge (Optional, aber empfohlen)<br />
+  Wenn Zustände Laufzeitdaten enthalten, macht das Erzeugen via std::make_unique in handle Sinn. Wenn sie aber wie hier statuslos sind, blockiert das permanente Allokieren die Performance.
+
+
 ---
 
 #### Conceptual Example:
 
-*Hinweis*:
 
-Das *Conceptual Example* liegt in drei Versionen vor:
-
-  * Ein einfaches Beispiel - mit *raw*-Zeigern 
-  * Dasselbe Beispiel - mit `std::shared_ptr`-Zeigern
-  * Ein zweites einfaches Beispiel
-
-[Quellcode 1 / .cpp](../ConceptualExample01.cpp)<br/>
-[Quellcode 1 / .h](../ConceptualExample01.h)
-
-[Quellcode 2 / .cpp](../ConceptualExample02.cpp)<br/>
-[Quellcode 2 / .h](../ConceptualExample02.h)
-
-[Quellcode 3 / .cpp](../ConceptualExample03.cpp)
+[Quellcode 1 / .cpp](../ConceptualExample.cpp)<br/>
+[Quellcode 1 / .h](../ConceptualExample.h)
 
 ---
 

@@ -140,9 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ConceptualExample01.cpp" />
-    <ClCompile Include="ConceptualExample03.cpp" />
-    <ClCompile Include="ConceptualExample02.cpp" />
+    <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="DepartmentStore.cpp" />
     <ClCompile Include="FiniteStateMachine_LightSwitch\ConcreteLightStates.cpp" />
     <ClCompile Include="FiniteStateMachine_LightSwitch\Light.cpp" />
@@ -157,8 +155,7 @@
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConceptualExample01.h" />
-    <ClInclude Include="ConceptualExample02.h" />
+    <ClInclude Include="ConceptualExample.h" />
     <ClInclude Include="FiniteStateMachine_LightSwitch\ConcreteLightStates.h" />
     <ClInclude Include="FiniteStateMachine_LightSwitch\Light.h" />
     <ClInclude Include="FiniteStateMachine_LightSwitch\LightState.h" />
