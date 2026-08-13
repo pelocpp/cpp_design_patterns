@@ -2,10 +2,10 @@
 // ConceptualExample.cpp - Decorator Pattern
 // ===========================================================================
 
-#include <cassert>
 #include <format>
 #include <memory>
 #include <print>
+#include <stdexcept>
 #include <string>
 
 /**
@@ -14,7 +14,15 @@
  */
 class IComponent {
 public:
+    IComponent() = default;
+
     virtual ~IComponent() = default;
+
+    // preventing object slicing with IComponent
+    IComponent(const IComponent&) = delete;
+    IComponent& operator=(const IComponent&) = delete;
+    IComponent(IComponent&&) = delete;
+    IComponent& operator=(IComponent&&) = delete;
 
     [[nodiscard]]
     virtual std::string operation() const = 0;
@@ -26,6 +34,7 @@ public:
  */
 class ConcreteComponent final : public IComponent {
 public:
+    [[nodiscard]]
     std::string operation() const override {
         return "CONCRETE COMPONENT";
     }
@@ -52,7 +61,9 @@ protected:
     {
         // I would prefer to safeguard the constructor:
         // A decorator cannot meaningfully exist without a component!
-        assert(m_component);
+        if (!m_component) {
+            throw std::invalid_argument("DecoratorBase: component must not be null");
+        }
     }
 
 public:
@@ -60,6 +71,7 @@ public:
      * The Decorator delegates all work to the wrapped component
      * (nullptr in an existing DecoratorBase object cannot exist!).
      */
+    [[nodiscard]]
     std::string operation() const override {
         return m_component->operation();
     }
@@ -81,6 +93,7 @@ public:
         : DecoratorBase{ std::move(component) }
     {}
 
+    [[nodiscard]]
     std::string operation() const override {
         return std::format("ConcreteDecoratorA ( {} )", DecoratorBase::operation());
 
@@ -99,6 +112,7 @@ public:
         : DecoratorBase{ std::move(component) }
     {}
 
+    [[nodiscard]]
     std::string operation() const override {
         return std::format("ConcreteDecoratorB [ {} ]", DecoratorBase::operation());
     }
@@ -115,6 +129,7 @@ public:
         : DecoratorBase{ std::move(component) }
     {}
 
+    [[nodiscard]]
     std::string operation() const override {
         return std::format("ConcreteDecoratorC {{ {} }}", DecoratorBase::operation());
     }
@@ -259,7 +274,7 @@ static void test_conceptual_example_06() {
     // run-time dependent decorator
     std::unique_ptr<IComponent> decorator;
 
-    constexpr bool useVariantA = true;  // <== change 'true' to 'false'
+    bool useVariantA = true;  // <== change 'true' to 'false'
 
     if (useVariantA)
     {

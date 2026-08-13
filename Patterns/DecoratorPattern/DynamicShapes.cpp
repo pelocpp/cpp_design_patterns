@@ -2,13 +2,15 @@
 // DynamicShapes.cpp // Decorator Pattern
 // ===========================================================================
 
-#include <iomanip>
-#include <iostream>
+#include <cstddef>
+#include <format>
 #include <memory>
-#include <sstream>
+#include <print>
 #include <string>
 
 namespace DynamicDecoration {
+
+    // =======================================================================
 
     // corresponds to 'component'
     class IShape
@@ -16,60 +18,60 @@ namespace DynamicDecoration {
     public:
         virtual ~IShape() = default;
 
+        [[nodiscard]]
         virtual std::string draw() const = 0;
     };
 
     // corresponds to 'concrete component'
-    class Circle : public IShape {
+    class Circle final : public IShape {
     private:
-        double m_radius;
+        double m_radius = 0.0;   // Default-Member-Initializer
 
     public:
-        Circle() : m_radius{ 0.0 } {}
+        Circle() = default;
 
         explicit Circle(double radius) : m_radius{ radius } {}
 
         void resize(double factor) { m_radius *= factor; }
 
+        [[nodiscard]]
         std::string draw() const override {
-            std::ostringstream oss;
-            oss << "A circle of radius " << std::fixed << m_radius;
-            return oss.str();
+            return std::format("A circle of radius {:.2f}", m_radius);
         }
     };
 
     // corresponds to 'concrete component'
-    class Square : public IShape
+    class Square final : public IShape
     {
     private:
-        double m_side;
+        double m_side = 0.0;   // Default-Member-Initializer;
 
     public:
-        Square() : m_side{ 0.0 } {}
+        Square() = default;
 
         explicit Square(double side) : m_side{ side } {}
 
-        virtual std::string draw() const override
+        [[nodiscard]]
+        std::string draw() const override
         {
-            std::ostringstream oss;
-            oss << "A square with side " << m_side;
-            return oss.str();
+            return std::format("A square with side {:.2f}", m_side);
         }
     };
 
-    // ---------------------------------------------------------------------------
+    // =======================================================================
 
     // corresponds to 'base decorator class'
     class ShapeDecorator : public IShape {
-    protected:
-        std::shared_ptr<IShape> m_component;
+    private:
+        std::unique_ptr<IShape> m_component;
 
     public:
-        ShapeDecorator(const std::shared_ptr<IShape>& component)
-            : m_component{ component }
+        explicit ShapeDecorator(std::unique_ptr<IShape> component)
+            : m_component{ std::move(component) }
         {}
 
         // base decorator class delegates all work to the wrapped component
+        [[nodiscard]]
         std::string draw() const override {
 
             return m_component->draw();
@@ -77,109 +79,113 @@ namespace DynamicDecoration {
     };
 
     // corresponds to 'concrete decorator class'
-    class ColoredShapeDecorator : public ShapeDecorator
+    class ColoredShapeDecorator final : public ShapeDecorator
     {
     private:
         std::string m_color;
 
     public:
-        ColoredShapeDecorator(const std::shared_ptr<IShape>& shape, const std::string& color)
-            : ShapeDecorator{ shape }, m_color{ color }
+        ColoredShapeDecorator(std::unique_ptr<IShape> shape, std::string color)
+            : ShapeDecorator{ std::move(shape) }, m_color{ std::move(color) }
         {}
 
-        virtual std::string draw() const override
+        [[nodiscard]]
+        std::string draw() const override
         {
-            std::ostringstream oss;
-            oss << ShapeDecorator::draw() << " has color " << m_color;
-            return oss.str();
+            return std::format("{} has color {}", ShapeDecorator::draw(), m_color);
         }
     };
 
     // corresponds to another 'concrete decorator class' 
-    class TransparentShapeDecorator : public ShapeDecorator
+    class TransparentShapeDecorator final : public ShapeDecorator
     {
     private:
-        uint8_t m_transparency;
+        std::uint8_t m_transparency;
 
     public:
-        TransparentShapeDecorator(const std::shared_ptr<IShape>& shape, uint8_t transparency)
-            : ShapeDecorator{ shape }, m_transparency{ transparency }
+        TransparentShapeDecorator(std::unique_ptr<IShape> shape, std::uint8_t transparency)
+            : ShapeDecorator{ std::move(shape) }, m_transparency{ transparency }
         {}
 
-        virtual std::string draw() const override
+        [[nodiscard]]
+        std::string draw() const override
         {
-            std::ostringstream oss;
-            oss << ShapeDecorator::draw() << " has "
-                << (static_cast<double>(m_transparency) / 255.0) * 100.0
-                << "% transparency";
-            return oss.str();
+            return std::format("{} has {:.2f}% transparency", 
+                ShapeDecorator::draw(),
+                (static_cast<double>(m_transparency) / 255.0) * 100.0);
         }
     };
 }
 
-static void test_real_world_example_01() {
+// =======================================================================
 
-    using namespace DynamicDecoration;
+namespace {
 
-    std::shared_ptr<IShape> circle{
-        std::make_shared<Circle>(0.5) 
-    };
+    void test_real_world_example_01() {
 
-    std::cout << circle->draw() << std::endl;
-    // "A circle of radius 0.5"
+        using namespace DynamicDecoration;
+
+        std::unique_ptr<IShape> circle{
+            std::make_unique<Circle>(0.5)
+        };
+
+        std::println("{}", circle->draw());
+        // "A circle of radius 0.50"
+    }
+
+    void test_real_world_example_02() {
+
+        using namespace DynamicDecoration;
+
+        std::unique_ptr<IShape> circle{
+            std::make_unique<Circle>(0.5)
+        };
+
+        std::unique_ptr<IShape> redCircle{
+            std::make_unique<ColoredShapeDecorator>(std::move(circle), "red")
+        };
+
+        std::println("{}", redCircle->draw());
+        // "A circle of radius 0.50 has color red"
+    }
+
+    void test_real_world_example_03() {
+
+        using namespace DynamicDecoration;
+
+        std::unique_ptr<IShape> square{
+            std::make_unique<Square>(3.0)
+        };
+
+        std::unique_ptr<IShape> transparentSquare{
+            std::make_unique<TransparentShapeDecorator>(std::move(square), static_cast<std::uint8_t>(85))
+        };
+
+        std::println("{}", transparentSquare->draw());
+        // "A square with side 3.00 has 33.33% transparency"
+    }
+
+    void test_real_world_example_04() {
+
+        using namespace DynamicDecoration;
+
+        std::unique_ptr<IShape> circle{
+            std::make_unique<Circle>(15.0)
+        };
+
+        std::unique_ptr<IShape> greenCircle{
+            std::make_unique<ColoredShapeDecorator>(std::move(circle), "green")
+        };
+
+        std::unique_ptr<IShape> greenTransparentCircle{
+            std::make_unique<TransparentShapeDecorator>(std::move(greenCircle), static_cast<std::uint8_t>(50))
+        };
+
+        std::println("{}", greenTransparentCircle->draw());
+        // "A circle of radius 15.00 has color green has 19.61% transparency"
+    }
 }
 
-static void test_real_world_example_02() {
-
-    using namespace DynamicDecoration;
-
-    std::shared_ptr<IShape> circle{
-        std::make_shared<Circle>(0.5)
-    };
-
-    std::shared_ptr<IShape> redCircle{
-        std::make_shared<ColoredShapeDecorator>(circle, "red") 
-    };
-
-    std::cout << redCircle->draw() << std::endl;
-    // "A circle of radius 0.500000 has color red"
-}
-
-static void test_real_world_example_03() {
-
-    using namespace DynamicDecoration;
-
-    std::shared_ptr<IShape> square{
-        std::make_shared<Square>(3.0) 
-    };
-
-    std::shared_ptr<IShape> transparentSquare{
-        std::make_shared<TransparentShapeDecorator>(square, static_cast<uint8_t>(85)) 
-    };
-
-    std::cout << transparentSquare->draw() << std::endl;
-    // "A square with side 3 has 33.3333% transparency"
-}
-
-static void test_real_world_example_04() {
-
-    using namespace DynamicDecoration;
-
-    std::shared_ptr<IShape> circle{
-        std::make_shared<Circle>(15.0) 
-    };
-
-    std::shared_ptr<IShape> greenCircle{
-        std::make_shared<ColoredShapeDecorator>(circle, "green")
-    };
-
-    std::shared_ptr<IShape> greenTransparentCircle{
-        std::make_shared<TransparentShapeDecorator>(greenCircle, static_cast<uint8_t>(50)) 
-    };
-
-    std::cout << greenTransparentCircle->draw() << std::endl;
-    // "A circle of radius 15.000000 has color green has 19.6078% transparency"
-}
 
 void test_real_world_example()
 {
