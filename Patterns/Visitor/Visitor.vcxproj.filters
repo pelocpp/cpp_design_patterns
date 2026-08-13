@@ -42,6 +42,9 @@
     <ClCompile Include="Bookstore.cpp">
       <Filter>Source Files\Bookstore</Filter>
     </ClCompile>
+    <ClCompile Include="ConceptualExample_Variant_Visit.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
