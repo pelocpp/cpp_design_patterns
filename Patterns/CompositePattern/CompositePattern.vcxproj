@@ -145,6 +145,7 @@
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Directory.cpp" />
     <ClCompile Include="DirectoryEx.cpp" />
+    <ClCompile Include="ConceptualExample_Factory.cpp" />
     <ClCompile Include="FileSystemBeginners.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="FileSystemAdvanced.cpp" />
@@ -158,10 +159,6 @@
     <ClInclude Include="FileComponent.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\CompositePattern.png" />
-    <Image Include="Resources\CompositePattern_02.jpg" />
-    <Image Include="Resources\CompositePattern_02.png" />
-    <Image Include="Resources\dp_composite_pattern.png" />
     <Image Include="Resources\dp_composite_pattern_intro.png" />
   </ItemGroup>
   <ItemGroup>

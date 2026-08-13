@@ -48,6 +48,9 @@
     <ClCompile Include="Shapes.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="ConceptualExample_Factory.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileComponent.h">
@@ -64,18 +67,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\CompositePattern.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\CompositePattern_02.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\CompositePattern_02.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\dp_composite_pattern.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Resources\dp_composite_pattern_intro.png">
       <Filter>Resource Files</Filter>
     </Image>

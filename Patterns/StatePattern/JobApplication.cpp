@@ -405,38 +405,33 @@ namespace JobApplicationExample {
                 std::make_unique<Talentpool>());
         }
     }
-
-
-    // ============================================================================
-    // Client code
-    // ============================================================================
-
-    void clientCode()
-    {
-        JobApplication application;
-
-        application.print();
-
-        application.inform();
-        application.process();
-
-        application.print();
-
-        application.inform();
-        application.process();
-
-        application.print();
-
-        application.inform();
-        application.process();
-
-        application.print();
-
-        application.inform();
-    }
-
 }
 
+void test_jobapplication_example()
+{
+    using namespace JobApplicationExample;
+
+    JobApplication application;
+
+    application.print();
+
+    application.inform();
+    application.process();
+
+    application.print();
+
+    application.inform();
+    application.process();
+
+    application.print();
+
+    application.inform();
+    application.process();
+
+    application.print();
+
+    application.inform();
+}
 // ===========================================================================
 // End-of-File
 // ===========================================================================

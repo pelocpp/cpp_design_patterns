@@ -80,6 +80,34 @@ also nicht zu verändern.
 
 ---
 
+#### Hinweise zu Modern C++
+
+##### Rule of Five / Slicing-Schutz:
+
+Sobald eine Klasse polymorph ist (virtueller Destruktor), sollte man sich explizit zu Copy/Move äußern, sonst drohen Slicing-Bugs,
+wenn jemand `AbstractClass` per Wert kopieren sollte:
+
+```cpp
+class AbstractClass {
+public:
+    virtual ~AbstractClass() = default;
+    
+    AbstractClass(const AbstractClass&) = delete;
+    AbstractClass& operator=(const AbstractClass&) = delete;
+    AbstractClass(AbstractClass&&) = delete;
+    AbstractClass& operator=(AbstractClass&&) = delete;
+
+protected:
+    AbstractClass() = default; // // Base class should not be directly instantiable
+    ...
+};
+```
+
+Damit verhindert man auch versehentliches direktes Instanziieren der Basisklasse (falls das gewünscht ist).
+
+---
+
+
 #### &bdquo;Real-World&rdquo; Beispiel:
 
 Im &bdquo;Real-World&rdquo; Beispiel zu diesem Entwurfsmuster 

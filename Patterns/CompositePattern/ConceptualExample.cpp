@@ -4,13 +4,13 @@
 
 #include <cstddef>
 #include <format>
-#include <iostream>
 #include <memory>
 #include <print>
 #include <string>
+#include <string_view>
 #include <vector>
 
-namespace CompositePatternSmartPointer {
+namespace ConceptualExample_Composite_Pattern {
 
     /**
      * The base Component class declares common operations for both
@@ -24,6 +24,11 @@ namespace CompositePatternSmartPointer {
         std::weak_ptr<Component> m_parent;
 
     public:
+        Component() = default;
+        Component(const Component&) = delete;
+        Component& operator=(const Component&) = delete;
+        Component(Component&&) = delete;
+        Component& operator=(Component&&) = delete;
         virtual ~Component() = default;
 
         /**
@@ -48,8 +53,8 @@ namespace CompositePatternSmartPointer {
          * object tree assembly. The downside is that these methods will be empty for
          * the leaf-level components.
          */
-        virtual void add(std::shared_ptr<Component> component) {}
-        virtual void remove(std::shared_ptr<Component> component) {}
+        virtual void add(std::shared_ptr<Component> /*component*/) {}
+        virtual void remove(std::shared_ptr<Component> /*component*/) {}
 
         /**
          * You can provide a method that lets the client code figure out
@@ -104,17 +109,24 @@ namespace CompositePatternSmartPointer {
         std::vector<std::shared_ptr<Component>> m_children;
 
     public:
-
         /**
          * A composite object can add or remove other components (both simple or
          * complex) to or from its child list.
          */
         void add(std::shared_ptr<Component> component) override {
+
+            if (!component) return;
     
             // this `shared_from_this()` is being stored as a weak_ptr in the Component
-            component->setParent(shared_from_this());
-        
+            component->setParent(shared_from_this()); 
             m_children.push_back(std::move(component));
+        }
+
+        void remove(std::shared_ptr<Component> component) override {
+            std::erase(m_children, component);   // C++ 20: std::erase for std::vector
+            if (component) {
+                component->setParent(nullptr);   // Remove parent reference
+            }
         }
 
         [[nodiscard]]
@@ -161,7 +173,7 @@ namespace CompositePatternSmartPointer {
      * base Component class, the client code can work with any component, simple or
      * complex, without depending on their concrete classes.
      */
-    static void clientCode2(/*const*/ Component& component1, const std::shared_ptr<Component>& component2) {
+    static void clientCode2(Component& component1, const std::shared_ptr<Component>& component2) {
 
         if (component1.isComposite()) {
             component1.add(component2);
@@ -171,9 +183,9 @@ namespace CompositePatternSmartPointer {
     }
 }
 
-void test_conceptual_example() {
+void test_conceptual_example_01() {
 
-    using namespace CompositePatternSmartPointer;
+    using namespace ConceptualExample_Composite_Pattern;
 
     // Components participating in the tree must be owned by shared_ptr,
     // because parent links are established via shared_from_this().

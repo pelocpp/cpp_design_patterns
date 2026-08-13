@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
+    <ClCompile Include="ConceptualExample_CRTP.cpp" />
     <ClCompile Include="Facebook.cpp" />
     <ClCompile Include="SocialNetwork.cpp" />
     <ClCompile Include="Program.cpp" />

@@ -39,6 +39,9 @@
     <ClCompile Include="SocialNetwork.cpp">
       <Filter>Source Files\SocialNetworking</Filter>
     </ClCompile>
+    <ClCompile Include="ConceptualExample_CRTP.cpp">
+      <Filter>Source Files\ConceptualExample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Facebook.h">

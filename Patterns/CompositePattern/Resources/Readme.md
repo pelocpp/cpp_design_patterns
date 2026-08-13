@@ -87,9 +87,10 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample.cpp) - Modern C++: Variante mit `std::shared_ptr`-Zeiger.
+[Quellcode](../ConceptualExample.cpp) &ndash; Konzeptionelles Beispiel.
+[Quellcode](../ConceptualExample_Factory.cpp) &ndash; Behandlung des `enable_shared_from_this`-Problems.
 
-Beachte in dem Quellcode:
+Beachte in dem Quellcode zum konzeptionellen Beispiel:
 
 Es wird das Problem möglicher Zyklen betrachtet:
 
@@ -97,7 +98,6 @@ Es wird das Problem möglicher Zyklen betrachtet:
   * Ein `Component`-Objekt kennt sein zugeordnetes `Composite`-Objekt.
 
 Wir lösen dieses Problem geschickt mit dem Einsatz von `std::shared_ptr`- und `std::weak_ptr`-Zeigern.
-
 
 ---
 
@@ -140,6 +140,73 @@ Group
 Hier gibt es keine Rückwärtsreferenz.
 
 Deshalb ist `std::unique_ptr` die natürliche Wahl.
+
+---
+
+#### Hinweise zu Modern C++
+
+##### Rule of Five / Slicing-Schutz:
+
+Sobald eine Klasse polymorph ist (virtueller Destruktor), sollte man sich explizit zu Copy/Move äußern, sonst drohen Slicing-Bugs,
+wenn jemand `Component` per Wert kopieren sollte:
+
+```cpp
+class Component : public std::enable_shared_from_this<Component>
+{
+protected:
+    // a child does not own its parents => weak_ptr prevents cycles.
+    std::weak_ptr<Component> m_parent;
+
+public:
+    Component() = default;
+    Component(const Component&) = delete;
+    Component& operator=(const Component&) = delete;
+    Component(Component&&) = delete;
+    Component& operator=(Component&&) = delete;
+    virtual ~Component() = default;
+	...
+```
+
+##### `enable_shared_from_this`-Problem
+
+Das erste konzeptionelle Beispiel funktioniert nur, weil jede `Composite`-Instanz über `std::make_shared` erzeugt wird,
+bevor `add()` aufgerufen wird. Wird ein `Composite`-Objekt aber als lokales Objekt (`Composite c;`) oder via `new` ohne anschließende `std::shared_ptr`-Übernahme erstellt,
+wirft `shared_from_this()` eine `std::bad_weak_ptr`-Exception zur Laufzeit.
+
+Das ist eine klassische, schwer zu debuggende Falle bei diesem Pattern. Zwei Optionen:
+
+  * Kommentar direkt an der Klasse ergänzen (&bdquo;Instanzen müssen über `std::make_shared` erzeugt werden&rdquo;).
+  * Konstruktor(en) `protected` machen und eine statische `create()`-Fabrikfunktion anbieten, die garantiert `std::make_shared` nutzt &ndash;
+  das macht den Fehler strukturell unmöglich statt nur dokumentiert.
+
+
+Warum der Hilfsmechanismus `EnableMakeShared` benötigt wird?
+
+`std::make_shared<T>` muss den Konstruktor von `T` direkt aufrufen;
+ein geschützter oder privater Konstruktor verhindert dies jedoch – selbst innerhalb von `T::create()`, da `std::make_shared` weder ein Element noch ein `friend` von `T` ist.
+Der übliche Trick besteht in der Verwendung einer kurzlebigen lokalen Unterklasse, die:
+
+  * den Konstruktor über einen öffentlichen Wrapper-Konstruktor erbt,
+  * nur innerhalb von `create()` benannt wird, sodass niemand von außen eine Instanz davon erzeugen kann,
+  * eine Klasse ist, die – abgesehen vom Namen – `final` ist (da sie lokal definiert ist, kann ohnehin keine andere Klasse von ihr abgeleitet werden).
+
+Dies ist das Standard-Idiom in C++ für Typen, die ausschließlich mittels `std::make_shared` instanziiert werden sollen.
+
+Es erfordert zwar etwas zusätzlichen Code (&bdquo;Boilerplate&rdquo;),
+wandelt aber eine Laufzeitfalle (eine `std::bad_weak_ptr`-Exception, die oft erst spät bemerkt wird) in eine Garantie zur Kompilierzeit um:
+Es gibt keine Möglichkeit mehr, Code wie
+
+```cpp
+Composite c;
+```
+
+oder
+
+```cpp
+new Composite()
+```
+
+zu schreiben, der erfolgreich kompiliert.
 
 ---
 
@@ -452,7 +519,6 @@ Anregungen finden sich zum Beispiel unter
   * Jede neue Operation der Komponente muss auf dem Blattknoten und dem zusammengesetzten Knoten implementiert werden.
 
 ---
-
 
 ## FAQs
 

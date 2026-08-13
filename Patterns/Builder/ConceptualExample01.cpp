@@ -8,7 +8,7 @@
 #include <list>
 #include <memory>
 
-namespace ConceptualExampleBuilder01 {
+namespace ConceptualExample_Builder_Pattern_Simple {
 
     class Product
     {
@@ -90,7 +90,7 @@ namespace ConceptualExampleBuilder01 {
 // function prototypes
 void test_conceptual_example_01()
 {
-    using namespace ConceptualExampleBuilder01;
+    using namespace ConceptualExample_Builder_Pattern_Simple;
 
     Director director;
     clientCode(director);
