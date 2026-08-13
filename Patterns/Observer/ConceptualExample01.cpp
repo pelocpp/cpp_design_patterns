@@ -24,7 +24,7 @@
 #include <string_view>
 #include <vector>
 
-namespace ObserverDesignPattern {
+namespace ConceptualExample_Observer_Pattern {
 
     class IObserver {
     public:
@@ -145,7 +145,7 @@ namespace ObserverDesignPattern {
         }
     };
 
-    static void clientCode_01() {
+    static void example_01() {
 
         Subject subject;
 
@@ -165,7 +165,7 @@ namespace ObserverDesignPattern {
         subject.detach(observer3);
     }
 
-    static void clientCode_02() {
+    static void example_02() {
 
         std::shared_ptr<Subject> subject{ std::make_shared<Subject>() };
 
@@ -197,8 +197,10 @@ void test_conceptual_example_01()
 {
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    ObserverDesignPattern::clientCode_01();
-    ObserverDesignPattern::clientCode_02();
+    using namespace ConceptualExample_Observer_Pattern;
+
+    example_01();
+    example_02();
 }
 
 // ===========================================================================

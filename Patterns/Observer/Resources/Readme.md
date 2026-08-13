@@ -96,6 +96,23 @@ im Vergleich zu `std::shared_ptr`-Objekten ist.
 
 ---
 
+### RAII-Subscription statt manuellem `attach` / `detach`
+
+Anmerkungen zum Design:
+
+  * `ISubject` enthält jetzt nur noch `detach()`. `attach()` ist bewusst nicht Teil des Interfaces, weil sein Rückgabetyp (`Subject::Connection`)
+  an die konkrete `Subject`-Implementierung gebunden ist — ein generisches `ISubject::attach()` müsste sonst entweder auf eine abstrakte `Connection`-Basisklasse (Interface-Overhead)
+  oder auf `std::any`/Type-Erasure ausweichen. Für dein Lehrbeispiel würde ich es so lassen.
+  * Der Rückverweis `Subject* m_subject` in `Connection` ist ein roher, nicht-owning Pointer. Das ist hier okay, weil `Subject` non-copyable/non-movable ist
+  und der Client dafür verantwortlich ist, dass alle Connections vor dem Subject zerstört werden (typisches RAII-Lifetime-Constraint, vergleichbar mit Iteratoren vs. Container). 
+  Ein `std::weak_ptr<Subject>` wäre robuster, würde aber voraussetzen, dass `Subject` selbst per `std::shared_ptr` verwaltet wird — eine größere Design-Entscheidung,
+  die über dieses Beispiel hinausgeht.
+  * `[[nodiscard]]` auf `attach()` sorgt dafür, dass ein Compiler-Warning auftaucht, falls jemand den Rückgabewert versehentlich verwirft — sonst würde die `Connection`
+  sofort wieder zerstört und der `Observer` wäre direkt nach `attach()` schon wieder abgemeldet, ohne dass das offensichtlich wäre.
+
+
+---
+
 ### `std::weak_ptr`-Objekte in einem `std::list`-Container
 
 Verwaltet man `std::weak_ptr`-Objekte in einem `std::list`-Container,
