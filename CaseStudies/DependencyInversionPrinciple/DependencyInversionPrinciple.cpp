@@ -41,7 +41,7 @@ namespace Dependency_Inversion_Principle_Violating {
 
     void test_01() {
 
-        Project project{};
+        Project project;
         project.develop();
     }
 }

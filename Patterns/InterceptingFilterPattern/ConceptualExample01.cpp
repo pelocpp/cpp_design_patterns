@@ -2,32 +2,41 @@
 // ConceptualExample01.cpp // Intercepting Filter Pattern
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-#include <list>
+#include <algorithm>
 #include <memory>
+#include <print>
+#include <string>
+#include <string_view>
+#include <vector>
 
-namespace ConceptualExample01 {
+namespace ConceptualExample_Intercepting_Filter {
 
     class IFilter
     {
     public:
-        virtual void execute(const std::string& request) = 0;
+        virtual ~IFilter() = default;
+
+        [[nodiscard]]
+        virtual bool execute(std::string_view request) = 0;
     };
 
-    class DebugFilter : public IFilter
+    class DebugFilter final : public IFilter
     {
     public:
-        void execute(const std::string& request) override {
-            std::cout << "[Log Request: " << request << "]" << std::endl;
+        [[nodiscard]]
+        bool execute(std::string_view request) override {
+            std::println("[Log Request: {}]", request);
+            return true;
         }
     };
 
-    class AuthenticationFilter : public IFilter
+    class AuthenticationFilter final : public IFilter
     {
     public:
-        void execute(const std::string& request) override {
-            std::cout << "[Authenticating Request: " << request << "]" << std::endl;
+        [[nodiscard]]
+        bool execute(std::string_view request) override {
+            std::println("[Authenticating Request: {}]", request);
+            return true;
         }
     };
 
@@ -36,95 +45,80 @@ namespace ConceptualExample01 {
     class Target
     {
     public:
-        void operation(const std::string& request) {
-            std::cout << "Executing Request: " << request << std::endl;
+        void operation(std::string_view request) {
+            std::println("Executing Request: {}", request);
         }
     };
 
     // ---------------------------------------------------------------------------
 
-    class FilterChain
+    class FilterChain final
     {
     private:
-        std::list<std::weak_ptr<IFilter>> m_filters;
-        std::weak_ptr<Target>             m_target;
+        std::vector<std::unique_ptr<IFilter>> m_filters;
+        Target&                               m_target;
 
     public:
-        FilterChain() = default;
+        explicit FilterChain(Target& target)
+            : m_target{ target }
+        {}
 
-        void addFilter(const std::shared_ptr<IFilter>& filter)
+        IFilter* addFilter(std::unique_ptr<IFilter> filter)
         {
-            m_filters.push_back(filter);
+            m_filters.push_back(std::move(filter));
+            return m_filters.back().get();
         }
 
-        void removeFilter(const std::shared_ptr<IFilter>& filter)
+        void removeFilter(const IFilter* filter)
         {
-            // https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs
-
-            m_filters.remove_if([&](std::weak_ptr<IFilter> wp) {
-                return !filter.owner_before(wp) && !wp.owner_before(filter);
+            std::erase_if(m_filters, [filter](const auto& f) {
+                return f.get() == filter;
                 }
             );
         }
-
-        void setTarget(const std::shared_ptr<Target>& target)
+        
+        bool executeRequest(std::string_view request)
         {
-            m_target = target;
-        }
-
-        void executeRequest(const std::string& request)
-        {
-            std::shared_ptr<Target> target{ m_target.lock() };
-            if (target == nullptr) {
-                std::cout << "Target Object doesn't exist anymore!" << std::endl;
-                return;
-            }
-
-            for (const std::weak_ptr<IFilter>& filter : m_filters) {
-                std::shared_ptr<IFilter> tmp{ filter.lock() };
-                if (tmp != nullptr) {
-                    tmp->execute(request);
+            bool allPassed = std::all_of(
+                m_filters.begin(), 
+                m_filters.end(),
+                [&](const auto& filter) {
+                    return filter->execute(request);
                 }
+            );
+
+            if (allPassed) {
+                m_target.operation(request);
             }
 
-            target->operation(request);
+            return allPassed;
         }
     };
 
-    class FilterManager
+    class FilterManager final
     {
     private:
-        std::weak_ptr<FilterChain> m_chain;
+        FilterChain& m_chain;
 
     public:
-        FilterManager() {}
+        explicit FilterManager(FilterChain& chain) : m_chain{chain} {}
 
-        void setFilterChain(std::shared_ptr<FilterChain>& chain)
+        void request(std::string_view request)
         {
-            m_chain = chain;
-        }
-
-        void request(const std::string& request)
-        {
-            std::shared_ptr<FilterChain> chain{ m_chain.lock() };
-            if (chain != nullptr) {
-                chain->executeRequest(request);
-            }
+            bool passed = m_chain.executeRequest(request);
+            std::println("Request {} passed: {}", request, passed);
         }
     };
 
-    class Client
+    class Client final
     {
     private:
-        FilterManager m_filterManager;
+        FilterManager& m_filterManager;
 
     public:
-        Client() {};
-
-        void setFilterManager(const FilterManager& filterManager)
-        {
-            m_filterManager = filterManager;
-        }
+        explicit Client(FilterManager& filterManager)
+            : m_filterManager{ filterManager }  
+        {}
 
         void sendRequest(const std::string& request)
         {
@@ -137,51 +131,50 @@ namespace ConceptualExample01 {
 
 void test_conceptual_example_01()
 {
-    using namespace ConceptualExample01;
+    using namespace ConceptualExample_Intercepting_Filter;
 
-    std::shared_ptr<Target> target{ std::make_shared<Target>() };
-    std::shared_ptr<FilterChain> chain{ std::make_shared<FilterChain>() };
-    chain->setTarget(target);
+    Target target;
 
-    std::shared_ptr<IFilter> filter1{ std::make_shared<DebugFilter>() };
-    std::shared_ptr<IFilter> filter2{ std::make_shared<AuthenticationFilter>() };
-    chain->addFilter(filter1);
-    chain->addFilter(filter2);
+    FilterChain chain{ target };
 
-    FilterManager filterManager{};
-    filterManager.setFilterChain(chain);
+    chain.addFilter(std::make_unique<DebugFilter>());
+    chain.addFilter(std::make_unique<AuthenticationFilter>());
 
-    Client client{};
-    client.setFilterManager(filterManager);
+    FilterManager filterManager{ chain };
+
+    Client client{ filterManager };
+
     client.sendRequest("Starting Downloads");
 }
 
 void test_conceptual_example_02()
 {
+    using namespace ConceptualExample_Intercepting_Filter;
 
-    using namespace ConceptualExample01;
+    Target target;
 
-    std::shared_ptr<Target> target{ std::make_shared<Target>() };
-    std::shared_ptr<FilterChain> chain{ std::make_shared<FilterChain>() };
-    chain->setTarget(target);
+    FilterChain chain{ target };
 
-    std::shared_ptr<IFilter> filter1{ std::make_shared<DebugFilter>() };
-    std::shared_ptr<IFilter> filter2{ std::make_shared<AuthenticationFilter>() };
-    chain->addFilter(filter1);
-    chain->addFilter(filter2);
+    auto filter1 = std::make_unique<DebugFilter>();
+    auto filter2 = std::make_unique<AuthenticationFilter>();
 
-    FilterManager filterManager{};
-    filterManager.setFilterChain(chain);
+    auto filterPrt1 = chain.addFilter(std::move(filter1));
+    auto filterPrt2 = chain.addFilter(std::move(filter2));
 
-    Client client{};
-    client.setFilterManager(filterManager);
+    FilterManager filterManager{ chain };
+
+    Client client{ filterManager };
+
     client.sendRequest("Starting Downloads");
+    std::println();
 
-    chain->removeFilter(filter1);
+    chain.removeFilter(filterPrt1);
     client.sendRequest("Starting Downloads again");
+    std::println();
 
-    chain->removeFilter(filter2);
+    chain.removeFilter(filterPrt2);
     client.sendRequest("Starting Downloads once again");
+    std::println();
 }
 
 // ===========================================================================
