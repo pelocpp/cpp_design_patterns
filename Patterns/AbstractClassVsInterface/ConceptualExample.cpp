@@ -2,7 +2,7 @@
 // ConceptualExample.cpp // Abstract Classes vs Interfaces in C++
 // ===========================================================================
 
-#include <iostream>
+#include <print>
 #include <string>
 
 namespace AbstractClassVsInterface {
@@ -31,7 +31,8 @@ namespace AbstractClassVsInterface {
 
         virtual void method_fourth()                 // (virtual) method with implementation
         { 
-            std::cout << m_message << std::endl;
+           // std::cout << m_message << std::endl;
+            std::println("{}", m_message);
         }
 
         void method_fifth() const                    // (final) method
@@ -50,7 +51,7 @@ namespace AbstractClassVsInterface {
 
         void method_first() override
         {
-            std::cout << m_value << std::endl;
+            std::println("{}", m_value);
         }
 
     protected:
@@ -71,7 +72,7 @@ namespace AbstractClassVsInterface {
 
         void method_second() override
         {
-            std::cout << m_value << ", " << m_anotherValue << std::endl;
+            std::println("{}, {}", m_value, m_anotherValue);
         }
 
     private:
@@ -88,7 +89,7 @@ namespace AbstractClassVsInterface {
 
         void method_first() override
         {
-            std::cout << m_oneMoreValue << std::endl;
+            std::println("{}", m_oneMoreValue);
         }
 
         void method_second() override

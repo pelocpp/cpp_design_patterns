@@ -2,10 +2,11 @@
 // ConceptualExample.cpp // Abstract Factory
 // ===========================================================================
 
-#include <iostream>
+//#include <iostream>
 #include <string>
 #include <memory>
 #include <map>
+#include <print>
 
 namespace ConceptualExample_Abstract_Factory_Pattern {
 
@@ -135,8 +136,8 @@ namespace ConceptualExample_Abstract_Factory_Pattern {
         const std::shared_ptr<AbstractProductA> product_a{ factory.createProductA() };
         const std::shared_ptr<AbstractProductB> product_b{ factory.createProductB() };
 
-        std::cout << product_a->usefulFunctionA() << std::endl;
-        std::cout << product_b->usefulFunctionB() << std::endl;
+        std::println("{}", product_a->usefulFunctionA());
+        std::println("{}", product_b->usefulFunctionB());
     }
 }
 
@@ -144,12 +145,12 @@ void test_conceptual_example()
 {
     using namespace ConceptualExample_Abstract_Factory_Pattern;
 
-    std::cout << "Client: Testing client code with the first factory type:" << std::endl;
+    std::println("Client: Testing client code with the first factory type:");
     ConcreteFactory1 f1;
     clientCode(f1);
-    std::cout << std::endl;
+    std::println();
 
-    std::cout << "Client: Testing the same client code with the second factory type:" << std::endl;
+    std::println("Client: Testing the same client code with the second factory type:");
     ConcreteFactory2 f2;
     clientCode(f2);
 }
