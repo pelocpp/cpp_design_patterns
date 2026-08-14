@@ -122,7 +122,7 @@ Durch `std::unique_ptr<Move>` ist nun klar geregelt, wer für den Lebenszyklus de
 Da `std::unique_ptr` keinen Referenzzähler verwalten muss, ist es zudem spürbar schneller und speichereffizienter als `std::shared_ptr`.
 
 Keine Kopien von Positionen:<br />
-Da Position nun mittels `std::move` durchgereicht wird, entfallen unnötige Kopierprozesse bei der Übergabe.
+Da `Position` nun mittels `std::move` durchgereicht wird, entfallen unnötige Kopierprozesse bei der Übergabe.
 
 Typ-Sicherheit und Lesbarkeit:<br />
 `std::println` formatiert Variablen direkt über `{}`. Es kann nicht mehr passieren, dass man ein `<<` vergisst oder den Typ falsch konvertiert.

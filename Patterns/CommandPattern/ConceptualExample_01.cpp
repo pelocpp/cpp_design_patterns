@@ -19,7 +19,7 @@ namespace ConceptualExample01 {
     class Receiver
     {
     public:
-        void action(std::string_view message)
+        void action(std::string_view message) const
         {
             std::println("Action called with message {}", message);
         }
@@ -30,8 +30,12 @@ namespace ConceptualExample01 {
      */
     class CommandBase
     {
-    protected:
+    private:
         std::shared_ptr<Receiver> m_receiver;
+
+    protected:
+        [[nodiscard]]
+        const std::shared_ptr<Receiver>& getReceiver() const { return m_receiver; }
 
     public:
         virtual ~CommandBase() = default;
@@ -52,21 +56,14 @@ namespace ConceptualExample01 {
         std::string m_data;
 
     public:
-        ConcreteCommand(std::shared_ptr<Receiver> receiver)
-            : CommandBase{ std::move(receiver) }
+        ConcreteCommand(std::shared_ptr<Receiver> receiver, std::string data)
+            : CommandBase{ std::move(receiver) }, m_data{ std::move(data) }
         {}
-
-        void setData(std::string data)
-        {
-            // note: accept by value and assign using `std::move` (avoids copies when called with rvalues).
-            m_data = std::move(data);
-        }
 
         void execute() const override
         {
-            if (m_receiver) {
-                m_receiver->action(m_data);
-            }
+            const std::shared_ptr<Receiver>& receiver = getReceiver();
+            receiver->action(m_data);
         }
     };
 
@@ -80,7 +77,7 @@ namespace ConceptualExample01 {
         std::unique_ptr<CommandBase> m_command;
 
     public:
-        void setCommand(std::unique_ptr <CommandBase> command)
+        void setCommand(std::unique_ptr<CommandBase> command)
         {
             m_command = std::move(command);
         }
@@ -107,9 +104,7 @@ void test_conceptual_example_01() {
 
     auto receiver = std::make_shared<Receiver>();
 
-    auto command = std::make_unique<ConcreteCommand>(receiver);
-
-    command->setData("Hello, world!");
+    auto command = std::make_unique<ConcreteCommand>(receiver, "Hello, world!");
 
     Invoker invoker;
 
