@@ -67,13 +67,55 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 ---
 
+#### Hinweise zu Modern C++:
+
+##### &bdquo;*Inheriting Constructors*&rdquo;
+
+In beiden konzeptionellen Beispielen tritt eine Zeile
+
+```cpp
+using Abstraction::Abstraction;
+```
+
+in Erscheinung. Das macht exakt dasselbe wie:
+
+  * `RefinedAbstraction` bekommt einen eigenen Konstruktor mit demselben Parameter wie `Abstraction`.
+  * Im Initialisierungsteil &ndash; `Abstraction(std::move(implementor))` &ndash; wird der Basisklassen-Konstruktor explizit aufgerufen und der `std::unique_ptr` weitergereicht. 
+
+
+Also ausgeschrieben:
+
+```cpp
+class RefinedAbstraction final : public Abstraction
+{
+public:
+    explicit RefinedAbstraction(std::unique_ptr<Implementor> implementor)
+        : Abstraction(std::move(implementor))
+    {
+    }
+
+    void operation() override
+    {
+        m_implementor->concreteOperation();
+    }
+};
+```
+
+Dieses Feature lautet (seit C++ 11) &bdquo;*Inheriting Constructors*&rdquo;:
+
+Es sagt dem Compiler: &bdquo;Übernimm alle Konstruktoren der Basisklasse &ndash; hier: `Abstraction` &ndash; auch als Konstruktoren
+von `RefinedAbstraction`, ohne dass man sie einzeln neu schreiben muss.&rdquo;
+
+Bei nur einem Konstruktor wie hier ist das Ersparte gering, aber bei mehreren überladenen Basiskonstruktoren spart es viel Schreibarbeit.
+Beide Varianten sind funktional identisch.
+
+---
+
 #### Abgrenzung zu anderen Entwurfsmustern:
 
-
-  * Das *Adapter Pattern* implementiert als Objektadapter ähnelt dem *Bridge Pattern*,
-  hat jedoch eine andere Absicht.
-  Der Zweck des *Bridge Patterns* besteht darin, die Schnittstelle von der Implementierung zu trennen.
-  Der Zweck des *Adapter Patterns* besteht darin, eine vorhandene Schnittstelle zu modifizieren.
+  * Das *Adapter Pattern* implementiert als Objektadapter ähnelt dem *Bridge Pattern*, hat jedoch eine andere Absicht:
+    * Der Zweck des *Bridge Patterns* besteht darin, die Schnittstelle von der Implementierung zu trennen.
+    * Der Zweck des *Adapter Patterns* besteht darin, eine vorhandene Schnittstelle zu modifizieren.
 
 ---
 

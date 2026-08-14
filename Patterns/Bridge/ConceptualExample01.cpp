@@ -2,18 +2,20 @@
 // ConceptualExample01.cpp // Bridge Pattern
 // ===========================================================================
 
-#include <iostream>
 #include <memory>
+#include <print>
 
 /**
  *  Basic Example
  */
 
-namespace ConceptualExampleBridge01 {
+namespace ConceptualExample_Bridge_Pattern {
 
     class Implementor
     {
     public:
+        virtual ~Implementor() = default;
+
         virtual void concreteOperation() = 0;
     };
 
@@ -23,54 +25,57 @@ namespace ConceptualExampleBridge01 {
         std::unique_ptr<Implementor> m_implementor;
 
     public:
-        void setImplementor(std::unique_ptr<Implementor>& implementor)
-        {
-            m_implementor = std::move(implementor);
-        }
+        explicit Abstraction(std::unique_ptr<Implementor> implementor)
+            : m_implementor{ std::move(implementor) } 
+        {}
+
+        virtual ~Abstraction() = default;
 
         virtual void operation() = 0;
     };
 
-    class RefinedAbstraction : public Abstraction
+    class RefinedAbstraction final : public Abstraction
     {
     public:
+        using Abstraction::Abstraction;
+
+        // or
+
+        //RefinedAbstraction(std::unique_ptr<Implementor> implementor)
+        //    : Abstraction{ std::move(implementor) }
+        //{}
+
         void operation() override
         {
             m_implementor->concreteOperation();
         }
     };
 
-    class ConcreteImplementor : public Implementor
+    class ConcreteImplementor final : public Implementor
     {
     public:
         void concreteOperation() override
         {
-            std::cout << "Concrete Implementor's Operation" << std::endl;
+            std::println("Concrete Implementor's Operation");
         }
     };
 
-    static void clientCode(const std::unique_ptr<Abstraction>& abstraction) {
+    static void clientCode(Abstraction& abstraction) {
         // ...
-        abstraction->operation();
+        abstraction.operation();
         // ...
     }
 }
 
 void test_conceptual_example_01()
 {
-    using namespace ConceptualExampleBridge01;
+    using namespace ConceptualExample_Bridge_Pattern;
 
-    std::unique_ptr<Abstraction> abstraction {
-        std::make_unique<RefinedAbstraction>()
-    };
+    auto implementor = std::make_unique<ConcreteImplementor>();
 
-    std::unique_ptr<Implementor> implementation {
-        std::make_unique<ConcreteImplementor>()
-    };
-    
-    abstraction->setImplementor(implementation);
-    
-    clientCode(abstraction);
+    auto abstraction = std::make_unique<RefinedAbstraction>(std::move(implementor));
+
+    clientCode(*abstraction);
 }
 
 // ===========================================================================

@@ -2,10 +2,13 @@
 // ConceptualExample02.cpp // Bridge Pattern
 // ===========================================================================
 
-#include <iostream>
+#include <format>
 #include <memory>
+#include <print>
+#include <string>
+#include <string_view>
 
-namespace ConceptualExampleBridge02 {
+namespace ConceptualExample_Bridge_Pattern {
 
     /**
      * The Implementor defines the interface for all implementation classes.
@@ -20,7 +23,8 @@ namespace ConceptualExampleBridge02 {
     public:
         virtual ~Implementor() = default;
 
-        virtual std::string operationImplementation() const = 0;
+        [[nodiscard]]
+        virtual std::string_view operationImplementation() const = 0;
     };
 
     /**
@@ -30,7 +34,8 @@ namespace ConceptualExampleBridge02 {
     class ConcreteImplementationA : public Implementor
     {
     public:
-        std::string operationImplementation() const override
+        [[nodiscard]]
+        std::string_view operationImplementation() const override
         {
             return "ConcreteImplementationA: Here's the result on the platform A.";
         }
@@ -39,7 +44,8 @@ namespace ConceptualExampleBridge02 {
     class ConcreteImplementationB : public Implementor
     {
     public:
-        std::string operationImplementation() const override
+        [[nodiscard]]
+        std::string_view operationImplementation() const override
         {
             return "ConcreteImplementationB: Here's the result on the platform B.";
         }
@@ -55,10 +61,12 @@ namespace ConceptualExampleBridge02 {
     class Abstraction
     {
     protected:
+        // Abstraction owns its Implementor.
+        // This allows the two hierarchies to evolve independently.
         std::unique_ptr<Implementor> m_implementor;
 
     public:
-        Abstraction(std::unique_ptr<Implementor> implementor)
+        explicit Abstraction(std::unique_ptr<Implementor> implementor)
             : m_implementor{ std::move(implementor) }
         {}
 
@@ -66,8 +74,8 @@ namespace ConceptualExampleBridge02 {
 
         virtual std::string operation() const
         {
-            return "Abstraction: Base operation with:\n" +
-                m_implementor->operationImplementation();
+            return std::format("Abstraction: Base operation with:\n{}",
+                m_implementor->operationImplementation());
         }
     };
 
@@ -77,14 +85,16 @@ namespace ConceptualExampleBridge02 {
     class ExtendedAbstraction : public Abstraction
     {
     public:
-        ExtendedAbstraction(std::unique_ptr<Implementor> implementor)
-            : Abstraction{ std::move(implementor) }
-        {}
+        //ExtendedAbstraction(std::unique_ptr<Implementor> implementor)
+        //    : Abstraction{ std::move(implementor) }
+        //{}
+
+        using Abstraction::Abstraction;
 
         std::string operation() const override
         {
-            return "ExtendedAbstraction: Extended operation with:\n" +
-                m_implementor->operationImplementation();
+            return std::format("ExtendedAbstraction: Extended operation with:\n{}",
+                m_implementor->operationImplementation());
         }
     };
 
@@ -94,30 +104,42 @@ namespace ConceptualExampleBridge02 {
      * the Abstraction class. This way the client code can support any abstraction-
      * implementation combination.
      */
-    static void clientCode(std::unique_ptr<Abstraction>& abstraction)
+    static void clientCode(const Abstraction& abstraction)
     {
         // ...
-        std::cout << abstraction->operation() << std::endl;
+        std::println("{}", abstraction.operation());
         // ...
     }
 }
 
 void test_conceptual_example_02() 
 {
-    using namespace ConceptualExampleBridge02;
+    using namespace ConceptualExample_Bridge_Pattern;
 
     /**
      * The client code should be able to work with any pre-configured
      * abstraction-implementation combination.
      */
-    std::unique_ptr<Implementor> implementor1{ std::make_unique<ConcreteImplementationA>() };
-    std::unique_ptr<Abstraction> abstraction1{ std::make_unique<Abstraction>(std::move(implementor1)) };
-    clientCode(abstraction1);
-    std::cout << std::endl;
+    //std::unique_ptr<Implementor> implementor1{ std::make_unique<ConcreteImplementationA>() };
 
-    std::unique_ptr<Implementor> implementor2{ std::make_unique<ConcreteImplementationB>() };
-    std::unique_ptr<Abstraction> abstraction2{ std::make_unique<ExtendedAbstraction>(std::move(implementor2)) };
-    clientCode(abstraction2);
+    //std::unique_ptr<Abstraction> abstraction1{ std::make_unique<Abstraction>(std::move(implementor1)) };
+
+    auto abstraction1 =
+        std::make_unique<Abstraction>(
+            std::make_unique<ConcreteImplementationA>());
+
+    clientCode(*abstraction1);
+    std::println();
+
+    //std::unique_ptr<Implementor> implementor2{ std::make_unique<ConcreteImplementationB>() };
+
+    //std::unique_ptr<Abstraction> abstraction2{ std::make_unique<ExtendedAbstraction>(std::move(implementor2)) };
+
+    auto abstraction2 =
+        std::make_unique<Abstraction>(
+            std::make_unique<ConcreteImplementationB>());
+
+    clientCode(*abstraction2);
 }
 
 // ===========================================================================
