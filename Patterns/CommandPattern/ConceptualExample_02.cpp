@@ -7,7 +7,7 @@
 #include <string>
 #include <string_view>
 
-namespace ConceptualExample02 {
+namespace ConceptualExample_Command_Pattern_Modern {
 
     class Receiver final {
     public:
@@ -40,13 +40,13 @@ namespace ConceptualExample02 {
 void test_conceptual_example_02() {
 
     /**
-     * Variant 1:
+     * Variant 2:
      * => idiomatic Modern C++
      * => command represented by a callable
      * => usually preferred unless polymorphic commands are required
      */
 
-    using namespace ConceptualExample02;
+    using namespace ConceptualExample_Command_Pattern_Modern;
 
     auto receiver = std::make_shared<Receiver>();
 

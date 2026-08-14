@@ -24,9 +24,6 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample_03.cpp">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClCompile>
     <ClCompile Include="ConceptualExample_01.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>

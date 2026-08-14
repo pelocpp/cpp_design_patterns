@@ -8,7 +8,7 @@
 #include <string>
 #include <string_view>
 
-namespace ConceptualExample01 {
+namespace ConceptualExample_Command_Pattern {
 
     /**
      * Receiver classes contain business logic.
@@ -100,7 +100,7 @@ void test_conceptual_example_01() {
      * => ideal for explaining the design pattern
      */
 
-    using namespace ConceptualExample01;
+    using namespace ConceptualExample_Command_Pattern;
 
     auto receiver = std::make_shared<Receiver>();
 

@@ -143,7 +143,6 @@
     <ClCompile Include="Chess_Modern.cpp" />
     <ClCompile Include="ConceptualExample_01.cpp" />
     <ClCompile Include="ConceptualExample_02.cpp" />
-    <ClCompile Include="ConceptualExample_03.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
