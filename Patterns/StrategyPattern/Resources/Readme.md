@@ -137,8 +137,10 @@ Der Methodenaufruf selbst erfolgt dann direkt, was eine verbesserte Laufzeit zur
 
 [Quellcode 1](../ConceptualExample.cpp) &ndash; Einfaches konzeptionelles Beispiel<br />
 [Quellcode 2](../ConceptualExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit `std::function`<br />
-[Quellcode 3](../RealWorldExample.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen<br />
-[Quellcode 4](../RealWorldExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit einer Hierarchie von Klassen und `std::function`<br />
+
+[Quellcode 3](../ShoppingCart.cpp) &ndash; Einfaches Beispiel zu einem Warenkorb (normale Preise, Black Friday Preise)<br />
+[Quellcode 4](../RealWorldExample.cpp) &ndash; Einfaches Beispiel mit einer Hierarchie von Klassen<br />
+[Quellcode 5](../RealWorldExampleModern.cpp) &ndash; Einfaches Beispiel mit einer Hierarchie von Klassen und `std::function`<br />
 
 ---
 

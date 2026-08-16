@@ -149,6 +149,7 @@
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="RealWorldExample.cpp" />
     <ClCompile Include="RealWorldExampleModern.cpp" />
+    <ClCompile Include="ShoppingCart.cpp" />
     <ClCompile Include="StaticStrategyExample.cpp" />
   </ItemGroup>
   <ItemGroup>

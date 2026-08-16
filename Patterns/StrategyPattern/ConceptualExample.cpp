@@ -8,7 +8,7 @@
 #include <vector>
 #include <print>
 
-namespace StrategyConceptualExample {
+namespace ConceptualExample_Strategy {
 
     /**
      * The StrategyBase interface declares operations
@@ -23,7 +23,10 @@ namespace StrategyConceptualExample {
     public:
         virtual ~StrategyBase() = default;
 
+        [[nodiscard]]
         virtual std::string doAlgorithm(const std::vector<std::string>& data) const = 0;
+
+        [[nodiscard]]
         virtual std::string getName() const = 0;
     };
 
@@ -37,10 +40,12 @@ namespace StrategyConceptualExample {
     class ConcreteStrategyA : public StrategyBase
     {
     public:
+        [[nodiscard]]
         std::string getName() const override {
             return { "Normal Sorting" };
         }
 
+        [[nodiscard]]
         std::string doAlgorithm(const std::vector<std::string>& data) const override
         {
             std::string result{};
@@ -65,10 +70,12 @@ namespace StrategyConceptualExample {
     class ConcreteStrategyB : public StrategyBase
     {
     public:
+        [[nodiscard]]
         std::string getName() const override {
             return { "Reverse Sorting" };
         }
 
+        [[nodiscard]]
         std::string doAlgorithm(const std::vector<std::string>& data) const override
         {
             std::string result;
@@ -166,7 +173,7 @@ namespace StrategyConceptualExample {
 
 void test_conceptual_example()
 {
-    using namespace StrategyConceptualExample;
+    using namespace ConceptualExample_Strategy;
 
     clientCode();
 }
