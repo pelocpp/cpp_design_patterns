@@ -19,6 +19,9 @@
     <Filter Include="Source Files\DrawShapes">
       <UniqueIdentifier>{2c55045e-640d-4b3b-a52c-7569d6a384fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\NotificationSystem">
+      <UniqueIdentifier>{2e4eed15-86b3-4f0a-bbab-ee7117d4be8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -28,6 +31,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Resources\dp_bridge_pattern_02.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_bridge_pattern_03.svg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\dp_bridge_pattern_04.svg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -43,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="Shapes.cpp">
       <Filter>Source Files\DrawShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="NotificationSystem.cpp">
+      <Filter>Source Files\NotificationSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -142,11 +142,14 @@
   <ItemGroup>
     <None Include="Resources\dp_bridge_pattern_01.svg" />
     <None Include="Resources\dp_bridge_pattern_02.svg" />
+    <None Include="Resources\dp_bridge_pattern_03.svg" />
+    <None Include="Resources\dp_bridge_pattern_04.svg" />
     <None Include="Resources\Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample02.cpp" />
     <ClCompile Include="ConceptualExample01.cpp" />
+    <ClCompile Include="NotificationSystem.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Shapes.cpp" />
   </ItemGroup>

@@ -126,7 +126,25 @@ Beide Varianten sind funktional identisch.
 
 ---
 
-#### &bdquo;Real-World&rdquo; Beispiel:
+#### &bdquo;Real-World&rdquo; Beispiel: Notification System
+
+<img src="dp_bridge_pattern_03.svg" width="600">
+
+*Abbildung* 2: Ein Notification System
+
+Das ist für mich der Kern des *Bridge Patterns*: 
+
+Nicht &bdquo;ich möchte ein Verhalten austauschen&rdquo; (*Strategy Pattern*),
+sondern &bdquo;ich habe zwei Achsen, die unabhängig voneinander wachsen&rdquo;.
+
+<img src="dp_bridge_pattern_04.svg" width="800">
+
+*Abbildung* 2: Architektur des Systems
+
+
+---
+
+#### &bdquo;Real-World&rdquo; Beispiel: Rendering von grafischen Figuren
 
 Bei diesem Muster steht eine Schnittstelle im Mittelpunkt,
 die als Brücke fungiert, die die Funktionalität konkreter Klassen unabhängig
@@ -137,7 +155,7 @@ Wir demonstrieren die Verwendung des Bridge-Entwurfsmusters anhand des folgenden
 in dem ein Kreis in verschiedenen Farben mit derselben abstrakten Basisklassenmethode,
 aber unterschiedlichen Bridge-Implementiererungsklassen gezeichnet werden kann.
 
-In *Abbildung* 2 finden Sie eine `IDrawAPI`-Schnittstelle vor, die als Bridge-Schnittstellenklasse fungiert,
+In *Abbildung* 4 finden Sie eine `IDrawAPI`-Schnittstelle vor, die als Bridge-Schnittstellenklasse fungiert,
 und zwei konkrete Klassen `RedCircleDrawer` und `GreenCircleDrawer`,
 die die `IDrawAPI`-Schnittstelle implementieren.
 
@@ -147,7 +165,7 @@ gezeichnet wird:
 
 <img src="dp_bridge_pattern_02.svg" width="600">
 
-*Abbildung* 2: Ein Anwendungsbeispiel des *Bridge* Patterns.
+*Abbildung* 4: Ein Anwendungsbeispiel des *Bridge* Patterns.
 
 ---
 

@@ -6,7 +6,7 @@
 #include <string>
 #include <memory>
 
-namespace ShapesExample {
+namespace RealWorldExample_Bridge_Pattern_Shapes {
 
     /**
      *  Bridge implementor interface.
@@ -132,9 +132,10 @@ namespace ShapesExample {
     }
 }
 
-void test_shapes_example() 
+void test_real_word_example_shapes()
 {
-    using namespace ShapesExample;
+    using namespace RealWorldExample_Bridge_Pattern_Shapes;
+
     clientCode01();
     clientCode02();
 }
