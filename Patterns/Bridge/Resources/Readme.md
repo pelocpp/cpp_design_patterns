@@ -128,7 +128,7 @@ Beide Varianten sind funktional identisch.
 
 #### &bdquo;Real-World&rdquo; Beispiel: Notification System
 
-<img src="dp_bridge_pattern_03.svg" width="600">
+<img src="dp_bridge_pattern_03.svg" width="300">
 
 *Abbildung* 2: Ein Notification System
 
@@ -139,8 +139,7 @@ sondern &bdquo;ich habe zwei Achsen, die unabhängig voneinander wachsen&rdquo;.
 
 <img src="dp_bridge_pattern_04.svg" width="800">
 
-*Abbildung* 2: Architektur des Systems
-
+*Abbildung* 3: Architektur des Notification Systems
 
 ---
 
@@ -163,7 +162,7 @@ die die `IDrawAPI`-Schnittstelle implementieren.
 (*Raw*-Pointer oder Smart-Pointer). In der Anwendung finden Sie ein Beispiel, in dem ein Kreis mit zwei verschiedenen Farben 
 gezeichnet wird:
 
-<img src="dp_bridge_pattern_02.svg" width="600">
+<img src="dp_bridge_pattern_02.svg" width="800">
 
 *Abbildung* 4: Ein Anwendungsbeispiel des *Bridge* Patterns.
 

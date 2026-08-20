@@ -12,7 +12,7 @@
 namespace RealWorldExample_Bridge_Pattern_NotificationSystem {
 
     // ===========================================================================
-    // Kind of Message: Alert, Reminder, Marketing Message
+    // Kind of Delivery: Email, SMS, Push
 
     class Sender {
     public:
@@ -36,7 +36,7 @@ namespace RealWorldExample_Bridge_Pattern_NotificationSystem {
     };
 
     // ===========================================================================
-    // Kind of Delivery: Email, SMS, Push
+    // Kind of Message: Alert, Reminder, Marketing Message  
 
     // abtraction
     class Notification
