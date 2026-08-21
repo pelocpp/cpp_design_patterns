@@ -18,20 +18,32 @@
 
 ###### In einem Satz:
 
-&bdquo;Bereitstellung eines Platzhalters (Stellvertreters) für ein anderes Objekt.&rdquo;
+&bdquo;Das Proxy Pattern stellt ein Stellvertreterobjekt bereit, das den Zugriff auf ein anderes Objekt kontrolliert
+und dabei dieselbe Schnittstelle wie das Originalobjekt verwendet.&rdquo;
 
-Das *Proxy Pattern* ist ein strukturelles Entwurfsmuster,
-das für ein anderes Objekt (Ressource) eine Art Ersatz oder Platzhalter bereitstellt.
+Das Proxy Pattern gehört zu den strukturellen Entwurfsmustern und führt eine Vermittlerinstanz
+zwischen Client und einem realen Objekt (dem *Real Subject*) ein.
 
-#### Problem:
+Proxy und Real Subject implementieren dieselbe Schnittstelle, sodass der Client beide austauschbar verwenden kann,
+ohne seinen Code anzupassen. Der Proxy leitet Aufrufe entweder direkt an das reale Objekt weiter
+oder fügt vor bzw. nach der Weiterleitung zusätzliches Verhalten hinzu, etwa Zugriffskontrolle, Caching, Logging
+oder eine verzögerte Initialisierung.
 
-Ein Proxy-Objekt kann zum Beispiel dann verwendet werden,
-wenn aus bestimmten Gründen nicht direkt auf die Ressource zugegriffen werden kann
-oder wenn nicht alle Methoden des ursprünglichen Objekts offen gelegt werden sollen.
-Es ist auch denkbar, dass ein Proxy-Objekt dem ursprünglichen Objekt
-zusätzliche Funktionen hinzufügt.
-Die Verwendung von Proxys ist hilfreich, wenn die Ressource schwer zu instanziieren
-oder sehr ressourcensensitiv ist (Beispiel: XML-Parser).
+Gerade Letzteres ist ein klassischer Anwendungsfall: Ein Virtual Proxy erzeugt das oft teure Real Subject erst dann,
+wenn es tatsächlich benötigt wird (Lazy Loading). Andere Varianten sind der Protection Proxy, der Zugriffsrechte prüft,
+oder der Remote Proxy, der ein Objekt repräsentiert, das sich in einem anderen Adressraum befindet.
+
+Auf diese Weise trennt das Pattern fachliche Logik von Querschnittsbelangen wie Zugriffskontrolle oder Ressourcenmanagement.
+
+In modernem C++ lässt sich das häufig elegant mit Smart Pointern, ``std::unique_ptr`/`std::shared_ptr` als gehaltenem Objekt
+und ggf. Move-Semantik umsetzen.
+
+Insgesamt erhöht das Proxy Pattern die Flexibilität eines Systems, da sich das Verhalten des Real Subject transparent erweitern lässt,
+ohne dessen Implementierung zu verändern.
+
+Es trennt somit den Zugriff auf ein Objekt von dessen eigentlicher Implementierung und ermöglicht es,
+zusätzliche Funktionalität transparent in den Zugriff einzubauen.
+
 
 #### Struktur (UML):
 

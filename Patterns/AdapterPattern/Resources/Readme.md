@@ -18,29 +18,30 @@
 
 ###### In einem Satz:
 
-&bdquo;Ermöglicht die Interaktion von Objekten mit inkompatiblen Schnittstellen.&rdquo;
+&bdquo;Das Adapter Pattern konvertiert die Schnittstelle einer bestehenden Klasse in eine andere Schnittstelle, die von einem Client erwartet wird,
+sodass Klassen mit inkompatiblen Schnittstellen zusammenarbeiten können.&rdquo;
 
-Das *Adapter Pattern* ist ein strukturelles Entwurfsmuster, das es Objekten mit
-inkompatiblen Schnittstellen ermöglicht, zusammenarbeiten zu können.
+Das *Adapter Pattern* gehört zur Kategorie der strukturellen Entwurfsmuster und löst ein sehr häufiges Problem:
+Eine vorhandene Klasse oder Bibliothek bietet genau die benötigte Funktionalität,
+aber ihre Schnittstelle passt nicht zu dem, was der Client erwartet.
 
-Ist eine Klasse auf eine bestimmte Schnittstelle angewiesen,
-die von einer anderen Klasse nicht implementiert wird,
-fungiert der Adapter als Übersetzer zwischen diesen beiden Klassen.
+Anstatt den vorhandenen Code zu ändern &ndash; was oft gar nicht möglich ist, etwa bei Bibliotheken
+von Drittanbietern &ndash; wird eine Zwischenschicht eingeführt, der Adapter.
+Dieser implementiert die vom Client erwartete Zielschnittstelle und delegiert die eigentlichen Aufrufe
+intern an das sogenannte *Adaptee*, also die anzupassende Klasse.
 
-#### Problem:
+Auf diese Weise bleibt der bestehende Code unverändert und wiederverwendbar,
+während der Client über eine für ihn passende Schnittstelle mit ihm kommuniziert.
 
-Das Adapter Entwurfsmuster ist ein strukturelles Muster, das eine Vorgehensweise
-zum Erstellen von Beziehungen zwischen Objekten definiert.
-Das Muster &bdquo;übersetzt&rdquo; eine Schnittstelle für eine Klasse in eine andere kompatible Schnittstelle.
+Man unterscheidet üblicherweise zwischen dem *Objekt-Adapter*, der auf Komposition basiert und das Adaptee als Member hält,
+und dem *Klassen-Adapter*, der über Mehrfachvererbung realisiert wird.
 
-Es gelangt zum Einsatz, wenn Anforderungen geändert werden
-und Funktionen von Klassen zu implementieren sind,
-deren Schnittstellen nicht mit den eigenen kompatibel sind.
+In C++ ist der Objekt-Adapter meist vorzuziehen, da er flexibler ist und sich besser mit Modern-C++-Prinzipien
+wie losem Kopplung und Testbarkeit verträgt.
 
-#### Lösung:
+Ein typisches Beispiel ist die Anpassung einer alten oder fremden API an ein modernes, im eigenen System etabliertes Interface.
+So wird das Adapter Pattern zu einem wichtigen Werkzeug für Wiederverwendbarkeit, Entkopplung und die Integration heterogener Systeme.
 
-Das Pattern steht im Prinzip für eine einzige Klasse (Adapterklasse),
-deren Aufgabe die Verknüpfung von Funktionen / das Weiterreichen unabhängiger oder inkompatibler Schnittstellen ist.
 
 #### Struktur (UML):
 

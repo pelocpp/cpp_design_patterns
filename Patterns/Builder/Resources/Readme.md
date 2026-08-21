@@ -17,16 +17,26 @@
 
 ###### In einem Satz:
 
-&bdquo;Um komplexe und komplizierte Objekte stückweise und intuitiver erstellen zu können.&rdquo;
+&bdquo;Das Builder Pattern trennt die schrittweise Konstruktion eines komplexen Objekts von seiner Repräsentation, sodass derselbe Konstruktionsprozess unterschiedliche Ausprägungen des Objekts erzeugen kann.&rdquo;
 
+Das Builder Pattern gehört zu den Erzeugungsmustern (Creational Patterns).
+Es kommt insbesondere dann zum Einsatz, wenn ein Objekt aus vielen optionalen oder voneinander abhängigen Bestandteilen besteht.
+Anstatt einen Konstruktor mit einer großen Anzahl von Parametern zu verwenden,
+wird das Objekt schrittweise über einen sogenannten *Builder* aufgebaut.
 
-#### Ziel / Absicht:
+Das *Builder*-Objekt kapselt die einzelnen Bauschritte über klar benannte Methoden.
+Ein sogenannter *Director* kann diese Schritte in einer bestimmten Reihenfolge aufrufen,
+ist dabei aber selbst unabhängig davon, wie das fertige Produkt konkret aussieht.
 
-Das *Builder Pattern* ist ein Entwurfsmuster, mit dem schrittweise komplexe Objekte mit der richtigen Reihenfolge von Aktionen erstellt werden können.
-Die Konstruktion wird von einem *Director*-Objekt gesteuert,
-das nur den Objekttyp kennen muss, den es erstellen soll.
+Dadurch lässt sich derselbe Bauprozess wiederverwenden, um verschiedene Varianten oder Repräsentationen eines Objekts zu erzeugen.
 
-#### Lösung:
+Der Client muss die internen Details der Konstruktion nicht kennen und erhält am Ende nur das fertige, konsistente Produkt.
+
+In C++ wird das Pattern häufig mit *Method Chaining* (fluenten Buildern) kombiniert,
+bei denen jede *setter*-ähnliche Methode eine Referenz auf den Builder zurückgibt.
+
+So entsteht ein lesbarer, deklarativer Konstruktionsablauf, der sowohl Robustheit als auch Flexibilität in der Objekterzeugung fördert.
+
 
 #### Struktur (UML):
 

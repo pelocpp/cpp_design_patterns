@@ -18,37 +18,32 @@
 
 ###### In einem Satz:
 
-&bdquo;Um einen Entwurf eines Algorithmus auf einer höheren Ebene bereitzustellen, der von seinen abgeleiteten Klassen zu vervollständigen ist.&rdquo;
+&bdquo;Das Template Method Pattern definiert das Grundgerüst eines Algorithmus in einer Basisklasse und überlässt es abgeleiteten Klassen, einzelne Schritte dieses Algorithmus zu überschreiben, ohne dabei dessen grundsätzlichen Ablauf zu verändern.&rdquo;
 
-Definiert das prinzipielle Grundgerüst eines Algorithmus in einer zentralen Methode.
-Diese lagert einen oder vorzugsweise mehrere Teilschritte in Methoden abgeleiteter Klassen aus.
-Änderungen an den Teilschritten haben keine Auswirkungen auf die Arbeitsweise (Realisierung)
-der zentralen Methode.
+Das *Template Method Pattern* gehört zu den Verhaltensmustern (Behavioral Patterns) und wird eingesetzt,
+wenn mehrere Algorithmen (beziehungsweise der grundlegende Ablauf eines Algorithmus) eine gemeinsame Struktur besitzen,
+sich aber in einzelnen Schritten unterscheiden.
 
-Das *Template Method Pattern* ist ein Verhaltensentwurfsmuster,
-das das Grundgerüst eines Algorithmus in einer Oberklasse definiert,
-Unterklassen jedoch bestimmte Schritte des Algorithmus überschreiben lässt,
-ohne dabei seine prinzipielle Struktur zu ändern.
+Die Basisklasse definiert dazu eine sogenannte &bdquo;Template Method&rdquo; &ndash; eine Methode,
+die den festen Ablauf des Algorithmus als Sequenz von Teilschritten vorgibt.
+Einzelne dieser Teilschritte werden als virtuelle Methoden deklariert, die in der Basisklasse
+entweder eine Standardimplementierung besitzen oder rein abstrakt sind.
 
-#### Problem:
+Abgeleitete Klassen überschreiben genau diese Schritte, um das Verhalten an ihre speziellen Bedürfnisse anzupassen,
+während der übergeordnete Ablauf unangetastet bleibt.
+Dadurch wird Code-Duplizierung vermieden, da der gemeinsame Steuerungsfluss nur einmal implementiert werden muss.
 
-Es gibt eine Methode oder anders formuliert, eine Reihe von auszuführenden Schritten (Teilmethoden),
-die auf einer höheren Abstraktionsebene
-festgelegt sind (Reihenfolge der Ausführung, Bereitstellung von Parametern, ...).
+Gleichzeitig bleibt die Reihenfolge der Schritte konsistent, da sie zentral in der Basisklasse festgelegt
+und nicht von den Subklassen beeinflusst wird.
 
-In einer niedrigeren Abstraktionsebene (Detailebene) können die Teilmethoden eine unterschiedliche Implementierung haben.
+Ein wesentlicher Vorteil des Patterns besteht darin, dass Änderungen am gemeinsamen Ablauf nur an einer Stelle vorgenommen werden müssen.
 
+Dieses Prinzip wird häufig auch als &bdquo;Hollywood-Prinzip&rdquo; bezeichnet:
+&bdquo;Don't call us, we'll call you&rdquo; &ndash; die Basisklasse ruft die spezialisierten Methoden der Subklasse auf,
+nicht umgekehrt.
 
-#### Lösung:
-
-Das *Template Method Pattern* hat zum Inhalt, dass Sie einen Algorithmus in eine Reihe von Schritten aufteilen,
-diese Schritte in Methoden umwandeln und diese Methoden in einer einzigen &bdquo;Vorlagenmethode&rdquo; aufrufen,
-daher auch der Name dieses Entwurfsmusters.
-Die Schritte können entweder abstrakt sein oder eine Standardimplementierung aufweisen.
-Um den Algorithmus zu verwenden, muss der Client eine eigene Unterklasse bereitstellen, alle abstrakten Schritte implementieren und bei Bedarf einige der optionalen Schritte überschreiben.
-Die Vorlagenmethode sollte dabei nicht überschrieben oder verändert werden!
-
-Das *Template Method Pattern* ermöglicht die Realisierung von variierenden Teilschritten, während ein konsistenter Grundprozess beibehalten wird.
+In C++ lässt sich das Pattern besonders elegant umsetzen, indem die *Template Method* als nicht-virtuelle
+(oder finale) Methode implementiert wird, während die austauschbaren Schritte als virtuelle (ggf. protected) Methoden bereitgestellt werden.
 
 
 #### Struktur (UML):
