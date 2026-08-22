@@ -12,30 +12,31 @@
 
 ###### In einem Satz:
 
-&bdquo;Standardisiert die zusätzliche Vor- und Nachbearbeitung von Methodenaufrufen.&rdquo;
+> &bdquo;Das Intercepting Filter Pattern ermöglicht es, eingehende Anfragen durch eine Kette von Filtern zu leiten, die diese Anfragen vor oder nach ihrer eigentlichen Verarbeitung prüfen, verändern oder ergänzend bearbeiten.&rdquo;
 
-Das *Intercepting Filter Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
-das sich der Vor- und Nachbearbeitung einer Anforderung (*&bdquo;Request&rdquo;*, typischerweise ein Methodenaufruf) zuwendet. 
-Die Vor- und Nachbearbeitung definiert Aktionen, die vor und nach der Kernverarbeitung der Anforderung ausgeführt werden.
-Es ist auch möglich, dass eine Aktion entscheiden kann, ob die eigentliche Kernverarbeitung überhaupt stattfindet.
-In der Regel bearbeiten Aktionen den eingehenden oder ausgehenden Datenstrom in einer Form,
-die für die weitere Verarbeitung geeignet ist.
+Das *Intercepting-Filter-Pattern* gehört zu den klassischen Entwurfsmustern für die Verarbeitung von Anfragen,
+wie sie ursprünglich im Kontext von Webanwendungen (J2EE Core Patterns) beschrieben wurden,
+sich aber genauso auf beliebige Request-Response-orientierte Systeme in C++ übertragen lassen.
 
-Die Aktionen des Patterns bezeichnet man auch als *Filter*. Filter können die Authentifizierung / Autorisierung / Protokollierung oder
-Nachverfolgung von Anforderungen durchführen und die Anforderungen dann an die entsprechenden Handler weiterleiten.
+Die Grundidee ist, wiederkehrende, anfragebezogene Querschnittsaufgaben &ndash; etwa Logging, Autorisierung, Kompression oder Eingabevalidierung &ndash;
+nicht in den eigentlichen Verarbeitungscode zu mischen, sondern in eigenständige Filter-Objekte auszulagern.
+Diese Filter werden zu einer Kette (*Filter Chain*) zusammengesetzt, die eine eingehende Anfrage nacheinander durchläuft,
+bevor sie den eigentlichen Ziel-Handler erreicht; häufig laufen dieselben Filter auch auf dem Rückweg der Antwort
+in umgekehrter Reihenfolge noch einmal durch.
 
-#### Problem:
+Jeder Filter implementiert dabei eine gemeinsame Schnittstelle und entscheidet selbst,
+ob und wie er die Anfrage bearbeitet und ob er sie an den nächsten Filter in der Kette weiterreicht.
 
-Ohne das *Intercepting Filter Pattern* beruht die klassische Lösung auf einer Reihe von bedingten Anweisungen,
-wobei jede fehlgeschlagene Bedingungsanweisung die Anforderung abbricht.
-Verschachtelte `if` / `else`-Anweisungen stehen für eine Standardstrategie,
-die aber zu einer Code-Unübersichtlichkeit bzw. Code-Fragilität führen.
+Ein zentraler Filter-Manager oder die Kette selbst kümmert sich um die Reihenfolge und den Aufruf der einzelnen Filter,
+sodass diese untereinander keine Abhängigkeiten kennen müssen.
+Dadurch lassen sich einzelne Filter unabhängig voneinander entwickeln, testen, austauschen oder auch zur Laufzeit neu konfigurieren,
+ohne den eigentlichen Anwendungscode anzufassen.
 
-#### Lösung:
+Das Pattern fördert so eine klare Trennung von fachlicher Logik und technischen Querschnittsbelangen
+und erhöht Wiederverwendbarkeit sowie Wartbarkeit des Systems.
 
-Der Schlüssel zur flexiblen und unauffälligen Lösung dieses Problems besteht in einem einfachen Mechanismus
-zum Hinzufügen und Entfernen von Verarbeitungskomponenten, jede Komponente führt eine bestimmte Filteraktion aus.
-
+In C++ lässt es sich beispielsweise über eine abstrakte Basisklasse `Filter` mit virtueller `execute()`-Methode und
+eine Kette aus `std::vector<std::unique_ptr<Filter>>` realisieren.
 
 #### Struktur (UML):
 

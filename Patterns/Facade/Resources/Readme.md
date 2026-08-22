@@ -18,33 +18,27 @@
 
 ###### In einem Satz:
 
-&bdquo;Bereitstellung einer einheitlichen (vereinfachten) Schnittstelle durch Verbergen einer existierenden Systemkomplexität.&rdquo;
+> &bdquo;Das Facade Pattern stellt eine vereinfachte, einheitliche Schnittstelle vor ein komplexes Subsystem aus mehreren Klassen,
+sodass Clients dieses Subsystem nutzen können, ohne seine innere Struktur und Zusammenhänge kennen zu müssen.&rdquo;
 
-Das *Facade Pattern* ist ein strukturelles Entwurfsmuster,
-das verwendet wird, um den Zugriff auf Funktionen in komplexen oder schlecht gestalteten Subsystemen/Bibliotheken
-oder Vergleichbares zu vereinfachen.
-Die Fassadenklasse stellt eine einfache Schnittstelle zur Verfügung,
-die die Implementierungsdetails des zugrunde liegenden Codes verbirgt.
+Viele Softwaresysteme bestehen aus mehreren Klassen, die eng zusammenarbeiten, um eine bestimmte Funktionalität bereitzustellen &ndash; etwa
+ein Subsystem zur Videokonvertierung, zum Datenbankzugriff oder zur Gerätesteuerung.
+Für einen Client, der nur eine einfache Aufgabe erledigen möchte, ist es oft unnötig kompliziert, sich mit all diesen Klassen,
+ihren Abhängigkeiten und der korrekten Aufrufreihenfolge auseinanderzusetzen.
 
-#### Problem:
+Das *Facade Pattern* löst dieses Problem, indem es eine eigene Klasse einführt &ndash; die Fassade &ndash;,
+die genau diese Komplexität kapselt und dem Client stattdessen eine schlanke, aufgabenorientierte Schnittstelle anbietet.
 
-Gegeben sei ein komplexes Subsystem mit vielen Klassen und Abhängigkeiten zwischen ihnen.
-Clients die dieses Subsystem oder Teile davon nutzen möchten,
-müssen sich mit den verschiedenen Schnittstellen der enthaltenen Klassen befassen und die Funktionsweise verstehen.
-Dabei bauen sie zwangsläufig viele Abhängigkeiten zu verschiedenen Objekten auf und koppeln sich eng an die Klassen des Subsystems.
-Das *Facade Pattern* definiert eine vereinfachte Schnittstelle zur Benutzung eines Systems (Bibliothek) oder einer Menge von Objekten.
+Intern koordiniert die Fassade die Aufrufe an die verschiedenen Subsystem-Klassen, sodass der Client nur noch mit der Fassade kommuniziert.
 
-#### Lösung:
+Wichtig dabei ist: Das Subsystem bleibt weiterhin direkt zugänglich, falls ein Client mehr Kontrolle oder Flexibilität benötigt als die Fassade bietet.
+Dadurch reduziert das Pattern die Kopplung zwischen Client-Code und Subsystem erheblich,
+was den Code leichter verständlich, wartbarer und testbarer macht.
 
-Die *Facade* (dt. Fassade) wird zwischen Clients und dem Subsystem geschaltet.
-Es "kapselt" dabei das Subsystem, beinhaltet die komplexe Logik zum Arbeiten mit dem Subsystem
-und bietet für den Client eine vereinfachte Schnittstelle (Methoden) nach außen an.
-Die Fassade delegiert die Clientaufrufe an das Subsystem.
-Dadurch kann der Client das System über die Facade nutzen,
-ohne die Klassen, ihre Beziehungen, und Abhängigkeiten zu kennen.
+Zudem erleichtert es den Austausch oder die Weiterentwicklung des Subsystems, solange die Schnittstelle der Fassade stabil bleibt.
 
-Der Einsatz des *Facade Pattern* bietet sich vor allem dann an, wenn mehrere Entwickler eines Teams davon
-profitieren können. Es müssen sich nicht alle Entwickler des Teams mit dem komplexen Subsystem beschäftigen.
+In C++ lässt sich das Pattern besonders elegant umsetzen, da die Fassade meist nur Referenzen oder Zeiger auf die Subsystem-Objekte hält
+und deren Methoden in sinnvoller Reihenfolge aufruft.
 
 #### Hinweis 1:
 

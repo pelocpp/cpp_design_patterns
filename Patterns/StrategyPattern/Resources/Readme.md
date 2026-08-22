@@ -18,33 +18,27 @@
 
 ###### In einem Satz:
 
-&bdquo;Je nach Bedarf einen bestimmten Algorithmus aus einer Familie von Algorithmen auswählen.&rdquo;
+> &bdquo;Das Strategy Pattern kapselt unterschiedliche Algorithmen bzw. Verhaltensweisen hinter einer gemeinsamen Schnittstelle, sodass sie unabhängig voneinander ausgetauscht werden können.&rdquo;
 
-Das Strategie-Entwurfsmuster ist ein Entwurfsmuster,
-in dem eine Reihe ähnlicher Algorithmen definiert und jeweils in eigenen Klassen eingekapselt und implementiert werden.
-Der für einen bestimmten Zweck geeignete Algorithmus kann dann zur Laufzeit gemäß der vorliegenden Anforderungen ausgewählt
-und eingesetzt werden.
+Das *Strategy-Pattern* gehört zu den Verhaltensmustern (Behavioral Patterns) und dient dazu,
+eine Familie von Algorithmen zu definieren, jeden davon zu kapseln und sie austauschbar zu machen.
 
-#### Problem:
+Statt eine bestimmte Logik fest in eine Klasse zu programmieren, wird diese Logik in eine eigene Strategie-Klasse ausgelagert,
+die ein gemeinsames Interface implementiert. Der sogenannte *Kontext* (*Context*) hält lediglich eine Referenz oder einen Zeiger
+auf dieses Interface und delegiert die eigentliche Arbeit an das konkret zugewiesene Strategie-Objekt.
 
-Dieses Entwurfsmuster empfiehlt sich für Situationen,
-in denen sich Klassen nur im Verhalten (*Behavior*) unterscheiden.
-In diesem Fall sind die Algorithmen in separate Klassen zu unterteilen,
-die zur Laufzeit ausgewählt werden können.
-Insbesondere kapselt das Entwurfsmuster die Algorithmen und macht sie austauschbar.
+Dadurch lässt sich das Verhalten eines Objekts zur Laufzeit ändern, indem einfach eine andere Strategie-Instanz gesetzt wird.
+Neue Algorithmen können hinzugefügt werden, ohne bestehenden Code zu verändern &ndash; ein klassisches Beispiel für das Open-Closed-Prinzip.
 
-Diese Trennung ermöglicht, dass das Verhalten (Methode, Algorithmus) unabhängig von den Clients ist,
-die es verwenden  und auf diese Weise variieren kann.
-Eine Anwendung kann mit dem Fortschreiten der Anwendungsentwicklung
-weitere, neue Algorithmen nahtlos hinzuzufügen.
+Gleichzeitig wird die Verzweigungslogik (z. B. lange `if`-`else`- oder `switch`-Ketten) vermieden,
+die sonst nötig wäre, um zwischen verschiedenen Verhaltensweisen zu unterscheiden.
 
-#### Lösung:
+In C++ bietet sich das Pattern besonders an, da es sowohl klassisch über abstrakte Basisklassen mit virtuellen Funktionen
+als auch moderner über `std::function` oder Templates umgesetzt werden kann.
 
-Das &bdquo;Strategie Entwurfsmuster&rdquo; zählt zur Kategorie der &bdquo;Verhaltensmuster&rdquo; / &bdquo;Behavioral Pattern&rdquo;.
-Es injiziert ein oder mehrere Verhaltensweisen in ein Objekt, die sich in ihrer Umgebung (&bdquo;*Object* / *Context*&rdquo;) austauschen lassen.
+Insgesamt fördert das Strategy-Pattern lose Kopplung, bessere Testbarkeit einzelner Algorithmen und eine klare Trennung von Verantwortlichkeiten.
 
-Das Strategie Pattern wird häufig eingesetzt, um das Verhalten einer Klasse zu ändern,
-ohne dies über eine Spezialisierung vorzunehmen.
+
 
 #### Struktur (UML):
 

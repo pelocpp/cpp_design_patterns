@@ -18,7 +18,8 @@
 
 ###### In einem Satz:
 
-&bdquo;Das Template Method Pattern definiert das Grundgerüst eines Algorithmus in einer Basisklasse und überlässt es abgeleiteten Klassen, einzelne Schritte dieses Algorithmus zu überschreiben, ohne dabei dessen grundsätzlichen Ablauf zu verändern.&rdquo;
+> &bdquo;Das Template Method Pattern definiert den grundlegenden Ablauf eines Algorithmus in einer Basisklasse und überlässt einzelne Schritte davon den abgeleiteten Klassen.&rdquo;
+
 
 Das *Template Method Pattern* gehört zu den Verhaltensmustern (Behavioral Patterns) und wird eingesetzt,
 wenn mehrere Algorithmen (beziehungsweise der grundlegende Ablauf eines Algorithmus) eine gemeinsame Struktur besitzen,

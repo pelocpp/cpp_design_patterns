@@ -18,42 +18,27 @@
 
 ###### In einem Satz:
 
-&bdquo;Zum Speichern und Wiederherstellen des Zustands einer Komponente/eines Objekts.&rdquo;
+> &bdquo;Das Memento Pattern ermöglicht es, den Zustand eines Objekts zu speichern und später wiederherzustellen, ohne dessen interne Implementierung nach außen offenzulegen.&rdquo;
 
-Das *Memento Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
-mit dem der aktuelle Status eines Objekts gespeichert werden kann,
-ohne dabei etwaige Details seiner Realisierung offenzulegen.
-Das Ursprungsobjekt kann nach Bedarf geändert als auch
-jederzeit in den gespeicherten Zustand zurückversetzt werden.
+Das *Memento Pattern* dient dazu, den Zustand eines Objekts zu einem bestimmten Zeitpunkt zu speichern und später wiederherzustellen.
+Dazu wird eine Momentaufnahme des Zustands in einem separaten Objekt, dem sogenannten *Memento*, abgelegt.
+Das ursprüngliche Objekt kann seinen Zustand bei Bedarf aus diesem Memento wiederherstellen.
 
-#### Problem:
+Ein wesentlicher Aspekt des Patterns ist, dass der gespeicherte Zustand außerhalb des ursprünglichen Objekts nicht verändert
+oder eingesehen werden muss. Dadurch bleibt die Kapselung des ursprünglichen Objekts erhalten.
 
-Manchmal ist es erforderlich, den (internen) Status eines Objekts zu einem bestimmten Zeitpunkt zu erfassen
-und diesen Status zu einem späteren Zeitpunkt wieder zu restaurieren.
-Häufig wird dieses Entwurfsmuster verwendet, um eine Anwendung um die &bdquo;*Undo*&rdquo;-Funktionalität zu bereichern.
-Aus diesem Grund wird das Muster auch als &bdquo;*Undo via Rollback*&rdquo; bezeichnet,
-in anderen Büchern wiederum tritt es als *Snapshot* Entwurfsmuster in Erscheinung.
+Ein weiteres Objekt, häufig als *Caretaker* bezeichnet, kann die Mementos verwalten, ohne deren Inhalt kennen zu müssen.
 
-#### Lösung:
+Typische Anwendungsfälle sind Undo/Redo-Mechanismen in Editoren, das Zurücksetzen von Einstellungen, Transaktionsverwaltung,
+Spielstände in Spielen oder das Zurücksetzen fehlgeschlagener Operationen.
 
-Das Memento-Muster delegiert das Erstellen des Status-Schnappschusses an den tatsächlichen Eigentümer dieses Status,
-also das betrachtete Ursprungsobjekt.
-Dies hat den Vorteil, dass ein Zugriff auf den Status des Objekts &bdquo;von außen&rdquo; nicht notwendig ist,
-der in den meisten Fällen auf Grund des Zugriffsschutzes der privaten (`private`) und geschützten  (`protected`) Variablen auch gar nicht möglich ist.
-Das Ursprungsobjekt selbst hat den vollen Zugriff auf seinen eigenen Status.
+In modernem C++ lässt sich das Pattern besonders elegant mit `std::unique_ptr`, `std::optional` oder Value-Semantik umsetzen,
+wodurch man auf manuelles Speichermanagement weitgehend verzichten kann.
 
-Das Muster sieht vor, die Kopie des Objektstatus in einem speziellen Objekt namens &bdquo;Memento&rdquo; zu speichern.
-Das &bdquo;Memento&rdquo;-Objekt ist keinem anderen Objekt zugänglich als dem, das es erstellt hat.
-Andere Objekte können über eine eingeschränkte Schnittstelle mit &bdquo;Memento&rdquo;-Objekten kommunizieren,
-um so die Metadaten des &bdquo;Memento&rdquo;-Objekt abrufen zu können
-(Erstellungszeit, Name des ausgeführten Vorgangs usw.).
-Es ist nicht der Zugriff auf den im Schnappschuss enthaltene Status des ursprünglichen Objekts möglich.
+Ein Nachteil des Patterns ist der potenziell hohe Speicherverbrauch, wenn viele oder große Snapshots gehalten werden müssen,
+weshalb in der Praxis oft zusätzliche Strategien wie Differenzspeicherung oder Kompression zum Einsatz kommen.
 
-Mit einer solchen restriktiven Richtlinie lassen sich Memento-Objekte in anderen Objekten speichern,
-die als &bdquo;*CareTaker*&rdquo; bezeichnet werden. Da ein *CareTaker* nur über die eingeschränkte Schnittstelle mit dem Memento-Objekt kommunizieren kann,
-kann er den im Memento-Objekt gespeicherten Status nicht manipulieren.
-Gleichzeitig hat der Urheber Zugriff auf alle Daten des Memento-Objekts,
-sodass er seinen ursprünglichen Zustand nach Belieben wiederherstellen kann.
+
 
 #### Struktur (UML):
 

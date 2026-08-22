@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&bdquo;Das Adapter Pattern konvertiert die Schnittstelle einer bestehenden Klasse in eine andere Schnittstelle, die von einem Client erwartet wird,
+> &bdquo;Das Adapter Pattern konvertiert die Schnittstelle einer bestehenden Klasse in eine andere Schnittstelle, die von einem Client erwartet wird,
 sodass Klassen mit inkompatiblen Schnittstellen zusammenarbeiten können.&rdquo;
 
 Das *Adapter Pattern* gehört zur Kategorie der strukturellen Entwurfsmuster und löst ein sehr häufiges Problem:

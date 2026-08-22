@@ -6,41 +6,39 @@
 
 ## Wesentliche Merkmale
 
-Das *Null Object Pattern* ist ein Entwurfsmuster, das sich der Thematik von Null-Referenzen annimmt.
-Null-Referenzen gibt es in anderen Programmiersprachen sehr wohl, in C++ sind sie per Definition nicht existent.
-Wir sprechen daher besser von so genannten *Null*-Objekten, also Objekten, die keinerlei Funktionalität haben.
-
-Der Sinn des Musters besteht darin, einer Referenz ein Objekt zuzuweisen, das keine Aktionen ausführt.
-Dadurch wird erreicht, dass die Referenz zu jedem Zeitpunkt auf ein gültiges Objekt verweist,
-was Behandlungen von Sonderfällen (das Nichtvorhandensein) erübrigt.
-
-#### Kategorie: *Behavioural Pattern*
+#### Kategorie: *Behavioral Pattern*
 
 #### Ziel / Absicht:
 
-Objekte ohne Funktionalität stellen natürlich einen Sonderfall dar.
-Sie können Sinn ergeben, wenn reale Daten - zum Beispiel in einem Testszenario - nicht verfügbar sind,
-man aber das Standardverhalten der Software trotzdem bereitstellen möchte.
-Das Null-Objekt spiegelt folglich eine "*Do-Nothing*"-Beziehung wieder.
+###### In einem Satz:
 
-#### Problem:
+> &bdquo;Das Null Object Pattern ersetzt ein fehlendes oder nicht benötigtes Objekt durch ein spezielles, funktionsloses Objekt, sodass auf nullptr-Prüfungen und Sonderbehandlungen verzichtet werden kann.&rdquo;
 
-Das *Null Object* Entwurfsmuster befreit uns von der Pflicht, zur Laufzeit Abfragen bzgl. gewisser Zustände vornehmen zu müssen.
-Überall im Quellcode, wo Überprüfungen auf Nullwerte erforderlich wären (was in C++ bei Referenzen ohnehin nicht möglich ist),
-kommen Nullobjektklassen zum Einsatz.
+Das *Null Object Pattern* ist ein Entwurfsmuster, bei dem anstelle eines fehlenden Objekts ein spezielles &bdquo;Null-Objekt&rdquo; verwendet wird.
+Dieses Objekt implementiert dieselbe Schnittstelle wie ein reguläres Objekt, führt bei seinen Operationen jedoch bewusst keine
+oder eine neutrale Aktion aus. Dadurch kann der aufrufende Code mit dem Objekt arbeiten, ohne zunächst prüfen zu müssen,
+ob überhaupt ein konkretes Objekt vorhanden ist.
 
-#### Lösung:
+Insbesondere lassen sich dadurch zahlreiche `nullptr`-Prüfungen und damit verbundene Sonderfälle vermeiden.
 
-Im *Null Object* Entwurfsmuster erstellen wir zunächst eine abstrakte Klasse,
-die die verschiedenen auszuführenden Operationen definiert.
+Das Null-Objekt kapselt die Behandlung des &bdquo;Nichts-tun&rdquo;-Falls und hält diese damit aus dem eigentlichen Anwendungscode heraus.
+Der Client kann dadurch einheitlich mit regulären und &bdquo;leeren&rdquo; Objekten umgehen.
 
-Davon leiten wir reale Klassen ab, die die eigentliche Funktionalität implementieren und schließlich eine Null-Objekt Klasse,
-die *keine* Implementierung der Basisklasse bereitstellt. Um es anderes zu formulieren: Streng genommen stellt auch die
-Null-Objekt Klasse eine Implementierung der Basisklasse dar, aber eben mit leeren Methodenrümpfen.
+Das Pattern eignet sich insbesondere dann, wenn das Fehlen eines Objekts einen definierten, harmlosen Standardfall darstellt.
 
-Nun kann man die Null-Objekt Klasse überall dort einsetzen, wo aus welchen Gründen auch immer,
-eine Klasse mit einer realen
-Realisierung (temporär) nicht anwendbar ist.
+In C++ basiert das Muster meist auf einer gemeinsamen abstrakten Basisklasse oder Schnittstelle,
+von der sowohl die &bdquo;echten&rdquo; Klassen als auch das Null-Objekt erben.
+Aufrufender Code kann so einheitlich mit dem Objekt arbeiten, unabhängig davon, ob es sich um eine reale Instanz oder das Null-Objekt handelt.
+
+In C++ lässt sich dies zum Beispiel über eine abstrakte Klasse mit virtuellen Methoden realisieren,
+wobei die Null-Objekt-Klasse diese Methoden mit leerem oder neutralem Verhalten überschreibt.
+
+Der wesentliche Vorteil liegt in der Reduktion von Fallunterscheidungen und in saubererem, robusterem Code,
+da *NullPointerException*-artige Fehler (bzw. Undefined Behavior durch Dereferenzierung eines Nullzeigers)
+von vornherein vermieden werden.
+
+Ein Nachteil kann sein, dass fehlerhafte oder unerwartete Zustände dadurch stillschweigend &bdquo;verschluckt&rdquo; werden,
+statt frühzeitig aufzufallen &ndash; hier ist Abwägung gefragt, je nach Anwendungsfall.
 
 
 ##### *Hinweis*: Abgrenzung von *Null*-Objekten zu *Mock*-Objekten

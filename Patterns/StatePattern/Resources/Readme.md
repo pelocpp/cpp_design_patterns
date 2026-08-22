@@ -18,20 +18,27 @@
 
 ###### In einem Satz:
 
-&bdquo;Um das durch seinen Zustand bestimmte Verhalten des Objekts darzustellen, aber auch zu ändern.&rdquo;
+> &bdquo;Das State Pattern ermöglicht es einem Objekt, sein Verhalten abhängig von seinem aktuellen Zustand zu verändern, ohne dass die Zustandslogik in einer großen bedingten Anweisung zusammengefasst werden muss.&rdquo;
 
-Das Muster beschreibt, wie ein Objekt sein Verhalten in Abhängigkeit
-von seinem aktuellen internen Zustand vollständig ändern kann.
-Es scheint, als hätte das Objekt seine Klasse geändert.
+Das State-Pattern gehört zu den Verhaltensmustern (Behavioral Patterns) und löst das Problem,
+dass sich das Verhalten eines Objekts abhängig von seinem aktuellen Zustand grundlegend unterscheidet.
+Statt diese Unterscheidung mit langen `if`- oder `switch`-Anweisungen im Kontext-Objekt abzubilden,
+wird jeder Zustand als eigene Klasse modelliert, die ein gemeinsames *State*-Interface implementiert.
 
-#### Problem:
+Das *Kontext*-Objekt hält eine Referenz auf das aktuelle State-Objekt und delegiert alle zustandsabhängigen Aufrufe an dieses.
+Ein Zustandswechsel erfolgt, indem der Kontext seine Referenz auf ein anderes State-Objekt umsetzt &ndash; häufig sogar
+veranlasst durch das State-Objekt selbst.
+Dadurch bleibt jede Zustandslogik gekapselt, übersichtlich und leicht erweiterbar, ohne bestehenden Code anpassen zu müssen (*Open/Closed*-Prinzip).
 
-Dass sich der Zustand eines Objekts verändert, ist zunächst einmal eine grundlegende Eigenschaft der OO-Programmierung.
-Klassen besitzen einen Zustand, über das Verhalten (Methoden) der Klasse ändert sich dieser Zustand.
-Was ist nun das Besondere am *State Pattern* Entwurfsmuster?
+In C++ lässt sich das typischerweise mit einer abstrakten Basisklasse (oder einem reinen Interface) für die Zustände und Ableitungen
+für jeden konkreten Zustand umsetzen. Das Pattern eignet sich besonders für endliche Automaten (Finite State Machines),
+etwa bei Verbindungsstatus, Spielfiguren-Zuständen oder Bestellprozessen.
 
-Manchmal ändert sich ein Zustand eines Objekts so grundlegend, dass man sich wünschen würde, man hätte ein Objekt einer anderen Klasse.
-Und genau das leistet dieses Muster: Wenn sich der Zustand ändert, wird das Objekt ausgetauscht, genauer der Teil, der den Zustand abbildet.
+Der Kompromiss: Man tauscht komplexe bedingte Logik gegen eine größere Anzahl kleiner, fokussierter Klassen.
+
+
+
+###### Ein Beispiel
 
 Ein gerne zitiertes Beispiel für dieses Muster ist ein Objekt der Java-Klasse `Thread`.
 Dieses kann eine Reihe sehr unterschiedlicher Zustände annehmen:
@@ -47,18 +54,6 @@ Die klassische Herangehensweise an ein derartiges Problem  wäre die Festlegung e
 Und eine Menge von `if`- und/oder `switch`-Anweisungen, die zerstreut in der Klasse vorliegen und versuchen,
 die Komplexität in den Griff zu bekommen.
 
-#### Lösung:
-
-Nicht so bei diesem Muster: Das *State Pattern* trennt das eigentliche Objekt und das Objekt, das seinen Zustand verkörpert.
-Ändert sich der Zustand, wird dieses Zustandsobjekt ausgetauscht.
-Da hinter jedem Zustandsobjekt eine Klasse steckt, wird der Code für jeden Zustand fein säuberlich von dem Code der anderen Zustände getrennt.
-
-Das Verhalten ist zur Laufzeit änderbar, ohne dass die für den Zugriff auf das Objekt
-verwendete bzw. vorhandene Schnittstelle sich ändert.
-Die Änderungen sind im Kontext des Objekts verborgen.
-
-Dieses Muster ist sehr nützlich beim Erstellen von Software Zustandsautomaten,
-bei denen sich die Funktionalität eines Objekts je nach Status grundlegend ändert.
 
 #### Struktur (UML):
 

@@ -18,56 +18,32 @@
 
 ###### In einem Satz:
 
-&bdquo;Um das Durchlaufen (Traversieren) einer Datenstruktur zu standardisieren.&rdquo;
+> &bdquo;Das Iterator Pattern stellt eine einheitliche Möglichkeit bereit, die Elemente einer Sammlung nacheinander zu durchlaufen, ohne deren interne Struktur (Array, Liste, Baum, ...) offenzulegen.&rdquo;
 
-Das *Iterator Pattern* ist ein Entwurfsmuster,
-das es ermöglicht, die Elemente eines Aggregatobjekts ohne Kenntnis seiner Struktur sequentiell
-zu durchlaufen (zu *traversieren*).
-Auf diese Weise wird das Traversieren von Listen, Bäumen und anderen Containerstrukturen
-in einer standardisierten Weise ermöglicht.
+Das *Iterator Pattern* gehört zu den Verhaltensmustern (Behavioral Patterns) und trennt die Logik
+zum Durchlaufen einer Sammlung von der Sammlung selbst.
+Eine Collection-Klasse muss so nicht mehr wissen, wie auf ihre Elemente zugegriffen wird,
+sondern delegiert diese Aufgabe an ein eigenes Iterator-Objekt.
+Dieses Iterator-Objekt kennt den aktuellen Zustand des Durchlaufs (z. B. die aktuelle Position)
+und bietet eine einheitliche Schnittstelle, typischerweise mit Operationen wie &bdquo;gibt es ein nächstes Element?&rdquo; und &bdquo;liefere das nächste Element&rdquo;.
 
-#### Problem:
-
-Eine *Collection* ist eine der am häufigsten verwendeten Datenstrukturen in der Programmierung.
-Eine *Collection* stellt einen *Container* für eine Gruppe von Objekten dar:
-
-<img src="dp_collections_iterator.png" width="600">
-
-*Abbildung* 1: Unterschiedliche Arten von *Collections*.
-
-Die meisten Collections speichern ihre Elemente in einfachen linearen (verketteten) Listen ab.
-Wiederum andere basieren auf komplexeren Datenstrukturen wie Stapeln (Stack), Bäumen (Tree), Diagrammen oder anderen.
-Unabhängig davon, wie eine Collection strukturiert ist,
-sollte sie eine Möglichkeit bieten, ihre Elemente durchlaufen (traversieren) zu können,
-so dass ein anderer Code diese Elemente verwenden kann.
-Es versteht sich dabei von selbst, dass bei einem derartigen Durchlauf kein Element 
-mehrfach oder überhaupt nicht erfasst werden darf.
-
-Dies mag nach einer einfachen Aufgabe klingen, wenn die Elemente beispielsweise in einem Array
-oder einer listenartigen Struktur abgelegt sind.
-Es werden einfach alle Elemente der Reihe nach (Index eines Arrays, *next*-Zeiger in einer Liste) erfasst.
-In einer komplexen Datenstruktur wie beispielsweise einer Baumstruktur
-ist dies nicht so einfach! Hier gibt es zum Beispiel 
-den "*Depth-First Traversal*" oder "*Breadth-First Traversal*" Algorithmus,
-die bzgl. der Reihenfolge des Durchlaufens der Baumstruktur sehr unterschiedlich funktionieren:
+Dadurch können verschiedenste Datenstrukturen &ndash; Arrays, verkettete Listen, Bäume, Graphen &ndash; auf dieselbe Weise durchlaufen werden,
+ganz unabhängig davon, wie sie intern aufgebaut sind.
 
 <img src="dp_collections_iterator_tree_structures.png" width="600">
 
-*Abbildung* 2: Eine Collection kann auf verschiedene Arten durchlaufen werden: *Depth-First Traversal* (links) versus *Breadth-First Traversal* (rechts).
+*Abbildung* 1: Eine Collection kann auf verschiedene Arten durchlaufen werden: *Depth-First Traversal* (links) versus *Breadth-First Traversal* (rechts).
 
-#### Lösung:
+Ein weiterer Vorteil ist, dass mehrere Iteratoren gleichzeitig und unabhängig voneinander über dieselbe Sammlung laufen können,
+ohne sich gegenseitig zu beeinflussen.
 
-Die Kernidee des *Iterator Patterns* besteht darin,
-die Art und Weise des Durchlaufens einer Collection in ein separates Objekt zu extrahieren, das als *Iterator* bezeichnet wird.
+Das Pattern folgt außerdem dem Single-Responsibility-Prinzip, da die Traversierungslogik nicht mehr die Collection-Klasse aufbläht,
+sowie dem Open/Closed-Prinzip, weil neue Durchlaufstrategien (z. B. rückwärts, gefiltert, in Baumreihenfolge)
+als zusätzliche Iterator-Implementierungen ergänzt werden können, ohne bestehenden Code zu ändern.
 
-Alle Iteratoren müssen dieselbe Schnittstelle implementieren.
-Dadurch ist ein Clientcode mit jedem Typ von Collection oder jedem Traversierungsalgorithmus kompatibel,
-sofern ein *Iterator*-Objekt vorhanden ist.
-
-Möchte man eine Collection auf eine bestimmte Art und Weise durchlaufen
-(z.B. "*Depth-First Traversal*" oder "*Breadth-First Traversal*"),
-implementiert man einfach eine neue Iteratorklasse.
-So muss man weder Änderungen an der Collection noch am Client vornehmen.
+In C++ ist dieses Pattern besonders interessant, weil die Sprache mit ihren eingebauten Iteratoren (z. B. in der STL)
+und dem Range-based-for-Loop bereits eine sehr elegante, idiomatische Umsetzung dieses Konzepts anbietet &ndash; ein guter Anknüpfungspunkt,
+um das klassische GoF-Pattern mit modernem C++ zu vergleichen.
 
 
 #### Struktur (UML):
@@ -83,7 +59,7 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 <img src="dp_iterator_pattern.svg" width="800">
 
-*Abbildung* 1: Schematische Darstellung des *Iterator Patterns*.
+*Abbildung* 2: Schematische Darstellung des *Iterator Patterns*.
 
 ---
 

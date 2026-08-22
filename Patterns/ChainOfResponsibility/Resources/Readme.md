@@ -18,40 +18,23 @@
 
 ###### In einem Satz:
 
-&bdquo;Bietet die Möglichkeit, eine Anfrage von mehr als einem Objekt/einer Komponente bearbeiten zu lassen.&rdquo;
+> &bdquo;Das Chain-of-Responsibility-Pattern leitet eine Anfrage entlang einer Kette von Objekten weiter, bis eines dieser Objekte sie bearbeiten kann.&rdquo;
 
-Das *Chain of Responsibility Pattern* ist ein Entwurfsmuster,
-das eine verkettete Liste von Methoden (*Handlern*) definiert,
-von denen jede eine bestimmte Anforderung (Funktionalität) verarbeiten kann.
-Wenn eine Anforderung an die Liste gesendet wird,
-wird sie zunächst dem ersten Handler in der Liste übergeben.
-Nun entscheidet jeder Handler für sich, die Anforderung entweder zu verarbeiten oder
-diese an den nächsten Handler in der Liste weiterzuleiten.
+Beim *Chain-of-Responsibility-Pattern* wird eine Anfrage nicht direkt an ein bestimmtes Objekt zur Bearbeitung übergeben,
+sondern an das erste Glied einer Verarbeitungskette. Jedes Glied entscheidet selbst, ob es für die Bearbeitung der Anfrage zuständig ist.
+Ist dies der Fall, verarbeitet es die Anfrage und beendet damit die Weiterleitung.
+Andernfalls gibt es die Anfrage an das nächste Glied der Kette weiter.
+Dadurch muss der Sender einer Anfrage nicht wissen, welches konkrete Objekt für ihre Bearbeitung zuständig ist.
 
-#### Problem:
+Die einzelnen Glieder der Kette sind über eine gemeinsame Schnittstelle miteinander verbunden
+und können in der Regel flexibel kombiniert oder ausgetauscht werden.
+So lassen sich beispielsweise unterschiedliche Verarbeitungsstufen oder Zuständigkeiten hintereinander anordnen.
 
-Im Prinzip betrachten wir das Problem, dass ein bestimmtes Ereignis von einem anderen Objekt zu verarbeiten ist.
-Das *Chain of Responsibility Pattern* ist eine formale Beschreibung dieses Problems.
-Wir haben in diesem Muster eine *Quelle* (*Ereignis*, *Event*) und mehrere Objekte,
-die auf dieses Ereignis reagieren könnten.
-Das Ereignis wird bei Eintreten dem ersten Verarbeitungsobjekt übergeben.
-Dieses kann den Befehl verarbeiten (oder auch nicht) und/oder an seinen Nachfolger senden.
-Dies wird solange fortgesetzt, bis der Befehl verarbeitet wurde oder das Ende der Kette erreicht ist.
-Das Objekt, das den Befehl sendet (das Ereignis ausgelöst hat), weiß nicht, welches Objekt in der Kette aller Verarbeitungsobjekte
-den Befehl verarbeitet hat.
+Ein wesentlicher Vorteil des Patterns ist die geringe Kopplung zwischen dem Absender einer Anfrage und ihrem konkreten Bearbeiter.
 
-#### Lösung:
-
-Das Pattern ermöglicht es, eine Anfrage an eine Kette von Verarbeitungsobjekten zu senden,
-ohne wissen zu müssen, welches Objekt / welche Objekte die Anfrage bearbeiten.
-Die Anfrage wird entlang der Kette weitergeleitet, bis ein oder mehrere Empfänger die Anfrage bearbeiten.
-Es kann auch sein, dass das Ereignis von keinem Empfänger bearbeitet wird.
-Der Absender eines Ereignisses ist nicht mit einem bestimmten Empfänger direkt verbunden.
-
-Bzgl. der Verarbeitung sind mehrere Szenarien denkbar: Hat ein Verarbeitungsobjekt die Anfrage übernommen,
-kann es das Weiterreichen der Anfrage an die noch vorhandenen Objekte in der Kette unterlassen ("*Single-Cast*" Szenario).
-Umgekehrt ist es denkbar, dass eine Anfrage prinzipiell die gesamte Kette aller Verarbeitungsobjekte durchläuft.
-Kein, ein oder mehrere Objekte können hierbei ihren Beitrag zur Abarbeitung des Ereignisses beitragen.
+Typische Einsatzgebiete sind zum Beispiel die Verarbeitung von Ereignissen in GUI-Frameworks, mehrstufige Validierungs- oder Genehmigungsprozesse
+sowie Middleware-Ketten in Webanwendungen. In C++ wird die Kette meist über eine gemeinsame Basisklasse mit einem Zeiger (ggf. `std::shared_ptr`)
+auf den nächsten Handler sowie einer virtuellen `handle()`-Methode realisiert.
 
 #### Struktur (UML):
 

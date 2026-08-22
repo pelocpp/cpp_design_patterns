@@ -12,9 +12,33 @@
 
 ###### In einem Satz:
 
-&bdquo;Um einen generischen Container zu erstellen, der eine Vielzahl unterschiedlicher, konkreter Typen aufnehmen kann.&rdquo;
+> &bdquo;Type Erasure verbirgt den konkreten Typ eines Objekts hinter einer einheitlichen Schnittstelle, sodass unterschiedliche,
+nicht miteinander verwandte Typen auf einheitliche Weise verwendet werden können.&rdquo;
 
-*Type Erasure* ermöglicht es, verschiedene Datentypen mit einem generischen Interface zu verwenden.
+In C++ begegnet man oft der Situation, dass mehrere Typen dieselbe &bdquo;Fähigkeit&rdquo; besitzen &ndash; etwa sich zeichnen,
+serialisieren oder vergleichen zu lassen &ndash;, ohne dass sie eine gemeinsame Vererbungshierarchie teilen oder teilen sollen.
+
+Klassisches Polymorphismus über virtuelle Funktionen und Basisklassen würde hier eine künstliche Kopplung erzwingen
+und zudem Referenz- oder Zeigersemantik mit sich bringen.
+
+Type Erasure löst dieses Problem, indem es die konkrete Typinformation intern &bdquo;löscht&rdquo; (daher der Name)
+und stattdessen ein einheitliches Wrapper-Objekt anbietet, das sich wie ein normaler Wert verhält &ndash; kopierbar,
+zuweisbar, ohne manuelles Speichermanagement.
+
+Intern kombiniert das Idiom üblicherweise eine kleine abstrakte Basisklasse mit einem Templated-Wrapper (oft &bdquo;Concept/Model&rdquo;-Pattern genannt),
+der die eigentliche Weiterleitung an den gespeicherten konkreten Typ über virtuelle Aufrufe übernimmt.
+
+Nach außen sieht der Nutzer nur eine einzige, nicht-generische Klasse &ndash; vergleichbar mit `std::function` oder `std::any`,
+die beide bekannte Beispiele für Type Erasure aus der Standardbibliothek sind.
+
+Der Vorteil liegt in der Entkopplung: Neue Typen können die geforderte Schnittstelle implementieren,
+ohne von einer bestimmten Basisklasse erben zu müssen (*Duck Typing* zur Compile-Zeit, verpackt in Laufzeitpolymorphismus).
+
+Der Preis dafür sind ein gewisser Implementierungsaufwand, eine zusätzliche Indirektion sowie meist eine Heap-Allokation
+für das gespeicherte Objekt, sofern keine Small-Buffer-Optimization eingesetzt wird.
+
+###### Zur Namensgebung
+
 Das Idiom *Type Erasure* ist auch unter dem Namen &bdquo;*Duck Typing*&rdquo; bekannt.
 Der Begriff geht auf ein Gedicht von [James Whitcomb Riley](https://de.wikipedia.org/wiki/James_Whitcomb_Riley) zurück:
 

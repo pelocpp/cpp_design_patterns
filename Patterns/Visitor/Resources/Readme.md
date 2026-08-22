@@ -18,31 +18,28 @@
 
 ###### In einem Satz:
 
-&bdquo;Hinzufügen einer neuen Operation für eine Gruppe ähnlicher Objekte oder Hierarchien.&rdquo;
+> &bdquo;Das Visitor Pattern ermöglicht es, neue Operationen auf einer bestehenden Objektstruktur hinzuzufügen, ohne die Klassen dieser Struktur selbst verändern zu müssen.&rdquo;
 
-Das *Visitor Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
-das eine Menge strukturierter Daten von den Funktionen trennt,
-die auf den Daten ausgeführt werden. Dies unterstützt zum einen das Prinzip der "losen Kopplung"
-und es ermöglicht zum anderen das Hinzufügen zusätzlicher Operationen, ohne an den Datenklassen Änderungen vornehmen zu müssen.
+Das Visitor Pattern gehört zur Kategorie der Verhaltensmuster (Behavioral Patterns) und löst ein häufiges Problem objektorientierter Systeme:
+Man hat eine heterogene Struktur von Objekten &ndash; etwa einen Syntaxbaum, eine Dokumentstruktur oder eine Sammlung
+geometrischer Figuren &ndash; und möchte immer wieder neue Operationen auf diesen Objekten ausführen,
+ohne jedes Mal deren Klassen anzufassen.
 
-Im Kern geht es darum, eine Hierarchie von Klassen und Operationen auf diesen Klassen voneinander zu trennen.
+Statt die Operation direkt in den Elementklassen zu implementieren, wird sie in ein separates Visitor-Objekt ausgelagert,
+das für jeden konkreten Elementtyp eine passende `visit()`-Methode bereitstellt.
+Die Elementklassen selbst benötigen dafür lediglich eine `accept()`-Methode, die den Visitor entgegennimmt
+und sich selbst an ihn übergibt &ndash; ein Mechanismus, der als *Double Dispatch* bekannt ist, da zur Laufzeit
+sowohl der konkrete Typ des Elements als auch der des Visitors über die auszuführende Methode entscheiden.
 
-#### Prinzip:
+Dieser Ansatz macht es sehr einfach, neue Operationen hinzuzufügen:
+Man schreibt einfach eine neue Visitor-Klasse, ohne die bestehende Objektstruktur zu verändern.
 
-Das Muster definiert eine Art Infrastruktur für den Zugriff auf komplexe dynamische Daten- und Objektstrukturen.
-Dabei wird der dynamischen Struktur eine Methodenschnittstelle gegeben, die ein sogenanntes &bdquo;Besucher&rdquo;-Objekt entgegennimmt
-und über alle Daten der Struktur schleust. Das &bdquo;Besucher&rdquo;-Objekt läuft also an allen Elementen der Struktur entlang
-und wird von den Elementen über eine Methode &bdquo;akzeptiert&rdquo;.
-Die Konvention besteht darin, diese Methode `accept` zu nennen.
-Dabei ruft das Strukturelement eine Methode im &bdquo;Besucher&rdquo;-Objekt auf,
-die speziell für den Typ des Strukturelements geschrieben wurde und eine Referenz oder einen Zeiger
-auf das Strukturelement in ihrer Parameterliste hat.
-Damit hat der Visitor wiederum die Chance, eine Operation auf dem Strukturelement auszuführen
-und dabei auf dessen Typ zu reagieren.
+Der Preis dafür ist, dass das Hinzufügen eines neuen Elementtyps aufwendig wird,
+da dann alle existierenden Visitor-Implementierungen angepasst werden müssen.
 
-Der Sinn des Visitors besteht darin, die eigentliche Operation auf den Daten von der Traver­sierung
-der Verwaltungs­struktur zu trennen. Aus der Entkopplung dieser beiden Aspekte entstehen
-Freiheitsgrade für Variationen dieses Entwurfsmusters.
+Das Pattern eignet sich daher besonders für Szenarien, in denen die Objektstruktur stabil bleibt,
+aber die Menge der darauf ausgeführten Operationen häufig wächst.
+
 
 ---
 

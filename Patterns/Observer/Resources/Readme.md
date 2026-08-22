@@ -18,44 +18,24 @@
 
 ###### In einem Satz:
 
-&bdquo;Um Benachrichtigungen zu erhalten, wenn Ereignisse eintreten.&rdquo;
+> &bdquo;Das Observer Pattern ermöglicht es einem Objekt, mehrere interessierte Objekte automatisch über Änderungen seines Zustands zu informieren, ohne deren konkrete Implementierungen kennen zu müssen.&rdquo;
 
-Das *Observer Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
-mit dem Sie einen Mechanismus für Benachrichtigungen definieren,
-um Objekte über Ereignisse zu informieren, die in einem beobachteten Objekt auftreten.
+Das *Observer Pattern* gehört zur Kategorie der Verhaltensmuster (Behavioral Patterns) und löst das Problem,
+wie mehrere Objekte (*Observer*) über Zustandsänderungen eines anderen Objekts informiert werden können, ohne dass eine enge Kopplung zwischen ihnen entsteht.
 
-#### Problem:
+Im Zentrum steht ein sogenanntes *Subject* (auch *Publisher* genannt), das eine Liste von *Observern* (auch *Subscriber*) verwaltet
+und diese bei relevanten Änderungen benachrichtigt. Observer können sich zur Laufzeit dynamisch an- und abmelden,
+wodurch das System sehr flexibel bleibt.
 
-Betrachten wir als Szenario ein Beispiel mit zwei Arten von Objekten:
-mehrere Kunden und ein Geschäft. Der Kunde ist an einem bestimmten Produkt interessiert,
-das bald erhältlich sein soll.
+Das Subject kennt dabei nur die abstrakte Schnittstelle der Observer, nicht deren konkrete Implementierung &ndash; dies
+entspricht dem Prinzip der losen Kopplung (*Loose Coupling*). Dadurch lassen sich neue Observer-Typen hinzufügen,
+ohne den Code des Subjects verändern zu müssen, was dem Open-Closed-Prinzip entspricht.
 
-Der Kunde kann das Geschäft jeden Tag aufsuchen oder die entsprechende WebSite konsultieren,
-um die Verfügbarkeit des Produkts zu überprüfen.
-Solange das Produkt aber noch gefertigt wird oder sich auf dem Versand zum Geschäft befindet,
-sind all diese Nachfragen sinnlos.
+Typische Anwendungsfälle sind grafische Benutzeroberflächen (z. B. Event-Handling),
+Modell-View-Architekturen (MVC) oder Publish-Subscribe-Systeme.
 
-Auf der anderen Seite könnte der Laden genau dann, wenn das Produkt abholbereit ist,
-dem oder den interessierten Kunden eine Nachricht zukommen lassen. Auf diese Weise
-ist die Information über die Verfügbarkeit am effizientesten gegeben.
-
-
-#### Lösung:
-
-Das Objekt, das den bereitzustellenden Status besitzt, wird häufig als &bdquo;*Subject*&rdquo; oder auch
-&bdquo;*Publisher*&rdquo; bezeichnet. Diejenigen Objekte, die die Änderungen am Status des *Publishers* verfolgen,
-werden als &bdquo;*Subscriber*&rdquo; oder auch &bdquo;*Observer*&rdquo; bezeichnet. Das Pendant eines &bdquo;*Observers*&rdquo;
-kann man auch als &bdquo;*Observable*&rdquo; bezeichnen.
-
-Das *Observer Pattern* sieht vor, dass das &bdquo;*Subject*&rdquo; einen Benachrichtigungsmechanismus der Gestalt aufweist, 
-dass einzelne Objekte (*Subscriber*) sich für das Benachrichtigen von Ereignissen
-an- und abmelden können.
-
-Typischerweise lässt sich diese Funktionalität mit einer Liste (`std::list` oder ähnliches)
-zum Speichern von Verweisen auf *Subscriber*-Objekte realisieren.
-Dazu gehören dann meist zwei Methoden (zum Beispiel `register` und `unregister`, `add` und `remove` oder `attach` und `detach`),
-um *Subscriber* zu dieser Liste hinzuzufügen und aus dieser wieder zu entfernen.
-
+In C++ wird das Pattern häufig über eine abstrakte Basisklasse mit einer virtuellen `update()`-Methode für die Observer
+sowie eine Verwaltungsstruktur (z. B. `std::vector<std::weak_ptr<IObserver>>`) im Subject umgesetzt.
 
 #### Struktur (UML):
 

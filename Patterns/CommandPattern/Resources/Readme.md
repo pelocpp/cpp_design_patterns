@@ -18,28 +18,26 @@
 
 ###### In einem Satz:
 
-&bdquo;Entkoppelt einen Sender und Empfänger, indem ein separates Objekt für ein oder mehrere Operationen erstellt wird.&rdquo;
+> &bdquo;Das Command Pattern kapselt eine Anfrage (einen Methodenaufruf mit allen dazugehörigen Parametern) als eigenständiges Objekt, sodass sich Aufrufer und Ausführender entkoppeln lassen und Anfragen sich parametrisieren,
+in Warteschlangen einreihen, protokollieren oder rückgängig machen lassen.&rdquo;
 
-Das *Command Pattern* ist ein Entwurfsmuster aus der Kategorie der *Behavioral Pattern*,
-das eine Anforderung (einen *Request*, einen *Befehl*) in ein eigenständiges Objekt umwandelt,
-das alle Informationen über das Kommando enthält.
-Der Befehl kann dann nach Bedarf aufgerufen werden, häufig als Teil einer Reihe von Befehlen,
-die in einer Warteschlange (*Queue*) abgelegt sind.
-Die Befehle in der Warteschlange können auf diese Weise sequentiell abgearbeitet werden,
-denkbar sind auch *Rollback*- bzw. *Undo*-Funktionalitäten.
+Das *Command Pattern* kapselt eine auszuführende Aktion in einem eigenen Objekt, dem sogenannten *Command*.
+Dadurch wird ein Objekt, das eine Aktion auslösen möchte, von dem Objekt entkoppelt, das diese Aktion tatsächlich ausführt.
+Der Aufrufer muss somit nicht wissen, wie die angeforderte Operation implementiert ist.
+Stattdessen kennt er lediglich die einheitliche Schnittstelle des Commands, beispielsweise eine Methode wie `execute()`.
 
-#### Problem:
+Da ein Command als vollwertiges Objekt existiert, lassen sich ausgeführte Commands zudem protokollieren,
+in einer Historie ablegen und &ndash; sofern eine `undo()`-Methode implementiert wird &ndash; rückgängig machen,
+was das Pattern zur Standardlösung für Undo/Redo-Funktionalität macht.
+Ebenso einfach lassen sich mehrere Commands zu Makro-Befehlen zusammensetzen, die nacheinander ausgeführt werden.
 
-Das *Command Pattern* ist ein Entwurfsmuster, bei dem alle zur Ausführung einer Methode erforderlichen Informationen
-in einem Objekt gekapselt sind, das sofort verwendet oder zum späteren Gebrauch aufbewahrt werden kann.
-Dieses Objekt führt nichts aus, es enthält nur Informationen.
+Häufig wird ein Command mit einem sogenannten *Receiver* verbunden, der die eigentliche Fachlogik der Aktion enthält.
+Das Pattern trennt damit insbesondere die Anforderung einer Aktion von ihrer konkreten Ausführung.
 
-Es gibt drei Schlüsselbegriffe, die im Umfeld dieses Patterns zu definieren sind: *Client*, *Invoker* und *Receiver*.
-Der *Client* erstellt das Befehlsobjekt ("*Command Object*").
-Das *Invoker*-Objekt entscheidet, wann die Methode, deren Informationen (*Parameter*) im *Command Object* abgelegt sind, aufgerufen werden soll.
-Das *Receiver*-Objekt ist eine Instanz einer Klasse, die den eigentlichen Code der auszuführenden Methode enthält.
+In C++ bietet sich für die gemeinsame Schnittstelle typischerweise eine abstrakte Basisklasse mit einer rein virtuellen `execute`()-Methode an,
+von der konkrete Command-Klassen erben. Insgesamt fördert das Pattern die lose Kopplung zwischen den Komponenten,
+die eine Aktion anstoßen, und denen, die sie ausführen, und erhöht dadurch die Erweiterbarkeit und Testbarkeit des Systems.
 
-#### Lösung:
 
 #### Struktur (UML):
 

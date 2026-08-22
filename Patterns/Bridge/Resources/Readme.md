@@ -18,35 +18,28 @@
 
 ###### In einem Satz:
 
-&bdquo;Trennung der Schnittstelle von einer Implementierung.&rdquo;
+&bdquo;Das Bridge Pattern trennt eine Abstraktion von ihrer Implementierung,
+sodass beide unabhängig voneinander variiert und weiterentwickelt werden können.&rdquo;
 
-Das *Bridge Pattern* ist ein strukturelles Entwurfsmuster,
-mit dem sich eine große Klasse oder eine Reihe eng verwandter Klassen in zwei separate Hierarchien aufteilen
-lassen &ndash; Abstraktion und Implementierung &ndash;, die beide unabhängig voneinander entwickelt werden können.
+Das *Bridge Pattern* ist ein strukturelles Entwurfsmuster, das eine Klassenhierarchie in zwei getrennte,
+aber über eine Referenz verbundene Hierarchien aufspaltet: eine für die Abstraktion und eine für die Implementierung.
 
-#### Problem:
+Ohne dieses Pattern führt die Kombination mehrerer unabhängiger Variationsdimensionen &ndash; etwa verschiedene Formen und verschiedene Rendering-Verfahren  &ndash; schnell zu einer explosionsartig wachsenden Anzahl von Unterklassen.
 
-Das *Bridge Pattern* genießt einen guten Ruf,
-da sich mit ihm die abstrakten Elemente der Klasse von den Implementierungsdetails trennen lassen.
-Dieses Muster ist vor allem dann zu empfehlen,
-wenn die betrachteten Klassen häufig variieren,
-da sich dann Änderungen an der Codebasis bei minimalem Wissen über das Programm leichter durchführen lassen.
+Bridge löst dieses Problem, indem die Abstraktion nicht selbst die Implementierung enthält,
+sondern lediglich einen Zeiger oder eine Referenz auf ein Implementierungs-Interface hält.
+Neue Abstraktionen und neue Implementierungen lassen sich dadurch jeweils unabhängig voneinander hinzufügen,
+ohne bestehenden Code anzupassen.
 
-Betrachten wir ein Beispiel, in dem eine Implementierung auf zwei oder mehreren Realisierungen fußt.
-Zum Beispiel ein Programm, das die Persistenz von Objekten auf verschiedenen Plattformen (Betriebssystemen) realisiert.
-Einige Objekte sollen in einer Datenbank und andere Objekte wiederum im Dateisystem des unterlagerten
-Betriebssystems gespeichert werden. 
-Wird das Programm um diese Funktionalität &bdquo;straight forward&rdquo; erweitert,
-sind Probleme vorprogrammiert, da die Abstraktion mit der Implementierung verknüpft wird.
-In diesem Fall ist es besser, das *Bridge Pattern*  zu verwenden und die Abstraktion von der Implementierung zu trennen.
-Wird dieses Muster nicht verwendet, kann man die Beobachtung machen,
-dass Implementierungsdetails in einer Abstraktion enthalten sind.
+In C++ wird dies typischerweise über eine abstrakte Basisklasse für die Implementierung
+sowie eine (ggf. abstrakte) Klasse für die Abstraktion realisiert, die einen Pointer auf die Implementierungsklasse hält.
+Zur Laufzeit kann die konkrete Implementierung sogar ausgetauscht werden, was zusätzliche Flexibilität bietet.
 
-Ein weiterer Vorteil des *Bridge Patterns* ist die Möglichkeit, Implementierungsdetails zur Laufzeit zu verändern.
-Dies ermöglicht es dem Benutzer, Implementierungen zu wechseln, um auf diese Weise zu bestimmen,
-wie die Software mit anderen Systemen zusammenarbeitet.
+Das Pattern ähnelt oberflächlich dem *Strategy-Pattern*, unterscheidet sich aber in der Absicht:
+Bridge zielt auf die strukturelle Entkopplung zweier Hierarchien ab, nicht primär auf austauschbares Verhalten.
+Besonders nützlich ist Bridge, wenn man plattformübergreifenden Code schreibt oder mehrere Implementierungsvarianten
+(z. B. verschiedene Grafik-APIs) unterstützen möchte.
 
-#### Lösung:
 
 #### Struktur (UML):
 

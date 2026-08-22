@@ -17,9 +17,9 @@
 
 ###### In einem Satz:
 
-&bdquo;Das Builder Pattern trennt die schrittweise Konstruktion eines komplexen Objekts von seiner Repräsentation, sodass derselbe Konstruktionsprozess unterschiedliche Ausprägungen des Objekts erzeugen kann.&rdquo;
+> &bdquo;Das Builder Pattern trennt die schrittweise Konstruktion eines komplexen Objekts von seiner Repräsentation, sodass derselbe Konstruktionsprozess unterschiedliche Ausprägungen des Objekts erzeugen kann.&rdquo;
 
-Das Builder Pattern gehört zu den Erzeugungsmustern (Creational Patterns).
+Das *Builder Pattern* gehört zu den Erzeugungsmustern (Creational Patterns).
 Es kommt insbesondere dann zum Einsatz, wenn ein Objekt aus vielen optionalen oder voneinander abhängigen Bestandteilen besteht.
 Anstatt einen Konstruktor mit einer großen Anzahl von Parametern zu verwenden,
 wird das Objekt schrittweise über einen sogenannten *Builder* aufgebaut.

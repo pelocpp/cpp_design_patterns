@@ -18,31 +18,29 @@
 
 ###### In einem Satz:
 
-&bdquo;Das Proxy Pattern stellt ein Stellvertreterobjekt bereit, das den Zugriff auf ein anderes Objekt kontrolliert
-und dabei dieselbe Schnittstelle wie das Originalobjekt verwendet.&rdquo;
+> &bdquo;Das Proxy Design Pattern stellt ein Stellvertreterobjekt für ein anderes Objekt bereit,
+das dieselbe Schnittstelle wie das andere Objekt implementiert und ermöglicht es, den Zugriff auf dieses Objekt kontrolliert zu steuern.&rdquo;
 
-Das Proxy Pattern gehört zu den strukturellen Entwurfsmustern und führt eine Vermittlerinstanz
-zwischen Client und einem realen Objekt (dem *Real Subject*) ein.
+Das *Proxy Design Pattern* gehört zu den strukturellen Entwurfsmustern und führt ein Objekt ein,
+das als Platzhalter oder Vermittler für ein anderes Objekt fungiert.
 
-Proxy und Real Subject implementieren dieselbe Schnittstelle, sodass der Client beide austauschbar verwenden kann,
-ohne seinen Code anzupassen. Der Proxy leitet Aufrufe entweder direkt an das reale Objekt weiter
-oder fügt vor bzw. nach der Weiterleitung zusätzliches Verhalten hinzu, etwa Zugriffskontrolle, Caching, Logging
-oder eine verzögerte Initialisierung.
+Der Proxy implementiert dieselbe Schnittstelle wie das reale Objekt (das sogenannte &bdquo;Real Subject&rdquo;), sodass er
+für den Client transparent an dessen Stelle verwendet werden kann, ohne dass dieser den Unterschied bemerkt.
+Dadurch lässt sich der Zugriff auf das reale Objekt kontrollieren, verzögern oder um zusätzliche Funktionalität erweitern,
+ohne den Code des Clients oder des realen Objekts selbst zu verändern.
 
-Gerade Letzteres ist ein klassischer Anwendungsfall: Ein Virtual Proxy erzeugt das oft teure Real Subject erst dann,
-wenn es tatsächlich benötigt wird (Lazy Loading). Andere Varianten sind der Protection Proxy, der Zugriffsrechte prüft,
-oder der Remote Proxy, der ein Objekt repräsentiert, das sich in einem anderen Adressraum befindet.
+Typische Einsatzzwecke sind *Lazy Initialization* (das reale Objekt wird erst bei tatsächlichem Bedarf erzeugt,
+etwa bei teuren Ressourcen), Zugriffskontrolle (Protection Proxy, z. B. Prüfung von Berechtigungen vor der Weiterleitung eines Aufrufs),
+Remote Proxies (Stellvertreter für Objekte, die sich in einem anderen Adressraum oder auf einem anderen Rechner befinden)
+sowie Caching oder Logging von Aufrufen.
 
-Auf diese Weise trennt das Pattern fachliche Logik von Querschnittsbelangen wie Zugriffskontrolle oder Ressourcenmanagement.
+In C++ wird dies häufig über eine gemeinsame abstrakte Basisklasse oder ein Interface realisiert,
+das sowohl vom Real Subject als auch vom Proxy implementiert wird;
+der Proxy hält dabei intern einen Zeiger oder eine Referenz auf das reale Objekt.
+Der Client arbeitet ausschließlich mit der Proxy-Schnittstelle und bleibt so von der konkreten Implementierung entkoppelt.
 
-In modernem C++ lässt sich das häufig elegant mit Smart Pointern, ``std::unique_ptr`/`std::shared_ptr` als gehaltenem Objekt
-und ggf. Move-Semantik umsetzen.
-
-Insgesamt erhöht das Proxy Pattern die Flexibilität eines Systems, da sich das Verhalten des Real Subject transparent erweitern lässt,
-ohne dessen Implementierung zu verändern.
-
-Es trennt somit den Zugriff auf ein Objekt von dessen eigentlicher Implementierung und ermöglicht es,
-zusätzliche Funktionalität transparent in den Zugriff einzubauen.
+Auf diese Weise verbindet das Pattern das Open/Closed-Prinzip mit einer sauberen Trennung von Verantwortlichkeiten:
+Steuerungslogik (Proxy) und eigentliche Funktionalität (Real Subject) bleiben getrennt.
 
 
 #### Struktur (UML):

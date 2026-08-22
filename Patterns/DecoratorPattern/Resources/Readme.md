@@ -18,9 +18,9 @@
 
 ###### In einem Satz:
 
-&bdquo;Das Decorator Pattern ermöglicht es, einem Objekt zur Laufzeit zusätzliche Funktionalitäten zu verleihen, ohne dessen Klasse zu verändern.&rdquo;
+> &bdquo;Das Decorator Pattern ermöglicht es, einem Objekt zur Laufzeit zusätzliche Funktionalitäten zu verleihen, ohne dessen Klasse zu verändern.&rdquo;
 
-Das Decorator Pattern ist ein Strukturmuster, mit dem sich Objekte flexibel um zusätzliche Funktionalitäten erweitern lassen.
+Das *Decorator Pattern* ist ein Strukturmuster, mit dem sich Objekte flexibel um zusätzliche Funktionalitäten erweitern lassen.
 Dabei wird das ursprüngliche Objekt von einem sogenannten Decorator umschlossen,
 der dieselbe Schnittstelle wie das dekorierte Objekt bereitstellt.
 

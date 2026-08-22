@@ -18,54 +18,33 @@
 
 ###### In einem Satz:
 
-&bdquo;Um Redundanzen beim Speichern von Daten zu vermeiden.&rdquo;
+> &bdquo;Das Flyweight Pattern reduziert den Speicherbedarf, indem es gemeinsame, unveränderliche Objektzustände zentral verwaltet und von mehreren Objekten wiederverwenden lässt.&rdquo;
 
-Das *Flyweight Pattern* ist ein Entwurfsmuster aus der Kategorie der *Structural Pattern*,
-das verwendet wird, um den Ressourcenverbrauch eines Programms mit einer sehr großen Anzahl von Objekten zu minimieren.
-Beim Erzeugen von vielen tausend identischen Objekten können zustandslose &bdquo;Flyweight&rdquo;-Objekte
-den in Anspruch genommen Speicher auf ein vertretbares Maß reduzieren.
+Das *Flyweight-Pattern* gehört zur Kategorie der Structural Patterns und kommt zum Einsatz,
+wenn eine Anwendung sehr viele gleichartige Objekte verwalten muss, was ohne Gegenmaßnahmen zu hohem Speicherverbrauch führen würde.
 
-#### Problem:
+Die Kernidee besteht darin, den Zustand eines Objekts in zwei Teile aufzuspalten:
+den *intrinsischen* Zustand, der zwischen vielen Objekten identisch ist und deshalb geteilt werden kann,
+und den *extrinsischen* Zustand, der für jede Instanz individuell ist und von außen übergeben werden muss.
 
-Manchmal arbeiten Programme mit einer großen Anzahl von Objekten, die dieselbe Struktur haben,
-und einige Zustände dieser Objekte haben stets denselben Wert.
-Wenn wir den klassischen Ansatz verwenden (Instanzen erstellen, Instanzvariablen schreiben),
-können sich die Speicher- bzw. Speicherbereichsanforderungen inakzeptabel erhöhen.
-Das *Flyweight Pattern* stellt eine Alternative in diesem Zusammenhang dar.
+Die intrinsischen Anteile werden in kompakten, unveränderlichen (*immutable*) *Flyweight*-Objekten zusammengefasst,
+die zentral verwaltet und wiederverwendet werden, statt sie für jedes logische Objekt neu anzulegen.
 
-#### Beispiel:
+Eine Factory bzw. ein Pool übernimmt dabei die Aufgabe, bereits existierende Flyweight-Objekte zurückzugeben
+oder bei Bedarf neue zu erzeugen, sodass niemals unnötige Duplikate entstehen.
 
-Zum Verständnis des  *Flyweight* Entwurfsmusters spielen zwei Begriffe eine Rolle: *Intrinsischer* und *extrinsischer* Zustand.
-Dazu ein Beispiel: Betrachten wir als Beispiel einen Texteditor. Pro Eingabe eines Zeichens wird ein Objekt einer Klasse `Character` erstellt.
-Zu den Attributen der `Character`-Klasse zählen zum Beispiel `name` (welches Zeichen), `font` (welche Schriftart) und
-`size` (welche Zeichengröße). Diese Informationen müssen wir nicht jedes Mal kopieren, wenn der Benutzer ein  Zeichen eingibt,
-da sich der Buchstabe 'B' nicht von einem anderen 'B' unterscheidet. 
-Wenn der Client erneut ein 'B' eingibt, geben wir einfach das Objekt zurück, das wir bereits zuvor erstellt haben.
-All dies bezeichnen wir als *intrinsische* Zustände (Name, Schriftart, Größe), da sie von den verschiedenen Objekten gemeinsam genutzt werden können!
+Der extrinsische Zustand wird nicht im Flyweight gespeichert, sondern erst beim Aufruf der jeweiligen Operation als Parameter mitgegeben.
+Dadurch sinkt die Anzahl tatsächlich im Speicher gehaltener Objekte drastisch,
+auch wenn logisch betrachtet Tausende oder Millionen &bdquo;Instanzen&rdquo; existieren.
 
-Jetzt fügen wir der Klasse `Character` weitere Attribute hinzu, zum Beispiel `row` (Zeile) und `col` (Spalte).
-Sie geben die Position eines Zeichens im Dokument an. Diese Attribute können niemals dieselben sein, auch nicht für dieselben Zeichen,
-da keine zwei Zeichen dieselbe Position in einem Dokument haben können.
-Diese Zustände werden als *extrinsische* Zustände bezeichnet und können von den betrachteten Objekten nicht gemeinsam genutzt werden.
+Ein klassisches Beispiel ist die Darstellung von Zeichen in einem Texteditor,
+bei dem sich viele Zeichen dieselbe Glyphen- bzw. Formatinformation teilen,
+während Position und Kontext extern verwaltet werden.
 
-An Stelle der beiden Fachwörter *intrinsischer* und *extrinsischer* Zustand spricht
-man auch von *repeatingState* und *uniqueState*.
+Der Vorteil liegt in der erheblichen Speicherersparnis bei großer Objektanzahl.
+Der Preis dafür ist eine größere Trennung zwischen gemeinsamem und individuellem Zustand
+sowie eine möglicherweise aufwendigere Verwaltung der Objekte.
 
-#### Lösung:
-
-Ein so genanntes *Flyweight* ist ein Objekt, das den Speicherbedarf minimiert,
-indem so viele Daten wie möglich mit anderen ähnlichen Objekten geteilt werden.
-Es gestattet, Objekte in großer Anzahl zu verwenden,
-wenn eine einfache wiederholte Erzeugung entsprechender Objekte 
-einen nicht akzeptablen Speicherbereich beanspruchen würde.
-Für jedes Objekt, das gemeinsam genutzte Daten verwendet,
-wird nur ein Verweis (Referenz, Pointer) auf ein gemeinsam genutztes Objekt gespeichert.
-
-Das *Flyweight Pattern* verwendet häufig eine Variation des *Factory Method* Entwurfsmusters
-für die Erzeugung der gemeinsam genutzten Objekte.
-Die Fabrik erhält eine Anfrage für eine *Flyweight* Instanz.
-Wenn bereits ein übereinstimmendes Objekt verwendet wird,
-wird eine Referenz dieses Objekt zurückgegeben. Andernfalls ist ein neues *Flyweight* Objekt zu generieren.
 
 #### Struktur (UML):
 

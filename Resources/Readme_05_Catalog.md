@@ -36,10 +36,9 @@ zusammengestellt:
 
 ##### Erzeugungsmuster
 
-In der Softwareentwicklung sind Erstellungsmuster (so genannte *Creational Pattern*) Entwurfsmuster,
-die sich mit Objekterstellungsmechanismen befassen und in Situationen verwendet werden,
-in denen die klassischen Formen der Objekterzeugung zu Entwurfsproblemen führen
-oder die Komplexität des Codes erhöhen.
+Erstellungsmuster (*Creational Pattern*) beschäftigen sich damit, wie **Objekte erzeugt** werden,
+und kapseln bzw. flexibilisieren den Erzeugungsprozess.
+Ziel ist, die konkrete Erstellung von Objekten möglichst von ihrer Verwendung zu entkoppeln
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
@@ -54,8 +53,8 @@ oder die Komplexität des Codes erhöhen.
 
 ##### Strukturmuster
 
-Strukturmuster beschreiben, wie sich Objekte und Klassen zu größeren Strukturen zusammensetzen lassen,
-ohne dabei einen Verlust an Flexibilität und Effizienz einzugehen.
+Strukturmuster beschreiben, wie sich **Objekte und Klassen zu größeren Strukturen zusammensetzen** lassen,
+ohne dabei einen **Verlust an Flexibilität und Effizienz** einzugehen.
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|
@@ -72,7 +71,9 @@ ohne dabei einen Verlust an Flexibilität und Effizienz einzugehen.
 
 ##### Verhaltensmuster
 
-Verhaltensentwurfsmuster betrachten Algorithmen und der Aufteilung von Verantwortlichkeiten zwischen Objekten.
+Verhaltensentwurfsmuster regeln, **wie Objekte miteinander kommunizieren** und **Aufgaben bzw. Verantwortlichkeiten verteilen**.
+Im Mittelpunkt stehen also Interaktionen, Algorithmen und die Steuerung des Verhaltens von Objekten.
+
 
 | Muster | Kurzbeschreibung |
 |:-------------- |----|

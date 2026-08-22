@@ -18,30 +18,28 @@
 
 ###### In einem Satz:
 
-&bdquo;Um die Kommunikation zwischen Objekten zu erleichtern.&rdquo;
+> &bdquo;Das Mediator Pattern kapselt die Kommunikation zwischen mehreren Objekten in einem zentralen Vermittler, sodass die Objekte nicht direkt voneinander abhängen müssen.&rdquo;
 
-Das *Mediator Pattern* ist ein Verhaltensentwurfsmuster,
-das die lose Kopplung von Objekten propagiert,
-indem Klassen nicht mehr direkt miteinander kommunizieren.
-Stattdessen werden Mediatorobjekte verwendet, um die Interaktionen zwischen Klassen zu kapseln
-und zu zentralisieren.
+In objektorientierten Systemen entstehen mit der Zeit oft viele Objekte, die stark miteinander verflochten sind,
+weil jedes Objekt direkt mit mehreren anderen kommuniziert.
+Diese Vielzahl an Punkt-zu-Punkt-Verbindungen führt zu einem engen Kopplungsgrad, der Code schwer wartbar und erweiterbar macht &ndash; jede
+Änderung an einem Objekt kann Auswirkungen auf viele andere haben.
 
-#### Problem:
+Das *Mediator Pattern* löst dieses Problem, indem es die gesamte Kommunikationslogik in ein zentrales *Mediator*-Objekt auslagert.
+Die beteiligten Objekte (in C++ oft als &bdquo;Colleague&rdquo;-Klassen umgesetzt) kennen fortan nur noch den Mediator, nicht mehr einander.
 
-Nicht selten bestehen Programme &ndash; zumindest in Teilen &ndash; aus umfangreichen Klassen.
-Dies ist nicht ungewöhnlich, aber es kommt zu Problemen, wenn diese Klassen miteinander kommunizieren müssen.
-Bei Verwendung des traditionellen Ansatzes, wenn Klassen direkt kommunizieren,
-müssen diese Klassen ihre internen Implementierungen kennen bzw. im Zuge der Kommunikation offenlegen.
+Möchte ein Colleague-Objekt mit einem anderen interagieren, informiert es stattdessen den Mediator,
+der die Anfrage an die passenden Empfänger weiterleitet oder entsprechend reagiert.
 
-Dies führt zu der bekannten Beobachtung, da es zunehmend schwieriger wird, die Implementierung einer Klasse zu lesen und zu verstehen,
-wenn das Programm immer komplexer wird. Derartige Klassen sind eng miteinander verbunden,
-was aus konzeptioneller Sicht nicht gut ist.
+Dadurch wird aus einem dichten Netz von Abhängigkeiten ein übersichtlicher Stern, in dessen Zentrum der Mediator steht.
 
-#### Lösung:
+Das erleichtert nicht nur das Verständnis und die Wartung des Systems, sondern auch die Wiederverwendung einzelner Colleague-Klassen,
+da diese nicht mehr an konkrete andere Klassen gebunden sind.
 
-Das *Mediator Pattern* löst dieses Problem, in diesem Muster ist die Kommunikation zwischen Objekten in einem Mediatorobjekt gekapselt.
-Anstatt dass Klassen direkt kommunizieren, senden Klassen Nachrichten an den Mediator und der Mediator sendet
-diese Nachrichten an die anderen Klassen weiter.
+Ein bekanntes Alltagsbeispiel ist ein Fluglotse (Mediator), der die Kommunikation zwischen Flugzeugen (Colleagues) koordiniert,
+statt dass jedes Flugzeug direkt mit jedem anderen kommuniziert.
+
+Fazit: Der zentrale Punkt des Patterns ist es, weniger direkte Abhängigkeiten zwischen Objekten zu haben.
 
 #### Struktur (UML):
 

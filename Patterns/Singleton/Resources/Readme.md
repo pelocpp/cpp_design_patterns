@@ -18,18 +18,28 @@
 
 ###### In einem Satz:
 
-&bdquo;Das *Singleton Pattern* ist ein Entwurfsmuster, mit dem sichergestellt wird, dass es zu einer Klasse nur eine einzige Instanz gibt.&rdquo;
+> &bdquo;Das Singleton Pattern stellt sicher, dass von einer Klasse genau eine Instanz existiert und diese global zugänglich ist.&rdquo;
 
-Immer wenn neue Objekte einer Singleton-Klasse benötigt werden, wird die zuvor erstellte Einzelinstanz bereitgestellt.
+Das *Singleton Pattern* gehört zu den Erzeugungsmustern (Creational Patterns) und regelt,
+wie eine Klasse instanziiert wird. Sein Kernanliegen ist, die Existenz genau einer einzigen Instanz einer Klasse zur Laufzeit
+zu garantieren &ndash; unabhängig davon, wie oft oder von wo aus versucht wird, ein Objekt dieser Klasse zu erzeugen.
 
-#### Problem:
+Dazu übernimmt die Klasse selbst die Kontrolle über ihre Instanziierung, typischerweise indem der Konstruktor privat ist
+und eine statische Methode (häufig `getInstance()`) den Zugriff auf die einzige erlaubte Instanz vermittelt.
 
-In einigen Fällen ist es wichtig, zu einer konkreten Klasse maximal nur eine Instanz zu haben.
-Zum Beispiel dann, wenn man nur einen einzigen globalen Zugriffspunkt
-auf eine begrenzte Ressource benötigt. 
+Zusätzlich bietet das Pattern einen global erreichbaren Zugriffspunkt, über den diese Instanz von beliebiger Stelle im Programm angesprochen werden kann.
 
-Würde man eine derartige globale Variable erstellen, die kopiert wird,
-würde dies zu mehreren Zugriffspunkten führen und damit zu möglichen Dateninkonsistenzen.
+Typische Einsatzgebiete sind Situationen, in denen genau eine koordinierende Instanz sinnvoll ist,
+etwa Konfigurationsobjekte, Logger, Verbindungs-Pools oder Caches.
+
+In modernem C++ lässt sich das Pattern besonders elegant über eine statische lokale Variable innerhalb der `getInstance()`-Methode umsetzen,
+da der C++11-Standard deren thread-sichere Initialisierung garantiert.
+
+Kritisch zu beachten sind dabei jedoch mögliche Nachteile: Singletons werden häufig für globalen, versteckten Zustand missbraucht,
+erschweren das Unit-Testing durch enge Kopplung und werden in der Praxis daher oft kontrovers diskutiert.
+
+
+###### Einige Beispiele
 
 *Beispiele*:
   * Stream Objekte von C++: `std::cout`, `std::cin` und `std::cerr`.

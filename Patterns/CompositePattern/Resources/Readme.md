@@ -18,50 +18,28 @@
 
 ###### In einem Satz:
 
-&bdquo;Um einzelne Objekte und Gruppen von Objekten einheitlich zu betrachten und behandeln.&rdquo;
+> &bdquo;Das Composite Pattern ermöglicht es, einzelne Objekte und aus diesen zusammengesetzte Objektstrukturen einheitlich zu behandeln.&rdquo;
 
-Das *Composite Entwurfsmuster* ist ein strukturelles Entwurfsmuster,
-mit dem Sie Objekte zu Baumstrukturen zusammensetzen und dann mit diesen Strukturen arbeiten können,
-als würde es sich um einzelne Objekte handeln.
+Das *Composite Pattern* gehört zu den strukturellen Entwurfsmustern und wird verwendet,
+wenn Objekte in hierarchischen, baumartigen Strukturen organisiert sind &ndash; etwa Dateisysteme, grafische Oberflächen oder Organigramme.
 
-#### Problem:
+Die Grundidee ist, sowohl einzelne Elemente (Blätter) als auch zusammengesetzte Elemente
+(Kompositen, die selbst wieder Blätter oder andere Kompositen enthalten) über eine gemeinsame abstrakte Basisklasse oder Schnittstelle anzusprechen.
+Dadurch muss der aufrufende Code nicht unterscheiden, ob er gerade mit einem einzelnen Objekt
+oder mit einer ganzen Gruppe von Objekten arbeitet &ndash; beide werden identisch behandelt.
 
-Der Einsatz des *Composite Entwurfsmuster* ist dann sinnvoll,
-wenn sich die Kernstruktur der Daten einer Anwendung als baumartige Struktur darstellen lässt.
+Operationen, die auf der Basisklasse definiert sind, werden von Blättern direkt ausgeführt, während Kompositen sie rekursiv an ihre Kindelemente weiterreichen.
 
-Stellen Sie sich beispielsweise vor, Sie haben zwei Arten von Objekten:
-Produkte und Kartons. Ein Karton kann mehrere Produkte sowie mehrere kleinere Kartons enthalten.
-Diese kleineren Kartons können wiederum Produkte oder sogar noch kleinere Kartons aufnehmen usw.
+In C++ wird dies typischerweise über eine abstrakte Klasse mit virtuellen Methoden umgesetzt,
+wobei die Composite-Klasse zusätzlich Methoden zum Hinzufügen und Entfernen von Kindelementen
+sowie einen Container (z. B. std::vector<std::unique_ptr<Component>>) besitzt.
 
-Betrachten wir nun ein Bestellsystem, das diese Klassen verwendet.
-Bestellungen können einfache Produkte ohne Verpackung sowie mit Produkten gefüllte Kartons und andere Produkte enthalten.
-Wie würden Sie den Gesamtpreis einer solchen Bestellung bestimmen?
+Der große Vorteil liegt in der Vereinfachung des Client-Codes:
+Dieser kann Baumstrukturen beliebiger Tiefe verarbeiten, da einzelne Elemente und Teilbäume einheitlich behandelt werden können.
 
-Sie können den direkten Ansatz ausprobieren:
-Packen Sie alle Kartons aus, gehen Sie alle Produkte durch und berechnen Sie dann die Gesamtsumme.
-Das wäre in der realen Welt machbar.
-In einem Programm ist es jedoch nicht so einfach wie das Ausführen einer Wiederholungsschleife.
-Sie müssen die Klassen der Produkte und Schachteln, die Sie durchlaufen,
-die Verschachtelungsebenen der Schachteln und andere unangenehme Details kennen.
-All dies macht den direkten Ansatz entweder sehr umständlich oder sogar unmöglich.
+Ein Nachteil kann sein, dass es schwieriger wird, die Menge der zulässigen Kindelemente einzuschränken, da Blätter und Kompositen dieselbe Schnittstelle teilen.
 
-#### Lösung:
-
-Die zentrale Idee des *Composite Entwurfsmusters* ist es, mit einer gemeinsamen Schnittstelle sowohl
-für Produkte als auch für Kartons zu arbeiten. Aufgabe dieser Schnittstelle wäre es an dem betrachteten Beispiel,
-eine Methode zur Berechnung des Gesamtpreises zu deklarieren.
-
-Wie könnte eine derartige Methode aussehen?
-Für ein Produkt wird einfach der Produktpreis zurückgegeben.
-Bei einer Schachtel wird jeder Artikel in der Schachtel überprüft, der Preis abgefragt und eine Gesamtsumme für die Schachtel zurückgegeben.
-
-Wenn eines dieser Elemente eine kleinere Schachtel wäre, würde diese Schachtel auch ihren Inhalt durchgehen, solange, bis die Preise aller inneren Komponenten berechnet wurden.
-Eine Schachtel kann sogar zusätzliche Kosten zum Endpreis hinzufügen, wie z.B. Verpackungskosten oder ähnliches.
-
-Der große Vorteil dieses Ansatzes besteht darin, dass Sie sich nicht um die konkreten Objekte kümmern müssen (Produkt oder Karton),
-aus denen der Baum besteht. Sie müssen nicht wissen, ob es sich bei einem Objekt um ein einfaches Produkt oder eine Schachtel mit Einzelteilen handelt.
-Sie können die Objekte alle gleich über eine gemeinsame Schnittstelle behandeln.
-Wenn Sie eine Methode aufrufen, übergeben die Objekte selbst die Anforderung an den Baum.
+Insgesamt ist das Composite Pattern besonders nützlich, wann immer &bdquo;Teil-Ganzes&rdquo;-Hierarchien rekursiv und einheitlich behandelt werden sollen.
 
 #### Struktur (UML):
 

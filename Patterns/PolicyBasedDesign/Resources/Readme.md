@@ -12,23 +12,35 @@
 
 ###### In einem Satz:
 
-&bdquo;*Policies* stellen Schnittstellen für konfigurierbare Belange einer Klasse dar.&rdquo;
-
-#### Problem / Motivation
+> &bdquo;*Policies* stellen Schnittstellen für konfigurierbare Belange einer Klasse dar.&rdquo;
 
 Wir bewegen uns im Problemfeld &bdquo;*Entwurfsentscheidungen*&rdquo; bei der Softwareentwicklung:
 
-  * Stichwort:  &bdquo;*Wie man es macht, macht man es falsch*&rdquo; :).
+  * Stichwort: &bdquo;*Wie man es macht, macht man es falsch*&rdquo; :).
 
   * Eine Strategie kann sein: Entscheidungen sollten nicht beim Entwickler einer Klasse liegen, sondern beim Anwender.
 
+*Policy-Based Design* ist ein C++-Idiom, bei dem eine Klasse ihr Verhalten nicht selbst fest verdrahtet,
+sondern es über austauschbare, als Template-Parameter übergebene „Policy“-Klassen konfigurierbar macht.
 
-#### Lösung:
+Policy-Based Design ist eine Technik der generischen Programmierung, bei der eine Klasse (der &bdquo;Host&rdquo;)
+in mehrere unabhängige Verhaltensaspekte zerlegt wird, die jeweils durch eine eigene Policy-Klasse repräsentiert werden.
 
-  * Ziel: Klassen konfigurierbar gestalten.
+Statt Vererbung oder Laufzeit-Polymorphie zu nutzen, kombiniert man diese Policies zur Kompilierzeit über Template-Parameter
+zu einer konkreten Klasse. Jede Policy kapselt dabei eine spezifische Design-Entscheidung &ndash; etwa Speicherverwaltung,
+Threading-Verhalten oder eine Vergleichsstrategie &ndash; und stellt dafür eine feste Schnittstelle bereit,
+die der Host über sie aufruft.
 
-  * Schaffung einer Auswahlmöglichkeit für verschiedene Verhaltensweisen durch den Anwender.
-   
+Der große Vorteil liegt in der enormen Flexibilität: Durch einfaches Austauschen einzelner Policies
+lassen sich völlig unterschiedliche Klassenvarianten erzeugen, ohne den Host-Code selbst zu ändern.
+Da die Bindung zur Kompilierzeit erfolgt, entstehen dabei keine Laufzeitkosten durch virtuelle Aufrufe,
+und der Compiler kann aggressiv inlinen und optimieren.
+
+Bekannt wurde das Idiom vor allem durch Andrei Alexandrescus Buch &bdquo;Modern C++ Design&rdquo;,
+in dem es unter anderem am Beispiel von `std::allocator` und generischen Smart-Pointer-Implementierungen erläutert wird.
+
+Die Kombinatorik mehrerer orthogonaler Policies ermöglicht es, aus wenigen Bausteinen eine große Zahl maßgeschneiderter Typen zu generieren,
+ohne eine explosionsartig wachsende Klassenhierarchie pflegen zu müssen.
 
 Damit sind wir beim Begriff der &bdquo;Policy&rdquo; angekommen:
 
