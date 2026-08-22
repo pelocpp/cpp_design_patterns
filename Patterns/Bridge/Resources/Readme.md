@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&bdquo;Das Bridge Pattern trennt eine Abstraktion von ihrer Implementierung,
+> &bdquo;Das Bridge Pattern trennt eine Abstraktion von ihrer Implementierung,
 sodass beide unabhängig voneinander variiert und weiterentwickelt werden können.&rdquo;
 
 Das *Bridge Pattern* ist ein strukturelles Entwurfsmuster, das eine Klassenhierarchie in zwei getrennte,

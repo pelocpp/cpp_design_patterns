@@ -18,11 +18,34 @@
 
 ###### In einem Satz:
 
-&bdquo;Erstellung von Objekten, ohne dem Client die Erstellungslogik zur Verfügung zu stellen.&rdquo;
+> &bdquo;Das Simple Factory Pattern kapselt die Erzeugung von Objekten, sodass der aufrufende Code nicht selbst entscheiden muss, welche konkrete Klasse instanziiert wird.&rdquo;
 
-Das *Simple Factory Pattern* ist eine Vorgehensweise, Objekte zu erstellen,
-ohne die Erstellungslogik dem Client zur Verfügung zu stellen.
-Das *Simple Factory Pattern* wird im eigentlichen Sinne *nicht* als Entwurfsmuster bezeichnet.
+Das *Simple Factory Pattern* gehört zu den grundlegendsten Erzeugungsmustern
+und wird oft als Einstieg in die &bdquo;richtigen&rdquo; Factory-Patterns (*Factory Method*, *Abstract Factory*)
+behandelt &ndash; streng genommen zählt es im klassischen GoF-Katalog gar nicht als eigenständiges Pattern,
+sondern eher als idiomatische Programmierpraxis.
+
+Die Grundidee ist einfach: Statt dass Client-Code direkt mit new konkrete Klassen instanziiert,
+delegiert er diese Aufgabe an eine zentrale Factory-Klasse,
+die anhand eines Parameters (z. B. eines Enums oder Strings) entscheidet,
+welches konkrete Objekt erzeugt und zurückgegeben wird.
+
+Dadurch wird der Client von der konkreten Implementierung entkoppelt und arbeitet stattdessen
+nur mit einer gemeinsamen Basisklasse oder einem Interface.
+
+Das bringt vor allem Vorteile bei der Wartbarkeit: Wenn neue Produktvarianten hinzukommen
+oder sich die Erzeugungslogik ändert, muss nur die Factory angepasst werden,
+nicht der gesamte Client-Code.
+
+In C++ wird dies typischerweise über eine statische Methode realisiert,
+die einen Zeiger oder `std::unique_ptr` auf die Basisklasse zurückgibt.
+
+Ein Nachteil ist, dass die Factory bei jeder neuen Produktklasse selbst erweitert werden muss &ndash; sie
+verletzt also tendenziell das Open-Closed-Prinzip, was einer der Gründe ist,
+warum in komplexeren Szenarien oft zu *Factory Method* oder *Abstract Factory* übergegangen wird.
+
+Dennoch ist das Simple Factory Pattern in der Praxis sehr verbreitet,
+weil es unkompliziert zu implementieren ist und die Objekterzeugung an einer einzigen, klar erkennbaren Stelle bündelt.
 
 ---
 

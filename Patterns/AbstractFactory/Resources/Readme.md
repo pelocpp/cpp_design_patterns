@@ -18,19 +18,33 @@
 
 ###### In einem Satz:
 
-Das **Abstract Factory** Design Pattern dient der Definition einer zusammenhängenden Familie aus Produkten.
+> &bdquo;Das Abstract Factory Pattern kapselt die Erzeugung zusammengehöriger Objekte einer Produktfamilie, ohne dass der Client deren konkrete Klassen kennen muss.&rdquo;
 
-Das *Abstract Factory* Pattern ist ein Entwurfsmuster,
-mit dem Gruppen miteinander verwandter Objekte erstellt werden können,
-ohne dass die genauen konkreten Klassen angegeben werden müssen, die dabei verwendet werden.
-Eine von mehreren Factory-Klassen generiert die jeweiligen Objekte.
+Das *Abstract Factory Pattern* gehört zur Kategorie der Erzeugungsmuster (*Creational Patterns*) und wird eingesetzt,
+wenn ein System von der konkreten Implementierung der Objekte, die es verwendet,
+entkoppelt werden soll.
 
-#### Problem:
+Anstatt Objekte direkt mit `new` zu instanziieren, delegiert der Client die Objekterzeugung
+an eine abstrakte Fabrik-Schnittstelle. Für jede &bdquo;Produktfamilie&bdquo; &ndash; also eine Gruppe von Objekten,
+die thematisch oder funktional zusammengehören und typischerweise gemeinsam verwendet werden &ndash; gibt es eine
+konkrete Fabrik-Implementierung.
 
-Dieses Muster ist sehr gut, wenn Sie die Details der Objektinstanziierung trennen möchten.
-Im Allgemeinen haben Fabriken mehr als eine Factory-Methode.
-Jede Factory-Methode kapselt den `new`-Operator und die konkreten, plattformspezifischen Klassen.
-Jede Plattform wird dann von einer Klasse repräsentiert, die sich von einer der Fabriken ableitet.
+Dadurch lässt sich zur Laufzeit oder Kompilierzeit entscheiden, welche Produktfamilie tatsächlich verwendet wird,
+ohne dass der übrige Code angepasst werden muss.
+
+Ein klassisches Beispiel ist eine GUI-Bibliothek, die je nach Betriebssystem passende Buttons, Checkboxen und Fenster erzeugt,
+wobei sichergestellt wird, dass innerhalb einer Anwendung nur Elemente eines einzigen, konsistenten Stils gemischt werden.
+
+Der große Vorteil liegt in der losen Kopplung:
+Der Client arbeitet ausschließlich mit abstrakten Schnittstellen (abstrakte Fabrik und abstrakte Produkte)
+und bleibt so unabhängig von konkreten Klassen.
+
+In C++ wird dies typischerweise über abstrakte Basisklassen mit rein virtuellen Methoden umgesetzt,
+wobei die konkreten Fabriken und Produkte davon erben.
+Neue Produktfamilien lassen sich so relativ einfach hinzufügen (Open/Closed-Prinzip),
+während das Hinzufügen neuer Produktarten innerhalb einer bestehenden Familie tendenziell aufwendiger ist,
+da dann alle Fabriken angepasst werden müssen.
+
 
 #### Struktur (UML):
 

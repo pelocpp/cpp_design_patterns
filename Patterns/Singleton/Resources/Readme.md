@@ -20,7 +20,7 @@
 
 > &bdquo;Das Singleton Pattern stellt sicher, dass von einer Klasse genau eine Instanz existiert und diese global zugänglich ist.&rdquo;
 
-Das *Singleton Pattern* gehört zu den Erzeugungsmustern (Creational Patterns) und regelt,
+Das *Singleton Pattern* gehört zu den Erzeugungsmustern (*Creational Patterns*) und regelt,
 wie eine Klasse instanziiert wird. Sein Kernanliegen ist, die Existenz genau einer einzigen Instanz einer Klasse zur Laufzeit
 zu garantieren &ndash; unabhängig davon, wie oft oder von wo aus versucht wird, ein Objekt dieser Klasse zu erzeugen.
 

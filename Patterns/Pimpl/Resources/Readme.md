@@ -10,30 +10,39 @@
 
 #### Ziel / Absicht:
 
-Was versteht man unter einem *Opaque Pointer*? Opaque, zu Deutsch *undurchsichtig*, impliziert,
-das wir es mit etwas zu tun haben, durch das wir nicht durchschauen können.
-Ein *Opaque Pointer* (zu Deutsch gewissermaßen ein "undurchsichtiger Zeiger") ist ein Zeiger,
-der auf eine Datenstruktur (Objekt) verweist, deren Inhalt zum Zeitpunkt seiner Definition nicht verfügbar ist.
+###### In einem Satz:
 
-#### Hinweis:
+> &bdquo;Das Pimpl Pattern kapselt die Implementierungsdetails einer Klasse hinter einem Zeiger auf ein verborgenes Implementierungsobjekt und trennt damit ihre öffentliche Schnittstelle von ihrer konkreten Implementierung.&rdquo;
 
-Das *Opaque Pointer* Pattern ist auch unter den Begriffen *d-pointer*, *compiler firewall*
-oder auch *Cheshire Cat Pattern* oder *Pimpl* ("*Pointer to implementation*") bekannt.
+Das *Pimpl-Idiom* (kurz für &bdquo;Pointer to Implementation&bdquo;, auch als &bdquo;Compiler Firewall&rdquo;
+oder &bdquo;Cheshire Cat Idiom&rdquo; bekannt) ist ein C++-spezifisches Entwurfsmuster zur Trennung von Schnittstelle
+und Implementierung.
 
-#### Problem:
+Anstatt private Member-Variablen und private Methoden direkt in der Klassendeklaration im Header offenzulegen,
+werden sie in eine separate, vorwärtsdeklarierte Klasse ausgelagert,
+die nur in der zugehörigen .cpp-Datei vollständig definiert ist.
 
-*Opaque Pointer* sind eine Möglichkeit, die Implementierungsdetails einer Schnittstelle vor Benutzern zu verbergen.
+Die öffentliche Klasse hält lediglich einen Zeiger (meist `std::unique_ptr`) auf diese Implementierungsklasse
+und leitet alle Aufrufe an sie weiter.
+Dadurch bleiben Implementierungsdetails wie private Datentypen, verwendete Bibliotheken oder interne Hilfsklassen
+vollständig vor dem Header und damit vor den Nutzern der Klasse verborgen.
 
-Auf diese Weise kann die Implementierung geändert werden,
-ohne dass die C++-Module, die sie verwenden, neu kompiliert werden müssen.
+Ein wesentlicher praktischer Vorteil ist die Reduktion von Kompilierabhängigkeiten:
+Ändert sich nur die Implementierung, muss nicht mehr jede Datei neu kompiliert werden, die den Header inkludiert,
+sondern nur die .cpp-Datei der betroffenen Klasse selbst.
+Das verbessert insbesondere bei großen Projekten die Build-Zeiten spürbar.
 
-Dies kommt auch dem Programmierer zugute, da eine einfache Schnittstelle erstellt werden kann
-und die meisten Details in einer anderen Datei versteckt sind.
+Zusätzlich sorgt das Pattern für eine stabile Binärschnittstelle (ABI-Stabilität),
+da sich die Größe und das Layout des öffentlichen Objekts durch interne Änderungen nicht verändern.
 
-Dies ist wichtig, um beispielsweise die Binärcode-Kompatibilität (*ABI*, *Application Binary Interface*)
-mit verschiedenen Versionen einer *Shared*-Bibliothek zu gewährleisten.
+Der Preis dafür ist ein gewisser Laufzeit-Overhead durch die zusätzliche Indirektion
+sowie ein Mehraufwand bei Speicherverwaltung und Implementierung (z. B. explizite Destruktoren
+wegen `std::unique_ptr` auf unvollständigen Typ).
 
-#### Lösung:
+In der Praxis wird Pimpl daher vor allem bei stabilen öffentlichen APIs, Bibliotheken und Klassen
+mit häufig wechselnder interner Implementierung eingesetzt.
+
+#### Details zur Umsetzung:
 
 In seiner Grundform sieht das Muster wie folgt aus:
 

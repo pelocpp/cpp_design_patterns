@@ -20,7 +20,7 @@
 
 > &bdquo;Das Flyweight Pattern reduziert den Speicherbedarf, indem es gemeinsame, unveränderliche Objektzustände zentral verwaltet und von mehreren Objekten wiederverwenden lässt.&rdquo;
 
-Das *Flyweight-Pattern* gehört zur Kategorie der Structural Patterns und kommt zum Einsatz,
+Das *Flyweight-Pattern* gehört zur Kategorie der strukturellen Entwurfsmuster und kommt zum Einsatz,
 wenn eine Anwendung sehr viele gleichartige Objekte verwalten muss, was ohne Gegenmaßnahmen zu hohem Speicherverbrauch führen würde.
 
 Die Kernidee besteht darin, den Zustand eines Objekts in zwei Teile aufzuspalten:

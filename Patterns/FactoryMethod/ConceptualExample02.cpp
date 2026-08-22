@@ -179,7 +179,7 @@ void test_conceptual_example_02()
     // to get more interesting results,
     // preorder some products from specific factories
     for (size_t i : { 0, 0, 0, 0, 0, 1 }) {
-        factories[i]->requestProduct();
+        std::unique_ptr<ProductBase> product = factories[i]->requestProduct();
     }
 
     // create a factory that automatically selects the least busy

@@ -18,7 +18,7 @@
 
 ###### In einem Satz:
 
-&bdquo;Erstelle eine Kopie eines Objekts durch einen Zeiger auf seinen Basistyp.&rdquo;
+> &bdquo;Erstelle eine Kopie eines Objekts durch einen Zeiger auf seinen Basistyp.&rdquo;
 
 Das *Prototype Pattern* ist ein Entwurfsmuster,
 das zum Instanziieren einer Klasse auf das Kopieren oder Klonen der Eigenschaften eines anderen, vorhandenen Objekts zurückgreift.

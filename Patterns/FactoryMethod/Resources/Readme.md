@@ -18,34 +18,35 @@
 
 ###### In einem Satz:
 
-&bdquo;Erstellung von Objekten auf Basis einer Schnittstelle in einer Oberklasse,
-die es den Unterklassen erlaubt, den Typ der zu erstellenden Objekte zu konkretisieren.&rdquo;
-
-Das *Factory Method Pattern* ist ein Entwurfsmuster, mit dem Objekte erstellt werden können,
-ohne den Objekttyp anzugeben, der hierzu verwendet werden soll.
-Das Entwurfsmuster definiert zuallererst eine Methode, die ein Objekt erzeugt.
-Welche Klasse hierbei herangezogen wird, entscheidet die konkrete Klasse, die diese Methode implementiert.
-
-Zum Erstellen des Objekts wird eine Schnittstelle benötigt.
-Die Unterklassen entscheiden, welche Klasse instanziiert werden soll.
-Mit dem *Factory Method Pattern* kann eine Klasse die Instanziierung auf Unterklassen verschieben.
-
-**Konsequenz**:<br />
-  * *Factory Methoden* verhindern, dass anwendungsspezifische Klassen in der Anwendung in Erscheinung treten. 
-  * Das *Factory Method* Pattern ermöglicht es dem Clientcode, mit abstrakten Klassen und Schnittstellen zu arbeiten,
-  ohne die konkreten Klassen zu kennen, die diese Schnittstellen implementieren.
-  Dies fördert eine lose Kopplung und macht den Code flexibler und erweiterbar.
+> &bdquo;Das Factory Method Pattern kapselt die Erzeugung von Objekten, indem es Unterklassen die Entscheidung darüber überlässt, welche konkrete Produktklasse instanziiert wird.&rdquo;
 
 
-#### Lösung:
+Das *Factory Method Pattern* gehört zu den Erzeugungsmustern (*Creational Patterns*)
+und löst das Problem, dass Code, der Objekte erzeugt, oft eng an konkrete Klassen gekoppelt ist.
 
-Das *Factory*-Entwurfsmuster definiert eine Schnittstelle zum Erstellen eines Objekts
-und überlässt die Auswahl des konkreten Klassentyps den Unterklassen.
-Das Entwurfsmuster macht ein Software-Design leichter anpassbar und weniger abhängig 
-von anderen Klassen.
+Statt Objekte direkt mit `new` zu erzeugen, definiert eine Basisklass
+eine virtuelle Methode &ndash; die sogenannte Factory Method &ndash;, die von abgeleiteten Klassen überschrieben wird,
+um die tatsächliche Instanz zu erzeugen.
 
-In dem Muster kommen zwei Vererbungshierarchien vor: eine mit den *Factory*-Klassen und
-eine zweite mit den zu erzeugenden Objekten. Diese werden in dem Muster häufig als *Produkte* bezeichnet.
+Der aufrufende Code arbeitet dabei ausschließlich über die abstrakte Basisklasse bzw. ein gemeinsames Interface
+und muss die konkrete Klasse gar nicht kennen.
+
+Dadurch wird die Erzeugungslogik von der Verwendungslogik getrennt, was das Single-Responsibility-Prinzip stärkt.
+
+Neue Produktvarianten lassen sich einführen, indem man einfach eine neue Unterklasse mit eigener Factory Method ergänzt,
+ohne bestehenden Code zu verändern – ein klassisches Beispiel für das Open/Closed-Prinzip.
+
+In C++ lässt sich das Pattern besonders elegant mit virtuellen Methoden und `std::unique_ptr` als Rückgabetyp umsetzen,
+um klare Ownership-Verhältnisse zu garantieren.
+
+Häufig wird es dort eingesetzt, wo ein Framework den Ablauf vorgibt,
+die konkrete Ausprägung eines Schritts aber von der konkreten Anwendung abhängt
+(z. B. bei parser- oder plugin-basierten Architekturen).
+
+Abzugrenzen ist es vom *Abstract-Factory*-Pattern, das mehrere zusammengehörige Objektfamilien erzeugt,
+während sich Factory Method typischerweise auf ein einzelnes Produkt konzentriert.
+
+
 
 #### Struktur (UML):
 
