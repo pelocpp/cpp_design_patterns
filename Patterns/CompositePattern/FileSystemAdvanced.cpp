@@ -47,7 +47,7 @@ constexpr const char* path1 =
 constexpr const char* path2 =
     R"(C:\Development\GitRepositoryCPlusPlus\Cpp_DesignPatterns\Patterns\CompositePattern)";
 
-void test_filesystem_02() {
+void test_filesystem_02_advanced() {
 
     std::string s = { path2 };
     std::filesystem::path path = { s };

@@ -25,10 +25,12 @@ namespace ConceptualExample_Composite_Pattern {
 
     public:
         Component() = default;
+
         Component(const Component&) = delete;
         Component& operator=(const Component&) = delete;
         Component(Component&&) = delete;
         Component& operator=(Component&&) = delete;
+
         virtual ~Component() = default;
 
         /**

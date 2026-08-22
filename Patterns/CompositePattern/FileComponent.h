@@ -2,7 +2,12 @@
 // FileComponent.h
 // ===========================================================================
 
-class IFileComponent {
+#pragma once
+
+#include <string>
+
+class IFileComponent
+{
 public:
     virtual ~IFileComponent() = default;
 

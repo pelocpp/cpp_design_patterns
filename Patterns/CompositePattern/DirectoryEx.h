@@ -2,6 +2,14 @@
 // DirectoryEx.h
 // ===========================================================================
 
+#pragma once
+
+#include "FileComponent.h"
+
+#include <string>
+#include <vector>
+#include <memory>
+
 class DirectoryEx : public IFileComponent
 {
 public:
@@ -11,7 +19,7 @@ public:
     ~DirectoryEx() {}
 
     // getter
-    std::string getName();
+    const std::string& getName() const;
 
     // public interface
     void addFileComponent(std::shared_ptr<IFileComponent>);

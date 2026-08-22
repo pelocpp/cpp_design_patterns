@@ -2,6 +2,12 @@
 // File.h
 // ===========================================================================
 
+#pragma once
+
+#include "FileComponent.h"
+
+#include <string>
+
 class File : public IFileComponent {
 public:
     File() {}
@@ -9,8 +15,8 @@ public:
     ~File() {}
 
     // getter
-    std::string getName();
-    std::string getData();
+    const std::string& getName() const;
+    const std::string& getData() const;
 
     void display(const std::string&) const override;
 

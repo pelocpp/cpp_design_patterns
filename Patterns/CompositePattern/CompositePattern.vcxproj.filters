@@ -22,19 +22,16 @@
     <Filter Include="Source Files\Shapes">
       <UniqueIdentifier>{5ecd5af9-7091-4552-abcf-d91b243707f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\FileSystem\Header Files">
+      <UniqueIdentifier>{112bfceb-ee5f-4ed8-8dc0-a667d6f92ee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FileSystem\Source Files">
+      <UniqueIdentifier>{decfa231-d68c-4b2b-ad4a-acb1697f6fe8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="File.cpp">
-      <Filter>Source Files\FileSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Directory.cpp">
-      <Filter>Source Files\FileSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectoryEx.cpp">
-      <Filter>Source Files\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="FileSystemBeginners.cpp">
       <Filter>Source Files\FileSystem</Filter>
@@ -51,19 +48,28 @@
     <ClCompile Include="ConceptualExample_Factory.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
+    <ClCompile Include="Directory.cpp">
+      <Filter>Source Files\FileSystem\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectoryEx.cpp">
+      <Filter>Source Files\FileSystem\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Source Files\FileSystem\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileComponent.h">
-      <Filter>Source Files\FileSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="File.h">
-      <Filter>Source Files\FileSystem</Filter>
-    </ClInclude>
     <ClInclude Include="Directory.h">
-      <Filter>Source Files\FileSystem</Filter>
+      <Filter>Source Files\FileSystem\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DirectoryEx.h">
-      <Filter>Source Files\FileSystem</Filter>
+      <Filter>Source Files\FileSystem\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>Source Files\FileSystem\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileComponent.h">
+      <Filter>Source Files\FileSystem\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

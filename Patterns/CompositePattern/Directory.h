@@ -2,15 +2,21 @@
 // Directory.h
 // ===========================================================================
 
+#pragma once
+
+#include "FileComponent.h"
+
+#include <string>
+#include <vector>
+
 class Directory : public IFileComponent {
 public:
     // c'tor(s)
     Directory() {}
-
     Directory(const std::string& name);
 
     // getter
-    std::string getName();
+    const std::string& getName() const;
 
     // public interface
     void addFileComponent(IFileComponent*);

@@ -2,18 +2,17 @@
 // Directory.cpp
 // ===========================================================================
 
-#include <iostream>
+#include "Directory.h"
+
+#include <print>
 #include <string>
 #include <vector>
 
-#include "FileComponent.h"
-#include "Directory.h"
-
 // c'tor(s)
-Directory::Directory(const std::string& name) : m_name(name) {}
+Directory::Directory(const std::string& name) : m_name{ name } {}
 
 // getter
-std::string Directory::getName() { return m_name; }
+const std::string& Directory::getName() const { return m_name; }
 
 // public interface
 void Directory::addFileComponent(IFileComponent* fc) {
@@ -23,7 +22,7 @@ void Directory::addFileComponent(IFileComponent* fc) {
 void Directory::display(const std::string& indent) const {
 
     std::string s{ indent + indent };
-    std::cout << s << m_name << std::endl;
+    std::println("{}{}", s, m_name);
 
     for (IFileComponent* fileComponent : m_contents) {
         fileComponent->display(s);

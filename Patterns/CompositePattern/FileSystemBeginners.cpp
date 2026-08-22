@@ -10,7 +10,7 @@
 #include "File.h"
 #include "Directory.h"
 
-void test_filesystem_01() {
+void test_filesystem_01_beginners() {
 
     Directory dir1 ("Directory 1:");
     Directory dir2 ("Directory 2:");

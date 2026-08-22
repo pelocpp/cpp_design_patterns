@@ -2,24 +2,25 @@
 // File.cpp
 // ===========================================================================
 
-#include <iostream>
-#include <string>
-
-#include "FileComponent.h"
 #include "File.h"
+
+#include <print>
+#include <string>
 
 // c'tor(s)
 File::File(const std::string& name, const std::string& data)
-    : m_name(name), m_data(data) {}
+    : m_name{ name }, m_data{ data }
+{}
 
 // getter
-std::string File::getName() { return m_name; }
-std::string File::getData() { return m_data; }
+const std::string& File::getName() const { return m_name; }
+const std::string& File::getData() const { return m_data; }
 
+// public interface
 void File::display(const std::string& indent) const {
 
-    std::string s = indent + "    ";
-    std::cout << s << m_name << " - data: " << m_data << std::endl;
+    std::string s{ indent + "  " };
+    std::println("{}{} - data: {}", s, m_name, m_data);
 }
 
 // ===========================================================================
