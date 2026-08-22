@@ -6,23 +6,23 @@
 
 #include "FileComponent.h"
 
+#include <cstddef>
 #include <string>
 
-class File : public IFileComponent {
+class File final : public IFileComponent {
 public:
-    File() {}
-    File(const std::string& name, const std::string& data);
-    ~File() {}
+    File();
+    File(std::string name, std::size_t size);
 
     // getter
-    const std::string& getName() const;
-    const std::string& getData() const;
+    [[nodiscard]] const std::string& name() const noexcept;
+    [[nodiscard]] std::size_t size() const noexcept;
 
-    void display(const std::string&) const override;
+    void display(std::size_t depth /*= 0*/) const override;
 
 private:
     std::string m_name;
-    std::string m_data;
+    std::size_t m_size;
 };
 
 // ===========================================================================

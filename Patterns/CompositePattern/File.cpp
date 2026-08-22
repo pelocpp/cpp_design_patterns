@@ -4,23 +4,32 @@
 
 #include "File.h"
 
+#include <cstddef>
 #include <print>
 #include <string>
 
 // c'tor(s)
-File::File(const std::string& name, const std::string& data)
-    : m_name{ name }, m_data{ data }
+File::File() : m_size{} {}
+
+File::File(std::string name, std::size_t size)
+    : m_name{ std::move(name) }, m_size{ size }
 {}
 
 // getter
-const std::string& File::getName() const { return m_name; }
-const std::string& File::getData() const { return m_data; }
+[[nodiscard]]
+const std::string& File::name() const noexcept { return m_name; }
+
+[[nodiscard]]
+std::size_t File::size() const noexcept { return m_size; }
 
 // public interface
-void File::display(const std::string& indent) const {
+void File::display(std::size_t depth) const /*override*/ {
 
-    std::string s{ indent + "  " };
-    std::println("{}{} - data: {}", s, m_name, m_data);
+    //std::string s{ indent + "  " };
+    //std::println("{}{} - Size: {}", s, m_name, m_size);
+
+    std::print("{:{}}", "", depth * 2);
+    std::println("{} - Size: {}", m_name, m_size);
 }
 
 // ===========================================================================

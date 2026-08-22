@@ -6,25 +6,28 @@
 
 #include "FileComponent.h"
 
+#include <cstddef>
 #include <string>
 #include <vector>
+#include <memory>
 
-class Directory : public IFileComponent {
+class Directory final : public IFileComponent
+{
 public:
-    // c'tor(s)
-    Directory() {}
-    Directory(const std::string& name);
+    // c'tor
+    Directory(std::string name);
 
     // getter
-    const std::string& getName() const;
+    [[nodiscard]]
+    const std::string& getName() const noexcept;
 
     // public interface
-    void addFileComponent(IFileComponent*);
-    void display(const std::string&) const override;
+    void addFileComponent(std::unique_ptr<IFileComponent> component);
+    void display(std::size_t depth/* = 0*/) const override;
 
 private:
     std::string m_name;
-    std::vector<IFileComponent*> m_contents;
+    std::vector<std::unique_ptr<IFileComponent>> m_contents;
 };
 
 // ===========================================================================

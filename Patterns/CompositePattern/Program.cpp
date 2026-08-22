@@ -31,8 +31,8 @@ int main()
 
     //test_shapes();
 
-    test_filesystem_01_beginners();
-    //test_filesystem_02_advanced();
+    //test_filesystem_01_beginners();
+    test_filesystem_02_advanced();
 
     return 0;
 }

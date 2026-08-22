@@ -51,18 +51,12 @@
     <ClCompile Include="Directory.cpp">
       <Filter>Source Files\FileSystem\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DirectoryEx.cpp">
-      <Filter>Source Files\FileSystem\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="File.cpp">
       <Filter>Source Files\FileSystem\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Directory.h">
-      <Filter>Source Files\FileSystem\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectoryEx.h">
       <Filter>Source Files\FileSystem\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="File.h">

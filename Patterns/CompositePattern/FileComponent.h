@@ -4,14 +4,14 @@
 
 #pragma once
 
-#include <string>
+#include <cstddef>
 
 class IFileComponent
 {
 public:
     virtual ~IFileComponent() = default;
 
-    virtual void display(const std::string&) const = 0;
+    virtual void display(std::size_t depth /*= 0*/) const = 0;
 };
 
 // ===========================================================================

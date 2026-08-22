@@ -4,29 +4,33 @@
 
 #include "Directory.h"
 
+#include <memory>
 #include <print>
 #include <string>
 #include <vector>
 
 // c'tor(s)
-Directory::Directory(const std::string& name) : m_name{ name } {}
+Directory::Directory(std::string name) : m_name{ std::move(name) } {}
 
 // getter
-const std::string& Directory::getName() const { return m_name; }
+const std::string& Directory::getName() const noexcept { return m_name; }
 
 // public interface
-void Directory::addFileComponent(IFileComponent* fc) {
-    m_contents.push_back(fc);
+void Directory::addFileComponent(std::unique_ptr<IFileComponent> component) {
+    m_contents.push_back(std::move(component));
 }
 
-void Directory::display(const std::string& indent) const {
+void Directory::display(std::size_t depth) const /*override*/ {
 
-    std::string s{ indent + indent };
-    std::println("{}{}", s, m_name);
+    //std::string s{ indent + indent };
+    //std::println("{}{}", s, m_name);
 
-    for (IFileComponent* fileComponent : m_contents) {
-        fileComponent->display(s);
-    }
+    std::print("{:{}}", "", depth * 2);
+    std::println("{}", m_name);
+
+    //for (const auto& fileComponent : m_contents) {
+    //    fileComponent->display(fileComponent);
+    //}
 }
 
 // ===========================================================================

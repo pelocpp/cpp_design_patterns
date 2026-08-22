@@ -144,7 +144,6 @@
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="Directory.cpp" />
-    <ClCompile Include="DirectoryEx.cpp" />
     <ClCompile Include="ConceptualExample_Factory.cpp" />
     <ClCompile Include="FileSystemBeginners.cpp" />
     <ClCompile Include="File.cpp" />
@@ -154,7 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Directory.h" />
-    <ClInclude Include="DirectoryEx.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="FileComponent.h" />
   </ItemGroup>
