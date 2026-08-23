@@ -6,8 +6,6 @@
 
 #include "FileSystemElement.h"
 
-#include <cstddef>
-
 class IFileComponent : public FileSystemElement
 {
 public:

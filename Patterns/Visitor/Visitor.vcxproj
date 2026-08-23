@@ -151,6 +151,7 @@
     <ClCompile Include="OnlineShop.cpp" />
     <ClCompile Include="PrintVisitor.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="ProgramFileSystem_Variant.cpp" />
     <ClCompile Include="SizeVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>

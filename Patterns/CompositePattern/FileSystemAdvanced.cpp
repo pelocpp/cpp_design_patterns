@@ -81,14 +81,14 @@ constexpr const char* path2 = R"(..\..\Patterns\CompositePattern\x64)";
 
 void test_filesystem_02_advanced() {
 
-    std::string s { path2 };
-    std::filesystem::path path { s };
+    std::string source { path2 };
+    std::filesystem::path path { source };
 
     if (!std::filesystem::exists(path)) {
-        std::println("Given path does not exist: {}", s);
+        std::println("Given path does not exist: {}", source);
     }
     else {
-        Directory dir{ s };
+        Directory dir{ source };
         exploreDirectory(path, dir);
         dir.display(2);
     }

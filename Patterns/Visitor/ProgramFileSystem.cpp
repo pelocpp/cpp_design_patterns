@@ -16,6 +16,8 @@
 #include <system_error>
 #include <utility>
 
+// ===========================================================================
+
 static void exploreDirectory(const std::filesystem::path& path, Directory& currentDir) {
 
     if (!std::filesystem::exists(path) || !std::filesystem::is_directory(path)) {
@@ -81,7 +83,7 @@ constexpr const char* path1 = R"(..\..\Patterns\CompositePattern\Resources)";
 constexpr const char* path2 = R"(..\..\Patterns\CompositePattern\x64)";
 
 // plain composite pattern
-static void test_filesystem_example_print_01() {
+static void test_filesystem_example_01() {
 
     std::string source { path2 };
     std::filesystem::path path { source };
@@ -96,7 +98,7 @@ static void test_filesystem_example_print_01() {
 }
 
 // composite pattern & visitor pattern (printing)
-static void test_filesystem_example_print_02() {
+static void test_filesystem_example_02() {
 
     std::string source{ path2 };
     std::filesystem::path path{ source };
@@ -114,7 +116,7 @@ static void test_filesystem_example_print_02() {
 }
 
 // composite pattern & visitor pattern (calculating total size)
-static void test_filesystem_example_print_03() {
+static void test_filesystem_example_03() {
 
     std::string source{ path2 };
     std::filesystem::path path{ source };
@@ -133,11 +135,11 @@ static void test_filesystem_example_print_03() {
     }
 }
 
-void test_filesystem_example_print() {
+void test_filesystem_example() {
 
-    test_filesystem_example_print_01();
-    test_filesystem_example_print_02();
-    test_filesystem_example_print_03();
+    test_filesystem_example_01();  // just composite pattern
+    test_filesystem_example_02();  // composite pattern & visitor pattern (printing)
+    test_filesystem_example_03();  // composite pattern & visitor pattern (calculating total size)
 }
 
 // ===========================================================================

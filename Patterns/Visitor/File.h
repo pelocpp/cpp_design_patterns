@@ -5,7 +5,6 @@
 #pragma once
 
 #include "FileComponent.h"
-#include "FileSystemElement.h"
 
 #include <cstddef>
 #include <string>

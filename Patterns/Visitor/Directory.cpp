@@ -15,14 +15,14 @@ Directory::Directory(std::string name) : m_name{ std::move(name) } {}
 // getter
 const std::string& Directory::name() const noexcept { return m_name; }
 
-// public interface
-void Directory::addFileComponent(std::unique_ptr<IFileComponent> component) {
-    m_contents.push_back(std::move(component));
-}
-
 const std::vector<std::unique_ptr<IFileComponent>>& Directory::children() const
 {
     return m_contents;
+}
+
+// public interface
+void Directory::addFileComponent(std::unique_ptr<IFileComponent> component) {
+    m_contents.push_back(std::move(component));
 }
 
 // Visitor pattern

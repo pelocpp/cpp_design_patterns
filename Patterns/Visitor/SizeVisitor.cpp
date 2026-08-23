@@ -5,9 +5,10 @@
 #pragma once
 
 #include "SizeVisitor.h"
-
 #include "File.h"
 #include "Directory.h"
+
+#include <cstddef>
 
 void SizeVisitor::visit(File& file)
 {
@@ -16,8 +17,7 @@ void SizeVisitor::visit(File& file)
 
 void SizeVisitor::visit(Directory& directory)
 {
-    for (auto& child : directory.children())
-    {
+    for (auto& child : directory.children()) {
         child->accept(*this);
     }
 }

@@ -40,6 +40,84 @@ da dann alle existierenden Visitor-Implementierungen angepasst werden müssen.
 Das Pattern eignet sich daher besonders für Szenarien, in denen die Objektstruktur stabil bleibt,
 aber die Menge der darauf ausgeführten Operationen häufig wächst.
 
+---
+
+### Zusammenspiel von Composite Pattern und Visitor Pattern
+
+Das Zusammenspiel von Composite Pattern und Visitor Pattern wird am Beispiel des Traversierens einer Verzeichnisstruktur
+aufgezeigt. In einer ersten Realisierung wird das Visitor Pattern über eine gemeinsame Basisklasse und virtuelle `accept()`-Methode
+ausgedrückt.
+
+In einer zweiten Realisierung entfallen diese Werkzeuge zu Gunsten von `std::variant`.
+
+Für das Beispiel bietet sich ungefähr folgende Struktur an:
+
+  * Die Klassen `File` und `Directory` sind normale, unabhängige Klassen.
+  * Der Typ `FileSystemElement` ist ein `std::variant<File, Directory>`.
+  * Die Klasse `Directory` enthält einen Member `std::vector<FileSystemElement>`.
+  * Der Visitor ist kein Objekt mehr, das von einer Visitor-Basisklasse erbt, sondern ein aufrufbares Objekt, das eine geeignete Menge
+	von Überladungen des Aufrufoperators `operator()` besitzt.
+  * Die dynamische Auswahl übernimmt `std::visit`.
+
+Ein wichtiger Punkt ist allerdings die Rekursion: `Directory` enthält wiederum `FileSystemElement`, das `Directory` enthalten kann.
+Ein `std::variant<File, Directory>` kann nicht direkt verwendet werden, solange `Directory` den Variant-Typ selbst *by value* enthält.
+
+Deshalb ist es sinnvoll, die Kinder weiterhin über `std::unique_ptr` zu halten oder einen rekursiven Wrapper einzuführen.
+
+Damit können wir nun die folgenden zwei Ansätze unterscheiden:
+
+Klassisches C++:
+
+```cpp
+IFileComponent
+   |
+   +-- File
+   |
+   +-- Directory
+          |
+          +-- unique_ptr<IFileComponent>
+          +-- unique_ptr<IFileComponent>
+```
+
+Modern C++:
+
+```cpp
+FileSystemElement = variant<File, unique_ptr<Directory>>
+
+Directory
+   |
+   +-- vector<FileSystemElement>
+```
+
+
+Die ursprünglicher Visitor-Klasse wird auf diese Weise überhaupt nicht mehr benötigt.
+
+Wir schreiben stattdessen eine Klasse mit mehreren Überladungen des Aufrufoperators `operator()`:
+
+```cpp
+01: class SizeVisitor
+02: {
+03: public:
+04:     void operator()(const File& file)
+05:     {
+06:         m_totalSize += file.size();
+07:     }
+08: 
+09:     void operator()(const std::unique_ptr<Directory>& directory)
+10:     {
+11:         for (const auto& child : directory->children()) {
+12:             std::visit(*this, child);
+13:         }
+14:     }
+15: 
+16:     [[nodiscard]]
+17:     std::size_t totalSize() const noexcept { return m_totalSize; }
+18: 
+19: private:
+20:     std::size_t m_totalSize{};
+21: };
+```
+
 
 ---
 

@@ -24,8 +24,7 @@ void PrintVisitor::visit(Directory& directory)
     std::print("{:>{}}", "", m_depth);
     std::println("Directory: {}", directory.name());
 
-    for (auto& child : directory.children())
-    {
+    for (auto& child : directory.children()) {
         child->accept(*this);
     }
 

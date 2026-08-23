@@ -5,10 +5,8 @@
 #pragma once
 
 #include "FileComponent.h"
-#include "FileSystemElement.h"
 #include "FileSystemVisitor.h"
 
-#include <cstddef>
 #include <string>
 #include <vector>
 #include <memory>
