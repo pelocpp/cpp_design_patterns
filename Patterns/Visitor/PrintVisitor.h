@@ -1,17 +1,23 @@
 // ===========================================================================
-// FileComponent.h // Visitor Pattern
+// PrintVisitor.h // Visitor Pattern
 // ===========================================================================
 
 #pragma once
 
-#include "FileSystemElement.h"
+#include "FileSystemVisitor.h"
 
 #include <cstddef>
 
-class IFileComponent : public FileSystemElement
-{
+class PrintVisitor : public FileSystemVisitor {
+private:
+    std::size_t m_depth{};
+
 public:
-    virtual ~IFileComponent() = default;
+    PrintVisitor() = default;
+    virtual ~PrintVisitor() = default;
+
+    void visit(File& file) override;
+    void visit(Directory& directory) override;
 };
 
 // ===========================================================================

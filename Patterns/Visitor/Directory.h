@@ -13,7 +13,7 @@
 #include <vector>
 #include <memory>
 
-class Directory final : public IFileComponent, public FileSystemElement {
+class Directory final : public IFileComponent {
 public:
     // c'tor
     Directory() = default;
@@ -21,12 +21,13 @@ public:
 
     // getter
     [[nodiscard]]
-    const std::string& getName() const noexcept;
+    const std::string& name() const noexcept;
+    const std::vector<std::unique_ptr<IFileComponent>>& children() const;
 
     // public interface
     void addFileComponent(std::unique_ptr<IFileComponent> component);
-    void display(std::size_t depth) const override;
 
+    // visitor pattern interface
     void accept(FileSystemVisitor& visitor) override;
 
 private:

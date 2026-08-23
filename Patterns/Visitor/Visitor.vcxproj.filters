@@ -60,7 +60,13 @@
     <ClCompile Include="File.cpp">
       <Filter>Source Files\FileSystem\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileSystem.cpp">
+    <ClCompile Include="ProgramFileSystem.cpp">
+      <Filter>Source Files\FileSystem\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PrintVisitor.cpp">
+      <Filter>Source Files\FileSystem\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SizeVisitor.cpp">
       <Filter>Source Files\FileSystem\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -97,6 +103,12 @@
       <Filter>Source Files\FileSystem\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Directory.h">
+      <Filter>Source Files\FileSystem\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrintVisitor.h">
+      <Filter>Source Files\FileSystem\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SizeVisitor.h">
       <Filter>Source Files\FileSystem\Header Files</Filter>
     </ClInclude>
   </ItemGroup>

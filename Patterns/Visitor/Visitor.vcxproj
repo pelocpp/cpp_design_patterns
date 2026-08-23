@@ -146,10 +146,12 @@
     <ClCompile Include="ConceptualExample_Variant_Visit.cpp" />
     <ClCompile Include="Directory.cpp" />
     <ClCompile Include="File.cpp" />
-    <ClCompile Include="FileSystem.cpp" />
+    <ClCompile Include="ProgramFileSystem.cpp" />
     <ClCompile Include="MotivationDocumentHtmlMarkdown.cpp" />
     <ClCompile Include="OnlineShop.cpp" />
+    <ClCompile Include="PrintVisitor.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="SizeVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\dp_visitor_double_dispatch.svg" />
@@ -166,6 +168,8 @@
     <ClInclude Include="FileComponent.h" />
     <ClInclude Include="FileSystemElement.h" />
     <ClInclude Include="FileSystemVisitor.h" />
+    <ClInclude Include="PrintVisitor.h" />
+    <ClInclude Include="SizeVisitor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

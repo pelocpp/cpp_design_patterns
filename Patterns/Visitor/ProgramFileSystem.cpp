@@ -1,9 +1,12 @@
 // ===========================================================================
-// FileSystem.cpp // Filesystem Test // Visitor Pattern
+// ProgramFileSystem.cpp // Filesystem Test // Visitor Pattern
 // ===========================================================================
 
 #include "File.h"
 #include "Directory.h"
+
+#include "PrintVisitor.h"
+#include "SizeVisitor.h"
 
 #include <cstdint>
 #include <filesystem>
@@ -77,19 +80,64 @@ constexpr const char* path1 = R"(..\..\Patterns\CompositePattern\Resources)";
 
 constexpr const char* path2 = R"(..\..\Patterns\CompositePattern\x64)";
 
-void test_filesystem_example_print() {
+// plain composite pattern
+static void test_filesystem_example_print_01() {
 
-    std::string s { path2 };
-    std::filesystem::path path { s };
+    std::string source { path2 };
+    std::filesystem::path path { source };
 
     if (!std::filesystem::exists(path)) {
-        std::println("Given path does not exist: {}", s);
+        std::println("Given path does not exist: {}", source);
     }
     else {
-        Directory dir{ s };
-        exploreDirectory(path, dir);
-        dir.display(2);
+        Directory root{ source };
+        exploreDirectory(path, root);
     }
+}
+
+// composite pattern & visitor pattern (printing)
+static void test_filesystem_example_print_02() {
+
+    std::string source{ path2 };
+    std::filesystem::path path{ source };
+
+    if (!std::filesystem::exists(path)) {
+        std::println("Given path does not exist: {}", source);
+    }
+    else {
+        Directory root{ source };
+        exploreDirectory(path, root);
+
+        PrintVisitor visitor;
+        root.accept(visitor);
+    }
+}
+
+// composite pattern & visitor pattern (calculating total size)
+static void test_filesystem_example_print_03() {
+
+    std::string source{ path2 };
+    std::filesystem::path path{ source };
+
+    if (!std::filesystem::exists(path)) {
+        std::println("Given path does not exist: {}", source);
+    }
+    else {
+        Directory root{ source };
+        exploreDirectory(path, root);
+
+        SizeVisitor visitor;
+        root.accept(visitor);
+
+        std::println("Total size: {} bytes.", visitor.totalSize());
+    }
+}
+
+void test_filesystem_example_print() {
+
+    test_filesystem_example_print_01();
+    test_filesystem_example_print_02();
+    test_filesystem_example_print_03();
 }
 
 // ===========================================================================

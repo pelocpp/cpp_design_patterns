@@ -10,7 +10,7 @@
 #include <cstddef>
 #include <string>
 
-class File final : public IFileComponent, public FileSystemElement {
+class File final : public IFileComponent {
 public:
     File() = default;
     File(std::string name, std::size_t size);
@@ -19,8 +19,7 @@ public:
     [[nodiscard]] const std::string& name() const noexcept;
     [[nodiscard]] std::size_t size() const noexcept;
 
-    void display(std::size_t depth) const override;
-
+    // visitor pattern interface
     void accept(FileSystemVisitor& visitor) override;
 
 private:
