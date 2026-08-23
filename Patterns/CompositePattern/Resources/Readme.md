@@ -65,7 +65,7 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample.cpp) &ndash; Konzeptionelles Beispiel.
+[Quellcode](../ConceptualExample.cpp) &ndash; Konzeptionelles Beispiel.<br />
 [Quellcode](../ConceptualExample_Factory.cpp) &ndash; Behandlung des `enable_shared_from_this`-Problems.
 
 Beachte in dem Quellcode zum konzeptionellen Beispiel:

@@ -11,7 +11,7 @@ class IFileComponent
 public:
     virtual ~IFileComponent() = default;
 
-    virtual void display(std::size_t depth /*= 0*/) const = 0;
+    virtual void display(std::size_t depth) const = 0;
 };
 
 // ===========================================================================

@@ -27,11 +27,12 @@ void test_filesystem_01_beginners() {
 
     //dir1.addFileComponent(&file1);
     //dir1.addFileComponent(&file2);
-    //dir1.addFileComponent(&dir2);
     //dir2.addFileComponent(&file3);
-    //dir2.addFileComponent(&dir3);
     //dir3.addFileComponent(&file4);
     //dir3.addFileComponent(&file5);
+    //dir1.addFileComponent(&dir2);
+    //dir2.addFileComponent(&dir3);
+
 
     auto dir1 = std::make_unique<Directory>("Directory 1");
     auto dir2 = std::make_unique<Directory>("Directory 2");
@@ -43,23 +44,15 @@ void test_filesystem_01_beginners() {
     auto file4 = std::make_unique<File>("File 4", 104);
     auto file5 = std::make_unique<File>("File 5", 105);
 
-    //dir1.addFileComponent(&file1);
-//dir1.addFileComponent(&file2);
-//dir1.addFileComponent(&dir2);
-//dir2.addFileComponent(&file3);
-//dir2.addFileComponent(&dir3);
-//dir3.addFileComponent(&file4);
-//dir3.addFileComponent(&file5);
-
     dir1->addFileComponent(std::move(file1));
     dir1->addFileComponent(std::move(file2));
     dir2->addFileComponent(std::move(file3));
     dir3->addFileComponent(std::move(file4));
     dir3->addFileComponent(std::move(file5));
     dir1->addFileComponent(std::move(dir2));
-    dir2->addFileComponent(std::move(dir3));
+    dir1->addFileComponent(std::move(dir3));
 
-    dir1->display(0);
+    dir1->display(2);
 }
 
 // ===========================================================================

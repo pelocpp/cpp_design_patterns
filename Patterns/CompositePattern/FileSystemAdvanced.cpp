@@ -11,39 +11,56 @@
 #include <memory>
 #include <print>
 #include <string>
+#include <system_error>
+#include <utility>
 
-static void exploreDirectory(const std::filesystem::path& path, const std::unique_ptr<Directory>& dir) {
+static void exploreDirectory(const std::filesystem::path& path, Directory& currentDir) {
 
-    if (std::filesystem::exists(path) && std::filesystem::is_directory(path)) {
+    if (!std::filesystem::exists(path) || !std::filesystem::is_directory(path)) {
+        return;
+    }
 
-        for (const auto& entry : std::filesystem::directory_iterator(path)) {
+    // std::filesystem::directory_iterator throws exceptions in case of permission issues;
+    // using std::error_code allows it to run more robustly.
+    std::error_code ec;
 
-            const std::filesystem::path filename{ entry.path().filename() };
+    for (const auto& entry : std::filesystem::directory_iterator(path, ec)) {
 
-            if (std::filesystem::is_directory(entry.status())) {
+        const std::filesystem::path filename = entry.path().filename();
 
-                /*const*/ std::unique_ptr<IFileComponent> subDir{
-                    std::make_unique<Directory>(filename.string())
-                };
-                
-                dir->addFileComponent(std::move(subDir)); 
-  
-              //  exploreDirectory(entry, std::dynamic_pointer_cast<Directory> (subDir));
+        if (entry.is_directory()) {
+
+            // 1. create a new subdirectory object (store the raw pointer)
+            auto subDirPtr = std::make_unique<Directory>(filename.string());
+
+            // 2. create a reference of this object
+            Directory& subDirRef = *subDirPtr;
+
+            // 3. transfer ownership to the current directory IFileComponent container
+            currentDir.addFileComponent(std::move(subDirPtr));
+
+            // 4. do recursion using the path and the reference of the subdirectory object
+            exploreDirectory(entry.path(), subDirRef);
+        }
+        else if (entry.is_regular_file()) {
+
+            std::error_code sizeErr;
+            std::uintmax_t filesize = std::filesystem::file_size(entry, sizeErr);
+
+            // in case of read errors regarding file size (e.g., system files), fallback to 0.
+            if (sizeErr) {
+                filesize = 0;
             }
-            else if (std::filesystem::is_regular_file(entry.status())) {
 
-                std::error_code err{ std::error_code{} };
-
-                std::uintmax_t filesize = std::filesystem::file_size(entry, err);
-                
-                std::unique_ptr<IFileComponent> file =
-                    std::make_unique<File>(filename.string(), static_cast<std::size_t>(filesize));
-                
-                dir->addFileComponent(std::move(file));
-            }
+            // 1. create a new File object
+            auto file = std::make_unique<File>(filename.string(), static_cast<std::size_t>(filesize));
+            
+            // 2. transfer ownership to the current directory IFileComponent container
+            currentDir.addFileComponent(std::move(file));
         }
     }
 }
+
 
 // ===========================================================================
 
@@ -71,10 +88,9 @@ void test_filesystem_02_advanced() {
         std::println("Given path does not exist: {}", s);
     }
     else {
-        std::unique_ptr<Directory> dir{ std::make_unique<Directory>(s) };
+        Directory dir{ s };
         exploreDirectory(path, dir);
-        //dir->display(" ");
-        dir->display(0);
+        dir.display(2);
     }
 }
 

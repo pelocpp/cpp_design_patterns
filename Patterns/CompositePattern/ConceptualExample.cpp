@@ -55,8 +55,8 @@ namespace ConceptualExample_Composite_Pattern {
          * object tree assembly. The downside is that these methods will be empty for
          * the leaf-level components.
          */
-        virtual void add(std::shared_ptr<Component> /*component*/) {}
-        virtual void remove(std::shared_ptr<Component> /*component*/) {}
+        virtual void add(std::shared_ptr<Component> component) {}
+        virtual void remove(std::shared_ptr<Component> component) {}
 
         /**
          * You can provide a method that lets the client code figure out
@@ -127,7 +127,7 @@ namespace ConceptualExample_Composite_Pattern {
         void remove(std::shared_ptr<Component> component) override {
             std::erase(m_children, component);   // C++ 20: std::erase for std::vector
             if (component) {
-                component->setParent(nullptr);   // Remove parent reference
+                component->setParent(nullptr);   // remove parent reference
             }
         }
 

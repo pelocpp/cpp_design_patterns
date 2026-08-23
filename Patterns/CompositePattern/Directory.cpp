@@ -20,17 +20,14 @@ void Directory::addFileComponent(std::unique_ptr<IFileComponent> component) {
     m_contents.push_back(std::move(component));
 }
 
-void Directory::display(std::size_t depth) const /*override*/ {
+void Directory::display(std::size_t depth) const {
 
-    //std::string s{ indent + indent };
-    //std::println("{}{}", s, m_name);
-
-    std::print("{:{}}", "", depth * 2);
+    std::print("{:>{}}", "", depth);
     std::println("{}", m_name);
 
-    //for (const auto& fileComponent : m_contents) {
-    //    fileComponent->display(fileComponent);
-    //}
+    for (const auto& fileComponent : m_contents) {
+        fileComponent->display(depth + 2);
+    }
 }
 
 // ===========================================================================

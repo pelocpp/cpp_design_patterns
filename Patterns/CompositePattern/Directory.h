@@ -15,6 +15,7 @@ class Directory final : public IFileComponent
 {
 public:
     // c'tor
+    Directory() = default;
     Directory(std::string name);
 
     // getter
@@ -23,7 +24,7 @@ public:
 
     // public interface
     void addFileComponent(std::unique_ptr<IFileComponent> component);
-    void display(std::size_t depth/* = 0*/) const override;
+    void display(std::size_t depth) const override;
 
 private:
     std::string m_name;
