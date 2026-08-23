@@ -144,6 +144,9 @@
     <ClCompile Include="Bookstore.cpp" />
     <ClCompile Include="ConceptualExample.cpp" />
     <ClCompile Include="ConceptualExample_Variant_Visit.cpp" />
+    <ClCompile Include="Directory.cpp" />
+    <ClCompile Include="File.cpp" />
+    <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="MotivationDocumentHtmlMarkdown.cpp" />
     <ClCompile Include="OnlineShop.cpp" />
     <ClCompile Include="Program.cpp" />
@@ -156,6 +159,13 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dp_visitorpattern_intro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Directory.h" />
+    <ClInclude Include="File.h" />
+    <ClInclude Include="FileComponent.h" />
+    <ClInclude Include="FileSystemElement.h" />
+    <ClInclude Include="FileSystemVisitor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

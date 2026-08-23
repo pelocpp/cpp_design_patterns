@@ -1,5 +1,5 @@
 // ===========================================================================
-// File.cpp // Composite Pattern
+// File.cpp // Visitor Pattern
 // ===========================================================================
 
 #include "File.h"
@@ -25,6 +25,12 @@ void File::display(std::size_t depth) const {
 
     std::print("{:>{}}", "", depth);
     std::println("{} - Size: {}", m_name, m_size);
+}
+
+// Visitor pattern
+void File::accept(FileSystemVisitor& visitor)
+{
+    visitor.visit(*this);
 }
 
 // ===========================================================================

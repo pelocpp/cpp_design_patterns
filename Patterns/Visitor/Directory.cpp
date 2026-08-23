@@ -1,5 +1,5 @@
 // ===========================================================================
-// Directory.cpp // Composite Pattern
+// Directory.cpp // Visitor Pattern
 // ===========================================================================
 
 #include "Directory.h"
@@ -28,6 +28,12 @@ void Directory::display(std::size_t depth) const {
     for (const auto& fileComponent : m_contents) {
         fileComponent->display(depth + 2);
     }
+}
+
+// Visitor pattern
+void Directory::accept(FileSystemVisitor& visitor)
+{
+    visitor.visit(*this);
 }
 
 // ===========================================================================

@@ -1,17 +1,18 @@
 // ===========================================================================
-// FileComponent.h // Composite Pattern
+// FileSystemVisitor.h // Visitor Pattern
 // ===========================================================================
 
 #pragma once
 
-#include <cstddef>
+class File;
+class Directory;
 
-class IFileComponent
-{
+class FileSystemVisitor {
 public:
-    virtual ~IFileComponent() = default;
+    virtual ~FileSystemVisitor() = default;
 
-    virtual void display(std::size_t depth) const = 0;
+    virtual void visit(File& file) = 0;
+    virtual void visit(Directory& directory) = 0;
 };
 
 // ===========================================================================

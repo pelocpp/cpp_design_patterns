@@ -25,6 +25,15 @@
     <Filter Include="Source Files\Bookstore">
       <UniqueIdentifier>{8d52c3fc-9e5a-491e-a60b-381f04375aa9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\FileSystem">
+      <UniqueIdentifier>{665530e1-3614-483a-ab10-0897bf9e5625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FileSystem\Header Files">
+      <UniqueIdentifier>{45f57415-eaf3-4b4e-905a-9189385cc918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FileSystem\Source Files">
+      <UniqueIdentifier>{8080ff4a-09c5-485d-9f1f-e87772563c48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConceptualExample.cpp">
@@ -45,6 +54,15 @@
     <ClCompile Include="ConceptualExample_Variant_Visit.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
+    <ClCompile Include="Directory.cpp">
+      <Filter>Source Files\FileSystem\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Source Files\FileSystem\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystem.cpp">
+      <Filter>Source Files\FileSystem\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -64,5 +82,22 @@
     <Image Include="Resources\dp_visitorpattern_intro.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="File.h">
+      <Filter>Source Files\FileSystem\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileComponent.h">
+      <Filter>Source Files\FileSystem\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystemElement.h">
+      <Filter>Source Files\FileSystem\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystemVisitor.h">
+      <Filter>Source Files\FileSystem\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Directory.h">
+      <Filter>Source Files\FileSystem\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
