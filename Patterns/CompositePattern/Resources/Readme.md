@@ -18,7 +18,8 @@
 
 ###### In einem Satz:
 
-> &bdquo;Das Composite Pattern ermöglicht es, einzelne Objekte und aus diesen zusammengesetzte Objektstrukturen einheitlich zu behandeln.&rdquo;
+> &bdquo;Das Composite Pattern ermöglicht es, einzelne Objekte und aus diesen zusammengesetzte Objektstrukturen
+einheitlich zu behandeln.&rdquo;
 
 Das *Composite Pattern* gehört zu den strukturellen Entwurfsmustern und wird verwendet,
 wenn Objekte in hierarchischen, baumartigen Strukturen organisiert sind &ndash; etwa Dateisysteme, grafische Oberflächen oder Organigramme.

@@ -20,7 +20,7 @@
 
 > &bdquo;Das State Pattern ermöglicht es einem Objekt, sein Verhalten abhängig von seinem aktuellen Zustand zu verändern, ohne dass die Zustandslogik in einer großen bedingten Anweisung zusammengefasst werden muss.&rdquo;
 
-Das State-Pattern gehört zu den Verhaltensmustern (Behavioral Patterns) und löst das Problem,
+Das *State-Pattern* gehört zu den Verhaltensmustern (Behavioral Patterns) und löst das Problem,
 dass sich das Verhalten eines Objekts abhängig von seinem aktuellen Zustand grundlegend unterscheidet.
 Statt diese Unterscheidung mit langen `if`- oder `switch`-Anweisungen im Kontext-Objekt abzubilden,
 wird jeder Zustand als eigene Klasse modelliert, die ein gemeinsames *State*-Interface implementiert.

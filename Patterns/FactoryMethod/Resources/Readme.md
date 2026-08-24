@@ -20,7 +20,6 @@
 
 > &bdquo;Das Factory Method Pattern kapselt die Erzeugung von Objekten, indem es Unterklassen die Entscheidung darüber überlässt, welche konkrete Produktklasse instanziiert wird.&rdquo;
 
-
 Das *Factory Method Pattern* gehört zu den Erzeugungsmustern (*Creational Patterns*)
 und löst das Problem, dass Code, der Objekte erzeugt, oft eng an konkrete Klassen gekoppelt ist.
 

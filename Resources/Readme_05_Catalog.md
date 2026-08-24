@@ -48,6 +48,12 @@ Ziel ist, die konkrete Erstellung von Objekten möglichst von ihrer Verwendung zu
 | [Builder](../Patterns/Builder/Resources/Readme.md) | Ermöglicht schrittweises Erstellen komplexer Objekte. |
 | [Prototype](../Patterns/Prototype/Resources/Readme.md) | Prototype Pattern &ndash; auch als *Virtueller Konstruktor* bezeichnet. |
 | [Singleton](../Patterns/Singleton/Resources/Readme.md) | Das **Singleton** Entwurfsmuster sorgt dafür, dass es von einer Klasse nur eine einzige Instanz gibt. |
+| [Simple Factory](../Patterns/SimpleFactory/Resources/Readme.md) | Das *Simple Factory* Pattern kapselt die Erzeugung von Objekten, sodass der aufrufende Code nicht selbst entscheiden muss, welche konkrete Klasse instanziiert wird. |
+| [Factory Method](../Patterns/FactoryMethod/Resources/Readme.md) | Das *Factory Method* Pattern kapselt die Erzeugung von Objekten, indem es Unterklassen die Entscheidung darüber überlässt, welche konkrete Produktklasse instanziiert wird. |
+| [Abstract Factory](../Patterns/AbstractFactory/Resources/Readme.md) | Das *Abstract Factory* Pattern kapselt die Erzeugung zusammengehöriger Objekte einer Produktfamilie, ohne dass der Client deren konkrete Klassen kennen muss. |
+| [Builder](../Patterns/Builder/Resources/Readme.md) | Das *Builder* Pattern trennt die schrittweise Konstruktion eines komplexen Objekts von seiner Repräsentation, sodass derselbe Konstruktionsprozess unterschiedliche Ausprägungen des Objekts erzeugen kann. |
+| [Prototype](../Patterns/Prototype/Resources/Readme.md) | XXX |
+| [Singleton](../Patterns/Singleton/Resources/Readme.md) | Das *Singleton* Pattern stellt sicher, dass von einer Klasse genau eine Instanz existiert und diese global zugänglich ist. |
 
 *Tabelle* 1: Erzeugungsmuster (*Creational Design Pattern*).
 
@@ -65,6 +71,13 @@ ohne dabei einen **Verlust an Flexibilität und Effizienz** einzugehen.
 | [Facade](../Patterns/Facade/Resources/Readme.md) | Bereitstellung einer vereinfachten Schnittstelle zu einer Bibliothek, einem Framework oder einer komplexen Menge von Objekten. |
 | [Flyweight](../Patterns/Flyweight/Resources/Readme.md) | Ermöglicht es, Objekte ressourcenschonend anzulegen, indem diese gemeinsame Zustandsdaten zwischen mehreren Objekten teilen, anstatt sie in jedem Objekt zu duplizieren. |
 | [Proxy](../Patterns/Proxy/Resources/Readme.md) | Bereitstellung eines Platzhalters (Stellvertreters) für ein anderes Objekt. |
+| [Adapter](../Patterns/AdapterPattern/Resources/Readme.md) | Das Adapter Pattern konvertiert die Schnittstelle einer bestehenden Klasse in eine andere Schnittstelle, die von einem Client erwartet wird, sodass Klassen mit inkompatiblen Schnittstellen zusammenarbeiten können. |
+| [Bridge](../Patterns/Bridge/Resources/Readme.md) | Das Bridge Pattern trennt eine Abstraktion von ihrer Implementierung, sodass beide unabhängig voneinander variiert und weiterentwickelt werden können. |
+| [Composite Pattern](../Patterns/CompositePattern/Resources/Readme.md) | Das Composite Pattern ermöglicht es, einzelne Objekte und aus diesen zusammengesetzte Objektstrukturen einheitlich zu behandeln. |
+| [Decorator](../Patterns/DecoratorPattern/Resources/Readme.md) | Das Decorator Pattern ermöglicht es, einem Objekt zur Laufzeit zusätzliche Funktionalitäten zu verleihen, ohne dessen Klasse zu verändern. |
+| [Facade](../Patterns/Facade/Resources/Readme.md) | Das Facade Pattern stellt eine vereinfachte, einheitliche Schnittstelle vor ein komplexes Subsystem aus mehreren Klassen, sodass Clients dieses Subsystem nutzen können, ohne seine innere Struktur und Zusammenhänge kennen zu müssen. |
+| [Flyweight](../Patterns/Flyweight/Resources/Readme.md) | Das Flyweight Pattern reduziert den Speicherbedarf, indem es gemeinsame, unveränderliche Objektzustände zentral verwaltet und von mehreren Objekten wiederverwenden lässt. |
+| [Proxy](../Patterns/Proxy/Resources/Readme.md) | Das Proxy Design Pattern stellt ein Stellvertreterobjekt für ein anderes Objekt bereit, das dieselbe Schnittstelle wie das andere Objekt implementiert und ermöglicht es, den Zugriff auf dieses Objekt kontrolliert zu steuern. |
 
 *Tabelle* 2: Strukturmuster (*Structural Design Pattern*).
 
@@ -88,6 +101,17 @@ Im Mittelpunkt stehen also Interaktionen, Algorithmen und die Steuerung des Verh
 | [Strategy Pattern](../Patterns/StrategyPattern/Resources/Readme.md) | Beschreibt eine Familie von Algorithmen und macht sie durch das **Strategiemuster** austauschbar. |
 | [Template Method](../Patterns/TemplatePattern/Resources/Readme.md) | Definiert das Grundgerüst eines Algorithmus in einer Oberklasse, lässt Unterklassen bestimmte Schritte des Algorithmus ausgestalten, ohne dabei Änderungen an der prinzipiellen Algorithmusstruktur zu gestatten. |
 | [Visitor Method](../Patterns/Visitor/Resources/Readme.md) | Befasst sich mit der Trennung von Algorithmen von den Objekten, mit denen sie arbeiten. |
+| [Chain of Responsibility](../Patterns/ChainOfResponsibility/Resources/Readme.md) | Das Chain-of-Responsibility-Pattern leitet eine Anfrage entlang einer Kette von Objekten weiter, bis eines dieser Objekte sie bearbeiten kann. |
+| [Command Pattern](../Patterns/CommandPattern/Resources/Readme.md) | Das Command Pattern kapselt eine Anfrage (einen Methodenaufruf mit allen dazugehörigen Parametern) als eigenständiges Objekt, sodass sich Aufrufer und Ausführender entkoppeln lassen und Anfragen sich parametrisieren, in Warteschlangen einreihen, protokollieren oder rückgängig machen lassen. |
+| [Interpreter](../Patterns/InterpreterPattern/Resources/Readme.md) | Das Interpreter Pattern definiert für eine einfache Grammatik eine Klassenhierarchie, mit der sich Sätze dieser Sprache als Objektbaum darstellen und durch rekursives Auswerten dieses Baums interpretieren lassen. |
+| [Iterator](../Patterns/IteratorPattern/Resources/Readme.md) | Das Iterator Pattern stellt eine einheitliche Möglichkeit bereit, die Elemente einer Sammlung nacheinander zu durchlaufen, ohne deren interne Struktur (Array, Liste, Baum, ...) offenzulegen. |
+| [Mediator](../Patterns/Mediator/Resources/Readme.md) | Das Mediator Pattern kapselt die Kommunikation zwischen mehreren Objekten in einem zentralen Vermittler, sodass die Objekte nicht direkt voneinander abhängen müssen. |
+| [Memento](../Patterns/Memento/Resources/Readme.md) | Das Memento Pattern ermöglicht es, den Zustand eines Objekts zu speichern und später wiederherzustellen, ohne dessen interne Implementierung nach außen offenzulegen. |
+| [Observer](../Patterns/Observer/Resources/Readme.md) | Das Observer Pattern ermöglicht es einem Objekt, mehrere interessierte Objekte automatisch über Änderungen seines Zustands zu informieren, ohne deren konkrete Implementierungen kennen zu müssen. |
+| [State](../Patterns/StatePattern/Resources/Readme.md) | Das State Pattern ermöglicht es einem Objekt, sein Verhalten abhängig von seinem aktuellen Zustand zu verändern, ohne dass die Zustandslogik in einer großen bedingten Anweisung zusammengefasst werden muss. |
+| [Strategy Pattern](../Patterns/StrategyPattern/Resources/Readme.md) | Das Strategy Pattern kapselt unterschiedliche Algorithmen bzw. Verhaltensweisen hinter einer gemeinsamen Schnittstelle, sodass sie unabhängig voneinander ausgetauscht werden können. |
+| [Template Method](../Patterns/TemplatePattern/Resources/Readme.md) | Das Template Method Pattern definiert den grundlegenden Ablauf eines Algorithmus in einer Basisklasse und überlässt einzelne Schritte davon den abgeleiteten Klassen. |
+| [Visitor Method](../Patterns/Visitor/Resources/Readme.md) | Das Visitor Pattern ermöglicht es, neue Operationen auf einer bestehenden Objektstruktur hinzuzufügen, ohne die Klassen dieser Struktur selbst verändern zu müssen. |
 
 *Tabelle* 3: Verhaltensmuster (*Behavioral Design Pattern*).
 

@@ -18,35 +18,26 @@
 
 ###### In einem Satz:
 
-> &bdquo;Erstelle eine Kopie eines Objekts durch einen Zeiger auf seinen Basistyp.&rdquo;
+> &bdquo;Das Prototype Pattern ermöglicht es, neue Objekte durch das Klonen eines vorhandenen Objekts zu erzeugen, ohne dessen konkrete Klasse direkt kennen zu müssen.&rdquo;
 
-Das *Prototype Pattern* ist ein Entwurfsmuster,
-das zum Instanziieren einer Klasse auf das Kopieren oder Klonen der Eigenschaften eines anderen, vorhandenen Objekts zurückgreift.
-Das neue Objekt ist eine exakte Kopie des Prototyps, ermöglicht jedoch Änderungen an diesem, ohne das Original zu verändern.
+Das *Prototype Pattern* ist ein Erzeugungsmuster, bei dem neue Objekte nicht direkt über ihren Konstruktor,
+sondern durch das Klonen eines bereits vorhandenen Objekts erzeugt werden.
 
-#### Problem:
+Das vorhandene Objekt dient dabei als Prototyp und gibt die Eigenschaften des neuen Objekts vor.
+Dazu stellt der Prototyp typischerweise eine Methode wie `clone()` bereit, die eine Kopie des Objekts erzeugt.
+Dadurch kann Code neue Objekte erstellen, ohne von deren konkreter Klasse abhängig zu sein.
 
-Mit dem *Prototype* Entwurfsmuster können wir die Komplexität des Erstellens
-neuer Instanzen vor dem Client verbergen. Das Konzept besteht darin, ein vorhandenes Objekt zu kopieren,
-anstatt eine neue Instanz (samt dazugehöriger Klasse) von Grund auf neu zu erstellen.
-Dies kann bisweilen mit einem recht zeitintensiven Aufwand verbunden sein.
+Dies ist insbesondere dann nützlich, wenn zur Laufzeit unterschiedliche konkrete Objekttypen erzeugt werden sollen,
+deren Klassen dem aufrufenden Code nicht bekannt sind.
 
-Das vorhandene Objekt fungiert als Prototyp eines neuen Objekts und besitzt seinen Status.
-Das neu kopierte Objekt kann dieselben Eigenschaften bei Bedarf ändern.
-Dieser Ansatz spart Ressourcen und Zeit, insbesondere wenn die Objekterstellung nicht-trivial ist.
+Das Pattern wird deshalb auch als &bdquo;virtueller Konstruktor&rdquo; bezeichnet.
 
-#### Lösung:
+In C++ lässt sich das beispielsweise über eine virtuelle `clone()`-Methode und polymorphe Basisklassen umsetzen.
 
-Das *Prototype* Entwurfsmuster stammt aus der Kategorie der Erzeugungssmuster.
-Das Entwurfsmuster ist erforderlich, wenn die Objekterstellung zeitaufwändig und kostspielig ist.
-Daher erstellen wir ein neues Objekt auf Basis eines vorhandenen Objekts.
+Je nach Anwendungsfall kann das Klonen als flache oder tiefe Kopie realisiert werden.
 
-Diese Art der Objekterstellung wird als *Klonen* bezeichnet.
-Wenn das ursprüngliche Objekt geklont wird, ist das neue Objekt &ndash; in Abhängigkeit von der Implementierung
-der `clone`-Methode &ndash; eine flache (*shallow*) oder tiefe (*deep*) Kopie.
-Diese Kopie dupliziert alle Eigenschaften und Felder des ursprünglichen Objekts.
-Wenn eine Eigenschaft ein Referenztyp ist, sollte vom referenzierten Objekt ebenfalls eine tiefe Kopie erstellt werden,
-um insgesamt zu einer echten Kopie des ursprünglichen Objekts zu gelangen.
+
+#### Hinweise:
 
 In manchen Programmiersprachen wird die `clone`-Methode automatisch bereitgestellt bzw. vom Programmersteller erzwungen:
 

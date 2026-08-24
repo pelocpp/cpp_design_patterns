@@ -20,7 +20,7 @@
 
 > &bdquo;Das Visitor Pattern ermöglicht es, neue Operationen auf einer bestehenden Objektstruktur hinzuzufügen, ohne die Klassen dieser Struktur selbst verändern zu müssen.&rdquo;
 
-Das Visitor Pattern gehört zur Kategorie der Verhaltensmuster (Behavioral Patterns) und löst ein häufiges Problem objektorientierter Systeme:
+Das *Visitor Pattern* gehört zur Kategorie der Verhaltensmuster (Behavioral Patterns) und löst ein häufiges Problem objektorientierter Systeme:
 Man hat eine heterogene Struktur von Objekten &ndash; etwa einen Syntaxbaum, eine Dokumentstruktur oder eine Sammlung
 geometrischer Figuren &ndash; und möchte immer wieder neue Operationen auf diesen Objekten ausführen,
 ohne jedes Mal deren Klassen anzufassen.
