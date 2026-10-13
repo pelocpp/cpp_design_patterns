@@ -88,6 +88,52 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ---
 
+## Ein ähnliches Entwurfsmuster: Das &bdquo;*Strangler Fig*&rdquo; Pattern
+
+Das &bdquo;*Strangler Fig*&rdquo; Pattern ist eine Methode, bei dem alter Code umhüllt wird,
+um ihn entweder zu neuem Code umzuleiten oder die Nutzung des alten Codes zu protokollieren.
+
+Dieses Muster wurde von *Martin Fowler* entwickelt und hat seinen Namen
+von der australischen Würgefeige Strangler Fig, einer Pflanze, die allmählich auf Bäumen wächst,
+bis diese schließlich komplett umhüllt sind und absterben.
+
+
+### So funktioniert das Muster in der Praxis
+
+1. Fassade / API-Gateway voranstellen:
+Es wird eine Vermittlungsschicht (ein Proxy oder API-Gateway) zwischen den Client und das bestehende Altsystem geschaltet.
+Anfangs leitet diese Schicht noch 100% der Anfragen an den alten Monolithen weiter.
+
+2. Funktionen isolieren:
+Das Entwicklungsteam wählt ein überschaubares Modul oder ein einzelnes Feature aus, das man isolieren möchte.
+
+3. Neu implementieren:
+Dieses Feature wird als neue, moderne Komponente in einer neuen Umgebung aufgebaut.
+
+4. Traffic umleiten:
+Ist der neue Service fertig und getestet, wird die Fassade so umkonfiguriert,
+dass Anfragen für diesen Bereich an den neuen Service gehen. Restliche Anfragen fließen weiter in das Altsystem.
+
+5. Altsystem schrumpfen lassen:
+Dieser Vorgang wird Schritt für Schritt für weitere Bereiche wiederholt,
+bis das alte System keine Aufgaben mehr hat und abgeschaltet werden kann
+
+
+*Bemerkung*:<br />
+Ein API Gateway ist eine zentrale Software-Schicht in der Softwareentwicklung,
+die als einziger Einstiegspunkt (Single Entry Point) zwischen Client-Anwendungen und einem Backend-Dienst fungiert.
+
+
+
+### Vorteile gegenüber einem &bdquo;Big Bang Rewrite&rdquo;
+
+  * Geringeres Risiko:<br />Statt jahrelanger Entwicklungsarbeit auf einer Baustelle gibt es kontinuierlich funktionierende Zwischenstände.
+  * Früher Nutzen (*Return on Investment*):<br />Einzelne neue Funktionen sind schnell produktionsreif und liefern frühzeitig Mehrwert.
+  * Kein Betriebsunterbrech (&bdquo;Business Continuity&rdquo;):<br />Das Geschäft läuft während der Migration ganz normal weiter
+
+
+---
+
 ## Literaturhinweise
 
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
