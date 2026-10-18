@@ -229,14 +229,14 @@ die die beiden Schnittstellen implementieren.
 Diese Klassen können Dateien im *VLC*- und *MP4*-Format abspielen.
 
 Wir wollen nun erreichen, dass die `AudioPlayer` Klasse auch die Formate *VLC* und *MP4* wiedergibt.
-Um dies zu erreichen, erstellen wir eine Adapterklasse `MediaAdapter`.
-Diese Klasse `MediaAdapter` implementiert einerseits die `IMediaPlayer`-Schnittstelle,
+Um dies zu erreichen, erstellen wir zwei Adapterklassen `VlcAdapter` und `Mp4Adapter`,
+Diese zwei Klassen implementieren einerseits die `IMediaPlayer`-Schnittstelle,
 um damit die Kompatibilität zu dieser Schnittstelle aufrecht zu erhalten. 
-Zum Anderen benutzt sie (*hat-sie*) zwei Instanzen der Klassen `VlcPlayer` und `Mp4Player`,
+Zum Anderen benutzen sie (*hat-sie*) Instanzen der Klassen `VlcPlayer` bzw. `Mp4Player`,
 um auch die weiteren Formate *VLC* und *MP4* abspielen zu können.
 
 Ein Redesign der Klasse `AudioPlayer` (im beiliegenden Quellcode hat sie den Namen `AudioPlayerExtended`)
-verwendet nun die Adapterklasse `MediaAdapter`.
+verwendet nun diese Adapterklassen.
 Die Klasse `AudioPlayer` kennt nach wie vor nicht die tatsächlichen Klassen, die das gewünschte Format wiedergeben können.
 Sie reicht allerdings bei Benutzung der Klasse `AudioPlayer` und bei Anforderung entsprechender Audiotypen
 diese an die Adapterklasse weiter, so dass die Anforderung doch unterstützt werden kann.

@@ -3,130 +3,83 @@
 // Pluggable Adapter Design Pattern using Modern C++
 // ===========================================================================
 
-#include <iostream>
-#include <string>
 #include <functional>
-#include <memory>
+#include <iostream>
+#include <utility>
 
 namespace PluggableAdapterDesignApproach {
 
-    // =======================================================================
-    // Legacy code
-
-    class IBeverage
-    {
+    // ---- Target interface: already shipped, known to the client ---------------
+    class IBeverage {
     public:
+        virtual ~IBeverage() = default;
         virtual void getBeverage() = 0;
     };
 
-    class CoffeeMaker : public IBeverage
-    {
-    public:
-        void brew() { 
-            std::cout << "brewing coffee" << std::endl;
-        }
+    static void makeDrink(IBeverage& drink) { drink.getBeverage(); }
 
-        void getBeverage() override {
-            brew(); 
-        }
+    // ---- Adaptees: written independently, interfaces don't match --------------
+    class CoffeeMaker {
+    public:
+        void brew() { std::cout << "brewing coffee\n"; }
     };
 
-    // Interface already shipped & known to client
-    static void makeDrink(IBeverage& drink) {
-        drink.getBeverage();             
-    }
-
-    // =======================================================================
-    // New source code (developed later)
-
-    class JuiceMaker 
-    {
+    class JuiceMaker {
     public:
-        void squeeze() {
-            std::cout << "making Juice" << std::endl;
-        }
+        void squeeze() { std::cout << "making juice\n"; }
     };
 
-    // making things compatible - using 'class adapter' strategy
-    class BeverageAdapter : public IBeverage
-    {   
+    // ---- Pluggable adapter: the adaptation is injected as a callable ----------
+    class BeverageAdapter final : public IBeverage {
+    public:
+        explicit BeverageAdapter(std::function<void()> request)
+            : m_request{ std::move(request) } 
+        {}
+
+        void getBeverage() override { m_request(); }
+
     private:
         std::function<void()> m_request;
-
-    public:
-        // c'tors
-        BeverageAdapter(std::unique_ptr<CoffeeMaker>& cm)
-            : m_request{ [&] () -> void { cm->brew(); } }
-        {}
-
-        BeverageAdapter(std::unique_ptr<JuiceMaker>& jm)
-            : m_request{ [&] () -> void { jm->squeeze(); } }
-        {}
-
-        void getBeverage() override { 
-            m_request();
-        }
     };
 
-    // =======================================================================
-    // Another new source code, also developed later
-
+    // ---- Compile-time alternative: adapter owns the adaptee by value ----------
     template <typename T>
-    class JuiceAdapter : public IBeverage
-    {
-    private:
-        std::function<void()> m_request;
-        std::unique_ptr<T> m_juiceMaker;
-
+    class JuiceAdapter final : public IBeverage {
     public:
-        // c'tors
-        JuiceAdapter(std::unique_ptr<T> juiceMaker) 
-            : m_juiceMaker{ std::move(juiceMaker) }
-        {
-            m_request = [this] { m_juiceMaker->squeeze(); };
-        }
+        explicit JuiceAdapter(T maker) : m_maker{ std::move(maker) } {}
 
-        void getBeverage() override {
-            m_request();
-        }
+        void getBeverage() override { m_maker.squeeze(); }
+
+    private:
+        T m_maker;
     };
-}
 
-// ===========================================================================
+} // namespace PluggableAdapterDesignApproach
 
 static void test_pluggable_adapter_design_01()
 {
     using namespace PluggableAdapterDesignApproach;
 
-    std::unique_ptr<CoffeeMaker> coffeeMaker{ 
-        std::make_unique<CoffeeMaker>() 
+    // Non-owning: the adaptee must outlive the adapter
+    CoffeeMaker coffeeMaker;
+    BeverageAdapter coffeeAdapter{ [&coffeeMaker] { coffeeMaker.brew(); } };
+    makeDrink(coffeeAdapter);
+
+    // Owning: the adaptee lives inside the lambda
+    BeverageAdapter juiceAdapter{
+        [juiceMaker = JuiceMaker{}]() mutable { 
+            juiceMaker.squeeze();
+        }
     };
-    
-    BeverageAdapter adapter1{ coffeeMaker };
 
-    makeDrink(adapter1);
-
-    std::unique_ptr<JuiceMaker> juiceMaker{ 
-        std::make_unique<JuiceMaker>() 
-    };
-
-    BeverageAdapter adapter2{ juiceMaker };
-
-    makeDrink(adapter2);
+    makeDrink(juiceAdapter);
 }
 
 static void test_pluggable_adapter_design_02()
 {
     using namespace PluggableAdapterDesignApproach;
 
-    std::unique_ptr<JuiceMaker> juiceMaker{ 
-        std::make_unique<JuiceMaker>()
-    };
-
-    JuiceAdapter<JuiceMaker> adapter{
-        std::move(juiceMaker) 
-    };
-
+    JuiceAdapter adapter{ JuiceMaker{} };   // template argument deduced (C++17 CTAD)
     makeDrink(adapter);
 }
 
