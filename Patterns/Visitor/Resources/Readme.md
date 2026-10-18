@@ -42,6 +42,13 @@ aber die Menge der darauf ausgeführten Operationen häufig wächst.
 
 ---
 
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp)
+[Quellcode](../ConceptualExample_Variant_Visit.cpp)
+
+---
+
 ### Zusammenspiel von Composite Pattern und Visitor Pattern
 
 Das Zusammenspiel von *Composite Pattern* und *Visitor Pattern* wird am Beispiel des Traversierens einer Verzeichnisstruktur
@@ -671,15 +678,6 @@ Es besteht im Wesentlichen aus sechs Teilen:
 <img src="dp_visitor_pattern.svg" width="600">
 
 *Abbildung* 2: Schematische Darstellung des *Visitor Patterns*.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp)
-
-*Hinweis*: Im konzeptionellen Beispiel ist der Aspekt `enable_shared_from_this` und `shared_from_this` 
-mit abgehandelt.
 
 ---
 

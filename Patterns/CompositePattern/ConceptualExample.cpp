@@ -28,6 +28,7 @@ namespace ConceptualExample_Composite_Pattern {
 
         Component(const Component&) = delete;
         Component& operator=(const Component&) = delete;
+
         Component(Component&&) = delete;
         Component& operator=(Component&&) = delete;
 
@@ -66,8 +67,8 @@ namespace ConceptualExample_Composite_Pattern {
         virtual bool isComposite() const noexcept { return false; }
 
         /**
-         * The base Component may implement some default behavior or leave it to
-         * concrete classes (by declaring the method containing
+         * The base Component may implement some default behavior
+         * or leave it to concrete classes (by declaring the method containing
          * the behavior as "abstract").
          */
         [[nodiscard]]
@@ -88,7 +89,9 @@ namespace ConceptualExample_Composite_Pattern {
         std::string m_description;
 
     public:
-        explicit Leaf(std::string_view description) : m_description{ description } {}
+        explicit Leaf(std::string_view description) 
+            : m_description{ description } 
+        {}
 
         [[nodiscard]]
         std::string operation() const override {
@@ -126,6 +129,7 @@ namespace ConceptualExample_Composite_Pattern {
 
         void remove(std::shared_ptr<Component> component) override {
             std::erase(m_children, component);   // C++ 20: std::erase for std::vector
+
             if (component) {
                 component->setParent(nullptr);   // remove parent reference
             }

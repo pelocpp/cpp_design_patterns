@@ -25,22 +25,24 @@ Das *Composite Pattern* gehört zu den strukturellen Entwurfsmustern und wird ve
 wenn Objekte in hierarchischen, baumartigen Strukturen organisiert sind &ndash; etwa Dateisysteme, grafische Oberflächen oder Organigramme.
 
 Die Grundidee ist, sowohl einzelne Elemente (Blätter) als auch zusammengesetzte Elemente
-(Kompositen, die selbst wieder Blätter oder andere Kompositen enthalten) über eine gemeinsame abstrakte Basisklasse oder Schnittstelle anzusprechen.
+(Komposita (Gruppen von Objekten), die selbst wieder Blätter oder andere Komposita enthalten)
+über eine gemeinsame abstrakte Basisklasse oder Schnittstelle anzusprechen.
 Dadurch muss der aufrufende Code nicht unterscheiden, ob er gerade mit einem einzelnen Objekt
 oder mit einer ganzen Gruppe von Objekten arbeitet &ndash; beide werden identisch behandelt.
 
-Operationen, die auf der Basisklasse definiert sind, werden von Blättern direkt ausgeführt, während Kompositen sie rekursiv an ihre Kindelemente weiterreichen.
+Operationen, die auf der Basisklasse definiert sind, werden von Blättern direkt ausgeführt,
+während Komposita sie rekursiv an ihre Kindelemente weiterreichen.
 
 In C++ wird dies typischerweise über eine abstrakte Klasse mit virtuellen Methoden umgesetzt,
-wobei die Composite-Klasse zusätzlich Methoden zum Hinzufügen und Entfernen von Kindelementen
-sowie einen Container (z. B. std::vector<std::unique_ptr<Component>>) besitzt.
+wobei die *Composite*-Klasse zusätzlich Methoden zum Hinzufügen und Entfernen von Kindelementen
+sowie einen Container (z. B. `std::vector<std::unique_ptr<Component>>`) besitzt.
 
 Der große Vorteil liegt in der Vereinfachung des Client-Codes:
 Dieser kann Baumstrukturen beliebiger Tiefe verarbeiten, da einzelne Elemente und Teilbäume einheitlich behandelt werden können.
 
-Ein Nachteil kann sein, dass es schwieriger wird, die Menge der zulässigen Kindelemente einzuschränken, da Blätter und Kompositen dieselbe Schnittstelle teilen.
+Ein Nachteil kann sein, dass es schwieriger wird, die Menge der zulässigen Kindelemente einzuschränken, da Blätter und Komposita dieselbe Schnittstelle teilen.
 
-Insgesamt ist das Composite Pattern besonders nützlich, wann immer &bdquo;Teil-Ganzes&rdquo;-Hierarchien rekursiv und einheitlich behandelt werden sollen.
+Insgesamt ist das *Composite Pattern* besonders nützlich, wann immer &bdquo;Teil-Ganzes&rdquo;-Hierarchien rekursiv und einheitlich behandelt werden sollen.
 
 #### Struktur (UML):
 

@@ -45,7 +45,25 @@ Neue Produktfamilien lassen sich so relativ einfach hinzufügen (Open/Closed-Prin
 während das Hinzufügen neuer Produktarten innerhalb einer bestehenden Familie tendenziell aufwendiger ist,
 da dann alle Fabriken angepasst werden müssen.
 
+---
 
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp)
+
+Die Ausgaben des konzeptionellen Beispiels lauten:
+
+```
+Client: Testing client code with the first factory type:
+Working on Concrete Product A1
+Working on Concrete Product B1
+
+Client: Testing the same client code with the second factory type:
+Working on Concrete Product A2
+Working on Concrete Product B2
+```
+
+---
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Abstract Factory Patterns*.
@@ -68,24 +86,6 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 Die Klassen `ProductA1` und `ProductA2` bzw. `ProductB1` und `ProductB2` sind Stellvertreter
 der `ConcreteProductA`- bzw. `ConcreteProductB`-Klasse aus *Abbildung* 1.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp)
-
-Die Ausgaben des konzeptionellen Beispiels lauten:
-
-```
-Client: Testing client code with the first factory type:
-Working on Concrete Product A1
-Working on Concrete Product B1
-
-Client: Testing the same client code with the second factory type:
-Working on Concrete Product A2
-Working on Concrete Product B2
-```
 
 ---
 

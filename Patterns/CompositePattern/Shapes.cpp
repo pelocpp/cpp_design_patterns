@@ -61,6 +61,7 @@ public:
 
     void add(std::unique_ptr<IShape> shape) {
         if (!shape) return;
+
         m_objects.push_back(std::move(shape));
     }
 

@@ -61,7 +61,6 @@ static void exploreDirectory(const std::filesystem::path& path, Directory& curre
     }
 }
 
-
 // ===========================================================================
 
 // directory with less files, no subdirectories

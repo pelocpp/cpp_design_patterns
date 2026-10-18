@@ -25,6 +25,7 @@ namespace ConceptualExample_Composite_Pattern_Factory   {
     public:
         Component(const Component&) = delete;
         Component& operator=(const Component&) = delete;
+
         Component(Component&&) = delete;
         Component& operator=(Component&&) = delete;
 
@@ -101,6 +102,7 @@ namespace ConceptualExample_Composite_Pattern_Factory   {
 
         void remove(std::shared_ptr<Component> component) override {
             std::erase(m_children, component);
+
             if (component) {
                 component->setParent(nullptr);
             }
