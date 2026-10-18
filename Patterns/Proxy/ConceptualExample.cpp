@@ -118,7 +118,8 @@ void test_conceptual_example()
 {
     using namespace ConceptualExample_Proxy_Pattern;
 
-    std::println("Client: Executing the client code with a real subject:");    
+    std::println("Client: Executing the client code with a real subject:");
+
     // no std::move, no forced heap allocation in the test code
     RealSubject realSubject;
     clientCode(realSubject);

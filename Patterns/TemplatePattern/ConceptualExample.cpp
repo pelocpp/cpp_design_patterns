@@ -17,12 +17,13 @@ namespace ConceptualExample_Template_Method_Pattern {
     class AbstractClass {
 
     public:
-        AbstractClass() = default; // Base class should not be directly instantiable
+        AbstractClass() = default; // base class should not be directly instantiable
 
         virtual ~AbstractClass() = default;
 
         AbstractClass(const AbstractClass&) = delete;
         AbstractClass& operator=(const AbstractClass&) = delete;
+
         AbstractClass(AbstractClass&&) = delete;
         AbstractClass& operator=(AbstractClass&&) = delete;
 

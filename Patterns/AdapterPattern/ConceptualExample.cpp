@@ -114,10 +114,9 @@ namespace ConceptualExample_Adapter_Pattern {
 
     static void test_conceptual_example_01() {
 
-        auto adapter =
-            std::make_unique<Adapter>(
-                std::make_unique<Adaptee>()
-            );
+        auto adapter = std::make_unique<Adapter> (
+            std::make_unique<Adaptee>()
+        );
 
         clientCode(*adapter);
     }

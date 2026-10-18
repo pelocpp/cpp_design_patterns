@@ -44,13 +44,13 @@ aber die Menge der darauf ausgeführten Operationen häufig wächst.
 
 ### Zusammenspiel von Composite Pattern und Visitor Pattern
 
-Das Zusammenspiel von Composite Pattern und Visitor Pattern wird am Beispiel des Traversierens einer Verzeichnisstruktur
-aufgezeigt. In einer ersten Realisierung wird das Visitor Pattern über eine gemeinsame Basisklasse und virtuelle `accept()`-Methode
+Das Zusammenspiel von *Composite Pattern* und *Visitor Pattern* wird am Beispiel des Traversierens einer Verzeichnisstruktur
+aufgezeigt. In einer ersten Realisierung wird das Visitor Pattern über eine gemeinsame Basisklasse und virtuelle `accept()`-Methoden
 ausgedrückt.
 
 In einer zweiten Realisierung entfallen diese Werkzeuge zu Gunsten von `std::variant`.
 
-Für das Beispiel bietet sich ungefähr folgende Struktur an:
+Für das Beispiel bietet sich folgende Struktur an:
 
   * Die Klassen `File` und `Directory` sind normale, unabhängige Klassen.
   * Der Typ `FileSystemElement` ist ein `std::variant<File, Directory>`.

@@ -11,7 +11,8 @@
 #include "Twitter.h"
 
 Twitter::Twitter(const std::string& username, const std::string& password)
-    : SocialNetwork{ username, password } {}
+    : SocialNetwork{ username, password } 
+{}
 
 bool Twitter::logIn()
 {

@@ -8,7 +8,8 @@
 #include "SocialNetwork.h"
 
 SocialNetwork::SocialNetwork(const std::string& username, const std::string& password) 
-    : m_username{ username }, m_password{ password } {}
+    : m_username{ username }, m_password{ password } 
+{}
 
 bool SocialNetwork::post(const std::string& message)
 {

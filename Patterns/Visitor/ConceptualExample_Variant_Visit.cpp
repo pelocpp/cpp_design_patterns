@@ -14,19 +14,19 @@ namespace ConceptualExample_Visitor_Pattern_Modern {
     // Components: plain value types, no common base class, no virtuals needed.
     // =======================================================================
 
-    class ConcreteComponentA
+    class ConcreteComponentA final
     {
     public:
         std::string_view exclusiveMethodOfConcreteComponentA() const { return "A"; }
     };
 
-    class ConcreteComponentB
+    class ConcreteComponentB final
     {
     public:
         std::string_view specialMethodOfConcreteComponentB() const { return "B"; }
     };
 
-    class ConcreteComponentC
+    class ConcreteComponentC final
     {
     public:
         std::string_view anotherMethodOfConcreteComponentC() const { return "C"; }
@@ -38,7 +38,7 @@ namespace ConceptualExample_Visitor_Pattern_Modern {
     // of one former ConcreteVisitor.
     // =======================================================================
 
-    class Visitor1
+    class ConcreteVisitor1
     {
     public:
         void operator() (const ConcreteComponentA& element) const {
@@ -54,7 +54,7 @@ namespace ConceptualExample_Visitor_Pattern_Modern {
         }
     };
 
-    class Visitor2
+    class ConcreteVisitor2
     {
     public:
         void operator() (const ConcreteComponentA& element) const {
@@ -86,8 +86,8 @@ namespace ConceptualExample_Visitor_Pattern_Modern {
     // accept()/visit() double dispatch entirely.
     // =======================================================================
 
-    template <typename Visitor>
-    static void clientCode(std::span<const Component> components, const Visitor& visitor)
+    template <typename TVisitor>
+    static void clientCode(std::span<const Component> components, const TVisitor& visitor)
     {
         for (const auto& comp : components) {
             std::visit(visitor, comp);
@@ -95,7 +95,7 @@ namespace ConceptualExample_Visitor_Pattern_Modern {
     }
 }
 
-void test_conceptual_example_02() {
+void test_conceptual_example_03() {
 
     using namespace ConceptualExample_Visitor_Pattern_Modern;
 
@@ -106,13 +106,13 @@ void test_conceptual_example_02() {
     components.emplace_back(ConcreteComponentC{});
 
     std::println("The client code works with all visitors via std::visit:");
-    Visitor1 visitor1;
-    clientCode<Visitor1>(components, visitor1);
+    ConcreteVisitor1 visitor1;
+    clientCode<ConcreteVisitor1>(components, visitor1);
     std::println();
 
     std::println("It allows the same client code to work with different types of visitors");
-    Visitor2 visitor2;
-    clientCode<Visitor2>(components, visitor2);
+    ConcreteVisitor2 visitor2;
+    clientCode<ConcreteVisitor2>(components, visitor2);
 }
 
 // ===========================================================================

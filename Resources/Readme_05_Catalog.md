@@ -87,7 +87,7 @@ Im Mittelpunkt stehen also Interaktionen, Algorithmen und die Steuerung des Verh
 | [State](../Patterns/StatePattern/Resources/Readme.md) | Das State Pattern ermöglicht es einem Objekt, sein Verhalten abhängig von seinem aktuellen Zustand zu verändern, ohne dass die Zustandslogik in einer großen bedingten Anweisung zusammengefasst werden muss. |
 | [Strategy Pattern](../Patterns/StrategyPattern/Resources/Readme.md) | Das Strategy Pattern kapselt unterschiedliche Algorithmen bzw. Verhaltensweisen hinter einer gemeinsamen Schnittstelle, sodass sie unabhängig voneinander ausgetauscht werden können. |
 | [Template Method](../Patterns/TemplatePattern/Resources/Readme.md) | Das Template Method Pattern definiert den grundlegenden Ablauf eines Algorithmus in einer Basisklasse und überlässt einzelne Schritte davon den abgeleiteten Klassen. |
-| [Visitor Method](../Patterns/Visitor/Resources/Readme.md) | Das Visitor Pattern ermöglicht es, neue Operationen auf einer bestehenden Objektstruktur hinzuzufügen, ohne die Klassen dieser Struktur selbst verändern zu müssen. |
+| [Visitor Pattern](../Patterns/Visitor/Resources/Readme.md) | Das Visitor Pattern ermöglicht es, neue Operationen auf einer bestehenden Objektstruktur hinzuzufügen, ohne die Klassen dieser Struktur selbst verändern zu müssen. |
 
 *Tabelle* 3: Verhaltensmuster (*Behavioral Design Pattern*).
 

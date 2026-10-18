@@ -136,7 +136,7 @@ namespace ConceptualExample_Visitor_Pattern {
             std::println("{} + ConcreteVisitor2", element.specialMethodOfConcreteComponentB());
         }
 
-        void visit(const ConcreteComponentC& element) override {  
+        void visit(const ConcreteComponentC& element) override {
             std::println("{} + ConcreteVisitor2", element.anotherMethodOfConcreteComponentC());
         }
     };
@@ -150,8 +150,17 @@ namespace ConceptualExample_Visitor_Pattern {
         std::span<const std::unique_ptr<ElementBase>> components,
         VisitorBase& visitor)
     {
-        for (/*const*/ auto& comp : components) {
+        for (const auto& comp : components) {
             comp->accept(visitor);
+        }
+    }
+
+    static void clientCodeEx(
+        std::span<const std::reference_wrapper<ElementBase>> components,
+        VisitorBase& visitor)
+    {
+        for (ElementBase& comp : components) {   // implicit conversion
+            comp.accept(visitor);
         }
     }
 }
@@ -174,6 +183,34 @@ void test_conceptual_example_01() {
     std::println("It allows the same client code to work with different types of visitors");
     ConcreteVisitor2 visitor2;
     clientCode(components, visitor2);
+    std::println();
+}
+
+void test_conceptual_example_02() {
+
+    using namespace ConceptualExample_Visitor_Pattern;
+
+    std::vector<std::unique_ptr<ElementBase>> components;
+
+    components.push_back(std::make_unique<ConcreteComponentA>());
+    components.push_back(std::make_unique<ConcreteComponentB>());
+    components.push_back(std::make_unique<ConcreteComponentC>());
+
+    //std::vector<std::unique_ptr<ElementBase>> components;
+    std::vector<std::reference_wrapper<ElementBase>> refs{ 
+        *components[0],
+        *components[1],
+        *components[2]
+    };
+
+    std::println("The client code works with all visitors via the base Visitor interface:");
+    ConcreteVisitor1 visitor1;
+    clientCodeEx(refs, visitor1);
+    std::println();
+
+    std::println("It allows the same client code to work with different types of visitors");
+    ConcreteVisitor2 visitor2;
+    clientCodeEx(refs, visitor2);
     std::println();
 }
 

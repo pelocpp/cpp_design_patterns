@@ -37,8 +37,8 @@ namespace {
     // forward declaration
     class Directory;
 
-    // A directory contains FileSystemElements. 
-    // Therefore, we first need a wrapper.
+    // A directory contains FileSystemElements, therefore, we first need a wrapper.
+    // Directory is incomplete, therefore I opt for using a std::unique_ptr
     using FileSystemElement = std::variant<File, std::unique_ptr<Directory>>;
 
     class Directory
