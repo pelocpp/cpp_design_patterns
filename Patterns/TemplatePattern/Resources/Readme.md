@@ -45,6 +45,14 @@ nicht umgekehrt.
 In C++ lässt sich das Pattern besonders elegant umsetzen, indem die *Template Method* als nicht-virtuelle
 (oder finale) Methode implementiert wird, während die austauschbaren Schritte als virtuelle (ggf. protected) Methoden bereitgestellt werden.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Einfaches Beispiel](../ConceptualExample.cpp)<br />
+[Quellcode 2 &ndash; Beispiel mit CRTP](../ConceptualExample_CRTP.cpp)
+
+---
 
 #### Struktur (UML):
 
@@ -67,11 +75,6 @@ um die **Template Methode** in der Oberklasse zu vervollständigen.
 Die Skelett-Methode ist davon ausgenommen - die prinzipielle Struktur des Algorithmus ist beizubehalten,
 also nicht zu verändern.
 
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp)
 
 ---
 

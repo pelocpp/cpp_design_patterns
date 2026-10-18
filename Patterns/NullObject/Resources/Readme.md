@@ -40,6 +40,13 @@ von vornherein vermieden werden.
 Ein Nachteil kann sein, dass fehlerhafte oder unerwartete Zustände dadurch stillschweigend &bdquo;verschluckt&rdquo; werden,
 statt frühzeitig aufzufallen &ndash; hier ist Abwägung gefragt, je nach Anwendungsfall.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp)
+
+---
 
 ##### *Hinweis*: Abgrenzung von *Null*-Objekten zu *Mock*-Objekten
 
@@ -63,17 +70,13 @@ Im Gegensatz zu *Null*-Objekten, die keinerlei Implementierung besitzen,
 weisen *Mock*-Objekte eine Implementierung auf, die das Ziel besitzt,
 dass sich das *Mock*-Objekt quasi täuschend echt im Vergleich zum eigentlichen realen Objekt verhält.
 
+---
+
 #### Struktur (UML):
 
 <img src="dp_null_object.svg" width="600">
 
 *Abbildung* 1: Schematische Darstellung des *Null Object* Entwurfsmusters.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp)
 
 ---
 

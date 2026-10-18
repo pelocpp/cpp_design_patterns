@@ -40,6 +40,14 @@ Bridge zielt auf die strukturelle Entkopplung zweier Hierarchien ab, nicht primä
 Besonders nützlich ist Bridge, wenn man plattformübergreifenden Code schreibt oder mehrere Implementierungsvarianten
 (z. B. verschiedene Grafik-APIs) unterstützen möchte.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Sehr einfache Version](../ConceptualExample01.cpp)<br />
+[Quellcode 2 &ndash; Ein etwas ausführlicheres Beispiel](../ConceptualExample02.cpp)
+
+---
 
 #### Struktur (UML):
 
@@ -110,12 +118,6 @@ Beide Varianten sind funktional identisch.
     * Der Zweck des *Bridge Patterns* besteht darin, die Schnittstelle von der Implementierung zu trennen.
     * Der Zweck des *Adapter Patterns* besteht darin, eine vorhandene Schnittstelle zu modifizieren.
 
----
-
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version<br />
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Ein etwas ausführlicheres Beispiel
 
 ---
 

@@ -45,28 +45,13 @@ In C++ ist dieses Pattern besonders interessant, weil die Sprache mit ihren eing
 und dem Range-based-for-Loop bereits eine sehr elegante, idiomatische Umsetzung dieses Konzepts anbietet &ndash; ein guter Anknüpfungspunkt,
 um das klassische GoF-Pattern mit modernem C++ zu vergleichen.
 
-
-#### Struktur (UML):
-
-Das folgende UML-Diagramm beschreibt eine Implementierung des *Iterator Patterns*.
-Es besteht im Wesentlichen aus fünf Teilen:
-
-  * **Client**: Fordert das *Iterator*-Objekt von einem aggregierten Objekt an und "konsumiert" es, wenn die Elemente durchlaufen werden sollen.
-  * **AggregateBase**: Abstrakte Basisklasse (oder Schnittstelle) für alle konkreten Aggregate. Diese Klasse enthält eine Methode, die auf Anfrage ein Iterator-Objekt zurückgibt.
-  * **ConcreteAggregate**: Repräsentiert die konkrete Implementierung der `AggregateBase`-Schnittstelle. Hat Zugriff auf die Elemente, die mit dem Iterator durchlaufen werden sollen.
-  * **IteratorBase**: Abstrakte Klasse (oder Schnittstelle) eines konkreten Iterators. Enthält Methoden (präziser: die Signaturen von Methoden), mit denen die Elemente durchlaufen werden können.
-  * **ConcreteIterator**: Konkrete Realisierung von `IteratorBase`.
-
-<img src="dp_iterator_pattern.svg" width="800">
-
-*Abbildung* 2: Schematische Darstellung des *Iterator Patterns*.
-
 ---
 
 #### Conceptual Example:
 
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; C++ spezifische Variante<br />
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Standard Variante
+[Quellcode 1 &ndash; C++ spezifische Variante](../ConceptualExample01.cpp)<br />
+[Quellcode 2 &ndash; Standard Variante](../ConceptualExample02.cpp)<br />
+[Quellcode 3 &ndash; Eine zweite Standard Variante](../ConceptualExample03.cpp)
 
 Die erste Umsetzung des *Iterator Patterns* berücksichtigt, dass es in C++ für Container bereits vordefinierte Iteratoren gibt.
 Dies kann man - wenn es sich bei der *ConcreteAggregate*-Klasse um einen STL-Standardcontainer handelt - ausnutzen.
@@ -93,6 +78,23 @@ public:
     virtual bool hasNext() = 0;
 };
 ```
+
+---
+
+#### Struktur (UML):
+
+Das folgende UML-Diagramm beschreibt eine Implementierung des *Iterator Patterns*.
+Es besteht im Wesentlichen aus fünf Teilen:
+
+  * **Client**: Fordert das *Iterator*-Objekt von einem aggregierten Objekt an und "konsumiert" es, wenn die Elemente durchlaufen werden sollen.
+  * **AggregateBase**: Abstrakte Basisklasse (oder Schnittstelle) für alle konkreten Aggregate. Diese Klasse enthält eine Methode, die auf Anfrage ein Iterator-Objekt zurückgibt.
+  * **ConcreteAggregate**: Repräsentiert die konkrete Implementierung der `AggregateBase`-Schnittstelle. Hat Zugriff auf die Elemente, die mit dem Iterator durchlaufen werden sollen.
+  * **IteratorBase**: Abstrakte Klasse (oder Schnittstelle) eines konkreten Iterators. Enthält Methoden (präziser: die Signaturen von Methoden), mit denen die Elemente durchlaufen werden können.
+  * **ConcreteIterator**: Konkrete Realisierung von `IteratorBase`.
+
+<img src="dp_iterator_pattern.svg" width="800">
+
+*Abbildung* 2: Schematische Darstellung des *Iterator Patterns*.
 
 #### Regelwerk für die Methoden `reset`, `getCurrent` und `hasNext`:
 

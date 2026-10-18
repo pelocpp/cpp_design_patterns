@@ -53,6 +53,14 @@ Eine Facadenklasse soll eine Vereinfachung in der Komplexität des/der unterlager
 Dies hat allerdings auch zur Folge, dass die Facadenklasse nur einen Teil
 (in manchen Fällen sogar nur einen Bruchteil) von den Fähigkeiten der Subsysteme besitzt.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp)
+
+---
+
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Facade Patterns*.
@@ -65,12 +73,6 @@ Es besteht im Wesentlichen aus drei Teilen:
 <img src="dp_facade_pattern.svg" width="700">
 
 *Abbildung* 1: Schematische Darstellung des *Facade Patterns*.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp)
 
 ---
 
@@ -90,13 +92,12 @@ Es besteht im Wesentlichen aus drei Teilen:
 
 ## Ein ähnliches Entwurfsmuster: Das &bdquo;*Strangler Fig*&rdquo; Pattern
 
-Das &bdquo;*Strangler Fig*&rdquo; Pattern ist eine Methode, bei dem alter Code umhüllt wird,
+Das &bdquo;*Strangler Fig*&rdquo; Pattern ist eine Vorgehensweise, bei der alter Code umhüllt wird,
 um ihn entweder zu neuem Code umzuleiten oder die Nutzung des alten Codes zu protokollieren.
 
 Dieses Muster wurde von *Martin Fowler* entwickelt und hat seinen Namen
-von der australischen Würgefeige Strangler Fig, einer Pflanze, die allmählich auf Bäumen wächst,
+von der australischen Würgefeige &bdquo;*Strangler Fig*&rdquo;, einer Pflanze, die allmählich auf Bäumen wächst,
 bis diese schließlich komplett umhüllt sind und absterben.
-
 
 ### So funktioniert das Muster in der Praxis
 
@@ -121,16 +122,13 @@ bis das alte System keine Aufgaben mehr hat und abgeschaltet werden kann
 
 *Bemerkung*:<br />
 Ein API Gateway ist eine zentrale Software-Schicht in der Softwareentwicklung,
-die als einziger Einstiegspunkt (Single Entry Point) zwischen Client-Anwendungen und einem Backend-Dienst fungiert.
-
-
+die als einziger Einstiegspunkt (*Single Entry Point*) zwischen Client-Anwendungen und einem Backend-Dienst fungiert.
 
 ### Vorteile gegenüber einem &bdquo;Big Bang Rewrite&rdquo;
 
   * Geringeres Risiko:<br />Statt jahrelanger Entwicklungsarbeit auf einer Baustelle gibt es kontinuierlich funktionierende Zwischenstände.
-  * Früher Nutzen (*Return on Investment*):<br />Einzelne neue Funktionen sind schnell produktionsreif und liefern frühzeitig Mehrwert.
-  * Kein Betriebsunterbrech (&bdquo;Business Continuity&rdquo;):<br />Das Geschäft läuft während der Migration ganz normal weiter
-
+  * Früher Nutzen (&bdquo;*Return on Investment*&rdquo;):<br />Einzelne neue Funktionen sind schnell produktionsreif und liefern frühzeitig Mehrwert.
+  * Kein Betriebsunterbrech (&bdquo;*Business Continuity*&rdquo;):<br />Das Geschäft läuft während der Migration ganz normal weiter
 
 ---
 

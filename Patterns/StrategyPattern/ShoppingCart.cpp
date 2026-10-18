@@ -76,9 +76,9 @@ namespace ConceptualExample_ShoppingCart {
          */
         void doShopping()
         {
-            double moneyAvailable = 100.0;
+            double moneyAvailable{ 100.0 };
             std::println("moneyAvailable: {}", moneyAvailable);
-            double moneyToSpend = m_strategy->price(moneyAvailable);
+            double moneyToSpend{ m_strategy->price(moneyAvailable) };
             std::println("moneyToSpend: {}", moneyToSpend);
         }
     };
@@ -93,7 +93,7 @@ namespace ConceptualExample_ShoppingCart {
     {
         BlackFridayPrice blackFriday;
 
-        ShoppingCart cart(blackFriday);
+        ShoppingCart cart{ blackFriday };
 
         std::println("{}", cart.total(100));   // 70
     }

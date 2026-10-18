@@ -38,6 +38,21 @@ In C++ bietet sich für die gemeinsame Schnittstelle typischerweise eine abstrakt
 von der konkrete Command-Klassen erben. Insgesamt fördert das Pattern die lose Kopplung zwischen den Komponenten,
 die eine Aktion anstoßen, und denen, die sie ausführen, und erhöht dadurch die Erweiterbarkeit und Testbarkeit des Systems.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Sehr einfaches Beispiel](../ConceptualExample_01.cpp)<br />
+[Quellcode 2 &ndash; Dasselbe Beispiel mit zusätzlichen Modern C++ Sprachkonstrukten](../ConceptualExample_02.cpp)
+
+*Bemerkung*:<br />
+Mit Modernen C++ Sprachmitteln benötigen Sie oft überhaupt keine `CommandBase`-Basisklasse und keine `ConcreteCommand`-Klassen mehr.
+Jedes aufrufbare Objekt (*Callable*), wie eine Lambda-Funktion, kann als Kommando dienen.
+
+Mithilfe von `std::move_only_function` (C++23) oder `std::function` (C++11) kapseln wir das Verhalten direkt zur Laufzeit.
+Das reduziert den "Boilerplate-Code" (Rahmencode) drastisch, siehe dazu [Quellcode 2](../ConceptualExample_02.cpp).
+
+---
 
 #### Struktur (UML):
 
@@ -62,21 +77,6 @@ Es besteht im Wesentlichen aus fünf Teilen:
 
 Bei den Fallstudien zu diesem Seminar finden Sie unter dem Stichwort &bdquo;Bankkonten&rdquo;
 ein praxisnahes Beispiel vor.
-
----
-
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample_01.cpp) &ndash; Sehr einfaches Beispiel<br />
-[Quellcode 2](../ConceptualExample_02.cpp) &ndash; Dasselbe Beispiel mit zusätzlichen Modern C++ Sprachkonstrukten
-[Quellcode 3](../ConceptualExample_03.cpp) &ndash; Ein etwas ausführlicheres Beispiel
-
-*Bemerkung*:<br />
-Mit Modernen C++ Sprachmitteln benötigen Sie oft überhaupt keine `CommandBase`-Basisklasse und keine `ConcreteCommand`-Klassen mehr.
-Jedes aufrufbare Objekt (*Callable*), wie eine Lambda-Funktion, kann als Kommando dienen.
-
-Mithilfe von `std::move_only_function` (C++23) oder `std::function` (C++11) kapseln wir das Verhalten direkt zur Laufzeit.
-Das reduziert den "Boilerplate-Code" (Rahmencode) drastisch, siehe dazu [Quellcode 2](../ConceptualExample_02.cpp).
 
 ---
 

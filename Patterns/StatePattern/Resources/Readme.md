@@ -36,7 +36,14 @@ etwa bei Verbindungsstatus, Spielfiguren-Zuständen oder Bestellprozessen.
 
 Der Kompromiss: Man tauscht komplexe bedingte Logik gegen eine größere Anzahl kleiner, fokussierter Klassen.
 
+---
 
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Cpp-Quelldatei](../ConceptualExample.cpp)<br/>
+[Quellcode 1 &ndash; Header-Datei](../ConceptualExample.h)
+
+---
 
 ###### Ein Beispiel
 
@@ -85,14 +92,6 @@ Es besteht im Wesentlichen aus drei Teilen:
   * Kapselung der Zustandsübergänge (Optional, aber empfohlen)<br />
   Wenn Zustände Laufzeitdaten enthalten, macht das Erzeugen via std::make_unique in handle Sinn. Wenn sie aber wie hier statuslos sind, blockiert das permanente Allokieren die Performance.
 
-
----
-
-#### Conceptual Example:
-
-
-[Quellcode 1 / .cpp](../ConceptualExample.cpp)<br/>
-[Quellcode 1 / .h](../ConceptualExample.h)
 
 ---
 

@@ -44,8 +44,8 @@ aber die Menge der darauf ausgeführten Operationen häufig wächst.
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample.cpp)
-[Quellcode](../ConceptualExample_Variant_Visit.cpp)
+[Quellcode 1 &ndash; mit Vererbung](../ConceptualExample.cpp)<br />
+[Quellcode 2 &ndash; mit `std::variant`](../ConceptualExample_Variant_Visit.cpp)
 
 ---
 

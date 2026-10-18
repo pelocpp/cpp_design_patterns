@@ -38,7 +38,13 @@ wodurch man auf manuelles Speichermanagement weitgehend verzichten kann.
 Ein Nachteil des Patterns ist der potenziell hohe Speicherverbrauch, wenn viele oder große Snapshots gehalten werden müssen,
 weshalb in der Praxis oft zusätzliche Strategien wie Differenzspeicherung oder Kompression zum Einsatz kommen.
 
+---
 
+#### Conceptual Example:
+
+[Quellcode &ndash; Einfaches Beispiel](../ConceptualExample.cpp)
+
+---
 
 #### Struktur (UML):
 
@@ -55,16 +61,9 @@ Es besteht im Wesentlichen aus drei Teilen:
     Das Memento-Objekt ist für den *CareTaker* eine Black-Box,
     der CareTaker kann darauf nicht zugreifen. 
 
-
 <img src="dp_memento.svg" width="600">
 
 *Abbildung* 1: Schematische Darstellung des *Memento Patterns*.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp) &ndash; Einfaches Beispiel<br />
 
 ---
 

@@ -12,7 +12,15 @@ Gegensatz zur Wahrnehmung eines Steuerelements als homogene Einheit besteht eine
 entwickelte Komponente aus den drei Einheiten *Modell*, *Ansicht* und *Controller*. Bestandteil des Entwurfsmusters 
 sind auch die Kommunikationswege innerhalb dieser Architektur.
 
-## Wesentliche Merkmale
+---
+
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp) &ndash; Umsetzung des Ventilsteuerungs-Beispiels
+
+---
+
+#### Wesentliche Merkmale
 
 Nach dem *Model-View-Controller* Paradigma ist eine Komponente in die folgenden drei Bestandteile zu unterteilen:
 
@@ -88,7 +96,7 @@ Anpassungen vorzunehmen sind.
   * Die Trennung des Controllers von der Ansicht ermöglicht die Berücksichtigung unterschiedlichster Eingabegeräte
    (Maus, Tastatur, Anbindung einer Netzwerkschnittstelle oder eines Sensors, usw.).
 
-## Kommunikationswege
+#### Kommunikationswege
 
 In einer MVC-Komponente gibt es zwischen den drei Einheiten Modell, Ansicht und Controller folgende
 Kommunikationswege (siehe dazu auch *Abbildung* 4):
@@ -112,7 +120,7 @@ Kommunikationswege (siehe dazu auch *Abbildung* 4):
 
 *Abbildung* 4: Die Kommunikationswege im MVC-Modell können direkt oder indirekt (ereignisgesteuert) erfolgen.
 
-## Eine Ventilsteuerung mit MVC-Architektur
+#### Eine Ventilsteuerung mit MVC-Architektur
 
 Lassen Sie uns das Model-View-Controller Paradigma am Beispiel eines Ventils betrachten (siehe dazu auch
 *Abbildung* 5). Ein Ventil, so wie wir es beispielsweise im Maschinenbau vorfinden, kann als Zustand entweder
@@ -123,12 +131,6 @@ Modells zu beeinflussen, das Ventil kann (teilweise) geöffnet oder (teilweise) g
 <img src="mvc_02.png" width="500">
 
 *Abbildung* 5: Ein Ventil unter dem Aspekt des Model-View-Controller Paradigmas betrachtet.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp) &ndash; Umsetzung des Ventilsteuerungs-Beispiels
 
 ---
 

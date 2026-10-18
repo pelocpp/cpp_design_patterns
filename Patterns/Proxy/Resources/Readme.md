@@ -42,6 +42,13 @@ Der Client arbeitet ausschlieﬂlich mit der Proxy-Schnittstelle und bleibt so von
 Auf diese Weise verbindet das Pattern das Open/Closed-Prinzip mit einer sauberen Trennung von Verantwortlichkeiten:
 Steuerungslogik (Proxy) und eigentliche Funktionalit‰t (Real Subject) bleiben getrennt.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp)
+
+---
 
 #### Struktur (UML):
 
@@ -76,12 +83,6 @@ Das Proxy Pattern hat zwei Beziehungen:
   Das Proxy-Objekt delegiert seine Arbeit an das &bdquo;echte&rdquo; Objekt, also an ein `RealSubject`-Objekt.
   Dies hat nichts mit Polymorphie zu tun, der Proxy weiﬂ genau, welches Objekt er repr‰sentiert.
   Deshalb besitzt er eine Variable `m_realSubject` des Typs `std::unique_ptr<RealSubject>`.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp)
 
 ---
 

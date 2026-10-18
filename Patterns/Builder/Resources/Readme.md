@@ -14,7 +14,6 @@
 
 ##### Kategorie: Erzeugungsmuster / *Creational Pattern*
 
-
 ###### In einem Satz:
 
 > &bdquo;Das Builder Pattern trennt die schrittweise Konstruktion eines komplexen Objekts von seiner Repräsentation, sodass derselbe Konstruktionsprozess unterschiedliche Ausprägungen des Objekts erzeugen kann.&rdquo;
@@ -37,6 +36,27 @@ bei denen jede *setter*-ähnliche Methode eine Referenz auf den Builder zurückgib
 
 So entsteht ein lesbarer, deklarativer Konstruktionsablauf, der sowohl Robustheit als auch Flexibilität in der Objekterzeugung fördert.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Sehr einfache Version](../ConceptualExample01.cpp)<br />
+[Quellcode 2 &ndash; Ein etwas ausführlicheres Beispiel](../ConceptualExample02.cpp)
+
+Die Ausgaben des konzeptionellen Beispiels lauten:
+
+```
+Standard basic product:
+Product parts: Part A1
+
+Standard full featured product:
+Product parts: Part A1, Part B1, Part C1
+
+Custom product:
+Product parts: Part A1, Part C1
+```
+
+---
 
 #### Struktur (UML):
 
@@ -54,26 +74,6 @@ Es besteht im Wesentlichen aus vier Teilen:
 <img src="dp_builder_pattern.svg" width="550">
 
 *Abbildung* 1: Schematische Darstellung des *Builder Patterns*.
-
----
-
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version<br />
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Ein etwas ausführlicheres Beispiel
-
-Die Ausgaben des konzeptionellen Beispiels lauten:
-
-```
-Standard basic product:
-Product parts: Part A1
-
-Standard full featured product:
-Product parts: Part A1, Part B1, Part C1
-
-Custom product:
-Product parts: Part A1, Part C1
-```
 
 ---
 

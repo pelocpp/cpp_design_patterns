@@ -49,6 +49,13 @@ weil es unkompliziert zu implementieren ist und die Objekterzeugung an einer ein
 
 ---
 
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Einfaches Beispiel](../ConceptualExample01.cpp)<br />
+[Quellcode 2 &ndash; Beispiel mit *Shapes*](../ConceptualExample02.cpp)
+
+---
+
 #### Struktur (UML):
 
 *Bemerkung*:<br />
@@ -95,103 +102,6 @@ Die Architektur des Simple Factory Patterns lässt sich an einer einzigen Frage 
 
  * Bei der Simple Factory entscheidet eine zentrale Factory-Funktion/-Klasse anhand eines Parameters über die Erzeugung eines Zielobjekts.
  * Bei der Factory Method wird die Entscheidung durch Polymorphie in eine konkrete Factory-Klasse verlagert.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample01.cpp) &ndash; Einfaches Beispiel<br />
-
-```cpp
-01: // =======================================================================
-02: // Product
-03: // =======================================================================
-04: 
-05: class ProductBase
-06: {
-07: public:
-08:     virtual ~ProductBase() = default;
-09: 
-10:     [[nodiscard]]
-11:     virtual std::string_view getName() const = 0;
-12: 
-13:     virtual void anyOperation() const = 0;
-14: };
-15: 
-16: class ConcreteProductA final : public ProductBase
-17: {
-18: public:
-19:     [[nodiscard]]
-20:     std::string_view getName() const override
-21:     {
-22:         return "ConcreteProductA";
-23:     }
-24: 
-25:     void anyOperation() const override
-26:     {
-27:         std::println("Working with ConcreteProduct A");
-28:     }
-29: };
-30: 
-31: class ConcreteProductB final : public ProductBase
-32: {
-33: public:
-34:     [[nodiscard]]
-35:     std::string_view getName() const override
-36:     {
-37:         return "ConcreteProductB";
-38:     }
-39: 
-40:     void anyOperation() const override
-41:     {
-42:         std::println("Working with ConcreteProduct B");
-43:     }
-44: };
-45: 
-46: // =======================================================================
-47: // Simple Factory
-48: // =======================================================================
-49: 
-50: enum class ProductType
-51: {
-52:     Variant_A,
-53:     Variant_B
-54: };
-55: 
-56: class ProductFactory final
-57: {
-58: public:
-59:     [[nodiscard]]
-60:     static std::unique_ptr<ProductBase>
-61:         createProduct(ProductType type)
-62:     {
-63:         switch (type)
-64:         {
-65:         case ProductType::Variant_A:
-66:             return std::make_unique<ConcreteProductA>();
-67: 
-68:         case ProductType::Variant_B:
-69:             return std::make_unique<ConcreteProductB>();
-70:         }
-71: 
-72:         // Should be unreachable for a valid ProductType.
-73:         std::unreachable();
-74:     }
-75: };
-76: 
-77: // =======================================================================
-78: // Client
-79: // =======================================================================
-80: 
-81: static void clientCode(ProductType type)
-82: {
-83:     auto product = ProductFactory::createProduct(type);
-84: 
-85:     product->anyOperation();
-86: 
-87:     std::println("Created {}", product->getName());
-88: }
-```
 
 ---
 

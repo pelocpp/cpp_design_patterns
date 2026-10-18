@@ -38,6 +38,15 @@ und erhöht Wiederverwendbarkeit sowie Wartbarkeit des Systems.
 In C++ lässt es sich beispielsweise über eine abstrakte Basisklasse `Filter` mit virtueller `execute()`-Methode und
 eine Kette aus `std::vector<std::unique_ptr<Filter>>` realisieren.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Standardvariante](../ConceptualExample01.cpp)<br />
+[Quellcode 2 &ndash; Siehe Weiterarbeit](../ConceptualExample02.cpp)
+
+---
+
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Intercepting Filter Patterns*.
@@ -57,13 +66,6 @@ Es besteht im Wesentlichen aus fünf Teilen:
 #### Hinweis:
 
 Es bestehen gewisse Ähnlichkeiten zum *Chain of Responsibility* Pattern.
-
----
-
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Standardvariante<br />
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Siehe Weiterarbeit
 
 ---
 

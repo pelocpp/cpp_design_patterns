@@ -41,6 +41,23 @@ statt dass jedes Flugzeug direkt mit jedem anderen kommuniziert.
 
 Fazit: Der zentrale Punkt des Patterns ist es, weniger direkte Abhängigkeiten zwischen Objekten zu haben.
 
+---
+
+#### Conceptual Example:
+
+*Hinweis*:
+
+Das *Conceptual Example* liegt in drei Varianten vor:
+
+  * Variante 1: Modern C++, mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
+  * Variante 2: Prinzipiell wie Variante 1, nur: Die Entscheidung, welche empfangende Komponente
+    aufzurufen ist, wird dieses Mal über das Absenderobjekt getroffen (und nicht über eine Parameterkennung).
+
+[Quellcode 1](../ConceptualExample01.cpp)<br />
+[Quellcode 2](../ConceptualExample02.cpp)
+
+---
+
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Mediator Patterns*.
@@ -73,21 +90,6 @@ Es besteht im Wesentlichen aus vier Teilen:
 <img src="dp_mediator_pattern.svg" width="800">
 
 *Abbildung* 1: Schematische Darstellung des *Mediator Patterns*.
-
----
-
-#### Conceptual Example:
-
-*Hinweis*:
-
-Das *Conceptual Example* liegt in drei Varianten vor:
-
-  * Variante 1: Modern C++, mit `std::shared_ptr` Objekten und `std::enable_shared_from_this<>` Mechanismus.
-  * Variante 2: Prinzipiell wie Variante 1, nur: Die Entscheidung, welche empfangende Komponente
-    aufzurufen ist, wird dieses Mal über das Absenderobjekt getroffen (und nicht über eine Parameterkennung).
-
-[Quellcode 1](../ConceptualExample01.cpp)<br />
-[Quellcode 2](../ConceptualExample02.cpp)
 
 ---
 

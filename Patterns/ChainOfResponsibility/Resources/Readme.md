@@ -36,6 +36,14 @@ Typische Einsatzgebiete sind zum Beispiel die Verarbeitung von Ereignissen in GU
 sowie Middleware-Ketten in Webanwendungen. In C++ wird die Kette meist über eine gemeinsame Basisklasse mit einem Zeiger (ggf. `std::shared_ptr`)
 auf den nächsten Handler sowie einer virtuellen `handle()`-Methode realisiert.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp)
+
+---
+
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Chain of Responsibility Patterns*.
@@ -50,12 +58,6 @@ Es besteht im Wesentlichen aus drei Teilen:
 <img src="dp_chain_of_responsibility.svg" width="700">
 
 *Abbildung* 1: Schematische Darstellung des *Chain of Responsibility Patterns*.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp)
 
 ---
 

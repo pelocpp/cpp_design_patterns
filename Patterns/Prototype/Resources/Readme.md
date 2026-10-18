@@ -36,6 +36,14 @@ In C++ lässt sich das beispielsweise über eine virtuelle `clone()`-Methode und p
 
 Je nach Anwendungsfall kann das Klonen als flache oder tiefe Kopie realisiert werden.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Sehr einfache Version &ndash; mit *raw*-Zeigern und Smart Pointern](../ConceptualExample01.cpp)<br />
+[Quellcode 2 &ndash; Beispiel eines Schachbretts mit Spielfiguren unterschiedlichen Typs](../ConceptualExample02.cpp)
+
+---
 
 #### Hinweise:
 
@@ -149,12 +157,6 @@ Die Erstellung von Objekten erfolgt hier &ndash; unter anderem &ndash; auf der B
 &bdquo;Konstruktorfunktionen&rdquo;, die als Blaupausen für neue Objekte verwendet werden können.
 Man spricht dabei auch von der so genannten &bdquo;*prototypischen Vererbung*&rdquo;.
 
----
-
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version &ndash; mit *raw*-Zeigern und Smart Pointern<br />
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Beispiel eines Schachbretts mit Spielfiguren unterschiedlichen Typs<br />
 
 ---
 

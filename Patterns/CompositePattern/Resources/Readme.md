@@ -44,6 +44,24 @@ Ein Nachteil kann sein, dass es schwieriger wird, die Menge der zulässigen Kind
 
 Insgesamt ist das *Composite Pattern* besonders nützlich, wann immer &bdquo;Teil-Ganzes&rdquo;-Hierarchien rekursiv und einheitlich behandelt werden sollen.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp) &ndash; Konzeptionelles Beispiel.<br />
+[Quellcode](../ConceptualExample_Factory.cpp) &ndash; Behandlung des `enable_shared_from_this`-Problems.
+
+Beachte in dem Quellcode zum konzeptionellen Beispiel:
+
+Es wird das Problem möglicher Zyklen betrachtet:
+
+  * Ein `Composite`-Objekt kennt seine `Component`-Objekte.
+  * Ein `Component`-Objekt kennt sein zugeordnetes `Composite`-Objekt.
+
+Wir lösen dieses Problem geschickt mit dem Einsatz von `std::shared_ptr`- und `std::weak_ptr`-Zeigern.
+
+---
+
 #### Struktur (UML):
 
 Das folgende UML-Diagramm beschreibt eine Implementierung des *Composite Patterns*.
@@ -63,22 +81,6 @@ Es besteht im Wesentlichen aus drei Teilen:
 <img src="dp_composite_pattern.svg" width="600">
 
 *Abbildung* 1: Schematische Darstellung des *Composite Entwurfsmusters*.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp) &ndash; Konzeptionelles Beispiel.<br />
-[Quellcode](../ConceptualExample_Factory.cpp) &ndash; Behandlung des `enable_shared_from_this`-Problems.
-
-Beachte in dem Quellcode zum konzeptionellen Beispiel:
-
-Es wird das Problem möglicher Zyklen betrachtet:
-
-  * Ein `Composite`-Objekt kennt seine `Component`-Objekte.
-  * Ein `Component`-Objekt kennt sein zugeordnetes `Composite`-Objekt.
-
-Wir lösen dieses Problem geschickt mit dem Einsatz von `std::shared_ptr`- und `std::weak_ptr`-Zeigern.
 
 ---
 

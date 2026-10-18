@@ -38,11 +38,7 @@ namespace ConceptualExample_Observer_Pattern_RAII {
     class ISubject {
     public:
         virtual ~ISubject() = default;
-
-     //   virtual void attach(std::weak_ptr<IObserver> observer) = 0;
-           virtual void detach(const std::weak_ptr<IObserver>& observer) = 0;
-
-        //   virtual Connection attach(std::weak_ptr<IObserver> observer) = 0;
+        virtual void detach(const std::weak_ptr<IObserver>& observer) = 0;
     };
 
     // =======================================================================
@@ -72,16 +68,12 @@ namespace ConceptualExample_Observer_Pattern_RAII {
                 : m_subject(subject), m_observer(std::move(observer))
             {}
             
-     //       ~Connection() { if (m_subject) m_subject->detach(m_observer); }
-
             ~Connection() {
                 release();
             }
             
             // move-only: ownership of "being subscribed" can move,
             // but must not be duplicated (would cause double-detach).
-            //Connection(Connection&&) noexcept = default;
-            //Connection& operator=(Connection&&) noexcept = default;
 
             Connection(const Connection&) = delete;
             Connection& operator=(const Connection&) = delete;
@@ -134,6 +126,7 @@ namespace ConceptualExample_Observer_Pattern_RAII {
         // those Connections dangling. Disable both.
         Subject(const Subject&) = delete;
         Subject& operator=(const Subject&) = delete;
+
         Subject(Subject&&) = delete;
         Subject& operator=(Subject&&) = delete;
 

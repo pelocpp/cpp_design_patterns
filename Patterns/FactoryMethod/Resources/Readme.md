@@ -45,7 +45,16 @@ die konkrete Ausprägung eines Schritts aber von der konkreten Anwendung abhäng
 Abzugrenzen ist es vom *Abstract-Factory*-Pattern, das mehrere zusammengehörige Objektfamilien erzeugt,
 während sich Factory Method typischerweise auf ein einzelnes Produkt konzentriert.
 
+---
 
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Einfaches Beispiel](../ConceptualExample01.cpp)<br />
+[Quellcode 2 &ndash; Erweiterung des einfachen Beispiels um eine Fabrik mit Lastausgleich](../ConceptualExample02.cpp)<br />
+[Quellcode 3 &ndash; Eine Fabrik ohne Vererbung](../ConceptualExample03.cpp)<br />
+[Quellcode 4 &ndash; Beispiel zu heißen Getränken](../ConceptualExample04.cpp)
+
+---
 
 #### Struktur (UML):
 
@@ -178,15 +187,6 @@ Zwei populäre Alternativen ersetzen das klassische Pattern:
 Im Beispiel zu dem &bdquo;Quellcode 3&rdquo; findet man eine funktionale, schlanke Factory,
 die komplett ohne Fabrik-Klassen auskommt. Jede &bdquo;Fabrik&rdquo; ist einfach ein registriertes Lambda.
 
-
----
-
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Einfaches Beispiel.<br />
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Erweiterung des einfachen Beispiels um eine Fabrik mit Lastausgleich.<br />
-[Quellcode 3](../ConceptualExample03.cpp) &ndash; Eine Fabrik ohne Vererbung.<br />
-[Quellcode 4](../ConceptualExample04.cpp) &ndash; Beispiel zu heißen Getränken.
 
 ---
 

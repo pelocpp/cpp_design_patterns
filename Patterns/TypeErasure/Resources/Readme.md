@@ -37,6 +37,14 @@ ohne von einer bestimmten Basisklasse erben zu müssen (*Duck Typing* zur Compile
 Der Preis dafür sind ein gewisser Implementierungsaufwand, eine zusätzliche Indirektion sowie meist eine Heap-Allokation
 für das gespeicherte Objekt, sofern keine Small-Buffer-Optimization eingesetzt wird.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode &ndash; Zusammenfassung aller Quellcode-Beispiel aus dem folgenden Text](../ConceptualExample.cpp)
+
+---
+
 ###### Zur Namensgebung
 
 Das Idiom *Type Erasure* ist auch unter dem Namen &bdquo;*Duck Typing*&rdquo; bekannt.
@@ -523,12 +531,6 @@ den Instanzvariablen verwalten sie eine Referenz des umhüllten Objekts:
 60:     animals.print();
 61: }
 ```
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp) &ndash; Zusammenfassung aller Quellcode-Beispiel aus dem Text.
 
 ---
 

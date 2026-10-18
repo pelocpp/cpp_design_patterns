@@ -38,6 +38,15 @@ da der C++11-Standard deren thread-sichere Initialisierung garantiert.
 Kritisch zu beachten sind dabei jedoch mögliche Nachteile: Singletons werden häufig für globalen, versteckten Zustand missbraucht,
 erschweren das Unit-Testing durch enge Kopplung und werden in der Praxis daher oft kontrovers diskutiert.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Sehr einfache Version](../ConceptualExample01.cpp)<br />
+[Quellcode 2 &ndash; Mit *Double-Checked Locking*](../ConceptualExample02.cpp)<br />
+[Quellcode 3 &ndash; Eine Alternative zum Singleton Pattern: *Dependency Injection*](../Singleton_vs_Dependency_Injection.cpp)
+
+---
 
 ###### Einige Beispiele
 
@@ -324,14 +333,6 @@ ein Singleton-Objekt von *innen* verankert!
 <img src="dp_singleton_pattern_05_logger_di_02.svg" width="800">
 
 *Abbildung* 5: `CustomerRepository`-Objekten können über ihren Konstruktor unterschiedliche Logger-Implementierungen zur Verfügung gestellt werden.
-
----
-
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample01.cpp) &ndash; Sehr einfache Version<br />
-[Quellcode 2](../ConceptualExample02.cpp) &ndash; Mit *Double-Checked Locking*<br />
-[Quellcode 3](../Singleton_vs_Dependency_Injection.cpp) &ndash; Eine Alternative zum Singleton Pattern: *Dependency Injection*
 
 ---
 

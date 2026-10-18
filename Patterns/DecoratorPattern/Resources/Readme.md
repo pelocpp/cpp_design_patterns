@@ -36,6 +36,44 @@ Das Pattern eignet sich insbesondere dann, wenn viele unterschiedliche Kombinati
 
 Ein typisches Beispiel ist die Erweiterung von Datenströmen um Funktionen wie Pufferung, Kompression oder Verschlüsselung.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp)
+
+*Hinweis*: Man beachte in dem konzeptionellen Beispiel auch die Demonstration
+der Deklaration zur Laufzeit:
+
+```cpp
+01: // component which is going to be decorated
+02: std::shared_ptr<Component> component{ std::make_shared<ConcreteComponent>() };
+03: 
+04: // run-time dependent decorator
+05: std::shared_ptr<Component> decorator;
+06: 
+07: if (true)   // <== change 'true' to 'false'
+08: {
+09:     std::shared_ptr<Component> decorator1{ std::make_shared<ConcreteDecoratorA>(component) };
+10:     decorator = std::make_shared<ConcreteDecoratorB>(decorator1);
+11: 
+12:     std::cout << "Client: Now I've this decorated component (if):" << std::endl;
+13: }
+14: else {
+15:     std::shared_ptr<Component> decorator1 {std::make_shared<ConcreteDecoratorB>(component)};
+16:     decorator = std::make_shared<ConcreteDecoratorA>(decorator1);
+17: 
+18:     std::cout << "Client: Now I've that decorated component (else):" << std::endl;
+19: }
+```
+
+---
+
+#### &bdquo;Real-World&rdquo; Beispiel zum Zweiten: Statisches Dekorieren mit Templates
+
+[Quellcode &bdquo;Statische Shapes&rdquo;](../StaticShapes.cpp)
+
+---
 
 #### Struktur (UML):
 
@@ -108,36 +146,6 @@ vor oder nach den Anrufen an das eingehüllte Objekt, um die richtige Reihenfolge
   * Das *Strategy Design Pattern* verwendet Objekte, um eine Implementierung zu ändern.
   Der *Decorateur* verwendet Objekte, um die Funktionalität eines Objekts zu erweitern.
 
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp)
-
-*Hinweis*: Man beachte in dem konzeptionellen Beispiel auch die Demonstration
-der Deklaration zur Laufzeit:
-
-```cpp
-01: // component which is going to be decorated
-02: std::shared_ptr<Component> component{ std::make_shared<ConcreteComponent>() };
-03: 
-04: // run-time dependent decorator
-05: std::shared_ptr<Component> decorator;
-06: 
-07: if (true)   // <== change 'true' to 'false'
-08: {
-09:     std::shared_ptr<Component> decorator1{ std::make_shared<ConcreteDecoratorA>(component) };
-10:     decorator = std::make_shared<ConcreteDecoratorB>(decorator1);
-11: 
-12:     std::cout << "Client: Now I've this decorated component (if):" << std::endl;
-13: }
-14: else {
-15:     std::shared_ptr<Component> decorator1 {std::make_shared<ConcreteDecoratorB>(component)};
-16:     decorator = std::make_shared<ConcreteDecoratorA>(decorator1);
-17: 
-18:     std::cout << "Client: Now I've that decorated component (else):" << std::endl;
-19: }
-```
 
 ---
 
@@ -249,12 +257,6 @@ std::cout << greenTransparentCircle->draw() << std::endl;
 ```
 A circle of radius 15.000000 has color green has 19.6078% transparency
 ```
-
----
-
-#### &bdquo;Real-World&rdquo; Beispiel zum Zweiten: Statisches Dekorieren mit Templates
-
-[Quellcode &bdquo;Statische Shapes&rdquo;](../StaticShapes.cpp)
 
 ---
 

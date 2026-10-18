@@ -37,6 +37,24 @@ Modell-View-Architekturen (MVC) oder Publish-Subscribe-Systeme.
 In C++ wird das Pattern häufig über eine abstrakte Basisklasse mit einer virtuellen `update()`-Methode für die Observer
 sowie eine Verwaltungsstruktur (z. B. `std::vector<std::weak_ptr<IObserver>>`) im Subject umgesetzt.
 
+---
+
+#### Conceptual Example:
+
+Das *Conceptual Example* liegt in vier Varianten vor:
+
+  * Variante 1: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
+  * Variante 2: Mit RAII-Anmeldung 
+  * Variante 3: Wie Variante 1, aber mit `std::enable_shared_from_this<>` Mechanismus.
+  * Variante 4: Mit `std::function<>`.
+
+[Quellcode 1](../ConceptualExample01.cpp)<br />
+[Quellcode 2](../ConceptualExample02.cpp)<br />
+[Quellcode 3](../ConceptualExample03.cpp)<br />
+[Quellcode 4](../ConceptualExample04.cpp)
+
+---
+
 #### Struktur (UML):
 
 <img src="dp_observer_01.svg" width="400">
@@ -50,20 +68,6 @@ sowie eine Verwaltungsstruktur (z. B. `std::vector<std::weak_ptr<IObserver>>`) i
 <img src="dp_observer_04.svg" width="700">
 
 *Abbildung* 3: Schematische Darstellung des *Observer Pattern Musters*: Abstraktion des Observers mittels Schnittstelle `IObserver`. 
-
----
-
-#### Conceptual Example:
-
-Das *Conceptual Example* liegt in vier Varianten vor:
-
-  * Variante 1: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
-  * Variante 2: Wie Variante 1, aber mit `std::enable_shared_from_this<>` Mechanismus.
-  * Variante 3: Mit `std::function<>`.
-
-[Quellcode 1](../ConceptualExample01.cpp)<br />
-[Quellcode 2](../ConceptualExample02.cpp)<br />
-[Quellcode 3](../ConceptualExample03.cpp)
 
 ---
 

@@ -45,6 +45,14 @@ Der Vorteil liegt in der erheblichen Speicherersparnis bei großer Objektanzahl.
 Der Preis dafür ist eine größere Trennung zwischen gemeinsamem und individuellem Zustand
 sowie eine möglicherweise aufwendigere Verwaltung der Objekte.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Sehr einfaches Beispiel](../ConceptualExample01.cpp)<br />
+[Quellcode 2 &ndash; Beispiel mit Autos](../ConceptualExample02.cpp)
+
+---
 
 #### Struktur (UML):
 
@@ -91,13 +99,6 @@ Es besteht im Wesentlichen aus vier Teilen:
 	Ein `std::shared_ptr`-Objekt verwaltet einen Kontrollblock (ca. 16 Byte) und den Zeiger. Da die Factory die Lebensdauer der Flyweights besitzt,
 	reicht es oft, die Objekte per `std::unique_ptr` in der Map zu speichern und dem Client nur eine Referenz (`const Flyweight&`) oder sogar
 	einen Rohzeiger (`const Flyweight*`) zurückzugeben. Das spart Speicher und erhöht die Cache-Lokalität.
-
----
-
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample01.cpp)<br />
-[Quellcode 2](../ConceptualExample02.cpp)
 
 ---
 

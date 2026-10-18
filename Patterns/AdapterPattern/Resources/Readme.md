@@ -42,6 +42,13 @@ wie losem Kopplung und Testbarkeit verträgt.
 Ein typisches Beispiel ist die Anpassung einer alten oder fremden API an ein modernes, im eigenen System etabliertes Interface.
 So wird das Adapter Pattern zu einem wichtigen Werkzeug für Wiederverwendbarkeit, Entkopplung und die Integration heterogener Systeme.
 
+---
+
+#### Conceptual Example:
+
+[Quellcode](../ConceptualExample.cpp)
+
+---
 
 #### Struktur (UML):
 
@@ -60,12 +67,6 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 Der Klassenname `Adaptee` steht stellvertretend für Service-Klassen, die es gilt,
 über Adapter-Klassen verfügbar zu machen.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample.cpp)
 
 ---
 
@@ -116,18 +117,15 @@ in einen Container einfügen.
 
 #### Das Addapter Pattern in Modern C++
 
-Ein Compile-Time-Adapter (auch statischer Adapter genannt) verzichtet komplett auf Laufzeit-Polymorphie (virtual-Funktionen, vtables)
-und Heap-Allokationen (std::unique_ptr).
+Ein Compile-Time-Adapter (auch statischer Adapter genannt) verzichtet komplett auf Laufzeit-Polymorphie (`virtual`-Funktionen, *vtables*)
+und Heap-Allokationen (`std::unique_ptr`).
 
 Anstatt ein gemeinsames Interface über Vererbung zu erzwingen, nutzen wir in Modern C++ (C++20) sogenannte Concepts,
 um die Schnittstellen-Bedingungen zur Compile-Zeit zu prüfen.
 
 Der Compiler generiert dann exakt den passenden, hochoptimierten Maschinencode für die jeweilige Kombination.
 
-```cpp
-TBD
-```
-
+[Quellcode](../StaticConceptualExample.cpp)
 
 ##### Warum ist das echtes Modern C++?
 

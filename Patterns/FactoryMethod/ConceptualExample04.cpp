@@ -3,9 +3,9 @@
 // ===========================================================================
 
 #include <cstddef>
-#include <string>
 #include <memory>
 #include <print>
+#include <string>
 
 namespace ConceptualExample04
 {

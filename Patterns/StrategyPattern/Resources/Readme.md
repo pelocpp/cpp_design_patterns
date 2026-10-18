@@ -38,7 +38,17 @@ als auch moderner über `std::function` oder Templates umgesetzt werden kann.
 
 Insgesamt fördert das Strategy-Pattern lose Kopplung, bessere Testbarkeit einzelner Algorithmen und eine klare Trennung von Verantwortlichkeiten.
 
+---
 
+#### Conceptual Example:
+
+[Quellcode 1 &ndash; Einfaches konzeptionelles Beispiel](../ConceptualExample.cpp)<br />
+[Quellcode 2 &ndash; Einfaches konzeptionelles Beispiel mit `std::function`](../ConceptualExampleModern.cpp)<br />
+[Quellcode 3 &ndash; Einfaches Beispiel zu einem Warenkorb (normale Preise, Black Friday Preise)](../ShoppingCart.cpp)<br />
+[Quellcode 4 &ndash; Einfaches Beispiel mit einer Hierarchie von Klassen](../RealWorldExample.cpp)<br />
+[Quellcode 5 &ndash; Einfaches Beispiel mit einer Hierarchie von Klassen und `std::function`](../RealWorldExampleModern.cpp)<br />
+
+---
 
 #### Struktur (UML):
 
@@ -125,16 +135,6 @@ Der Methodenaufruf selbst erfolgt dann direkt, was eine verbesserte Laufzeit zur
 
 [Quellcode](../StaticStrategyExample.cpp) &ndash; Statische Umsetzung des Strategy Design Patterns (Templates)
 
----
-
-#### Conceptual Example:
-
-[Quellcode 1](../ConceptualExample.cpp) &ndash; Einfaches konzeptionelles Beispiel<br />
-[Quellcode 2](../ConceptualExampleModern.cpp) &ndash; Einfaches konzeptionelles Beispiel mit `std::function`<br />
-
-[Quellcode 3](../ShoppingCart.cpp) &ndash; Einfaches Beispiel zu einem Warenkorb (normale Preise, Black Friday Preise)<br />
-[Quellcode 4](../RealWorldExample.cpp) &ndash; Einfaches Beispiel mit einer Hierarchie von Klassen<br />
-[Quellcode 5](../RealWorldExampleModern.cpp) &ndash; Einfaches Beispiel mit einer Hierarchie von Klassen und `std::function`<br />
 
 ---
 
