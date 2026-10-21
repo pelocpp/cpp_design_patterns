@@ -4,6 +4,12 @@
 
 ---
 
+#### Conceptual Example:
+
+[Quellcode](../SRP.cpp)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: Programmier-Idiom
@@ -120,12 +126,6 @@ Man könnte sie auch unter der Begrifflichkeit &bdquo;Separation of Concerns&rdqu
   * Expressiveness &ndash; Ausdruckskraft
   * Maintainability &ndash; Wartbarkeit
   * Reusability &ndash; Wiederverwendbarkeit
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../SRP.cpp)
 
 ---
 

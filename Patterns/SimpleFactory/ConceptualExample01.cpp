@@ -68,8 +68,7 @@ namespace SimpleFactoryExample
     {
     public:
         [[nodiscard]]
-        static std::unique_ptr<ProductBase>
-            createProduct(ProductType type)
+        static std::unique_ptr<ProductBase> createProduct(ProductType type)
         {
             switch (type)
             {
@@ -80,7 +79,7 @@ namespace SimpleFactoryExample
                 return std::make_unique<ConcreteProductB>();
             }
 
-            // Should be unreachable for a valid ProductType.
+            // should be unreachable for a valid ProductType.
             std::unreachable();
         }
     };

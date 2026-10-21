@@ -4,6 +4,12 @@
 
 ---
 
+#### Conceptual Example:
+
+[Quellcode](../DIP.cpp)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: Programmier-Idiom
@@ -31,44 +37,52 @@ Was versteht man eigentlich unter &bdquo;High-Level&rdquo;- und &bdquo;Low-Level
 02: 
 03: struct Person
 04: {
-05:     std::string m_name;
+05:     std::string name;
 06: };
 07: 
 08: // low-level <<<<<<<<< -------------------
 09: class Relationships
 10: {
 11: public:
-12:     std::vector<std::tuple<Person, Relationship, Person>> m_relations;
-13: 
-14:     void addParentAndChild(const Person& parent, const Person& child)
-15:     {
-16:         m_relations.push_back({ parent, Relationship::Parent, child });
-17:         m_relations.push_back({ child, Relationship::Child, parent });
-18:     }
-19: };
+12:     struct Relation
+13:     {
+14:         std::shared_ptr<const Person> parent;
+15:         Relationship                  relation;
+16:         std::shared_ptr<const Person> child;
+17:     };
+18: 
+19:     std::vector<Relation> m_relations;
 20: 
-21: // high-level <<<<<<<<< -------------------
-22: class FamilyTree
-23: {
-24: private:
-25:     const Relationships& m_relationships;
-26: 
-27: public:
-28:     FamilyTree(const Relationships& relationships) 
-29:         : m_relationships{ relationships }
-30:     {}
-31: 
-32:     void showChildrenOfJohn()
-33:     {
-34:         // using structured binding (C++ 17) and range-based for loop (C++ 11)
-35:         for (const auto& [first, relation, second] : m_relationships.m_relations)
-36:         {
-37:             if (first.m_name == "John" && relation == Relationship::Parent) {
-38:                 std::cout << "John has a child called " << second.m_name << std::endl;
-39:             }
-40:         }
-41:     }
-42: };
+21:     void addParentAndChild(
+22:         std::shared_ptr<const Person> parent,
+23:         std::shared_ptr<const Person> child)
+24:     {
+25:         m_relations.push_back({ std::move(parent), Relationship::Parent, std::move(child) });
+26:     }
+27: };
+28: 
+29: // high-level <<<<<<<<< -------------------
+30: class FamilyTree
+31: {
+32: private:
+33:     const Relationships& m_relationships;
+34: 
+35: public:
+36:     FamilyTree(const Relationships& relationships)
+37:         : m_relationships{ relationships }
+38:     {}
+39: 
+40:     void showChildrenOfJohn()
+41:     {
+42:         // using structured binding (C++ 17) and range-based for loop (C++ 11)
+43:         for (const auto& [parent, relation, child] : m_relationships.m_relations)
+44:         {
+45:             if (parent->name == "John" && relation == Relationship::Parent) {
+46:                 std::println("John has a child called {}", child->name);
+47:             }
+48:         }
+49:     }
+50: };
 ```
 
 Erkennen Sie die Nachteile dieser Implementierung?
@@ -90,59 +104,68 @@ Betrachten Sie den folgenden Vorschlag:
 02: 
 03: struct Person
 04: {
-05:     std::string m_name;
+05:     std::string name;
 06: };
 07: 
-08: // abstraction <<<<<<<<< -------------------
+08: // abstraction
 09: struct IRelationshipBrowser
 10: {
-11:     virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
-12: };
-13: 
-14: // low-level <<<<<<<<< -------------------
-15: class Relationships : public IRelationshipBrowser
-16: {
-17: private:
-18:     std::vector<std::tuple<Person, Relationship, Person>> m_relations;
-19: 
-20: public:
-21:     void addParentAndChild(const Person& parent, const Person& child) {
-22:         m_relations.push_back({ parent, Relationship::Parent, child });
-23:         m_relations.push_back({ child, Relationship::Child, parent });
-24:     }
+11:     virtual ~IRelationshipBrowser() = default;
+12:     virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
+13: };
+14: 
+15: // low-level <<<<<<<<< -------------------
+16: class Relationships : public IRelationshipBrowser
+17: {
+18: private:
+19:     struct Relation
+20:     {
+21:         std::shared_ptr<const Person> parent;
+22:         Relationship                  relation;
+23:         std::shared_ptr<const Person> child;
+24:     };
 25: 
-26:     std::vector<Person> findAllChildrenOf(const std::string& name) const override {
+26:     std::vector<Relation> m_relations;
 27: 
-28:         std::vector<Person> result;
-29:         for (const auto& [first, rel, second] : m_relations) {
-30:             if (first.m_name == name && rel == Relationship::Parent) {
-31:                 result.push_back(second);
-32:             }
-33:         }
-34:         return result;
-35:     }
-36: };
+28: public:
+29:     void addParentAndChild(
+30:         std::shared_ptr<const Person> parent,
+31:         std::shared_ptr<const Person> child)
+32:     {
+33:         m_relations.push_back({ std::move(parent), Relationship::Parent, std::move(child) });
+34:     }
+35: 
+36:     std::vector<Person> findAllChildrenOf(const std::string& name) const override {
 37: 
-38: // high-level <<<<<<<<< -------------------
-39: class FamilyTree
-40: {
-41: private:
-42:     const IRelationshipBrowser& m_browser;
-43: 
-44: public:
-45:     FamilyTree(const IRelationshipBrowser& browser) 
-46:         : m_browser { browser } 
-47:     {}
-48: 
-49:     void showChildrenOfJohn() {
-50: 
-51:         std::vector<Person> children{ m_browser.findAllChildrenOf("John") };
+38:         std::vector<Person> result;
+39:         for (const auto& [parent, relation, child] : m_relations) {
+40:             if (parent->name == name && relation == Relationship::Parent)
+41:                 result.push_back(*child);
+42:         }
+43:         return result;
+44:     }
+45: };
+46: 
+47: // high-level <<<<<<<<< -------------------
+48: class FamilyTree
+49: {
+50: private:
+51:     const IRelationshipBrowser& m_browser;
 52: 
-53:         for (const auto& child : children) {
-54:             std::cout << "John has a child called " << child.m_name << std::endl;
-55:         }
-56:     }
-57: };
+53: public:
+54:     FamilyTree(const IRelationshipBrowser& browser)
+55:         : m_browser{ browser }
+56:     {}
+57: 
+58:     void showChildrenOfJohn() const {
+59: 
+60:         std::vector<Person> children{ m_browser.findAllChildrenOf("John") };
+61: 
+62:         for (const auto& child : children) {
+63:             std::println("John has a child called {}", child.name);
+64:         }
+65:     }
+66: };
 ```
 
 Wir betrachten das Redesign in *Abbildung* 1:
@@ -189,13 +212,6 @@ Das bedeutet:
   * Die Details implementieren die Abstraktion &rightarrow; sie hängen also von der Abstraktion der höheren Logik ab, nicht umgekehrt.
 
 Das ist die so genannte &bdquo;Inversion&rdquo; der Abhängigkeiten.
-
----
-
-
-#### Conceptual Example:
-
-[Quellcode](../DIP.cpp)
 
 ---
 

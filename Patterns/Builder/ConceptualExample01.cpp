@@ -35,6 +35,7 @@ namespace ConceptualExample_Builder_Pattern_Simple {
 
         virtual void buildPartA() = 0;
         virtual void buildPartB() = 0;
+
         virtual std::shared_ptr<Product> getProduct() = 0;
     };
 

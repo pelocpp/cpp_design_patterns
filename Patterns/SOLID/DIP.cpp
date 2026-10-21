@@ -2,16 +2,15 @@
 // DIP.cpp // Dependency Inversion Principle
 // ===========================================================================
 
-#include <iostream>
+#include <print>
 #include <string>
 #include <vector>
-#include <tuple>
 
 enum class Relationship { Parent, Child, Sibling };
 
 struct Person
 {
-    std::string m_name;
+    std::string name;
 };
 
 namespace DependencyInversionPrinciple01
@@ -20,12 +19,20 @@ namespace DependencyInversionPrinciple01
     class Relationships
     {
     public:
-        std::vector<std::tuple<Person, Relationship, Person>> m_relations;
-
-        void addParentAndChild(const Person& parent, const Person& child)
+        struct Relation
         {
-            m_relations.push_back({ parent, Relationship::Parent, child });
-            m_relations.push_back({ child, Relationship::Child, parent });
+            std::shared_ptr<const Person> parent;
+            Relationship                  relation;
+            std::shared_ptr<const Person> child;
+        };
+
+        std::vector<Relation> m_relations;
+
+        void addParentAndChild(
+            std::shared_ptr<const Person> parent,
+            std::shared_ptr<const Person> child)
+        {
+            m_relations.push_back({ std::move(parent), Relationship::Parent, std::move(child) });
         }
     };
 
@@ -36,17 +43,17 @@ namespace DependencyInversionPrinciple01
         const Relationships& m_relationships;
 
     public:
-        FamilyTree(const Relationships& relationships) 
+        FamilyTree(const Relationships& relationships)
             : m_relationships{ relationships }
         {}
 
         void showChildrenOfJohn()
         {
             // using structured binding (C++ 17) and range-based for loop (C++ 11)
-            for (const auto& [first, relation, second] : m_relationships.m_relations)
+            for (const auto& [parent, relation, child] : m_relationships.m_relations)
             {
-                if (first.m_name == "John" && relation == Relationship::Parent) {
-                    std::cout << "John has a child called " << second.m_name << std::endl;
+                if (parent->name == "John" && relation == Relationship::Parent) {
+                    std::println("John has a child called {}", child->name);
                 }
             }
         }
@@ -58,6 +65,7 @@ namespace DependencyInversionPrinciple02
     // abstraction
     struct IRelationshipBrowser
     {
+        virtual ~IRelationshipBrowser() = default;
         virtual std::vector<Person> findAllChildrenOf(const std::string& name) const = 0;
     };
 
@@ -65,21 +73,29 @@ namespace DependencyInversionPrinciple02
     class Relationships : public IRelationshipBrowser
     {
     private:
-        std::vector<std::tuple<Person, Relationship, Person>> m_relations;
+        struct Relation
+        {
+            std::shared_ptr<const Person> parent;
+            Relationship                  relation;
+            std::shared_ptr<const Person> child;
+        };
+
+        std::vector<Relation> m_relations;
 
     public:
-        void addParentAndChild(const Person& parent, const Person& child) {
-            m_relations.push_back({ parent, Relationship::Parent, child });
-            m_relations.push_back({ child, Relationship::Child, parent });
+        void addParentAndChild(
+            std::shared_ptr<const Person> parent,
+            std::shared_ptr<const Person> child)
+        {
+            m_relations.push_back({ std::move(parent), Relationship::Parent, std::move(child) });
         }
 
         std::vector<Person> findAllChildrenOf(const std::string& name) const override {
 
             std::vector<Person> result;
-            for (const auto& [first, rel, second] : m_relations) {
-                if (first.m_name == name && rel == Relationship::Parent) {
-                    result.push_back(second);
-                }
+            for (const auto& [parent, relation, child] : m_relations) {
+                if (parent->name == name && relation == Relationship::Parent)
+                    result.push_back(*child);
             }
             return result;
         }
@@ -92,16 +108,16 @@ namespace DependencyInversionPrinciple02
         const IRelationshipBrowser& m_browser;
 
     public:
-        FamilyTree(const IRelationshipBrowser& browser) 
-            : m_browser { browser } 
+        FamilyTree(const IRelationshipBrowser& browser)
+            : m_browser{ browser }
         {}
 
-        void showChildrenOfJohn() {
+        void showChildrenOfJohn() const {
 
             std::vector<Person> children{ m_browser.findAllChildrenOf("John") };
 
             for (const auto& child : children) {
-                std::cout << "John has a child called " << child.m_name << std::endl;
+                std::println("John has a child called {}", child.name);
             }
         }
     };
@@ -111,9 +127,9 @@ static void test_anti_conceptual_example_dip()
 {
     using namespace DependencyInversionPrinciple01;
 
-    Person parent{ "John" };
-    Person child1{ "Carina" };
-    Person child2{ "Mary" };
+    auto parent = std::make_shared<Person>("John");
+    auto child1 = std::make_shared<Person>("Carina");
+    auto child2 = std::make_shared<Person>("Mary");
 
     Relationships relationships{};
 
@@ -129,9 +145,9 @@ static void test_conceptual_example_dip()
 {
     using namespace DependencyInversionPrinciple02;
 
-    Person parent{ "John" };
-    Person child1{ "Carina" };
-    Person child2{ "Mary" };
+    auto parent = std::make_shared<Person>("John");
+    auto child1 = std::make_shared<Person>("Carina");
+    auto child2 = std::make_shared<Person>("Mary");
 
     Relationships relationships{};
 

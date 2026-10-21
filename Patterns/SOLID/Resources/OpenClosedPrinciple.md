@@ -4,6 +4,12 @@
 
 ---
 
+#### Conceptual Example:
+
+[Quellcode](../OCP.cpp)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: Programmier-Idiom
@@ -503,12 +509,6 @@ Sehen Sie hierzu eine Realisierung im Quellcode der Klasse `GenericSpecification
   * Expressiveness &ndash; Ausdruckskraft
   * Maintainability &ndash; Wartbarkeit
   * Flexibility &ndash; Flexibilität
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../OCP.cpp)
 
 ---
 

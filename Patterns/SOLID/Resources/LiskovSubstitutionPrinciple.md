@@ -4,6 +4,12 @@
 
 ---
 
+#### Conceptual Example:
+
+[Quellcode](../LSP.cpp)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: Programmier-Idiom
@@ -170,12 +176,6 @@ eine so genannte &bdquo;*is-substitutable-for*&rdquo;-Beziehung zum geerbten Obj
   * Code, der sich an das Liskov-Substitutionsprinzip hält, ist lose voneinander abhängig und fördert die Wiederverwendbarkeit von Code.
 
   * Code, der dem Liskov-Substitutionsprinzip entspricht, ist Code, der die richtigen Abstraktionen in Bezug auf das Prinzip der *Vererbung* vornimmt.
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../LSP.cpp)
 
 ---
 

@@ -25,7 +25,7 @@ und wird oft als Einstieg in die &bdquo;richtigen&rdquo; Factory-Patterns (*Fact
 behandelt &ndash; streng genommen zählt es im klassischen GoF-Katalog gar nicht als eigenständiges Pattern,
 sondern eher als idiomatische Programmierpraxis.
 
-Die Grundidee ist einfach: Statt dass Client-Code direkt mit new konkrete Klassen instanziiert,
+Die Grundidee ist einfach: Statt dass Client-Code direkt mit `new` konkrete Klassen instanziiert,
 delegiert er diese Aufgabe an eine zentrale Factory-Klasse,
 die anhand eines Parameters (z. B. eines Enums oder Strings) entscheidet,
 welches konkrete Objekt erzeugt und zurückgegeben wird.
@@ -84,9 +84,9 @@ Es besteht im Wesentlichen aus drei Teilen:
     die von den konkreten Ableitungen der Klasse implementiert werden.
   * **ConcreteProduct**: Konkrete Implementierung der Klasse `ProductBase`.
     Objekte des Typs `ConcreteProduct` werden von der Klasse *Factory* erzeugt.
-  * **Factory**: Diese Klasse besitzt eine Methode `getProduct`,
+  * **Factory**: Diese Klasse besitzt eine Methode `createProduct`,
     die Objekte zurückliefert, die die `ProductBase`-Schnittstelle implementieren.
-    Über einen Parameter der `getProduct`-Methode wird typischerweise gesteuert, welches `ConcreteProduct` Objekt zu erzeugen ist.
+    Über einen Parameter der `createProduct`-Methode wird typischerweise gesteuert, welches `ConcreteProduct` Objekt zu erzeugen ist.
 
 <img src="dp_factory_pattern.svg" width="700">
 
@@ -415,13 +415,6 @@ Point p{ PointFactory::create(2, 3, PointType::Cartesian) };
 
 > Das *Factory Pattern* erstellt seine Objekte im Ganzen im Gegensatz zur *Builder*-Vorgehensweise.
   Hier werden die Objekte stückweise erstellt.  
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ConceptualExample01.cpp)
-[Quellcode](../ConceptualExample02.cpp)
 
 ---
 

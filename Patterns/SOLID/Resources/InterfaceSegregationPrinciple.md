@@ -4,6 +4,12 @@
 
 ---
 
+#### Conceptual Example:
+
+[Quellcode](../ISP.cpp)
+
+---
+
 ## Wesentliche Merkmale
 
 #### Kategorie: Programmier-Idiom
@@ -160,12 +166,6 @@ Das Beantworten einer einzigen Frage zur Entwurfszeit kann helfen,
 ein Design zu korrigieren:
 
 *Benötige ich alle Methoden einer Schnittstelle, die ich verwende?*
-
----
-
-#### Conceptual Example:
-
-[Quellcode](../ISP.cpp)
 
 ---
 
