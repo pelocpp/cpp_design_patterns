@@ -21,6 +21,7 @@ public:
     // preventing object slicing with IComponent
     IComponent(const IComponent&) = delete;
     IComponent& operator=(const IComponent&) = delete;
+
     IComponent(IComponent&&) = delete;
     IComponent& operator=(IComponent&&) = delete;
 
@@ -96,7 +97,6 @@ public:
     [[nodiscard]]
     std::string operation() const override {
         return std::format("ConcreteDecoratorA ( {} )", DecoratorBase::operation());
-
     }
 };
 
@@ -199,13 +199,11 @@ static void test_conceptual_example_02() {
 
 static void test_conceptual_example_03() {
 
-    std::unique_ptr<IComponent> component{
-        std::make_unique<ConcreteComponent>()
-    };
-
     std::unique_ptr<IComponent> decorator{
         std::make_unique<ConcreteDecoratorB>(
-            std::make_unique<ConcreteDecoratorA>(std::move(component))
+            std::make_unique<ConcreteDecoratorA>(
+                std::make_unique<ConcreteComponent>()
+            )
         )
     };
 
@@ -222,14 +220,14 @@ static void test_conceptual_example_03() {
 
 static void test_conceptual_example_04() {
 
-    std::unique_ptr<IComponent> component{
-        std::make_unique<ConcreteComponent>()
-    };
-
     std::unique_ptr<IComponent> decorator{
         std::make_unique<ConcreteDecoratorA>(
             std::make_unique<ConcreteDecoratorB>(
-                std::make_unique<ConcreteDecoratorC>(std::move(component))))
+                std::make_unique<ConcreteDecoratorC>(
+                    std::make_unique<ConcreteComponent>()
+                )
+            )
+        )
     };
 
     std::println("Client: Decorated component using three decorator objects:");
@@ -245,14 +243,13 @@ static void test_conceptual_example_04() {
 
 static void test_conceptual_example_05() {
 
-    std::unique_ptr<IComponent> component{
-        std::make_unique<ConcreteComponent>()
-    };
-
     std::unique_ptr<IComponent> decorator{
         std::make_unique<ConcreteDecoratorC>(
             std::make_unique<ConcreteDecoratorB>(
-                std::make_unique<ConcreteDecoratorA>(std::move(component)))) 
+                std::make_unique<ConcreteDecoratorA>(std::make_unique<ConcreteComponent>()
+                )
+            )
+        )
     };
 
     std::println("Client: Reverse Decoration:");

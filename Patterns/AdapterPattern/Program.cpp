@@ -16,7 +16,6 @@ int main()
     test_media_player_01();
     test_media_player_02();
     test_pluggable_adapter_design();
-
     return 0;
 }
 

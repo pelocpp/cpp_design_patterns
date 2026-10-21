@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Person">
       <UniqueIdentifier>{04618f48-5b0d-46c3-b132-8ff3c5621536}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Heist">
+      <UniqueIdentifier>{6ef6f9bc-1ad3-49c2-9943-d5e272dbdd66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Readme.md">
@@ -35,13 +38,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConceptualExample02.cpp">
-      <Filter>Source Files\ConceptualExample</Filter>
-    </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConceptualExample01.cpp">
+    <ClCompile Include="ConceptualExample.cpp">
       <Filter>Source Files\ConceptualExample</Filter>
     </ClCompile>
     <ClCompile Include="Person.cpp">
@@ -52,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="PersonBuilderExample.cpp">
       <Filter>Source Files\Person</Filter>
+    </ClCompile>
+    <ClCompile Include="Heist.cpp">
+      <Filter>Source Files\Heist</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

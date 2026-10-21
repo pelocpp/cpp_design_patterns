@@ -28,12 +28,9 @@ int main()
 
     test_conceptual_example_01();
     test_conceptual_example_02();
-
     test_shapes();
-
     test_filesystem_01_beginners();
     test_filesystem_02_advanced();
-
     return 0;
 }
 

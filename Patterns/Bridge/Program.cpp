@@ -11,12 +11,10 @@ extern void test_real_word_example_shapes();
 
 int main()
 {
-    //test_conceptual_example_01();
-    //test_conceptual_example_02();
-
+    test_conceptual_example_01();
+    test_conceptual_example_02();
     test_real_word_example_notification();
-    //test_real_word_example_shapes();
-
+    test_real_word_example_shapes();
     return 0;
 }
 

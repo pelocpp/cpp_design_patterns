@@ -3,14 +3,14 @@
 // ===========================================================================
 
 // function prototypes
-extern void test_conceptual_example_01();
-extern void test_conceptual_example_02();
+extern void test_conceptual_example();
+extern void test_heist_example();
 extern void test_person_builder_example();
 
 int main()
 {
-    test_conceptual_example_01();
-    test_conceptual_example_02();
+    test_conceptual_example();
+    test_heist_example();
     test_person_builder_example();
     return 0;
 }

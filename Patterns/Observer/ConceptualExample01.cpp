@@ -112,6 +112,18 @@ namespace ConceptualExample_Observer_Pattern {
                 }
             );
         }
+
+        // simpler implementation: no cleaning up of expired weak pointers,
+        // just notifying all (avaiable) observers
+        void notify2() {
+
+            for (const auto& observer: m_observers) {
+
+                if (auto sharedPtr = observer.lock()) {
+                    sharedPtr->update(m_message);
+                }
+            }
+        }
     };
 
     // ===========================================================================

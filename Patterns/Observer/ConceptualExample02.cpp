@@ -65,7 +65,7 @@ namespace ConceptualExample_Observer_Pattern_RAII {
             Connection() = default;
 
             Connection(Subject* subject, std::weak_ptr<IObserver> observer)
-                : m_subject(subject), m_observer(std::move(observer))
+                : m_subject{ subject }, m_observer{ std::move(observer) }
             {}
             
             ~Connection() {
@@ -73,13 +73,13 @@ namespace ConceptualExample_Observer_Pattern_RAII {
             }
             
             // move-only: ownership of "being subscribed" can move,
-            // but must not be duplicated (would cause double-detach).
+            // but may not be duplicated (would cause double-detach).
 
             Connection(const Connection&) = delete;
             Connection& operator=(const Connection&) = delete;
 
             Connection(Connection&& other) noexcept
-                : m_subject(other.m_subject), m_observer(std::move(other.m_observer))
+                : m_subject{ other.m_subject }, m_observer{ std::move(other.m_observer) }
             {
                 other.m_subject = nullptr;
             }
@@ -99,7 +99,8 @@ namespace ConceptualExample_Observer_Pattern_RAII {
                 release();
             }
 
-            [[nodiscard]] bool isConnected() const {
+            [[nodiscard]]
+            bool isConnected() const {
                 return m_subject != nullptr && !m_observer.expired();
             }
 
@@ -121,8 +122,8 @@ namespace ConceptualExample_Observer_Pattern_RAII {
             std::println("d'tor Subject");
         }
 
-        // Subject is referenced by outstanding Connection objects (raw
-        // pointer back-reference), so copying/moving it would leave
+        // Subject is referenced by outstanding Connection objects
+        // (raw pointer back-reference), so copying/moving it would leave
         // those Connections dangling. Disable both.
         Subject(const Subject&) = delete;
         Subject& operator=(const Subject&) = delete;
@@ -133,7 +134,6 @@ namespace ConceptualExample_Observer_Pattern_RAII {
         /**
          * subscription management methods
          */
-
 
         [[nodiscard]]
         Connection attach(std::weak_ptr<IObserver> observer) {
@@ -197,11 +197,11 @@ namespace ConceptualExample_Observer_Pattern_RAII {
             //// 2) notify on a snapshot copy, so that re-entrant attach()/detach()
             ////    calls from within an observer's update() don't invalidate
             ////    the vector we're currently iterating over.
-            //auto snapshot = m_observers;
-            //for (const auto& wp : snapshot) {
-            //    if (auto sharedPtr = wp.lock()) {
-            //        sharedPtr->update(m_message);
-            //    }
+            //      auto snapshot = m_observers;
+            //      for (const auto& wp : snapshot) {
+            //        if (auto sharedPtr = wp.lock()) {
+            //            sharedPtr->update(m_message);
+            //      }
             //}
         }
     };

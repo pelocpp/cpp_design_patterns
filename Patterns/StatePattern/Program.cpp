@@ -14,7 +14,6 @@ int main()
     test_jobapplication_example();
     test_departmentstore_example();
     test_lightSwitch_StateMachine();
-
     return 0;
 }
 

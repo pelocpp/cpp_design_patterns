@@ -13,10 +13,8 @@ int main()
 {
     test_conceptual_example_01();
     test_conceptual_example_02();
-
     test_chess_example_classic();
     test_chess_example_modern();
-
     return 0;
 }
 

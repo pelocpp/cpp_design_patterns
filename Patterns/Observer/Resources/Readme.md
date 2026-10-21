@@ -43,15 +43,10 @@ sowie eine Verwaltungsstruktur (z. B. `std::vector<std::weak_ptr<IObserver>>`) i
 
 Das *Conceptual Example* liegt in vier Varianten vor:
 
-  * Variante 1: Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten.
-  * Variante 2: Mit RAII-Anmeldung 
-  * Variante 3: Wie Variante 1, aber mit `std::enable_shared_from_this<>` Mechanismus.
-  * Variante 4: Mit `std::function<>`.
-
-[Quellcode 1](../ConceptualExample01.cpp)<br />
-[Quellcode 2](../ConceptualExample02.cpp)<br />
-[Quellcode 3](../ConceptualExample03.cpp)<br />
-[Quellcode 4](../ConceptualExample04.cpp)
+[Quellcode 1 &ndash; Mit `std::shared_ptr`- und `std::weak_ptr`-Objekten](../ConceptualExample01.cpp)<br />
+[Quellcode 2 &ndash; Mit RAII-`Connection` Objekten](../ConceptualExample02.cpp)<br />
+[Quellcode 3 &ndash; Wie Variante 1, aber mit `std::enable_shared_from_this<>` Mechanismus](../ConceptualExample03.cpp)<br />
+[Quellcode 4 &ndash; Mit `std::function<>`](../ConceptualExample04.cpp)
 
 ---
 
@@ -86,13 +81,13 @@ Anmerkungen zum Design:
 
   * `ISubject` enthält jetzt nur noch `detach()`. `attach()` ist bewusst nicht Teil des Interfaces, weil sein Rückgabetyp (`Subject::Connection`)
   an die konkrete `Subject`-Implementierung gebunden ist — ein generisches `ISubject::attach()` müsste sonst entweder auf eine abstrakte `Connection`-Basisklasse (Interface-Overhead)
-  oder auf `std::any`/Type-Erasure ausweichen. Für dein Lehrbeispiel würde ich es so lassen.
+  oder auf `std::any`/Type-Erasure ausweichen.
   * Der Rückverweis `Subject* m_subject` in `Connection` ist ein roher, nicht-owning Pointer. Das ist hier okay, weil `Subject` non-copyable/non-movable ist
   und der Client dafür verantwortlich ist, dass alle Connections vor dem Subject zerstört werden (typisches RAII-Lifetime-Constraint, vergleichbar mit Iteratoren vs. Container). 
-  Ein `std::weak_ptr<Subject>` wäre robuster, würde aber voraussetzen, dass `Subject` selbst per `std::shared_ptr` verwaltet wird — eine größere Design-Entscheidung,
+  Ein `std::weak_ptr<Subject>` wäre robuster, würde aber voraussetzen, dass `Subject` selbst per `std::shared_ptr` verwaltet wird &ndash; eine größere Design-Entscheidung,
   die über dieses Beispiel hinausgeht.
-  * `[[nodiscard]]` auf `attach()` sorgt dafür, dass ein Compiler-Warning auftaucht, falls jemand den Rückgabewert versehentlich verwirft — sonst würde die `Connection`
-  sofort wieder zerstört und der `Observer` wäre direkt nach `attach()` schon wieder abgemeldet, ohne dass das offensichtlich wäre.
+  * `[[nodiscard]]` auf `attach()` sorgt dafür, dass eine Compiler-Warning auftaucht, falls jemand den Rückgabewert versehentlich verwirft &ndash; sonst
+  würde die `Connection` sofort wieder zerstört und der `Observer` wäre direkt nach `attach()` schon wieder abgemeldet, ohne dass das offensichtlich wäre.
 
 
 ---
@@ -140,10 +135,10 @@ Aufgeschlüsselt:
 
 | Ausdruck | Bedeutung |
 |:-|:-|
-| `observer.owner_before(wp)` | Zeigt `observer` auf ein Objekt, das vor dem Objekt von `wp` liegt? |
-| `observer.owner_before(wp)` | Liegt `observer` nicht vor `wp`? |
-| `observer.owner_before(wp)` | Liegt `wp` nicht vor `observer`? | 
-| `Both true` | Es muss sich um dasselbe Objekt handeln. | 
+| `observer.owner_before(wp)` | Liegt der Eigentümer von `observer` vor dem Eigentümer von `wp`? |
+| `! observer.owner_before(wp)` | Liegt der Eigentümer von `observer` *nicht* vor dem Eigentümer von `wp`? |
+| `! wp.owner_before(observer)` | Liegt der Eigentümer von `wp` *nicht* vor dem Eigentümer von `observer`? | 
+| Beide negierten Ausdrücke sind `true` | Beide `std::weak_ptr`-Objekte haben denselben Eigentümer. | 
 
 Eine detailliertere Beschreibung kann man unter
 &bdquo;[Removing item from list of weak_ptrs](https://stackoverflow.com/questions/10120623/removing-item-from-list-of-weak-ptrs) &rdquo;
@@ -162,15 +157,7 @@ Siehe hierzu die Datei [ConceptualExample04.cpp](../ConceptualExample04.cpp).
 
 ---
 
-Die Anregung zum konzeptionellen Beispiel finden Sie unter
-
-[https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/observer/cpp/example#example-0)
-
-vor.
-
----
-
-**Hinweis** zu `shared_from_this`:
+### *Hinweis* zu `shared_from_this`:
 
 In Variante 2 wird prinzipiell ohne &bdquo;raw&rdquo;-Zeiger gearbeitet, also so,
 wie man es der &bdquo;reinen Lehre&rdquo; nach machen sollte. Dabei stellt sich aber eine Frage:

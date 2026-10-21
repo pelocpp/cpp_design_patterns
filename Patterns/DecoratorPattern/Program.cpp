@@ -9,15 +9,9 @@ extern void test_static_decoration();
 
 int main()
 {
-    // conceptual example
     test_conceptual_example();
-
-    // real-world example (shapes)
-    test_real_world_example();
-
-    // same real-world example with templates
-    test_static_decoration();
-
+    test_real_world_example(); // using shapes
+    test_static_decoration();  // same real-world example with templates
     return 0;
 }
 

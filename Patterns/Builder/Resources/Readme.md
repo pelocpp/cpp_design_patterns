@@ -40,20 +40,14 @@ So entsteht ein lesbarer, deklarativer Konstruktionsablauf, der sowohl Robusthei
 
 #### Conceptual Example:
 
-[Quellcode 1 &ndash; Sehr einfache Version](../ConceptualExample01.cpp)<br />
-[Quellcode 2 &ndash; Ein etwas ausführlicheres Beispiel](../ConceptualExample02.cpp)
+[Quellcode &ndash; Sehr einfache Version](../ConceptualExample.cpp)<br />
 
 Die Ausgaben des konzeptionellen Beispiels lauten:
 
 ```
-Standard basic product:
-Product parts: Part A1
-
-Standard full featured product:
-Product parts: Part A1, Part B1, Part C1
-
-Custom product:
-Product parts: Part A1, Part C1
+Parts:
+    Part A
+    Part B
 ```
 
 ---

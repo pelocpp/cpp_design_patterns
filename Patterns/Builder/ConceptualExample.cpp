@@ -1,8 +1,7 @@
 // ===========================================================================
-// ConceptualExample01.cpp // Builder Pattern
+// ConceptualExample.cpp // Builder Pattern
 // ===========================================================================
 
-#include <iomanip>
 #include <list>
 #include <memory>
 #include <print>
@@ -20,7 +19,7 @@ namespace ConceptualExample_Builder_Pattern_Simple {
             m_parts.push_back(part);
         }
 
-        void show() {
+        void show() const {
             std::println("Parts:");
             for (const auto& part : m_parts) {
                 std::println("{:>10}", part);
@@ -36,30 +35,30 @@ namespace ConceptualExample_Builder_Pattern_Simple {
         virtual void buildPartA() = 0;
         virtual void buildPartB() = 0;
 
-        virtual std::shared_ptr<Product> getProduct() = 0;
+        // ownership of the finished product moves to the caller
+        virtual std::unique_ptr<Product> getProduct() = 0;
     };
 
     class Director
     {
     public:
-        void construct(std::shared_ptr<Builder>& builder) 
+        // the director only uses the builder, it does not own it
+        void construct(Builder& builder)
         {
-            builder->buildPartA();
-            builder->buildPartB();
+            builder.buildPartA();
+            builder.buildPartB();
         }
     };
 
     class ConcreteBuilder : public Builder
     {
     private:
-        std::shared_ptr<Product> m_product;
+        std::unique_ptr<Product> m_product;
 
     public:
         ConcreteBuilder()
-            : m_product{ std::make_shared<Product>() }
+            : m_product{ std::make_unique<Product>() }
         {}
-
-        virtual ~ConcreteBuilder() = default;
 
         void buildPartA() override {
             m_product->add("Part A");
@@ -69,27 +68,26 @@ namespace ConceptualExample_Builder_Pattern_Simple {
             m_product->add("Part B");
         }
 
-        std::shared_ptr<Product> getProduct() override {
-            return m_product;
+        std::unique_ptr<Product> getProduct() override {
+            auto result = std::move(m_product);
+            m_product = std::make_unique<Product>();   // builder can be reused
+            return result;
         }
     };
 
     static void clientCode(Director& director)
     {
-        // 'Product' is created through the builder - here: ConcreteBuilder
-        std::shared_ptr<Builder> builder{ std::make_shared<ConcreteBuilder>() };
+        std::unique_ptr<Builder> builder{ std::make_unique<ConcreteBuilder>() };
 
-        // the builder is handed over to the director - including the product
-        director.construct(builder);
-        
-        std::shared_ptr<Product> product{ builder->getProduct() };
-        
+        director.construct(*builder);
+
+        std::unique_ptr<Product> product{ builder->getProduct() };
+
         product->show();
     }
 }
 
-// function prototypes
-void test_conceptual_example_01()
+void test_conceptual_example()
 {
     using namespace ConceptualExample_Builder_Pattern_Simple;
 

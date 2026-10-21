@@ -16,7 +16,6 @@ int main()
     test_lsp();
     test_isp();
     test_dip();
-
     return 0;
 }
 
