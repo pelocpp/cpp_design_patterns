@@ -139,30 +139,8 @@ namespace ConceptualExampleChainOfResponsibility {
      * The client code is usually suited to work with a single handler.
      * In most cases, it is not even aware that the handler is part of a chain.
      */
-    static void clientCode_01(const HandlerBase& handler)
-    {
-        std::array requests =
-        {
-            Request{  7, "Req. No.  7" },
-            Request{ 25, "Req. No. 25" },
-            Request{ 17, "Req. No. 17" },
-            Request{ 21, "Req. No. 21" },
-            Request{ 18, "Req. No. 18" },
-            Request{  3, "Req. No. 03" },
-            Request{ 19, "Req. No. 19" },
-            Request{ 20, "Req. No. 20" }
-        };
 
-        for (const Request& request : requests) {
-            auto result = handler.handleRequest(request);
-            if (result == HandleResult::Rejected) {
-                std::println("  (Request type {} was not handled)", request.getType());
-            }
-        }
-        std::println();
-    }
-
-    static void clientCode_02(const HandlerBase& handler)
+    static void clientCode(const HandlerBase& handler)
     {
         std::array requests =
         {
@@ -192,9 +170,7 @@ void test_conceptual_example() {
         .setSuccessor(std::make_unique<ConcreteHandlerC>())
         .setSuccessor(std::make_unique<DefaultHandler>());
 
-    clientCode_01(*chain);
-
-    clientCode_02(*chain);
+    clientCode(*chain);
 }
 
 // ===========================================================================

@@ -171,14 +171,6 @@ Damit zu weiteren Unterschieden auf Detailebene:
 
 ---
 
-Die Anregung zum konzeptionellen Beispiel finden Sie unter
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#AbstractFactory)
-
-vor.
-
----
-
 #### Zweites &bdquo;Real-World&rdquo; Beispiel:
 
 Im &bdquo;Real-World&rdquo; Beispiel zu diesem Entwurfsmuster wird
@@ -193,16 +185,11 @@ Die Klasse `Vehicle` ist eine abstrakte Basisklasse für alle konkreten Produkte.
 
 ## Literaturhinweise
 
-Das Beispiel ist portiert von C# nach C++ bzgl. der Vorlage unter
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#AbstractFactory).
-
 Ein Beispiel zu verschiedenen Themes und grafischen Steuerelementen kann man
 [hier](https://medium.com/@lokeshbihani99/abstract-factory-pattern-in-c-f0ed420fc9fb)
 nachlesen.
 
 Das Beispiel zu Fahrrädern, Autos und Trucks stammt aus diesem [Artikel](https://medium.com/@kamresh485/abstract-factory-pattern-in-c-ddc98f547801).
-
 
 ---
 

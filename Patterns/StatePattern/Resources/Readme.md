@@ -321,10 +321,6 @@ Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/state/cpp/example#example-0)
 
-und 
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#State)
-
 vor.
 
 Das zweite &bdquo;Real-World&rdquo;-Beispiel stammt aus dem Buch 

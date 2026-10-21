@@ -40,7 +40,8 @@ auf den nächsten Handler sowie einer virtuellen `handle()`-Methode realisiert.
 
 #### Conceptual Example:
 
-[Quellcode](../ConceptualExample.cpp)
+[Quellcode 1 &ndash; Konzeptionelles Beispiel](../ConceptualExample.cpp)<br />
+[Quellcode 2 &ndash; Anwendungsfall des *Chain of Responsibility* Patterns: Anmeldeprozesses (Login)](../Authentication.cpp)
 
 ---
 
@@ -71,7 +72,7 @@ wie z.B. die Eingabe von Benutzername, Passwort, den Abgleich mit einem Captcha 
 Ein erster Aufruf von
 
 ```cpp
-login->authenticate();
+bool ok = chain->authenticate(attempt)
 ```
 
 löst eine &bdquo;*Chain of Responsibility*&rdquo; Kette aus,
@@ -83,25 +84,28 @@ so wie dies für Benutzername und Passwort im [Quellcode](../Authentication.cpp) 
 
 ##### Zuordnung der Klassen und Methoden:
 
-  * Klasse `Authentication` &ndash; Klasse `HandlerBase` 
+  * Klasse `AuthHandler` &ndash; Klasse `HandlerBase` 
   * Methode `authenticate` &ndash; Methode `handleRequest`
-  * Methode `nextAuthentication` &ndash; Methode `setSuccessor` 
-  * Klasse `AuthenticateUserName` &ndash; Klasse `ConcreteHandler` 
-  * Klasse `AuthenticatePassword` &ndash; Klasse `ConcreteHandler` 
+  * Methode `setNext` &ndash; Methode `setSuccessor` 
+  * Klasse `UserNameHandler` &ndash; Klasse `ConcreteHandler` 
+  * Klasse `PasswordHandler` &ndash; Klasse `ConcreteHandler` 
 
-[Quellcode zum 'Authentication' Beispiel](../Authentication.cpp) &ndash; Anwendungsfall des *Chain of Responsibility* Patterns.
+[Quellcode &ndash; Anwendungsfall des *Chain of Responsibility* Patterns: Anmeldeprozesses (Login)](../Authentication.cpp)
 
-*Hinweis*: In der Realisierung des Beispiels sind zwei Implementierungsdetails zu beachten:
-
-  * Einsatz von Klasse `std::unique_ptr<>`.
-  * `std::move`: `std::unique_ptr<>`-Objekte unterstützen nur die Verschiebe-Semantik.
 
 *Ausgabe*:
 
 ```
-Authentication of User Name succeeded!
-Authentication of Password succeeded!
-Authentication succeeded!
+User name check succeeded
+Password check succeeded
+-> Authentication succeeded!
+
+User name check succeeded
+Password check failed
+-> Authentication failed!
+
+User name check failed
+-> Authentication failed!
 ```
 
 ---
@@ -111,10 +115,6 @@ Authentication succeeded!
 Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/chain-of-responsibility/cpp/example#example-0)
-
-und 
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/455228/Design-Patterns-3-of-3-Behavioral-Design-Patterns#Chain)
 
 vor.
 

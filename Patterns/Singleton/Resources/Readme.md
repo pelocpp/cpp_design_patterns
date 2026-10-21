@@ -353,10 +353,6 @@ Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/singleton/cpp/example#example-0)
 
-und 
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/430590/Design-Patterns-1-of-3-Creational-Design-Patterns#Singleton)
-
 vor.
 
 Die Anregungen zur Betrachtung &bdquo;Eine Alternative zum Singleton Pattern: *Dependency Injection*&rdquo;

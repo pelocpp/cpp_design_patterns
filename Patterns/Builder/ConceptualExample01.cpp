@@ -2,11 +2,11 @@
 // ConceptualExample01.cpp // Builder Pattern
 // ===========================================================================
 
-#include <iostream>
 #include <iomanip>
-#include <string>
 #include <list>
 #include <memory>
+#include <print>
+#include <string>
 
 namespace ConceptualExample_Builder_Pattern_Simple {
 
@@ -21,9 +21,9 @@ namespace ConceptualExample_Builder_Pattern_Simple {
         }
 
         void show() {
-            std::cout << "Parts:" << std::endl;
+            std::println("Parts:");
             for (const auto& part : m_parts) {
-                std::cout << std::setw(10) << part << std::endl;
+                std::println("{:>10}", part);
             }
         }
     };

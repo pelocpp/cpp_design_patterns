@@ -2,107 +2,106 @@
 // Authentication.cpp // Chain of Responsibility
 // ===========================================================================
 
-#include <iostream>
-#include <string>
 #include <memory>
+#include <print>
+#include <string>
+#include <utility>
+#include <vector>
 
-namespace ChainofResponsibilityExample
+namespace chain_of_responsibility
 {
-    class Authentication
+    // the "request" travels through the chain
+    struct Credentials
     {
-    protected:
-        std::unique_ptr<Authentication> m_next;
-
-    public:
-        // c'tor(s)
-        Authentication() : m_next{ nullptr } {}
-
-        virtual bool authenticate() = 0;   // handleRequest
-
-        void nextAuthentication(std::unique_ptr<Authentication>& nextAuth) {  // setSuccessor
-            m_next = std::move(nextAuth);
-        }
+        std::string user_name;
+        std::string password;
     };
 
-    class AuthenticateUserName : public Authentication
+    class AuthHandler
     {
-    private:
-        std::string m_name;
-
     public:
-        // c'tor(s)
-        AuthenticateUserName(const std::string& name) : m_name{ name } {}
+        virtual ~AuthHandler() = default;
 
-        bool authenticate() override {
+        // takes ownership of the successor and returns a reference to it,
+        // so calls can be chained: a->set_next(...).set_next(...)
+        AuthHandler& setNext(std::unique_ptr<AuthHandler> next)
+        {
+            m_next = std::move(next);
+            return *m_next;
+        }
 
-            if (!is_valid_user_name()) {
-                std::cout << "Invalid user name" << std::endl;
+        // Template Method: the forwarding logic lives here, exactly once.
+        [[nodiscard]] bool authenticate(const Credentials& credentials) const
+        {
+            if (!check(credentials)) {
                 return false;
             }
-            else if (m_next) {
-                return m_next->authenticate();
-            } 
-            else 
-                return true;
+            else {
+                return m_next ? m_next->authenticate(credentials) : true;
+            }
         }
 
     private:
-        // helper methods
-        bool is_valid_user_name() {
-            std::cout << "Authentication of User Name succeeded!" << std::endl;
-            return true;
-        }
+        // each concrete handler implements only its own check.
+        [[nodiscard]]
+        virtual bool check(const Credentials& credentials) const = 0;
+
+        std::unique_ptr<AuthHandler> m_next;
     };
 
-    class AuthenticatePassword : public Authentication
+    class UserNameHandler final : public AuthHandler
     {
-    private:
-        std::string m_password;
-
     public:
-        // c'tor(s)
-        AuthenticatePassword(const std::string& password) : m_password{ password } {}
-
-        bool authenticate() override {
-
-            if (!is_valid_password()) {
-                std::cout << "Invalid password" << std::endl;
-                return false;
-            }
-            else if (m_next) {
-                return m_next->authenticate();
-            }
-            else 
-                return true;
-        }
+        explicit UserNameHandler(std::string expected)
+            : m_expected{ std::move(expected) }
+        {}
 
     private:
-        // helper methods
-        bool is_valid_password() {
-            std::cout << "Authentication of Password succeeded!" << std::endl;
-            return true;
+        bool check(const Credentials& credentials) const override
+        {
+            const bool ok = credentials.user_name == m_expected;
+            std::println("User name check {}", ok ? "succeeded" : "failed");
+            return ok;
         }
+
+        std::string m_expected;
+    };
+
+    class PasswordHandler final : public AuthHandler
+    {
+    public:
+        explicit PasswordHandler(std::string expected) : m_expected{ std::move(expected) } {}
+
+    private:
+        bool check(const Credentials& credentials) const override
+        {
+            // Demo only: real code would compare password hashes, never plain text.
+            const bool ok = credentials.password == m_expected;
+            std::println("Password check {}", ok ? "succeeded" : "failed");
+            return ok;
+        }
+
+        std::string m_expected;
     };
 }
 
 void test_authentication_example()
 {
-    using namespace ChainofResponsibilityExample;
+    using namespace chain_of_responsibility;
 
-    std::unique_ptr<Authentication> auth1{ 
-        new AuthenticateUserName{"John"} 
+    auto chain = std::make_unique<UserNameHandler>("John");
+
+    chain->setNext(std::make_unique<PasswordHandler>("12345678"));
+
+    std::vector credentials {
+        Credentials{ "John", "12345678" },
+        Credentials{ "John", "wrong" },
+        Credentials{ "Jane", "12345678" }
     };
 
-    std::unique_ptr<Authentication> auth2{
-        new AuthenticatePassword{"12345678"} 
-    };
-
-    auth1->nextAuthentication(auth2);
-
-    bool result{ auth1->authenticate() };
-
-    if (result) {
-        std::cout << "Authentication succeeded!" << std::endl;
+    for (const auto& attempt : credentials) {
+        /*const*/ bool ok = chain->authenticate(attempt);
+        std::println("-> Authentication {}\n", ok ? "succeeded!" : "failed!");
     }
 }
 

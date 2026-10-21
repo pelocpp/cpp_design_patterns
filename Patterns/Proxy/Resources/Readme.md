@@ -240,10 +240,6 @@ Die Anregungen zum konzeptionellen Beispiel finden Sie unter
 
 [https://refactoring.guru/design-patterns](https://refactoring.guru/design-patterns/proxy/cpp/example#example-0)
 
-und 
-
-[https://www.codeproject.com](https://www.codeproject.com/Articles/438922/Design-Patterns-2-of-3-Structural-Design-Patterns#Proxy)
-
 vor.
 
 Die beiden Beispiele &bdquo;Property Proxy&rdquo; und &bdquo;Virtual Proxy&rdquo;

@@ -147,7 +147,6 @@
   <ItemGroup>
     <ClCompile Include="ConceptualExample01.cpp" />
     <ClCompile Include="ConceptualExample02.cpp" />
-    <ClCompile Include="LayoutManagerExample.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="PersonBuilder.cpp" />
     <ClCompile Include="PersonBuilderExample.cpp" />

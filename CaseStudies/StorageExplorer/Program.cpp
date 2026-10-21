@@ -7,7 +7,6 @@
 
 // 2.) Zweite Console
 //https://codereview.stackexchange.com/questions/195157/using-multiple-console-windows-for-output
-//https://www.codeproject.com/Articles/13368/Multiple-consoles-for-a-single-application
 //https://stackoverflow.com/questions/20847474/multiple-consoles-for-a-single-application-c
 
 // ===========================================================================
