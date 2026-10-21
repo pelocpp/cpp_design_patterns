@@ -40,15 +40,9 @@ So entsteht ein lesbarer, deklarativer Konstruktionsablauf, der sowohl Robusthei
 
 #### Conceptual Example:
 
-[Quellcode &ndash; Sehr einfache Version](../ConceptualExample.cpp)<br />
-
-Die Ausgaben des konzeptionellen Beispiels lauten:
-
-```
-Parts:
-    Part A
-    Part B
-```
+[Quellcode 1 &ndash; Sehr einfache Version](../ConceptualExample.cpp)<br />
+[Quellcode 2 &ndash; Fluent Programming Style mit einem PersonBuilder](../PersonBuilderExample.cpp)<br />
+[Quellcode 3 &ndash; Ein Raubüberfall](../Heist.cpp)<br />
 
 ---
 
@@ -71,71 +65,7 @@ Es besteht im Wesentlichen aus vier Teilen:
 
 ---
 
-#### Ein erstes &bdquo;Real-World&rdquo; Beispiel:
-
-Das &bdquo;Real-World&rdquo; Beispiel zu diesem Entwurfsmuster orientiert sich an den UI-Bibliotheken von Java.
-Wir implementieren - natürlich stark vereinfacht - einen Layoutmanager.
-Das Ergebnis könnten Java-Containerobjekte sein, oder - etwas einfacher gestrickt - in unserem Fall HTML-Code.
-
-Folgende Klassen sind an dem Beispiel beteiligt:
-
-###### Klasse `HtmlPage`
-
-Die Klasse `HtmlPage` steht für das *Produkt* des Entwurfsmusters, in unserem Fall die zu erstellende HTML-Seite.
-Das Produkt enthält einer Reihe von UI-Steuerelementen, wir führen zu diesem Zweck eine
-weitere (Hilfs-)Klasse `Widget` ein. Ein `HtmlPage`-Objekt besitzt eine Liste mit `Widget`-Objekten.
-Wesentlich bei dieser Klasse ist, dass sie den fertig generierten HTML-Code, der durch einen Layoutmanager erzeugt wird,
-enthält. Über eine *getter*-Methode `getHtmlCode` ist dieser verfügbar.
-
-###### Abstrakte Klasse `LayoutManager`
-
-Diese Klasse entspricht der abstrakten Klasse *Builder*.
-Die Methode `buildPart` aus dem allgemeinen UML-Diagramm findet ihre Entsprechung in der Methode `addWidget`.
-Der wiederholte Aufruf der `addWidget`-Methode "konfiguriert" gewissermaßen das Produkt.
-
-Die `getProduct`-Methode aus dem allgemeinen UML-Diagramm entspricht der Methode `getHtmlPage`.
-Etwas abweichend vom allgemeinen UML-Diagramm ist hierzu noch ein vorgelagerter Aufruf der `render`-Methode,
-die das eigentliche Ergebnis berechnet.
-
-###### Konkrete Klassen `FlowLayoutManager`, `BorderLayoutManager` und `BoxLayoutManager`
-
-Diese Klassen sind Ableitungen von der abstrakten Basisklasse `LayoutManager`.
-In ihrem Aufbau sind sie sehr ähnlich,
-sie unterscheiden sich lediglich in der Generierung des HTML-Codes.
-Je nach der Funktionsweise des Layouts sind die Widgets in einer Reihe, in einer Spalte
-und bzw. oder mit einer entsprechenden Kopf- und Fußzeile anzuzeigen.
-
-Zentral in diesen Klassen ist natürlich die konkrete Realisierung der beiden Methoden
-`render` und `addWidget`.
-
-###### Klasse `Layouter`
-
-Die `Layouter`-Klasse übernimmt die Funktion der *Director*-Klasse.
-Das Pendant zur `construct`-Methode ist hier die `doLayout`-Methode.
-
-###### Klasse `Widget`
-
-Die Klasse `Widget` ist eine Hilfsklasse und verwaltet den erzeugten HTML-Code.
-
-Einen Überblick über die beteiligten Klassen und ihren Zusammenhang mit dem *Builder Pattern*
-entnehmen Sie *Abbildung* 2:
-
-<img src="dp_builder_pattern_layoutmanager.svg" width="750">
-
-*Abbildung* 2: Implementierung eines LayoutManagers mit dem *Builder Pattern*.
-
-Weitere Details zur Umsetzung des Beispiels entnehmen Sie bitte dem [Quellcode](../LayoutManagerExample.cpp).
-Die Ausgaben des &bdquo;Real-World&rdquo;-Beispiels lauten:
-
-```
-HTML: HTML-Code for BorderLayoutManager
-HTML: HTML-Code for BoxLayoutManager
-HTML: HTML-Code for FlowLayout
-```
-
----
-
-#### Ein zweites &bdquo;Real-World&rdquo; Beispiel: Fluent Builder
+#### Ein erstes &bdquo;Real-World&rdquo; Beispiel: Fluent Builder
 
 *Bemerkung*:<br />
 Diese Anwendung des Builder Patterns wird auch als &bdquo;Named Arguments in C++&rdquo; bezeichnet.
@@ -193,6 +123,23 @@ Person p{ Person::create("Jack")
     .as_a("Consultant")
 };
 ```
+
+---
+
+#### Ein zweites &bdquo;Real-World&rdquo; Beispiel: Ein Raubüberfall
+
+Hier ist ein Beispiel für einen &bdquo;Builder&rdquo; im Raubüberfall-Stil:
+
+Der Builder berechnet die Erfolgswahrscheinlichkeit eigenständig auf Basis von Sicherheitsstufe, Crew, Ausrüstung und Tarnung.
+Die Werte sind beispielhaft gewählt (46 %, 40 % und 43 % in der Demo) &ndash; man kann
+die Formel also gerne anpassen, wenn du für mehr Spannung sorgen möchtest.
+
+Möchte man das Ganze noch weiter ausbauen möchtest, wäre ein nächster Schritt,
+den Builder wieder als abstraktes Interface zu gestalten &ndash; etwa mit einem `StealthHeistBuilder` und einem `LoudHeistBuilder`,
+die denselben Plan jeweils auf unterschiedliche Weise zusammenstellen.
+
+Damit greift man auf das polymorphe *Builder*-Konzept aus deinem ersten Beispiel zurück,
+verleiht ihm nun aber einen konkreten Daseinszweck.
 
 ---
 
