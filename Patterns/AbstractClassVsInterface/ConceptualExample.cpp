@@ -31,7 +31,6 @@ namespace AbstractClassVsInterface {
 
         virtual void method_fourth()                 // (virtual) method with implementation
         { 
-           // std::cout << m_message << std::endl;
             std::println("{}", m_message);
         }
 

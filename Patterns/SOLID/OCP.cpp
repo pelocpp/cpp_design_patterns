@@ -6,9 +6,10 @@
 #include <concepts>
 #include <iostream>
 #include <memory>
-#include <numeric>
 #include <print>
 #include <string>
+#include <string_view>
+#include <unordered_map>
 #include <vector>
 
 namespace AntiFirstExampleOCP {
@@ -18,16 +19,19 @@ namespace AntiFirstExampleOCP {
     class NotificationManager
     {
     public:
-        void send(NotificationType type, const std::string& msg) {
+        bool sendTo(NotificationType type, const std::string& msg) {
 
             if (type == NotificationType::Email) {
                 std::println("Email: {}", msg);
+                return true;
             }
             else if (type == NotificationType::WhatsApp) {
                 std::println("WhatsApp: {}", msg);
+                return true;
             }
 
-            // Every new messenger requires a new 'else if' modification here!
+            // every new messenger requires a new 'else if' modification here!
+            return false;
         }
     };
 }
@@ -38,28 +42,40 @@ namespace FirstExampleOCP {
     class INotifier {
     public:
         virtual ~INotifier() = default;
+        virtual std::string_view name() const = 0;
         virtual void send(const std::string& msg) const = 0;
     };
 
     // manager uses only the interface
     class NotificationManager {
     public:
+        void addNotifier(std::unique_ptr<INotifier> notifier) {
+            auto key = std::string{ notifier->name() };
+            m_notifiers.insert_or_assign(std::move(key), std::move(notifier));
+        }
+
         void sendAll(const std::string& msg) const {
-            for (const auto& notifier : notifiers) {
+            for (const auto& [key, notifier] : m_notifiers) {
                 notifier->send(msg);
             }
         }
 
-        void addNotifier(std::unique_ptr<INotifier> notifier) {
-            notifiers.push_back(std::move(notifier));
+        bool sendTo(std::string_view name, const std::string& msg) const {
+            auto it = m_notifiers.find(std::string{ name });
+            if (it == m_notifiers.end()) {
+                return false;
+            }
+            it->second->send(msg);
+            return true;
         }
 
     private:
-        std::vector<std::unique_ptr<INotifier>> notifiers;
+        std::unordered_map<std::string, std::unique_ptr<INotifier>> m_notifiers;
     };
 
     class EmailNotifier : public INotifier {
     public:
+        std::string_view name() const override { return "EMail"; }
         void send(const std::string& msg) const override {
             std::println("Email: {}", msg);
         }
@@ -67,6 +83,7 @@ namespace FirstExampleOCP {
 
     class WhatsAppNotifier : public INotifier {
     public:
+        std::string_view name() const override { return "WhatsApp"; }
         void send(const std::string& msg) const override {
             std::println("WhatsApp: {}", msg);
         }
@@ -75,13 +92,14 @@ namespace FirstExampleOCP {
     // NEW: Simply add a new class via inheritance without modifying legacy code!
     class SMSNotifier : public INotifier {
     public:
+        std::string_view name() const override { return "SMS"; }
         void send(const std::string& msg) const override {
             std::println("SMS: {}", msg);
         }
     };
 }
 
-static void test_first_conceptual_example_ocp() {
+void test_first_conceptual_example_ocp() {
 
     using namespace FirstExampleOCP;
 
@@ -90,9 +108,12 @@ static void test_first_conceptual_example_ocp() {
     manager.addNotifier(std::make_unique<EmailNotifier>());
     manager.addNotifier(std::make_unique<WhatsAppNotifier>());
 
-    manager.addNotifier(std::make_unique<SMSNotifier>()); // Seamlessly integrable
+    manager.sendTo("WhatsApp", "Hello");
 
+    manager.addNotifier(std::make_unique<SMSNotifier>()); // Seamlessly integrable
     manager.sendAll("System update successful!");
+
+    manager.sendTo("SMS", "Hello");
 }
 
 // ===========================================================================

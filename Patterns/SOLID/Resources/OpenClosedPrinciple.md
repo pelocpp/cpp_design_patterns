@@ -48,20 +48,22 @@ und den Aufzählungstyp `NotificationType` ändern. Das birgt das Risiko, Fehler i
 03: class NotificationManager
 04: {
 05: public:
-06:     void send(NotificationType type, const std::string& msg) {
+06:     bool sendTo(NotificationType type, const std::string& msg) {
 07: 
 08:         if (type == NotificationType::Email) {
 09:             std::println("Email: {}", msg);
-10:         }
-11:         else if (type == NotificationType::WhatsApp) {
-12:             std::println("WhatsApp: {}", msg);
-13:         }
-14: 
-15:         // Every new messenger requires a new 'else if' modification here!
-16:     }
-17: };
+10:             return true;
+11:         }
+12:         else if (type == NotificationType::WhatsApp) {
+13:             std::println("WhatsApp: {}", msg);
+14:             return true;
+15:         }
+16: 
+17:         // every new messenger requires a new 'else if' modification here!
+18:         return false;
+19:     }
+20: };
 ```
-
 
 #### Beispiel: Respecting the Open Closed Principle
 
@@ -74,25 +76,36 @@ Wir nutzen Polymorphie (Schnittstellen). Der `NotificationManager` bleibt komple
 02: class INotifier {
 03: public:
 04:     virtual ~INotifier() = default;
-05:     virtual void send(const std::string& msg) const = 0;
-06: };
-07: 
-08: // manager uses only the interface
-09: class NotificationManager {
-10: public:
-11:     void sendAll(const std::string& msg) const {
-12:         for (const auto& notifier : notifiers) {
-13:             notifier->send(msg);
-14:         }
+05:     virtual std::string_view name() const = 0;
+06:     virtual void send(const std::string& msg) const = 0;
+07: };
+08: 
+09: // manager uses only the interface
+10: class NotificationManager {
+11: public:
+12:     void addNotifier(std::unique_ptr<INotifier> notifier) {
+13:         auto key = std::string{ notifier->name() };
+14:         m_notifiers.insert_or_assign(std::move(key), std::move(notifier));
 15:     }
 16: 
-17:     void addNotifier(std::unique_ptr<INotifier> notifier) {
-18:         notifiers.push_back(std::move(notifier));
-19:     }
-20: 
-21: private:
-22:     std::vector<std::unique_ptr<INotifier>> notifiers;
-23: };
+17:     void sendAll(const std::string& msg) const {
+18:         for (const auto& [key, notifier] : m_notifiers) {
+19:             notifier->send(msg);
+20:         }
+21:     }
+22: 
+23:     bool sendTo(std::string_view name, const std::string& msg) const {
+24:         auto it = m_notifiers.find(std::string{ name });
+25:         if (it == m_notifiers.end()) {
+26:             return false;
+27:         }
+28:         it->second->send(msg);
+29:         return true;
+30:     }
+31: 
+32: private:
+33:     std::unordered_map<std::string, std::unique_ptr<INotifier>> m_notifiers;
+34: };
 ```
 
 ##### 2. Die Erweiterung (Offen für Erweiterung)
@@ -103,25 +116,28 @@ ohne die vorhandenen Klassen anfassen zu müssen:
 ```cpp
 01: class EmailNotifier : public INotifier {
 02: public:
-03:     void send(const std::string& msg) const override {
-04:         std::println("Email: {}", msg);
-05:     }
-06: };
-07: 
-08: class WhatsAppNotifier : public INotifier {
-09: public:
-10:     void send(const std::string& msg) const override {
-11:         std::println("WhatsApp: {}", msg);
-12:     }
-13: };
-14: 
-15: // NEW: Simply add a new class via inheritance without modifying legacy code!
-16: class SMSNotifier : public INotifier {
-17: public:
-18:     void send(const std::string& msg) const override {
-19:         std::println("SMS: {}", msg);
-20:     }
-21: };
+03:     std::string_view name() const override { return "EMail"; }
+04:     void send(const std::string& msg) const override {
+05:         std::println("Email: {}", msg);
+06:     }
+07: };
+08: 
+09: class WhatsAppNotifier : public INotifier {
+10: public:
+11:     std::string_view name() const override { return "WhatsApp"; }
+12:     void send(const std::string& msg) const override {
+13:         std::println("WhatsApp: {}", msg);
+14:     }
+15: };
+16: 
+17: // NEW: Simply add a new class via inheritance without modifying legacy code!
+18: class SMSNotifier : public INotifier {
+19: public:
+20:     std::string_view name() const override { return "SMS"; }
+21:     void send(const std::string& msg) const override {
+22:         std::println("SMS: {}", msg);
+23:     }
+24: };
 ```
 
 ##### 3. Die Nutzung
@@ -134,10 +150,13 @@ ohne die vorhandenen Klassen anfassen zu müssen:
 05:     manager.addNotifier(std::make_unique<EmailNotifier>());
 06:     manager.addNotifier(std::make_unique<WhatsAppNotifier>());
 07: 
-08:     manager.addNotifier(std::make_unique<SMSNotifier>()); // Seamlessly integrable
+08:     manager.sendTo("WhatsApp", "Hello");
 09: 
-10:     manager.sendAll("System update successful!");
-11: }
+10:     manager.addNotifier(std::make_unique<SMSNotifier>()); // Seamlessly integrable
+11:     manager.sendAll("System update successful!");
+12: 
+13:     manager.sendTo("SMS", "Hello");
+14: }
 ```
 
 *Zusammenfassung OCP*:

@@ -41,7 +41,7 @@ Vergleichen wir zunächst die beiden Konzepte von *abstrakten Klassen* und *Schni
   * Eine *Schnittstelle* (*Interface*) besitzt keine Implementierung von Methoden,
   sie besteht ausschließlich aus Methodendeklarationen.
   Natürlich benötigt es Klassen, die eine Schnittstelle implementieren, was wiederum bedeutet,
-  das die Methoden der Schnittstelle dann eine Realisierung erhalten.
+  dass die Methoden der Schnittstelle dann eine Realisierung erhalten.
 
   * Ein Interface (Schnittstelle) enthält keine Variablen.
   Es gibt von dieser Regel einige Ausnahmen, wie beispielsweise möglicherweise
