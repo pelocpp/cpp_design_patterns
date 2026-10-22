@@ -147,7 +147,7 @@ namespace ConceptualExample_Visitor_Pattern {
      * the appropriate operation in the visitor object.
      */
     static void clientCode(
-        std::span<const std::unique_ptr<ElementBase>> components,
+        const std::vector<std::unique_ptr<ElementBase>>& components,
         VisitorBase& visitor)
     {
         for (const auto& comp : components) {
@@ -156,7 +156,7 @@ namespace ConceptualExample_Visitor_Pattern {
     }
 
     static void clientCodeEx(
-        std::span<const std::reference_wrapper<ElementBase>> components,
+        const std::vector<std::reference_wrapper<ElementBase>>& components,
         VisitorBase& visitor)
     {
         for (ElementBase& comp : components) {   // implicit conversion
@@ -196,7 +196,6 @@ void test_conceptual_example_02() {
     components.push_back(std::make_unique<ConcreteComponentB>());
     components.push_back(std::make_unique<ConcreteComponentC>());
 
-    //std::vector<std::unique_ptr<ElementBase>> components;
     std::vector<std::reference_wrapper<ElementBase>> refs{ 
         *components[0],
         *components[1],

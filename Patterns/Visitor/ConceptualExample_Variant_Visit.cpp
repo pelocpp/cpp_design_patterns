@@ -87,7 +87,7 @@ namespace ConceptualExample_Visitor_Pattern_Modern {
     // =======================================================================
 
     template <typename TVisitor>
-    static void clientCode(std::span<const Component> components, const TVisitor& visitor)
+    static void clientCode(const std::vector<Component>& components, const TVisitor& visitor)
     {
         for (const auto& comp : components) {
             std::visit(visitor, comp);

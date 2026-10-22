@@ -3,9 +3,9 @@
 // ===========================================================================
 
 #include <iostream>
-#include <string>
 #include <list>
 #include <memory>
+#include <string>
 
 namespace OnlineShopExample {
 

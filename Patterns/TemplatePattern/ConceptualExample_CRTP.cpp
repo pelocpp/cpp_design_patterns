@@ -7,7 +7,7 @@
 
 namespace ConceptualExample_Template_Method_Pattern_CRTP {
 
-    template <typename Derived>
+    template <typename TDerived>
     class AbstractClassCRTP {
     public:
         void TemplateMethod() const {
@@ -31,7 +31,7 @@ namespace ConceptualExample_Template_Method_Pattern_CRTP {
         void Hook2() const {}
 
     private:
-        const Derived& self() const { return static_cast<const Derived&>(*this); }
+        const TDerived& self() const { return static_cast<const TDerived&>(*this); }
     };
 
     class ConcreteClass1 : public AbstractClassCRTP<ConcreteClass1> {

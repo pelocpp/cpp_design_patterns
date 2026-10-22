@@ -20,6 +20,8 @@ public:
     // getter
     [[nodiscard]]
     const std::string& name() const noexcept;
+
+    [[nodiscard]]
     const std::vector<std::unique_ptr<IFileComponent>>& children() const;
 
     // public interface

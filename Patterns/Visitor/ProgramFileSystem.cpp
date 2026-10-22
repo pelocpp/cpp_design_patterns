@@ -73,14 +73,14 @@ static void exploreDirectory(const std::filesystem::path& path, Directory& curre
 // constexpr const char* path1 =
 //    R"(C:\Development\GitHub_Cpp_Repositories\Cpp_Design_Patterns\Patterns\CompositePattern\Resources)";
 
-constexpr const char* path1 = R"(..\..\Patterns\CompositePattern\Resources)";
+constexpr const char* path1 = R"(..\..\Patterns\Visitor\Resources)";
 
 // directory without many files and subdirectories
 // Absolute path:
 //constexpr const char* path2 =
 //    R"(C:\Development\GitHub_Cpp_Repositories\Cpp_Design_Patterns\Patterns\CompositePattern\x64)";
 
-constexpr const char* path2 = R"(..\..\Patterns\CompositePattern\x64)";
+constexpr const char* path2 = R"(..\..\Patterns\Visitor\x64)";
 
 // plain composite pattern
 static void test_filesystem_example_01() {
@@ -139,7 +139,7 @@ void test_filesystem_example() {
 
     test_filesystem_example_01();  // just composite pattern
     test_filesystem_example_02();  // composite pattern & visitor pattern (printing)
-    test_filesystem_example_03();  // composite pattern & visitor pattern (calculating total size)
+    //test_filesystem_example_03();  // composite pattern & visitor pattern (calculating total size)
 }
 
 // ===========================================================================
