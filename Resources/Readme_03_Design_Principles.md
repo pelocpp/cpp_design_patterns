@@ -92,7 +92,7 @@ weitere Entwurfsprinzipien aus:
 | **YAGNI** | &bdquo;You aren't gonna need it&rdquo; - &bdquo;Implementiere Dinge immer dann, wenn Du sie tatsächlich brauchst, niemals, wenn Du nur der Meinung bist, dass Du sie brauchst!&rdquo; |
 | **Separation of Concerns** | Das &bdquo;Separation of Concerns&rdquo; (**SoC**) Prinzip ist eines der grundlegendsten Prinzipien in der Softwareentwicklung. Es ist so wichtig, dass zwei der fünf SOLID-Prinzipien (*Single Responsibility* und *Interface Segregation*) direkte Ableitungen von diesem Konzept sind. Die Aussage des Prinzips ist einfach: Schreiben Sie Ihr Programm nicht als einen festen Block, sondern teilen Sie den Code in Blöcke auf, die winzige Teile des Systems sind, die jeweils einen einfachen, unterschiedlichen Auftrag ausführen. |
 
-Tabelle 1. Weitere Entwurfsprinzipien.
+*Tabelle* 1. Weitere Entwurfsprinzipien.
 
 ---
 

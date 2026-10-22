@@ -103,7 +103,7 @@ und teilweise auch in ihrem Verhalten.
 
 Für jedes *Look and Feel* gibt es eine eigene Familie an graphischen Steuerelementen und damit
 eine eigenen Fabrik. Abstrahiert werden all diese Fabriken durch eine zentral definierte abstrakte Fabrik.
-Nur um einen Eindruck zu erhalten, finden Sie in Tabelle 1 eine - nicht vollständige - Auflistung
+Nur um einen Eindruck zu erhalten, finden Sie in *Tabelle* 1 eine - nicht vollständige - Auflistung
 der unterschiedlichen Bibliotheken, also sprich konkreten UI-Fabriken vor:
 
 | Plattform | Look and Feel |
@@ -114,7 +114,7 @@ der unterschiedlichen Bibliotheken, also sprich konkreten UI-Fabriken vor:
 | Classic Windows | Windows | 
 | HP UX | HP* | 
 
-Tabelle 1: Verfügbare *Look and Feel* UI-Fabriken.
+*Tabelle* 1: Verfügbare *Look and Feel* UI-Fabriken.
 
 ---
 

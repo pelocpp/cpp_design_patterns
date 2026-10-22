@@ -78,13 +78,39 @@ Es besteht im Wesentlichen aus sechs Teilen:
 
 ---
 
+##### Zuordnung der Klassen:
+
+  * Klasse `ChatRoomBase` &ndash; Klasse `MediatorBase` 
+  * Klasse `PersonBase` &ndash; Klasse `ColleagueBase` 
+  * Klasse `Person` &ndash; Klasse `ConcreteColleague` 
+  * Klasse `ChatRoom` &ndash; Klasse `ConcreteMediator` 
+
+
 ### Zusammenspiel von Composite Pattern und Visitor Pattern
+
+#### Überblick
 
 Das Zusammenspiel von *Composite Pattern* und *Visitor Pattern* wird am Beispiel des Traversierens einer Verzeichnisstruktur
 aufgezeigt. In einer ersten Realisierung wird das Visitor Pattern über eine gemeinsame Basisklasse und virtuelle `accept()`-Methoden
 ausgedrückt.
 
 In einer zweiten Realisierung entfallen diese Werkzeuge zu Gunsten von `std::variant`.
+
+#### Zuordnung der Klassen
+
+| Klasse | Zuordnung zum  Visitor Pattern|
+|:- |:-|
+| Klasse `IFileComponent` | Basisklasse aller konkreten Dateisystem Objekte |
+| Klasse `FileSystemElement` | Klasse `ElementBase` (`accept`-Methode ist hier deklariert) |
+| Klasse `File` | Konkrete Dateisystem-Klasse (Klasse `ConcreteElement`) |
+| Klasse `Directory` | Konkrete Dateisystem-Klasse (Klasse `ConcreteElement`) |
+| Klasse `FileSystemVisitor` | Klasse `VisitorBase` (`visit`-Methode ist hier deklariert) |
+| Klasse `SizeVisitor` | Konkrete Visitor-Klasse (Klasse `ConcreteVisitor`) |
+| Klasse `PrintVisitor` | Konkrete Visitor-Klasse (Klasse `ConcreteVisitor`) |
+
+*Tabelle* 1: Zuordnung der Klassen
+
+#### Weitere Details zur Realisierung mit `std::variant`
 
 Für das Beispiel bietet sich folgende Struktur an:
 
@@ -99,6 +125,8 @@ Ein wichtiger Punkt ist allerdings die Rekursion: `Directory` enthält wiederum `
 Ein `std::variant<File, Directory>` kann nicht direkt verwendet werden, solange `Directory` den Variant-Typ selbst *by value* enthält.
 
 Deshalb ist es sinnvoll, die Kinder weiterhin über `std::unique_ptr` zu halten oder einen rekursiven Wrapper einzuführen.
+
+#### Vergleich
 
 Damit können wir nun die folgenden zwei Ansätze unterscheiden:
 
@@ -156,7 +184,7 @@ Wir schreiben stattdessen eine Klasse mit mehreren Überladungen des Aufrufoperat
 
 ---
 
-#### Erstes &bdquo;Real-World&rdquo; Beispiel:
+#### *Double Dispatch*
 
 Wie wir sehen, haben wir es in der Realisierung des Patterns mit zwei Ebenen der Indirektion zu tun.
 Damit wurde vor allem vermieden, die zwei Prinzipien

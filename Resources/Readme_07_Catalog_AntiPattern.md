@@ -31,7 +31,7 @@ schlechte Aussichten auf eine qualitativ gelungene Architektur bescheinigt werde
 | [Race Conditions](#Race-Conditions) | Unter einer "Race-Condition" versteht man im Ablauf eines multi-threading / multi-processing Programms eine Situation, die auftritt, wenn versucht wird, zwei oder mehr Funktionen/Methoden gleichzeitig ("parallel") auszuführen. |
 | [Circular Dependencies](#Circular-Dependencies) | In der Softwareentwicklung ist eine zirkuläre Abhängigkeit eine Beziehung zwischen zwei oder mehreren Modulen, die entweder direkt oder indirekt voneinander abhängig sind. Solche Module werden auch als „*gegenseitig rekursiv*“ (*mutually recursiv*) bezeichnet. |
 
-Tabelle 1. Anti-Pattern
+*Tabelle* 1. Anti-Pattern
 
 
 ## Einige Antipattern im Detail
